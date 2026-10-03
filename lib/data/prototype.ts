@@ -14,6 +14,7 @@ import importedPolities from "./generated/imported-polities.json";
 import importedPlaces from "./generated/imported-places.json";
 import importedBattles from "./generated/imported-battles.json";
 import importedPeople from "./generated/imported-people.json";
+import importedNames from "./generated/imported-names.json";
 
 /** Boundary geometry lives in geo/boundaries.json (keyed by boundary id,
  * `${polityId}-${validFrom}`) — tens of thousands of coordinates don't
@@ -380,6 +381,10 @@ export const WIKIDATA_SOURCE: Source = {
   citation: "Wikidata, wikidata.org (CC0). Capital cities and their coordinates.",
 };
 
+// Native-script names and aliases from Wikidata (see scripts/import-names.py). Keyed by record id.
+type NameRecord = { native?: { lang: string; text: string }; aliases?: string[] };
+const names = importedNames as { polities: Record<string, NameRecord>; people: Record<string, NameRecord>; places: Record<string, NameRecord> };
+
 type ImportedPolity = (typeof importedPolities)[number];
 const importedById = new Map<string, ImportedPolity>(importedPolities.map((p) => [p.id, p]));
 
@@ -443,7 +448,9 @@ export const polities: Polity[] = [
         id: p.id,
         slug: p.id,
         name: p.name,
-        alternativeNames: [],
+        nativeName: names.polities[p.id]?.native?.text,
+        nativeLang: names.polities[p.id]?.native?.lang,
+        alternativeNames: names.polities[p.id]?.aliases ?? [],
         polityType: polityKind(p.name),
         region: p.region,
         capitals: p.capitals,
@@ -611,6 +618,8 @@ const importedPeopleRecords: Person[] = importedPeople
     id: p.id,
     slug: p.id,
     name: p.name,
+    nativeName: names.people[p.id]?.native?.text,
+    nativeLang: names.people[p.id]?.native?.lang,
     role: p.role,
     polityId: p.polityId,
     datesAre: p.datesAre as "reign" | "lifetime",
@@ -658,6 +667,8 @@ const importedPlaceRecords: Place[] = importedPlaces
     id: pl.id,
     slug: pl.id,
     name: pl.name,
+    nativeName: names.places[pl.id]?.native?.text,
+    nativeLang: names.places[pl.id]?.native?.lang,
     placeType: "capital",
     coordinates: pl.coordinates as [number, number],
     region: pl.region,

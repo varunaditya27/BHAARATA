@@ -5,6 +5,7 @@ import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { HeroPhoto } from "@/components/primitives/HeroPhoto";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
+import { InkName } from "@/components/entity/InkName";
 import { RisingTitle } from "@/components/entity/RisingTitle";
 import { images, type ImageKey } from "@/lib/data/images";
 import { events, getPolityBySlug, places, polities } from "@/lib/data/prototype";
@@ -36,11 +37,24 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
 
   // Which recorded kingdoms' territory contains this point, in time order —
   // computed from the boundaries, not hand-entered.
-  const heldBy = boundariesContaining(place.coordinates)
-    .map((b) => ({ boundary: b, polity: getPolityBySlug(b.polityId) }))
-    .filter((h): h is { boundary: typeof h.boundary; polity: NonNullable<typeof h.polity> } => Boolean(h.polity));
+  // A kingdom has many dated border shapes; merge them into one entry per kingdom, with the year ranges
+  // it held the place (consecutive shapes join up, a real gap stays a gap) and its latest shape for the map.
+  const heldBy: { polity: NonNullable<ReturnType<typeof getPolityBySlug>>; ranges: [number, number][]; boundary: ReturnType<typeof boundariesContaining>[number] }[] = [];
+  for (const b of boundariesContaining(place.coordinates)) {
+    const polity = getPolityBySlug(b.polityId);
+    if (!polity) continue;
+    const existing = heldBy.find((h) => h.polity.id === polity.id);
+    if (!existing) {
+      heldBy.push({ polity, ranges: [[b.validFrom, b.validTo]], boundary: b });
+      continue;
+    }
+    const last = existing.ranges[existing.ranges.length - 1];
+    if (b.validFrom <= last[1] + 1) last[1] = Math.max(last[1], b.validTo);
+    else existing.ranges.push([b.validFrom, b.validTo]);
+    existing.boundary = b;
+  }
   const miniMap = heldBy.length > 0 ? projectTogether(heldBy.map((h) => h.boundary.geometry), place.coordinates) : null;
-  const firstYear = heldBy[0]?.boundary.validFrom ?? 985;
+  const firstYear = heldBy[0]?.ranges[0][0] ?? 985;
 
   const header = (dark: boolean) => (
     <>
@@ -48,6 +62,9 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
         {place.placeType} · {place.region}
       </Eyebrow>
       <RisingTitle text={place.name} className={`mt-2 text-5xl sm:text-6xl ${dark ? "text-paper" : "text-ink"}`} />
+      {place.nativeName && (
+        <InkName text={place.nativeName} lang={place.nativeLang} className={`mt-2 text-2xl sm:text-3xl ${dark ? "text-paper/85" : "text-ink-muted"}`} />
+      )}
     </>
   );
 
@@ -81,7 +98,7 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
                   <svg viewBox="0 0 100 100" className="mt-4 w-full max-w-sm" role="img" aria-label={`Kingdoms whose territory included ${place.name}`}>
                     {heldBy.map((h, i) => (
                       <path
-                        key={h.boundary.validFrom + h.polity.id}
+                        key={h.polity.id}
                         d={miniMap.paths[i]}
                         fill={h.polity.accentColor}
                         fillOpacity={0.22}
@@ -106,7 +123,7 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
             <section>
               <ol className="space-y-5">
                 {heldBy.map((h) => (
-                  <li key={h.boundary.validFrom + h.polity.id} className="flex gap-4 border-t border-border pt-4">
+                  <li key={h.polity.id} className="flex gap-4 border-t border-border pt-4">
                     <span className="mt-1.5 h-3 w-3 shrink-0" style={{ backgroundColor: h.polity.accentColor }} aria-hidden />
                     <div>
                       <Link
@@ -117,7 +134,7 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
                         {h.polity.name}
                       </Link>
                       <p className="font-sans text-sm text-ink-muted">
-                        c. {h.boundary.validFrom}–{h.boundary.validTo} CE
+                        {h.ranges.map(([a, z]) => `c. ${a}–${z}`).join(", ")} CE
                         {capitalOf.some((c) => c.id === h.polity.id) && " · its capital"}
                       </p>
                     </div>

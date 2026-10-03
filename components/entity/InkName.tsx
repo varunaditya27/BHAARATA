@@ -6,9 +6,9 @@ import { cn } from "@/lib/utils/cn";
  * Kannada, and Telugu alike), softened at the leading edge so it reads as
  * a brush moving rather than a wipe. See .bh-ink-write in globals.css.
  */
-export function InkName({ text, className, delayMs = 700 }: { text: string; className?: string; delayMs?: number }) {
+export function InkName({ text, lang = "und", className, delayMs = 700 }: { text: string; lang?: string; className?: string; delayMs?: number }) {
   return (
-    <p lang="und" className={cn("font-indic-display", className)}>
+    <p lang={lang} className={cn("font-indic-display", className)}>
       <span className="bh-ink-write inline-block" style={{ animationDelay: `${delayMs}ms` }}>
         {text}
       </span>

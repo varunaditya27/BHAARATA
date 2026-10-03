@@ -87,7 +87,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
           <div>
             <Eyebrow>{person.role}</Eyebrow>
             <RisingTitle text={person.name} className="mt-2 text-5xl text-ink sm:text-6xl" />
-            {person.nativeName && <InkName text={person.nativeName} className="mt-2 text-2xl text-ink-muted" />}
+            {person.nativeName && <InkName text={person.nativeName} lang={person.nativeLang} className="mt-2 text-2xl text-ink-muted" />}
             <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
               <p className="font-display text-xl text-ink">{formatPersonDates(person)}</p>
               <Badge tone={status.sourced ? "neutral" : "uncertainty"}>{status.label}</Badge>

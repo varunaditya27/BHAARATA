@@ -334,7 +334,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
       </Eyebrow>
       <RisingTitle text={polity.name} className={`mt-2 text-5xl sm:text-7xl ${dark ? "text-paper" : "text-ink"}`} />
       {polity.nativeName && (
-        <InkName text={polity.nativeName} className={`mt-2 text-2xl sm:text-3xl ${dark ? "text-paper/85" : "text-ink-muted"}`} />
+        <InkName text={polity.nativeName} lang={polity.nativeLang} className={`mt-2 text-2xl sm:text-3xl ${dark ? "text-paper/85" : "text-ink-muted"}`} />
       )}
       {polity.quote && (
         <p className={`bh-fade-in mt-4 max-w-xl font-sans text-lg ${dark ? "text-paper/80" : "text-ink-muted"}`} style={{ animationDelay: "1200ms" }}>
