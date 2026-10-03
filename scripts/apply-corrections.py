@@ -16,6 +16,7 @@ REMOVE_PEOPLE = {
     "khas-mahal": "Wikidata lists her as 'Queen regnant'; she was a consort of Jahangir, not a ruler of the Mughal Empire.",
     "jaswant-singh-of-marwar": "He was Maharaja of Marwar (Jodhpur), a Mughal ally and officer, not a Mughal ruler.",
     "q16312506": "A Wikidata item with no English label, no dates and no article; nothing can be shown for it.",
+    "kalinga-magha": "Wikidata files him under the Eastern Ganga as 'King of Jaffna'; he ruled in Sri Lanka and was not an Eastern Ganga ruler.",
     "q16311542": "A Wikidata item with no English label, no dates and no article; nothing can be shown for it.",
 }
 # Reign dates where Wikidata is wrong. Checked against the Wikipedia article for each.
@@ -27,6 +28,12 @@ FIX_WIKIPEDIA = {"anuradhapura": ("Anuradhapura_kingdom", "'Anurādhapura' redir
 # Kingdoms whose summary fell back to a placeholder line because the first article tried was a
 # disambiguation page, or its opening had an unbalanced bracket. The right article's opening is used.
 FIX_SUMMARY_FROM = {"anuradhapura": "Anuradhapura kingdom", "turk-shahis": "Turk Shahis"}
+
+# Rulers whose Wikidata item has no Wikipedia link here, but whose article exists under another title.
+# person id -> (Wikipedia title, opening sentences as the article gives them)
+FIX_PERSON_ARTICLE = {
+    "masud-ii": ("Mas'ud_II_of_Ghazni", "Mas'ud ibn Mawdud ibn Mas'ud, commonly known as Mas'ud II, was Ghaznavid sultan for sometime in 1048. Masud was the son and successor of Mawdud of Ghazni, and ruled for a short period."),
+}
 
 # Battles whose Wikipedia title redirects to a broader subject, so the summary described something else
 # (the whole Dutch–Portuguese war, or Shivaji's biography). They keep Wikidata's date and place only.
@@ -45,6 +52,7 @@ def rw(name, fn):
 def people(d):
     d = [r for r in d if r["id"] not in REMOVE_PEOPLE]
     for r in d:
+        if r["id"] in FIX_PERSON_ARTICLE: r["wikipedia"], r["summary"] = FIX_PERSON_ARTICLE[r["id"]]
         if r["id"] in FIX_DATES: r["start"], r["end"] = FIX_DATES[r["id"]][:2]
     return d
 

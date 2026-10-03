@@ -920,19 +920,6 @@
   "imageKey": "ruler-ibrahim-khan-lodi"
  },
  {
-  "id": "kalinga-magha",
-  "q": "Q3534920",
-  "name": "Kalinga Magha",
-  "role": "King of Jaffna",
-  "polityId": "eastern-ganga",
-  "start": 1215,
-  "end": 1255,
-  "datesAre": "reign",
-  "datesFromText": false,
-  "wikipedia": "Kalinga_Magha",
-  "summary": "Kalinga Magha or  Gangaraja Kalinga Vijayabahu was an invader from the Kingdom of Kalinga who usurped the throne from Parakrama Pandyan II of Polonnaruwa in 1215. A massive migration followed of Sinhalese people to the south and west of Sri Lanka, and into the mountainous interior, as they attempted to escape his power."
- },
- {
   "id": "alp-tigin",
   "q": "Q555219",
   "name": "Alp Tigin",
@@ -1036,8 +1023,8 @@
   "end": 1048,
   "datesAre": "reign",
   "datesFromText": false,
-  "wikipedia": null,
-  "summary": ""
+  "wikipedia": "Mas'ud_II_of_Ghazni",
+  "summary": "Mas'ud ibn Mawdud ibn Mas'ud, commonly known as Mas'ud II, was Ghaznavid sultan for sometime in 1048. Masud was the son and successor of Mawdud of Ghazni, and ruled for a short period."
  },
  {
   "id": "abd-al-rashid-ben-mahmud",

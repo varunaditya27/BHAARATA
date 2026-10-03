@@ -100,6 +100,11 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
         <div className="mt-10 grid gap-12 md:grid-cols-[1.5fr_1fr]">
           <div>
             {person.summary && <p className="bh-dropcap max-w-prose font-sans text-lg leading-relaxed text-ink">{person.summary}</p>}
+            {!person.summary && (
+              <p className="max-w-prose font-sans text-base leading-relaxed text-ink-muted">
+                The sources used here give only the title and dates for {person.name}. There is no article about them to summarise.
+              </p>
+            )}
 
             {polity && (
               <section className="mt-12">

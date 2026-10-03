@@ -417,7 +417,7 @@ export const sources: Source[] = [
       id: `wikipedia-list-${page.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
       title: `Wikipedia: ${page}`,
       sourceType: "digital",
-      citation: `English Wikipedia, "${page}", en.wikipedia.org/wiki/${page.replace(/ /g, "_")} (CC BY-SA 4.0). Names and reign years from its dated tables.`,
+      citation: `English Wikipedia, "${page}", en.wikipedia.org/wiki/${page.replace(/ /g, "_")} (CC BY-SA 4.0). Names and reign years from the article's list of rulers.`,
       url: `https://en.wikipedia.org/wiki/${page.replace(/ /g, "_")}`,
     }),
   ),
@@ -625,7 +625,10 @@ const sameName = (a: string, b: string) => {
   const [x, y] = [n(a), n(b)];
   return x === y || x.startsWith(y.slice(0, 7)) || y.startsWith(x.slice(0, 7));
 };
+// A lifetime-only record is dropped where a list gives the same ruler's actual reign.
+const supersededRulerIds = new Set(importedRulerLists.flatMap((r) => r.supersedes));
 const importedPeopleRecords: Person[] = importedPeople
+  .filter((p) => !supersededRulerIds.has(p.id))
   .filter((p) => !curatedPeople.some((c) => c.polityId === p.polityId && sameName(c.name, p.name) && c.period.startYear <= (p.end ?? p.start) + 5 && p.start <= (c.period.endYear ?? c.period.startYear) + 5))
   .map((p): Person => ({
     id: p.id,
@@ -655,7 +658,7 @@ const listedRulerRecords: Person[] = importedRulerLists.map(
     role: r.role,
     polityId: r.polityId,
     datesAre: "reign",
-    period: { startYear: r.start, endYear: r.end, startQualifier: "circa", endQualifier: "circa", confidence: "probable" },
+    period: { startYear: r.start, endYear: r.end ?? null, startQualifier: "circa", endQualifier: r.end == null ? "unknown" : "circa", confidence: "probable" },
     provenance: [
       {
         sourceId: `wikipedia-list-${r.list.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,

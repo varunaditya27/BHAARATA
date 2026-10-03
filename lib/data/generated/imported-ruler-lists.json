@@ -8,7 +8,8 @@
   "end": 904,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "sugandha-904-utpala",
@@ -19,7 +20,8 @@
   "end": 906,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "partha-906-utpala",
@@ -30,7 +32,8 @@
   "end": 921,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "nirjitavarman-921-utpala",
@@ -41,7 +44,8 @@
   "end": 922,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "chakravarman-922-utpala",
@@ -52,7 +56,8 @@
   "end": 933,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "shuravarman-i-933-utpala",
@@ -63,18 +68,20 @@
   "end": 934,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
-  "id": "partha-restored-934-utpala",
-  "name": "Partha (restored)",
+  "id": "partha-second-term-934-utpala",
+  "name": "Partha (second term)",
   "role": "King of Kashmir",
   "polityId": "utpala",
   "start": 934,
   "end": 935,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "shankaravardhana-935-utpala",
@@ -85,18 +92,20 @@
   "end": 936,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
-  "id": "chakravarman-restored-936-utpala",
-  "name": "Chakravarman (restored)",
+  "id": "chakravarman-second-term-936-utpala",
+  "name": "Chakravarman (second term)",
   "role": "King of Kashmir",
   "polityId": "utpala",
   "start": 936,
   "end": 937,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "unmattavanti-937-utpala",
@@ -107,7 +116,8 @@
   "end": 939,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "parvagupta-948-utpala",
@@ -118,7 +128,8 @@
   "end": 950,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "abhimanyu-ii-958-utpala",
@@ -129,7 +140,8 @@
   "end": 972,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "nandigupta-972-utpala",
@@ -140,7 +152,8 @@
   "end": 973,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "tribhuvanagupta-973-utpala",
@@ -151,7 +164,8 @@
   "end": 975,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "bhimagupta-975-utpala",
@@ -162,7 +176,8 @@
   "end": 980,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "didda-980-utpala",
@@ -173,7 +188,8 @@
   "end": 1003,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "sangramaraja-1003-lohara",
@@ -184,7 +200,8 @@
   "end": 1028,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "hariraja-1028-lohara",
@@ -195,7 +212,8 @@
   "end": 1028,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "ananta-deva-1028-lohara",
@@ -206,7 +224,8 @@
   "end": 1063,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "kalasha-1063-lohara",
@@ -217,7 +236,8 @@
   "end": 1089,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "utkarsha-1089-lohara",
@@ -228,7 +248,8 @@
   "end": 1101,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "harsha-1101-lohara",
@@ -239,7 +260,8 @@
   "end": 1101,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "uchchala-1101-lohara",
@@ -250,7 +272,8 @@
   "end": 1111,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "jayasimha-1111-lohara",
@@ -261,7 +284,8 @@
   "end": 1123,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "paramanuka-1123-lohara",
@@ -272,7 +296,8 @@
   "end": 1165,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "vantideva-1165-lohara",
@@ -283,7 +308,8 @@
   "end": 1172,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "vuppadeva-1172-lohara",
@@ -294,7 +320,8 @@
   "end": 1181,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "jassaka-1181-lohara",
@@ -305,7 +332,8 @@
   "end": 1199,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "jagadeva-1199-lohara",
@@ -316,7 +344,8 @@
   "end": 1213,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "rajadeva-1213-lohara",
@@ -327,7 +356,8 @@
   "end": 1235,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "samgramadeva-1235-lohara",
@@ -338,7 +368,8 @@
   "end": 1273,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "laksmandadeva-1273-lohara",
@@ -349,7 +380,8 @@
   "end": 1286,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "simhadeva-1286-lohara",
@@ -360,7 +392,8 @@
   "end": 1301,
   "datesAre": "reign",
   "endFromNext": true,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "shamsu-d-din-shah-1339-kashmir-sultanate",
@@ -371,7 +404,8 @@
   "end": 1342,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "jamshid-shah-1342-kashmir-sultanate",
@@ -382,7 +416,8 @@
   "end": 1343,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "alau-d-din-shah-1343-kashmir-sultanate",
@@ -393,7 +428,8 @@
   "end": 1354,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "shihabu-d-din-shah-1354-kashmir-sultanate",
@@ -404,7 +440,8 @@
   "end": 1373,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "qutbu-d-din-shah-1373-kashmir-sultanate",
@@ -415,7 +452,8 @@
   "end": 1389,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "sikandar-shah-1389-kashmir-sultanate",
@@ -426,7 +464,8 @@
   "end": 1413,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "ali-shah-1413-kashmir-sultanate",
@@ -437,7 +476,8 @@
   "end": 1418,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "zayn-al-abidin-1418-kashmir-sultanate",
@@ -448,29 +488,32 @@
   "end": 1419,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
-  "id": "ali-shah-restored-1419-kashmir-sultanate",
-  "name": "Alī Shāh (restored)",
+  "id": "ali-shah-second-term-1419-kashmir-sultanate",
+  "name": "Alī Shāh (second term)",
   "role": "Sultan of Kashmir",
   "polityId": "kashmir-sultanate",
   "start": 1419,
   "end": 1420,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
-  "id": "zayn-al-abidin-restored-1420-kashmir-sultanate",
-  "name": "Zayn al-Abidin (restored)",
+  "id": "zayn-al-abidin-second-term-1420-kashmir-sultanate",
+  "name": "Zayn al-Abidin (second term)",
   "role": "Sultan of Kashmir",
   "polityId": "kashmir-sultanate",
   "start": 1420,
   "end": 1470,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "haider-shah-1470-kashmir-sultanate",
@@ -481,7 +524,8 @@
   "end": 1472,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "hasan-shah-1472-kashmir-sultanate",
@@ -492,7 +536,8 @@
   "end": 1484,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "muhammad-shah-1484-kashmir-sultanate",
@@ -503,7 +548,8 @@
   "end": 1486,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "fat-h-shah-1486-kashmir-sultanate",
@@ -514,62 +560,68 @@
   "end": 1493,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
-  "id": "muhammad-shah-restored-1493-kashmir-sultanate",
-  "name": "Muhammad Shāh (restored)",
+  "id": "muhammad-shah-second-term-1493-kashmir-sultanate",
+  "name": "Muhammad Shāh (second term)",
   "role": "Sultan of Kashmir",
   "polityId": "kashmir-sultanate",
   "start": 1493,
   "end": 1505,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
-  "id": "fat-h-shah-restored-1505-kashmir-sultanate",
-  "name": "Fatēh Shāh (restored)",
+  "id": "fat-h-shah-second-term-1505-kashmir-sultanate",
+  "name": "Fatēh Shāh (second term)",
   "role": "Sultan of Kashmir",
   "polityId": "kashmir-sultanate",
   "start": 1505,
   "end": 1514,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
-  "id": "muhammad-shah-restored-1514-kashmir-sultanate",
-  "name": "Muhammad Shāh (restored)",
+  "id": "muhammad-shah-second-term-1514-kashmir-sultanate",
+  "name": "Muhammad Shāh (second term)",
   "role": "Sultan of Kashmir",
   "polityId": "kashmir-sultanate",
   "start": 1514,
   "end": 1515,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
-  "id": "fat-h-shah-restored-1515-kashmir-sultanate",
-  "name": "Fatēh Shāh (restored)",
+  "id": "fat-h-shah-second-term-1515-kashmir-sultanate",
+  "name": "Fatēh Shāh (second term)",
   "role": "Sultan of Kashmir",
   "polityId": "kashmir-sultanate",
   "start": 1515,
   "end": 1517,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
-  "id": "muhammad-shah-restored-1517-kashmir-sultanate",
-  "name": "Muhammad Shāh (restored)",
+  "id": "muhammad-shah-second-term-1517-kashmir-sultanate",
+  "name": "Muhammad Shāh (second term)",
   "role": "Sultan of Kashmir",
   "polityId": "kashmir-sultanate",
   "start": 1517,
   "end": 1528,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "ibrahim-shah-1528-kashmir-sultanate",
@@ -580,7 +632,8 @@
   "end": 1528,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "nazuk-shah-1528-kashmir-sultanate",
@@ -591,18 +644,20 @@
   "end": 1530,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
-  "id": "muhammad-shah-restored-1530-kashmir-sultanate",
-  "name": "Muhammad Shāh (restored)",
+  "id": "muhammad-shah-second-term-1530-kashmir-sultanate",
+  "name": "Muhammad Shāh (second term)",
   "role": "Sultan of Kashmir",
   "polityId": "kashmir-sultanate",
   "start": 1530,
   "end": 1537,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "shamsu-d-din-shah-ii-1537-kashmir-sultanate",
@@ -613,7 +668,8 @@
   "end": 1540,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "ismail-shah-1540-kashmir-sultanate",
@@ -624,40 +680,44 @@
   "end": 1540,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
-  "id": "nazuk-shah-restored-1540-kashmir-sultanate",
-  "name": "Nāzuk Shāh (restored)",
+  "id": "nazuk-shah-second-term-1540-kashmir-sultanate",
+  "name": "Nāzuk Shāh (second term)",
   "role": "Sultan of Kashmir",
   "polityId": "kashmir-sultanate",
   "start": 1540,
   "end": 1552,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
-  "id": "ibrahim-shah-restored-1552-kashmir-sultanate",
-  "name": "Ibrahīm Shāh (restored)",
+  "id": "ibrahim-shah-second-term-1552-kashmir-sultanate",
+  "name": "Ibrahīm Shāh (second term)",
   "role": "Sultan of Kashmir",
   "polityId": "kashmir-sultanate",
   "start": 1552,
   "end": 1555,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
-  "id": "ismail-shah-restored-1555-kashmir-sultanate",
-  "name": "Ismaīl Shāh (restored)",
+  "id": "ismail-shah-second-term-1555-kashmir-sultanate",
+  "name": "Ismaīl Shāh (second term)",
   "role": "Sultan of Kashmir",
   "polityId": "kashmir-sultanate",
   "start": 1555,
   "end": 1557,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "habib-shah-1557-kashmir-sultanate",
@@ -668,7 +728,8 @@
   "end": 1561,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "ghazi-shah-1561-kashmir-sultanate",
@@ -679,7 +740,8 @@
   "end": 1563,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "husain-shah-1563-kashmir-sultanate",
@@ -690,7 +752,8 @@
   "end": 1570,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "ali-shah-1570-kashmir-sultanate",
@@ -701,7 +764,8 @@
   "end": 1578,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "yousuf-shah-1578-kashmir-sultanate",
@@ -712,7 +776,8 @@
   "end": 1579,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of monarchs of Kashmir"
+  "list": "List of monarchs of Kashmir",
+  "supersedes": []
  },
  {
   "id": "siyaka-ii-940-paramara",
@@ -723,7 +788,8 @@
   "end": 972,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "vakpatiraja-ii-972-paramara",
@@ -734,7 +800,8 @@
   "end": 990,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "sindhuraja-990-paramara",
@@ -745,7 +812,8 @@
   "end": 1010,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "bhoja-1010-paramara",
@@ -756,7 +824,8 @@
   "end": 1055,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "jayasimha-i-1055-paramara",
@@ -767,7 +836,8 @@
   "end": 1070,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "udayaditya-1070-paramara",
@@ -778,7 +848,8 @@
   "end": 1086,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "lakshmadeva-1086-paramara",
@@ -789,7 +860,8 @@
   "end": 1094,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "naravarman-1094-paramara",
@@ -800,7 +872,8 @@
   "end": 1133,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "yashovarman-1133-paramara",
@@ -811,7 +884,8 @@
   "end": 1142,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "jayavarman-i-1142-paramara",
@@ -822,7 +896,8 @@
   "end": 1143,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "vindhyavarman-1175-paramara",
@@ -833,7 +908,8 @@
   "end": 1194,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "subhatavarman-1194-paramara",
@@ -844,7 +920,8 @@
   "end": 1209,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "arjunavarman-i-1210-paramara",
@@ -855,7 +932,8 @@
   "end": 1215,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "devapala-1215-paramara",
@@ -866,7 +944,8 @@
   "end": 1239,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "jaitugideva-1239-paramara",
@@ -877,7 +956,8 @@
   "end": 1255,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "jayavarman-ii-1255-paramara",
@@ -888,7 +968,8 @@
   "end": 1274,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
  },
  {
   "id": "arjunavarman-ii-1274-paramara",
@@ -899,6 +980,4475 @@
   "end": 1285,
   "datesAre": "reign",
   "endFromNext": false,
-  "list": "List of kings of Malwa"
+  "list": "List of kings of Malwa",
+  "supersedes": []
+ },
+ {
+  "id": "qasim-barid-i-1489-bidar-sultanate",
+  "name": "Qasim Barid I",
+  "role": "Barid Shahi ruler of Bidar",
+  "polityId": "bidar-sultanate",
+  "start": 1489,
+  "end": 1504,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bidar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "amir-barid-i-1504-bidar-sultanate",
+  "name": "Amir Barid I",
+  "role": "Barid Shahi ruler of Bidar",
+  "polityId": "bidar-sultanate",
+  "start": 1504,
+  "end": 1542,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bidar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "ali-barid-shah-i-1542-bidar-sultanate",
+  "name": "Ali Barid Shah I",
+  "role": "Barid Shahi ruler of Bidar",
+  "polityId": "bidar-sultanate",
+  "start": 1542,
+  "end": 1580,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bidar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "ibrahim-barid-shah-1580-bidar-sultanate",
+  "name": "Ibrahim Barid Shah",
+  "role": "Barid Shahi ruler of Bidar",
+  "polityId": "bidar-sultanate",
+  "start": 1580,
+  "end": 1587,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bidar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "qasim-barid-shah-ii-1587-bidar-sultanate",
+  "name": "Qasim Barid Shah II",
+  "role": "Barid Shahi ruler of Bidar",
+  "polityId": "bidar-sultanate",
+  "start": 1587,
+  "end": 1591,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bidar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "ali-barid-shah-ii-1591-bidar-sultanate",
+  "name": "Ali Barid Shah II",
+  "role": "Barid Shahi ruler of Bidar",
+  "polityId": "bidar-sultanate",
+  "start": 1591,
+  "end": 1591,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bidar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "amir-barid-shah-ii-1591-bidar-sultanate",
+  "name": "Amir Barid Shah II",
+  "role": "Barid Shahi ruler of Bidar",
+  "polityId": "bidar-sultanate",
+  "start": 1591,
+  "end": 1601,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bidar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "mirza-ali-barid-shah-iii-1601-bidar-sultanate",
+  "name": "Mirza Ali Barid Shah III",
+  "role": "Barid Shahi ruler of Bidar",
+  "polityId": "bidar-sultanate",
+  "start": 1601,
+  "end": 1609,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bidar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "amir-barid-shah-iii-1609-bidar-sultanate",
+  "name": "Amir Barid Shah III",
+  "role": "Barid Shahi ruler of Bidar",
+  "polityId": "bidar-sultanate",
+  "start": 1609,
+  "end": 1619,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bidar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "shri-harsha-905-chandela",
+  "name": "Shri Harsha",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 905,
+  "end": 925,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "yasho-varman-925-chandela",
+  "name": "Yasho-Varman",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 925,
+  "end": 950,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "dhanga-deva-950-chandela",
+  "name": "Dhanga-Deva",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 950,
+  "end": 999,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "ganda-deva-999-chandela",
+  "name": "Ganda-Deva",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 999,
+  "end": 1002,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "vidyadhara-1003-chandela",
+  "name": "Vidyadhara",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1003,
+  "end": 1035,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "vijaya-pala-1035-chandela",
+  "name": "Vijaya-Pala",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1035,
+  "end": 1050,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "deva-varman-1050-chandela",
+  "name": "Deva-Varman",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1050,
+  "end": 1060,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "kirtti-varman-1060-chandela",
+  "name": "Kirtti-Varman",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1060,
+  "end": 1100,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "sallakshana-varman-1100-chandela",
+  "name": "Sallakshana-Varman",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1100,
+  "end": 1110,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "jaya-varman-1110-chandela",
+  "name": "Jaya-Varman",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1110,
+  "end": 1120,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "prithvi-varman-1120-chandela",
+  "name": "Prithvi-Varman",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1120,
+  "end": 1128,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "madana-varman-1128-chandela",
+  "name": "Madana-Varman",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1128,
+  "end": 1164,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "yasho-varman-ii-1164-chandela",
+  "name": "Yasho-Varman II",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1164,
+  "end": 1165,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "paramardi-deva-1165-chandela",
+  "name": "Paramardi-Deva",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1165,
+  "end": 1203,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "trailokya-varman-1203-chandela",
+  "name": "Trailokya-Varman",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1203,
+  "end": 1245,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "vira-varman-1245-chandela",
+  "name": "Vira-Varman",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1245,
+  "end": 1285,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "bhoja-varman-1285-chandela",
+  "name": "Bhoja-Varman",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1285,
+  "end": 1288,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "hammira-varman-1288-chandela",
+  "name": "Hammira-Varman",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1288,
+  "end": 1311,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "vira-varman-ii-1311-chandela",
+  "name": "Vira-Varman II",
+  "role": "Chandela king",
+  "polityId": "chandela",
+  "start": 1311,
+  "end": 1315,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandelas of Jejakabhukti",
+  "supersedes": []
+ },
+ {
+  "id": "traillokyachandra-900-chandra",
+  "name": "Traillokyachandra",
+  "role": "Chandra king",
+  "polityId": "chandra",
+  "start": 900,
+  "end": 930,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandra dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "srichandra-930-chandra",
+  "name": "Srichandra",
+  "role": "Chandra king",
+  "polityId": "chandra",
+  "start": 930,
+  "end": 975,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandra dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "kalyanachandra-975-chandra",
+  "name": "Kalyanachandra",
+  "role": "Chandra king",
+  "polityId": "chandra",
+  "start": 975,
+  "end": 1000,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandra dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "ladahachandra-1000-chandra",
+  "name": "Ladahachandra",
+  "role": "Chandra king",
+  "polityId": "chandra",
+  "start": 1000,
+  "end": 1020,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandra dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "govindachandra-1020-chandra",
+  "name": "Govindachandra",
+  "role": "Chandra king",
+  "polityId": "chandra",
+  "start": 1020,
+  "end": 1050,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chandra dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "simha-raja-944-chauhan",
+  "name": "Simha-raja",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 944,
+  "end": 971,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "vigraha-raja-ii-971-chauhan",
+  "name": "Vigraha-raja II",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 971,
+  "end": 998,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "durlabha-raja-ii-998-chauhan",
+  "name": "Durlabha-raja II",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 998,
+  "end": 1012,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "govinda-raja-iii-1012-chauhan",
+  "name": "Govinda-raja III",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1012,
+  "end": 1026,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "vakpati-raja-ii-1026-chauhan",
+  "name": "Vakpati-raja II",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1026,
+  "end": 1040,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "viryarama-1040-chauhan",
+  "name": "Viryarama",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1040,
+  "end": 1040,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "chamunda-raja-1040-chauhan",
+  "name": "Chamunda-raja",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1040,
+  "end": 1065,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "durlabha-raja-iii-alias-du-ala-1065-chauhan",
+  "name": "Durlabha-raja III alias Duśala",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1065,
+  "end": 1070,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "vigraha-raja-iii-alias-visala-1070-chauhan",
+  "name": "Vigraha-raja III alias Visala",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1070,
+  "end": 1090,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "prithvi-raja-i-1090-chauhan",
+  "name": "Prithvi-raja I",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1090,
+  "end": 1110,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "ajaya-raja-ii-1110-chauhan",
+  "name": "Ajaya-raja II",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1110,
+  "end": 1135,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "arno-raja-alias-ana-1135-chauhan",
+  "name": "Arno-raja alias Ana",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1135,
+  "end": 1150,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jagad-deva-1150-chauhan",
+  "name": "Jagad-deva",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1150,
+  "end": 1150,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "vigraha-raja-iv-alias-visaladeva-1150-chauhan",
+  "name": "Vigraha-raja IV alias Visaladeva",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1150,
+  "end": 1164,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "apara-gangeya-1164-chauhan",
+  "name": "Apara-gangeya",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1164,
+  "end": 1165,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "prithvi-raja-ii-1165-chauhan",
+  "name": "Prithvi-raja II",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1165,
+  "end": 1169,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "someshvara-1169-chauhan",
+  "name": "Someshvara",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1169,
+  "end": 1178,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "prithviraja-iii-1177-chauhan",
+  "name": "Prithviraja III",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1177,
+  "end": 1192,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "govinda-raja-iv-1192-chauhan",
+  "name": "Govinda-raja IV",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1192,
+  "end": 1192,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "hari-raja-1193-chauhan",
+  "name": "Hari-raja",
+  "role": "Chahamana king of Shakambhari",
+  "polityId": "chauhan",
+  "start": 1193,
+  "end": 1194,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chauhan Dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "malik-sarwar-1394-jaunpur",
+  "name": "Malik Sarwar",
+  "role": "Sharqi Sultan of Jaunpur",
+  "polityId": "jaunpur",
+  "start": 1394,
+  "end": 1399,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Jaunpur Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "mubarak-shah-1399-jaunpur",
+  "name": "Mubarak Shah",
+  "role": "Sharqi Sultan of Jaunpur",
+  "polityId": "jaunpur",
+  "start": 1399,
+  "end": 1402,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Jaunpur Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "shams-ud-din-ibrahim-shah-1402-jaunpur",
+  "name": "Shams-ud-Din Ibrahim Shah",
+  "role": "Sharqi Sultan of Jaunpur",
+  "polityId": "jaunpur",
+  "start": 1402,
+  "end": 1440,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Jaunpur Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "nasir-ud-din-mahmud-shah-1440-jaunpur",
+  "name": "Nasir-ud-Din Mahmud Shah",
+  "role": "Sharqi Sultan of Jaunpur",
+  "polityId": "jaunpur",
+  "start": 1440,
+  "end": 1457,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Jaunpur Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "muhammad-shah-1457-jaunpur",
+  "name": "Muhammad Shah",
+  "role": "Sharqi Sultan of Jaunpur",
+  "polityId": "jaunpur",
+  "start": 1457,
+  "end": 1458,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Jaunpur Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "hussain-shah-1458-jaunpur",
+  "name": "Hussain Shah",
+  "role": "Sharqi Sultan of Jaunpur",
+  "polityId": "jaunpur",
+  "start": 1458,
+  "end": 1479,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Jaunpur Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "durlabhavardhana-625-karkota",
+  "name": "Durlabhavardhana",
+  "role": "King of Kashmir",
+  "polityId": "karkota",
+  "start": 625,
+  "end": 662,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Karkota dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "durlabhaka-or-pratipaditya-662-karkota",
+  "name": "Durlabhaka or Pratipaditya",
+  "role": "King of Kashmir",
+  "polityId": "karkota",
+  "start": 662,
+  "end": 712,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Karkota dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "chandrapeeda-or-varnaditya-712-karkota",
+  "name": "Chandrapeeda or Varnaditya",
+  "role": "King of Kashmir",
+  "polityId": "karkota",
+  "start": 712,
+  "end": 720,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Karkota dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "tarapida-or-udayaditya-720-karkota",
+  "name": "Tarapida or Udayaditya",
+  "role": "King of Kashmir",
+  "polityId": "karkota",
+  "start": 720,
+  "end": 724,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Karkota dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "lalitaditya-muktapida-724-karkota",
+  "name": "Lalitaditya Muktapida",
+  "role": "King of Kashmir",
+  "polityId": "karkota",
+  "start": 724,
+  "end": 760,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Karkota dynasty",
+  "supersedes": [
+   "lalitaditya-muktapida"
+  ]
+ },
+ {
+  "id": "kuvalayaditya-760-karkota",
+  "name": "Kuvalayaditya",
+  "role": "King of Kashmir",
+  "polityId": "karkota",
+  "start": 760,
+  "end": 761,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Karkota dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "vajraditya-or-bapyayika-or-lalitapida-761-karkota",
+  "name": "Vajraditya or Bapyayika or Lalitapida",
+  "role": "King of Kashmir",
+  "polityId": "karkota",
+  "start": 761,
+  "end": 768,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Karkota dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "prithivyapida-i-768-karkota",
+  "name": "Prithivyapida I",
+  "role": "King of Kashmir",
+  "polityId": "karkota",
+  "start": 768,
+  "end": 772,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Karkota dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "sangramapida-772-karkota",
+  "name": "Sangramapida",
+  "role": "King of Kashmir",
+  "polityId": "karkota",
+  "start": 772,
+  "end": 779,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Karkota dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jayapida-779-karkota",
+  "name": "Jayapida",
+  "role": "King of Kashmir",
+  "polityId": "karkota",
+  "start": 779,
+  "end": 813,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Karkota dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "lalitapida-813-karkota",
+  "name": "Lalitapida",
+  "role": "King of Kashmir",
+  "polityId": "karkota",
+  "start": 813,
+  "end": 825,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Karkota dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "sangramapida-ii-825-karkota",
+  "name": "Sangramapida II",
+  "role": "King of Kashmir",
+  "polityId": "karkota",
+  "start": 825,
+  "end": 832,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Karkota dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "chipyata-jayapida-832-karkota",
+  "name": "Chipyata-Jayapida",
+  "role": "King of Kashmir",
+  "polityId": "karkota",
+  "start": 832,
+  "end": 885,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Karkota dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "mularaja-940-chaulukya",
+  "name": "Mularaja",
+  "role": "Chaulukya king of Gujarat",
+  "polityId": "chaulukya",
+  "start": 940,
+  "end": 995,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chaulukya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "chamundaraja-996-chaulukya",
+  "name": "Chamundaraja",
+  "role": "Chaulukya king of Gujarat",
+  "polityId": "chaulukya",
+  "start": 996,
+  "end": 1008,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chaulukya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "vallabharaja-1008-chaulukya",
+  "name": "Vallabharaja",
+  "role": "Chaulukya king of Gujarat",
+  "polityId": "chaulukya",
+  "start": 1008,
+  "end": 1008,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chaulukya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "durlabharaja-1008-chaulukya",
+  "name": "Durlabharaja",
+  "role": "Chaulukya king of Gujarat",
+  "polityId": "chaulukya",
+  "start": 1008,
+  "end": 1022,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chaulukya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "bhima-i-1022-chaulukya",
+  "name": "Bhima I",
+  "role": "Chaulukya king of Gujarat",
+  "polityId": "chaulukya",
+  "start": 1022,
+  "end": 1064,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chaulukya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "karna-1064-chaulukya",
+  "name": "Karna",
+  "role": "Chaulukya king of Gujarat",
+  "polityId": "chaulukya",
+  "start": 1064,
+  "end": 1092,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chaulukya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "kumarapala-1142-chaulukya",
+  "name": "Kumarapala",
+  "role": "Chaulukya king of Gujarat",
+  "polityId": "chaulukya",
+  "start": 1142,
+  "end": 1171,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chaulukya dynasty",
+  "supersedes": [
+   "kumarapala"
+  ]
+ },
+ {
+  "id": "ajayapala-1171-chaulukya",
+  "name": "Ajayapala",
+  "role": "Chaulukya king of Gujarat",
+  "polityId": "chaulukya",
+  "start": 1171,
+  "end": 1175,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chaulukya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "mularaja-ii-1175-chaulukya",
+  "name": "Mularaja II",
+  "role": "Chaulukya king of Gujarat",
+  "polityId": "chaulukya",
+  "start": 1175,
+  "end": 1178,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chaulukya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "bhima-ii-1178-chaulukya",
+  "name": "Bhima II",
+  "role": "Chaulukya king of Gujarat",
+  "polityId": "chaulukya",
+  "start": 1178,
+  "end": 1240,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chaulukya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "tribhuvanapala-1240-chaulukya",
+  "name": "Tribhuvanapala",
+  "role": "Chaulukya king of Gujarat",
+  "polityId": "chaulukya",
+  "start": 1240,
+  "end": 1244,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Chaulukya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-unar-i-1351-samma",
+  "name": "Jam Unar I",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1351,
+  "end": 1352,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-banbinah-i-1352-samma",
+  "name": "Jam Banbinah I",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1352,
+  "end": 1367,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-tamachi-1367-samma",
+  "name": "Jam Tamachi",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1367,
+  "end": 1371,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-togachi-1368-samma",
+  "name": "Jam Togachi",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1368,
+  "end": 1370,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-juna-i-1371-samma",
+  "name": "Jam Juna I",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1371,
+  "end": 1389,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-tamachi-second-term-1389-samma",
+  "name": "Jam Tamachi (second term)",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1389,
+  "end": 1392,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-unar-ii-1392-samma",
+  "name": "Jam Unar II",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1392,
+  "end": 1404,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-nizam-1404-samma",
+  "name": "Jam Nizam",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1404,
+  "end": 1406,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-ali-sher-1406-samma",
+  "name": "Jam Ali Sher",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1406,
+  "end": 1412,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-karan-1412-samma",
+  "name": "Jam Karan",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1412,
+  "end": 1412,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-sikandar-i-1412-samma",
+  "name": "Jam Sikandar I",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1412,
+  "end": 1413,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-fath-1413-samma",
+  "name": "Jam Fath",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1413,
+  "end": 1428,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-juna-ii-1428-samma",
+  "name": "Jam Juna II",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1428,
+  "end": 1442,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-mubarak-1442-samma",
+  "name": "Jam Mubarak",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1442,
+  "end": 1442,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-sikandar-ii-1442-samma",
+  "name": "Jam Sikandar II",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1442,
+  "end": 1444,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-raidhan-1444-samma",
+  "name": "Jam Raidhan",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1444,
+  "end": 1453,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jam-nindo-1461-samma",
+  "name": "Jam Nindo",
+  "role": "Jam of Sindh",
+  "polityId": "samma",
+  "start": 1461,
+  "end": 1508,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Samma dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "venkoji-bhonsle-1674-thanjavur-marathas",
+  "name": "Venkoji Bhonsle",
+  "role": "Maratha ruler of Thanjavur",
+  "polityId": "thanjavur-marathas",
+  "start": 1674,
+  "end": 1684,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Thanjavur Maratha kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "shahuji-bhonsle-1684-thanjavur-marathas",
+  "name": "Shahuji Bhonsle",
+  "role": "Maratha ruler of Thanjavur",
+  "polityId": "thanjavur-marathas",
+  "start": 1684,
+  "end": 1712,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Thanjavur Maratha kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "serfoji-bhonsle-i-1712-thanjavur-marathas",
+  "name": "Serfoji Bhonsle I",
+  "role": "Maratha ruler of Thanjavur",
+  "polityId": "thanjavur-marathas",
+  "start": 1712,
+  "end": 1728,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Thanjavur Maratha kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "tukkoji-bhonsle-1728-thanjavur-marathas",
+  "name": "Tukkoji Bhonsle",
+  "role": "Maratha ruler of Thanjavur",
+  "polityId": "thanjavur-marathas",
+  "start": 1728,
+  "end": 1736,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Thanjavur Maratha kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "ekoji-ii-1736-thanjavur-marathas",
+  "name": "Ekoji II",
+  "role": "Maratha ruler of Thanjavur",
+  "polityId": "thanjavur-marathas",
+  "start": 1736,
+  "end": 1737,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Thanjavur Maratha kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "sujana-bai-1737-thanjavur-marathas",
+  "name": "Sujana Bai",
+  "role": "Maratha ruler of Thanjavur",
+  "polityId": "thanjavur-marathas",
+  "start": 1737,
+  "end": 1738,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Thanjavur Maratha kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "shahuji-ii-1738-thanjavur-marathas",
+  "name": "Shahuji II",
+  "role": "Maratha ruler of Thanjavur",
+  "polityId": "thanjavur-marathas",
+  "start": 1738,
+  "end": 1739,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Thanjavur Maratha kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "pratapsingh-bhonsle-1739-thanjavur-marathas",
+  "name": "Pratapsingh Bhonsle",
+  "role": "Maratha ruler of Thanjavur",
+  "polityId": "thanjavur-marathas",
+  "start": 1739,
+  "end": 1763,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Thanjavur Maratha kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "shamsuddin-ilyas-shah-1342-bengal-sultanate",
+  "name": "Shamsuddin Ilyas Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1342,
+  "end": 1358,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": [
+   "shamsuddin-ilyas-shah"
+  ]
+ },
+ {
+  "id": "sikandar-shah-1358-bengal-sultanate",
+  "name": "Sikandar Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1358,
+  "end": 1390,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": [
+   "sikandar-shah"
+  ]
+ },
+ {
+  "id": "ghiyasuddin-azam-shah-1390-bengal-sultanate",
+  "name": "Ghiyasuddin Azam Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1390,
+  "end": 1411,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "saifuddin-hamza-shah-1411-bengal-sultanate",
+  "name": "Saifuddin Hamza Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1411,
+  "end": 1413,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "nasiruddin-muhammad-shah-bin-hamza-shah-1413-bengal-sultanate",
+  "name": "Nasiruddin Muhammad Shah bin Hamza Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1413,
+  "end": 1413,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "shihabuddin-bayazid-shah-1413-bengal-sultanate",
+  "name": "Shihabuddin Bayazid Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1413,
+  "end": 1414,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "alauddin-firuz-shah-i-1414-bengal-sultanate",
+  "name": "Alauddin Firuz Shah I",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1414,
+  "end": 1414,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "raja-ganesha-1414-bengal-sultanate",
+  "name": "Raja Ganesha",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1414,
+  "end": 1415,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "jalaluddin-muhammad-shah-1415-bengal-sultanate",
+  "name": "Jalaluddin Muhammad Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1415,
+  "end": 1416,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "raja-ganesha-second-term-1416-bengal-sultanate",
+  "name": "Raja Ganesha (second term)",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1416,
+  "end": 1418,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "jalaluddin-muhammad-shah-second-term-1418-bengal-sultanate",
+  "name": "Jalaluddin Muhammad Shah (second term)",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1418,
+  "end": 1433,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "shamsuddin-ahmad-shah-1433-bengal-sultanate",
+  "name": "Shamsuddin Ahmad Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1433,
+  "end": 1435,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "nasiruddin-mahmud-shah-i-1435-bengal-sultanate",
+  "name": "Nasiruddin Mahmud Shah I",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1435,
+  "end": 1459,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "rukunuddin-barbak-shah-1459-bengal-sultanate",
+  "name": "Rukunuddin Barbak Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1459,
+  "end": 1474,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "shamsuddin-yusuf-shah-1474-bengal-sultanate",
+  "name": "Shamsuddin Yusuf Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1474,
+  "end": 1481,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "sikandar-shah-ii-1481-bengal-sultanate",
+  "name": "Sikandar Shah II",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1481,
+  "end": 1481,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "jalaluddin-fateh-shah-1481-bengal-sultanate",
+  "name": "Jalaluddin Fateh Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1481,
+  "end": 1487,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "shahzada-barbak-1487-bengal-sultanate",
+  "name": "Shahzada Barbak",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1487,
+  "end": 1487,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "saifuddin-firuz-shah-1487-bengal-sultanate",
+  "name": "Saifuddin Firuz Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1487,
+  "end": 1489,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "mahmud-shah-ii-1489-bengal-sultanate",
+  "name": "Mahmud Shah II",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1489,
+  "end": 1490,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "shamsuddin-muzaffar-shah-1490-bengal-sultanate",
+  "name": "Shamsuddin Muzaffar Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1490,
+  "end": 1494,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "alauddin-hussain-shah-1494-bengal-sultanate",
+  "name": "Alauddin Hussain Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1494,
+  "end": 1518,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": [
+   "alauddin-husain-shah"
+  ]
+ },
+ {
+  "id": "nasiruddin-nasrat-shah-1518-bengal-sultanate",
+  "name": "Nasiruddin Nasrat Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1518,
+  "end": 1533,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "alauddin-firuz-shah-ii-1533-bengal-sultanate",
+  "name": "Alauddin Firuz Shah II",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1533,
+  "end": 1533,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "ghiyasuddin-mahmud-shah-1533-bengal-sultanate",
+  "name": "Ghiyasuddin Mahmud Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1533,
+  "end": 1538,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "khidr-khan-1539-bengal-sultanate",
+  "name": "Khidr Khan",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1539,
+  "end": 1541,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "qazi-fazilat-1541-bengal-sultanate",
+  "name": "Qazi Fazilat",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1541,
+  "end": 1545,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "muhammad-khan-sur-1545-bengal-sultanate",
+  "name": "Muhammad Khan Sur",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1545,
+  "end": 1554,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "muhammad-khan-sur-second-term-1554-bengal-sultanate",
+  "name": "Muhammad Khan Sur (second term)",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1554,
+  "end": 1555,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "ghiyasuddin-bahadur-shah-ii-1555-bengal-sultanate",
+  "name": "Ghiyasuddin Bahadur Shah II",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1555,
+  "end": 1561,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "ghiyasuddin-jalal-shah-1561-bengal-sultanate",
+  "name": "Ghiyasuddin Jalal Shah",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1561,
+  "end": 1563,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "ghiyasuddin-bahadur-shah-iii-1563-bengal-sultanate",
+  "name": "Ghiyasuddin Bahadur Shah III",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1563,
+  "end": 1564,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "taj-khan-karrani-1564-bengal-sultanate",
+  "name": "Taj Khan Karrani",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1564,
+  "end": 1566,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": [
+   "taj-khan-karrani"
+  ]
+ },
+ {
+  "id": "sulaiman-khan-karrani-1566-bengal-sultanate",
+  "name": "Sulaiman Khan Karrani",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1566,
+  "end": 1572,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "bayazid-khan-karrani-1572-bengal-sultanate",
+  "name": "Bayazid Khan Karrani",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1572,
+  "end": 1572,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "daud-khan-karrani-1572-bengal-sultanate",
+  "name": "Daud Khan Karrani",
+  "role": "Sultan of Bengal",
+  "polityId": "bengal-sultanate",
+  "start": 1572,
+  "end": 1576,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Bengal Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "fathullah-imad-ul-mulk-1490-berar",
+  "name": "Fathullah Imad-ul-Mulk",
+  "role": "Imad Shahi Sultan of Berar",
+  "polityId": "berar",
+  "start": 1490,
+  "end": 1504,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Berar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "aladdin-imad-shah-1504-berar",
+  "name": "Aladdin Imad Shah",
+  "role": "Imad Shahi Sultan of Berar",
+  "polityId": "berar",
+  "start": 1504,
+  "end": 1529,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Berar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "darya-imad-shah-1529-berar",
+  "name": "Darya Imad Shah",
+  "role": "Imad Shahi Sultan of Berar",
+  "polityId": "berar",
+  "start": 1529,
+  "end": 1562,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Berar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "burhan-imad-shah-1562-berar",
+  "name": "Burhan Imad Shah",
+  "role": "Imad Shahi Sultan of Berar",
+  "polityId": "berar",
+  "start": 1562,
+  "end": 1574,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Berar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "tufail-khan-1568-berar",
+  "name": "Tufail Khan",
+  "role": "Imad Shahi Sultan of Berar",
+  "polityId": "berar",
+  "start": 1568,
+  "end": 1574,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Berar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "mallugi-i-1145-yadava",
+  "name": "Mallugi I",
+  "role": "Yadava king of Devagiri",
+  "polityId": "yadava",
+  "start": 1145,
+  "end": 1160,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Seuna (Yadava) dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "bhillama-v-1175-yadava",
+  "name": "Bhillama V",
+  "role": "Yadava king of Devagiri",
+  "polityId": "yadava",
+  "start": 1175,
+  "end": 1187,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Seuna (Yadava) dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "bhillama-v-second-term-1187-yadava",
+  "name": "Bhillama V (second term)",
+  "role": "Yadava king of Devagiri",
+  "polityId": "yadava",
+  "start": 1187,
+  "end": 1191,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Seuna (Yadava) dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jaitugi-i-1191-yadava",
+  "name": "Jaitugi I",
+  "role": "Yadava king of Devagiri",
+  "polityId": "yadava",
+  "start": 1191,
+  "end": 1200,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Seuna (Yadava) dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "simhana-ii-1200-yadava",
+  "name": "Simhana II",
+  "role": "Yadava king of Devagiri",
+  "polityId": "yadava",
+  "start": 1200,
+  "end": 1246,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Seuna (Yadava) dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "krishna-alias-kannara-1246-yadava",
+  "name": "Krishna alias Kannara",
+  "role": "Yadava king of Devagiri",
+  "polityId": "yadava",
+  "start": 1246,
+  "end": 1261,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Seuna (Yadava) dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "mahadeva-1261-yadava",
+  "name": "Mahadeva",
+  "role": "Yadava king of Devagiri",
+  "polityId": "yadava",
+  "start": 1261,
+  "end": 1270,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Seuna (Yadava) dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "ramachandra-alias-ramadeva-1271-yadava",
+  "name": "Ramachandra alias Ramadeva",
+  "role": "Yadava king of Devagiri",
+  "polityId": "yadava",
+  "start": 1271,
+  "end": 1308,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Seuna (Yadava) dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "ramachandra-1308-yadava",
+  "name": "Ramachandra",
+  "role": "Yadava king of Devagiri",
+  "polityId": "yadava",
+  "start": 1308,
+  "end": 1311,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Seuna (Yadava) dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "simhana-iii-alias-shankaradeva-1311-yadava",
+  "name": "Simhana III alias Shankaradeva",
+  "role": "Yadava king of Devagiri",
+  "polityId": "yadava",
+  "start": 1311,
+  "end": 1313,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Seuna (Yadava) dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "harapaladeva-1313-yadava",
+  "name": "Harapaladeva",
+  "role": "Yadava king of Devagiri",
+  "polityId": "yadava",
+  "start": 1313,
+  "end": 1317,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Seuna (Yadava) dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "anantavarman-chodaganga-1077-eastern-ganga",
+  "name": "Anantavarman Chodaganga",
+  "role": "Eastern Ganga king",
+  "polityId": "eastern-ganga",
+  "start": 1077,
+  "end": 1150,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Eastern Ganga dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "kamarnnava-deva-1150-eastern-ganga",
+  "name": "Kamarnnava Deva",
+  "role": "Eastern Ganga king",
+  "polityId": "eastern-ganga",
+  "start": 1150,
+  "end": 1156,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Eastern Ganga dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "raghava-deva-1156-eastern-ganga",
+  "name": "Raghava Deva",
+  "role": "Eastern Ganga king",
+  "polityId": "eastern-ganga",
+  "start": 1156,
+  "end": 1170,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Eastern Ganga dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "rajaraja-deva-ii-1170-eastern-ganga",
+  "name": "Rajaraja Deva II",
+  "role": "Eastern Ganga king",
+  "polityId": "eastern-ganga",
+  "start": 1170,
+  "end": 1190,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Eastern Ganga dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "anangabhima-deva-ii-1190-eastern-ganga",
+  "name": "Anangabhima Deva II",
+  "role": "Eastern Ganga king",
+  "polityId": "eastern-ganga",
+  "start": 1190,
+  "end": 1198,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Eastern Ganga dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "rajraja-deva-iii-1198-eastern-ganga",
+  "name": "Rajraja Deva III",
+  "role": "Eastern Ganga king",
+  "polityId": "eastern-ganga",
+  "start": 1198,
+  "end": 1211,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Eastern Ganga dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "anangabhima-deva-iii-1211-eastern-ganga",
+  "name": "Anangabhima Deva III",
+  "role": "Eastern Ganga king",
+  "polityId": "eastern-ganga",
+  "start": 1211,
+  "end": 1238,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Eastern Ganga dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "narasimha-deva-i-1238-eastern-ganga",
+  "name": "Narasimha Deva I",
+  "role": "Eastern Ganga king",
+  "polityId": "eastern-ganga",
+  "start": 1238,
+  "end": 1264,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Eastern Ganga dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "bhanu-deva-i-1264-eastern-ganga",
+  "name": "Bhanu Deva I",
+  "role": "Eastern Ganga king",
+  "polityId": "eastern-ganga",
+  "start": 1264,
+  "end": 1278,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Eastern Ganga dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "narasimha-deva-ii-1279-eastern-ganga",
+  "name": "Narasimha Deva II",
+  "role": "Eastern Ganga king",
+  "polityId": "eastern-ganga",
+  "start": 1279,
+  "end": 1306,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Eastern Ganga dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "bhanu-deva-ii-1306-eastern-ganga",
+  "name": "Bhanu Deva II",
+  "role": "Eastern Ganga king",
+  "polityId": "eastern-ganga",
+  "start": 1306,
+  "end": 1328,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Eastern Ganga dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "narasimha-deva-iii-1328-eastern-ganga",
+  "name": "Narasimha Deva III",
+  "role": "Eastern Ganga king",
+  "polityId": "eastern-ganga",
+  "start": 1328,
+  "end": 1352,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Eastern Ganga dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "bhanu-deva-iii-1352-eastern-ganga",
+  "name": "Bhanu Deva III",
+  "role": "Eastern Ganga king",
+  "polityId": "eastern-ganga",
+  "start": 1352,
+  "end": 1378,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Eastern Ganga dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "rudra-1158-kakatiya",
+  "name": "Rudra",
+  "role": "Kakatiya ruler",
+  "polityId": "kakatiya",
+  "start": 1158,
+  "end": 1195,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kakatiya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "mahadeva-1196-kakatiya",
+  "name": "Mahadeva",
+  "role": "Kakatiya ruler",
+  "polityId": "kakatiya",
+  "start": 1196,
+  "end": 1199,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kakatiya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "ganapati-deva-1199-kakatiya",
+  "name": "Ganapati-deva",
+  "role": "Kakatiya ruler",
+  "polityId": "kakatiya",
+  "start": 1199,
+  "end": 1262,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kakatiya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "rudrama-devi-1262-kakatiya",
+  "name": "Rudrama-devi",
+  "role": "Kakatiya ruler",
+  "polityId": "kakatiya",
+  "start": 1262,
+  "end": 1289,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kakatiya dynasty",
+  "supersedes": [
+   "rudrama-devi"
+  ]
+ },
+ {
+  "id": "prataparudra-deva-1289-kakatiya",
+  "name": "Prataparudra-deva",
+  "role": "Kakatiya ruler",
+  "polityId": "kakatiya",
+  "start": 1289,
+  "end": 1323,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kakatiya dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "ahmad-nizam-shah-i-1490-ahmadnagar",
+  "name": "Ahmad Nizam Shah I",
+  "role": "Nizam Shahi Sultan of Ahmadnagar",
+  "polityId": "ahmadnagar",
+  "start": 1490,
+  "end": 1510,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ahmadnagar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "burhan-nizam-shah-i-1510-ahmadnagar",
+  "name": "Burhan Nizam Shah I",
+  "role": "Nizam Shahi Sultan of Ahmadnagar",
+  "polityId": "ahmadnagar",
+  "start": 1510,
+  "end": 1553,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ahmadnagar Sultanate",
+  "supersedes": [
+   "burhan-shah-i"
+  ]
+ },
+ {
+  "id": "hussain-nizam-shah-i-1553-ahmadnagar",
+  "name": "Hussain Nizam Shah I",
+  "role": "Nizam Shahi Sultan of Ahmadnagar",
+  "polityId": "ahmadnagar",
+  "start": 1553,
+  "end": 1565,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ahmadnagar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "murtaza-nizam-shah-i-1565-ahmadnagar",
+  "name": "Murtaza Nizam Shah I",
+  "role": "Nizam Shahi Sultan of Ahmadnagar",
+  "polityId": "ahmadnagar",
+  "start": 1565,
+  "end": 1588,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ahmadnagar Sultanate",
+  "supersedes": [
+   "murtaza-nizam-shah-ii"
+  ]
+ },
+ {
+  "id": "hussain-nizam-shah-ii-1588-ahmadnagar",
+  "name": "Hussain Nizam Shah II",
+  "role": "Nizam Shahi Sultan of Ahmadnagar",
+  "polityId": "ahmadnagar",
+  "start": 1588,
+  "end": 1589,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ahmadnagar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "ismail-nizam-shah-1589-ahmadnagar",
+  "name": "Ismail Nizam Shah",
+  "role": "Nizam Shahi Sultan of Ahmadnagar",
+  "polityId": "ahmadnagar",
+  "start": 1589,
+  "end": 1591,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ahmadnagar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "burhan-nizam-shah-ii-1591-ahmadnagar",
+  "name": "Burhan Nizam Shah II",
+  "role": "Nizam Shahi Sultan of Ahmadnagar",
+  "polityId": "ahmadnagar",
+  "start": 1591,
+  "end": 1595,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ahmadnagar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "bahadur-nizam-shah-1595-ahmadnagar",
+  "name": "Bahadur Nizam Shah",
+  "role": "Nizam Shahi Sultan of Ahmadnagar",
+  "polityId": "ahmadnagar",
+  "start": 1595,
+  "end": 1600,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ahmadnagar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "murtaza-nizam-shah-ii-1600-ahmadnagar",
+  "name": "Murtaza Nizam Shah II",
+  "role": "Nizam Shahi Sultan of Ahmadnagar",
+  "polityId": "ahmadnagar",
+  "start": 1600,
+  "end": 1610,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ahmadnagar Sultanate",
+  "supersedes": [
+   "murtaza-nizam-shah-ii"
+  ]
+ },
+ {
+  "id": "burhan-nizam-shah-iii-1610-ahmadnagar",
+  "name": "Burhan Nizam Shah III",
+  "role": "Nizam Shahi Sultan of Ahmadnagar",
+  "polityId": "ahmadnagar",
+  "start": 1610,
+  "end": 1631,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ahmadnagar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "hussain-nizam-shah-iii-1631-ahmadnagar",
+  "name": "Hussain Nizam Shah III",
+  "role": "Nizam Shahi Sultan of Ahmadnagar",
+  "polityId": "ahmadnagar",
+  "start": 1631,
+  "end": 1633,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ahmadnagar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "murtaza-nizam-shah-iii-1633-ahmadnagar",
+  "name": "Murtaza Nizam Shah III",
+  "role": "Nizam Shahi Sultan of Ahmadnagar",
+  "polityId": "ahmadnagar",
+  "start": 1633,
+  "end": 1636,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ahmadnagar Sultanate",
+  "supersedes": []
+ },
+ {
+  "id": "simhavishnu-575-pallava",
+  "name": "Simhavishnu",
+  "role": "Pallava king",
+  "polityId": "pallava",
+  "start": 575,
+  "end": 600,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Pallava dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "mahendravarman-ii-668-pallava",
+  "name": "Mahendravarman II",
+  "role": "Pallava king",
+  "polityId": "pallava",
+  "start": 668,
+  "end": 672,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Pallava dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "paramesvaravarman-ii-725-pallava",
+  "name": "Paramesvaravarman II",
+  "role": "Pallava king",
+  "polityId": "pallava",
+  "start": 725,
+  "end": 731,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Pallava dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "nandivarman-ii-732-pallava",
+  "name": "Nandivarman II",
+  "role": "Pallava king",
+  "polityId": "pallava",
+  "start": 732,
+  "end": 796,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Pallava dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "dantivarman-795-pallava",
+  "name": "Dantivarman",
+  "role": "Pallava king",
+  "polityId": "pallava",
+  "start": 795,
+  "end": 846,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Pallava dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "chandradeva-1089-gahadavala",
+  "name": "Chandradeva",
+  "role": "Gahadavala king",
+  "polityId": "gahadavala",
+  "start": 1089,
+  "end": 1103,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gahadavala dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "madanapala-1104-gahadavala",
+  "name": "Madanapala",
+  "role": "Gahadavala king",
+  "polityId": "gahadavala",
+  "start": 1104,
+  "end": 1113,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gahadavala dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "govindachandra-1114-gahadavala",
+  "name": "Govindachandra",
+  "role": "Gahadavala king",
+  "polityId": "gahadavala",
+  "start": 1114,
+  "end": 1155,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gahadavala dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "vijayachandra-1155-gahadavala",
+  "name": "Vijayachandra",
+  "role": "Gahadavala king",
+  "polityId": "gahadavala",
+  "start": 1155,
+  "end": 1169,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gahadavala dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jayachandra-1170-gahadavala",
+  "name": "Jayachandra",
+  "role": "Gahadavala king",
+  "polityId": "gahadavala",
+  "start": 1170,
+  "end": 1194,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gahadavala dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "harishchandra-1194-gahadavala",
+  "name": "Harishchandra",
+  "role": "Gahadavala king",
+  "polityId": "gahadavala",
+  "start": 1194,
+  "end": 1197,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gahadavala dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "umar-ibn-abd-al-aziz-al-habbari-855-habbarid",
+  "name": "Umar ibn'Abd al-Aziz al'Habbari",
+  "role": "Habbarid emir of Mansura",
+  "polityId": "habbarid",
+  "start": 855,
+  "end": 884,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Habbari Emirate",
+  "supersedes": []
+ },
+ {
+  "id": "abdullah-ibn-umar-884-habbarid",
+  "name": "Abdullah ibn Umar",
+  "role": "Habbarid emir of Mansura",
+  "polityId": "habbarid",
+  "start": 884,
+  "end": 913,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Habbari Emirate",
+  "supersedes": []
+ },
+ {
+  "id": "umar-ibn-abdullah-913-habbarid",
+  "name": "Umar ibn-Abdullah",
+  "role": "Habbarid emir of Mansura",
+  "polityId": "habbarid",
+  "start": 913,
+  "end": 943,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Habbari Emirate",
+  "supersedes": []
+ },
+ {
+  "id": "muhammad-ibn-abdullah-943-habbarid",
+  "name": "Muhammad ibn Abdullah",
+  "role": "Habbarid emir of Mansura",
+  "polityId": "habbarid",
+  "start": 943,
+  "end": 973,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Habbari Emirate",
+  "supersedes": []
+ },
+ {
+  "id": "ali-ibn-umar-973-habbarid",
+  "name": "Ali ibn Umar",
+  "role": "Habbarid emir of Mansura",
+  "polityId": "habbarid",
+  "start": 973,
+  "end": 987,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Habbari Emirate",
+  "supersedes": []
+ },
+ {
+  "id": "manbi-ibn-ali-ibn-umar-987-habbarid",
+  "name": "Manbi ibn Ali ibn Umar",
+  "role": "Habbarid emir of Mansura",
+  "polityId": "habbarid",
+  "start": 987,
+  "end": 1010,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Habbari Emirate",
+  "supersedes": []
+ },
+ {
+  "id": "salastamba-650-kamarupa",
+  "name": "Salastamba",
+  "role": "Mlechchha king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 650,
+  "end": 670,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Mlechchha dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "harshadeva-alias-harshavarman-725-kamarupa",
+  "name": "Harshadeva alias Harshavarman",
+  "role": "Mlechchha king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 725,
+  "end": 745,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Mlechchha dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "harjjaravarman-815-kamarupa",
+  "name": "Harjjaravarman",
+  "role": "Mlechchha king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 815,
+  "end": 832,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Mlechchha dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "vanamalavarmadeva-832-kamarupa",
+  "name": "Vanamalavarmadeva",
+  "role": "Mlechchha king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 832,
+  "end": 855,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Mlechchha dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jayamala-alias-virabahu-855-kamarupa",
+  "name": "Jayamala alias Virabahu",
+  "role": "Mlechchha king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 855,
+  "end": 860,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Mlechchha dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "balavarman-iii-860-kamarupa",
+  "name": "Balavarman III",
+  "role": "Mlechchha king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 860,
+  "end": 880,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Mlechchha dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "tyagasimha-890-kamarupa",
+  "name": "Tyagasimha",
+  "role": "Mlechchha king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 890,
+  "end": 900,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Mlechchha dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "brahma-pala-900-kamarupa",
+  "name": "Brahma Pala",
+  "role": "Pala king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 900,
+  "end": 920,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Pala dynasty (Kamarupa)",
+  "supersedes": []
+ },
+ {
+  "id": "ratna-pala-920-kamarupa",
+  "name": "Ratna Pala",
+  "role": "Pala king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 920,
+  "end": 960,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Pala dynasty (Kamarupa)",
+  "supersedes": []
+ },
+ {
+  "id": "indra-pala-960-kamarupa",
+  "name": "Indra Pala",
+  "role": "Pala king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 960,
+  "end": 990,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Pala dynasty (Kamarupa)",
+  "supersedes": []
+ },
+ {
+  "id": "go-pala-990-kamarupa",
+  "name": "Go Pala",
+  "role": "Pala king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 990,
+  "end": 1015,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Pala dynasty (Kamarupa)",
+  "supersedes": []
+ },
+ {
+  "id": "harsha-pala-1015-kamarupa",
+  "name": "Harsha Pala",
+  "role": "Pala king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 1015,
+  "end": 1035,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Pala dynasty (Kamarupa)",
+  "supersedes": []
+ },
+ {
+  "id": "dharma-pala-1035-kamarupa",
+  "name": "Dharma Pala",
+  "role": "Pala king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 1035,
+  "end": 1060,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Pala dynasty (Kamarupa)",
+  "supersedes": []
+ },
+ {
+  "id": "jaya-pala-1075-kamarupa",
+  "name": "Jaya Pala",
+  "role": "Pala king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 1075,
+  "end": 1100,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Pala dynasty (Kamarupa)",
+  "supersedes": []
+ },
+ {
+  "id": "kulasekara-cinkaiariyan-1277-jaffna",
+  "name": "Kulasekara Cinkaiariyan",
+  "role": "Aryacakravarti king of Jaffna",
+  "polityId": "jaffna",
+  "start": 1277,
+  "end": 1284,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Jaffna monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "kulotunga-cinkaiariyan-1284-jaffna",
+  "name": "Kulotunga Cinkaiariyan",
+  "role": "Aryacakravarti king of Jaffna",
+  "polityId": "jaffna",
+  "start": 1284,
+  "end": 1292,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Jaffna monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "vickrama-cinkaiariyan-1292-jaffna",
+  "name": "Vickrama Cinkaiariyan",
+  "role": "Aryacakravarti king of Jaffna",
+  "polityId": "jaffna",
+  "start": 1292,
+  "end": 1302,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Jaffna monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "varodaya-cinkaiariyan-1302-jaffna",
+  "name": "Varodaya Cinkaiariyan",
+  "role": "Aryacakravarti king of Jaffna",
+  "polityId": "jaffna",
+  "start": 1302,
+  "end": 1325,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Jaffna monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "martanda-cinkaiariyan-1325-jaffna",
+  "name": "Martanda Cinkaiariyan",
+  "role": "Aryacakravarti king of Jaffna",
+  "polityId": "jaffna",
+  "start": 1325,
+  "end": 1348,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Jaffna monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "gunaveera-cinkaiariyan-1410-jaffna",
+  "name": "Gunaveera Cinkaiariyan",
+  "role": "Aryacakravarti king of Jaffna",
+  "polityId": "jaffna",
+  "start": 1410,
+  "end": 1440,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Jaffna monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "kanakasooriya-cinkaiariyan-1440-jaffna",
+  "name": "Kanakasooriya Cinkaiariyan",
+  "role": "Aryacakravarti king of Jaffna",
+  "polityId": "jaffna",
+  "start": 1440,
+  "end": 1450,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Jaffna monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "bhutivarman-518-kamarupa",
+  "name": "Bhutivarman",
+  "role": "Varman king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 518,
+  "end": 542,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Varman dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "chandramukhavarman-542-kamarupa",
+  "name": "Chandramukhavarman",
+  "role": "Varman king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 542,
+  "end": 566,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Varman dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "sthitavarman-566-kamarupa",
+  "name": "Sthitavarman",
+  "role": "Varman king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 566,
+  "end": 590,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Varman dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "susthitavarman-590-kamarupa",
+  "name": "Susthitavarman",
+  "role": "Varman king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 590,
+  "end": 595,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Varman dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "supratisthitavarman-595-kamarupa",
+  "name": "Supratisthitavarman",
+  "role": "Varman king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 595,
+  "end": 600,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Varman dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "bhaskaravarman-600-kamarupa",
+  "name": "Bhaskaravarman",
+  "role": "Varman king of Kamarupa",
+  "polityId": "kamarupa",
+  "start": 600,
+  "end": 650,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Varman dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "dhatusena-455-anuradhapura",
+  "name": "Dhatusena",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 455,
+  "end": 473,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "kashyapa-i-479-anuradhapura",
+  "name": "Kashyapa I",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 479,
+  "end": 497,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "moggallana-i-497-anuradhapura",
+  "name": "Moggallana I",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 497,
+  "end": 515,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "kumara-dhatusena-515-anuradhapura",
+  "name": "Kumara Dhatusena",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 515,
+  "end": 524,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "kittisena-524-anuradhapura",
+  "name": "Kittisena",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 524,
+  "end": 524,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "siva-ii-524-anuradhapura",
+  "name": "Siva II",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 524,
+  "end": 525,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "upatissa-ii-525-anuradhapura",
+  "name": "Upatissa II",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 525,
+  "end": 526,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "silakala-ambosamanera-526-anuradhapura",
+  "name": "Silakala Ambosamanera",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 526,
+  "end": 539,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "dathappabhuti-539-anuradhapura",
+  "name": "Dathappabhuti",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 539,
+  "end": 540,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "moggallana-ii-540-anuradhapura",
+  "name": "Moggallana II",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 540,
+  "end": 560,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "kittisiri-meghavanna-560-anuradhapura",
+  "name": "Kittisiri Meghavanna",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 560,
+  "end": 561,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "maha-naga-561-anuradhapura",
+  "name": "Maha Naga",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 561,
+  "end": 564,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "aggabodhi-i-564-anuradhapura",
+  "name": "Aggabodhi I",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 564,
+  "end": 598,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "aggabodhi-ii-598-anuradhapura",
+  "name": "Aggabodhi II",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 598,
+  "end": 608,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "sangha-tissa-ii-608-anuradhapura",
+  "name": "Sangha Tissa II",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 608,
+  "end": 608,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "moggallana-iii-608-anuradhapura",
+  "name": "Moggallana III",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 608,
+  "end": 614,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "silameghavanna-614-anuradhapura",
+  "name": "Silameghavanna",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 614,
+  "end": 623,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "aggabodhi-iii-623-anuradhapura",
+  "name": "Aggabodhi III",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 623,
+  "end": 623,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "jettha-tissa-iii-623-anuradhapura",
+  "name": "Jettha Tissa III",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 623,
+  "end": 624,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "aggabodhi-iii-second-term-624-anuradhapura",
+  "name": "Aggabodhi III (second term)",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 624,
+  "end": 640,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "dathopa-tissa-i-640-anuradhapura",
+  "name": "Dathopa Tissa I",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 640,
+  "end": 652,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "kassapa-ii-652-anuradhapura",
+  "name": "Kassapa II",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 652,
+  "end": 661,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "dappula-i-661-anuradhapura",
+  "name": "Dappula I",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 661,
+  "end": 664,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "dathopa-tissa-ii-664-anuradhapura",
+  "name": "Dathopa Tissa II",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 664,
+  "end": 673,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "aggabodhi-iv-673-anuradhapura",
+  "name": "Aggabodhi IV",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 673,
+  "end": 689,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "unhanagara-hatthadatha-691-anuradhapura",
+  "name": "Unhanagara Hatthadatha",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 691,
+  "end": 691,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "manavamma-691-anuradhapura",
+  "name": "Manavamma",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 691,
+  "end": 726,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "aggabodhi-v-726-anuradhapura",
+  "name": "Aggabodhi V",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 726,
+  "end": 732,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "kassapa-iii-732-anuradhapura",
+  "name": "Kassapa III",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 732,
+  "end": 738,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "mahinda-i-738-anuradhapura",
+  "name": "Mahinda I",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 738,
+  "end": 741,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "aggabodhi-vi-741-anuradhapura",
+  "name": "Aggabodhi VI",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 741,
+  "end": 781,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "aggabodhi-vii-781-anuradhapura",
+  "name": "Aggabodhi VII",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 781,
+  "end": 787,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "mahinda-ii-787-anuradhapura",
+  "name": "Mahinda II",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 787,
+  "end": 807,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "dappula-ii-807-anuradhapura",
+  "name": "Dappula II",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 807,
+  "end": 812,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "mahinda-iii-812-anuradhapura",
+  "name": "Mahinda III",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 812,
+  "end": 816,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "aggabodhi-viii-816-anuradhapura",
+  "name": "Aggabodhi VIII",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 816,
+  "end": 827,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "dappula-iii-827-anuradhapura",
+  "name": "Dappula III",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 827,
+  "end": 843,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "aggabodhi-ix-843-anuradhapura",
+  "name": "Aggabodhi IX",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 843,
+  "end": 846,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "sena-i-846-anuradhapura",
+  "name": "Sena I",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 846,
+  "end": 866,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "udaya-i-901-anuradhapura",
+  "name": "Udaya I",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 901,
+  "end": 912,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "kassapa-iv-912-anuradhapura",
+  "name": "Kassapa IV",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 912,
+  "end": 929,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "kassapa-v-929-anuradhapura",
+  "name": "Kassapa V",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 929,
+  "end": 939,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "dappula-iv-939-anuradhapura",
+  "name": "Dappula IV",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 939,
+  "end": 940,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "dappula-v-940-anuradhapura",
+  "name": "Dappula V",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 940,
+  "end": 952,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "udaya-ii-952-anuradhapura",
+  "name": "Udaya II",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 952,
+  "end": 955,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "sena-iii-955-anuradhapura",
+  "name": "Sena III",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 955,
+  "end": 964,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "udaya-iii-964-anuradhapura",
+  "name": "Udaya III",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 964,
+  "end": 972,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "sena-iv-972-anuradhapura",
+  "name": "Sena IV",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 972,
+  "end": 975,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "mahinda-iv-975-anuradhapura",
+  "name": "Mahinda IV",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 975,
+  "end": 991,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": [
+   "mahinda-v-of-anuradhapura"
+  ]
+ },
+ {
+  "id": "sena-v-991-anuradhapura",
+  "name": "Sena V",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 991,
+  "end": 1001,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": []
+ },
+ {
+  "id": "mahinda-v-1001-anuradhapura",
+  "name": "Mahinda V",
+  "role": "King of Anuradhapura",
+  "polityId": "anuradhapura",
+  "start": 1001,
+  "end": 1029,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Sri Lankan monarchs",
+  "supersedes": [
+   "mahinda-v-of-anuradhapura"
+  ]
+ },
+ {
+  "id": "dravya-shah-1559-gorkha",
+  "name": "Dravya Shah",
+  "role": "King of Gorkha",
+  "polityId": "gorkha",
+  "start": 1559,
+  "end": 1570,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gorkha Kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "purna-shah-1570-gorkha",
+  "name": "Purna Shah",
+  "role": "King of Gorkha",
+  "polityId": "gorkha",
+  "start": 1570,
+  "end": 1605,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gorkha Kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "chatra-shah-1605-gorkha",
+  "name": "Chatra Shah",
+  "role": "King of Gorkha",
+  "polityId": "gorkha",
+  "start": 1605,
+  "end": 1609,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gorkha Kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "ram-shah-1609-gorkha",
+  "name": "Ram Shah",
+  "role": "King of Gorkha",
+  "polityId": "gorkha",
+  "start": 1609,
+  "end": 1633,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gorkha Kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "dambar-shah-1633-gorkha",
+  "name": "Dambar Shah",
+  "role": "King of Gorkha",
+  "polityId": "gorkha",
+  "start": 1633,
+  "end": 1645,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gorkha Kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "krishna-shah-1645-gorkha",
+  "name": "Krishna Shah",
+  "role": "King of Gorkha",
+  "polityId": "gorkha",
+  "start": 1645,
+  "end": 1661,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gorkha Kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "rudra-shah-1661-gorkha",
+  "name": "Rudra Shah",
+  "role": "King of Gorkha",
+  "polityId": "gorkha",
+  "start": 1661,
+  "end": 1673,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gorkha Kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "prithvipati-shah-1673-gorkha",
+  "name": "Prithvipati Shah",
+  "role": "King of Gorkha",
+  "polityId": "gorkha",
+  "start": 1673,
+  "end": 1716,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gorkha Kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "nara-bhupal-shah-1716-gorkha",
+  "name": "Nara Bhupal Shah",
+  "role": "King of Gorkha",
+  "polityId": "gorkha",
+  "start": 1716,
+  "end": 1743,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gorkha Kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "prithvi-narayan-shah-1743-gorkha",
+  "name": "Prithvi Narayan Shah",
+  "role": "King of Gorkha",
+  "polityId": "gorkha",
+  "start": 1743,
+  "end": 1768,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Gorkha Kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "samanta-sena-1070-sena",
+  "name": "Samanta Sena",
+  "role": "Sena king of Bengal",
+  "polityId": "sena",
+  "start": 1070,
+  "end": 1095,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Sena dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "vijaya-sena-1096-sena",
+  "name": "Vijaya Sena",
+  "role": "Sena king of Bengal",
+  "polityId": "sena",
+  "start": 1096,
+  "end": 1159,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Sena dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "ballala-sena-1159-sena",
+  "name": "Ballala Sena",
+  "role": "Sena king of Bengal",
+  "polityId": "sena",
+  "start": 1159,
+  "end": 1179,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Sena dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "lakshmana-sena-1179-sena",
+  "name": "Lakshmana Sena",
+  "role": "Sena king of Bengal",
+  "polityId": "sena",
+  "start": 1179,
+  "end": 1206,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Sena dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "vishvarupa-sena-1206-sena",
+  "name": "Vishvarupa Sena",
+  "role": "Sena king of Bengal",
+  "polityId": "sena",
+  "start": 1206,
+  "end": 1225,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Sena dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "keshava-sena-1225-sena",
+  "name": "Keshava Sena",
+  "role": "Sena king of Bengal",
+  "polityId": "sena",
+  "start": 1225,
+  "end": 1230,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Sena dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "dronasinha-500-maitraka",
+  "name": "Dronasinha",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 500,
+  "end": 520,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "dhruvasena-i-520-maitraka",
+  "name": "Dhruvasena I",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 520,
+  "end": 550,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "dharapatta-550-maitraka",
+  "name": "Dharapatta",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 550,
+  "end": 556,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "guhasena-556-maitraka",
+  "name": "Guhasena",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 556,
+  "end": 570,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "dharasena-ii-570-maitraka",
+  "name": "Dharasena II",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 570,
+  "end": 595,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "shiladitya-i-595-maitraka",
+  "name": "Shiladitya I",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 595,
+  "end": 615,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "kharagraha-i-615-maitraka",
+  "name": "Kharagraha I",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 615,
+  "end": 626,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "dharasena-iii-626-maitraka",
+  "name": "Dharasena III",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 626,
+  "end": 640,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "dhruvasena-ii-baladitya-640-maitraka",
+  "name": "Dhruvasena II (Baladitya)",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 640,
+  "end": 644,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "dharasena-iv-644-maitraka",
+  "name": "Dharasena IV",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 644,
+  "end": 651,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "dhruvasena-iii-650-maitraka",
+  "name": "Dhruvasena III",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 650,
+  "end": 655,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "kharagraha-ii-655-maitraka",
+  "name": "Kharagraha II",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 655,
+  "end": 658,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "shiladitya-ii-658-maitraka",
+  "name": "Shiladitya II",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 658,
+  "end": 685,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "shiladitya-iii-690-maitraka",
+  "name": "Shiladitya III",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 690,
+  "end": 710,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "shiladitya-iv-710-maitraka",
+  "name": "Shiladitya IV",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 710,
+  "end": 740,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "shiladitya-v-740-maitraka",
+  "name": "Shiladitya V",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 740,
+  "end": 762,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "shiladitya-vi-dhrubhata-762-maitraka",
+  "name": "Shiladitya VI Dhrubhata",
+  "role": "Maitraka king of Valabhi",
+  "polityId": "maitraka",
+  "start": 762,
+  "end": 776,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Valabhi",
+  "supersedes": []
+ },
+ {
+  "id": "barha-tegin-665-turk-shahis",
+  "name": "Barha Tegin",
+  "role": "Turk Shahi ruler of Kabul",
+  "polityId": "turk-shahis",
+  "start": 665,
+  "end": 680,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Turk Shahis",
+  "supersedes": []
+ },
+ {
+  "id": "tegin-shah-680-turk-shahis",
+  "name": "Tegin Shah",
+  "role": "Turk Shahi ruler of Kabul",
+  "polityId": "turk-shahis",
+  "start": 680,
+  "end": 739,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Turk Shahis",
+  "supersedes": []
+ },
+ {
+  "id": "fromo-kesaro-739-turk-shahis",
+  "name": "Fromo Kesaro",
+  "role": "Turk Shahi ruler of Kabul",
+  "polityId": "turk-shahis",
+  "start": 739,
+  "end": 745,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Turk Shahis",
+  "supersedes": []
+ },
+ {
+  "id": "bo-fuzhun-745-turk-shahis",
+  "name": "Bo Fuzhun",
+  "role": "Turk Shahi ruler of Kabul",
+  "polityId": "turk-shahis",
+  "start": 745,
+  "end": null,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Turk Shahis",
+  "supersedes": []
+ },
+ {
+  "id": "khingala-780-turk-shahis",
+  "name": "Khingala",
+  "role": "Turk Shahi ruler of Kabul",
+  "polityId": "turk-shahis",
+  "start": 780,
+  "end": 785,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Turk Shahis",
+  "supersedes": []
+ },
+ {
+  "id": "lagaturman-815-turk-shahis",
+  "name": "Lagaturman",
+  "role": "Turk Shahi ruler of Kabul",
+  "polityId": "turk-shahis",
+  "start": 815,
+  "end": 822,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Turk Shahis",
+  "supersedes": []
+ },
+ {
+  "id": "viswanatha-nayak-1529-madurai-nayaks",
+  "name": "Viswanatha Nayak",
+  "role": "Nayak ruler of Madurai",
+  "polityId": "madurai-nayaks",
+  "start": 1529,
+  "end": 1563,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Madurai Nayak dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "kumara-krishnappa-nayak-1563-madurai-nayaks",
+  "name": "Kumara Krishnappa Nayak",
+  "role": "Nayak ruler of Madurai",
+  "polityId": "madurai-nayaks",
+  "start": 1563,
+  "end": 1573,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Madurai Nayak dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "muttu-krishnappa-nayak-1602-madurai-nayaks",
+  "name": "Muttu Krishnappa Nayak",
+  "role": "Nayak ruler of Madurai",
+  "polityId": "madurai-nayaks",
+  "start": 1602,
+  "end": 1609,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Madurai Nayak dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "muttu-virappa-nayak-1609-madurai-nayaks",
+  "name": "Muttu Virappa Nayak",
+  "role": "Nayak ruler of Madurai",
+  "polityId": "madurai-nayaks",
+  "start": 1609,
+  "end": 1623,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Madurai Nayak dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "tirumala-nayak-1623-madurai-nayaks",
+  "name": "Tirumala Nayak",
+  "role": "Nayak ruler of Madurai",
+  "polityId": "madurai-nayaks",
+  "start": 1623,
+  "end": 1659,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Madurai Nayak dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "muthu-alakadri-nayak-1659-madurai-nayaks",
+  "name": "Muthu Alakadri Nayak",
+  "role": "Nayak ruler of Madurai",
+  "polityId": "madurai-nayaks",
+  "start": 1659,
+  "end": 1662,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Madurai Nayak dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "chokkanatha-nayak-1662-madurai-nayaks",
+  "name": "Chokkanatha Nayak",
+  "role": "Nayak ruler of Madurai",
+  "polityId": "madurai-nayaks",
+  "start": 1662,
+  "end": 1682,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Madurai Nayak dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "rangakrishna-muthu-virappa-nayak-1682-madurai-nayaks",
+  "name": "Rangakrishna Muthu Virappa Nayak",
+  "role": "Nayak ruler of Madurai",
+  "polityId": "madurai-nayaks",
+  "start": 1682,
+  "end": 1689,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Madurai Nayak dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "rani-mangammal-1689-madurai-nayaks",
+  "name": "Rani Mangammal",
+  "role": "Nayak ruler of Madurai",
+  "polityId": "madurai-nayaks",
+  "start": 1689,
+  "end": 1704,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Madurai Nayak dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "vijaya-ranga-chokkanatha-nayak-1704-madurai-nayaks",
+  "name": "Vijaya Ranga Chokkanatha Nayak",
+  "role": "Nayak ruler of Madurai",
+  "polityId": "madurai-nayaks",
+  "start": 1704,
+  "end": 1731,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Madurai Nayak dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "queen-meenakshi-1731-madurai-nayaks",
+  "name": "Queen Meenakshi",
+  "role": "Nayak ruler of Madurai",
+  "polityId": "madurai-nayaks",
+  "start": 1731,
+  "end": 1736,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Madurai Nayak dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "sevappa-nayaka-1532-thanjavur-nayaks",
+  "name": "Sevappa Nayaka",
+  "role": "Nayak ruler of Thanjavur",
+  "polityId": "thanjavur-nayaks",
+  "start": 1532,
+  "end": 1580,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Thanjavur Nayak kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "achuthappa-nayaka-1560-thanjavur-nayaks",
+  "name": "Achuthappa Nayaka",
+  "role": "Nayak ruler of Thanjavur",
+  "polityId": "thanjavur-nayaks",
+  "start": 1560,
+  "end": 1614,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Thanjavur Nayak kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "raghunatha-nayaka-1600-thanjavur-nayaks",
+  "name": "Raghunatha Nayaka",
+  "role": "Nayak ruler of Thanjavur",
+  "polityId": "thanjavur-nayaks",
+  "start": 1600,
+  "end": 1634,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Thanjavur Nayak kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "vijaya-raghava-nayaka-1634-thanjavur-nayaks",
+  "name": "Vijaya Raghava Nayaka",
+  "role": "Nayak ruler of Thanjavur",
+  "polityId": "thanjavur-nayaks",
+  "start": 1634,
+  "end": 1673,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Thanjavur Nayak kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "singeya-nayaka-iii-1280-kampili",
+  "name": "Singeya Nayaka III",
+  "role": "Ruler of Kampili",
+  "polityId": "kampili",
+  "start": 1280,
+  "end": 1300,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kampili kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "kampilideva-1300-kampili",
+  "name": "Kampilideva",
+  "role": "Ruler of Kampili",
+  "polityId": "kampili",
+  "start": 1300,
+  "end": 1327,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kampili kingdom",
+  "supersedes": []
+ },
+ {
+  "id": "vijayabahu-iii-1220-dambadeniya",
+  "name": "Vijayabahu III",
+  "role": "King of Dambadeniya",
+  "polityId": "dambadeniya",
+  "start": 1220,
+  "end": 1224,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Dambadeniya",
+  "supersedes": []
+ },
+ {
+  "id": "parakramabahu-iii-1302-dambadeniya",
+  "name": "Parakramabahu III",
+  "role": "King of Dambadeniya",
+  "polityId": "dambadeniya",
+  "start": 1302,
+  "end": 1310,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Dambadeniya",
+  "supersedes": []
+ },
+ {
+  "id": "bhuvanaikabahu-ii-1310-dambadeniya",
+  "name": "Bhuvanaikabahu II",
+  "role": "King of Dambadeniya",
+  "polityId": "dambadeniya",
+  "start": 1310,
+  "end": 1326,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Kingdom of Dambadeniya",
+  "supersedes": []
+ },
+ {
+  "id": "izz-al-din-husayn-1100-ghurid",
+  "name": "Izz al-Din Husayn",
+  "role": "Ghurid ruler",
+  "polityId": "ghurid",
+  "start": 1100,
+  "end": 1146,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "sayf-al-din-suri-1146-ghurid",
+  "name": "Sayf al-Din Suri",
+  "role": "Ghurid ruler",
+  "polityId": "ghurid",
+  "start": 1146,
+  "end": 1149,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "baha-al-din-sam-i-1149-ghurid",
+  "name": "Baha al-Din Sam I",
+  "role": "Ghurid ruler",
+  "polityId": "ghurid",
+  "start": 1149,
+  "end": 1149,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "ala-al-din-husayn-1149-ghurid",
+  "name": "Ala al-Din Husayn",
+  "role": "Ghurid ruler",
+  "polityId": "ghurid",
+  "start": 1149,
+  "end": 1161,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "sayf-al-din-muhammad-1161-ghurid",
+  "name": "Sayf al-Din Muhammad",
+  "role": "Ghurid ruler",
+  "polityId": "ghurid",
+  "start": 1161,
+  "end": 1163,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "ghiyath-al-din-muhammad-1163-ghurid",
+  "name": "Ghiyath al-Din Muhammad",
+  "role": "Ghurid ruler",
+  "polityId": "ghurid",
+  "start": 1163,
+  "end": 1203,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "muhammad-of-ghor-1203-ghurid",
+  "name": "Muhammad of Ghor",
+  "role": "Ghurid ruler",
+  "polityId": "ghurid",
+  "start": 1203,
+  "end": 1206,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": [
+   "muhammad-of-ghor"
+  ]
+ },
+ {
+  "id": "ghiyath-al-din-mahmud-1206-ghurid",
+  "name": "Ghiyath al-Din Mahmud",
+  "role": "Ghurid ruler",
+  "polityId": "ghurid",
+  "start": 1206,
+  "end": 1212,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "baha-al-din-sam-iii-1212-ghurid",
+  "name": "Baha al-Din Sam III",
+  "role": "Ghurid ruler",
+  "polityId": "ghurid",
+  "start": 1212,
+  "end": 1213,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "ala-al-din-atsiz-1213-ghurid",
+  "name": "Ala al-Din Atsiz",
+  "role": "Ghurid ruler",
+  "polityId": "ghurid",
+  "start": 1213,
+  "end": 1214,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "ala-al-din-ali-1214-ghurid",
+  "name": "Ala al-Din Ali",
+  "role": "Ghurid ruler",
+  "polityId": "ghurid",
+  "start": 1214,
+  "end": 1215,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "fakhr-al-din-masud-1152-ghurid",
+  "name": "Fakhr al-Din Masud",
+  "role": "Ghurid ruler of Bamiyan",
+  "polityId": "ghurid",
+  "start": 1152,
+  "end": 1163,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "shams-al-din-muhammad-ibn-masud-1163-ghurid",
+  "name": "Shams al-Din Muhammad ibn Masud",
+  "role": "Ghurid ruler of Bamiyan",
+  "polityId": "ghurid",
+  "start": 1163,
+  "end": 1192,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "baha-al-din-sam-ii-1192-ghurid",
+  "name": "Baha al-Din Sam II",
+  "role": "Ghurid ruler of Bamiyan",
+  "polityId": "ghurid",
+  "start": 1192,
+  "end": 1206,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "jalal-al-din-ali-1206-ghurid",
+  "name": "Jalal al-Din Ali",
+  "role": "Ghurid ruler of Bamiyan",
+  "polityId": "ghurid",
+  "start": 1206,
+  "end": 1215,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Ghurid dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "sher-shah-suri-1540-sur",
+  "name": "Sher Shah Suri",
+  "role": "Sur Sultan",
+  "polityId": "sur",
+  "start": 1540,
+  "end": 1545,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Sur Empire",
+  "supersedes": [
+   "sher-shah-suri"
+  ]
+ },
+ {
+  "id": "islam-shah-suri-1545-sur",
+  "name": "Islam Shah Suri",
+  "role": "Sur Sultan",
+  "polityId": "sur",
+  "start": 1545,
+  "end": 1554,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Sur Empire",
+  "supersedes": []
+ },
+ {
+  "id": "firuz-shah-suri-1554-sur",
+  "name": "Firuz Shah Suri",
+  "role": "Sur Sultan",
+  "polityId": "sur",
+  "start": 1554,
+  "end": 1554,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Sur Empire",
+  "supersedes": []
+ },
+ {
+  "id": "muhammad-adil-shah-1554-sur",
+  "name": "Muhammad Adil Shah",
+  "role": "Sur Sultan",
+  "polityId": "sur",
+  "start": 1554,
+  "end": 1555,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Sur Empire",
+  "supersedes": []
+ },
+ {
+  "id": "ibrahim-shah-suri-1555-sur",
+  "name": "Ibrahim Shah Suri",
+  "role": "Sur Sultan",
+  "polityId": "sur",
+  "start": 1555,
+  "end": 1555,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Sur Empire",
+  "supersedes": []
+ },
+ {
+  "id": "sikandar-shah-suri-1555-sur",
+  "name": "Sikandar Shah Suri",
+  "role": "Sur Sultan",
+  "polityId": "sur",
+  "start": 1555,
+  "end": 1555,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Sur Empire",
+  "supersedes": []
+ },
+ {
+  "id": "adil-shah-suri-1555-sur",
+  "name": "Adil Shah Suri",
+  "role": "Sur Sultan",
+  "polityId": "sur",
+  "start": 1555,
+  "end": 1556,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Sur Empire",
+  "supersedes": []
+ },
+ {
+  "id": "shivaji-1674-maratha",
+  "name": "Shivaji",
+  "role": "Chhatrapati of the Marathas",
+  "polityId": "maratha",
+  "start": 1674,
+  "end": 1680,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Maratha Empire",
+  "supersedes": []
+ },
+ {
+  "id": "sambhaji-1681-maratha",
+  "name": "Sambhaji",
+  "role": "Chhatrapati of the Marathas",
+  "polityId": "maratha",
+  "start": 1681,
+  "end": 1689,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Maratha Empire",
+  "supersedes": []
+ },
+ {
+  "id": "rajaram-i-1689-maratha",
+  "name": "Rajaram I",
+  "role": "Chhatrapati of the Marathas",
+  "polityId": "maratha",
+  "start": 1689,
+  "end": 1700,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Maratha Empire",
+  "supersedes": []
+ },
+ {
+  "id": "harsha-606-harsha",
+  "name": "Harsha",
+  "role": "Emperor of Kannauj",
+  "polityId": "harsha",
+  "start": 606,
+  "end": 647,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Harshavardhana",
+  "supersedes": []
  }
 ]

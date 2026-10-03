@@ -63,6 +63,9 @@ for m in sorted(miss): bad("border", f"{m}: no border shapes at all")
 
 # ---- people
 span = {p["id"]: (p["from"], p["to"]) for p in polities}
+# Fathers who shared the throne with a son, as the sources state (not an error).
+COREGENT = {("Sevappa Nayaka", "Achuthappa Nayaka")}
+LONG_REIGNS_OK = {"Anantavarman Chodaganga"}
 by_poly = {}
 for r in people:
     by_poly.setdefault(r["polityId"], []).append(r)
@@ -71,7 +74,7 @@ for r in people:
     if a is not None and b is not None and a > b: bad("person", f"{r['id']}: starts after it ends ({a}–{b})")
     lo, hi = span[r["polityId"]]
     if a is not None and r["datesAre"] == "reign" and not (lo - 60 <= a <= hi + 60): bad("person", f"{r['id']} ({r['name']}): reign {a}–{b} is far outside {r['polityId']} {lo}–{hi}")
-    if a is not None and b is not None and r["datesAre"] == "reign" and b - a > 70: bad("person", f"{r['id']} ({r['name']}): reign of {b-a} years looks wrong")
+    if a is not None and b is not None and r["datesAre"] == "reign" and b - a > 70 and r["name"] not in LONG_REIGNS_OK: bad("person", f"{r['id']} ({r['name']}): reign of {b-a} years looks wrong")
     if a is not None and b is not None and r["datesAre"] == "lifetime" and b - a > 100: bad("person", f"{r['id']} ({r['name']}): lifetime of {b-a} years looks wrong")
     if not r.get("summary"): bad("person", f"{r['id']}: no summary")
 for pid, rs in by_poly.items():
@@ -79,7 +82,7 @@ for pid, rs in by_poly.items():
     rs.sort(key=lambda r: r["start"])
     for x, y in zip(rs, rs[1:]):
         if x["end"] is not None and x["end"] > x["start"] and y["end"] != y["start"] and y["start"] < x["end"] - 15 and x["name"] != y["name"]:
-            if x["name"] != y["name"]: bad("overlap", f"{pid}: {x['name']} ({x['start']}–{x['end']}) overlaps {y['name']} ({y['start']}–{y['end']}) by {x['end']-y['start']} years")
+            if x["name"] != y["name"] and x["role"] == y["role"] and (x["name"], y["name"]) not in COREGENT: bad("overlap", f"{pid}: {x['name']} ({x['start']}–{x['end']}) overlaps {y['name']} ({y['start']}–{y['end']}) by {x['end']-y['start']} years")
 
 # ---- places
 for pl in places:

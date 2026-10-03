@@ -18,6 +18,7 @@ export function polityStatus(p: Polity): DataStatus {
 
 export function personStatus(p: Person): DataStatus {
   const ids = p.provenance.map((x) => x.sourceId);
+  if (ids.some((id) => id.startsWith("wikipedia-list-"))) return { label: "Name and dates: Wikipedia's list of rulers", sourced: true };
   if (ids.includes("wikidata")) {
     return { label: ids.some((id) => id.startsWith("wikipedia-")) ? "Dates: Wikidata · Summary: Wikipedia" : "Dates and role: Wikidata", sourced: true };
   }
