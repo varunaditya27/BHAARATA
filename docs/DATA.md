@@ -243,7 +243,7 @@ What is still thin, and why:
 - **Not researched:** the **routes** (two example lines, drawn by hand and labelled so on the map) and the **Chera outline**.
 - **Portraits:** about 35 of roughly 670 rulers have a free-licence depiction; the rest show an initial.
 - **Photographs:** every kingdom has one. Three (Maitraka, Lohara, Dambadeniya) show a coin or temples of the period rather than the capital's best-known building; Gahadavala and Sena show an inscription and pottery.
-- **Battles:** 12 of 127 have only a date and place from Wikidata; no source describing them was found.
+- **Battles:** 10 of 127 have only a date and place from Wikidata; no source describing them was found.
 - **Native-script names** were checked against the same-language Wikipedia titles; one (Kalyani Chalukya) has none because no article title could be confirmed.
 
 ---

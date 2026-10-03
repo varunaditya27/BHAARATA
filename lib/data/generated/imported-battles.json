@@ -81,8 +81,8 @@
    28.6167
   ],
   "wikidata": "Q121537391",
-  "wikipedia": null,
-  "extract": null,
+  "wikipedia": "Al-Mufaddal_ibn_al-Muhallab",
+  "extract": "In 720, the sons of al-Muhallab, who had rebelled against the Umayyads, fled to Qandabil in Sind hoping for refuge. Their ally shut the gates against them, and they were killed fighting their Umayyad pursuer, Hilal ibn Ahwaz al-Tamimi.",
   "polityIds": []
  },
  {
@@ -1555,10 +1555,14 @@
   ],
   "wikidata": "Q4871475",
   "wikipedia": null,
-  "extract": "Battle of Kolhapur, 1659. Wikidata records its date and place; there is no article that describes this battle on its own.",
+  "extract": "On 28 December 1659, near Kolhapur, a Maratha force under Shivaji defeated a larger Bijapur army led by Rustam Zaman, who fled the field. It was the Marathas' second major victory over Bijapur, after Pratapgad.",
   "polityIds": [
    "bijapur"
-  ]
+  ],
+  "otherSource": {
+   "title": "Military History Wiki: Battle of Kolhapur",
+   "url": "https://military-history.fandom.com/wiki/Battle_of_Kolhapur"
+  }
  },
  {
   "id": "battle-battle-of-marg-o-1659",
