@@ -23,14 +23,16 @@ export function HeroPhoto({
 }) {
   const photo = (
     <div className="bh-kenburns absolute inset-0 overflow-hidden">
-      <Image
-        src={credit.file}
-        alt={credit.alt}
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover brightness-[0.55]"
-      />
+      <div className="bh-parallax absolute inset-0">
+        <Image
+          src={credit.file}
+          alt={credit.alt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover brightness-[0.55]"
+        />
+      </div>
     </div>
   );
 

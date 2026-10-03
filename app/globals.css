@@ -552,6 +552,22 @@ body::before {
   .bh-needle { animation: none; }
 }
 
+/* Hero photographs sink at a third of scroll speed as the page moves up —
+ * depth without JS. The gap it opens at the top stays above the viewport. */
+@supports (animation-timeline: scroll()) {
+  .bh-parallax {
+    animation: bh-parallax linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 100vh;
+  }
+  @keyframes bh-parallax {
+    to { transform: translateY(33vh); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bh-parallax { animation: none; }
+}
+
 /* Slow settle on hero photographs — the camera easing in after a cut. */
 .bh-kenburns {
   animation: bh-kenburns 14s cubic-bezier(0.22, 1, 0.36, 1) both;
