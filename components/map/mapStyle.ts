@@ -15,6 +15,11 @@
  *
  * To regenerate: see the derivation notes in this file's git history, or
  * re-derive from https://basemaps.cartocdn.com/gl/positron-gl-style/style.json.
+ *
+ * Map labels use glyphs generated from our own Ranade/Zodiak fonts
+ * (public/map-glyphs/, built with `npx @kartore/glyphore build`), not
+ * CARTO's glyph server — which doesn't send CORS headers for the faces
+ * we want, so every label was silently falling back to a system font.
  */
 export const BASEMAP_STYLE_URL = "/map-styles/bhaarata-atlas.json";
 

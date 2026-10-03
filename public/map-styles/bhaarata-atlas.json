@@ -1,7 +1,7 @@
 {
   "version": 8,
   "name": "BH\u0100RATA Atlas",
-  "glyphs": "https://tiles.basemaps.cartocdn.com/fonts/{fontstack}/{range}.pbf",
+  "glyphs": "/map-glyphs/{fontstack}/{range}.pbf",
   "sources": {
     "carto": {
       "type": "vector",
@@ -184,7 +184,7 @@
           ]
         },
         "text-font": [
-          "Noto Sans Italic"
+          "Zodiak Regular"
         ],
         "text-line-height": 1.2,
         "text-padding": 2,
@@ -229,7 +229,7 @@
         "symbol-placement": "point",
         "text-size": 12,
         "text-font": [
-          "Noto Sans Italic"
+          "Zodiak Regular"
         ],
         "text-line-height": 1.2,
         "text-padding": 2,
@@ -308,7 +308,7 @@
           ]
         },
         "text-font": [
-          "Noto Sans Italic"
+          "Zodiak Regular"
         ],
         "text-line-height": 1.2,
         "text-padding": 2,
@@ -350,7 +350,7 @@
       "layout": {
         "text-field": "{name_en}",
         "text-font": [
-          "Noto Sans Bold"
+          "Zodiak Bold"
         ],
         "text-size": {
           "stops": [
@@ -407,7 +407,7 @@
       "layout": {
         "text-field": "{name_en}",
         "text-font": [
-          "Noto Sans Bold"
+          "Zodiak Bold"
         ],
         "text-size": {
           "stops": [
@@ -486,7 +486,7 @@
           ]
         },
         "text-font": [
-          "Noto Sans Regular"
+          "Ranade Regular"
         ],
         "text-size": {
           "stops": [

@@ -239,7 +239,7 @@ export function HistoricalMap({
           "text-size": 11,
           "text-offset": [0, 1.3],
           "text-anchor": "top",
-          "text-font": ["Noto Sans Regular"],
+          "text-font": ["Ranade Medium"],
         },
         paint: {
           "text-color": "#241f17",
