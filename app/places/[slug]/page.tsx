@@ -2,16 +2,25 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/primitives/Badge";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
-import { Rule } from "@/components/primitives/Rule";
 import { HeroPhoto } from "@/components/primitives/HeroPhoto";
-import { events, places, polities } from "@/lib/data/prototype";
-import { images, type ImageKey } from "@/lib/data/images";
-import { formatDateRange } from "@/lib/domain/time";
 import { PageTransition } from "@/components/primitives/PageTransition";
+import { Rule } from "@/components/primitives/Rule";
+import { RisingTitle } from "@/components/entity/RisingTitle";
+import { images, type ImageKey } from "@/lib/data/images";
+import { events, getPolityBySlug, places, polities } from "@/lib/data/prototype";
+import { formatDateRange } from "@/lib/domain/time";
+import { boundariesContaining, projectTogether } from "@/lib/geo/silhouette";
+import { darkenHex } from "@/lib/utils/color";
 import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 export function generateStaticParams() {
   return places.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: PageProps<"/places/[slug]">) {
+  const { slug } = await params;
+  const place = places.find((p) => p.slug === slug);
+  return { title: place ? `${place.name} — BHĀRATA` : "Place — BHĀRATA" };
 }
 
 export default async function PlacePage({ params }: PageProps<"/places/[slug]">) {
@@ -20,84 +29,127 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
   if (!place) notFound();
 
   const hero = place.imageKey ? images[place.imageKey as ImageKey] : undefined;
-  const associatedPolities = polities.filter((p) => p.capitals.includes(place.name));
+  const capitalOf = polities.filter((p) => p.capitals.some((c) => place.name.startsWith(c)));
   const relatedEvents = events.filter((e) => e.placeIds.includes(place.id));
 
-  const header = (
+  // Which recorded kingdoms' territory contains this point, in time order —
+  // computed from the boundaries, not hand-entered.
+  const heldBy = boundariesContaining(place.coordinates)
+    .map((b) => ({ boundary: b, polity: getPolityBySlug(b.polityId) }))
+    .filter((h): h is { boundary: typeof h.boundary; polity: NonNullable<typeof h.polity> } => Boolean(h.polity));
+  const miniMap = heldBy.length > 0 ? projectTogether(heldBy.map((h) => h.boundary.geometry), place.coordinates) : null;
+  const firstYear = heldBy[0]?.boundary.validFrom ?? 985;
+
+  const header = (dark: boolean) => (
     <>
-      <Eyebrow className={hero ? "text-paper/70" : undefined}>{place.placeType} · {place.region}</Eyebrow>
-      <h1 className={`mt-2 font-display text-5xl ${hero ? "text-paper" : "text-ink"}`}>{place.name}</h1>
+      <Eyebrow className={`capitalize ${dark ? "text-paper/70" : ""}`}>
+        {place.placeType} · {place.region}
+      </Eyebrow>
+      <RisingTitle text={place.name} className={`mt-2 text-5xl sm:text-6xl ${dark ? "text-paper" : "text-ink"}`} />
     </>
   );
 
   return (
     <PageTransition>
-    <div>
-      {hero ? (
-        <HeroPhoto credit={hero} sharedName={transitionNames.placePhoto(place.slug)}>
-          <div className="flex h-full items-end">
-            <div className="mx-auto w-full max-w-[760px] px-6 pb-10">{header}</div>
-          </div>
-        </HeroPhoto>
-      ) : null}
-
-      <div className="mx-auto max-w-[760px] px-6 py-12">
-        {!hero && header}
-        <div className="mt-3">
-          <Badge tone="uncertainty">Illustrative prototype data</Badge>
-        </div>
-
-        <Rule className="mt-8" />
-
-        <div className="mt-8 grid grid-cols-2 gap-6 font-sans text-sm">
-          <div>
-            <Eyebrow>Coordinates</Eyebrow>
-            <p className="mt-1 text-ink">
-              {place.coordinates[1].toFixed(3)}°N, {place.coordinates[0].toFixed(3)}°E
-            </p>
-          </div>
-          {associatedPolities.length > 0 && (
-            <div>
-              <Eyebrow>Capital of</Eyebrow>
-              <p className="mt-1 text-ink">
-                {associatedPolities.map((p, i) => (
-                  <span key={p.id}>
-                    {i > 0 && ", "}
-                    <Link href={`/polities/${p.slug}`} transitionTypes={NAV_FORWARD} className="underline underline-offset-4 hover:text-territory-selected">
-                      {p.name}
-                    </Link>
-                  </span>
-                ))}
-              </p>
+      <div>
+        {hero && (
+          <HeroPhoto credit={hero} sharedName={transitionNames.placePhoto(place.slug)}>
+            <div className="flex h-full items-end">
+              <div className="mx-auto w-full max-w-[960px] px-4 pb-10 sm:px-6">{header(true)}</div>
             </div>
-          )}
-        </div>
-
-        {relatedEvents.length > 0 && (
-          <section className="mt-10">
-            <Eyebrow>Events here</Eyebrow>
-            <ul className="mt-3 space-y-2">
-              {relatedEvents.map((e) => (
-                <li key={e.id} className="font-sans text-sm">
-                  <span className="text-ink-muted">{formatDateRange(e.period)}</span>{" "}
-                  <span className="text-ink">{e.title}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
+          </HeroPhoto>
         )}
 
-        <p className="mt-10 font-sans text-sm text-ink-muted">
-          <Link
-            href={`/atlas?year=985`}
-            transitionTypes={NAV_BACK}
-            className="underline underline-offset-4 text-ink hover:text-territory-selected"
-          >
-            View on the atlas →
-          </Link>
-        </p>
+        <div className="mx-auto max-w-[960px] px-4 py-12 sm:px-6">
+          {!hero && header(false)}
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <p className="font-sans text-ink-muted">
+              {place.coordinates[1].toFixed(3)}°N, {place.coordinates[0].toFixed(3)}°E
+            </p>
+            <Badge tone="uncertainty">Illustrative prototype data</Badge>
+          </div>
+
+          <Rule className="mt-8" />
+
+          <div className="mt-10 grid gap-12 md:grid-cols-[1fr_1.2fr]">
+            <section>
+              <Eyebrow>Held by</Eyebrow>
+              {miniMap ? (
+                <>
+                  <svg viewBox="0 0 100 100" className="mt-4 w-full max-w-sm" role="img" aria-label={`Kingdoms whose territory included ${place.name}`}>
+                    {heldBy.map((h, i) => (
+                      <path
+                        key={h.boundary.validFrom + h.polity.id}
+                        d={miniMap.paths[i]}
+                        fill={h.polity.accentColor}
+                        fillOpacity={0.22}
+                        stroke={darkenHex(h.polity.accentColor, 0.3)}
+                        strokeWidth={0.5}
+                        strokeLinejoin="round"
+                      />
+                    ))}
+                    <circle cx={miniMap.point[0]} cy={miniMap.point[1]} r={2.8} fill="none" stroke="var(--bh-ink)" strokeWidth={0.6} />
+                    <circle cx={miniMap.point[0]} cy={miniMap.point[1]} r={1.2} fill="var(--bh-ink)" />
+                  </svg>
+                  <p className="mt-2 font-sans text-xs text-ink-muted">
+                    Overlaid outlines of every recorded kingdom whose territory included this point. Outlines are
+                    illustrative approximations.
+                  </p>
+                </>
+              ) : (
+                <p className="mt-3 font-sans text-sm text-ink-muted">No recorded territory includes this point.</p>
+              )}
+            </section>
+
+            <section>
+              <ol className="space-y-5">
+                {heldBy.map((h) => (
+                  <li key={h.boundary.validFrom + h.polity.id} className="flex gap-4 border-t border-border pt-4">
+                    <span className="mt-1.5 h-3 w-3 shrink-0" style={{ backgroundColor: h.polity.accentColor }} aria-hidden />
+                    <div>
+                      <Link
+                        href={`/polities/${h.polity.slug}`}
+                        transitionTypes={NAV_FORWARD}
+                        className="font-display text-xl text-ink hover:text-territory-selected"
+                      >
+                        {h.polity.name}
+                      </Link>
+                      <p className="font-sans text-sm text-ink-muted">
+                        c. {h.boundary.validFrom}–{h.boundary.validTo} CE
+                        {capitalOf.some((c) => c.id === h.polity.id) && " · its capital"}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+
+              {relatedEvents.length > 0 && (
+                <div className="mt-10">
+                  <Eyebrow>Events here</Eyebrow>
+                  <ul className="mt-3 space-y-3">
+                    {relatedEvents.map((e) => (
+                      <li key={e.id} className="font-sans text-sm">
+                        <span className="text-ink-muted">{formatDateRange(e.period)}</span>{" "}
+                        <Link href={`/chronology#${e.slug}`} transitionTypes={NAV_FORWARD} className="text-ink underline underline-offset-4">
+                          {e.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <Link
+                href={`/atlas?year=${firstYear}`}
+                transitionTypes={NAV_BACK}
+                className="mt-10 inline-block border border-ink px-4 py-2 font-sans text-sm text-ink transition-colors hover:bg-ink hover:text-paper"
+              >
+                See it on the atlas
+              </Link>
+            </section>
+          </div>
+        </div>
       </div>
-    </div>
     </PageTransition>
   );
 }
