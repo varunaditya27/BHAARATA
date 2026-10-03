@@ -1,14 +1,15 @@
-import type { Map as MapLibreMap } from "maplibre-gl";
+import type { GeoJSONSource, Map as MapLibreMap } from "maplibre-gl";
 import { DASH_SEQUENCE } from "./layers";
-import { LAYER_IDS } from "./mapStyle";
+import { LAYER_IDS, SOURCE_IDS } from "./mapStyle";
+import { routeMoversFeatureCollection } from "./route-movers";
 
 export function prefersReducedMotion(): boolean {
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 /**
- * The map's ambient motion — marching-ants routes and the pulse on active
- * capitals — on one shared clock. Skipped entirely under reduced motion
+ * The map's ambient motion — marching-ants routes, ships and travellers
+ * moving along them, and the pulse on active capitals — on one shared clock. Skipped entirely under reduced motion
  * (not frozen mid-frame). Returns a stop function for unmount.
  */
 export function startMapAnimations(map: MapLibreMap): () => void {
@@ -17,6 +18,7 @@ export function startMapAnimations(map: MapLibreMap): () => void {
   let raf = 0;
   let dashIndex = 0;
   let lastDash = 0;
+  let lastMove = 0;
   const startedAt = performance.now();
 
   const tick = (now: number) => {
@@ -26,6 +28,11 @@ export function startMapAnimations(map: MapLibreMap): () => void {
       if (map.getLayer(LAYER_IDS.routeLinesDash)) {
         map.setPaintProperty(LAYER_IDS.routeLinesDash, "line-dasharray", DASH_SEQUENCE[dashIndex]);
       }
+    }
+    if (now - lastMove > 33) {
+      lastMove = now;
+      const source = map.getSource(SOURCE_IDS.routeMovers) as GeoJSONSource | undefined;
+      source?.setData(routeMoversFeatureCollection((now - startedAt) / 1000));
     }
     const phase = (Math.sin(((now - startedAt) / 1000) * 2.2) + 1) / 2;
     if (map.getLayer(LAYER_IDS.capitalPulseOuter)) {

@@ -134,6 +134,9 @@ export function routesToFeatureCollection(routes: HistoricalRoute[]): GeoJSON.Fe
         label: route.label,
         routeType: route.routeType,
         accentColor: accentByPolityId.get(route.polityIds[0] ?? "") ?? "#5c5447",
+        // Glyphs on a route (arrows, ships) sit over that same kingdom's
+        // fill, so they take a darker shade to stay visible.
+        glyphColor: darkenHex(accentByPolityId.get(route.polityIds[0] ?? "") ?? "#5c5447", 0.45),
       },
       geometry: route.path,
     })),

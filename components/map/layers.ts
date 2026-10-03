@@ -7,7 +7,8 @@ import {
   placesToFeatureCollection,
   routesToFeatureCollection,
 } from "@/lib/geo/to-geojson";
-import { PLACE_ICON_EXPRESSION, registerHatchPattern, registerMapIcons } from "./mapIcons";
+import { PLACE_ICON_EXPRESSION, registerHatchPattern, registerMapIcons, registerRouteIcons } from "./mapIcons";
+import { routeMoversFeatureCollection } from "./route-movers";
 import { LAYER_IDS, SOURCE_IDS, TERRAIN_SOURCE } from "./mapStyle";
 
 /** Classic "marching ants" dash-phase sequence (Mapbox/MapLibre pattern):
@@ -59,6 +60,7 @@ export function addHistoricalLayers(
     map.setTerrain({ source: SOURCE_IDS.demTerrain, exaggeration: 1.6 });
   }
   registerHatchPattern(map);
+  registerRouteIcons(map);
 
   map.addSource(SOURCE_IDS.territory, {
     type: "geojson",
@@ -167,6 +169,46 @@ export function addHistoricalLayers(
     filter: ["in", ["get", "routeId"], ["literal", []]],
     layout: { "line-cap": "round", "line-join": "round" },
     paint: { "line-color": ["get", "accentColor"], "line-width": 2, "line-dasharray": DASH_SEQUENCE[0] },
+  });
+  // Chevrons along each route, pointing the way it runs.
+  map.addLayer({
+    id: LAYER_IDS.routeArrows,
+    type: "symbol",
+    source: SOURCE_IDS.routes,
+    filter: ["in", ["get", "routeId"], ["literal", []]],
+    layout: {
+      "symbol-placement": "line",
+      "symbol-spacing": 56,
+      "icon-image": "bh-route-arrow",
+      "icon-size": ["interpolate", ["linear"], ["zoom"], 4, 0.8, 8, 1.2],
+      "icon-rotate": 90,
+      "icon-rotation-alignment": "map",
+      "icon-allow-overlap": true,
+      "icon-ignore-placement": true,
+    },
+    paint: { "icon-color": ["get", "glyphColor"], "icon-opacity": 0.9 },
+  });
+  // One ship or traveller per route, moved by the animation clock.
+  map.addSource(SOURCE_IDS.routeMovers, { type: "geojson", data: routeMoversFeatureCollection(0) });
+  map.addLayer({
+    id: LAYER_IDS.routeMovers,
+    type: "symbol",
+    source: SOURCE_IDS.routeMovers,
+    filter: ["in", ["get", "routeId"], ["literal", []]],
+    layout: {
+      "icon-image": ["case", ["==", ["get", "routeType"], "maritime"], "bh-route-ship", "bh-route-traveller"],
+      "icon-size": ["interpolate", ["linear"], ["zoom"], 4, 0.9, 8, 1.5],
+      "icon-rotate": ["get", "bearing"],
+      "icon-rotation-alignment": "map",
+      "icon-allow-overlap": true,
+      "icon-ignore-placement": true,
+    },
+    paint: {
+      "icon-color": ["get", "accentColor"],
+      "icon-halo-color": "#f3ede0",
+      "icon-halo-width": 1.2,
+      "icon-opacity": ["get", "fade"],
+    },
   });
 
   map.addLayer({

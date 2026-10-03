@@ -115,3 +115,48 @@ export const PLACE_ICON_EXPRESSION = [
   "bh-icon-port",
   "bh-icon-settlement",
 ] as unknown as string;
+
+/** Draws a white glyph on a canvas and registers it as an SDF image, so a
+ * layer can tint it per feature (each route in its kingdom's colour). */
+function addSdfGlyph(map: MapLibreMap, id: string, size: number, draw: (ctx: CanvasRenderingContext2D) => void) {
+  if (map.hasImage(id)) return;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  ctx.fillStyle = "#fff";
+  ctx.strokeStyle = "#fff";
+  draw(ctx);
+  const imageData = ctx.getImageData(0, 0, size, size);
+  map.addImage(id, { width: size, height: size, data: imageData.data }, { pixelRatio: 2, sdf: true });
+}
+
+/** Route glyphs, all pointing "up" (north) so icon-rotate = bearing works:
+ * a chevron for direction of travel, a hull seen from above for ships. */
+export function registerRouteIcons(map: MapLibreMap) {
+  addSdfGlyph(map, "bh-route-arrow", 24, (ctx) => {
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.beginPath();
+    ctx.moveTo(6, 15);
+    ctx.lineTo(12, 9);
+    ctx.lineTo(18, 15);
+    ctx.stroke();
+  });
+  addSdfGlyph(map, "bh-route-ship", 40, (ctx) => {
+    ctx.beginPath();
+    ctx.moveTo(20, 3);
+    ctx.bezierCurveTo(28, 12, 28, 26, 26, 36);
+    ctx.lineTo(14, 36);
+    ctx.bezierCurveTo(12, 26, 12, 12, 20, 3);
+    ctx.closePath();
+    ctx.fill();
+  });
+  addSdfGlyph(map, "bh-route-traveller", 24, (ctx) => {
+    ctx.beginPath();
+    ctx.arc(12, 12, 5, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}

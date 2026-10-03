@@ -50,6 +50,7 @@ export const SOURCE_IDS = {
   kingdomLabels: "bh-kingdom-labels",
   places: "bh-places",
   routes: "bh-routes",
+  routeMovers: "bh-route-movers",
 } as const;
 
 export const LAYER_IDS = {
@@ -67,4 +68,6 @@ export const LAYER_IDS = {
   capitalPulseInner: "bh-capital-pulse-inner",
   routeLines: "bh-route-lines",
   routeLinesDash: "bh-route-lines-dash",
+  routeArrows: "bh-route-arrows",
+  routeMovers: "bh-route-movers",
 } as const;

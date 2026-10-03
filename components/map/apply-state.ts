@@ -54,7 +54,7 @@ export function applyHistoricalState(map: MapLibreMap, year: number, selectedPol
   map.setFilter(LAYER_IDS.capitalPulseOuter, ["in", ["get", "placeId"], ["literal", capitalIds]]);
 
   const routeIds = getRoutesAtYear(year).map((r) => r.id);
-  for (const layerId of [LAYER_IDS.routeLines, LAYER_IDS.routeLinesDash]) {
+  for (const layerId of [LAYER_IDS.routeLines, LAYER_IDS.routeLinesDash, LAYER_IDS.routeArrows, LAYER_IDS.routeMovers]) {
     map.setFilter(layerId, ["in", ["get", "routeId"], ["literal", routeIds]]);
   }
 }
