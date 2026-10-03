@@ -59,8 +59,12 @@
 
   --font-display: var(--font-zodiak);
   --font-sans: var(--font-ranade);
-  --font-devanagari: var(--font-anek-devanagari);
-  --font-devanagari-display: var(--font-tiro-devanagari);
+  /* Indic running text / display. One stack per role; each family covers
+   * a single script, so the browser resolves per glyph. */
+  --font-indic: var(--font-anek-tamil), var(--font-anek-kannada), var(--font-anek-telugu),
+    var(--font-anek-devanagari), var(--font-ranade), sans-serif;
+  --font-indic-display: var(--font-tiro-tamil), var(--font-tiro-kannada), var(--font-tiro-telugu),
+    var(--font-tiro-devanagari), var(--font-zodiak), serif;
 }
 
 html {

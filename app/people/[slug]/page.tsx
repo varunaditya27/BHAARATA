@@ -35,7 +35,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
           <Eyebrow>{person.role}</Eyebrow>
           <h1 className="mt-1 font-display text-4xl text-ink">{person.name}</h1>
           {person.nativeName && (
-            <p className="font-devanagari-display text-lg text-ink-muted">{person.nativeName}</p>
+            <p lang="und" className="font-indic-display text-lg text-ink-muted">{person.nativeName}</p>
           )}
           <p className="mt-2 font-sans text-ink-muted">{formatDateRange(person.period)}</p>
           <div className="mt-2">

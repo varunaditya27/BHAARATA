@@ -163,11 +163,11 @@ function TitleBlock({ polity, compact }: { polity: Polity; compact?: boolean }) 
       <h2 className={`mt-1 font-display text-paper ${compact ? "text-xl" : "text-2xl"}`}>
         {polity.name}
         {compact && polity.nativeName && (
-          <span lang="und" className="ml-2 font-indic text-base text-paper/60">{polity.nativeName}</span>
+          <span lang="und" className="ml-2 font-indic-display text-base text-paper/60">{polity.nativeName}</span>
         )}
       </h2>
       {!compact && polity.nativeName && (
-        <p lang="und" className="font-indic text-base text-paper/70">{polity.nativeName}</p>
+        <p lang="und" className="font-indic-display text-base text-paper/70">{polity.nativeName}</p>
       )}
       <p className="mt-1 font-sans text-sm text-paper/70">{formatDateRange(polity.period)}</p>
     </div>

@@ -182,7 +182,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
               <Eyebrow className="text-paper/70">{polity.polityType} · {polity.region}</Eyebrow>
               <h1 className="mt-2 font-display text-5xl text-paper sm:text-6xl">{polity.name}</h1>
               {polity.nativeName && (
-                <p className="mt-1 font-devanagari-display text-2xl text-paper/80">{polity.nativeName}</p>
+                <p lang="und" className="mt-1 font-indic-display text-2xl text-paper/80">{polity.nativeName}</p>
               )}
               {polity.quote && (
                 <p className="mt-3 max-w-xl font-sans italic text-paper/80">&ldquo;{polity.quote}&rdquo;</p>

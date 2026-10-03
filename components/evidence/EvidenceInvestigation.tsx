@@ -67,7 +67,7 @@ export function EvidenceInvestigation({
                     <button
                       onClick={() => setActiveLine(activeLine === i ? null : i)}
                       className={cn(
-                        "flex w-full gap-2 px-2 py-1.5 text-left font-devanagari text-sm transition-colors",
+                        "flex w-full gap-2 px-2 py-1.5 text-left font-indic text-sm transition-colors",
                         activeLine === i ? "bg-territory/15 text-ink" : "text-ink hover:bg-stone/50",
                       )}
                     >
