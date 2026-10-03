@@ -445,6 +445,72 @@ body {
   from { opacity: 0; transform: translateY(8px); }
 }
 
+/* Native-script names "written" in: a soft-edged mask sweeps left→right. */
+.bh-ink-write {
+  -webkit-mask-image: linear-gradient(90deg, #000 45%, transparent 55%);
+  mask-image: linear-gradient(90deg, #000 45%, transparent 55%);
+  -webkit-mask-size: 260% 100%;
+  mask-size: 260% 100%;
+  animation: bh-ink-write 1.6s cubic-bezier(0.45, 0, 0.25, 1) both;
+}
+@keyframes bh-ink-write {
+  from { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+  to { -webkit-mask-position: 0 0; mask-position: 0 0; }
+}
+
+/* A bar that grows from its start date. */
+.bh-grow-x {
+  transform-origin: left center;
+  animation: bh-grow-x 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+@keyframes bh-grow-x {
+  from { transform: scaleX(0); }
+}
+
+/* Per-record accent: a page sets --bh-accent (its kingdom's colour) on a
+ * wrapper; selection, the reading line and accent rules pick it up. */
+.bh-accented ::selection {
+  background: color-mix(in srgb, var(--bh-accent) 28%, transparent);
+}
+.bh-accent-rule {
+  border-color: color-mix(in srgb, var(--bh-accent) 55%, var(--bh-border));
+}
+
+/* Drop cap on a record's opening paragraph. */
+.bh-dropcap::first-letter {
+  float: left;
+  margin: 0.08em 0.12em 0 0;
+  font-family: var(--font-zodiak), serif;
+  font-size: 3.6em;
+  line-height: 0.82;
+  color: var(--bh-accent, var(--bh-ink));
+}
+
+/* Reading progress, in the record's colour, driven purely by scroll. */
+.bh-reading-progress {
+  position: fixed;
+  top: 4rem;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  height: 2px;
+  background: var(--bh-accent, var(--bh-ink));
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+@supports (animation-timeline: scroll()) {
+  .bh-reading-progress {
+    animation: bh-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes bh-progress {
+    to { transform: scaleX(1); }
+  }
+}
+@supports not (animation-timeline: scroll()) {
+  .bh-reading-progress { display: none; }
+}
+
 /* Slow settle on hero photographs — the camera easing in after a cut. */
 .bh-kenburns {
   animation: bh-kenburns 14s cubic-bezier(0.22, 1, 0.36, 1) both;

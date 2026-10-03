@@ -1,13 +1,18 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/primitives/Badge";
-import { HeroPhoto } from "@/components/primitives/HeroPhoto";
-import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { EntityTabs } from "@/components/primitives/EntityTabs";
-import { RulerPortrait } from "@/components/entity/RulerPortrait";
-import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
+import { Eyebrow } from "@/components/primitives/Eyebrow";
+import { HeroPhoto } from "@/components/primitives/HeroPhoto";
 import { PageTransition } from "@/components/primitives/PageTransition";
+import { Plate } from "@/components/primitives/Plate";
 import { Shared } from "@/components/primitives/Shared";
+import { InkName } from "@/components/entity/InkName";
+import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
+import { contemporariesOf, KingdomLifespan } from "@/components/entity/KingdomLifespan";
+import { RisingTitle } from "@/components/entity/RisingTitle";
+import { RulerPortrait } from "@/components/entity/RulerPortrait";
+import { images, type ImageKey } from "@/lib/data/images";
 import {
   evidence as evidenceData,
   events,
@@ -17,12 +22,17 @@ import {
   places,
   polities,
 } from "@/lib/data/prototype";
-import { images, type ImageKey } from "@/lib/data/images";
 import { formatDateRange } from "@/lib/domain/time";
 import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 export function generateStaticParams() {
   return polities.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: PageProps<"/polities/[slug]">) {
+  const { slug } = await params;
+  const polity = getPolityBySlug(slug);
+  return { title: polity ? `${polity.name} — BHĀRATA` : "Kingdom — BHĀRATA", description: polity?.summary };
 }
 
 export default async function PolityPage({ params }: PageProps<"/polities/[slug]">) {
@@ -31,211 +41,295 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
   if (!polity) notFound();
 
   const hero = polity.heroImageKey ? images[polity.heroImageKey as ImageKey] : undefined;
-  const rulers = getRulersForPolity(polity.id);
-  const relatedEvents = events.filter((e) => e.polityIds.includes(polity.id));
-  const relatedPlaces = places.filter((p) => polity.capitals.includes(p.name));
+  const rulers = getRulersForPolity(polity.id).sort((a, b) => a.period.startYear - b.period.startYear);
+  const relatedEvents = events
+    .filter((e) => e.polityIds.includes(polity.id))
+    .sort((a, b) => a.period.startYear - b.period.startYear);
+  const relatedPlaces = places.filter((p) => polity.capitals.some((c) => p.name.startsWith(c)));
   const relatedEvidence = evidenceData.filter((e) => e.polityIds.includes(polity.id));
   const sourceRecords = polity.provenance
     .map((p) => getSourceById(p.sourceId))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
-  const otherPolities = polities.filter((p) => p.id !== polity.id);
+  const contemporaries = contemporariesOf(polity);
+  const span = (polity.period.endYear ?? polity.period.startYear) - polity.period.startYear;
 
   const overviewTab = (
-    <div className="grid gap-12 md:grid-cols-[2fr_1fr]">
+    <div className="grid gap-14 md:grid-cols-[1.6fr_1fr]">
       <div>
-        <p className="max-w-prose font-sans leading-relaxed text-ink">{polity.summary}</p>
+        <p className="bh-dropcap max-w-prose font-sans text-lg leading-relaxed text-ink">{polity.summary}</p>
+        {polity.notableFor && (
+          <p className="bh-accent-rule mt-6 max-w-prose border-l-2 pl-4 font-sans text-ink-muted">
+            <span className="text-ink">Remembered for:</span> {polity.notableFor}.
+          </p>
+        )}
+
+        <section className="mt-12">
+          <Eyebrow>Across the centuries</Eyebrow>
+          <p className="mt-1 font-sans text-sm text-ink-muted">
+            About {span} years on record. The dashed lines mark its span; below, every kingdom that overlapped it.
+          </p>
+          <div className="mt-5">
+            <KingdomLifespan polity={polity} />
+          </div>
+        </section>
+
         {sourceRecords.length > 0 && (
-          <div className="mt-10">
+          <section className="mt-12">
             <Eyebrow>Selected sources</Eyebrow>
-            <ul className="mt-3 space-y-2">
+            <ul className="mt-3 space-y-3">
               {sourceRecords.map((s) => (
-                <li key={s.id} className="font-sans text-sm text-ink">
+                <li key={s.id} className="border-t border-border pt-3 font-sans text-sm text-ink">
                   {s.title}
                   <span className="block text-xs text-ink-muted">{s.citation}</span>
                 </li>
               ))}
             </ul>
-          </div>
+          </section>
         )}
       </div>
-      <div className="space-y-6 font-sans text-sm">
-        <div>
-          <Eyebrow>Capital{polity.capitals.length > 1 ? "s" : ""}</Eyebrow>
-          <p className="mt-1 text-ink">{polity.capitals.join(", ")}</p>
+
+      <aside className="bh-accent-rule h-fit border-t-2 pt-5 font-sans text-sm md:sticky md:top-24">
+        <Eyebrow>At a glance</Eyebrow>
+        <dl className="mt-4 space-y-4">
+          <div>
+            <dt className="text-xs uppercase tracking-wide text-ink-muted">Capital{polity.capitals.length > 1 ? "s" : ""}</dt>
+            <dd className="mt-0.5 text-ink">{polity.capitals.join(", ")}</dd>
+          </div>
+          <div>
+            <dt className="text-xs uppercase tracking-wide text-ink-muted">Region</dt>
+            <dd className="mt-0.5 text-ink">{polity.region}</dd>
+          </div>
+          {polity.language && (
+            <div>
+              <dt className="text-xs uppercase tracking-wide text-ink-muted">Language</dt>
+              <dd className="mt-0.5 text-ink">{polity.language}</dd>
+            </div>
+          )}
+          {polity.religion && (
+            <div>
+              <dt className="text-xs uppercase tracking-wide text-ink-muted">Religion</dt>
+              <dd className="mt-0.5 text-ink">{polity.religion}</dd>
+            </div>
+          )}
+          <div>
+            <dt className="text-xs uppercase tracking-wide text-ink-muted">Also known as</dt>
+            <dd className="mt-0.5 text-ink">{polity.alternativeNames.join(", ") || "—"}</dd>
+          </div>
+          <div>
+            <dt className="text-xs uppercase tracking-wide text-ink-muted">On record here</dt>
+            <dd className="mt-0.5 text-ink">
+              {rulers.length} {rulers.length === 1 ? "ruler" : "rulers"} · {relatedEvents.length}{" "}
+              {relatedEvents.length === 1 ? "event" : "events"} · {relatedEvidence.length} evidence{" "}
+              {relatedEvidence.length === 1 ? "record" : "records"}
+            </dd>
+          </div>
+        </dl>
+        <Link
+          href={`/atlas?polity=${polity.slug}&year=${polity.period.startYear}`}
+          transitionTypes={NAV_BACK}
+          className="mt-6 block border border-ink px-4 py-2 text-center text-ink transition-colors hover:bg-ink hover:text-paper"
+        >
+          See it on the atlas
+        </Link>
+      </aside>
+    </div>
+  );
+
+  const rulersTab =
+    rulers.length === 0 ? (
+      <p className="font-sans text-sm text-ink-muted">No rulers recorded yet for this kingdom.</p>
+    ) : (
+      <div>
+        <Eyebrow>Reigns</Eyebrow>
+        <div className="relative mt-4 h-10 border-b border-border">
+          {rulers.map((r) => {
+            const start = polity.period.startYear;
+            const total = Math.max(1, (polity.period.endYear ?? start) - start);
+            const left = ((r.period.startYear - start) / total) * 100;
+            const width = Math.max(1.2, (((r.period.endYear ?? r.period.startYear) - r.period.startYear) / total) * 100);
+            return (
+              <div key={r.id} className="absolute bottom-0" style={{ left: `${left}%`, width: `${width}%` }}>
+                <div className="h-2" style={{ backgroundColor: polity.accentColor }} />
+                <span className="absolute bottom-3 left-0 whitespace-nowrap font-sans text-[0.7rem] text-ink-muted">
+                  {r.name}
+                </span>
+              </div>
+            );
+          })}
         </div>
-        {polity.language && (
-          <div>
-            <Eyebrow>Language</Eyebrow>
-            <p className="mt-1 text-ink">{polity.language}</p>
-          </div>
-        )}
-        {polity.religion && (
-          <div>
-            <Eyebrow>Religion</Eyebrow>
-            <p className="mt-1 text-ink">{polity.religion}</p>
-          </div>
-        )}
-        {polity.notableFor && (
-          <div>
-            <Eyebrow>Notable for</Eyebrow>
-            <p className="mt-1 text-ink">{polity.notableFor}</p>
-          </div>
-        )}
-        <div>
-          <Eyebrow>Alternative names</Eyebrow>
-          <p className="mt-1 text-ink">{polity.alternativeNames.join(", ") || "—"}</p>
+        <div className="mt-2 flex justify-between font-sans text-[0.65rem] text-ink-muted">
+          <span>{polity.period.startYear}</span>
+          <span>{polity.period.endYear}</span>
+        </div>
+
+        <div className="mt-10 grid gap-8 sm:grid-cols-3">
+          {rulers.map((ruler) => (
+            <Link key={ruler.id} href={`/people/${ruler.slug}`} transitionTypes={NAV_FORWARD} className="group block">
+              <Shared name={transitionNames.personPortrait(ruler.slug)}>
+                <RulerPortrait imageKey={ruler.imageKey} name={ruler.name} accentColor={polity.accentColor} className="w-full" />
+              </Shared>
+              <h3 className="mt-3 font-display text-lg text-ink transition-colors group-hover:[color:var(--bh-accent)]">
+                {ruler.name}
+              </h3>
+              <p className="font-sans text-xs text-ink-muted">{formatDateRange(ruler.period)}</p>
+              {ruler.summary && <p className="mt-2 font-sans text-sm leading-relaxed text-ink-muted">{ruler.summary}</p>}
+            </Link>
+          ))}
         </div>
       </div>
-    </div>
-  );
+    );
 
-  const rulersTab = (
-    <div className="grid gap-8 sm:grid-cols-3">
-      {rulers.map((ruler) => (
-        <Link key={ruler.id} href={`/people/${ruler.slug}`} transitionTypes={NAV_FORWARD} className="group block">
-          <Shared name={transitionNames.personPortrait(ruler.slug)}>
-            <RulerPortrait
-              imageKey={ruler.imageKey}
-              name={ruler.name}
-              accentColor={polity.accentColor}
-              className="w-full"
-            />
-          </Shared>
-          <h3 className="mt-3 font-display text-lg text-ink group-hover:text-territory-selected">
-            {ruler.name}
-          </h3>
-          <p className="font-sans text-xs text-ink-muted">{formatDateRange(ruler.period)}</p>
-        </Link>
-      ))}
-      {rulers.length === 0 && (
-        <p className="font-sans text-sm text-ink-muted">No rulers recorded yet for this entity.</p>
+  const placesTab =
+    relatedPlaces.length === 0 ? (
+      <p className="font-sans text-sm text-ink-muted">No places recorded yet.</p>
+    ) : (
+      <div className="grid gap-10 sm:grid-cols-2">
+        {relatedPlaces.map((place, i) => {
+          const photo = place.imageKey ? images[place.imageKey as ImageKey] : undefined;
+          return (
+            <Link key={place.id} href={`/places/${place.slug}`} transitionTypes={NAV_FORWARD} className="group block">
+              {photo && (
+                <Shared name={transitionNames.placePhoto(place.slug)}>
+                  <Plate credit={photo} number={i + 1} />
+                </Shared>
+              )}
+              <h3 className="mt-3 font-display text-xl text-ink transition-colors group-hover:[color:var(--bh-accent)]">
+                {place.name}
+              </h3>
+              <p className="font-sans text-sm capitalize text-ink-muted">
+                {place.placeType} · {place.region}
+              </p>
+            </Link>
+          );
+        })}
+      </div>
+    );
+
+  const eventsTab =
+    relatedEvents.length === 0 ? (
+      <p className="font-sans text-sm text-ink-muted">No events recorded yet.</p>
+    ) : (
+      <ol className="bh-accent-rule relative space-y-8 border-l pl-6">
+        {relatedEvents.map((event) => (
+          <li key={event.id} className="bh-reveal relative">
+            <span className="absolute -left-[29px] top-1.5 h-2 w-2 rotate-45" style={{ backgroundColor: polity.accentColor }} aria-hidden />
+            <p className="font-sans text-sm text-ink-muted">{formatDateRange(event.period)}</p>
+            <h3 className="mt-1 font-display text-xl text-ink">{event.title}</h3>
+            <p className="mt-1 max-w-prose font-sans text-sm leading-relaxed text-ink-muted">{event.summary}</p>
+            <Link
+              href={`/atlas?year=${event.period.startYear}&polity=${polity.slug}`}
+              transitionTypes={NAV_BACK}
+              className="mt-2 inline-block font-sans text-xs text-ink underline underline-offset-4"
+            >
+              See {event.period.startYear} on the atlas
+            </Link>
+          </li>
+        ))}
+      </ol>
+    );
+
+  const evidenceTab =
+    relatedEvidence.length === 0 ? (
+      <p className="font-sans text-sm text-ink-muted">No evidence records linked yet.</p>
+    ) : (
+      <ul className="space-y-6">
+        {relatedEvidence.map((ev) => (
+          <li key={ev.id} className="border-t border-border pt-4">
+            <Link href={`/evidence/${ev.slug}`} transitionTypes={NAV_FORWARD} className="group block">
+              <p className="font-sans text-sm capitalize text-ink-muted">
+                {formatDateRange(ev.period)} · {ev.evidenceType}
+              </p>
+              <h3 className="mt-1 font-display text-xl text-ink transition-colors group-hover:[color:var(--bh-accent)]">
+                {ev.title}
+              </h3>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    );
+
+  const relatedTab =
+    contemporaries.length === 0 ? (
+      <p className="font-sans text-sm text-ink-muted">No other recorded kingdom overlaps this one.</p>
+    ) : (
+      <div>
+        <p className="max-w-prose font-sans text-sm text-ink-muted">
+          Kingdoms that existed at the same time as {polity.name}, and for how long their records overlap.
+        </p>
+        <div className="mt-6 grid gap-8 sm:grid-cols-3">
+          {contemporaries.map(({ polity: p, from, to }) => (
+            <Link key={p.id} href={`/polities/${p.slug}`} transitionTypes={NAV_FORWARD} className="group flex gap-4 border-t border-border pt-4">
+              <KingdomEmblem polityId={p.id} color={p.accentColor} className="h-12 w-12" />
+              <div>
+                <h3 className="font-display text-xl text-ink group-hover:text-territory-selected">{p.name}</h3>
+                <p className="font-sans text-sm text-ink-muted">
+                  Shared {from}–{to} · {to - from} years
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    );
+
+  const title = (dark: boolean) => (
+    <>
+      <KingdomEmblem
+        polityId={polity.id}
+        color={polity.accentColor}
+        draw
+        className="mb-4 h-16 w-16 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]"
+      />
+      <Eyebrow className={dark ? "text-paper/70" : undefined}>
+        {polity.polityType} · {polity.region}
+      </Eyebrow>
+      <RisingTitle text={polity.name} className={`mt-2 text-5xl sm:text-7xl ${dark ? "text-paper" : "text-ink"}`} />
+      {polity.nativeName && (
+        <InkName text={polity.nativeName} className={`mt-2 text-2xl sm:text-3xl ${dark ? "text-paper/85" : "text-ink-muted"}`} />
       )}
-    </div>
-  );
-
-  const placesTab = (
-    <div className="grid gap-8 sm:grid-cols-2">
-      {relatedPlaces.map((place) => (
-        <Link key={place.id} href={`/places/${place.slug}`} transitionTypes={NAV_FORWARD} className="group block border-t border-border pt-4">
-          <h3 className="font-display text-xl text-ink group-hover:text-territory-selected">{place.name}</h3>
-          <p className="font-sans text-sm text-ink-muted">{place.placeType} · {place.region}</p>
-        </Link>
-      ))}
-      {relatedPlaces.length === 0 && (
-        <p className="font-sans text-sm text-ink-muted">No places recorded yet.</p>
+      {polity.quote && (
+        <p className={`bh-fade-in mt-4 max-w-xl font-sans italic ${dark ? "text-paper/80" : "text-ink-muted"}`} style={{ animationDelay: "1200ms" }}>
+          &ldquo;{polity.quote}&rdquo;
+        </p>
       )}
-    </div>
-  );
-
-  const eventsTab = (
-    <ul className="space-y-6">
-      {relatedEvents.map((event) => (
-        <li key={event.id} className="border-t border-border pt-4">
-          <p className="font-sans text-sm text-ink-muted">{formatDateRange(event.period)}</p>
-          <h3 className="mt-1 font-display text-xl text-ink">{event.title}</h3>
-          <p className="mt-1 max-w-prose font-sans text-sm leading-relaxed text-ink-muted">
-            {event.summary}
-          </p>
-        </li>
-      ))}
-      {relatedEvents.length === 0 && (
-        <p className="font-sans text-sm text-ink-muted">No events recorded yet.</p>
-      )}
-    </ul>
-  );
-
-  const evidenceTab = (
-    <ul className="space-y-6">
-      {relatedEvidence.map((ev) => (
-        <li key={ev.id} className="border-t border-border pt-4">
-          <Link href={`/evidence/${ev.slug}`} transitionTypes={NAV_FORWARD} className="group block">
-            <p className="font-sans text-sm text-ink-muted">{formatDateRange(ev.period)} · {ev.evidenceType}</p>
-            <h3 className="mt-1 font-display text-xl text-ink group-hover:text-territory-selected">
-              {ev.title}
-            </h3>
-          </Link>
-        </li>
-      ))}
-      {relatedEvidence.length === 0 && (
-        <p className="font-sans text-sm text-ink-muted">No evidence records linked yet.</p>
-      )}
-    </ul>
-  );
-
-  const relatedTab = (
-    <div className="grid gap-8 sm:grid-cols-3">
-      {otherPolities.map((p) => (
-        <Link key={p.id} href={`/polities/${p.slug}`} transitionTypes={NAV_FORWARD} className="group block border-t border-border pt-4">
-          <h3 className="font-display text-xl text-ink group-hover:text-territory-selected">{p.name}</h3>
-          <p className="font-sans text-sm text-ink-muted">{formatDateRange(p.period)}</p>
-        </Link>
-      ))}
-    </div>
+    </>
   );
 
   return (
     <PageTransition>
-    <div>
-      {hero && (
-        <HeroPhoto credit={hero} sharedName={transitionNames.polityPhoto(polity.slug)}>
-          <div className="flex h-full items-end">
-            <div className="mx-auto w-full max-w-[1100px] px-6 pb-10">
-              <KingdomEmblem
-                polityId={polity.id}
-                color={polity.accentColor}
-                draw
-                className="mb-4 h-16 w-16 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
-              />
-              <Eyebrow className="text-paper/70">{polity.polityType} · {polity.region}</Eyebrow>
-              <h1 className="mt-2 font-display text-5xl text-paper sm:text-6xl">{polity.name}</h1>
-              {polity.nativeName && (
-                <p lang="und" className="mt-1 font-indic-display text-2xl text-paper/80">{polity.nativeName}</p>
-              )}
-              {polity.quote && (
-                <p className="mt-3 max-w-xl font-sans italic text-paper/80">&ldquo;{polity.quote}&rdquo;</p>
-              )}
+      <div className="bh-accented" style={{ "--bh-accent": polity.accentColor } as React.CSSProperties}>
+        <div className="bh-reading-progress" aria-hidden />
+        {hero ? (
+          <HeroPhoto credit={hero} sharedName={transitionNames.polityPhoto(polity.slug)} heightClassName="h-[62vh] min-h-[420px]">
+            <div className="flex h-full items-end">
+              <div className="mx-auto w-full max-w-[1100px] px-4 pb-10 sm:px-6">{title(true)}</div>
             </div>
-          </div>
-        </HeroPhoto>
-      )}
-
-      <div className="mx-auto max-w-[1100px] px-6 py-12">
-        {!hero && (
-          <>
-            <Eyebrow>{polity.polityType} · {polity.region}</Eyebrow>
-            <h1 className="mt-2 font-display text-5xl text-ink">{polity.name}</h1>
-          </>
+          </HeroPhoto>
+        ) : (
+          <div className="mx-auto max-w-[1100px] px-4 pt-16 sm:px-6">{title(false)}</div>
         )}
-        <p className="mt-3 font-sans text-ink-muted">{formatDateRange(polity.period)}</p>
-        <div className="mt-3">
-          <Badge tone="uncertainty">Illustrative prototype data</Badge>
-        </div>
 
-        <div className="mt-10">
-          <EntityTabs
-            defaultValue="overview"
-            items={[
-              { value: "overview", label: "Overview", content: overviewTab },
-              { value: "rulers", label: "Rulers", content: rulersTab },
-              { value: "places", label: "Places", content: placesTab },
-              { value: "events", label: "Events", content: eventsTab },
-              { value: "evidence", label: "Evidence", content: evidenceTab },
-              { value: "related", label: "Related", content: relatedTab },
-            ]}
-          />
-        </div>
+        <div className="mx-auto max-w-[1100px] px-4 py-10 sm:px-6">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <p className="font-display text-xl text-ink">{formatDateRange(polity.period)}</p>
+            <Badge tone="uncertainty">Illustrative prototype data</Badge>
+          </div>
 
-        <p className="mt-16 border-t border-border pt-6 font-sans text-sm text-ink-muted">
-          <Link
-            href={`/atlas?polity=${polity.slug}&year=${polity.period.startYear}`}
-            transitionTypes={NAV_BACK}
-            className="underline underline-offset-4 text-ink hover:text-territory-selected"
-          >
-            View {polity.name} on the atlas →
-          </Link>
-        </p>
+          <div className="mt-8">
+            <EntityTabs
+              defaultValue="overview"
+              items={[
+                { value: "overview", label: "Overview", content: overviewTab },
+                { value: "rulers", label: `Rulers (${rulers.length})`, content: rulersTab },
+                { value: "places", label: `Places (${relatedPlaces.length})`, content: placesTab },
+                { value: "events", label: `Events (${relatedEvents.length})`, content: eventsTab },
+                { value: "evidence", label: `Evidence (${relatedEvidence.length})`, content: evidenceTab },
+                { value: "related", label: `Contemporaries (${contemporaries.length})`, content: relatedTab },
+              ]}
+            />
+          </div>
+        </div>
       </div>
-    </div>
     </PageTransition>
   );
 }
