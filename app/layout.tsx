@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Colophon } from "@/components/layout/Colophon";
 import { GlobalNav } from "@/components/layout/GlobalNav";
 import { fontVariables } from "@/lib/fonts";
 import "./globals.css";
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <GlobalNav />
         <main className="flex-1">{children}</main>
+        <Colophon />
       </body>
     </html>
   );
