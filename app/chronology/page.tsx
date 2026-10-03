@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Badge } from "@/components/primitives/Badge";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
+import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
+import { KingdomLanes } from "@/components/chronology/KingdomLanes";
 import { events, getPolityBySlug } from "@/lib/data/prototype";
 import { formatDateRange } from "@/lib/domain/time";
-import { getEraForYear } from "@/lib/geo/historical-state";
-import { PageTransition } from "@/components/primitives/PageTransition";
+import { PROTOTYPE_ERAS } from "@/lib/geo/historical-state";
 import { NAV_BACK, NAV_FORWARD } from "@/lib/utils/view-transition";
 
 export const metadata = {
@@ -14,86 +15,86 @@ export const metadata = {
 
 export default function ChronologyPage() {
   const sorted = [...events].sort((a, b) => a.period.startYear - b.period.startYear);
-
-  const groups: { era: string; items: typeof sorted }[] = [];
-  for (const event of sorted) {
-    const era = getEraForYear(event.period.startYear);
-    const lastGroup = groups[groups.length - 1];
-    if (lastGroup && lastGroup.era === era) {
-      lastGroup.items.push(event);
-    } else {
-      groups.push({ era, items: [event] });
-    }
-  }
+  const groups = PROTOTYPE_ERAS.map((era) => ({
+    era,
+    items: sorted.filter((e) => e.period.startYear >= era.start && e.period.startYear <= era.end),
+  })).filter((g) => g.items.length > 0);
 
   return (
     <PageTransition>
-    <div className="mx-auto max-w-[760px] px-6 py-16">
-      <Eyebrow>Temporal exploration</Eyebrow>
-      <h1 className="mt-2 font-display text-4xl text-ink">Chronology</h1>
-      <p className="mt-4 font-sans text-ink-muted">
-        Events in sequence, grouped by era. Dates preserve whatever
-        uncertainty the record carries — nothing here is rounded to a
-        cleaner number than the underlying claim supports.
-      </p>
-      <div className="mt-3">
-        <Badge tone="uncertainty">Illustrative prototype data</Badge>
-      </div>
+      <div className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6">
+        <Eyebrow>Events in order</Eyebrow>
+        <h1 className="mt-2 font-display text-5xl text-ink">Chronology</h1>
+        <p className="mt-4 max-w-prose font-sans text-ink-muted">
+          Each line is a kingdom; each diamond is something that happened to it. Dates keep whatever uncertainty
+          the record has — a &ldquo;c.&rdquo; means roughly, and nothing is rounded to look more exact than it is.
+        </p>
+        <div className="mt-3">
+          <Badge tone="uncertainty">Illustrative prototype data</Badge>
+        </div>
 
-      <Rule className="mt-10" />
+        <div className="mt-10">
+          <KingdomLanes />
+        </div>
 
-      <div className="relative mt-10">
-        <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border" aria-hidden />
+        <Rule className="mt-12" />
 
-        {groups.map((group) => (
-          <section key={group.era} className="mb-12 last:mb-0">
-            <div className="sticky top-4 z-10 mb-6 flex items-center gap-3 bg-paper/95 py-1 pr-4 backdrop-blur-sm">
-              <span className="relative z-10 h-3.5 w-3.5 shrink-0 rounded-full border-2 border-ink bg-paper" aria-hidden />
-              <Eyebrow>{group.era}</Eyebrow>
-            </div>
+        <div className="mx-auto max-w-[760px]">
+          {groups.map(({ era, items }) => (
+            <section key={era.name} className="relative mt-16">
+              <p className="bh-outline-numeral pointer-events-none select-none font-display text-[5.5rem] leading-none sm:text-[8rem]" aria-hidden>
+                {era.start}
+              </p>
+              <div className="sticky top-16 z-10 mb-8 border-b border-border bg-paper/95 py-2 backdrop-blur-sm">
+                <h2 className="font-sans text-xs uppercase tracking-[0.16em] text-ink">
+                  {era.name} <span className="text-ink-muted">· {era.start}–{era.end}</span>
+                </h2>
+              </div>
 
-            <ol className="space-y-10 pl-8">
-              {group.items.map((event) => (
-                <li key={event.id} id={event.slug} className="bh-reveal relative">
-                  <span
-                    className="absolute -left-[26px] top-1.5 h-2 w-2 rounded-full bg-territory"
-                    aria-hidden
-                  />
-                  <p className="font-sans text-sm text-ink-muted">{formatDateRange(event.period)}</p>
-                  <h2 className="mt-1 font-display text-2xl text-ink">{event.title}</h2>
-                  <p className="mt-2 font-sans text-sm leading-relaxed text-ink-muted">
-                    {event.summary}
-                  </p>
-                  <div className="mt-3 flex gap-4 font-sans text-sm">
-                    {event.polityIds.map((id) => {
-                      const polity = getPolityBySlug(id);
-                      if (!polity) return null;
-                      return (
+              <ol className="relative space-y-12 border-l border-border pl-8">
+                {items.map((event) => {
+                  const lead = getPolityBySlug(event.polityIds[0]);
+                  return (
+                    <li key={event.id} id={event.slug} className="bh-reveal relative scroll-mt-32">
+                      <span
+                        className="absolute -left-[37px] top-1.5 h-2.5 w-2.5 rotate-45 border-2 border-paper"
+                        style={{ backgroundColor: lead?.accentColor ?? "var(--bh-ink)" }}
+                        aria-hidden
+                      />
+                      <p className="font-sans text-sm tabular-nums text-ink-muted">{formatDateRange(event.period)}</p>
+                      <h3 className="mt-1 font-display text-2xl text-ink">{event.title}</h3>
+                      <p className="mt-2 max-w-prose font-sans leading-relaxed text-ink-muted">{event.summary}</p>
+                      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-sans text-sm">
+                        {event.polityIds.map((id) => {
+                          const polity = getPolityBySlug(id);
+                          if (!polity) return null;
+                          return (
+                            <Link
+                              key={id}
+                              href={`/polities/${polity.slug}`}
+                              transitionTypes={NAV_FORWARD}
+                              className="text-ink underline underline-offset-4 hover:text-territory-selected"
+                            >
+                              {polity.name}
+                            </Link>
+                          );
+                        })}
                         <Link
-                          key={id}
-                          href={`/polities/${polity.slug}`}
-                          transitionTypes={NAV_FORWARD}
-                          className="underline underline-offset-4 text-ink hover:text-territory-selected"
+                          href={`/atlas?year=${event.period.startYear}${lead ? `&polity=${lead.slug}` : ""}`}
+                          transitionTypes={NAV_BACK}
+                          className="text-ink-muted underline underline-offset-4 hover:text-ink"
                         >
-                          {polity.name}
+                          See {event.period.startYear} on the atlas
                         </Link>
-                      );
-                    })}
-                    <Link
-                      href={`/atlas?year=${event.period.startYear}`}
-                      transitionTypes={NAV_BACK}
-                      className="underline underline-offset-4 text-ink-muted hover:text-ink"
-                    >
-                      View on the atlas →
-                    </Link>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </section>
-        ))}
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
+            </section>
+          ))}
+        </div>
       </div>
-    </div>
     </PageTransition>
   );
 }

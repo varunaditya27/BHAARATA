@@ -69,6 +69,7 @@
 
 html {
   color-scheme: light;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -509,6 +510,13 @@ body {
 }
 @supports not (animation-timeline: scroll()) {
   .bh-reading-progress { display: none; }
+}
+
+/* Big outlined era numerals on the chronology. */
+.bh-outline-numeral {
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--bh-ink) 28%, transparent);
+  font-variant-numeric: oldstyle-nums;
 }
 
 /* Slow settle on hero photographs — the camera easing in after a cut. */
