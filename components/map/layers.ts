@@ -111,6 +111,20 @@ export function addHistoricalLayers(
       "fill-opacity-transition": { duration: 500, delay: 0 },
     },
   });
+  // Dashed ghost of a recently lost territory (see ECHO_YEARS).
+  map.addLayer({
+    id: LAYER_IDS.territoryEcho,
+    type: "line",
+    source: SOURCE_IDS.territory,
+    layout: { "line-join": "round" },
+    paint: {
+      "line-color": ["get", "outlineColor"],
+      "line-width": 1.4,
+      "line-dasharray": [2, 2],
+      "line-opacity": ["coalesce", ["feature-state", "echoOpacity"], 0],
+      "line-opacity-transition": { duration: 500, delay: 0 },
+    },
+  });
   // A soft halo under the outline, shown only on hover.
   map.addLayer({
     id: LAYER_IDS.territoryGlow,

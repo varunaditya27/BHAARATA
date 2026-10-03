@@ -56,6 +56,7 @@ export const LAYER_IDS = {
   territoryFill: "bh-territory-fill",
   territoryOutline: "bh-territory-outline",
   territoryGlow: "bh-territory-glow",
+  territoryEcho: "bh-territory-echo",
   frontierHatch: "bh-frontier-hatch",
   hillshade: "bh-hillshade",
   kingdomLabels: "bh-kingdom-labels",

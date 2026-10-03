@@ -49,6 +49,7 @@ const TOGGLE_LAYER_MAP: Record<LayerToggleId, string[]> = {
     LAYER_IDS.territoryFill,
     LAYER_IDS.frontierHatch,
     LAYER_IDS.territoryGlow,
+    LAYER_IDS.territoryEcho,
     LAYER_IDS.territoryOutline,
     LAYER_IDS.kingdomLabels,
   ],

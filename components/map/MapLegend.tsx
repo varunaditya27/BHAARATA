@@ -72,6 +72,10 @@ export function MapLegend({
           />
           <span>Hatched edge: the frontier&rsquo;s exact line isn&rsquo;t known</span>
         </div>
+        <div className="mt-2 flex items-start gap-2 text-xs text-paper/70">
+          <span className="mt-1.5 w-5 shrink-0 border-t border-dashed border-paper/60" aria-hidden />
+          <span>Dashed outline: land a kingdom held until recently</span>
+        </div>
       </div>
     </div>
   );

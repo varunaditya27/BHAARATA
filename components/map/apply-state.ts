@@ -6,6 +6,9 @@ import { LAYER_IDS, SOURCE_IDS } from "./mapStyle";
 
 export const TERRITORY_OPACITY = { inactive: 0, active: 0.58, selected: 0.8 } as const;
 
+/** How long a lost territory's outline lingers as a dashed "echo". */
+export const ECHO_YEARS = 60;
+
 /**
  * The one place that turns "year Y, kingdom K selected" into map state.
  * Feature-state writes are idempotent and the paint transitions (in
@@ -16,6 +19,7 @@ export function applyHistoricalState(map: MapLibreMap, year: number, selectedPol
   const state = getHistoricalState(year);
   const activeBoundaryIds = new Set(state.activeBoundaries.map(boundaryId));
   const activeCapitalNames = new Set(state.activePolities.flatMap((p) => p.capitals));
+  const polityHasActiveShape = new Set(state.activeBoundaries.map((b) => b.polityId));
 
   for (const b of boundaries) {
     const id = boundaryId(b);
@@ -30,6 +34,16 @@ export function applyHistoricalState(map: MapLibreMap, year: number, selectedPol
         selected,
       },
     );
+    // Echo: a territory that ended within ECHO_YEARS keeps a dashed ghost
+    // of its old outline, fading with time — unless the same kingdom
+    // already shows a newer shape. Derived from the year, so scrubbing
+    // either way is consistent.
+    const since = year - b.validTo;
+    const echo =
+      !active && since > 0 && since <= ECHO_YEARS && !polityHasActiveShape.has(b.polityId)
+        ? 0.7 * (1 - since / ECHO_YEARS)
+        : 0;
+    map.setFeatureState({ source: SOURCE_IDS.territory, id }, { echoOpacity: echo });
     map.setFeatureState({ source: SOURCE_IDS.frontier, id }, { hatchOpacity: active ? (selected ? 0.75 : 0.5) : 0 });
     map.setFeatureState({ source: SOURCE_IDS.kingdomLabels, id }, { labelOpacity: active ? 0.92 : 0 });
   }
