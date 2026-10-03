@@ -26,7 +26,7 @@ import { getPlaceById, milestones, getPolityBySlug, polities } from "@/lib/data/
 import type { HistoricalEvent } from "@/lib/domain/types";
 import { getEraForYear, getHistoricalState, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 
-const DEFAULT_VISIBLE_LAYERS: LayerToggleId[] = ["territory", "places", "routes", "relief", "battles"];
+const DEFAULT_VISIBLE_LAYERS: LayerToggleId[] = ["territory", "places", "routes", "relief", "battles", "sites"];
 const ERA_CARD_DURATION_MS = 1700;
 const URL_COMMIT_DEBOUNCE_MS = 300;
 const CAPTION_MS = 5200;

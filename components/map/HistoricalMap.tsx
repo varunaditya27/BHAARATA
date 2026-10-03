@@ -15,7 +15,7 @@ import { useCallback, useEffect, useRef } from "react";
 import { prefersReducedMotion, startMapAnimations } from "./animations";
 import { applyHistoricalState, boundaryForPolity, polityAtPoint, territoryAtPoint } from "./apply-state";
 import { captureMapCanvas } from "./export-image";
-import { addHistoricalLayers, ensureMonuments } from "./layers";
+import { addHistoricalLayers, ensureMonuments, ensureSites } from "./layers";
 import type { LayerToggleId } from "./MapLegend";
 import { BASEMAP_STYLE_URL, LAYER_IDS, SOURCE_IDS } from "./mapStyle";
 import { events, getPolityBySlug } from "@/lib/data/prototype";
@@ -68,10 +68,11 @@ const TOGGLE_LAYER_MAP: Record<LayerToggleId, string[]> = {
   relief: [LAYER_IDS.hillshade, LAYER_IDS.riverFlow],
   battles: [LAYER_IDS.battleRings, LAYER_IDS.battleLabels],
   monuments: [LAYER_IDS.monumentClusters, LAYER_IDS.monumentClusterCount, LAYER_IDS.monumentPoints],
+  sites: [LAYER_IDS.sitePoints, LAYER_IDS.siteLabels],
 };
 
 /** Layers whose features can be clicked for a small popup. */
-const POPUP_LAYERS = [LAYER_IDS.battleRings, LAYER_IDS.monumentPoints, LAYER_IDS.monumentClusters];
+const POPUP_LAYERS = [LAYER_IDS.battleRings, LAYER_IDS.sitePoints, LAYER_IDS.monumentPoints, LAYER_IDS.monumentClusters];
 
 function popupLine(parent: HTMLElement, tag: "p" | "a", text: string, className: string, href?: string) {
   const el = document.createElement(tag);
@@ -214,6 +215,25 @@ export function HistoricalMap({
             popupLine(box, "p", String(props.name), "bh-popup-title");
             if (ev) popupLine(box, "p", ev.summary.length > 260 ? ev.summary.slice(0, 257).replace(/\s+\S*$/, "") + "…" : ev.summary, "bh-popup-text");
             popupLine(box, "a", "More in the chronology →", "bh-popup-link", `/chronology#${props.slug}`);
+          } else if (hit.layer.id === LAYER_IDS.sitePoints) {
+            const kind = String(props.t);
+            popupLine(box, "p", `${kind.charAt(0).toUpperCase()}${kind.slice(1)} · built c. ${props.y}`, "bh-popup-eyebrow");
+            popupLine(box, "p", String(props.n), "bh-popup-title");
+            if (props.i) {
+              // A thumbnail linked from Wikimedia Commons, with its credit; nothing is copied into the site.
+              const fig = document.createElement("figure");
+              fig.className = "bh-popup-photo";
+              const img = document.createElement("img");
+              img.src = String(props.i);
+              img.alt = String(props.n);
+              img.loading = "lazy";
+              fig.appendChild(img);
+              popupLine(fig, "a", String(props.c), "bh-popup-credit", String(props.p));
+              box.appendChild(fig);
+            }
+            if (props.d) popupLine(box, "p", String(props.d), "bh-popup-text");
+            popupLine(box, "p", "Date of construction from Wikidata; many such dates are approximate.", "bh-popup-note");
+            if (props.w) popupLine(box, "a", "Read on Wikipedia →", "bh-popup-link", `https://en.wikipedia.org/wiki/${encodeURIComponent(String(props.w))}`);
           } else {
             popupLine(box, "p", "Protected monument today", "bh-popup-eyebrow");
             popupLine(box, "p", String(props.n), "bh-popup-title");
@@ -362,6 +382,7 @@ export function HistoricalMap({
   useEffect(() => {
     whenReady("layers", (map) => {
       if (visibleLayers.has("monuments")) ensureMonuments(map);
+      if (visibleLayers.has("sites")) ensureSites(map);
       for (const [toggleId, layerIds] of Object.entries(TOGGLE_LAYER_MAP)) {
         const visible = visibleLayers.has(toggleId as LayerToggleId);
         for (const layerId of layerIds) {

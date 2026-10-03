@@ -19,7 +19,12 @@ export const ECHO_YEARS = 60;
  * touches the few shapes that actually changed (there are hundreds). */
 const lastWritten = new WeakMap<MapLibreMap, Map<string, string>>();
 
+/** The year most recently applied to a map, so layers added later (lazily) can start in step. */
+const appliedYear = new WeakMap<MapLibreMap, number>();
+export const currentYear = (map: MapLibreMap, fallback = 1050) => appliedYear.get(map) ?? fallback;
+
 export function applyHistoricalState(map: MapLibreMap, year: number, selectedPolityId: string | null) {
+  appliedYear.set(map, year);
   let written = lastWritten.get(map);
   if (!written) lastWritten.set(map, (written = new Map()));
   const state = getHistoricalState(year);
@@ -66,6 +71,10 @@ export function applyHistoricalState(map: MapLibreMap, year: number, selectedPol
     ["<=", ["get", "year"], year],
     [">", ["get", "year"], year - 10],
   ];
+  // Sites (temples, mosques, forts…) appear in the year they were built and stay.
+  for (const id of [LAYER_IDS.sitePoints, LAYER_IDS.siteLabels]) {
+    if (map.getLayer(id)) map.setFilter(id, ["<=", ["get", "y"], year]);
+  }
   map.setFilter(LAYER_IDS.battleRings, battleWindow);
   map.setFilter(LAYER_IDS.battleLabels, battleWindow);
 

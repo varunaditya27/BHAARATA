@@ -591,6 +591,10 @@ body::before {
 .bh-popup-eyebrow { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--bh-ink-muted); }
 .bh-popup-title { margin-top: 0.2rem; font-family: var(--font-zodiak), serif; font-size: 1.15rem; line-height: 1.2; color: var(--bh-ink); }
 .bh-popup-text { margin-top: 0.4rem; font-size: 0.8rem; line-height: 1.45; color: var(--bh-ink-muted); }
+.bh-popup-photo { margin-top: 0.5rem; }
+.bh-popup-photo img { display: block; width: 100%; max-height: 118px; object-fit: cover; background: var(--bh-stone); }
+.bh-popup-credit { display: block; margin-top: 0.2rem; font-size: 0.62rem; color: var(--bh-ink-muted); text-decoration: underline; text-underline-offset: 2px; }
+.bh-popup-note { margin-top: 0.4rem; font-size: 0.68rem; font-style: italic; color: var(--bh-ink-muted); }
 .bh-popup-link { display: inline-block; margin-top: 0.55rem; font-size: 0.8rem; color: var(--bh-ink); text-decoration: underline; text-underline-offset: 3px; }
 
 /* Wordmark letters: each rises, then a band of light crosses it. The delays come from a

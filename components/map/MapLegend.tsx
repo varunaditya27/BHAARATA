@@ -2,9 +2,10 @@
 
 import { Layers } from "lucide-react";
 import { useState } from "react";
+import { SITE_COLORS } from "@/components/map/mapStyle";
 import { cn } from "@/lib/utils/cn";
 
-export type LayerToggleId = "territory" | "places" | "routes" | "relief" | "battles" | "monuments";
+export type LayerToggleId = "territory" | "places" | "routes" | "relief" | "battles" | "sites" | "monuments";
 
 const LAYER_OPTIONS: { id: LayerToggleId; label: string }[] = [
   { id: "territory", label: "Kingdoms" },
@@ -12,6 +13,7 @@ const LAYER_OPTIONS: { id: LayerToggleId; label: string }[] = [
   { id: "routes", label: "Trade and war routes" },
   { id: "relief", label: "Hills and rivers" },
   { id: "battles", label: "Battles" },
+  { id: "sites", label: "Temples, forts and mosques, by year built" },
   { id: "monuments", label: "Monuments protected today" },
 ];
 
@@ -64,6 +66,16 @@ export function MapLegend({
             </li>
           ))}
         </ul>
+        {visible.has("sites") && (
+          <ul className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 border-t border-paper/15 pt-2 text-[0.65rem] text-paper/70" aria-label="Colours of sites">
+            {Object.entries(SITE_COLORS).map(([kind, color]) => (
+              <li key={kind} className="flex items-center gap-1 capitalize">
+                <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: color }} aria-hidden />
+                {kind}
+              </li>
+            ))}
+          </ul>
+        )}
         <div className="mt-3 flex items-start gap-2 border-t border-paper/15 pt-3 text-xs text-paper/70">
           <span
             className="mt-0.5 h-3 w-5 shrink-0 border border-paper/40"
