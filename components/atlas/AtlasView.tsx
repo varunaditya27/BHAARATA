@@ -7,6 +7,7 @@ import { MapLegend, type LayerToggleId } from "@/components/map/MapLegend";
 import { AtlasSidebar } from "@/components/atlas/AtlasSidebar";
 import { KingdomChips } from "@/components/atlas/KingdomChips";
 import { EraTitleCard } from "@/components/atlas/EraTitleCard";
+import { LifespanStrip } from "@/components/chronology/LifespanStrip";
 import { TimelineScrubber, type TimelineChangeSource } from "@/components/chronology/TimelineScrubber";
 import { EntityPreviewPanel } from "@/components/entity/EntityPreviewPanel";
 import { getPolityBySlug, polities } from "@/lib/data/prototype";
@@ -79,9 +80,12 @@ export function AtlasView() {
     [historicalState],
   );
 
+  // Reads the live URL, not the `searchParams` snapshot from this render:
+  // the debounced year commit below fires ~300ms later, and building from
+  // a stale snapshot would silently drop a polity selected in between.
   const pushParams = useCallback(
     (next: { year?: number; polity?: string | null }) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(window.location.search);
       if (next.year !== undefined) params.set("year", String(next.year));
       if (next.polity !== undefined) {
         if (next.polity) params.set("polity", next.polity);
@@ -89,7 +93,7 @@ export function AtlasView() {
       }
       router.replace(`/atlas?${params.toString()}`, { scroll: false });
     },
-    [router, searchParams],
+    [router],
   );
 
   const handleSelectPolity = useCallback(
@@ -171,7 +175,23 @@ export function AtlasView() {
       </div>
 
       <div className="border-t border-paper/10 bg-ink px-4 py-3 md:px-6 md:py-4">
-        <TimelineScrubber year={displayYear} onYearChange={handleYearChange} />
+        <TimelineScrubber
+          year={displayYear}
+          onYearChange={handleYearChange}
+          aboveTrack={
+            <LifespanStrip
+              polities={polities}
+              year={displayYear}
+              min={PROTOTYPE_YEAR_RANGE.min}
+              max={PROTOTYPE_YEAR_RANGE.max}
+              selectedPolityId={selectedPolity?.id ?? null}
+              onJump={(p) => {
+                handleYearChange(Math.max(PROTOTYPE_YEAR_RANGE.min, p.period.startYear), "manual");
+                handleSelectPolity(p.id);
+              }}
+            />
+          }
+        />
       </div>
     </div>
   );

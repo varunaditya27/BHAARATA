@@ -2,6 +2,7 @@
 
 import type { Polity } from "@/lib/domain/types";
 import { cn } from "@/lib/utils/cn";
+import { lightenHex } from "@/lib/utils/color";
 
 /**
  * Phone-width stand-in for AtlasSidebar: the kingdoms present in the
@@ -40,7 +41,7 @@ export function KingdomChips({
               : "border-paper/25 bg-ink/85 text-paper",
           )}
         >
-          <span className="h-2 w-2 rounded-full" style={{ backgroundColor: polity.accentColor }} aria-hidden />
+          <span className="h-2 w-2 rounded-full" style={{ backgroundColor: lightenHex(polity.accentColor, 0.25) }} aria-hidden />
           {polity.name}
         </button>
       ))}

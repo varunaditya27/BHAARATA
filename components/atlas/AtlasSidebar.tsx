@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { formatDateRange } from "@/lib/domain/time";
 import type { Polity } from "@/lib/domain/types";
 import { cn } from "@/lib/utils/cn";
+import { lightenHex } from "@/lib/utils/color";
 
 export type AtlasSidebarProps = {
   allPolities: Polity[];
@@ -64,7 +65,7 @@ export function AtlasSidebar({
                 <span className="flex items-center gap-2">
                   <span
                     className="h-2 w-2 rounded-full"
-                    style={{ backgroundColor: polity.accentColor, opacity: isActive ? 1 : 0.3 }}
+                    style={{ backgroundColor: lightenHex(polity.accentColor, 0.25), opacity: isActive ? 1 : 0.3 }}
                     aria-hidden
                   />
                   {polity.name}

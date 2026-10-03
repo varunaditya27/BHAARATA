@@ -9,6 +9,9 @@ export type TimelineChangeSource = "manual" | "auto";
 export type TimelineScrubberProps = {
   year: number;
   onYearChange: (year: number, source: TimelineChangeSource) => void;
+  /** Rendered directly above the range track, sharing its width and
+   * x-scale — the atlas puts the kingdom lifespan strip here. */
+  aboveTrack?: React.ReactNode;
 };
 
 /** The scrubber's cursor position isn't a historical claim, so it gets its
@@ -29,7 +32,7 @@ const PLAY_INTERVAL_MS = 120;
  * because none is owned by this component (the map handles its own
  * transitions and already resolves prefers-reduced-motion separately).
  */
-export function TimelineScrubber({ year, onYearChange }: TimelineScrubberProps) {
+export function TimelineScrubber({ year, onYearChange, aboveTrack }: TimelineScrubberProps) {
   const { min, max } = PROTOTYPE_YEAR_RANGE;
   const [playing, setPlaying] = useState(false);
   const yearRef = useRef(year);
@@ -76,6 +79,7 @@ export function TimelineScrubber({ year, onYearChange }: TimelineScrubberProps) 
             </span>
           ))}
         </div>
+        {aboveTrack}
         <input
           type="range"
           min={min}
