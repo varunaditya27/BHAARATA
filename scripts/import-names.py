@@ -26,7 +26,7 @@ REGION_LANGS = {
 }
 SULTANATE = ["fa", "ur", "ar"]
 # Wikidata items that stand for the city or region rather than the kingdom, so their labels name the wrong thing.
-SKIP_NATIVE = {"anuradhapura"}
+SKIP_NATIVE = {"anuradhapura", "lohara"}   # the labels name a city, or call a Hindu dynasty a "Sultanate"
 FALLBACK = ["hi", "ta", "kn", "te", "fa", "bn", "si", "ne", "ur"]
 
 def entity(q):

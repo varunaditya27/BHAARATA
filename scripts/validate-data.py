@@ -21,6 +21,7 @@ def bad(kind, msg): problems.append((kind, msg))
 def load(p): return json.load(open(p))
 
 polities = load(f"{G}/imported-polities.json"); people = load(f"{G}/imported-people.json")
+people += [{**r, "q": None, "summary": "(from a list page)", "wikipedia": None} for r in load(f"{G}/imported-ruler-lists.json")]
 places = load(f"{G}/imported-places.json"); battles = load(f"{G}/imported-battles.json")
 imgs = {**load(f"{G}/imported-images.json"), **load(f"{G}/imported-ruler-images.json"), **load(f"{G}/photos.json")}
 sites = load(f"{ROOT}/public/data/sites.geojson")["features"]

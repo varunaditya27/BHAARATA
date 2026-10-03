@@ -176,10 +176,6 @@
    ]
   },
   "lohara": {
-   "native": {
-    "lang": "ks",
-    "text": "لوہارا سلطنت"
-   },
    "aliases": [
     "Khasha Lohara"
    ]
@@ -1269,12 +1265,6 @@
     "Großmogul Jahangir Mogulreich"
    ]
   },
-  "khas-mahal": {
-   "native": {
-    "lang": "ur",
-    "text": "خاص محل"
-   }
-  },
   "gaj-singh-of-marwar": {
    "native": {
     "lang": "ur",
@@ -1295,16 +1285,6 @@
     "Shahjahan",
     "Shahab-ud-din Muhammad Khurram",
     "Shah-Jehan"
-   ]
-  },
-  "jaswant-singh-of-marwar": {
-   "native": {
-    "lang": "ur",
-    "text": "جسونت سنگھ (مارواڑ)"
-   },
-   "aliases": [
-    "Jaswant Singh Rathore",
-    "Raja Jaswant Singh I"
    ]
   },
   "aurangzeb": {
@@ -1427,18 +1407,6 @@
    "native": {
     "lang": "ta",
     "text": "ரணதீரன்"
-   }
-  },
-  "q16312506": {
-   "native": {
-    "lang": "ta",
-    "text": "பராந்தகன்"
-   }
-  },
-  "q16311542": {
-   "native": {
-    "lang": "ta",
-    "text": "வரகுணன்"
    }
   },
   "parantaka-viranarayana": {

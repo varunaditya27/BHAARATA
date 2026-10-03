@@ -16,6 +16,7 @@ import importedBattles from "./generated/imported-battles.json";
 import importedPeople from "./generated/imported-people.json";
 import { images } from "./images";
 import importedNames from "./generated/imported-names.json";
+import importedRulerLists from "./generated/imported-ruler-lists.json";
 
 /** Boundary geometry lives in geo/boundaries.json (keyed by boundary id,
  * `${polityId}-${validFrom}`) — tens of thousands of coordinates don't
@@ -410,6 +411,16 @@ export const sources: Source[] = [
         citation: `English Wikipedia, "${p.wikipedia?.replace(/_/g, " ")}", en.wikipedia.org/wiki/${p.wikipedia} (CC BY-SA 4.0). Opening sentences, trimmed.`,
       }),
     ),
+  // One source per Wikipedia list page that rulers were read from (see scripts/import-ruler-lists.py).
+  ...[...new Set(importedRulerLists.map((r) => r.list))].map(
+    (page): Source => ({
+      id: `wikipedia-list-${page.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+      title: `Wikipedia: ${page}`,
+      sourceType: "digital",
+      citation: `English Wikipedia, "${page}", en.wikipedia.org/wiki/${page.replace(/ /g, "_")} (CC BY-SA 4.0). Names and reign years from its dated tables.`,
+      url: `https://en.wikipedia.org/wiki/${page.replace(/ /g, "_")}`,
+    }),
+  ),
   ...importedBattles
     .filter((b) => b.wikipedia)
     .map(
@@ -635,7 +646,25 @@ const importedPeopleRecords: Person[] = importedPeople
       ...(p.summary ? [{ sourceId: `wikipedia-ruler-${p.q}`, note: "Summary." }] : []),
     ],
   }));
-export const people: Person[] = [...curatedPeople, ...importedPeopleRecords];
+// Rulers of kingdoms Wikidata has no monarch records for, read from Wikipedia's own lists.
+const listedRulerRecords: Person[] = importedRulerLists.map(
+  (r): Person => ({
+    id: r.id,
+    slug: r.id,
+    name: r.name,
+    role: r.role,
+    polityId: r.polityId,
+    datesAre: "reign",
+    period: { startYear: r.start, endYear: r.end, startQualifier: "circa", endQualifier: "circa", confidence: "probable" },
+    provenance: [
+      {
+        sourceId: `wikipedia-list-${r.list.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+        note: r.endFromNext ? "Name and start of reign. The list gives only the year each ruler took the throne, so the reign is shown as ending where the next one begins." : "Name and reign years.",
+      },
+    ],
+  }),
+);
+export const people: Person[] = [...curatedPeople, ...importedPeopleRecords, ...listedRulerRecords];
 
 const curatedPlaces: Place[] = [
   { id: "thanjavur", slug: "thanjavur", name: "Thanjavur", placeType: "capital", coordinates: [79.1378, 10.787], region: "Tamil Nadu", imageKey: "chola-brihadisvara", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
