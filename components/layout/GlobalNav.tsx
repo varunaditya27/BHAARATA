@@ -17,7 +17,7 @@ const secondaryLinks = [{ href: "/method", label: "Method" }];
 export function GlobalNav() {
   return (
     <header
-      className="relative z-40 h-16 border-b border-border bg-paper/90 backdrop-blur-sm"
+      className="sticky top-0 z-40 h-16 border-b border-border bg-paper/90 backdrop-blur-sm"
       style={{ viewTransitionName: "site-header" }}
     >
       <div className="mx-auto flex h-full max-w-[1400px] items-center gap-6 px-4 sm:px-6">

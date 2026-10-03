@@ -422,6 +422,29 @@ body {
   from { fill-opacity: 0; }
 }
 
+/* Wordmark: letters rise out of a clipped line, then the macron draws. */
+.bh-letter-rise {
+  animation: bh-letter-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes bh-letter-rise {
+  from { transform: translateY(105%); }
+  to { transform: translateY(0); }
+}
+.bh-macron-draw {
+  stroke-dasharray: 100;
+  animation: bh-macron-draw 520ms cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+@keyframes bh-macron-draw {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+.bh-fade-in {
+  animation: bh-fade-in 900ms ease-out both;
+}
+@keyframes bh-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
 /* Slow settle on hero photographs — the camera easing in after a cut. */
 .bh-kenburns {
   animation: bh-kenburns 14s cubic-bezier(0.22, 1, 0.36, 1) both;
