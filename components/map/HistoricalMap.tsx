@@ -38,7 +38,7 @@ const DEFAULT_CENTER: [number, number] = [78.5, 13.5];
 const DEFAULT_ZOOM = 4.9;
 
 const TOGGLE_LAYER_MAP: Record<LayerToggleId, string[]> = {
-  territory: [LAYER_IDS.territoryFill, LAYER_IDS.territoryOutline],
+  territory: [LAYER_IDS.territoryFill, LAYER_IDS.frontierHatch, LAYER_IDS.territoryOutline],
   places: [LAYER_IDS.placePoints, LAYER_IDS.placeLabels, LAYER_IDS.placeIcons],
   routes: [LAYER_IDS.routeLines, LAYER_IDS.routeLinesDash],
 };

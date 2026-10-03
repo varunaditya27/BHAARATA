@@ -81,6 +81,31 @@ export function registerMapIcons(map: MapLibreMap) {
   }
 }
 
+/** Diagonal ink hatching for the frontier band. Drawn tileable: the line
+ * runs corner to corner plus the two wrapped corner fragments. */
+export function registerHatchPattern(map: MapLibreMap) {
+  const id = "bh-hatch";
+  if (map.hasImage(id)) return;
+  const size = 10;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  ctx.strokeStyle = "rgba(36, 31, 23, 0.55)";
+  ctx.lineWidth = 1.1;
+  ctx.beginPath();
+  ctx.moveTo(0, size);
+  ctx.lineTo(size, 0);
+  ctx.moveTo(-size / 2, size / 2);
+  ctx.lineTo(size / 2, -size / 2);
+  ctx.moveTo(size / 2, size * 1.5);
+  ctx.lineTo(size * 1.5, size / 2);
+  ctx.stroke();
+  const data = ctx.getImageData(0, 0, size, size);
+  map.addImage(id, { width: size, height: size, data: data.data }, { pixelRatio: 1 });
+}
+
 export const PLACE_ICON_EXPRESSION = [
   "match",
   ["get", "placeType"],

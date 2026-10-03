@@ -1,6 +1,7 @@
 import { polities } from "@/lib/data/prototype";
 import type { HistoricalBoundary, HistoricalRoute, Place } from "@/lib/domain/types";
 import { darkenHex } from "@/lib/utils/color";
+import frontierGeometries from "@/lib/data/geo/frontiers.json";
 
 const accentByPolityId = new Map(polities.map((p) => [p.id, p.accentColor]));
 
@@ -50,6 +51,27 @@ export function boundariesToFeatureCollection(
       },
       geometry: b.geometry,
     })),
+  };
+}
+
+/**
+ * The inner band along each boundary's edge (precomputed: the polygon
+ * minus an inward buffer sized so the band is ~28% of the territory).
+ * Drawn hatched — the atlas convention for "approximate frontier" — so
+ * the uncertainty of where a kingdom ended is visible, not just
+ * footnoted (PROJECT_BIBLE.md §8).
+ */
+export function frontiersToFeatureCollection(boundaries: HistoricalBoundary[]): GeoJSON.FeatureCollection {
+  const geoms = frontierGeometries as Record<string, GeoJSON.Polygon | GeoJSON.MultiPolygon>;
+  return {
+    type: "FeatureCollection",
+    features: boundaries
+      .filter((b) => geoms[boundaryId(b)])
+      .map((b) => ({
+        type: "Feature",
+        properties: { boundaryId: boundaryId(b), polityId: b.polityId },
+        geometry: geoms[boundaryId(b)],
+      })),
   };
 }
 

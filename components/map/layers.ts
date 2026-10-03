@@ -2,10 +2,11 @@ import type { Map as MapLibreMap } from "maplibre-gl";
 import { boundaries, places, routes } from "@/lib/data/prototype";
 import {
   boundariesToFeatureCollection,
+  frontiersToFeatureCollection,
   placesToFeatureCollection,
   routesToFeatureCollection,
 } from "@/lib/geo/to-geojson";
-import { PLACE_ICON_EXPRESSION, registerMapIcons } from "./mapIcons";
+import { PLACE_ICON_EXPRESSION, registerHatchPattern, registerMapIcons } from "./mapIcons";
 import { LAYER_IDS, SOURCE_IDS } from "./mapStyle";
 
 /** Classic "marching ants" dash-phase sequence (Mapbox/MapLibre pattern):
@@ -27,10 +28,16 @@ export const DASH_SEQUENCE: number[][] = [
  */
 export function addHistoricalLayers(map: MapLibreMap, options: { interactive?: boolean } = {}) {
   registerMapIcons(map);
+  registerHatchPattern(map);
 
   map.addSource(SOURCE_IDS.territory, {
     type: "geojson",
     data: boundariesToFeatureCollection(boundaries),
+    promoteId: "boundaryId",
+  });
+  map.addSource(SOURCE_IDS.frontier, {
+    type: "geojson",
+    data: frontiersToFeatureCollection(boundaries),
     promoteId: "boundaryId",
   });
   map.addSource(SOURCE_IDS.places, {
@@ -51,6 +58,16 @@ export function addHistoricalLayers(map: MapLibreMap, options: { interactive?: b
     paint: {
       "fill-color": ["get", "accentColor"],
       "fill-opacity": ["coalesce", ["feature-state", "opacity"], 0],
+      "fill-opacity-transition": { duration: 500, delay: 0 },
+    },
+  });
+  map.addLayer({
+    id: LAYER_IDS.frontierHatch,
+    type: "fill",
+    source: SOURCE_IDS.frontier,
+    paint: {
+      "fill-pattern": "bh-hatch",
+      "fill-opacity": ["coalesce", ["feature-state", "hatchOpacity"], 0],
       "fill-opacity-transition": { duration: 500, delay: 0 },
     },
   });

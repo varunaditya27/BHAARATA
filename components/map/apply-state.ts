@@ -30,6 +30,7 @@ export function applyHistoricalState(map: MapLibreMap, year: number, selectedPol
         selected,
       },
     );
+    map.setFeatureState({ source: SOURCE_IDS.frontier, id }, { hatchOpacity: active ? (selected ? 0.75 : 0.5) : 0 });
   }
 
   const capitalIds = places

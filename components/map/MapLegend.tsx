@@ -60,6 +60,17 @@ export function MapLegend({
             </li>
           ))}
         </ul>
+        <div className="mt-3 flex items-start gap-2 border-t border-paper/15 pt-3 text-xs text-paper/70">
+          <span
+            className="mt-0.5 h-3 w-5 shrink-0 border border-paper/40"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(135deg, rgba(243,237,224,0.55) 0 1px, transparent 1px 5px)",
+            }}
+            aria-hidden
+          />
+          <span>Hatched edge: the frontier&rsquo;s exact line isn&rsquo;t known</span>
+        </div>
       </div>
     </div>
   );
