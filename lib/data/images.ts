@@ -9,6 +9,7 @@
  */
 import importedImages from "./generated/imported-images.json";
 import importedRulerImages from "./generated/imported-ruler-images.json";
+import kingdomPhotos from "./generated/photos.json";
 
 export type ImageCredit = {
   file: string;
@@ -158,6 +159,6 @@ const handPickedImages = {
 } satisfies Record<string, ImageCredit>;
 
 /** Photographs picked up by scripts/import-cliopatria.py (free licences only). */
-export const images = { ...handPickedImages, ...(importedImages as Record<string, ImageCredit>), ...(importedRulerImages as Record<string, ImageCredit>) } as typeof handPickedImages & Record<string, ImageCredit>;
+export const images = { ...handPickedImages, ...(importedImages as Record<string, ImageCredit>), ...(importedRulerImages as Record<string, ImageCredit>), ...(kingdomPhotos as Record<string, ImageCredit>) } as typeof handPickedImages & Record<string, ImageCredit>;
 
 export type ImageKey = keyof typeof images;

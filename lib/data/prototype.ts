@@ -14,6 +14,7 @@ import importedPolities from "./generated/imported-polities.json";
 import importedPlaces from "./generated/imported-places.json";
 import importedBattles from "./generated/imported-battles.json";
 import importedPeople from "./generated/imported-people.json";
+import { images } from "./images";
 import importedNames from "./generated/imported-names.json";
 
 /** Boundary geometry lives in geo/boundaries.json (keyed by boundary id,
@@ -457,7 +458,8 @@ export const polities: Polity[] = [
         summary: p.summary,
         period: { startYear: p.from, endYear: p.to, startQualifier: "circa", endQualifier: "circa", confidence: "probable" },
         accentColor: p.accentColor,
-        heroImageKey: p.imageKey ?? undefined,
+        // Kingdoms the first photo pass missed got a hand-picked one later (scripts/import-photos.py), keyed "kp-<id>".
+        heroImageKey: p.imageKey ?? (`kp-${p.id}` in images ? `kp-${p.id}` : undefined),
         rulerIds: [],
         provenance: [
           { sourceId: CLIOPATRIA_SOURCE.id, note: "Borders and dates." },
