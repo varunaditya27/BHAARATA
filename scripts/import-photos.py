@@ -58,8 +58,9 @@ QUERIES = {
 }
 
 # kingdom id -> the exact Commons file chosen by eye from the candidate sheets.
-# Left out on purpose, because no candidate showed the kingdom's own site: maitraka (Ghumli's temple is a later dynasty's),
-# lohara and dambadeniya. Gahadavala and Sena use real artefacts (an inscription, pottery) instead of a building.
+# Where no good photograph of a kingdom's own buildings exists on Commons, a real artefact of the kingdom stands in:
+# Gahadavala (an inscription), Sena (pottery), Lohara (a coin of Jagadeva), Dambadeniya (a massa coin). Maitraka uses
+# the Maitraka-era temples at Balej. Ghumli's Navlakha temple was rejected: it belongs to a later dynasty.
 PICKS = {
     'anuradhapura': 'File:Ruwanweli Saya 1.jpg',
     'chalukya-badami': 'File:A-temple-at-pattadakal-badami.jpg',
@@ -89,6 +90,9 @@ PICKS = {
     'sur': 'File:Sher Shah Suri Tomb.jpg',
     'mysore': 'File:Outer Wall SW Ranganatha Swamy Temple Srirangapatna Jan24 A7C 08954.jpg',
     'gorkha': 'File:Gorkha Palace durbar.jpg',
+    'maitraka': 'File:6th to 7th-century Maitraka Group of Temples, Balej 240.jpg',
+    'lohara': 'File:Coin of Jagadeva of the Vuppadevas (Lohara dynasty, Kashmir). 1199-1213 CE. AV Stater (18mm, 10.38 g, 12h). Stylized figure of Toramana standing facing.jpg',
+    'dambadeniya': 'File:Dambadeniya Massa.jpg',
     'gahadavala': 'File:092 Kumaradevis Inscription, 12th.jpg',
     'sena': 'File:Pala and Sena dynasty pottery shards.jpg',
     'kakatiya': 'File:Kakatiya kala thoranam in Warangal fort.jpg',

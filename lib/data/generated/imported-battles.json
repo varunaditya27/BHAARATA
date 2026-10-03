@@ -257,8 +257,8 @@
    20.91
   ],
   "wikidata": "Q22934305",
-  "wikipedia": null,
-  "extract": null,
+  "wikipedia": "Sack_of_Somnath",
+  "extract": "The sack of Somnath, on 6–8 January 1026, was a campaign led by Mahmud of Ghazni against the Chaulukya dynasty of Gujarat, his fifteenth invasion of India. It ended with the destruction of the Somnath Temple.",
   "polityIds": []
  },
  {
@@ -651,7 +651,7 @@
   ],
   "wikidata": "Q4872511",
   "wikipedia": "Battle_of_Tarnab_(1448)",
-  "extract": "The Battle of Tarnab took place in 1448.",
+  "extract": "In spring 1448, east of Herat, the Timurid ruler Ulugh Beg of Samarkand decisively defeated Ala al-Dawla Mirza of Khurasan, during the Second Timurid Succession Crisis.",
   "polityIds": []
  },
  {
@@ -1617,10 +1617,14 @@
   ],
   "wikidata": "Q4872629",
   "wikipedia": null,
-  "extract": null,
+  "extract": "On 3 February 1661, in the Umberkhind pass of the Sahyadri hills near Khopoli, Shivaji's Maratha forces ambushed a Mughal army led by Kartalab Khan. After about two hours the Mughals surrendered their arms and paid a ransom to be allowed to leave.",
   "polityIds": [
    "mughal"
-  ]
+  ],
+  "otherSource": {
+   "title": "Military History Wiki: Battle of Umberkhind",
+   "url": "https://military-history.fandom.com/wiki/Battle_of_Umberkhind"
+  }
  },
  {
   "id": "battle-battle-of-surat-1664",
@@ -1711,8 +1715,12 @@
   ],
   "wikidata": "Q24925403",
   "wikipedia": null,
-  "extract": null,
-  "polityIds": []
+  "extract": "In February 1672, near the fort of Salher in Nashik district, Maratha forces under Prataprao Gujar and Moropant Pingle defeated a larger Mughal force. It is described as the first battle in which the Mughals lost in the open field.",
+  "polityIds": [],
+  "otherSource": {
+   "title": "Military History Wiki: Battle of Salher",
+   "url": "https://military-history.fandom.com/wiki/Battle_of_Salher"
+  }
  },
  {
   "id": "battle-battle-of-kohat-1674",

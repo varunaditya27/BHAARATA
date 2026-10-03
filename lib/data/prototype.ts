@@ -450,6 +450,12 @@ export const sources: Source[] = [
       url: `https://en.wikipedia.org/wiki/${page.replace(/ /g, "_")}`,
     }),
   ),
+  // Battles described from a source other than Wikipedia (see scripts/apply-corrections.py).
+  ...importedBattles.flatMap((b): Source[] =>
+    "otherSource" in b && b.otherSource
+      ? [{ id: `web-battle-${b.wikidata}`, title: b.otherSource.title, sourceType: "digital", citation: `${b.otherSource.title}, ${b.otherSource.url} (CC BY-SA). The description here is written in our own words from this page.`, url: b.otherSource.url }]
+      : [],
+  ),
   ...importedBattles
     .filter((b) => b.wikipedia)
     .map(
@@ -953,6 +959,7 @@ const battleEvents: HistoricalEvent[] = importedBattles.map((b) => {
     provenance: [
       { sourceId: "wikidata", note: "Date and place." },
       ...(b.wikipedia ? [{ sourceId: `wikipedia-battle-${b.wikidata}`, note: "Summary." }] : []),
+      ...("otherSource" in b && b.otherSource ? [{ sourceId: `web-battle-${b.wikidata}`, note: "Summary." }] : []),
       { sourceId: "cliopatria", note: "Which kingdom's borders contained the site." },
     ],
   };

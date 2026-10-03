@@ -52,6 +52,16 @@ STRIP_BATTLE_SUMMARY = [
     "battle-battle-of-badghis-654",
 ]
 
+# Battles that have no Wikipedia article of their own in the importer's data, or whose article it missed, with a short
+# description written in our own words from the named source. Where no usable source was found (Sangamner 1679, whose only
+# source is unreliable; Qandabil, Friday Battle, Kanchi, Ucha, Mandavgad, Balkh 1602, Badghis), the battle keeps only Wikidata's date and place.
+FIX_BATTLES = {
+    "battle-battle-of-somnath-1026": {"wikipedia": "Sack_of_Somnath", "extract": "The sack of Somnath, on 6–8 January 1026, was a campaign led by Mahmud of Ghazni against the Chaulukya dynasty of Gujarat, his fifteenth invasion of India. It ended with the destruction of the Somnath Temple."},
+    "battle-battle-of-tarnab-1448": {"wikipedia": "Battle_of_Tarnab_(1448)", "extract": "In spring 1448, east of Herat, the Timurid ruler Ulugh Beg of Samarkand decisively defeated Ala al-Dawla Mirza of Khurasan, during the Second Timurid Succession Crisis."},
+    "battle-battle-of-umberkhind-1661": {"otherSource": {"title": "Military History Wiki: Battle of Umberkhind", "url": "https://military-history.fandom.com/wiki/Battle_of_Umberkhind"}, "extract": "On 3 February 1661, in the Umberkhind pass of the Sahyadri hills near Khopoli, Shivaji's Maratha forces ambushed a Mughal army led by Kartalab Khan. After about two hours the Mughals surrendered their arms and paid a ransom to be allowed to leave."},
+    "battle-battle-of-salher-1672": {"otherSource": {"title": "Military History Wiki: Battle of Salher", "url": "https://military-history.fandom.com/wiki/Battle_of_Salher"}, "extract": "In February 1672, near the fort of Salher in Nashik district, Maratha forces under Prataprao Gujar and Moropant Pingle defeated a larger Mughal force. It is described as the first battle in which the Mughals lost in the open field."},
+}
+
 def rw(name, fn):
     p = os.path.join(G, name); d = json.load(open(p)); d = fn(d)
     json.dump(d, open(p, "w"), indent=1, ensure_ascii=False); open(p, "a").write("\n")
@@ -83,6 +93,9 @@ def battles(d):
         if b["id"] in STRIP_BATTLE_SUMMARY:
             b["extract"] = f"{b['name']}, {b['year']}. Wikidata records its date and place; there is no article that describes this battle on its own."
             b["wikipedia"] = None
+    for b in d:
+        fix = FIX_BATTLES.get(b["id"])
+        if fix: b.update(fix)
     return d
 
 def credits(d):
