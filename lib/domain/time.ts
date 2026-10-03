@@ -36,15 +36,21 @@ function formatYear(year: number): string {
   return year < 0 ? `${Math.abs(year)} BCE` : `${year} CE`;
 }
 
+/** One end of a range. An "unknown" qualifier means the stored year is only
+ * a sorting placeholder, so it is never printed. */
+function formatEnd(qualifier: DateQualifier, year: number): string {
+  return qualifier === "unknown" ? "unknown" : `${qualifierPrefix[qualifier]}${formatYear(year)}`;
+}
+
 /** Renders a DateRange the way the reader should see it — never fake precision. */
 export function formatDateRange(range: DateRange): string {
-  const start = `${qualifierPrefix[range.startQualifier]}${formatYear(range.startYear)}`;
-  if (range.endYear === null) {
-    return range.confidence === "disputed" ? `${start} (disputed)` : start;
-  }
-  const end = `${qualifierPrefix[range.endQualifier]}${formatYear(range.endYear)}`;
-  const joined = `${start} – ${end}`;
-  return range.confidence === "disputed" ? `${joined} (disputed)` : joined;
+  const startUnknown = range.startQualifier === "unknown";
+  const endUnknown = range.endYear === null || range.endQualifier === "unknown";
+  let text: string;
+  if (startUnknown && endUnknown) text = "date unknown";
+  else if (range.endYear === null) text = formatEnd(range.startQualifier, range.startYear);
+  else text = `${formatEnd(range.startQualifier, range.startYear)} – ${formatEnd(range.endQualifier, range.endYear)}`;
+  return range.confidence === "disputed" ? `${text} (disputed)` : text;
 }
 
 /** True when `year` falls inside the range, using endYear=null as "ongoing/unknown end". */
