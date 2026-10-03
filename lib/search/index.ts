@@ -7,6 +7,8 @@ export type SearchEntry = {
   title: string;
   subtitle: string;
   href: string;
+  /** Kingdoms carry their outline into the results list. */
+  emblem?: { polityId: string; color: string };
 };
 
 const TYPE_LABEL: Record<SearchEntryType, string> = {
@@ -36,6 +38,7 @@ export function buildSearchIndex(): SearchEntry[] {
       title: p.name,
       subtitle: `${p.polityType} · ${p.region}`,
       href: `/polities/${p.slug}`,
+      emblem: { polityId: p.id, color: p.accentColor },
     });
   }
   for (const p of people) {

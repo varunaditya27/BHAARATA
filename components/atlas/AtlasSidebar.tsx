@@ -5,6 +5,7 @@ import { formatDateRange } from "@/lib/domain/time";
 import type { Polity } from "@/lib/domain/types";
 import { cn } from "@/lib/utils/cn";
 import { lightenHex } from "@/lib/utils/color";
+import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 
 export type AtlasSidebarProps = {
   allPolities: Polity[];
@@ -62,15 +63,15 @@ export function AtlasSidebar({
                   isActive ? "text-paper" : "text-paper/35",
                 )}
               >
-                <span className="flex items-center gap-2">
-                  <span
-                    className="h-2 w-2 rounded-full"
-                    style={{ backgroundColor: lightenHex(polity.accentColor, 0.25), opacity: isActive ? 1 : 0.3 }}
-                    aria-hidden
+                <span className="flex items-center gap-2.5">
+                  <KingdomEmblem
+                    polityId={polity.id}
+                    color={lightenHex(polity.accentColor, 0.25)}
+                    className={cn("h-5 w-5 transition-opacity", isActive ? "opacity-100" : "opacity-30")}
                   />
                   {polity.name}
                 </span>
-                <span className="pl-4 text-xs text-paper/40">{formatDateRange(polity.period)}</span>
+                <span className="pl-[1.875rem] text-xs text-paper/40">{formatDateRange(polity.period)}</span>
               </button>
             </li>
           );

@@ -11,6 +11,7 @@ import {
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { buildSearchIndex, searchEntryGroupLabel, type SearchEntryType } from "@/lib/search";
 
 const GROUP_ORDER: SearchEntryType[] = ["kingdom", "person", "place", "event", "evidence"];
@@ -91,10 +92,15 @@ export function CommandPalette() {
                     key={item.href}
                     value={`${item.title} ${item.subtitle}`}
                     onSelect={() => go(item.href)}
-                    className="cursor-pointer px-3 py-2 font-sans text-sm text-ink data-[selected=true]:bg-stone/60"
+                    className="flex cursor-pointer items-center gap-3 px-3 py-2 font-sans text-sm text-ink data-[selected=true]:bg-stone/60"
                   >
-                    <span className="block">{item.title}</span>
-                    <span className="block text-xs text-ink-muted">{item.subtitle}</span>
+                    {item.emblem && (
+                      <KingdomEmblem polityId={item.emblem.polityId} color={item.emblem.color} className="h-7 w-7" />
+                    )}
+                    <span className="min-w-0">
+                      <span className="block">{item.title}</span>
+                      <span className="block truncate text-xs text-ink-muted">{item.subtitle}</span>
+                    </span>
                   </CommandItem>
                 ))}
               </CommandGroup>

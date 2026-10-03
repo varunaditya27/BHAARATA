@@ -4,6 +4,7 @@ import { Badge } from "@/components/primitives/Badge";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { Shared } from "@/components/primitives/Shared";
+import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { polities } from "@/lib/data/prototype";
 import { images, type ImageKey } from "@/lib/data/images";
 import { formatDateRange } from "@/lib/domain/time";
@@ -45,9 +46,12 @@ export default function PolitiesIndexPage() {
                 </div>
                 </Shared>
               )}
-              <h2 className="mt-3 font-display text-2xl text-ink group-hover:text-territory-selected">
-                {polity.name}
-              </h2>
+              <div className="mt-3 flex items-center gap-3">
+                <KingdomEmblem polityId={polity.id} color={polity.accentColor} className="h-9 w-9" />
+                <h2 className="font-display text-2xl text-ink group-hover:text-territory-selected">
+                  {polity.name}
+                </h2>
+              </div>
               <p className="mt-1 font-sans text-sm text-ink-muted">
                 {formatDateRange(polity.period)} · {polity.region}
               </p>
