@@ -182,7 +182,7 @@ Automatic imports need a few human judgements. They are written down in the scri
 | `public/data/monuments.geojson` | `import-wikidata` | 4,313 protected monuments (name, id, Wikipedia title) |
 | `public/data/sites.geojson` | `import-sites` | 439 temples, mosques, forts, tombs, palaces and monasteries with a known date of construction (600–1700). 271 carry a linked Commons thumbnail with its credit; the images are not copied into the repository |
 | `lib/data/generated/imported-names.json` | `import-names` | Native-script names (Tamil, Kannada, Persian, Gujarati…) and alternative English names, taken from Wikidata labels and never transliterated by us |
-| `lib/data/generated/imported-ruler-lists.json` | `import-ruler-lists` | 80 rulers of four kingdoms read from Wikipedia's dated list tables; each names its list page. A reign given only as a start year ends where the next begins, and says so |
+| `lib/data/generated/imported-ruler-lists.json` | `import-ruler-lists` | 82 rulers of four kingdoms read from Wikipedia's dated list tables; each names its list page. A reign given only as a start year ends where the next begins, and says so |
 | `lib/data/generated/photos.json` | `import-photos` | Credit for 32 hand-picked kingdom photographs (`public/images/kp-*.jpg`) |
 | `lib/data/generated/imported-people.json` | `import-rulers` | Rulers: dates, whether they are a reign or a lifetime, role, summary |
 | `lib/data/generated/imported-ruler-images.json` | `import-rulers` | Credit for each ruler image |
