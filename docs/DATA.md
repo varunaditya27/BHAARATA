@@ -135,6 +135,7 @@ venv/bin/python $REPO/scripts/import-names.py      # reads the caches written ab
 venv/bin/python $REPO/scripts/import-sites.py
 venv/bin/python $REPO/scripts/import-ruler-lists.py   # one request per 2.5 s: Wikipedia rate-limits faster
 venv/bin/python $REPO/scripts/check-places.py        # one request every 2 s
+venv/bin/python $REPO/scripts/import-place-photos.py # needs check-places first
 venv/bin/python $REPO/scripts/apply-corrections.py   # after the importers: re-applies the documented fixes
 venv/bin/python $REPO/scripts/validate-data.py       # audits every record and link; read what it prints
 
@@ -184,6 +185,7 @@ Automatic imports need a few human judgements. They are written down in the scri
 | `public/data/sites.geojson` | `import-sites` | 344 temples, mosques, churches, forts, tombs and palaces in the subcontinent and Afghanistan with a known date of construction (600–1700; Tibet, Iran and Central Asia are filtered out by Wikidata's country). 252 carry a linked Commons thumbnail with its credit; the images are not copied into the repository |
 | `lib/data/generated/imported-names.json` | `import-names` | Native-script names (Tamil, Kannada, Persian, Gujarati…) and alternative English names, taken from Wikidata labels and never transliterated by us |
 | `lib/data/generated/imported-ruler-lists.json` | `import-ruler-lists` | About 550 rulers of 30 kingdoms, read from Wikipedia's dated lists (tables, bullet lists, or rows entered by hand from the article, all in the script); each names its list page. A reign given only as a start year ends where the next begins, and says so. Where a list gives a reign and Wikidata only a lifetime, the list replaces it |
+| `lib/data/generated/place-photos.json` | `import-place-photos` | Credit for the Wikidata image of 11 places, each checked for a free licence. Two places (Manyakheta, Kannauj) were left without a picture because Wikidata's image was a railway station and a different town's temple |
 | `lib/data/generated/place-wikidata.json` | `check-places` | Wikidata item and coordinates for each of the 22 hand-written places (it found Halebidu typed 25 km off) |
 | `lib/data/generated/photos.json` | `import-photos` | Credit for 35 hand-picked kingdom photographs (`public/images/kp-*.jpg`) |
 | `lib/data/generated/imported-people.json` | `import-rulers` | Rulers: dates, whether they are a reign or a lifetime, role, summary |

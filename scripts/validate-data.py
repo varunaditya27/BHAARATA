@@ -23,7 +23,7 @@ def load(p): return json.load(open(p))
 polities = load(f"{G}/imported-polities.json"); people = load(f"{G}/imported-people.json")
 people += [{**r, "q": None, "summary": "(from a list page)", "wikipedia": None} for r in load(f"{G}/imported-ruler-lists.json")]
 places = load(f"{G}/imported-places.json"); battles = load(f"{G}/imported-battles.json")
-imgs = {**load(f"{G}/imported-images.json"), **load(f"{G}/imported-ruler-images.json"), **load(f"{G}/photos.json")}
+imgs = {**load(f"{G}/imported-images.json"), **load(f"{G}/imported-ruler-images.json"), **load(f"{G}/photos.json"), **load(f"{G}/place-photos.json")}
 sites = load(f"{ROOT}/public/data/sites.geojson")["features"]
 monuments = load(f"{ROOT}/public/data/monuments.geojson")["features"]
 borders = load(f"{ROOT}/lib/data/geo/cliopatria-boundaries.json")
@@ -128,8 +128,9 @@ for k, c in imgs.items():
     if not re.match(r"(CC BY|CC0|Public domain|PD|CC-BY|Attribution)", c.get("license", ""), re.I): bad("image", f"{k}: licence {c.get('license')!r} not on the allow-list")
     if c.get("artist") == "Unknown" and "public domain" not in c.get("license", "").lower(): bad("credit", f"{k}: photographer unknown (licence {c['license']})")
 used = {c["file"] for c in imgs.values()}
+used |= set(re.findall(r'file: "(/images/[^"]+)"', open(os.path.join(ROOT, "lib/data/images.ts")).read()))   # the hand-picked credits live in images.ts
 for fn in os.listdir(os.path.join(ROOT, "public/images")):
-    if fn.startswith(("imp-", "kp-", "ruler-")) and f"/images/{fn}" not in used: bad("image", f"{fn}: on disk but not credited anywhere")
+    if fn.startswith(("imp-", "kp-", "ruler-", "place-")) and f"/images/{fn}" not in used: bad("image", f"{fn}: on disk but not credited anywhere")
 
 # ---- names
 for kind, d in names.items():

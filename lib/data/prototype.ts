@@ -697,10 +697,10 @@ const curatedPlaces: Place[] = [
   { id: "hampi", slug: "hampi", name: "Hampi", placeType: "capital", coordinates: [76.4600, 15.3350], region: "Karnataka", imageKey: "vijayanagara-virupaksha", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "kanchipuram", slug: "kanchipuram", name: "Kanchipuram", placeType: "settlement", coordinates: [79.7036, 12.8342], region: "Tamil Nadu", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "nagapattinam", slug: "nagapattinam", name: "Nagapattinam", placeType: "port", coordinates: [79.8428, 10.7657], region: "Tamil Nadu", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
-  { id: "kodungallur", slug: "kodungallur", name: "Kodungallur", placeType: "capital", coordinates: [76.195, 10.2297], region: "Kerala", imageKey: "chera-vadakkunnathan", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
-  { id: "manyakheta", slug: "manyakheta", name: "Manyakheta", placeType: "capital", coordinates: [77.2058, 17.1964], region: "Karnataka", imageKey: "rashtrakuta-kailasa", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
-  { id: "basavakalyan", slug: "basavakalyan", name: "Basavakalyan", placeType: "capital", coordinates: [76.94, 17.8697], region: "Karnataka", imageKey: "chalukya-itagi", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
-  { id: "dorasamudra", slug: "dorasamudra", name: "Dorasamudra (Halebidu)", placeType: "capital", coordinates: [76.2437, 13.2132], region: "Karnataka", imageKey: "hoysala-chennakeshava", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
+  { id: "kodungallur", slug: "kodungallur", name: "Kodungallur", placeType: "capital", coordinates: [76.195, 10.2297], region: "Kerala", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
+  { id: "manyakheta", slug: "manyakheta", name: "Manyakheta", placeType: "capital", coordinates: [77.2058, 17.1964], region: "Karnataka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
+  { id: "basavakalyan", slug: "basavakalyan", name: "Basavakalyan", placeType: "capital", coordinates: [76.94, 17.8697], region: "Karnataka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
+  { id: "dorasamudra", slug: "dorasamudra", name: "Dorasamudra (Halebidu)", placeType: "capital", coordinates: [76.2437, 13.2132], region: "Karnataka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "belur", slug: "belur", name: "Belur", placeType: "capital", coordinates: [75.8648, 13.1629], region: "Karnataka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "ellora", slug: "ellora", name: "Ellora", placeType: "monument", coordinates: [75.1791, 20.0268], region: "Maharashtra", imageKey: "rashtrakuta-kailasa", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "pataliputra", slug: "pataliputra", name: "Pataliputra (Patna)", placeType: "capital", coordinates: [85.1376, 25.5941], region: "Bihar", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
@@ -721,7 +721,8 @@ const curatedPlaces: Place[] = [
 const wikidataPlaces = placeWikidata as unknown as Record<string, { q: string; coordinates: [number, number] }>;
 const checkedPlaces: Place[] = curatedPlaces.map((p) => {
   const wd = wikidataPlaces[p.id];
-  return wd ? { ...p, coordinates: wd.coordinates, provenance: [{ sourceId: WIKIDATA_SOURCE.id, note: `Name and location (Wikidata ${wd.q}).` }] } : p;
+  const photo = `place-${p.id}` in images ? { imageKey: `place-${p.id}` as NonNullable<Place["imageKey"]> } : {};
+  return wd ? { ...p, ...photo, coordinates: wd.coordinates, provenance: [{ sourceId: WIKIDATA_SOURCE.id, note: `Name and location (Wikidata ${wd.q}).` }] } : p;
 });
 
 /** Capitals from Wikidata, except where a hand-written place already covers the same city. */
