@@ -92,7 +92,12 @@ export function addHistoricalLayers(
     source: SOURCE_IDS.territory,
     paint: {
       "fill-color": ["get", "accentColor"],
-      "fill-opacity": ["coalesce", ["feature-state", "opacity"], 0],
+      // Hovering lifts the shade a touch, so the pointer reads as "this one".
+      "fill-opacity": [
+        "+",
+        ["coalesce", ["feature-state", "opacity"], 0],
+        ["case", ["boolean", ["feature-state", "hover"], false], 0.12, 0],
+      ],
       "fill-opacity-transition": { duration: 500, delay: 0 },
     },
   });
@@ -104,6 +109,20 @@ export function addHistoricalLayers(
       "fill-pattern": "bh-hatch",
       "fill-opacity": ["coalesce", ["feature-state", "hatchOpacity"], 0],
       "fill-opacity-transition": { duration: 500, delay: 0 },
+    },
+  });
+  // A soft halo under the outline, shown only on hover.
+  map.addLayer({
+    id: LAYER_IDS.territoryGlow,
+    type: "line",
+    source: SOURCE_IDS.territory,
+    layout: { "line-join": "round" },
+    paint: {
+      "line-color": ["get", "accentColor"],
+      "line-width": 12,
+      "line-blur": 10,
+      "line-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 0.7, 0],
+      "line-opacity-transition": { duration: 250, delay: 0 },
     },
   });
   map.addLayer({

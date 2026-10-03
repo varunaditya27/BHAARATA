@@ -11,10 +11,12 @@ import {
 } from "maplibre-gl";
 import { useCallback, useEffect, useRef } from "react";
 import { prefersReducedMotion, startMapAnimations } from "./animations";
-import { applyHistoricalState, boundaryForPolity, polityAtPoint } from "./apply-state";
+import { applyHistoricalState, boundaryForPolity, polityAtPoint, territoryAtPoint } from "./apply-state";
 import { addHistoricalLayers } from "./layers";
 import type { LayerToggleId } from "./MapLegend";
-import { BASEMAP_STYLE_URL, LAYER_IDS } from "./mapStyle";
+import { BASEMAP_STYLE_URL, LAYER_IDS, SOURCE_IDS } from "./mapStyle";
+import { getPolityBySlug } from "@/lib/data/prototype";
+import { formatDateRange } from "@/lib/domain/time";
 
 // MapLibre resolves its worker via `import.meta.url` inside node_modules,
 // which Turbopack doesn't serve correctly ("Worker failed to load").
@@ -43,7 +45,13 @@ const DEFAULT_CENTER: [number, number] = [78.5, 13.5];
 const DEFAULT_ZOOM = 4.9;
 
 const TOGGLE_LAYER_MAP: Record<LayerToggleId, string[]> = {
-  territory: [LAYER_IDS.territoryFill, LAYER_IDS.frontierHatch, LAYER_IDS.territoryOutline, LAYER_IDS.kingdomLabels],
+  territory: [
+    LAYER_IDS.territoryFill,
+    LAYER_IDS.frontierHatch,
+    LAYER_IDS.territoryGlow,
+    LAYER_IDS.territoryOutline,
+    LAYER_IDS.kingdomLabels,
+  ],
   places: [LAYER_IDS.placePoints, LAYER_IDS.placeLabels, LAYER_IDS.placeIcons],
   routes: [LAYER_IDS.routeLines, LAYER_IDS.routeLinesDash],
   relief: [LAYER_IDS.hillshade],
@@ -102,6 +110,7 @@ export function HistoricalMap({
   initialZoom = DEFAULT_ZOOM,
 }: HistoricalMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const hoverLabelRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const readyRef = useRef(false);
   const queueRef = useRef(new Map<string, (map: MapLibreMap) => void>());
@@ -160,8 +169,35 @@ export function HistoricalMap({
         }
         onSelectRef.current(polityId);
       });
+      // Hover: glow + lifted shade via feature-state, and a name/dates label
+      // moved directly on the DOM — no React render per mouse move.
+      let hovered: string | null = null;
+      const setHover = (featureId: string | null) => {
+        if (featureId === hovered) return;
+        if (hovered) map.setFeatureState({ source: SOURCE_IDS.territory, id: hovered }, { hover: false });
+        if (featureId) map.setFeatureState({ source: SOURCE_IDS.territory, id: featureId }, { hover: true });
+        hovered = featureId;
+      };
       map.on("mousemove", (e: MapMouseEvent) => {
-        map.getCanvas().style.cursor = polityAtPoint(map, e.point) ? "pointer" : "";
+        const hit = territoryAtPoint(map, e.point);
+        map.getCanvas().style.cursor = hit ? "pointer" : "";
+        setHover(hit?.featureId ?? null);
+        const label = hoverLabelRef.current;
+        if (!label) return;
+        const polity = hit ? getPolityBySlug(hit.polityId) : undefined;
+        if (!polity) {
+          label.style.opacity = "0";
+          return;
+        }
+        const [name, dates] = label.children as unknown as HTMLElement[];
+        name.textContent = polity.name;
+        dates.textContent = formatDateRange(polity.period);
+        label.style.opacity = "1";
+        label.style.transform = `translate(${e.point.x + 14}px, ${e.point.y + 14}px)`;
+      });
+      map.getCanvas().addEventListener("mouseleave", () => {
+        setHover(null);
+        if (hoverLabelRef.current) hoverLabelRef.current.style.opacity = "0";
       });
 
       stopAnimations = startMapAnimations(map);
@@ -253,11 +289,21 @@ export function HistoricalMap({
   }, [visibleLayers, whenReady]);
 
   return (
-    <div
-      ref={containerRef}
-      className="h-full w-full"
-      role="application"
-      aria-label="Interactive historical map of the Indian subcontinent"
-    />
+    <div className="relative h-full w-full">
+      <div
+        ref={containerRef}
+        className="h-full w-full"
+        role="application"
+        aria-label="Interactive historical map of the Indian subcontinent"
+      />
+      <div
+        ref={hoverLabelRef}
+        className="pointer-events-none absolute left-0 top-0 z-10 border border-ink/15 bg-paper-raised/95 px-2.5 py-1.5 opacity-0 shadow-md transition-opacity duration-150"
+        aria-hidden
+      >
+        <p className="font-display text-sm leading-tight text-ink" />
+        <p className="font-sans text-[0.7rem] text-ink-muted" />
+      </div>
+    </div>
   );
 }

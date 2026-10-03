@@ -58,11 +58,19 @@ export function boundaryForPolity(polityId: string, year: number) {
  * and the smallest one when several overlap — Hoysala sitting inside the
  * Chalukya extent should win, not lose to it.
  */
-export function polityAtPoint(map: MapLibreMap, point: { x: number; y: number }): string | null {
+/** The visible territory under a point — the smallest, where they overlap. */
+export function territoryAtPoint(
+  map: MapLibreMap,
+  point: { x: number; y: number },
+): { polityId: string; featureId: string } | null {
   const hits = map
     .queryRenderedFeatures([point.x, point.y], { layers: [LAYER_IDS.territoryFill] })
     .filter((f) => map.getFeatureState({ source: SOURCE_IDS.territory, id: f.id as string }).active);
   if (hits.length === 0) return null;
   hits.sort((a, b) => (a.properties.area as number) - (b.properties.area as number));
-  return hits[0].properties.polityId as string;
+  return { polityId: hits[0].properties.polityId as string, featureId: hits[0].id as string };
+}
+
+export function polityAtPoint(map: MapLibreMap, point: { x: number; y: number }): string | null {
+  return territoryAtPoint(map, point)?.polityId ?? null;
 }
