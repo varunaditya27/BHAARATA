@@ -363,6 +363,7 @@ export const places: Place[] = [
   { id: "basavakalyan", slug: "basavakalyan", name: "Basavakalyan", placeType: "capital", coordinates: [76.94, 17.8697], region: "Karnataka", imageKey: "chalukya-itagi", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "dorasamudra", slug: "dorasamudra", name: "Dorasamudra (Halebidu)", placeType: "capital", coordinates: [76.2437, 13.2132], region: "Karnataka", imageKey: "hoysala-chennakeshava", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "belur", slug: "belur", name: "Belur", placeType: "capital", coordinates: [75.8648, 13.1629], region: "Karnataka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
+  { id: "ellora", slug: "ellora", name: "Ellora", placeType: "monument", coordinates: [75.1791, 20.0268], region: "Maharashtra", imageKey: "rashtrakuta-kailasa", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
 ];
 
 /**
@@ -522,7 +523,7 @@ export const events: HistoricalEvent[] = [
     summary:
       "Under Krishna I, the Kailasa Temple at Ellora was carved downward from a single basalt outcrop — traditionally regarded as one of the largest rock-cut structures in the world.",
     polityIds: ["rashtrakuta"],
-    placeIds: [],
+    placeIds: ["ellora"],
     provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder summary." }],
   },
   {

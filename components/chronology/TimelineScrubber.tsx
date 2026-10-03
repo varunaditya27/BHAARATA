@@ -12,6 +12,9 @@ export type TimelineScrubberProps = {
   /** Rendered directly above the range track, sharing its width and
    * x-scale — the atlas puts the kingdom lifespan strip here. */
   aboveTrack?: React.ReactNode;
+  /** Years playback lands on exactly and lingers at (event dates), so an
+   * event isn't skipped over at 2 years a tick. */
+  holdYears?: number[];
 };
 
 /** The scrubber's cursor position isn't a historical claim, so it gets its
@@ -22,6 +25,7 @@ function formatCursorYear(year: number): string {
 
 const PLAY_STEP_YEARS = 2;
 const PLAY_INTERVAL_MS = 120;
+const HOLD_MS = 2400;
 
 /**
  * The only control that changes "when". A native <input type="range">
@@ -32,21 +36,35 @@ const PLAY_INTERVAL_MS = 120;
  * because none is owned by this component (the map handles its own
  * transitions and already resolves prefers-reduced-motion separately).
  */
-export function TimelineScrubber({ year, onYearChange, aboveTrack }: TimelineScrubberProps) {
+export function TimelineScrubber({ year, onYearChange, aboveTrack, holdYears = [] }: TimelineScrubberProps) {
   const { min, max } = PROTOTYPE_YEAR_RANGE;
   const [playing, setPlaying] = useState(false);
   const yearRef = useRef(year);
+  const holdUntilRef = useRef(0);
+  const holdYearsRef = useRef(holdYears);
 
   useEffect(() => {
     yearRef.current = year;
   }, [year]);
 
   useEffect(() => {
+    holdYearsRef.current = holdYears;
+  }, [holdYears]);
+
+  useEffect(() => {
     if (!playing) return;
     const id = setInterval(() => {
-      const next = yearRef.current + PLAY_STEP_YEARS;
+      if (performance.now() < holdUntilRef.current) return;
+      const current = yearRef.current;
+      const next = current + PLAY_STEP_YEARS;
       if (next > max) {
         setPlaying(false);
+        return;
+      }
+      const hold = holdYearsRef.current.find((y) => y > current && y <= next);
+      if (hold !== undefined) {
+        holdUntilRef.current = performance.now() + HOLD_MS;
+        onYearChange(hold, "auto");
         return;
       }
       onYearChange(next, "auto");

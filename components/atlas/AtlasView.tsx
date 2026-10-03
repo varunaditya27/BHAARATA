@@ -7,15 +7,20 @@ import { MapLegend, type LayerToggleId } from "@/components/map/MapLegend";
 import { AtlasSidebar } from "@/components/atlas/AtlasSidebar";
 import { KingdomChips } from "@/components/atlas/KingdomChips";
 import { EraTitleCard } from "@/components/atlas/EraTitleCard";
+import { EventCaption } from "@/components/atlas/EventCaption";
+import { EventTicks } from "@/components/chronology/EventTicks";
 import { LifespanStrip } from "@/components/chronology/LifespanStrip";
 import { TimelineScrubber, type TimelineChangeSource } from "@/components/chronology/TimelineScrubber";
 import { EntityPreviewPanel } from "@/components/entity/EntityPreviewPanel";
-import { getPolityBySlug, polities } from "@/lib/data/prototype";
+import { events, getPlaceById, getPolityBySlug, polities } from "@/lib/data/prototype";
+import type { HistoricalEvent } from "@/lib/domain/types";
 import { getEraForYear, getHistoricalState, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 
 const DEFAULT_VISIBLE_LAYERS: LayerToggleId[] = ["territory", "places", "routes", "relief"];
 const ERA_CARD_DURATION_MS = 1700;
 const URL_COMMIT_DEBOUNCE_MS = 300;
+const CAPTION_MS = 5200;
+const EVENT_YEARS = events.map((e) => e.period.startYear);
 const DEFAULT_YEAR = 1050;
 
 /**
@@ -41,6 +46,10 @@ export function AtlasView() {
   const prevEraRef = useRef<string | null>(null);
   const eraCardTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const urlCommitTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [caption, setCaption] = useState<HistoricalEvent | null>(null);
+  const [focus, setFocus] = useState<{ key: string; center: [number, number] } | null>(null);
+  const captionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastYearRef = useRef<number | null>(null);
 
   const urlYear = useMemo(() => {
     const raw = Number(searchParams.get("year"));
@@ -67,6 +76,7 @@ export function AtlasView() {
     return () => {
       if (eraCardTimeoutRef.current) clearTimeout(eraCardTimeoutRef.current);
       if (urlCommitTimeoutRef.current) clearTimeout(urlCommitTimeoutRef.current);
+      if (captionTimeoutRef.current) clearTimeout(captionTimeoutRef.current);
     };
     // Only seed on mount — subsequent era tracking happens in handleYearChange.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -104,6 +114,15 @@ export function AtlasView() {
     [pushParams],
   );
 
+  /** Lower-third + a camera drift toward the event's first place. */
+  const showEvent = useCallback((event: HistoricalEvent) => {
+    if (captionTimeoutRef.current) clearTimeout(captionTimeoutRef.current);
+    setCaption(event);
+    captionTimeoutRef.current = setTimeout(() => setCaption(null), CAPTION_MS);
+    const place = event.placeIds[0] ? getPlaceById(event.placeIds[0]) : undefined;
+    if (place) setFocus({ key: `${event.id}-${Date.now()}`, center: place.coordinates });
+  }, []);
+
   // Era title cards only fire during auto-play, not manual scrubbing —
   // otherwise dragging the slider across a boundary would interrupt the
   // reader with a full-screen flash on every drag, which is the opposite
@@ -117,6 +136,18 @@ export function AtlasView() {
         pushParams({ year: nextYear });
       }, URL_COMMIT_DEBOUNCE_MS);
 
+      // Playback narrates: an event whose start year was just reached gets
+      // its caption. Manual scrubbing clears captions instead of spawning
+      // them — dragging shouldn't throw up a card at every mark.
+      const previous = lastYearRef.current;
+      lastYearRef.current = nextYear;
+      if (source === "auto" && previous !== null) {
+        const reached = events.find((e) => e.period.startYear > previous && e.period.startYear <= nextYear);
+        if (reached) showEvent(reached);
+      } else if (source === "manual") {
+        setCaption(null);
+      }
+
       const era = getEraForYear(nextYear);
       if (source === "auto" && era !== prevEraRef.current) {
         if (eraCardTimeoutRef.current) clearTimeout(eraCardTimeoutRef.current);
@@ -125,7 +156,7 @@ export function AtlasView() {
       }
       prevEraRef.current = era;
     },
-    [pushParams],
+    [pushParams, showEvent],
   );
 
   const toggleLayer = useCallback((id: LayerToggleId) => {
@@ -153,6 +184,7 @@ export function AtlasView() {
             selectedPolityId={selectedPolity?.id ?? null}
             onSelectPolity={handleSelectPolity}
             visibleLayers={visibleLayers}
+            focus={focus}
           />
           <div className="bh-map-grain pointer-events-none absolute inset-0" />
 
@@ -170,6 +202,7 @@ export function AtlasView() {
           </div>
 
           <EntityPreviewPanel polity={selectedPolity} onClose={() => pushParams({ polity: null })} />
+          <EventCaption event={caption} />
           <EraTitleCard era={eraCard?.era ?? null} year={eraCard?.year ?? displayYear} />
         </div>
       </div>
@@ -178,7 +211,9 @@ export function AtlasView() {
         <TimelineScrubber
           year={displayYear}
           onYearChange={handleYearChange}
+          holdYears={EVENT_YEARS}
           aboveTrack={
+            <>
             <LifespanStrip
               polities={polities}
               year={displayYear}
@@ -190,6 +225,17 @@ export function AtlasView() {
                 handleSelectPolity(p.id);
               }}
             />
+            <EventTicks
+              events={events}
+              year={displayYear}
+              min={PROTOTYPE_YEAR_RANGE.min}
+              max={PROTOTYPE_YEAR_RANGE.max}
+              onJump={(e) => {
+                handleYearChange(e.period.startYear, "manual");
+                showEvent(e);
+              }}
+            />
+            </>
           }
         />
       </div>

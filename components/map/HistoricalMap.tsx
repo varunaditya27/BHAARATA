@@ -30,6 +30,9 @@ export type HistoricalMapProps = {
   onSelectPolity: (polityId: string | null) => void;
   visibleLayers: Set<LayerToggleId>;
   onViewportChange?: (center: [number, number], zoom: number) => void;
+  /** A place the camera should drift toward (an event during playback).
+   * `key` changes trigger the move; the same key twice does nothing. */
+  focus?: { key: string; center: [number, number] } | null;
   initialCenter?: [number, number];
   initialZoom?: number;
 };
@@ -91,6 +94,7 @@ export function HistoricalMap({
   onSelectPolity,
   visibleLayers,
   onViewportChange,
+  focus,
   initialCenter = DEFAULT_CENTER,
   initialZoom = DEFAULT_ZOOM,
 }: HistoricalMapProps) {
@@ -205,6 +209,22 @@ export function HistoricalMap({
       if (yearRafRef.current !== undefined) cancelAnimationFrame(yearRafRef.current);
     };
   }, []);
+
+  // A gentle drift toward an event's place — no zoom punch, no pitch
+  // change: it should read as the camera following the story, not a cut.
+  useEffect(() => {
+    if (!focus) return;
+    whenReady("focus", (map) => {
+      map.easeTo({
+        center: focus.center,
+        zoom: Math.max(map.getZoom(), 5.2),
+        duration: prefersReducedMotion() ? 0 : 1800,
+        essential: true,
+      });
+    });
+    // Keyed on focus.key so re-renders with an equal focus don't re-fire.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focus?.key, whenReady]);
 
   // Layer visibility toggles.
   useEffect(() => {
