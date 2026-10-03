@@ -16,9 +16,15 @@ export type HistoricalState = {
  * don't duplicate the "is this polity active this year" logic elsewhere.
  */
 export function getHistoricalState(year: number): HistoricalState {
-  const activePolities = polities.filter((p) => yearInRange(year, p.period));
   const activeBoundaries = boundaries.filter(
     (b) => year >= b.validFrom && year <= b.validTo,
+  );
+  // A kingdom with mapped borders counts as present only in years its borders
+  // cover — the Pandya, for one, have no shape between 922 and 1215.
+  const mapped = new Set(boundaries.map((b) => b.polityId));
+  const withBorders = new Set(activeBoundaries.map((b) => b.polityId));
+  const activePolities = polities.filter(
+    (p) => yearInRange(year, p.period) && (!mapped.has(p.id) || withBorders.has(p.id)),
   );
   const activeEvents = events.filter((e) => yearInRange(year, e.period));
 
@@ -33,14 +39,14 @@ export function getRoutesAtYear(year: number): HistoricalRoute[] {
   return routes.filter((r) => year >= r.validFrom && year <= r.validTo);
 }
 
-export const PROTOTYPE_YEAR_RANGE = { min: 700, max: 1650 } as const;
+export const PROTOTYPE_YEAR_RANGE = { min: 600, max: 1700 } as const;
 
 /** The usual periods of Indian history: early medieval to about 1200, late
  * medieval to the start of the Mughal era in 1526, early modern after. */
 export const PROTOTYPE_ERAS = [
-  { name: "Early medieval", start: 700, end: 1199 },
+  { name: "Early medieval", start: 600, end: 1199 },
   { name: "Late medieval", start: 1200, end: 1525 },
-  { name: "Early modern", start: 1526, end: 1650 },
+  { name: "Early modern", start: 1526, end: 1700 },
 ] as const;
 
 /** Where each era's name sits on the timeline: the middle of its span. */

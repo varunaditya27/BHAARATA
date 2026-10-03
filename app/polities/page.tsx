@@ -25,7 +25,7 @@ export default function PolitiesIndexPage() {
         was and when, who ruled it, and who its neighbours were.
       </p>
       <div className="mt-3">
-        <Badge tone="uncertainty">Placeholder data, not yet checked</Badge>
+        <Badge tone="neutral">Borders: Cliopatria · Summaries: Wikipedia · each page shows what is still unchecked</Badge>
       </div>
 
       <div className="mt-10 grid gap-10 sm:grid-cols-2">
@@ -55,7 +55,7 @@ export default function PolitiesIndexPage() {
               <p className="mt-1 font-sans text-sm text-ink-muted">
                 {formatDateRange(polity.period)} · {polity.region}
               </p>
-              <p className="mt-3 font-sans text-sm leading-relaxed text-ink-muted">
+              <p className="mt-3 line-clamp-4 font-sans text-sm leading-relaxed text-ink-muted">
                 {polity.summary}
               </p>
             </Link>

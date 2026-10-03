@@ -75,7 +75,7 @@ export default async function EvidencePage({ params }: PageProps<"/evidence/[slu
       <Rule className="mt-12" />
 
       <div className="mt-10">
-        <Badge tone="uncertainty">Worked example, not a real reading</Badge>
+        <Badge tone={record.claimIsIllustrative ? "uncertainty" : "neutral"}>{record.claimIsIllustrative ? "Worked example, not a real reading" : "Translation from a published edition"}</Badge>
         <ClaimThread record={record} />
       </div>
 

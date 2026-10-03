@@ -10,135 +10,158 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # BHĀRATA — agent rules
 
-Read `PROJECT_BIBLE.md` before touching product identity, domain model, or
-content tone. Read `IMPLEMENTATION_PLAN.md` and `GUIDANCE.md` for the
-architecture/phase plan this build follows — they supersede PROJECT_BIBLE.md
-on anything stack-related (PROJECT_BIBLE.md is product/content canon;
-IMPLEMENTATION_PLAN.md/GUIDANCE.md are the engineering direction).
+Working rules for AI coding agents on this repository (`CLAUDE.md` mirrors this
+file). People should start with [`README.md`](README.md).
 
-`GUIDANCE.md` was authored for OpenCode's `.opencode/skills/` loader. This
-repo uses Claude Code instead, so its `npx skills add ...` installers were
-skipped — the *rules* those skills would have enforced are folded into this
-file instead. Treat the sections below as those skills' rulings.
+## Read this first
+
+| Before you… | Read |
+|---|---|
+| Touch product identity, tone, the domain model or what counts as "done" | [`PROJECT_BIBLE.md`](PROJECT_BIBLE.md) — the product canon |
+| Change how the app is structured, or the map | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
+| Add, import or relabel data | [`docs/DATA.md`](docs/DATA.md) |
+| Change how anything looks, moves or reads | [`docs/DESIGN.md`](docs/DESIGN.md) |
+| Run, build, deploy or debug | [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) |
+| Pick up work | [`docs/BACKLOG.md`](docs/BACKLOG.md) |
+
+`PROJECT_BIBLE.md` says *what* BHĀRATA is and must stay; the `docs/` folder says
+*how* it is built today. If they disagree about the product, the Bible wins; if
+they disagree about the code, the code and `docs/` win — and fix the doc.
 
 ## What BHĀRATA is
 
-Not a SaaS dashboard, not a Wikipedia clone, not a chatbot with a history
-skin. It is a source-aware, time-aware atlas whose core loop is:
+Not a SaaS dashboard, not a Wikipedia clone, not a chatbot with a history skin.
+It is a source-aware, time-aware atlas whose core loop is:
 
-> place → polity → time → event → evidence → source
+> place → kingdom → time → event → evidence → source
 
-The interface should make relationships in the data visible — not just
-display records. See PROJECT_BIBLE.md §1–4, §20 (non-negotiables) before
-adding any feature.
+The interface should make relationships in the data visible — not just display
+records. See `PROJECT_BIBLE.md` §1–4 and §20 (non-negotiables) before adding any
+feature.
 
-## Current state (read this before assuming anything is wired up)
+## Current state
 
-- Built: the homepage (globe descent + scroll chapters), the Atlas,
-  Chronology (kingdom lanes), Kingdom/People/Places/Evidence pages, the
-  ⌘K search palette, Method (with full credits), a colophon footer and a
-  404 page.
-- Atlas extras: the layers panel, keyboard shortcuts (`?` lists them),
-  cinema view, side-by-side compare, save-as-image, opt-in era sound
-  (synthesised with Web Audio; off by default), hover labels, border
-  echoes, route ships/travellers, capital seals, river flow, era tint.
-- Evidence pages: a pan/zoom viewer with hand-placed line regions,
-  simulated raking light (a shader — always labelled as a simulation),
-  a Tamil/romanised toggle, and a provenance chain marking each step
-  real / partly real / placeholder. Not a real IIIF viewer yet.
-- **All domain data in `lib/data/prototype.ts` is illustrative placeholder
-  data**, not a scholarly corpus. Never present it as fact, and never add
-  more of it just to make a screen look fuller — see Data policy below.
-- Boundaries are unions of modern districts (plus Natural Earth for Sri
-  Lanka, Bangladesh, Pakistan), with a few dated snapshots per kingdom at
-  well-known turning points. `scripts/build-boundaries.py` rebuilds
-  `lib/data/geo/*.json` and reports any two kingdoms claiming the same
-  land at the same time.
-- Photos are real Wikimedia Commons files with their real credits in
-  `lib/data/images.ts`; every image shown must have one.
-- Not yet built: a real source/citation layer, IIIF, PostgreSQL/PostGIS,
-  Wikidata ingestion.
-- `legacy/frontend-v1` branch holds a prior, deliberately parked attempt.
-  Don't pull from it without being asked.
+Read this before assuming anything is wired up. The detail is in `docs/DATA.md`.
+
+- **Built:** the homepage film (globe, starfield, orbital descent, four scroll
+  chapters); the Atlas (time scrubber, layers, hover, echoes, routes with moving
+  ships, capital seals, battles, optional monuments, river flow, era tint,
+  keyboard shortcuts, cinema view, compare two years, save as image, opt-in era
+  sound); the Chronology (kingdom lanes, battles by period); Kingdom, People,
+  Places and Evidence pages; the ⌘K search (with year jump and recent items);
+  share images per kingdom; Method (with credits); a colophon footer; a 404 page.
+- **Data comes from three kinds of source, and every page says which:**
+  - *Cliopatria* (CC BY 4.0): 54 kingdoms, 465 dated border shapes, 600–1700.
+    Borders are one researched version of each territory, not exact frontiers.
+  - *Wikidata / Wikipedia / Wikimedia Commons* (CC0 / CC BY-SA / per-file free
+    licences): capitals, 127 battles, 4,313 protected monuments, 185 rulers,
+    summaries and photographs.
+  - *Hand-written placeholders* in `lib/data/prototype.ts`: the text of the 10
+    "curated" kingdoms, the nine turning points, the routes, and Chera's
+    outline. These must be labelled as placeholders wherever they appear.
+- **Evidence:** one real translation (*South Indian Inscriptions* Vol. II no. 85)
+  and one clearly labelled placeholder example. There is no Tamil transcription:
+  the scan's machine-read Tamil is garbled and must not be used.
+- **Not built:** a database, IIIF, PMTiles, a citation layer down to page
+  numbers, automated tests, CI. See `docs/BACKLOG.md`.
+- `legacy/frontend-v1` holds a prior, deliberately parked attempt. Don't pull
+  from it without being asked.
 
 ## Architecture boundaries
 
 ```
-lib/domain   — Zod schemas + types (Polity, Place, Event, DateRange, …)
-lib/data     — data sources (currently: prototype.ts placeholder data)
-lib/geo      — getHistoricalState(year)/getBoundariesAtYear(year), GeoJSON conversion
-components/primitives — Text/Eyebrow/Rule/Badge/Button only. No app logic.
-components/map        — MapLibre lifecycle. React never re-renders the map
-                         itself; it calls setData/setFeatureState/flyTo.
-components/chronology, components/entity, components/atlas — compose primitives + map
-app/*        — routes. Server components by default; "use client" only
-               where interaction requires it (map, timeline, search, IIIF).
+lib/domain      Zod schemas + types (Polity, Person, Place, Event, Evidence, DateRange…), date formatting
+lib/data        Records. prototype.ts merges hand-written and imported data; status.ts turns provenance into badges
+lib/geo         getHistoricalState(year), GeoJSON conversion, point-in-polygon, route motion
+components/primitives   Small, logic-free pieces (Eyebrow, Rule, Badge, Plate, Odometer…). No app logic
+components/map          The only code that touches MapLibre. React never re-renders the map;
+                        it calls setFeatureState / setFilter / flyTo
+components/atlas, chronology, entity, evidence, home, search, layout   Compose primitives and the map
+app/*           Routes. Server components by default; "use client" only where interaction needs it
+scripts/        Python importers (run by hand, output committed) and the MapLibre worker copy
 ```
 
-Keep domain logic (date formatting, year-range queries) in `lib/`, not in
-components. `getHistoricalState(year)` is the one function the timeline,
-map, and any future entity panel should all call — don't reimplement "is
-this polity active in year Y" elsewhere.
+Dependencies point down: routes → feature components → map/primitives → `lib/geo`
+→ `lib/data` → `lib/domain`. Keep domain logic (date formatting, year-range
+tests) in `lib/`, not in components.
+
+`getHistoricalState(year)` is the one function the timeline, map and preview
+panel all call. Do not reimplement "is this kingdom active in year Y" anywhere.
 
 ## Data policy (non-negotiable)
 
-- Never fabricate historical facts, dates, rulers, sources, or boundaries
-  as if they were real. Prototype/placeholder data must say so visibly
-  (see the `Badge tone="uncertainty"` → "Illustrative prototype data"
-  pattern already used on /atlas, /polities, /chronology, /method).
-- Unknown ≠ empty. Uncertain ≠ false. Missing ≠ zero.
+- **Never fabricate** historical facts, dates, rulers, sources, or borders as if
+  they were real. A record with no source must say so visibly — see
+  `lib/data/status.ts`, which computes each page's badge from its `provenance`.
+- **Unknown ≠ empty. Uncertain ≠ false. Missing ≠ zero.** Show a gap as a gap.
 - Every `DateRange` carries a `confidence` and qualifiers
-  (`circa`/`before`/`after`/`unknown`) — use `formatDateRange()`, never
-  print a bare year when the record doesn't support that precision.
-- When real data eventually replaces the prototype set, each record needs
-  actual provenance (a real source, not `PROTOTYPE_SOURCE`).
+  (`exact`/`circa`/`before`/`after`/`unknown`). Print with `formatDateRange()`;
+  for a person use `formatPersonDates()`. Never print a bare year the record
+  doesn't support.
+- **A lifetime is not a reign.** A `Person` has `datesAre: "reign" | "lifetime"`;
+  pages word them differently.
+- **Battles are linked to the kingdoms whose borders contained the site, not to
+  combatants.** Say "fought within its borders", never "fought by".
+- **Monuments are "protected today"**, not dated.
+- Images must be real, freely licensed, and credited. Never pair a real artifact
+  photo with invented content about that specific artifact; if the photo shows a
+  different object, say so (`imageIsIllustrative`).
+- New data arrives through an importer in `scripts/` with a cited source and a
+  licence check, never by hand-typing facts. Checklist: `docs/DATA.md` §8.
 
 ## Map rules
 
-- MapLibre owns geography (sources/layers/camera). React owns surrounding
-  UI. Never remount `<HistoricalMap>` on year/selection change — only its
-  effects should run (see the comments in `HistoricalMap.tsx`).
-- Historical geometry is data (`lib/data/prototype.ts` →
-  `HistoricalBoundary[]`), never hardcoded JSX/SVG paths.
-- Use `feature-state` for selection/hover, not component re-renders.
-- The current basemap (CARTO Positron + a CSS sepia filter) is a Phase-1
-  placeholder, not the intended final visual identity — see
-  `components/map/mapStyle.ts` for the follow-up note (custom vector style
-  once PostGIS/PMTiles exist).
+- MapLibre owns geography (sources, layers, camera). React owns the UI around it.
+  Never remount `<HistoricalMap>` on year or selection change; only its effects
+  should run.
+- Historical geometry is data (`HistoricalBoundary[]`), never JSX or hand-drawn
+  SVG paths.
+- Use `feature-state` for selection, hover and visibility; use `setFilter` for
+  year-windowed layers. In `applyHistoricalState`, write only what changed.
+- A legend toggle must control a real layer. Don't add checkboxes that don't.
+- Don't rely on `isStyleLoaded()`; use the ready flag and queue in
+  `HistoricalMap.tsx`.
+- The basemap is CARTO Positron, recoloured, with modern borders and country
+  names removed on purpose. Map text uses glyphs generated from the project's
+  own fonts (`public/map-glyphs/`).
 
 ## Motion rules
 
-Use `motion/react` (not `framer-motion`). Animate `opacity`/`transform`
-only. Every animation must justify itself (continuity, hierarchy, state
-change) — no decoration-only motion, no bouncing, no animating everything
-on a page at once. Reduced motion is automatic via Motion; don't fight it.
+Use `motion/react` (not `framer-motion`). Animate `opacity` / `transform` only
+(and map `feature-state` paint transitions). Every animation must justify itself
+— continuity, hierarchy, cause, state change. No decoration-only motion, no
+bouncing, no animating everything at once. Respect `prefers-reduced-motion`; the
+map's ambient animation, the starfield and the homepage swoop all have reduced-
+motion paths. Details: `docs/DESIGN.md` §6.
 
-## UI rules
+## UI and writing rules
 
-Editorial composition, not dashboard composition: typography, whitespace,
-and rules (`<Rule />`) do the work that cards/shadows/gradients would do
-elsewhere. No glassmorphism, no rounded-everything, no fake stats, no
-"AI-powered" badges, no decorative icons. Every visual element must
-communicate information or hierarchy — if you can't say what it
-communicates, don't add it.
+Editorial composition, not dashboard composition: typography, whitespace and
+rules do the work that cards, shadows and gradients do elsewhere. No
+glassmorphism, no rounded-everything, no fake stats, no "AI-powered" badges, no
+decorative icons. If you can't say what an element communicates, don't add it.
+
+**Write in plain language.** No jargon ("polity", "semantic", "epistemic"), no
+filler ("immersive", "seamless"). Say what a thing is, what is uncertain and why,
+and where a claim comes from. Examples and rules: `docs/DESIGN.md` §7.
 
 ## Fonts
 
-Display: Zodiak (self-hosted, `public/fonts/`, Fontshare — 400/700 only).
-Interface: Ranade (self-hosted, `public/fonts/`, Fontshare — 400/500/700).
-Devanagari running text: Anek Devanagari (`next/font/google`).
-Devanagari display/epigraphic framing: Tiro Devanagari Hindi
-(`next/font/google`). All wired through `lib/fonts.ts` — don't add a
-competing font import elsewhere.
+Display: Zodiak (self-hosted, `public/fonts/`, 400/700). Interface: Ranade
+(self-hosted, 400/500/700). Indian-script text: Anek (Devanagari, Tamil, Kannada,
+Telugu); Indian-script display: Tiro (same four). All wired through
+`lib/fonts.ts` — don't add a competing font import elsewhere.
 
 ## Verification loop
 
-Before calling a feature done: `npm run lint`, `npm run build`, then
-actually run `npm run dev` and click through it in a browser — check
-console/hydration errors, keyboard operability (the timeline scrubber is a
-native `<input type="range">` on purpose), and that reduced-motion still
-works. Don't declare something done because the build passed.
+Before calling a feature done: `npm run lint`, `npx tsc --noEmit`,
+`npm run build`, then run it and **use it** in a browser — check the console for
+errors and hydration warnings, keyboard operation (the timeline is a native
+`<input type="range">` on purpose), a phone-width viewport, and reduced motion.
+A passing build is not proof that it works. Checklist: `docs/DEVELOPMENT.md` §3.
 
 ## Git
 
-Never add yourself (or any AI co-author trailer) to commits.
+- **Never add yourself (or any AI co-author trailer) to commits.**
+- Keep commit messages short and plain.
+- Commit generated data together with the script change that produced it.

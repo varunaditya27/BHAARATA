@@ -52,6 +52,8 @@ export const SOURCE_IDS = {
   routes: "bh-routes",
   routeMovers: "bh-route-movers",
   capitalSeals: "bh-capital-seals",
+  battles: "bh-battles",
+  monuments: "bh-monuments",
 } as const;
 
 export const LAYER_IDS = {
@@ -73,4 +75,9 @@ export const LAYER_IDS = {
   routeMovers: "bh-route-movers",
   capitalSeals: "bh-capital-seals",
   riverFlow: "bh-river-flow",
+  battleRings: "bh-battle-rings",
+  battleLabels: "bh-battle-labels",
+  monumentClusters: "bh-monument-clusters",
+  monumentClusterCount: "bh-monument-cluster-count",
+  monumentPoints: "bh-monument-points",
 } as const;

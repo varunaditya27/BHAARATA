@@ -53,6 +53,12 @@ export function formatDateRange(range: DateRange): string {
   return range.confidence === "disputed" ? `${text} (disputed)` : text;
 }
 
+/** A person's dates, worded for what they are: a reign, or only a lifetime. */
+export function formatPersonDates(person: { period: DateRange; datesAre?: "reign" | "lifetime" }): string {
+  const text = formatDateRange(person.period);
+  return person.datesAre === "lifetime" ? `Lived ${text}` : text;
+}
+
 /** True when `year` falls inside the range, using endYear=null as "ongoing/unknown end". */
 export function yearInRange(year: number, range: DateRange): boolean {
   if (year < range.startYear) return false;

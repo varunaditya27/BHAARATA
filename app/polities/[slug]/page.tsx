@@ -22,7 +22,8 @@ import {
   places,
   polities,
 } from "@/lib/data/prototype";
-import { formatDateRange } from "@/lib/domain/time";
+import { polityStatus } from "@/lib/data/status";
+import { formatDateRange, formatPersonDates } from "@/lib/domain/time";
 import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 export function generateStaticParams() {
@@ -43,7 +44,10 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
   const hero = polity.heroImageKey ? images[polity.heroImageKey as ImageKey] : undefined;
   const rulers = getRulersForPolity(polity.id).sort((a, b) => a.period.startYear - b.period.startYear);
   const relatedEvents = events
-    .filter((e) => e.polityIds.includes(polity.id))
+    .filter((e) => e.category !== "battle" && e.polityIds.includes(polity.id))
+    .sort((a, b) => a.period.startYear - b.period.startYear);
+  const relatedBattles = events
+    .filter((e) => e.category === "battle" && e.polityIds.includes(polity.id))
     .sort((a, b) => a.period.startYear - b.period.startYear);
   const relatedPlaces = places.filter((p) => polity.capitals.some((c) => p.name.startsWith(c)));
   const relatedEvidence = evidenceData.filter((e) => e.polityIds.includes(polity.id));
@@ -51,6 +55,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
     .map((p) => getSourceById(p.sourceId))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
   const contemporaries = contemporariesOf(polity);
+  const status = polityStatus(polity);
   const span = (polity.period.endYear ?? polity.period.startYear) - polity.period.startYear;
 
   const overviewTab = (
@@ -82,6 +87,11 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
                 <li key={s.id} className="border-t border-border pt-3 font-sans text-sm text-ink">
                   {s.title}
                   <span className="block text-xs text-ink-muted">{s.citation}</span>
+                  {s.url && (
+                    <a href={s.url} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-xs underline underline-offset-4">
+                      Open the source
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -92,10 +102,12 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
       <aside className="bh-accent-rule h-fit border-t-2 pt-5 font-sans text-sm md:sticky md:top-24">
         <Eyebrow>At a glance</Eyebrow>
         <dl className="mt-4 space-y-4">
-          <div>
-            <dt className="text-xs uppercase tracking-wide text-ink-muted">Capital{polity.capitals.length > 1 ? "s" : ""}</dt>
-            <dd className="mt-0.5 text-ink">{polity.capitals.join(", ")}</dd>
-          </div>
+          {polity.capitals.length > 0 && (
+            <div>
+              <dt className="text-xs uppercase tracking-wide text-ink-muted">Capital{polity.capitals.length > 1 ? "s" : ""}</dt>
+              <dd className="mt-0.5 text-ink">{polity.capitals.join(", ")}</dd>
+            </div>
+          )}
           <div>
             <dt className="text-xs uppercase tracking-wide text-ink-muted">Region</dt>
             <dd className="mt-0.5 text-ink">{polity.region}</dd>
@@ -112,10 +124,13 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
               <dd className="mt-0.5 text-ink">{polity.religion}</dd>
             </div>
           )}
-          <div>
-            <dt className="text-xs uppercase tracking-wide text-ink-muted">Also known as</dt>
-            <dd className="mt-0.5 text-ink">{polity.alternativeNames.join(", ") || "—"}</dd>
-          </div>
+          {polity.alternativeNames.length > 0 && (
+            <div>
+              <dt className="text-xs uppercase tracking-wide text-ink-muted">Also known as</dt>
+              <dd className="mt-0.5 text-ink">{polity.alternativeNames.join(", ")}</dd>
+            </div>
+          )}
+          {rulers.length + relatedEvents.length + relatedEvidence.length > 0 && (
           <div>
             <dt className="text-xs uppercase tracking-wide text-ink-muted">In this atlas</dt>
             <dd className="mt-0.5 text-ink">
@@ -124,6 +139,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
               {relatedEvidence.length === 1 ? "record" : "records"}
             </dd>
           </div>
+          )}
         </dl>
         <Link
           href={`/atlas?polity=${polity.slug}&year=${polity.period.startYear}`}
@@ -141,19 +157,24 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
       <p className="font-sans text-sm text-ink-muted">No rulers recorded yet for this kingdom.</p>
     ) : (
       <div>
-        <Eyebrow>Reigns</Eyebrow>
+        <Eyebrow>{rulers.some((r) => r.datesAre === "lifetime") ? "Reigns (paler bars: only the lifetime is known)" : "Reigns"}</Eyebrow>
         <div className="relative mt-4 h-10 border-b border-border">
           {rulers.map((r) => {
             const start = polity.period.startYear;
             const total = Math.max(1, (polity.period.endYear ?? start) - start);
-            const left = ((r.period.startYear - start) / total) * 100;
-            const width = Math.max(1.2, (((r.period.endYear ?? r.period.startYear) - r.period.startYear) / total) * 100);
+            // Ruler dates (Wikidata) and kingdom dates (Cliopatria) can disagree by a few years: clamp to the track.
+            const left = Math.min(99, Math.max(0, ((r.period.startYear - start) / total) * 100));
+            const right = Math.min(100, ((r.period.endYear ?? r.period.startYear) - start) / total * 100);
+            const width = Math.max(1.2, Math.min(100 - left, right - left));
             return (
-              <div key={r.id} className="absolute bottom-0" style={{ left: `${left}%`, width: `${width}%` }}>
-                <div className="h-2" style={{ backgroundColor: polity.accentColor }} />
-                <span className="absolute bottom-3 left-0 whitespace-nowrap font-sans text-[0.7rem] text-ink-muted">
-                  {r.name}
-                </span>
+              <div key={r.id} className="absolute bottom-0" style={{ left: `${left}%`, width: `${width}%` }} title={`${r.name}, ${formatPersonDates(r)}`}>
+                <div className="h-2" style={{ backgroundColor: polity.accentColor, opacity: r.datesAre === "lifetime" ? 0.4 : 1 }} />
+                {/* Names only when there are few enough not to overlap; otherwise hover for the name. */}
+                {rulers.length <= 8 && (
+                  <span className="absolute bottom-3 left-0 whitespace-nowrap font-sans text-[0.7rem] text-ink-muted">
+                    {r.name}
+                  </span>
+                )}
               </div>
             );
           })}
@@ -172,8 +193,8 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
               <h3 className="mt-3 font-display text-lg text-ink transition-colors group-hover:[color:var(--bh-accent)]">
                 {ruler.name}
               </h3>
-              <p className="font-sans text-xs text-ink-muted">{formatDateRange(ruler.period)}</p>
-              {ruler.summary && <p className="mt-2 font-sans text-sm leading-relaxed text-ink-muted">{ruler.summary}</p>}
+              <p className="font-sans text-xs text-ink-muted">{ruler.role} · {formatPersonDates(ruler)}</p>
+              {ruler.summary && <p className="mt-2 line-clamp-3 font-sans text-sm leading-relaxed text-ink-muted">{ruler.summary}</p>}
             </Link>
           ))}
         </div>
@@ -206,10 +227,34 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
       </div>
     );
 
+  const battlesList =
+    relatedBattles.length > 0 ? (
+      <div className={relatedEvents.length > 0 ? "mt-12" : ""}>
+        <Eyebrow>Battles fought within its borders ({relatedBattles.length})</Eyebrow>
+        <ul className="mt-3 divide-y divide-border border-y border-border">
+          {relatedBattles.map((b) => (
+            <li key={b.id} className="py-3 font-sans">
+              <div className="flex flex-wrap items-baseline gap-x-3">
+                <span className="w-12 shrink-0 text-sm tabular-nums text-ink-muted">{b.period.startYear}</span>
+                <Link href={`/chronology#${b.slug}`} transitionTypes={NAV_FORWARD} className="font-display text-lg text-ink underline-offset-4 hover:underline">
+                  {b.title}
+                </Link>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-2 text-xs text-ink-muted">
+          Listed by where the battle was fought, not who fought it: the borders come from Cliopatria.
+        </p>
+      </div>
+    ) : null;
+
   const eventsTab =
-    relatedEvents.length === 0 ? (
+    relatedEvents.length + relatedBattles.length === 0 ? (
       <p className="font-sans text-sm text-ink-muted">No events recorded yet.</p>
     ) : (
+      <>
+        {relatedEvents.length > 0 && (
       <ol className="bh-accent-rule relative space-y-8 border-l pl-6">
         {relatedEvents.map((event) => (
           <li key={event.id} className="bh-reveal relative">
@@ -227,6 +272,9 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
           </li>
         ))}
       </ol>
+        )}
+        {battlesList}
+      </>
     );
 
   const evidenceTab =
@@ -313,7 +361,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
         <div className="mx-auto max-w-[1100px] px-4 py-10 sm:px-6">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <p className="font-display text-xl text-ink">{formatDateRange(polity.period)}</p>
-            <Badge tone="uncertainty">Placeholder data, not yet checked</Badge>
+            <Badge tone={status.sourced ? "neutral" : "uncertainty"}>{status.label}</Badge>
           </div>
 
           <div className="mt-8">
@@ -321,12 +369,12 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
               defaultValue="overview"
               items={[
                 { value: "overview", label: "Overview", content: overviewTab },
-                { value: "rulers", label: `Rulers (${rulers.length})`, content: rulersTab },
-                { value: "places", label: `Places (${relatedPlaces.length})`, content: placesTab },
-                { value: "events", label: `Events (${relatedEvents.length})`, content: eventsTab },
-                { value: "evidence", label: `Evidence (${relatedEvidence.length})`, content: evidenceTab },
-                { value: "related", label: `Same period (${contemporaries.length})`, content: relatedTab },
-              ]}
+                { value: "rulers", label: `Rulers (${rulers.length})`, content: rulersTab, show: rulers.length > 0 },
+                { value: "places", label: `Places (${relatedPlaces.length})`, content: placesTab, show: relatedPlaces.length > 0 },
+                { value: "events", label: `Events (${relatedEvents.length + relatedBattles.length})`, content: eventsTab, show: relatedEvents.length + relatedBattles.length > 0 },
+                { value: "evidence", label: `Evidence (${relatedEvidence.length})`, content: evidenceTab, show: relatedEvidence.length > 0 },
+                { value: "related", label: `Same period (${contemporaries.length})`, content: relatedTab, show: contemporaries.length > 0 },
+              ].filter((item) => item.show !== false)}
             />
           </div>
         </div>

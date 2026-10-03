@@ -17,7 +17,7 @@ export default function PlacesIndexPage() {
         Capitals, ports and monuments that appear on the map. Each page shows which kingdoms held the place, and when.
       </p>
       <div className="mt-3">
-        <Badge tone="uncertainty">Placeholder data, not yet checked</Badge>
+        <Badge tone="neutral">Capitals: Wikidata · some other places are placeholders</Badge>
       </div>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2">

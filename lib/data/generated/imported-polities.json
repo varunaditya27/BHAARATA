@@ -1,0 +1,904 @@
+[
+ {
+  "id": "anuradhapura",
+  "name": "Anuradhapura Kingdom",
+  "from": 439,
+  "to": 1017,
+  "wikipedia": "Anurādhapura",
+  "wikidata": "Q5724",
+  "title": "Anuradhapura kingdom",
+  "summary": "Appears in the Cliopatria historical-borders dataset from 439 to 1017. The linked Wikipedia article has more.",
+  "capitals": [],
+  "region": "Sri Lanka",
+  "accentColor": "#753582",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "pallava",
+  "name": "Pallava",
+  "from": 555,
+  "to": 805,
+  "wikipedia": "Pallava dynasty",
+  "wikidata": "Q466803",
+  "title": "Pallava dynasty",
+  "summary": "The Pallava dynasty ruled from 275 to 897 in southern India, including a significant portion of the Deccan and Tondaimandalam. The dynasty rose to prominence after the downfall of the Satavahana Empire, whom they had formerly served as feudatories.",
+  "capitals": [
+   "Kanchipuram"
+  ],
+  "region": "Tamil country and Andhra",
+  "accentColor": "#35827e",
+  "imageKey": "imp-pallava",
+  "curated": false
+ },
+ {
+  "id": "chalukya-badami",
+  "name": "Chalukya (Badami)",
+  "from": 555,
+  "to": 756,
+  "wikipedia": "Chalukya dynasty",
+  "wikidata": "Q1395011",
+  "title": "Chalukya dynasty",
+  "summary": "The Chalukya dynasty was a Classical Indian dynasty that ruled large parts of southern and central India between the 6th and the 12th centuries. During this period, they ruled as three related yet individual dynasties. The earliest dynasty, known as the \"Badami Chalukyas\", ruled from Vatapi from the middle of the 6th century.",
+  "capitals": [
+   "Manyakheta",
+   "Basavakalyan"
+  ],
+  "region": "Deccan",
+  "accentColor": "#3c3582",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "maitraka",
+  "name": "Maitraka",
+  "from": 555,
+  "to": 731,
+  "wikipedia": "Maitraka dynasty",
+  "wikidata": "Q6737189",
+  "title": "Maitraka dynasty",
+  "summary": "The Maitraka dynasty ruled the Kingdom of Valabhi in western India from approximately 475 to 776 from their capital at Vallabhi. With the sole exception of Dharapaṭṭa, who is associated with sun-worship, they were followers of Shaivism.",
+  "capitals": [
+   "Vallabhi"
+  ],
+  "region": "Gujarat and Malwa",
+  "accentColor": "#823578",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "kamarupa",
+  "name": "Kamarupa",
+  "from": 555,
+  "to": 1138,
+  "wikipedia": "Kamarupa",
+  "wikidata": "Q1194765",
+  "title": "Kamarupa",
+  "summary": "Kamarupa, an early state during the Classical period on the Indian subcontinent, was the first historical kingdom of Assam. The Kamrupa word first appeared in the Samudragupta Allahabad Edict before that there is no mention of existence of this word.",
+  "capitals": [
+   "Guwahati"
+  ],
+  "region": "Assam and the north-east",
+  "accentColor": "#368235",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "turk-shahis",
+  "name": "Turk Shahis",
+  "from": 561,
+  "to": 874,
+  "wikipedia": "Kabul Shahi",
+  "wikidata": "Q654380",
+  "title": "Kabul Shahi",
+  "summary": "Appears in the Cliopatria historical-borders dataset from 561 to 874. The linked Wikipedia article has more.",
+  "capitals": [
+   "Kabul"
+  ],
+  "region": "Afghanistan and Sindh",
+  "accentColor": "#826835",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "karkota",
+  "name": "Karkota",
+  "from": 592,
+  "to": 859,
+  "wikipedia": "Karkota dynasty",
+  "wikidata": "Q466433",
+  "title": "Karkota dynasty",
+  "summary": "The Karkota dynasty ruled over the Kashmir valley and some northern parts of the Indian subcontinent during 7th and 8th centuries. Their rule saw a period of political expansion, economic prosperity and emergence of Kashmir as a centre of culture and scholarship.",
+  "capitals": [
+   "Srinagar"
+  ],
+  "region": "Kashmir and the Himalaya",
+  "accentColor": "#503582",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "pandya",
+  "name": "Pandya",
+  "from": 592,
+  "to": 1325,
+  "wikipedia": "Pandya Empire",
+  "wikidata": "Q844910",
+  "title": "Pandya dynasty",
+  "summary": "The Pandya dynasty, also referred to as the Pandyas of Madurai, was an ancient Tamil dynasty of South India, and among the four great kingdoms of Tamilakam, the other three being the Pallavas, the Cholas and the Cheras. Existing since at least the 4th to 3rd centuries BCE, the dynasty passed through two periods of imperial dominance, the 6th to 10th centuries CE, and under the 'Later Pandyas'.",
+  "capitals": [
+   "Madurai"
+  ],
+  "region": "Southern India",
+  "accentColor": "#513582",
+  "imageKey": null,
+  "curated": true
+ },
+ {
+  "id": "harsha",
+  "name": "Harsha's Empire",
+  "from": 612,
+  "to": 655,
+  "wikipedia": "Harsha",
+  "wikidata": "Q216895",
+  "title": "Harsha",
+  "summary": "Harshavardhana was the emperor of Kannauj from April 606 until his death in 647. He was the king of Thanesar who had defeated the Alchon Huns, and the younger brother of Rajyavardhana, son of Prabhakaravardhana and last king of Thanesar. He is regarded as one of the greatest kings of the Kingdom of Kannauj, which under him expanded into a vast realm in northern India.",
+  "capitals": [
+   "Kannauj"
+  ],
+  "region": "Northern India",
+  "accentColor": "#356882",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "pratihara",
+  "name": "Gurjara-Pratihara",
+  "from": 732,
+  "to": 1039,
+  "wikipedia": "Gurjara-Pratihara dynasty",
+  "wikidata": "Q5324",
+  "title": "Pratihara dynasty",
+  "summary": "The Pratihara dynasty, also called the Gurjara-Pratiharas, the Pratiharas of Kannauj or the Imperial Pratiharas, was a prominent medieval Indian dynasty which initially ruled the Gurjaradesa until its victory in the Tripartite Struggle in 816 in which Pratiharas secured the throne of Kannauj. Cadet branches of the dynasty ruled other minor states in the subcontinent. Pratihara are known for their sculptures, carved panels and open pavilion style temples.",
+  "capitals": [
+   "Kannauj"
+  ],
+  "region": "Punjab and Rajasthan",
+  "accentColor": "#3b8235",
+  "imageKey": null,
+  "curated": true
+ },
+ {
+  "id": "pala",
+  "name": "Pala",
+  "from": 750,
+  "to": 1168,
+  "wikipedia": "Pala Empire",
+  "wikidata": "Q668412",
+  "title": "Pala Empire",
+  "summary": "The Pāla Empire was an early medieval Indian empire ruled by the Pala dynasty. The empire was founded with the election of Gopāla by the chiefs of Gauda in the late 8th century CE. The Pala stronghold was located in Bengal and Bihar, which included the major cities of Gauḍa, Vikramapura, Pāṭaliputra, Monghyr, Somapura, Ramavati (Varendra), Tāmralipta and Jagaddala.",
+  "capitals": [
+   "Pataliputra"
+  ],
+  "region": "Odisha and the east coast",
+  "accentColor": "#354382",
+  "imageKey": null,
+  "curated": true
+ },
+ {
+  "id": "rashtrakuta",
+  "name": "Rashtrakuta",
+  "from": 755,
+  "to": 989,
+  "wikipedia": "Rashtrakuta dynasty",
+  "wikidata": "Q856691",
+  "title": "Rashtrakuta Empire",
+  "summary": "The Rashtrakuta Empire was an early medieval Indian empire ruling large parts of the Indian subcontinent between the 6th and 10th centuries. At their peak the Rashtrakutas of Manyakheta ruled a vast empire stretching from the Ganges River and Yamuna River doab in the north to Kanyakumari in the south, a fruitful time of political expansion, architectural achievements and famous literary contributions.",
+  "capitals": [
+   "Manyakheta"
+  ],
+  "region": "Deccan",
+  "accentColor": "#5d3582",
+  "imageKey": null,
+  "curated": true
+ },
+ {
+  "id": "chola",
+  "name": "Chola",
+  "from": 850,
+  "to": 1259,
+  "wikipedia": "Chola Empire",
+  "wikidata": "Q6806806",
+  "title": "Chola Empire",
+  "summary": "The Chola Empire, which is often referred to as the Imperial Cholas, was a medieval thalassocratic empire based in southern India that was ruled by the Chola dynasty, and comprised overseas dominions, protectorates and spheres of influence in southeast Asia.",
+  "capitals": [
+   "Gangaikonda Cholapuram"
+  ],
+  "region": "Southern India",
+  "accentColor": "#358257",
+  "imageKey": null,
+  "curated": true
+ },
+ {
+  "id": "habbarid",
+  "name": "Habbarid Emirate of Sind",
+  "from": 860,
+  "to": 1201,
+  "wikipedia": "Habbari dynasty",
+  "wikidata": "Q5636647",
+  "title": "Habbari Emirate",
+  "summary": "The Habbari Dynasty were an Arab dynasty that ruled much of Sindh, as a semi-independent emirate from 854 to 1024. Beginning with the rule of 'Umar bin Abdul Aziz al-Habbari in 854 CE, the region became semi-independent from the Abbasid Caliphate in 861, while continuing to nominally pledge allegiance to the Abbasid Caliph in Baghdad.",
+  "capitals": [],
+  "region": "Afghanistan and Sindh",
+  "accentColor": "#7f8235",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "chandra",
+  "name": "Chandra (Bengal)",
+  "from": 900,
+  "to": 1055,
+  "wikipedia": "Chandra dynasty",
+  "wikidata": "Q5032034",
+  "title": "Chandra dynasty",
+  "summary": "The Chandra dynasty was a Buddhist dynasty, originating from the South-east Bengal region of Indian subcontinent, which ruled the Samatata area of Bengal, as well as parts of Arakan Later it was a neighbour to the Pala Empire to the north. Rulers of Chandra kingdom were adherents of Buddhism. The Kings of Chandra dynasty were identified as the kings of Vangaladesha in the Tirumulai inscription of Chola dynasty.",
+  "capitals": [],
+  "region": "Bengal",
+  "accentColor": "#753582",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "chaulukya",
+  "name": "Chaulukya (Solanki)",
+  "from": 947,
+  "to": 1249,
+  "wikipedia": "Chaulukya dynasty",
+  "wikidata": "Q18211496",
+  "title": "Chaulukya dynasty",
+  "summary": "The Chaulukya dynasty, also Solanki dynasty, was a dynasty that ruled parts of what are now Gujarat and Rajasthan in north-western India, between c. 940 CE and c. 1244 CE. Their capital was located at Anahilavada. At times, their rule extended to the Malwa region in present-day Madhya Pradesh. The family is also known as the \"Solanki dynasty\" in the vernacular literature. They belonged to the Solanki clan of Rajputs.",
+  "capitals": [],
+  "region": "Gujarat and Malwa",
+  "accentColor": "#823550",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "chandela",
+  "name": "Chandela",
+  "from": 960,
+  "to": 1313,
+  "wikipedia": "Chandelas of Jejakabhukti",
+  "wikidata": "Q2039087",
+  "title": "Chandelas of Jejakabhukti",
+  "summary": "The Chandelas of Jejakabhukti was an Indian dynasty in Central India. The Chandelas ruled much of the Bundelkhand region between the 9th and the 13th centuries. They belonged to the Chandel clan of the Rajputs.",
+  "capitals": [
+   "Khajuraho"
+  ],
+  "region": "Gangetic plain",
+  "accentColor": "#827d35",
+  "imageKey": "imp-chandela",
+  "curated": false
+ },
+ {
+  "id": "utpala",
+  "name": "Utpala (Kashmir)",
+  "from": 960,
+  "to": 1002,
+  "wikipedia": "Utpala dynasty",
+  "wikidata": "Q1617123",
+  "title": "Utpala dynasty",
+  "summary": "The Utpala Dynasty was a medieval Kashmiri Hindu dynasty that ruled over Kashmir from the 9th to 10th centuries. Founded by Avantivarman in 855, it replaced the Karkota dynasty. It came into existence in the northern region of the Indian subcontinent.",
+  "capitals": [
+   "Awantipora"
+  ],
+  "region": "Kashmir and the Himalaya",
+  "accentColor": "#823554",
+  "imageKey": "imp-utpala",
+  "curated": false
+ },
+ {
+  "id": "ghaznavid",
+  "name": "Ghaznavid",
+  "from": 962,
+  "to": 1209,
+  "wikipedia": "Ghaznavids",
+  "wikidata": "Q12844800",
+  "title": "Ghaznavid Empire",
+  "summary": "The Ghaznavid Empire was a culturally Persianate, Sunni Muslim state flourishing from 977 to 1186. The empire spread from the Oxus to the Indus Valley at its greatest extent. The dynasty was founded by Sabuktigin upon his succession to the rule of Ghazna after the death of his father-in-law, Alp Tigin, who was an ex-general of the Samanid Empire from Balkh.",
+  "capitals": [],
+  "region": "Afghanistan and northern India",
+  "accentColor": "#823535",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "chalukya-kalyani",
+  "name": "Chalukya (Kalyani)",
+  "from": 980,
+  "to": 1187,
+  "wikipedia": "Western Chalukya Empire",
+  "wikidata": "Q14624218",
+  "title": "Western Chalukya Empire",
+  "summary": "The Western Chalukya Empire ruled most of the western Deccan, South India, between the 10th and 12th centuries. This Kannada dynasty is sometimes called the Kalyani Chalukya after its regal capital at Kalyani, today's Basavakalyan in the modern Bidar district of Karnataka state, and alternatively the Later Chalukya from its theoretical relationship to the 6th-century Chalukya dynasty of Badami.",
+  "capitals": [
+   "Manyakheta"
+  ],
+  "region": "Deccan",
+  "accentColor": "#35825d",
+  "imageKey": null,
+  "curated": true
+ },
+ {
+  "id": "paramara",
+  "name": "Paramara",
+  "from": 980,
+  "to": 1235,
+  "wikipedia": "Paramara dynasty",
+  "wikidata": "Q7135130",
+  "title": "Paramara dynasty",
+  "summary": "The Paramara dynasty was an Indian dynasty that ruled Malwa and surrounding areas in west-central India between 948 and 1305. They belonged to the Paramara clan of the Rajputs.",
+  "capitals": [],
+  "region": "Malwa",
+  "accentColor": "#648235",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "chauhan",
+  "name": "Chauhan",
+  "from": 980,
+  "to": 1201,
+  "wikipedia": "Chauhan Dynasty",
+  "wikidata": "Q1068371",
+  "title": "Chauhan dynasty",
+  "summary": "The Chauhan dynasty are a dynasty associated with various ruling Rajput families in the present-day Indian state of Rajasthan from seventh century onwards.",
+  "capitals": [],
+  "region": "Rajasthan",
+  "accentColor": "#82354c",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "lohara",
+  "name": "Lohara (Kashmir)",
+  "from": 1003,
+  "to": 1259,
+  "wikipedia": "Lohara dynasty",
+  "wikidata": "Q1315339",
+  "title": "Lohara dynasty",
+  "summary": "The Lohar dynasty was a dynasty that ruled over Kashmir and surrounding regions in the northwestern part of the Indian subcontinent between 1003 and approximately 1175. The early history of the dynasty was described in the Rajatarangini, a work written by Kalhana in the mid-12th century, upon which many studies of the first 150 years of the dynasty depend.",
+  "capitals": [],
+  "region": "Kashmir and the Himalaya",
+  "accentColor": "#358250",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "eastern-ganga",
+  "name": "Eastern Ganga",
+  "from": 1056,
+  "to": 1351,
+  "wikipedia": "Eastern Ganga dynasty",
+  "wikidata": "Q250515",
+  "title": "Eastern Ganga dynasty",
+  "summary": "The Eastern Ganga dynasty were a large medieval era dynasty that reigned from Kalinga from as early as the 5th century to the mid 20th century. They are known as \"Eastern Gangas\" to distinguish them from the Western Gangas who ruled over Karnataka.",
+  "capitals": [],
+  "region": "Odisha and the east coast",
+  "accentColor": "#5d3582",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "sena",
+  "name": "Sena",
+  "from": 1072,
+  "to": 1235,
+  "wikipedia": "Sena Dynasty",
+  "wikidata": "Q2428714",
+  "title": "Sena dynasty",
+  "summary": "The Sena dynasty, or the Senas, were a Hindu dynasty that succeeded the Pala Empire and ruled much of the eastern region of the Indian subcontinent from Bengal, during the early medieval period, through the 11th and 13th centuries.",
+  "capitals": [
+   "Nabadwip"
+  ],
+  "region": "Bengal",
+  "accentColor": "#708235",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "polonnaruwa",
+  "name": "Polonnaruwa",
+  "from": 1072,
+  "to": 1259,
+  "wikipedia": "Kingdom of Polonnaruwa",
+  "wikidata": "Q3167772",
+  "title": "Kingdom of Polonnaruwa",
+  "summary": "The Kingdom of Polonnaruwa was the Sinhalese kingdom that expanded across the island of Sri Lanka from 1070 until 1232. The kingdom unified the island and started expanding its overseas influence during the reign of Parakramabahu the Great.",
+  "capitals": [
+   "Polonnaruwa"
+  ],
+  "region": "Sri Lanka",
+  "accentColor": "#573582",
+  "imageKey": "imp-polonnaruwa",
+  "curated": false
+ },
+ {
+  "id": "gahadavala",
+  "name": "Gahadavala",
+  "from": 1085,
+  "to": 1201,
+  "wikipedia": "Gahadavala dynasty",
+  "wikidata": "Q1147823",
+  "title": "Gahadavala dynasty",
+  "summary": "The Gahadavala dynasty, also known as Gahadavalas of Kannauj, was a Rajput dynasty that ruled parts of the present-day Indian states of Uttar Pradesh and Bihar, during 11th and 12th centuries. Their capital was located at Banaras in the Gangetic plains, and for a brief period, they also controlled Kannauj.",
+  "capitals": [],
+  "region": "Gangetic plain",
+  "accentColor": "#358249",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "hoysala",
+  "name": "Hoysala",
+  "from": 1111,
+  "to": 1351,
+  "wikipedia": "Hoysala Kingdom",
+  "wikidata": "Q466581",
+  "title": "Hoysala Kingdom",
+  "summary": "The Hoysala Kingdom was a prominent South Indian dynasty that ruled most of what is now Karnataka, as well as parts of Tamil Nadu and southwestern Telangana, between the 11th and 14th centuries CE. The capital was initially located at Belur and was later moved to Halebidu.",
+  "capitals": [
+   "Halebidu"
+  ],
+  "region": "Karnataka and the Deccan",
+  "accentColor": "#356082",
+  "imageKey": null,
+  "curated": true
+ },
+ {
+  "id": "ghurid",
+  "name": "Ghurid",
+  "from": 1152,
+  "to": 1209,
+  "wikipedia": "Ghurid dynasty",
+  "wikidata": "Q199443",
+  "title": "Ghurid dynasty",
+  "summary": "The Ghurid dynasty was a culturally Persianate dynasty of eastern Iranian Tajik origin, which ruled from the 8th-century in the region of Ghor, and became an Empire from 1175 to 1215. The Ghurids were centered in the hills of the Ghor region in the present-day central Afghanistan, where they initially started out as local chiefs. They gradually converted to Sunni Islam after the conquest of Ghor by the Ghaznavid ruler Mahmud of Ghazni in 1011.",
+  "capitals": [],
+  "region": "Afghanistan and northern India",
+  "accentColor": "#573582",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "kakatiya",
+  "name": "Kakatiya",
+  "from": 1177,
+  "to": 1325,
+  "wikipedia": "Kakatiya dynasty",
+  "wikidata": "Q2086556",
+  "title": "Kakatiya dynasty",
+  "summary": "The Kakatiya dynasty was a Telugu dynasty that ruled most of eastern Deccan region in present-day India between 12th and 14th centuries. Their territory comprised much of the present day Telangana and Andhra Pradesh, parts of eastern Karnataka, northern Tamil Nadu, and southern Odisha. Their capital was Orugallu, now known as Warangal.",
+  "capitals": [
+   "Warangal"
+  ],
+  "region": "Deccan",
+  "accentColor": "#353f82",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "yadava",
+  "name": "Yadava (Devagiri)",
+  "from": 1188,
+  "to": 1325,
+  "wikipedia": "Yadava Dynasty",
+  "wikidata": "Q5790",
+  "title": "Seuna (Yadava) dynasty",
+  "summary": "The Seuna, Sevuna, or Yadavas of Devagiri was a medieval Indian dynasty, which at its peak ruled a realm stretching from the Narmada river in the north to the Tungabhadra river in the south, in the western part of the Deccan region. Its territory included present-day Maharashtra, northern Karnataka and parts of Madhya Pradesh, from its capital at Devagiri.",
+  "capitals": [],
+  "region": "Deccan",
+  "accentColor": "#357b82",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "delhi-sultanate",
+  "name": "Delhi Sultanate",
+  "from": 1210,
+  "to": 1528,
+  "wikipedia": "Delhi Sultanate",
+  "wikidata": "Q229411",
+  "title": "Delhi Sultanate",
+  "summary": "The Delhi Sultanate or the Sultanate of Delhi was a late medieval empire primarily based in Delhi that stretched over large parts of the Indian subcontinent for more than three centuries. The sultanate was established in 1206 in the former Ghurid territories in India. Its history is generally divided into five periods: Mamluk, Khalji, Tughlaq, Sayyid, and Lodi.",
+  "capitals": [
+   "Delhi",
+   "Lahore",
+   "Budaun"
+  ],
+  "region": "Northern India",
+  "accentColor": "#7b8235",
+  "imageKey": null,
+  "curated": true
+ },
+ {
+  "id": "dambadeniya",
+  "name": "Dambadeniya",
+  "from": 1236,
+  "to": 1293,
+  "wikipedia": "Kingdom of Dambadeniya",
+  "wikidata": "Q3136869",
+  "title": "Kingdom of Dambadeniya",
+  "summary": "The Kingdom of Dambadeniya was a medieval Sinhalese kingdom in what is present-day Sri Lanka. The kingdom's rulers reigned from 1220–1345.",
+  "capitals": [
+   "Dambadeniya"
+  ],
+  "region": "Sri Lanka",
+  "accentColor": "#35827d",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "kampili",
+  "name": "Kampili",
+  "from": 1285,
+  "to": 1332,
+  "wikipedia": "Kampili Kingdom",
+  "wikidata": "Q1446192",
+  "title": "Kampili kingdom",
+  "summary": "The Kampili kingdom was a short-lived Hindu kingdom in the 14th century CE in South India. The kingdom existed near Ballari in the Tungabhadra river in the northeastern parts of the present-day Karnataka state, India. It was destroyed after a defeat by the armies of the Tughlaq dynasty and a Jauhar in 1327 CE when it faced a defeat.",
+  "capitals": [
+   "Kammatadurga"
+  ],
+  "region": "Karnataka and the Deccan",
+  "accentColor": "#82357f",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "jaffna",
+  "name": "Jaffna",
+  "from": 1314,
+  "to": 1594,
+  "wikipedia": "Jaffna kingdom",
+  "wikidata": "Q1311219",
+  "title": "Jaffna kingdom",
+  "summary": "The Jaffna Kingdom, also known as Kingdom of Aryachakravarti, was a historical kingdom of what today is northern Sri Lanka. It came into existence around the town of Jaffna on the Jaffna Peninsula and was traditionally thought to have been established after the invasion of Kalinga Magha from Kalinga in India.",
+  "capitals": [
+   "Nallur"
+  ],
+  "region": "Sri Lanka",
+  "accentColor": "#7b3582",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "kashmir-sultanate",
+  "name": "Kashmir Sultanate",
+  "from": 1344,
+  "to": 1587,
+  "wikipedia": "Kashmir Sultanate",
+  "wikidata": "Q123027565",
+  "title": "Kashmir Sultanate",
+  "summary": "The Kashmir Sultanate, historically Latinised as the Sultanate of Cashmere, was a medieval kingdom primarily based in the Kashmir Valley, in the northern part of the Indian subcontinent, between the early 14th and late 16th centuries. It was established by Rinchan Shah, a Ladakhi noble who had converted from Buddhism to Islam.",
+  "capitals": [
+   "Srinagar",
+   "Baramulla",
+   "Nowhatta"
+  ],
+  "region": "Kashmir and the Himalaya",
+  "accentColor": "#823570",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "bengal-sultanate",
+  "name": "Bengal Sultanate",
+  "from": 1344,
+  "to": 1533,
+  "wikipedia": "Bengal Sultanate",
+  "wikidata": "Q4083686",
+  "title": "Bengal Sultanate",
+  "summary": "The Bengal Sultanate was a late medieval sultanate based in the Bengal region in eastern South Asia between the 14th and 16th centuries. It was the dominant power of the Ganges-Brahmaputra Delta, with a network of mint towns spread across the region.",
+  "capitals": [],
+  "region": "Bengal",
+  "accentColor": "#623582",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "samma",
+  "name": "Samma (Sindh)",
+  "from": 1344,
+  "to": 1525,
+  "wikipedia": "Samma dynasty",
+  "wikidata": "Q27260",
+  "title": "Samma dynasty",
+  "summary": "The Samma dynasty was a medieval Sindhi Muslim dynasty based in Sindh. It was established by Unar bin Babinah in 1351 after defeating Hamir and declaring independence from the Delhi Sultanate. The Sammas took the title of jam, the equivalent of sultan. The capital of the sultanate was in the city of Samanagar. The Sammas were conquered in the early 16th century by the Arghun dynasty.",
+  "capitals": [
+   "Thatta"
+  ],
+  "region": "Sindh and Makran",
+  "accentColor": "#768235",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "vijayanagara",
+  "name": "Vijayanagara",
+  "from": 1344,
+  "to": 1571,
+  "wikipedia": "Vijayanagara Empire",
+  "wikidata": "Q167639",
+  "title": "Vijayanagara Empire",
+  "summary": "The Vijayanagara Empire, also known as the Karnāta Empire, was a late medieval Hindu empire that ruled much of Southern India. It was established in 1336 by the brothers Harihara I and Bukka Raya I of the Sangama dynasty.",
+  "capitals": [
+   "Vijayanagara",
+   "Penukonda",
+   "Chandragiri"
+  ],
+  "region": "Karnataka and the Deccan",
+  "accentColor": "#35825f",
+  "imageKey": null,
+  "curated": true
+ },
+ {
+  "id": "bahmani",
+  "name": "Bahmani",
+  "from": 1352,
+  "to": 1491,
+  "wikipedia": "Bahmani Sultanate",
+  "wikidata": "Q374521",
+  "title": "Bahmani Kingdom",
+  "summary": "The Bahmani Kingdom, or the Bahmani Sultanate, was a late medieval Persianate kingdom that ruled the Deccan Plateau in India. The first independent Muslim sultanate of the Deccan, the Bahmani Kingdom came to power in 1347 during the rebellion of Ismail Mukh against Muhammad bin Tughlaq, the Sultan of Delhi. Ismail Mukh then abdicated in favour of Zafar Khan, who established the Bahmani Sultanate.",
+  "capitals": [
+   "Kalaburagi",
+   "Bidar"
+  ],
+  "region": "Deccan",
+  "accentColor": "#82353e",
+  "imageKey": null,
+  "curated": true
+ },
+ {
+  "id": "jaunpur",
+  "name": "Jaunpur Sultanate",
+  "from": 1395,
+  "to": 1481,
+  "wikipedia": "Jaunpur Sultanate",
+  "wikidata": "Q167134",
+  "title": "Jaunpur Sultanate",
+  "summary": "The Jaunpur Sultanate was a late medieval Indian Muslim state which ruled over much of what is now the Indian states of Uttar Pradesh and Bihar and southern Nepal between 1394 and 1494. It was founded in 1394 by Khwajah-i-Jahan Malik Sarwar, a eunuch slave and former wazir of Sultan Nasiruddin Muhammad Shah, amidst the disintegration of the Delhi Sultanate under ruling Tughlaq dynasty.",
+  "capitals": [
+   "Jaunpur"
+  ],
+  "region": "Gangetic plain",
+  "accentColor": "#826335",
+  "imageKey": "imp-jaunpur",
+  "curated": false
+ },
+ {
+  "id": "ahmadnagar",
+  "name": "Ahmadnagar Sultanate",
+  "from": 1492,
+  "to": 1652,
+  "wikipedia": "Ahmadnagar Sultanate",
+  "wikidata": "Q400998",
+  "title": "Ahmadnagar Sultanate",
+  "summary": "The Ahmadnagar Sultanate was a medieval Deccani Muslim kingdom located in the northwestern Deccan, between the sultanates of Gujarat and Bijapur, ruled by the Nizam Shahi dynasty. It was established by Malik Ahmad Nizam Shah I in 1490. He was the son of Malik Hasan Bahri and was originally part of the Kulkarnis of Pathri in Marathwada.",
+  "capitals": [
+   "Ahilyanagar"
+  ],
+  "region": "Deccan",
+  "accentColor": "#823563",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "berar",
+  "name": "Berar Sultanate",
+  "from": 1492,
+  "to": 1578,
+  "wikipedia": "Berar Sultanate",
+  "wikidata": "Q818666",
+  "title": "Berar sultanate",
+  "summary": "The Berar Sultanate was an early modern Indian kingdom in the Deccan, ruled by the Imad Shahi dynasty. It was one of the Deccan sultanates, and was established in 1490 following the disintegration of the Bahmani Sultanate by Fathullah Imad-ul-Mulk. It was annexed by the Ahmadnagar Sultanate in 1574 following an invasion.",
+  "capitals": [
+   "Achalpur"
+  ],
+  "region": "Central India",
+  "accentColor": "#82354e",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "bijapur",
+  "name": "Bijapur Sultanate",
+  "from": 1492,
+  "to": 1686,
+  "wikipedia": "Adil Shahi dynasty",
+  "wikidata": "Q83821",
+  "title": "Sultanate of Bijapur",
+  "summary": "The Sultanate of Bijapur was an early modern kingdom in the western Deccan and South India, ruled by the Muslim Adil Shahi dynasty. Bijapur had been a taraf (province) of the Bahmani Kingdom prior to its independence in 1490 and before the kingdom's political decline in the last quarter of the 15th century. It was one of the Deccan sultanates, the collective name of the kingdom's five successor states.",
+  "capitals": [
+   "Vijaypura District",
+   "Vijayapura"
+  ],
+  "region": "Deccan",
+  "accentColor": "#353b82",
+  "imageKey": "imp-bijapur",
+  "curated": false
+ },
+ {
+  "id": "bidar-sultanate",
+  "name": "Bidar Sultanate",
+  "from": 1492,
+  "to": 1618,
+  "wikipedia": "Bidar Sultanate",
+  "wikidata": "Q669317",
+  "title": "Bidar Sultanate",
+  "summary": "The Sultanate of Bidar was an early modern Indian polity, ruled by the Barid Shahi dynasty that ruled a territory in the central Deccan centred at Bidar. As one of the five Deccan sultanates, the sultanate's initial territory corresponded to that of one of the five provinces of the Bahmani Sultanate, and under the rule of Qasim Barid I in 1492 assumed de facto control of state affairs of the Bahmani Sultanate.",
+  "capitals": [
+   "Bidar"
+  ],
+  "region": "Deccan",
+  "accentColor": "#818235",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "golconda",
+  "name": "Golconda Sultanate",
+  "from": 1519,
+  "to": 1686,
+  "wikipedia": "Qutb Shahi dynasty",
+  "wikidata": "Q1148042",
+  "title": "Sultanate of Golconda",
+  "summary": "The Sultanate of Golconda was an early modern kingdom in southern India, ruled by the Persianate, Shia Islamic Qutb Shahi dynasty of Turkoman origin. After the decline of the Bahmani Sultanate, the Sultanate of Golconda was established in 1518 by Quli Qutb Shah, as one of the five Deccan sultanates.",
+  "capitals": [
+   "Golconda",
+   "Hyderabad"
+  ],
+  "region": "Deccan",
+  "accentColor": "#358240",
+  "imageKey": "imp-golconda",
+  "curated": false
+ },
+ {
+  "id": "madurai-nayaks",
+  "name": "Madurai Nayaks",
+  "from": 1529,
+  "to": 1712,
+  "wikipedia": "Madurai Nayak dynasty",
+  "wikidata": "Q1530838",
+  "title": "Madurai Nayak dynasty",
+  "summary": "The Madurai Nayaks were a Telugu-speaking dynasty of Balija origin that ruled large parts of modern-day Tamil Nadu, India, between the 16th and 18th centuries, with Madurai as their capital. It was founded by Nagama Nayak's son Viswanatha Nayak around 1529 as a viceroyalty under the Vijayanagara Empire.",
+  "capitals": [],
+  "region": "Southern India",
+  "accentColor": "#827935",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "mughal",
+  "name": "Mughal Empire",
+  "from": 1529,
+  "to": 1705,
+  "wikipedia": "Mughal Empire",
+  "wikidata": "Q33296",
+  "title": "Mughal Empire",
+  "summary": "The Mughal Empire was an early modern empire in South Asia. At its peak, the empire stretched from the outer fringes of the Indus River Basin in the west, northern Afghanistan in the northwest, and Kashmir in the north, to the highlands of present-day Assam and Bangladesh in the east, and the uplands of the Deccan Plateau in South India.",
+  "capitals": [
+   "Agra",
+   "Fatehpur Sikri",
+   "Old Delhi"
+  ],
+  "region": "Northern India and the Deccan",
+  "accentColor": "#823535",
+  "imageKey": "imp-mughal",
+  "curated": false
+ },
+ {
+  "id": "thanjavur-nayaks",
+  "name": "Thanjavur Nayaks",
+  "from": 1534,
+  "to": 1676,
+  "wikipedia": "Thanjavur Nayak kingdom",
+  "wikidata": "Q1588434",
+  "title": "Thanjavur Nayak kingdom",
+  "summary": "The Thanjavur Nayak Dynasty, established by Sevappa Nayaka around 1532, was a ruling lineage that governed Thanjavur between 16th and 17th centuries. Hailing from Telugu Balijas ancestry, the Nayaks were initially appointed as provincial governors by the Vijayanagara Emperor in the early 16th century, alongside governorships based at Madurai, and Gingee.",
+  "capitals": [
+   "Thanjavur"
+  ],
+  "region": "Southern India",
+  "accentColor": "#823552",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "sur",
+  "name": "Sur Empire",
+  "from": 1540,
+  "to": 1594,
+  "wikipedia": "Sur Empire",
+  "wikidata": "Q373650",
+  "title": "Sur Empire",
+  "summary": "The Sur Empire was an empire ruled by the Afghan-origin Sur dynasty in northern India for nearly 16 or 18 years, between 1538/1540 and 1556, with Sasaram serving as its capital. It was founded by Sher Shah Suri.",
+  "capitals": [
+   "Delhi"
+  ],
+  "region": "Northern India",
+  "accentColor": "#7e3582",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "mysore",
+  "name": "Kingdom of Mysore",
+  "from": 1572,
+  "to": 1708,
+  "wikipedia": "Kingdom of Mysore",
+  "wikidata": "Q266923",
+  "title": "Kingdom of Mysore",
+  "summary": "The Kingdom of Mysore was a geopolitical realm in southern India founded in around 1399 in the vicinity of the modern-day city of Mysuru. Existing until 1950, the territorial boundaries and the form of government transmuted substantially throughout the kingdom's lifetime. While originally a feudal vassal under the Vijayanagara Empire, it became a princely state in the British Raj from 1799 to 1947, marked in-between by major political changes.",
+  "capitals": [
+   "Mysore",
+   "Srirangapatna",
+   "Bengaluru"
+  ],
+  "region": "Karnataka and the Deccan",
+  "accentColor": "#358243",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "gorkha",
+  "name": "Gorkha Kingdom",
+  "from": 1588,
+  "to": 1717,
+  "wikipedia": "Gorkha Kingdom",
+  "wikidata": "Q3332217",
+  "title": "Gorkha kingdom",
+  "summary": "The Gorkha Kingdom, also known as the Gorkha Confederation or the Gorkha Empire, was one of the 24 Khasa principally state or Chaubisi states, situated at the junction of the Himalayas and the Indian subcontinent. In 1743, the kingdom began a campaign of military expansion, annexing several neighbors and laying the foundations of present-day Nepal.",
+  "capitals": [],
+  "region": "Himalaya and Nepal",
+  "accentColor": "#827535",
+  "imageKey": null,
+  "curated": false
+ },
+ {
+  "id": "maratha",
+  "name": "Maratha Empire",
+  "from": 1677,
+  "to": 1690,
+  "wikipedia": "Maratha Empire",
+  "wikidata": "Q83618",
+  "title": "Maratha Empire",
+  "summary": "The Maratha Empire, also referred to as the Maratha Confederacy, was an early modern polity in the Indian subcontinent. For most of its existence, it comprised the realms of the Peshwa and four major independent Maratha states under the nominal leadership of the former and nominal loyalty to the Chhatrapatis who were successors of Shivaji.",
+  "capitals": [
+   "Raigad Fort"
+  ],
+  "region": "Deccan",
+  "accentColor": "#358264",
+  "imageKey": "imp-maratha",
+  "curated": false
+ },
+ {
+  "id": "thanjavur-marathas",
+  "name": "Thanjavur Marathas",
+  "from": 1677,
+  "to": 1712,
+  "wikipedia": "Thanjavur Maratha Kingdom",
+  "wikidata": "Q3530610",
+  "title": "Thanjavur Maratha kingdom",
+  "summary": "The Thanjavur Maratha kingdom, ruled by the Bhonsle dynasty, was a South Indian Monarchy that governed the Kaveri delta from 1675 to 1855. It was established by Maratha general Ekoji I, with its capital at Thanjavur. The royal court patronized art and literature, with Thanjavur Marathi developing as the dialect of the administrative elite.",
+  "capitals": [
+   "Thanjavur"
+  ],
+  "region": "Southern India",
+  "accentColor": "#35827f",
+  "imageKey": null,
+  "curated": false
+ }
+]

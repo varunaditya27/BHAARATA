@@ -8,9 +8,9 @@ const STRENGTH = 0.35;
 /**
  * Wraps a single primary CTA — not every button, not every card. The
  * element leans a few pixels toward the cursor inside its bounds and
- * springs back on leave. Scoped to exactly the 2-3 highest-intent calls
- * to action per GUIDANCE.md's restraint rules; don't reach for this on
- * ordinary links or list items.
+ * springs back on leave. Keep it to the two or three highest-intent calls
+ * to action; don't reach for it on ordinary links or list items, where it
+ * would just be noise.
  */
 export function Magnetic({ children, className }: { children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);

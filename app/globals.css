@@ -577,6 +577,44 @@ body::before {
   bottom: 13vh;
 }
 
+/* Map popups (battles, monuments): paper card, editorial type. */
+.maplibregl-popup-content {
+  padding: 0.9rem 1rem !important;
+  border-radius: 0 !important;
+  background: var(--bh-paper-raised) !important;
+  border: 1px solid var(--bh-ink) !important;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.25) !important;
+  font-family: var(--font-ranade), system-ui, sans-serif;
+}
+.maplibregl-popup-tip { display: none; }
+.maplibregl-popup-close-button { color: var(--bh-ink-muted); font-size: 1.1rem; padding: 0.1rem 0.45rem; }
+.bh-popup-eyebrow { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--bh-ink-muted); }
+.bh-popup-title { margin-top: 0.2rem; font-family: var(--font-zodiak), serif; font-size: 1.15rem; line-height: 1.2; color: var(--bh-ink); }
+.bh-popup-text { margin-top: 0.4rem; font-size: 0.8rem; line-height: 1.45; color: var(--bh-ink-muted); }
+.bh-popup-link { display: inline-block; margin-top: 0.55rem; font-size: 0.8rem; color: var(--bh-ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Wordmark letters: each rises, then a band of light crosses it. The delays come from a
+ * per-letter variable, so the glint travels along the word a letter at a time. */
+.bh-wordmark-letter {
+  background-image: linear-gradient(105deg, currentColor 0%, currentColor 38%, #fff6e2 50%, currentColor 62%, currentColor 100%);
+  background-size: 280% 100%;
+  background-position: 130% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation:
+    bh-letter-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) both,
+    bh-sheen 1.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: var(--d, 0ms), calc(var(--d, 0ms) + 1900ms);
+}
+@keyframes bh-sheen {
+  from { background-position: 130% 0; }
+  to { background-position: -30% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bh-wordmark-letter { animation: none; background-image: none; -webkit-text-fill-color: currentColor; }
+}
+
 /* Slow settle on hero photographs — the camera easing in after a cut. */
 .bh-kenburns {
   animation: bh-kenburns 14s cubic-bezier(0.22, 1, 0.36, 1) both;

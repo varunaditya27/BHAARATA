@@ -26,18 +26,20 @@ export default function MethodPage() {
 
         <section className="mt-8 space-y-4 font-sans text-lg leading-relaxed text-ink">
           <p className="bh-dropcap">
-            This is an early working version. The kingdoms, rulers, places, dates and outlines you see are{" "}
-            <strong>placeholders</strong>, written by hand so the map and timeline have something to show. They follow
-            the broad shape of the history, but they have not been checked against scholarship, and none of it should
-            be quoted as fact.
+            This is an early working version, and it mixes two kinds of data. The kingdoms, their dates and their
+            borders come from <strong>Cliopatria</strong>, an open research dataset built by historians and
+            data scientists. The short descriptions come from <strong>Wikipedia</strong>. Rulers, events, the evidence
+            page and a few other records are still <strong>placeholders</strong> written by hand, and none of those
+            should be quoted as fact. Each page says which kind it is.
           </p>
           <p>
-            The kingdom outlines in particular are rough. They were built by grouping modern districts into an
-            approximate core territory — real frontiers moved, overlapped, and were often never fixed lines at all.
+            Even the researched borders are one version of the past. Real frontiers moved, overlapped, and were often
+            never fixed lines at all, and historians disagree about many of them. The map shows each kingdom at the
+            moment its record was drawn, and moves to the next record when that one ends.
           </p>
           <p>
-            When real records replace these, every one will name the source it comes from, so you can follow any claim
-            back to the inscription, coin, text or study behind it.
+            The aim is for every record to name the source it comes from, so you can follow any claim back to the
+            inscription, coin, text or study behind it. Where a record can&rsquo;t do that yet, it is labelled.
           </p>
         </section>
 
@@ -69,6 +71,15 @@ export default function MethodPage() {
               the years pass.
             </li>
             <li>
+              <span className="text-ink">Red dot with a name</span> — a battle. It appears in the year it was fought and
+              stays for ten years. Click it for a short description. Wikidata rarely records who fought, so each battle
+              is linked to the kingdoms whose borders contained the site that year, which is not always the combatants.
+            </li>
+            <li>
+              <span className="text-ink">Dark dots (off by default)</span> — monuments the Archaeological Survey of
+              India protects today. The data has no construction dates for them, so they are not tied to a year.
+            </li>
+            <li>
               <span className="text-ink">Modern borders and country names</span> are left off on purpose, so the map
               doesn&rsquo;t suggest today&rsquo;s lines existed then.
             </li>
@@ -98,8 +109,17 @@ export default function MethodPage() {
             <li>Base map © CARTO, map data © OpenStreetMap contributors.</li>
             <li>Terrain from Terrain Tiles (Mapzen, AWS Open Data).</li>
             <li>
-              Kingdom outlines assembled from district boundaries published in the indian-district-boundaries project on
-              GitHub (MIT licence), and Natural Earth&rsquo;s boundaries (public domain) for Sri Lanka, Bangladesh and Pakistan.
+              Kingdom borders and dates: Cliopatria, Seshat Global History Databank (CC BY 4.0). Data simplified for
+              the web.
+            </li>
+            <li>Kingdom summaries: the opening paragraphs of the Wikipedia articles linked on each kingdom page (CC BY-SA 4.0).</li>
+            <li>
+              Capital cities, rulers and their dates, battle dates and sites, and monument locations: Wikidata (CC0).
+              Ruler and battle summaries: the Wikipedia articles named on each page.
+            </li>
+            <li>
+              The Chera outline is a placeholder built from modern Kerala districts (indian-district-boundaries project
+              on GitHub, MIT licence).
             </li>
           </ul>
 

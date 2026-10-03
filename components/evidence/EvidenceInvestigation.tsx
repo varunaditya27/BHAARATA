@@ -35,6 +35,8 @@ export function EvidenceInvestigation({
     onFocus: () => setHoverLine(i),
     onBlur: () => setHoverLine(null),
     "aria-pressed": activeLine === i,
+    // With no hand-placed regions there is nothing to zoom to: the lines are just text.
+    disabled: record.lineRegions.length === 0,
   });
 
   return (
@@ -99,7 +101,7 @@ export function EvidenceInvestigation({
       )}
 
       {(record.transcription.length > 0 || record.translation.length > 0) && (
-        <div className="mt-8 grid gap-8 sm:grid-cols-2">
+        <div className={cn("mt-8 grid gap-8", record.transcription.length > 0 && record.translation.length > 0 && "sm:grid-cols-2")}>
           {record.transcription.length > 0 && (
             <div>
               <div className="flex items-baseline justify-between gap-3">
@@ -135,7 +137,7 @@ export function EvidenceInvestigation({
                         lit(i) ? "bg-territory/15 text-ink" : "text-ink",
                       )}
                     >
-                      <span className="text-ink-muted tabular-nums">{i + 1}</span>
+                      {record.lineRegions.length > 0 && <span className="text-ink-muted tabular-nums">{i + 1}</span>}
                       <span>{line}</span>
                     </button>
                   </li>
@@ -156,7 +158,7 @@ export function EvidenceInvestigation({
                         lit(i) ? "bg-territory/15 text-ink" : "text-ink",
                       )}
                     >
-                      <span className="text-ink-muted tabular-nums">{i + 1}</span>
+                      {record.lineRegions.length > 0 && <span className="text-ink-muted tabular-nums">{i + 1}</span>}
                       <span>{line}</span>
                     </button>
                   </li>

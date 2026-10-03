@@ -452,6 +452,8 @@ docs/
 
 The exact folders may evolve. Separation of concerns should not.
 
+This is the **target**. The structure that exists today is described in `docs/ARCHITECTURE.md`; `server/`, `hooks/`, `tests/` and `queries/` do not exist yet (see `docs/BACKLOG.md`).
+
 ## 17. Quality bar
 
 A feature is not done because it renders.
@@ -475,7 +477,7 @@ It is done when:
 Before UI implementation:
 
 1. Read PROJECT_BIBLE.md.
-2. Read DESIGN.md.
+2. Read `docs/DESIGN.md`.
 3. Inspect current architecture.
 4. Identify affected domain boundaries.
 5. Define interaction and content states.
@@ -483,7 +485,7 @@ Before UI implementation:
 7. Audit visually and interactively.
 8. Remove generic defaults.
 9. Verify accessibility and responsive behaviour.
-10. Document meaningful architectural changes.
+10. Document meaningful architectural changes in `docs/ARCHITECTURE.md`.
 
 Agents contribute code. They do not define product identity.
 

@@ -6,8 +6,8 @@ import type { Polity } from "@/lib/domain/types";
 import { cn } from "@/lib/utils/cn";
 import { lightenHex } from "@/lib/utils/color";
 
-const BAND = 6;
-const GAP = 3;
+const BAND = 4;
+const GAP = 2;
 /** Half the timeline thumb's width, so band x-positions line up with
  * where the native range thumb actually sits for a given year. */
 const THUMB_INSET = 6.5;
@@ -34,15 +34,28 @@ export function LifespanStrip({
   onJump: (polity: Polity) => void;
 }) {
   const [hovered, setHovered] = useState<string | null>(null);
-  const sorted = [...polities].sort((a, b) => a.period.startYear - b.period.startYear);
   const pct = (y: number) => ((Math.min(max, Math.max(min, y)) - min) / (max - min)) * 100;
+  // Pack kingdoms onto as few rows as possible: a kingdom goes on the first
+  // row where the previous one has already ended (with a small gap), so 60+
+  // kingdoms fit in a dozen or so rows instead of 60.
+  const sorted = [...polities].sort((a, b) => a.period.startYear - b.period.startYear);
+  const rowEnds: number[] = [];
+  const rowOf = new Map<string, number>();
+  for (const p of sorted) {
+    const left = pct(p.period.startYear);
+    let row = rowEnds.findIndex((end) => end + 0.4 <= left);
+    if (row === -1) row = rowEnds.push(0) - 1;
+    rowEnds[row] = pct(p.period.endYear ?? max);
+    rowOf.set(p.id, row);
+  }
+  const rows = rowEnds.length;
   const hoveredPolity = sorted.find((p) => p.id === hovered);
-  const hoveredIndex = sorted.findIndex((p) => p.id === hovered);
+  const hoveredRow = hoveredPolity ? rowOf.get(hoveredPolity.id) ?? 0 : 0;
 
   return (
     <div className="relative mb-2" style={{ paddingInline: THUMB_INSET }}>
-      <div className="relative" style={{ height: sorted.length * (BAND + GAP) - GAP }}>
-        {sorted.map((p, i) => {
+      <div className="relative" style={{ height: rows * (BAND + GAP) - GAP }}>
+        {sorted.map((p) => {
           const left = pct(p.period.startYear);
           const right = pct(p.period.endYear ?? max);
           const active = yearInRange(year, p.period);
@@ -63,7 +76,7 @@ export function LifespanStrip({
               style={{
                 left: `${left}%`,
                 width: `${right - left}%`,
-                top: i * (BAND + GAP),
+                top: (rowOf.get(p.id) ?? 0) * (BAND + GAP),
                 height: BAND,
                 backgroundColor: lightenHex(p.accentColor, 0.25),
                 opacity: active || hovered === p.id ? 1 : 0.32,
@@ -83,7 +96,7 @@ export function LifespanStrip({
             className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full whitespace-nowrap border border-paper/20 bg-ink px-2 py-1 font-sans text-[0.7rem] text-paper shadow-lg"
             style={{
               left: `${(pct(hoveredPolity.period.startYear) + pct(hoveredPolity.period.endYear ?? max)) / 2}%`,
-              top: hoveredIndex * (BAND + GAP) - 4,
+              top: hoveredRow * (BAND + GAP) - 4,
             }}
           >
             {hoveredPolity.name} · {formatDateRange(hoveredPolity.period)}

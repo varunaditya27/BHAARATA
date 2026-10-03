@@ -1,5 +1,5 @@
 import { polities } from "@/lib/data/prototype";
-import type { HistoricalBoundary, HistoricalRoute, Place, Polity } from "@/lib/domain/types";
+import type { HistoricalBoundary, HistoricalEvent, HistoricalRoute, Place, Polity } from "@/lib/domain/types";
 import { darkenHex } from "@/lib/utils/color";
 import frontierGeometries from "@/lib/data/geo/frontiers.json";
 import labelPoints from "@/lib/data/geo/labels.json";
@@ -64,6 +64,9 @@ export function boundariesToFeatureCollection(
  * the uncertainty of where a kingdom ended is visible, not just
  * footnoted (PROJECT_BIBLE.md §8).
  */
+/** Ids of the boundaries that have a hatched frontier band. */
+export const hasFrontier: ReadonlySet<string> = new Set(Object.keys(frontierGeometries));
+
 export function frontiersToFeatureCollection(boundaries: HistoricalBoundary[]): GeoJSON.FeatureCollection {
   const geoms = frontierGeometries as Record<string, GeoJSON.Polygon | GeoJSON.MultiPolygon>;
   return {
@@ -120,6 +123,21 @@ export function placesToFeatureCollection(places: Place[]): GeoJSON.FeatureColle
         coordinates: place.coordinates,
       },
     })),
+  };
+}
+
+/** Battles as points; `year` drives the "only near its own year" filter. */
+export function battlesToFeatureCollection(events: HistoricalEvent[]): GeoJSON.FeatureCollection {
+  return {
+    type: "FeatureCollection",
+    features: events
+      .filter((e) => e.category === "battle" && e.location)
+      .map((e) => ({
+        type: "Feature",
+        id: e.id,
+        properties: { eventId: e.id, slug: e.slug, name: e.title, year: e.period.startYear },
+        geometry: { type: "Point", coordinates: e.location as [number, number] },
+      })),
   };
 }
 

@@ -1,0 +1,74 @@
+{
+ "imp-pallava": {
+  "file": "/images/imp-pallava.jpg",
+  "alt": "Pallava: Kailasanathar temple Kanchipuram (16)",
+  "title": "Kailasanathar temple Kanchipuram (16)",
+  "artist": "Ssriram mt",
+  "license": "CC BY-SA 4.0",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kailasanathar_temple_Kanchipuram_(16).jpg"
+ },
+ "imp-chandela": {
+  "file": "/images/imp-chandela.jpg",
+  "alt": "Chandela: Khajuraho tempel india",
+  "title": "Khajuraho tempel india",
+  "artist": "Unknown",
+  "license": "CC BY-SA 3.0",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Khajuraho_tempel_india.jpg"
+ },
+ "imp-utpala": {
+  "file": "/images/imp-utpala.jpg",
+  "alt": "Utpala (Kashmir): Avantipura Avantiswami Temple 8",
+  "title": "Avantipura Avantiswami Temple 8",
+  "artist": "Swathy T D",
+  "license": "CC BY-SA 4.0",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Avantipura_Avantiswami_Temple_8.jpg"
+ },
+ "imp-polonnaruwa": {
+  "file": "/images/imp-polonnaruwa.jpg",
+  "alt": "Polonnaruwa: Polonnaruwa",
+  "title": "Polonnaruwa",
+  "artist": "Mlechanteur",
+  "license": "CC BY 3.0",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Polonnaruwa.jpg"
+ },
+ "imp-jaunpur": {
+  "file": "/images/imp-jaunpur.jpg",
+  "alt": "Jaunpur Sultanate: Shahi bridge, Jaunpur",
+  "title": "Shahi bridge, Jaunpur",
+  "artist": "Varun Shiv Kapur from Berkeley, United States",
+  "license": "CC BY 2.0",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shahi_bridge,_Jaunpur.jpg"
+ },
+ "imp-bijapur": {
+  "file": "/images/imp-bijapur.jpg",
+  "alt": "Bijapur Sultanate: GolGumbaz2",
+  "title": "GolGumbaz2",
+  "artist": "Ashwatham at English Wikipedia",
+  "license": "Public domain",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:GolGumbaz2.jpg"
+ },
+ "imp-golconda": {
+  "file": "/images/imp-golconda.jpg",
+  "alt": "Golconda Sultanate: Golkonda Fort 12",
+  "title": "Golkonda Fort 12",
+  "artist": "Khadeeja Henna",
+  "license": "CC BY-SA 4.0",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golkonda_Fort_12.jpg"
+ },
+ "imp-mughal": {
+  "file": "/images/imp-mughal.jpg",
+  "alt": "Mughal Empire: Aks The Reflection Taj Mahal",
+  "title": "Aks The Reflection Taj Mahal",
+  "artist": "Antrix3",
+  "license": "CC BY-SA 4.0",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aks_The_Reflection_Taj_Mahal.jpg"
+ },
+ "imp-maratha": {
+  "file": "/images/imp-maratha.jpg",
+  "alt": "Maratha Empire: Raigad Fort-Rigad",
+  "title": "Raigad Fort-Rigad",
+  "artist": "Gbaadkar",
+  "license": "CC BY-SA 3.0",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Raigad_Fort-Rigad.JPG"
+ }
+}

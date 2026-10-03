@@ -1,5 +1,5 @@
 import { evidence, events, people, places, polities } from "@/lib/data/prototype";
-import { formatDateRange } from "@/lib/domain/time";
+import { formatDateRange, formatPersonDates } from "@/lib/domain/time";
 import { getHistoricalState, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 
 export type SearchEntryType = "kingdom" | "person" | "place" | "event" | "evidence";
@@ -32,7 +32,8 @@ export function searchEntryGroupLabel(type: SearchEntryType): string {
 /**
  * One flat index built from the same prototype data everything else
  * reads — no separate search backend to keep in sync. Swap this for a
- * real query (Postgres FTS, per GUIDANCE.md §13) once there's a database;
+ * real query (Postgres full-text search plus trigram matching) once there's
+ * a database;
  * the shape callers use (SearchEntry[]) shouldn't need to change.
  */
 export function buildSearchIndex(): SearchEntry[] {
@@ -54,7 +55,7 @@ export function buildSearchIndex(): SearchEntry[] {
       title: p.name,
       subtitle: p.role,
       href: `/people/${p.slug}`,
-      dates: formatDateRange(p.period),
+      dates: formatPersonDates(p),
     });
   }
   for (const p of places) {

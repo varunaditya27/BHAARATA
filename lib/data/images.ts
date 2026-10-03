@@ -7,6 +7,9 @@
  * typographic placeholder instead of fabricating one (see
  * components/entity/RulerPortrait.tsx).
  */
+import importedImages from "./generated/imported-images.json";
+import importedRulerImages from "./generated/imported-ruler-images.json";
+
 export type ImageCredit = {
   file: string;
   alt: string;
@@ -16,7 +19,7 @@ export type ImageCredit = {
   sourceUrl: string;
 };
 
-export const images = {
+const handPickedImages = {
   "chola-brihadisvara": {
     file: "/images/chola-brihadisvara.jpg",
     alt: "The Brihadisvara Temple at Thanjavur, built under Rajaraja I",
@@ -153,5 +156,8 @@ export const images = {
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Madarsa_Mahmud_Gawan-Bidar-Karnataka-PhotoOne.jpg",
   },
 } satisfies Record<string, ImageCredit>;
+
+/** Photographs picked up by scripts/import-cliopatria.py (free licences only). */
+export const images = { ...handPickedImages, ...(importedImages as Record<string, ImageCredit>), ...(importedRulerImages as Record<string, ImageCredit>) } as typeof handPickedImages & Record<string, ImageCredit>;
 
 export type ImageKey = keyof typeof images;

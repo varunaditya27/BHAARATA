@@ -3,7 +3,7 @@ import { Badge } from "@/components/primitives/Badge";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { RulerPortrait } from "@/components/entity/RulerPortrait";
 import { getPolityBySlug, people } from "@/lib/data/prototype";
-import { formatDateRange } from "@/lib/domain/time";
+import { formatPersonDates } from "@/lib/domain/time";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 import { Shared } from "@/components/primitives/Shared";
@@ -20,7 +20,7 @@ export default function PeopleIndexPage() {
         Kings, emperors and sultans, in order of their reigns, with the kingdoms they ruled.
       </p>
       <div className="mt-3">
-        <Badge tone="uncertainty">Placeholder data, not yet checked</Badge>
+        <Badge tone="neutral">Rulers: Wikidata and Wikipedia · a few hand-written placeholders</Badge>
       </div>
 
       <div className="mt-10 grid gap-8 sm:grid-cols-2">
@@ -39,7 +39,7 @@ export default function PeopleIndexPage() {
                   {person.role}
                   {polity && <> · {polity.name}</>}
                 </p>
-                <p className="font-sans text-sm text-ink-muted">{formatDateRange(person.period)}</p>
+                <p className="font-sans text-sm text-ink-muted">{formatPersonDates(person)}</p>
               </div>
             </Link>
           );

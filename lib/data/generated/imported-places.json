@@ -1,0 +1,442 @@
+[
+ {
+  "id": "kanchipuram",
+  "name": "Kanchipuram",
+  "coordinates": [
+   79.7078,
+   12.8308
+  ],
+  "region": "Tamil country and the east coast",
+  "wikidata": "Q212332"
+ },
+ {
+  "id": "manyakheta",
+  "name": "Manyakheta",
+  "coordinates": [
+   77.1608,
+   17.195
+  ],
+  "region": "Deccan",
+  "wikidata": "Q191771"
+ },
+ {
+  "id": "basavakalyan",
+  "name": "Basavakalyan",
+  "coordinates": [
+   76.95,
+   17.87
+  ],
+  "region": "Deccan",
+  "wikidata": "Q712521"
+ },
+ {
+  "id": "vallabhi",
+  "name": "Vallabhi",
+  "coordinates": [
+   71.8795,
+   21.8878
+  ],
+  "region": "Gujarat and Malwa",
+  "wikidata": "Q1534153"
+ },
+ {
+  "id": "guwahati",
+  "name": "Guwahati",
+  "coordinates": [
+   91.7502,
+   26.1806
+  ],
+  "region": "Bengal",
+  "wikidata": "Q199605"
+ },
+ {
+  "id": "kabul",
+  "name": "Kabul",
+  "coordinates": [
+   69.1658,
+   34.5328
+  ],
+  "region": "Afghanistan and Sindh",
+  "wikidata": "Q5838"
+ },
+ {
+  "id": "srinagar",
+  "name": "Srinagar",
+  "coordinates": [
+   74.8061,
+   34.0911
+  ],
+  "region": "Kashmir and the Himalaya",
+  "wikidata": "Q170115"
+ },
+ {
+  "id": "madurai",
+  "name": "Madurai",
+  "coordinates": [
+   78.1194,
+   9.9197
+  ],
+  "region": "Southern India",
+  "wikidata": "Q228405"
+ },
+ {
+  "id": "kannauj",
+  "name": "Kannauj",
+  "coordinates": [
+   79.922,
+   27.0313
+  ],
+  "region": "Gangetic plain",
+  "wikidata": "Q614890"
+ },
+ {
+  "id": "pataliputra",
+  "name": "Pataliputra",
+  "coordinates": [
+   85.144,
+   25.611
+  ],
+  "region": "Gangetic plain",
+  "wikidata": "Q389755"
+ },
+ {
+  "id": "gangaikonda-cholapuram",
+  "name": "Gangaikonda Cholapuram",
+  "coordinates": [
+   79.4528,
+   11.2052
+  ],
+  "region": "Southern India",
+  "wikidata": "Q1493439"
+ },
+ {
+  "id": "khajuraho",
+  "name": "Khajuraho",
+  "coordinates": [
+   79.9255,
+   24.8528
+  ],
+  "region": "Gangetic plain",
+  "wikidata": "Q178948"
+ },
+ {
+  "id": "awantipora",
+  "name": "Awantipora",
+  "coordinates": [
+   75.0153,
+   33.9197
+  ],
+  "region": "Kashmir and the Himalaya",
+  "wikidata": "Q584971"
+ },
+ {
+  "id": "nabadwip",
+  "name": "Nabadwip",
+  "coordinates": [
+   88.3657,
+   23.4088
+  ],
+  "region": "Bengal",
+  "wikidata": "Q1006330"
+ },
+ {
+  "id": "polonnaruwa",
+  "name": "Polonnaruwa",
+  "coordinates": [
+   81,
+   7.9333
+  ],
+  "region": "Sri Lanka",
+  "wikidata": "Q394443"
+ },
+ {
+  "id": "halebidu",
+  "name": "Halebidu",
+  "coordinates": [
+   75.9917,
+   13.2169
+  ],
+  "region": "Karnataka and the Deccan",
+  "wikidata": "Q1013556"
+ },
+ {
+  "id": "warangal",
+  "name": "Warangal",
+  "coordinates": [
+   79.6011,
+   17.9756
+  ],
+  "region": "Deccan",
+  "wikidata": "Q25563103"
+ },
+ {
+  "id": "delhi",
+  "name": "Delhi",
+  "coordinates": [
+   77.2167,
+   28.6667
+  ],
+  "region": "Gangetic plain",
+  "wikidata": "Q1353"
+ },
+ {
+  "id": "lahore",
+  "name": "Lahore",
+  "coordinates": [
+   74.3436,
+   31.5497
+  ],
+  "region": "Kashmir and the Himalaya",
+  "wikidata": "Q11739"
+ },
+ {
+  "id": "budaun",
+  "name": "Budaun",
+  "coordinates": [
+   79.12,
+   28.05
+  ],
+  "region": "Gangetic plain",
+  "wikidata": "Q798839"
+ },
+ {
+  "id": "dambadeniya",
+  "name": "Dambadeniya",
+  "coordinates": [
+   80.15,
+   7.3667
+  ],
+  "region": "Sri Lanka",
+  "wikidata": "Q1021154"
+ },
+ {
+  "id": "kammatadurga",
+  "name": "Kammatadurga",
+  "coordinates": [
+   76.375,
+   15.4078
+  ],
+  "region": "Karnataka and the Deccan",
+  "wikidata": "Q6358830"
+ },
+ {
+  "id": "nallur",
+  "name": "Nallur",
+  "coordinates": [
+   80.0333,
+   9.6667
+  ],
+  "region": "Sri Lanka",
+  "wikidata": "Q6960987"
+ },
+ {
+  "id": "baramulla",
+  "name": "Baramulla",
+  "coordinates": [
+   74.3428,
+   34.2089
+  ],
+  "region": "Kashmir and the Himalaya",
+  "wikidata": "Q712644"
+ },
+ {
+  "id": "nowhatta",
+  "name": "Nowhatta",
+  "coordinates": [
+   74.81,
+   34.1
+  ],
+  "region": "Kashmir and the Himalaya",
+  "wikidata": "Q7066653"
+ },
+ {
+  "id": "thatta",
+  "name": "Thatta",
+  "coordinates": [
+   67.9243,
+   24.7461
+  ],
+  "region": "Sindh and Makran",
+  "wikidata": "Q27212"
+ },
+ {
+  "id": "penukonda",
+  "name": "Penukonda",
+  "coordinates": [
+   77.5967,
+   14.0847
+  ],
+  "region": "Karnataka and the Deccan",
+  "wikidata": "Q2572975"
+ },
+ {
+  "id": "chandragiri",
+  "name": "Chandragiri",
+  "coordinates": [
+   79.3167,
+   13.5833
+  ],
+  "region": "Tamil country and the east coast",
+  "wikidata": "Q3430006"
+ },
+ {
+  "id": "kalaburagi",
+  "name": "Kalaburagi",
+  "coordinates": [
+   76.8333,
+   17.3333
+  ],
+  "region": "Deccan",
+  "wikidata": "Q37112"
+ },
+ {
+  "id": "bidar",
+  "name": "Bidar",
+  "coordinates": [
+   77.55,
+   17.9
+  ],
+  "region": "Deccan",
+  "wikidata": "Q461922"
+ },
+ {
+  "id": "jaunpur",
+  "name": "Jaunpur",
+  "coordinates": [
+   82.6869,
+   25.7536
+  ],
+  "region": "Gangetic plain",
+  "wikidata": "Q1025475"
+ },
+ {
+  "id": "ahilyanagar",
+  "name": "Ahilyanagar",
+  "coordinates": [
+   74.7333,
+   19.0833
+  ],
+  "region": "Deccan",
+  "wikidata": "Q223517"
+ },
+ {
+  "id": "achalpur",
+  "name": "Achalpur",
+  "coordinates": [
+   77.5086,
+   21.2572
+  ],
+  "region": "Central India",
+  "wikidata": "Q490886"
+ },
+ {
+  "id": "vijayapura",
+  "name": "Vijayapura",
+  "coordinates": [
+   75.7154,
+   16.8244
+  ],
+  "region": "Deccan",
+  "wikidata": "Q3636023"
+ },
+ {
+  "id": "golconda",
+  "name": "Golconda",
+  "coordinates": [
+   78.4042,
+   17.3833
+  ],
+  "region": "Deccan",
+  "wikidata": "Q4141623"
+ },
+ {
+  "id": "hyderabad",
+  "name": "Hyderabad",
+  "coordinates": [
+   78.4747,
+   17.3617
+  ],
+  "region": "Deccan",
+  "wikidata": "Q1361"
+ },
+ {
+  "id": "agra",
+  "name": "Agra",
+  "coordinates": [
+   78.02,
+   27.18
+  ],
+  "region": "Gangetic plain",
+  "wikidata": "Q42941"
+ },
+ {
+  "id": "fatehpur-sikri",
+  "name": "Fatehpur Sikri",
+  "coordinates": [
+   77.6611,
+   27.0911
+  ],
+  "region": "Gangetic plain",
+  "wikidata": "Q179046"
+ },
+ {
+  "id": "old-delhi",
+  "name": "Old Delhi",
+  "coordinates": [
+   77.23,
+   28.66
+  ],
+  "region": "Gangetic plain",
+  "wikidata": "Q3242297"
+ },
+ {
+  "id": "thanjavur",
+  "name": "Thanjavur",
+  "coordinates": [
+   79.1378,
+   10.787
+  ],
+  "region": "Southern India",
+  "wikidata": "Q41496"
+ },
+ {
+  "id": "mysore",
+  "name": "Mysore",
+  "coordinates": [
+   76.6531,
+   12.3086
+  ],
+  "region": "Southern India",
+  "wikidata": "Q10086"
+ },
+ {
+  "id": "srirangapatna",
+  "name": "Srirangapatna",
+  "coordinates": [
+   76.6947,
+   12.4181
+  ],
+  "region": "Southern India",
+  "wikidata": "Q653988"
+ },
+ {
+  "id": "bengaluru",
+  "name": "Bengaluru",
+  "coordinates": [
+   77.5913,
+   12.9791
+  ],
+  "region": "Karnataka and the Deccan",
+  "wikidata": "Q1355"
+ },
+ {
+  "id": "raigad-fort",
+  "name": "Raigad Fort",
+  "coordinates": [
+   73.4455,
+   18.2354
+  ],
+  "region": "Deccan",
+  "wikidata": "Q3626515"
+ }
+]

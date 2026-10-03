@@ -46,6 +46,9 @@ export const PersonSchema = z.object({
   nativeName: z.string().optional(),
   role: z.string(),
   period: DateRangeSchema,
+  /** Whether `period` is a reign (the default) or only the person's lifetime,
+   * when no reign dates are known. Pages word the two differently. */
+  datesAre: z.enum(["reign", "lifetime"]).optional(),
   polityId: z.string().optional(),
   summary: z.string().optional(),
   imageKey: z.string().optional(),
@@ -96,6 +99,12 @@ export const EventSchema = z.object({
   summary: z.string(),
   polityIds: z.array(z.string()).default([]),
   placeIds: z.array(z.string()).default([]),
+  /** "milestone": a hand-picked turning point (the atlas pauses on these
+   * during playback). "battle": one of many imported battles, shown on the
+   * map and in the chronology without pausing playback. */
+  category: z.enum(["milestone", "battle"]).optional(),
+  /** Where it happened, as [lng, lat], for events that have no Place record. */
+  location: z.tuple([z.number(), z.number()]).optional(),
   provenance: z.array(ProvenanceSchema).default([]),
 });
 export type HistoricalEvent = z.infer<typeof EventSchema>;
@@ -113,6 +122,8 @@ export const SourceSchema = z.object({
     "digital",
   ]),
   citation: z.string(),
+  /** Where a reader can check it, when it is online (e.g. a scan). */
+  url: z.string().optional(),
 });
 export type Source = z.infer<typeof SourceSchema>;
 

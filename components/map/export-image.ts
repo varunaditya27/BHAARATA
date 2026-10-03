@@ -85,7 +85,7 @@ export function composeMapPrint(
   cy += 8 * s;
   ctx.fillStyle = MUTED;
   ctx.font = `italic 400 ${11 * s}px ${sans}`;
-  ctx.fillText("Placeholder data, not yet checked — please don't quote it as fact.", x + pad, cy);
+  ctx.fillText("Borders: Cliopatria dataset. One researched version, not exact frontiers.", x + pad, cy);
 
   ctx.font = `400 ${10 * s}px ${sans}`;
   const w = ctx.measureText(opts.credits).width;

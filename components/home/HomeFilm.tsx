@@ -52,6 +52,17 @@ export function HomeFilm() {
     <section className="relative bg-ink text-paper">
       <div className="sticky top-16 h-[calc(100dvh-4rem)] overflow-hidden">
         <StoryMap chapter={chapter} onYear={setMapYear} />
+        {/* Light on the globe: a warm sun glint from the upper right, and the far side falling into shadow. */}
+        <div
+          className="pointer-events-none absolute inset-0 mix-blend-screen"
+          style={{ background: "radial-gradient(52% 46% at 82% 14%, rgba(255,196,128,0.20), rgba(255,170,90,0.06) 45%, transparent 70%)" }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: "radial-gradient(90% 85% at 72% 38%, transparent 38%, rgba(5,4,3,0.55) 78%, rgba(5,4,3,0.85) 100%)" }}
+          aria-hidden
+        />
         <div className="bh-map-grain pointer-events-none absolute inset-0" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-ink/40 md:bg-gradient-to-r md:from-ink/80 md:via-ink/20 md:to-transparent" />
 
@@ -88,7 +99,7 @@ export function HomeFilm() {
               <Wordmark className="text-6xl text-paper md:text-8xl" />
             </h1>
             <p className="bh-fade-in mt-6 max-w-md font-sans text-lg leading-relaxed text-paper/85" style={{ animationDelay: "1300ms" }}>
-              The kingdoms of the Indian subcontinent from 700 to 1650: where they ruled, when, and how we know.
+              The kingdoms of the Indian subcontinent from 600 to 1700: where they ruled, when, and how we know.
             </p>
             <p className="bh-fade-in mt-10 font-sans text-sm text-paper/60" style={{ animationDelay: "1800ms" }}>
               Scroll down to begin ↓

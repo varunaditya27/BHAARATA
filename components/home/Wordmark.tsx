@@ -15,8 +15,8 @@ export function Wordmark({ className }: { className?: string }) {
       {LETTERS.map((ch, i) => (
         <span key={i} className="inline-block overflow-hidden pb-[0.08em] pt-[0.18em]" aria-hidden>
           <span
-            className="bh-letter-rise relative inline-block"
-            style={{ animationDelay: `${300 + i * 85}ms` }}
+            className="bh-wordmark-letter relative inline-block"
+            style={{ "--d": `${300 + i * 85}ms` } as React.CSSProperties}
           >
             {ch}
             {i === MACRON_INDEX && (

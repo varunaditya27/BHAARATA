@@ -36,7 +36,7 @@ export default function Home() {
               <Eyebrow>Explore it yourself</Eyebrow>
               <h2 className="mt-3 font-display text-4xl text-ink md:text-5xl">Every year, every kingdom, on one map.</h2>
               <p className="mt-4 font-sans leading-relaxed text-ink-muted">
-                Those were four moments. In the atlas you can move to any year from 700 to 1650, click a kingdom to
+                Those were four moments. In the atlas you can move to any year from 600 to 1700, click a kingdom to
                 read about it, and see what evidence each claim rests on.
               </p>
             </div>
@@ -62,7 +62,8 @@ export default function Home() {
           </div>
 
           <p className="mt-12 font-sans text-xs text-ink-muted">
-            The history on this site is placeholder data and hasn&rsquo;t been checked yet.{" "}
+            Kingdom borders come from a research dataset, and summaries from Wikipedia; rulers, events and the evidence
+            page are still placeholders.{" "}
             <Link href="/method" className="underline underline-offset-4 hover:text-ink">
               Read why
             </Link>

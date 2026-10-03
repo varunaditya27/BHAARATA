@@ -7,9 +7,8 @@ import { darkenHex } from "@/lib/utils/color";
  * Small ink-coloured glyphs drawn on a canvas at runtime and registered
  * as MapLibre images — not a generic icon-font pin set. Each glyph is
  * purpose-built for one placeType and only appears once you zoom close
- * enough to read it (see place-icons layer's minzoom), matching
- * IMPLEMENTATION_PLAN.md §6's "the map gets more knowledgeable as you
- * approach" rule.
+ * enough to read it (see place-icons layer's minzoom): the map should
+ * get more detailed as you approach, not show everything at once.
  */
 const SIZE = 28;
 const INK = "#241f17";

@@ -8,7 +8,8 @@ import { Badge } from "@/components/primitives/Badge";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { Shared } from "@/components/primitives/Shared";
 import { images, type ImageKey } from "@/lib/data/images";
-import { events, getRulersForPolity } from "@/lib/data/prototype";
+import { getRulersForPolity, milestones } from "@/lib/data/prototype";
+import { polityStatus } from "@/lib/data/status";
 import { formatDateRange } from "@/lib/domain/time";
 import type { Polity } from "@/lib/domain/types";
 import { MOBILE_QUERY, useMediaQuery } from "@/lib/utils/use-media-query";
@@ -20,9 +21,9 @@ export type EntityPreviewPanelProps = {
 };
 
 /**
- * Map-native preview (IMPLEMENTATION_PLAN.md §11). Selecting a polity does
- * not navigate — it surfaces this panel. Only "Explore" navigates. Stat
- * counts are real counts from our own (small, illustrative) dataset,
+ * Map-native preview. Selecting a kingdom does not navigate — it surfaces
+ * this panel, so the reader keeps their place on the map. Only the "Open the
+ * … page" link navigates. Counts are real counts from our own dataset,
  * never invented numbers.
  *
  * Desktop: a card floating over the map's right edge. Phone: a bottom
@@ -176,14 +177,17 @@ function TitleBlock({ polity, compact }: { polity: Polity; compact?: boolean }) 
 
 function Details({ polity }: { polity: Polity }) {
   const rulers = getRulersForPolity(polity.id);
-  const relatedEvents = events.filter((e) => e.polityIds.includes(polity.id));
+  const relatedEvents = milestones.filter((e) => e.polityIds.includes(polity.id));
+  const status = polityStatus(polity);
   return (
     <>
       <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 border-t border-paper/15 pt-4 font-sans text-sm">
-        <div>
-          <p className="text-paper/50">Capital</p>
-          <p className="text-paper">{polity.capitals[0]}</p>
-        </div>
+        {polity.capitals.length > 0 && (
+          <div>
+            <p className="text-paper/50">Capital</p>
+            <p className="text-paper">{polity.capitals[0]}</p>
+          </div>
+        )}
         <div>
           <p className="text-paper/50">Region</p>
           <p className="text-paper">{polity.region}</p>
@@ -201,12 +205,14 @@ function Details({ polity }: { polity: Polity }) {
           </div>
         )}
       </div>
-      <div className="mt-4 flex gap-5 border-t border-paper/15 pt-3 font-sans text-xs text-paper/60">
-        <span>{rulers.length} {rulers.length === 1 ? "ruler" : "rulers"} in the atlas</span>
-        <span>{relatedEvents.length} {relatedEvents.length === 1 ? "event" : "events"} in the atlas</span>
-      </div>
+      {(rulers.length > 0 || relatedEvents.length > 0) && (
+        <div className="mt-4 flex gap-5 border-t border-paper/15 pt-3 font-sans text-xs text-paper/60">
+          {rulers.length > 0 && <span>{rulers.length} {rulers.length === 1 ? "ruler" : "rulers"} in the atlas</span>}
+          {relatedEvents.length > 0 && <span>{relatedEvents.length} {relatedEvents.length === 1 ? "event" : "events"} in the atlas</span>}
+        </div>
+      )}
       <div className="mt-3">
-        <Badge tone="uncertainty">Placeholder data, not yet checked</Badge>
+        <Badge tone={status.sourced ? "neutral" : "uncertainty"}>{status.label}</Badge>
       </div>
     </>
   );

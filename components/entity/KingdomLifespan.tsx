@@ -5,7 +5,7 @@ import type { Polity } from "@/lib/domain/types";
 import { PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
-const TICKS = [700, 900, 1100, 1300, 1500];
+const TICKS = [600, 800, 1000, 1200, 1400, 1600];
 
 /** Kingdoms whose recorded span overlaps this one's, with the shared years. */
 export function contemporariesOf(polity: Polity) {
@@ -31,7 +31,9 @@ export function KingdomLifespan({ polity }: { polity: Polity }) {
   const { min, max } = PROTOTYPE_YEAR_RANGE;
   const pct = (y: number) => ((Math.min(max, Math.max(min, y)) - min) / (max - min)) * 100;
   const end = polity.period.endYear ?? max;
-  const others = contemporariesOf(polity);
+  const all = contemporariesOf(polity);
+  // The chart shows the ten longest overlaps; the "Same period" tab lists every one.
+  const others = [...all].sort((a, b) => b.to - b.from - (a.to - a.from)).slice(0, 10).sort((a, b) => a.from - b.from);
 
   return (
     <div>
@@ -85,6 +87,11 @@ export function KingdomLifespan({ polity }: { polity: Polity }) {
               </Link>
             </li>
           ))}
+          {all.length > others.length && (
+            <li className="font-sans text-xs text-ink-muted">
+              And {all.length - others.length} more — see the &ldquo;Same period&rdquo; tab.
+            </li>
+          )}
           {others.length === 0 && (
             <li className="font-sans text-xs text-ink-muted">No other kingdom in the atlas existed at the same time.</li>
           )}

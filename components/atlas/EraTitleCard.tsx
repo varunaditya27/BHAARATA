@@ -3,8 +3,8 @@
 import { AnimatePresence, motion } from "motion/react";
 
 /**
- * A brief full-bleed flash when auto-play crosses into a new named era
- * (IMPLEMENTATION_PLAN.md §23.1). Only fires during auto-play, not on
+ * A brief full-bleed flash when auto-play crosses into a new named era.
+ * Only fires during auto-play, not on
  * manual scrubbing — see the trigger logic in AtlasView — so it reads as
  * a cinematic beat, not an interruption every time someone drags the
  * slider.

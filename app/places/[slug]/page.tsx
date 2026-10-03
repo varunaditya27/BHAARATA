@@ -8,6 +8,7 @@ import { Rule } from "@/components/primitives/Rule";
 import { RisingTitle } from "@/components/entity/RisingTitle";
 import { images, type ImageKey } from "@/lib/data/images";
 import { events, getPolityBySlug, places, polities } from "@/lib/data/prototype";
+import { placeStatus } from "@/lib/data/status";
 import { formatDateRange } from "@/lib/domain/time";
 import { boundariesContaining, projectTogether } from "@/lib/geo/silhouette";
 import { darkenHex } from "@/lib/utils/color";
@@ -31,6 +32,7 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
   const hero = place.imageKey ? images[place.imageKey as ImageKey] : undefined;
   const capitalOf = polities.filter((p) => p.capitals.some((c) => place.name.startsWith(c)));
   const relatedEvents = events.filter((e) => e.placeIds.includes(place.id));
+  const status = placeStatus(place);
 
   // Which recorded kingdoms' territory contains this point, in time order —
   // computed from the boundaries, not hand-entered.
@@ -66,7 +68,7 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
             <p className="font-sans text-ink-muted">
               {place.coordinates[1].toFixed(3)}°N, {place.coordinates[0].toFixed(3)}°E
             </p>
-            <Badge tone="uncertainty">Placeholder data, not yet checked</Badge>
+            <Badge tone={status.sourced ? "neutral" : "uncertainty"}>{status.label}</Badge>
           </div>
 
           <Rule className="mt-8" />

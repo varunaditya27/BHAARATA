@@ -2,10 +2,12 @@
 
 import "maplibre-gl/dist/maplibre-gl.css";
 import {
+  type GeoJSONSource,
   LngLatBounds,
   Map as MapLibreMap,
   MapMouseEvent,
   NavigationControl,
+  Popup,
   ScaleControl,
   setWorkerUrl,
 } from "maplibre-gl";
@@ -13,10 +15,10 @@ import { useCallback, useEffect, useRef } from "react";
 import { prefersReducedMotion, startMapAnimations } from "./animations";
 import { applyHistoricalState, boundaryForPolity, polityAtPoint, territoryAtPoint } from "./apply-state";
 import { captureMapCanvas } from "./export-image";
-import { addHistoricalLayers } from "./layers";
+import { addHistoricalLayers, ensureMonuments } from "./layers";
 import type { LayerToggleId } from "./MapLegend";
 import { BASEMAP_STYLE_URL, LAYER_IDS, SOURCE_IDS } from "./mapStyle";
-import { getPolityBySlug } from "@/lib/data/prototype";
+import { events, getPolityBySlug } from "@/lib/data/prototype";
 import { formatDateRange } from "@/lib/domain/time";
 
 // MapLibre resolves its worker via `import.meta.url` inside node_modules,
@@ -64,7 +66,26 @@ const TOGGLE_LAYER_MAP: Record<LayerToggleId, string[]> = {
   places: [LAYER_IDS.placePoints, LAYER_IDS.placeLabels, LAYER_IDS.placeIcons, LAYER_IDS.capitalSeals],
   routes: [LAYER_IDS.routeLines, LAYER_IDS.routeLinesDash, LAYER_IDS.routeArrows, LAYER_IDS.routeMovers],
   relief: [LAYER_IDS.hillshade, LAYER_IDS.riverFlow],
+  battles: [LAYER_IDS.battleRings, LAYER_IDS.battleLabels],
+  monuments: [LAYER_IDS.monumentClusters, LAYER_IDS.monumentClusterCount, LAYER_IDS.monumentPoints],
 };
+
+/** Layers whose features can be clicked for a small popup. */
+const POPUP_LAYERS = [LAYER_IDS.battleRings, LAYER_IDS.monumentPoints, LAYER_IDS.monumentClusters];
+
+function popupLine(parent: HTMLElement, tag: "p" | "a", text: string, className: string, href?: string) {
+  const el = document.createElement(tag);
+  el.textContent = text; // textContent, never HTML: names come from Wikidata
+  el.className = className;
+  if (href && el instanceof HTMLAnchorElement) {
+    el.href = href;
+    if (href.startsWith("http")) {
+      el.target = "_blank";
+      el.rel = "noopener noreferrer";
+    }
+  }
+  parent.appendChild(el);
+}
 
 /** Keep the selected territory clear of whatever panel covers the map:
  * the bottom sheet on phones, the floating card on the right on desktop. */
@@ -75,9 +96,9 @@ function fitPadding() {
     : { top: 60, bottom: 60, left: 80, right: 380 };
 }
 
-/** Pull back, then fly in — the staged camera move from
- * IMPLEMENTATION_PLAN.md §23.2 ("India → South India → Thanjavur"),
- * instead of a single flat fitBounds. */
+/** Pull back, then fly in — a staged camera move (wide view, then down to
+ * the kingdom) instead of a single flat fitBounds, so the reader sees where
+ * in the subcontinent they are being taken. */
 function cinematicFitBounds(map: MapLibreMap, bounds: LngLatBounds) {
   const camera = map.cameraForBounds(bounds, { padding: fitPadding(), maxZoom: 7 });
   if (!camera) return;
@@ -174,6 +195,35 @@ export function HistoricalMap({
       addHistoricalLayers(map, { terrain3d: !window.matchMedia("(max-width: 767px)").matches });
 
       map.on("click", (e: MapMouseEvent) => {
+        // Battles, monuments and clusters take the click before any kingdom underneath.
+        const layers = POPUP_LAYERS.filter((id) => map.getLayer(id) && map.getLayoutProperty(id, "visibility") !== "none");
+        const hit = layers.length ? map.queryRenderedFeatures(e.point, { layers })[0] : undefined;
+        if (hit) {
+          const props = hit.properties as Record<string, string | number>;
+          const coords = (hit.geometry as GeoJSON.Point).coordinates as [number, number];
+          if (props.cluster_id !== undefined) {
+            (map.getSource(SOURCE_IDS.monuments) as GeoJSONSource).getClusterExpansionZoom(Number(props.cluster_id)).then((zoom) => {
+              map.easeTo({ center: coords, zoom: zoom + 0.5, duration: prefersReducedMotion() ? 0 : 500 });
+            });
+            return;
+          }
+          const box = document.createElement("div");
+          if (hit.layer.id === LAYER_IDS.battleRings) {
+            const ev = events.find((x) => x.id === props.eventId);
+            popupLine(box, "p", `Battle · ${props.year}`, "bh-popup-eyebrow");
+            popupLine(box, "p", String(props.name), "bh-popup-title");
+            if (ev) popupLine(box, "p", ev.summary.length > 260 ? ev.summary.slice(0, 257).replace(/\s+\S*$/, "") + "…" : ev.summary, "bh-popup-text");
+            popupLine(box, "a", "More in the chronology →", "bh-popup-link", `/chronology#${props.slug}`);
+          } else {
+            popupLine(box, "p", "Protected monument today", "bh-popup-eyebrow");
+            popupLine(box, "p", String(props.n), "bh-popup-title");
+            popupLine(box, "p", "Looked after by the Archaeological Survey of India. Not tied to a year on this map.", "bh-popup-text");
+            if (props.w) popupLine(box, "a", "Read on Wikipedia →", "bh-popup-link", `https://en.wikipedia.org/wiki/${encodeURIComponent(String(props.w))}`);
+            else popupLine(box, "a", "See it on Wikidata →", "bh-popup-link", `https://www.wikidata.org/wiki/${props.q}`);
+          }
+          new Popup({ offset: 12, maxWidth: "280px", closeButton: true }).setLngLat(coords).setDOMContent(box).addTo(map);
+          return;
+        }
         const polityId = polityAtPoint(map, e.point);
         // Clicking open ground deselects and levels the camera back out.
         if (!polityId && map.getPitch() > 0) {
@@ -192,7 +242,9 @@ export function HistoricalMap({
       };
       map.on("mousemove", (e: MapMouseEvent) => {
         const hit = territoryAtPoint(map, e.point);
-        map.getCanvas().style.cursor = hit ? "pointer" : "";
+        const popupLayers = POPUP_LAYERS.filter((id) => map.getLayer(id));
+        const overPoint = popupLayers.length > 0 && map.queryRenderedFeatures(e.point, { layers: popupLayers }).length > 0;
+        map.getCanvas().style.cursor = hit || overPoint ? "pointer" : "";
         setHover(hit?.featureId ?? null);
         const label = hoverLabelRef.current;
         if (!label) return;
@@ -309,6 +361,7 @@ export function HistoricalMap({
   // Layer visibility toggles.
   useEffect(() => {
     whenReady("layers", (map) => {
+      if (visibleLayers.has("monuments")) ensureMonuments(map);
       for (const [toggleId, layerIds] of Object.entries(TOGGLE_LAYER_MAP)) {
         const visible = visibleLayers.has(toggleId as LayerToggleId);
         for (const layerId of layerIds) {

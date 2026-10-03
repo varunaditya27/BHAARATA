@@ -4,19 +4,22 @@ import { Layers } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils/cn";
 
-export type LayerToggleId = "territory" | "places" | "routes" | "relief";
+export type LayerToggleId = "territory" | "places" | "routes" | "relief" | "battles" | "monuments";
 
 const LAYER_OPTIONS: { id: LayerToggleId; label: string }[] = [
   { id: "territory", label: "Kingdoms" },
   { id: "places", label: "Cities and places" },
   { id: "routes", label: "Trade and war routes" },
   { id: "relief", label: "Hills and rivers" },
+  { id: "battles", label: "Battles" },
+  { id: "monuments", label: "Monuments protected today" },
 ];
 
 /**
  * Every checkbox here controls a real MapLibre layer's visibility — see
  * the `visibleLayers` prop on HistoricalMap. Don't add a toggle that
- * doesn't actually control something (GUIDANCE.md: no decorative UI).
+ * doesn't actually control something: a control that does nothing is
+ * decoration, and decoration here would be a small lie.
  * Below `md` it folds into a single "Layers" button so it doesn't sit on
  * top of the map a phone has so little of.
  */

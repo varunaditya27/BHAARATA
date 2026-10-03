@@ -1,6 +1,7 @@
 import type { Map as MapLibreMap } from "maplibre-gl";
-import { boundaries, places, polities, routes } from "@/lib/data/prototype";
+import { boundaries, events, places, polities, routes } from "@/lib/data/prototype";
 import {
+  battlesToFeatureCollection,
   boundariesToFeatureCollection,
   capitalSealsToFeatureCollection,
   frontiersToFeatureCollection,
@@ -282,6 +283,42 @@ export function addHistoricalLayers(
     },
     paint: { "text-color": "#241f17", "text-halo-color": "#f3ede0", "text-halo-width": 1.2 },
   });
+  // Battles: a ring and a name, shown from the battle's year for ten years
+  // (the filter is set per year in apply-state.ts).
+  map.addSource(SOURCE_IDS.battles, { type: "geojson", data: battlesToFeatureCollection(events) });
+  map.addLayer({
+    id: LAYER_IDS.battleRings,
+    type: "circle",
+    source: SOURCE_IDS.battles,
+    filter: ["==", ["get", "year"], -1],
+    paint: {
+      "circle-radius": ["interpolate", ["linear"], ["zoom"], 3, 4, 8, 8],
+      "circle-color": "#8f2d1a",
+      "circle-opacity": 0.85,
+      "circle-stroke-color": "#f3ede0",
+      "circle-stroke-width": 1.5,
+    },
+  });
+  map.addLayer({
+    id: LAYER_IDS.battleLabels,
+    type: "symbol",
+    source: SOURCE_IDS.battles,
+    minzoom: 4.5,
+    filter: ["==", ["get", "year"], -1],
+    layout: {
+      "text-field": ["concat", ["get", "name"], " · ", ["to-string", ["get", "year"]]],
+      "text-size": 11,
+      "text-anchor": "top",
+      "text-offset": [0, 0.9],
+      "text-font": ["Ranade Medium"],
+      "text-optional": true,
+    },
+    paint: { "text-color": "#8f2d1a", "text-halo-color": "#f3ede0", "text-halo-width": 1.4 },
+  });
+
+  // Monuments protected today (ASI), clustered. Loaded from a static file only
+  // when this layer is first switched on — 4,000+ points aren't worth fetching for
+  // everyone — see ensureMonuments below.
   // Each living kingdom's seal beside its capitals, once close enough to read.
   map.addSource(SOURCE_IDS.capitalSeals, {
     type: "geojson",
@@ -340,4 +377,49 @@ export function addHistoricalLayers(
       map.setLayoutProperty(id, "visibility", "none");
     }
   }
+}
+
+/** Adds the monuments source and its layers the first time they're needed. */
+export function ensureMonuments(map: MapLibreMap) {
+  if (map.getSource(SOURCE_IDS.monuments)) return;
+  map.addSource(SOURCE_IDS.monuments, {
+    type: "geojson",
+    data: "/data/monuments.geojson",
+    cluster: true,
+    clusterRadius: 44,
+    clusterMaxZoom: 8,
+  });
+  map.addLayer({
+    id: LAYER_IDS.monumentClusters,
+    type: "circle",
+    source: SOURCE_IDS.monuments,
+    filter: ["has", "point_count"],
+    paint: {
+      "circle-color": "#3f3a2f",
+      "circle-opacity": 0.82,
+      "circle-radius": ["step", ["get", "point_count"], 11, 25, 15, 100, 20, 400, 26],
+      "circle-stroke-color": "#f3ede0",
+      "circle-stroke-width": 1.5,
+    },
+  });
+  map.addLayer({
+    id: LAYER_IDS.monumentClusterCount,
+    type: "symbol",
+    source: SOURCE_IDS.monuments,
+    filter: ["has", "point_count"],
+    layout: { "text-field": ["get", "point_count_abbreviated"], "text-size": 11, "text-font": ["Ranade Medium"], "text-allow-overlap": true },
+    paint: { "text-color": "#f3ede0" },
+  });
+  map.addLayer({
+    id: LAYER_IDS.monumentPoints,
+    type: "circle",
+    source: SOURCE_IDS.monuments,
+    filter: ["!", ["has", "point_count"]],
+    paint: {
+      "circle-radius": ["interpolate", ["linear"], ["zoom"], 6, 3, 10, 6],
+      "circle-color": "#3f3a2f",
+      "circle-stroke-color": "#f3ede0",
+      "circle-stroke-width": 1.2,
+    },
+  });
 }

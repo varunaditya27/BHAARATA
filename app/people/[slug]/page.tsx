@@ -10,8 +10,9 @@ import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { RisingTitle } from "@/components/entity/RisingTitle";
 import { RulerPortrait } from "@/components/entity/RulerPortrait";
 import { images, type ImageKey } from "@/lib/data/images";
-import { events, getPolityBySlug, people } from "@/lib/data/prototype";
-import { formatDatePoint, formatDateRange } from "@/lib/domain/time";
+import { getPolityBySlug, getSourceById, milestones as events, people } from "@/lib/data/prototype";
+import { personStatus } from "@/lib/data/status";
+import { formatDatePoint, formatDateRange, formatPersonDates } from "@/lib/domain/time";
 import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 export function generateStaticParams() {
@@ -33,6 +34,9 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
 
   const polity = person.polityId ? getPolityBySlug(person.polityId) : undefined;
   const accent = polity?.accentColor ?? "#5c5447";
+  const status = personStatus(person);
+  const lifetimeOnly = person.datesAre === "lifetime";
+  const sourceRecords = person.provenance.filter((pv) => getSourceById(pv.sourceId));
   const reignStart = person.period.startYear;
   const reignEnd = person.period.endYear ?? reignStart;
   const portrait = person.imageKey ? images[person.imageKey as ImageKey] : undefined;
@@ -85,8 +89,8 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
             <RisingTitle text={person.name} className="mt-2 text-5xl text-ink sm:text-6xl" />
             {person.nativeName && <InkName text={person.nativeName} className="mt-2 text-2xl text-ink-muted" />}
             <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-              <p className="font-display text-xl text-ink">{formatDateRange(person.period)}</p>
-              <Badge tone="uncertainty">Placeholder data, not yet checked</Badge>
+              <p className="font-display text-xl text-ink">{formatPersonDates(person)}</p>
+              <Badge tone={status.sourced ? "neutral" : "uncertainty"}>{status.label}</Badge>
             </div>
           </div>
         </div>
@@ -99,7 +103,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
 
             {polity && (
               <section className="mt-12">
-                <Eyebrow>The reign in the kingdom&rsquo;s history</Eyebrow>
+                <Eyebrow>{lifetimeOnly ? "Their lifetime in the kingdom's history" : "The reign in the kingdom's history"}</Eyebrow>
                 <div className="relative mt-5 h-3 bg-stone/60">
                   <div
                     className="bh-grow-x absolute h-full"
@@ -119,7 +123,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
 
             {reignEvents.length > 0 && (
               <section className="mt-12">
-                <Eyebrow>During the reign</Eyebrow>
+                <Eyebrow>{lifetimeOnly ? "During their lifetime" : "During the reign"}</Eyebrow>
                 <ol className="bh-accent-rule mt-4 space-y-6 border-l pl-6">
                   {reignEvents.map((e) => (
                     <li key={e.id} className="relative">
@@ -141,6 +145,19 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
           </div>
 
           <aside className="space-y-10">
+            {sourceRecords.length > 0 && (
+              <section>
+                <Eyebrow>Sources</Eyebrow>
+                <ul className="mt-3 space-y-3">
+                  {sourceRecords.map((pv) => (
+                    <li key={pv.sourceId} className="border-t border-border pt-3 font-sans text-sm text-ink">
+                      {getSourceById(pv.sourceId)?.title}
+                      {pv.note && <span className="block text-xs text-ink-muted">{pv.note}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
             {polity && (
               <Link href={`/polities/${polity.slug}`} transitionTypes={NAV_FORWARD} className="bh-accent-rule group flex gap-4 border-t-2 pt-4">
                 <KingdomEmblem polityId={polity.id} color={polity.accentColor} className="h-12 w-12" />

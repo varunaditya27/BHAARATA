@@ -22,20 +22,20 @@ import { EventTicks } from "@/components/chronology/EventTicks";
 import { LifespanStrip } from "@/components/chronology/LifespanStrip";
 import { TimelineScrubber, type TimelineChangeSource } from "@/components/chronology/TimelineScrubber";
 import { EntityPreviewPanel } from "@/components/entity/EntityPreviewPanel";
-import { events, getPlaceById, getPolityBySlug, polities } from "@/lib/data/prototype";
+import { getPlaceById, milestones, getPolityBySlug, polities } from "@/lib/data/prototype";
 import type { HistoricalEvent } from "@/lib/domain/types";
 import { getEraForYear, getHistoricalState, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 
-const DEFAULT_VISIBLE_LAYERS: LayerToggleId[] = ["territory", "places", "routes", "relief"];
+const DEFAULT_VISIBLE_LAYERS: LayerToggleId[] = ["territory", "places", "routes", "relief", "battles"];
 const ERA_CARD_DURATION_MS = 1700;
 const URL_COMMIT_DEBOUNCE_MS = 300;
 const CAPTION_MS = 5200;
-const EVENT_YEARS = events.map((e) => e.period.startYear);
+const EVENT_YEARS = milestones.map((e) => e.period.startYear);
 const DEFAULT_YEAR = 1050;
 
 /**
- * URL state is the shareable "exploration" (IMPLEMENTATION_PLAN.md §17):
- * /atlas?year=985&polity=chola is a saved viewpoint, not just navigation.
+ * URL state is the shareable "exploration": /atlas?year=985&polity=chola is
+ * a saved viewpoint, so a link reproduces what the sender was looking at.
  *
  * But the URL is not the live interaction state. Dragging the timeline
  * used to call router.replace() on every native <input> tick — tens of
@@ -155,7 +155,8 @@ export function AtlasView() {
     setCaption(event);
     captionTimeoutRef.current = setTimeout(() => setCaption(null), CAPTION_MS);
     const place = event.placeIds[0] ? getPlaceById(event.placeIds[0]) : undefined;
-    if (place) setFocus({ key: `${event.id}-${Date.now()}`, center: place.coordinates });
+    const center = place?.coordinates ?? event.location;
+    if (center) setFocus({ key: `${event.id}-${Date.now()}`, center });
   }, []);
 
   // Era title cards only fire during auto-play, not manual scrubbing —
@@ -177,7 +178,7 @@ export function AtlasView() {
       const previous = lastYearRef.current;
       lastYearRef.current = nextYear;
       if (source === "auto" && previous !== null) {
-        const reached = events.find((e) => e.period.startYear > previous && e.period.startYear <= nextYear);
+        const reached = milestones.find((e) => e.period.startYear > previous && e.period.startYear <= nextYear);
         if (reached) showEvent(reached);
       } else if (source === "manual") {
         setCaption(null);
@@ -257,7 +258,7 @@ export function AtlasView() {
       handleYearChange(clampYear(displayYear + delta), "manual");
     },
     stepEvent: (direction) => {
-      const sorted = [...events].sort((a, b) => a.period.startYear - b.period.startYear);
+      const sorted = [...milestones].sort((a, b) => a.period.startYear - b.period.startYear);
       const next =
         direction === 1
           ? sorted.find((e) => e.period.startYear > displayYear)
@@ -413,7 +414,7 @@ export function AtlasView() {
               }}
             />
             <EventTicks
-              events={events}
+              events={milestones}
               year={displayYear}
               min={PROTOTYPE_YEAR_RANGE.min}
               max={PROTOTYPE_YEAR_RANGE.max}

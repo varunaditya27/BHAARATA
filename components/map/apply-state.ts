@@ -1,7 +1,7 @@
-import type { Map as MapLibreMap } from "maplibre-gl";
+import type { ExpressionSpecification, Map as MapLibreMap } from "maplibre-gl";
 import { boundaries, places } from "@/lib/data/prototype";
 import { getHistoricalState, getRoutesAtYear } from "@/lib/geo/historical-state";
-import { boundaryId } from "@/lib/geo/to-geojson";
+import { boundaryId, hasFrontier } from "@/lib/geo/to-geojson";
 import { LAYER_IDS, SOURCE_IDS } from "./mapStyle";
 
 export const TERRITORY_OPACITY = { inactive: 0, active: 0.58, selected: 0.8 } as const;
@@ -15,7 +15,13 @@ export const ECHO_YEARS = 60;
  * layers.ts) do the fading, so calling this every frame of a scrub is
  * cheap and always correct.
  */
+/** What was last written to each boundary on each map, so a scrub frame only
+ * touches the few shapes that actually changed (there are hundreds). */
+const lastWritten = new WeakMap<MapLibreMap, Map<string, string>>();
+
 export function applyHistoricalState(map: MapLibreMap, year: number, selectedPolityId: string | null) {
+  let written = lastWritten.get(map);
+  if (!written) lastWritten.set(map, (written = new Map()));
   const state = getHistoricalState(year);
   const activeBoundaryIds = new Set(state.activeBoundaries.map(boundaryId));
   const activeCapitalNames = new Set(state.activePolities.flatMap((p) => p.capitals));
@@ -25,15 +31,8 @@ export function applyHistoricalState(map: MapLibreMap, year: number, selectedPol
     const id = boundaryId(b);
     const active = activeBoundaryIds.has(id);
     const selected = active && b.polityId === selectedPolityId;
-    map.setFeatureState(
-      { source: SOURCE_IDS.territory, id },
-      {
-        active,
-        opacity: !active ? TERRITORY_OPACITY.inactive : selected ? TERRITORY_OPACITY.selected : TERRITORY_OPACITY.active,
-        lineOpacity: active ? 1 : 0,
-        selected,
-      },
-    );
+    const opacity = !active ? TERRITORY_OPACITY.inactive : selected ? TERRITORY_OPACITY.selected : TERRITORY_OPACITY.active;
+
     // Echo: a territory that ended within ECHO_YEARS keeps a dashed ghost
     // of its old outline, fading with time — unless the same kingdom
     // already shows a newer shape. Derived from the year, so scrubbing
@@ -43,15 +42,33 @@ export function applyHistoricalState(map: MapLibreMap, year: number, selectedPol
       !active && since > 0 && since <= ECHO_YEARS && !polityHasActiveShape.has(b.polityId)
         ? 0.7 * (1 - since / ECHO_YEARS)
         : 0;
-    map.setFeatureState({ source: SOURCE_IDS.territory, id }, { echoOpacity: echo });
-    map.setFeatureState({ source: SOURCE_IDS.frontier, id }, { hatchOpacity: active ? (selected ? 0.75 : 0.5) : 0 });
-    map.setFeatureState({ source: SOURCE_IDS.kingdomLabels, id }, { labelOpacity: active ? 0.92 : 0 });
+    const hatch = active ? (selected ? 0.75 : 0.5) : 0;
+    const label = active ? 0.92 : 0;
+    const signature = `${active}|${opacity}|${selected}|${echo.toFixed(2)}`;
+    if (written.get(id) === signature) continue;
+    written.set(id, signature);
+    map.setFeatureState(
+      { source: SOURCE_IDS.territory, id },
+      { active, opacity, lineOpacity: active ? 1 : 0, selected, echoOpacity: echo },
+    );
+    // Only some shapes have a frontier band (Chera); the rest simply have no such feature.
+    if (hasFrontier.has(id)) map.setFeatureState({ source: SOURCE_IDS.frontier, id }, { hatchOpacity: hatch });
+    map.setFeatureState({ source: SOURCE_IDS.kingdomLabels, id }, { labelOpacity: label });
   }
 
   const capitalIds = places
     // By name prefix, as elsewhere: "Gulbarga" is the place "Gulbarga (Kalaburagi)".
     .filter((p) => p.placeType === "capital" && [...activeCapitalNames].some((c) => p.name.startsWith(c)))
     .map((p) => p.id);
+  // A battle shows from its own year for ten years, so scrubbing past it leaves it briefly on the map.
+  const battleWindow: ExpressionSpecification = [
+    "all",
+    ["<=", ["get", "year"], year],
+    [">", ["get", "year"], year - 10],
+  ];
+  map.setFilter(LAYER_IDS.battleRings, battleWindow);
+  map.setFilter(LAYER_IDS.battleLabels, battleWindow);
+
   map.setFilter(LAYER_IDS.capitalPulseOuter, ["in", ["get", "placeId"], ["literal", capitalIds]]);
   map.setFilter(LAYER_IDS.capitalSeals, ["in", ["get", "polityId"], ["literal", state.activePolities.map((p) => p.id)]]);
 

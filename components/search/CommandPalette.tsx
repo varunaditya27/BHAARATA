@@ -163,7 +163,7 @@ export function CommandPalette() {
                   </span>
                 </CommandItem>
               ) : (
-                <p className="px-3 py-2 font-sans text-xs text-ink-muted">The atlas covers 700 to 1650 CE.</p>
+                <p className="px-3 py-2 font-sans text-xs text-ink-muted">The atlas covers 600 to 1700 CE.</p>
               )}
             </CommandGroup>
           )}

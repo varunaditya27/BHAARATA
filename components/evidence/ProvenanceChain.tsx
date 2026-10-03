@@ -68,6 +68,14 @@ export function ProvenanceChain({
         : "A photograph of this object.",
     });
   }
+  if (record.transcription.length === 0 && record.translation.length > 0) {
+    links.push({
+      step: "The original text",
+      what: `${record.script ?? "Original"}, printed in the volume`,
+      status: "partly",
+      note: "Not typed out here. The machine-read scan garbles the Tamil, and we won't guess at it. Read it in the scan linked below.",
+    });
+  }
   if (record.transcription.length > 0) {
     links.push({
       step: "The transcription",
@@ -83,7 +91,7 @@ export function ProvenanceChain({
       step: "The translation",
       what: `${record.translation.length} lines in English`,
       status: record.textIsIllustrative ? "placeholder" : "real",
-      note: record.textIsIllustrative ? "Placeholder lines matching the placeholder transcription." : "Translated from the transcription.",
+      note: record.textIsIllustrative ? "Placeholder lines matching the placeholder transcription." : "Translated into English by the volume's editors. Shown here in part.",
     });
   }
   links.push({
@@ -99,6 +107,11 @@ export function ProvenanceChain({
         <>
           {s.title}
           <span className="block text-xs text-ink-muted">{s.citation}</span>
+          {s.url && (
+            <a href={s.url} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-xs underline underline-offset-4">
+              Open the scan
+            </a>
+          )}
         </>
       ),
       status: record.textIsIllustrative ? "partly" : "real",

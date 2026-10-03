@@ -19,7 +19,7 @@ export default function EvidenceIndexPage() {
         object itself to where its reading is published.
       </p>
       <div className="mt-3">
-        <Badge tone="uncertainty">Placeholder data, not yet checked</Badge>
+        <Badge tone="neutral">One real inscription translation · one placeholder example</Badge>
       </div>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2">

@@ -9,6 +9,11 @@ import type {
   Source,
 } from "@/lib/domain/types";
 import boundaryGeometries from "./geo/boundaries.json";
+import cliopatriaBoundaries from "./geo/cliopatria-boundaries.json";
+import importedPolities from "./generated/imported-polities.json";
+import importedPlaces from "./generated/imported-places.json";
+import importedBattles from "./generated/imported-battles.json";
+import importedPeople from "./generated/imported-people.json";
 
 /** Boundary geometry lives in geo/boundaries.json (keyed by boundary id,
  * `${polityId}-${validFrom}`) — tens of thousands of coordinates don't
@@ -51,8 +56,16 @@ export const PROTOTYPE_SOURCE: Source = {
     "Written as a placeholder for this early version of the site. It does not come from a published source.",
 };
 
-export const sources: Source[] = [
+const baseSources: Source[] = [
   PROTOTYPE_SOURCE,
+  {
+    id: "sii-vol-2",
+    title: "South Indian Inscriptions, Vol. II",
+    sourceType: "epigraphic",
+    citation:
+      "E. Hultzsch and V. Venkayya (eds.), South Indian Inscriptions, Volume II: Tamil Inscriptions of Rajaraja, Rajendra-Chola and others in the Rajarajesvara Temple at Tanjavur. Archaeological Survey of India, Madras. Scan from the Digital Library of India (public domain).",
+    url: "https://archive.org/details/in.ernet.dli.2015.34674",
+  },
   {
     id: "sii-vol-3",
     title: "South Indian Inscriptions, Vol. III",
@@ -68,7 +81,8 @@ export const sources: Source[] = [
   },
 ];
 
-export const polities: Polity[] = [
+
+const curatedPolities: Polity[] = [
   {
     id: "chola",
     slug: "chola",
@@ -344,7 +358,110 @@ export const polities: Polity[] = [
   },
 ];
 
-export const people: Person[] = [
+/**
+ * Where each kingdom's borders and dates come from. Most kingdoms' borders
+ * and dates are from Cliopatria (Seshat Global History Databank, CC BY 4.0):
+ * one researched version of each polity's territory, in dated snapshots.
+ * The hand-written records above keep their own text, but take their
+ * period from the same dataset so the page and the map agree.
+ */
+export const CLIOPATRIA_SOURCE: Source = {
+  id: "cliopatria",
+  title: "Cliopatria",
+  sourceType: "cartographic",
+  citation:
+    "Bennett, J. S., Mutch, E., Tollefson, A., Chalstrey, E., Benam, M. et al. (2025). Cliopatria: a geospatial database of world-wide political entities from 3400 BCE to 2024 CE. Scientific Data 12, 247. Seshat Global History Databank, CC BY 4.0. Borders are one researched version of each territory and are not exact frontiers.",
+  url: "https://doi.org/10.1038/s41597-025-04516-9",
+};
+export const WIKIDATA_SOURCE: Source = {
+  id: "wikidata",
+  title: "Wikidata",
+  sourceType: "digital",
+  citation: "Wikidata, wikidata.org (CC0). Capital cities and their coordinates.",
+};
+
+type ImportedPolity = (typeof importedPolities)[number];
+const importedById = new Map<string, ImportedPolity>(importedPolities.map((p) => [p.id, p]));
+
+function polityKind(name: string): string {
+  if (/Emirate/.test(name)) return "Emirate";
+  if (/Sultanate/.test(name)) return "Sultanate";
+  if (/Empire/.test(name)) return "Empire";
+  return "Kingdom";
+}
+
+export const sources: Source[] = [
+  ...baseSources,
+  CLIOPATRIA_SOURCE,
+  WIKIDATA_SOURCE,
+  ...importedPeople
+    .filter((p) => p.summary && p.wikipedia)
+    .map(
+      (p): Source => ({
+        id: `wikipedia-ruler-${p.q}`,
+        title: `Wikipedia: ${p.wikipedia?.replace(/_/g, " ")}`,
+        sourceType: "digital",
+        citation: `English Wikipedia, "${p.wikipedia?.replace(/_/g, " ")}", en.wikipedia.org/wiki/${p.wikipedia} (CC BY-SA 4.0). Opening sentences, trimmed.`,
+      }),
+    ),
+  ...importedBattles
+    .filter((b) => b.wikipedia)
+    .map(
+      (b): Source => ({
+        id: `wikipedia-battle-${b.wikidata}`,
+        title: `Wikipedia: ${b.wikipedia?.replace(/_/g, " ")}`,
+        sourceType: "digital",
+        citation: `English Wikipedia, "${b.wikipedia?.replace(/_/g, " ")}", en.wikipedia.org/wiki/${b.wikipedia} (CC BY-SA 4.0). Opening sentences, trimmed.`,
+      }),
+    ),
+  ...importedPolities
+    .filter((p) => !p.curated)
+    .map(
+      (p): Source => ({
+        id: `wikipedia-${p.id}`,
+        title: `Wikipedia: ${p.title}`,
+        sourceType: "digital",
+        citation: `English Wikipedia, "${p.title}", en.wikipedia.org/wiki/${p.wikipedia} (CC BY-SA 4.0). Opening paragraph, lightly trimmed.`,
+      }),
+    ),
+];
+
+export const polities: Polity[] = [
+  ...curatedPolities.map((p) => {
+    const imp = importedById.get(p.id);
+    if (!imp) return p;
+    return {
+      ...p,
+      period: { ...p.period, startYear: imp.from, endYear: imp.to, startQualifier: "circa" as const, endQualifier: "circa" as const },
+      provenance: [...p.provenance, { sourceId: CLIOPATRIA_SOURCE.id, note: "Borders and dates." }],
+    };
+  }),
+  ...importedPolities
+    .filter((p) => !p.curated)
+    .map(
+      (p): Polity => ({
+        id: p.id,
+        slug: p.id,
+        name: p.name,
+        alternativeNames: [],
+        polityType: polityKind(p.name),
+        region: p.region,
+        capitals: p.capitals,
+        summary: p.summary,
+        period: { startYear: p.from, endYear: p.to, startQualifier: "circa", endQualifier: "circa", confidence: "probable" },
+        accentColor: p.accentColor,
+        heroImageKey: p.imageKey ?? undefined,
+        rulerIds: [],
+        provenance: [
+          { sourceId: CLIOPATRIA_SOURCE.id, note: "Borders and dates." },
+          { sourceId: `wikipedia-${p.id}`, note: "Summary." },
+        ],
+      }),
+    ),
+];
+
+
+const curatedPeople: Person[] = [
   {
     id: "rajaraja-i",
     slug: "rajaraja-i",
@@ -478,7 +595,38 @@ export const people: Person[] = [
   },
 ];
 
-export const places: Place[] = [
+/**
+ * Rulers from Wikidata (dates, role) and Wikipedia (summary). An imported
+ * ruler is dropped when a hand-written record already covers the same person
+ * (same kingdom, overlapping years, similar name).
+ */
+const sameName = (a: string, b: string) => {
+  const n = (x: string) => x.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const [x, y] = [n(a), n(b)];
+  return x === y || x.startsWith(y.slice(0, 7)) || y.startsWith(x.slice(0, 7));
+};
+const importedPeopleRecords: Person[] = importedPeople
+  .filter((p) => !curatedPeople.some((c) => c.polityId === p.polityId && sameName(c.name, p.name) && c.period.startYear <= (p.end ?? p.start) + 5 && p.start <= (c.period.endYear ?? c.period.startYear) + 5))
+  .map((p): Person => ({
+    id: p.id,
+    slug: p.id,
+    name: p.name,
+    role: p.role,
+    polityId: p.polityId,
+    datesAre: p.datesAre as "reign" | "lifetime",
+    imageKey: "imageKey" in p ? (p.imageKey as string) : undefined,
+    period: { startYear: p.start, endYear: p.end, startQualifier: "circa", endQualifier: "circa", confidence: "probable" },
+    summary: p.summary || undefined,
+    provenance: [
+      p.datesFromText
+        ? { sourceId: WIKIDATA_SOURCE.id, note: "Role. Reign dates were read from the Wikipedia summary, not from Wikidata." }
+        : { sourceId: WIKIDATA_SOURCE.id, note: p.datesAre === "reign" ? "Role and reign dates." : "Role and life dates." },
+      ...(p.summary ? [{ sourceId: `wikipedia-ruler-${p.q}`, note: "Summary." }] : []),
+    ],
+  }));
+export const people: Person[] = [...curatedPeople, ...importedPeopleRecords];
+
+const curatedPlaces: Place[] = [
   { id: "thanjavur", slug: "thanjavur", name: "Thanjavur", placeType: "capital", coordinates: [79.1378, 10.787], region: "Tamil Nadu", imageKey: "chola-brihadisvara", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "gangaikondacholapuram", slug: "gangaikondacholapuram", name: "Gangaikonda Cholapuram", placeType: "capital", coordinates: [79.4486, 11.2075], region: "Tamil Nadu", imageKey: "place-gangaikondacholapuram", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "madurai", slug: "madurai", name: "Madurai", placeType: "capital", coordinates: [78.1198, 9.9252], region: "Tamil Nadu", imageKey: "pandya-meenakshi", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
@@ -503,219 +651,45 @@ export const places: Place[] = [
   { id: "polonnaruwa", slug: "polonnaruwa", name: "Polonnaruwa", placeType: "settlement", coordinates: [81.0006, 7.9403], region: "Sri Lanka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
 ];
 
+/** Capitals from Wikidata, except where a hand-written place already covers the same city. */
+const importedPlaceRecords: Place[] = importedPlaces
+  .filter((pl) => !curatedPlaces.some((c) => c.name.includes(pl.name) || pl.name.startsWith(c.name.split(" ")[0])))
+  .map((pl) => ({
+    id: pl.id,
+    slug: pl.id,
+    name: pl.name,
+    placeType: "capital",
+    coordinates: pl.coordinates as [number, number],
+    region: pl.region,
+    provenance: [{ sourceId: WIKIDATA_SOURCE.id, note: "Name and location." }],
+  }));
+export const places: Place[] = [...curatedPlaces, ...importedPlaceRecords];
+
 /**
- * Each polygon is the real union of modern districts that roughly cover a
- * kingdom's territory in that period — Indian districts, plus Natural
- * Earth's districts and divisions for Sri Lanka, Bangladesh and Pakistan —
- * simplified for rendering (scripts/build-boundaries.py rebuilds them).
- * That gives real coastlines instead of hand-drawn shapes, and each kingdom
- * changes shape at a few well-known turning points (the Chola hold on
- * northern Sri Lanka, the Pandya revival, Talikota…). But these are still
- * NOT reconstructed historical frontiers: modern district lines did not
- * exist then, and real extents shifted constantly within each period. See
- * the module-level notice above.
+ * Borders. Almost all come from Cliopatria — dated snapshots of one
+ * researched version of each state's territory (see CLIOPATRIA_SOURCE).
+ * The exception is Chera, which has no Cliopatria entry: its shape is
+ * still the union of modern Kerala districts, kept as a placeholder.
  */
+const cliopatriaBoundaryRecords: HistoricalBoundary[] = cliopatriaBoundaries.map((b) => ({
+  polityId: b.polityId,
+  validFrom: b.validFrom,
+  validTo: b.validTo,
+  confidence: "medium",
+  provenance: [{ sourceId: CLIOPATRIA_SOURCE.id, note: `Cliopatria entry "${b.source}".` }],
+  geometry: b.geometry as GeoJSON.Polygon | GeoJSON.MultiPolygon,
+}));
+
 export const boundaries: HistoricalBoundary[] = [
-  {
-    polityId: "chola",
-    validFrom: 850,
-    validTo: 984,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. Kaveri delta core." }],
-    geometry: boundaryGeometry("chola-850"),
-  },
-  {
-    polityId: "chola",
-    validFrom: 985,
-    validTo: 992,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier." }],
-    geometry: boundaryGeometry("chola-985"),
-  },
-  {
-    polityId: "chola",
-    validFrom: 993,
-    validTo: 1070,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. Includes northern Sri Lanka, held from Rajaraja I's conquest of Anuradhapura until about 1070." }],
-    geometry: boundaryGeometry("chola-993"),
-  },
-  {
-    polityId: "chola",
-    validFrom: 1071,
-    validTo: 1250,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier." }],
-    geometry: boundaryGeometry("chola-1071"),
-  },
-  {
-    polityId: "chola",
-    validFrom: 1251,
-    validTo: 1279,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. Reduced to the delta in the dynasty's last decades." }],
-    geometry: boundaryGeometry("chola-1251"),
-  },
-  {
-    polityId: "pandya",
-    validFrom: 1190,
-    validTo: 1250,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier." }],
-    geometry: boundaryGeometry("pandya-1190"),
-  },
-  {
-    polityId: "pandya",
-    validFrom: 1251,
-    validTo: 1310,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. The 13th-century revival, north to Kanchipuram." }],
-    geometry: boundaryGeometry("pandya-1251"),
-  },
-  {
-    polityId: "pandya",
-    validFrom: 1311,
-    validTo: 1345,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. After the Delhi Sultanate's raids of 1311." }],
-    geometry: boundaryGeometry("pandya-1311"),
-  },
-  {
-    polityId: "vijayanagara",
-    validFrom: 1336,
-    validTo: 1565,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. Without the Bahmani heartland around Gulbarga and Bidar; the Raichur doab was long contested." }],
-    geometry: boundaryGeometry("vijayanagara-1336"),
-  },
-  {
-    polityId: "vijayanagara",
-    validFrom: 1566,
-    validTo: 1646,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. After Talikota: ruled from Penukonda, Chandragiri and Vellore." }],
-    geometry: boundaryGeometry("vijayanagara-1566"),
-  },
   {
     polityId: "chera",
     validFrom: 800,
     validTo: 1124,
     confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier." }],
+    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern Kerala districts — not a reconstructed frontier." }],
     geometry: boundaryGeometry("chera-800"),
   },
-  {
-    polityId: "rashtrakuta",
-    validFrom: 753,
-    validTo: 982,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier." }],
-    geometry: boundaryGeometry("rashtrakuta-753"),
-  },
-  {
-    polityId: "chalukya-kalyani",
-    validFrom: 973,
-    validTo: 1189,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier." }],
-    geometry: boundaryGeometry("chalukya-kalyani-973"),
-  },
-  {
-    polityId: "hoysala",
-    validFrom: 1026,
-    validTo: 1116,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. Hill-country core around Belur and Halebidu." }],
-    geometry: boundaryGeometry("hoysala-1026"),
-  },
-  {
-    polityId: "hoysala",
-    validFrom: 1117,
-    validTo: 1343,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier." }],
-    geometry: boundaryGeometry("hoysala-1117"),
-  },
-  {
-    polityId: "pala",
-    validFrom: 750,
-    validTo: 769,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. Northern Bengal." }],
-    geometry: boundaryGeometry("pala-750"),
-  },
-  {
-    polityId: "pala",
-    validFrom: 770,
-    validTo: 1161,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. Bengal and Bihar." }],
-    geometry: boundaryGeometry("pala-770"),
-  },
-  {
-    polityId: "pratihara",
-    validFrom: 730,
-    validTo: 815,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. Malwa and south-western Rajasthan." }],
-    geometry: boundaryGeometry("pratihara-730"),
-  },
-  {
-    polityId: "pratihara",
-    validFrom: 816,
-    validTo: 915,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. At its height, ruled from Kannauj." }],
-    geometry: boundaryGeometry("pratihara-816"),
-  },
-  {
-    polityId: "pratihara",
-    validFrom: 916,
-    validTo: 1036,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. Reduced to the Kannauj region." }],
-    geometry: boundaryGeometry("pratihara-916"),
-  },
-  {
-    polityId: "delhi-sultanate",
-    validFrom: 1206,
-    validTo: 1295,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. Punjab and the Ganga plain." }],
-    geometry: boundaryGeometry("delhi-sultanate-1206"),
-  },
-  {
-    polityId: "delhi-sultanate",
-    validFrom: 1296,
-    validTo: 1335,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. Khalji and Tughlaq expansion into central India and the Deccan." }],
-    geometry: boundaryGeometry("delhi-sultanate-1296"),
-  },
-  {
-    polityId: "delhi-sultanate",
-    validFrom: 1336,
-    validTo: 1526,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. Back to the north after the Deccan broke away." }],
-    geometry: boundaryGeometry("delhi-sultanate-1336"),
-  },
-  {
-    polityId: "bahmani",
-    validFrom: 1347,
-    validTo: 1489,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. The northern Deccan." }],
-    geometry: boundaryGeometry("bahmani-1347"),
-  },
-  {
-    polityId: "bahmani",
-    validFrom: 1490,
-    validTo: 1527,
-    confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Approximated as the union of modern districts over the historical heartland — not a reconstructed frontier. The rump state around Bidar, as the successor sultanates broke away." }],
-    geometry: boundaryGeometry("bahmani-1490"),
-  },
+  ...cliopatriaBoundaryRecords,
 ];
 
 /**
@@ -767,7 +741,7 @@ export const routes: HistoricalRoute[] = [
   },
 ];
 
-export const events: HistoricalEvent[] = [
+const curatedEvents: HistoricalEvent[] = [
   {
     id: "rajaraja-conquests",
     slug: "rajaraja-conquests",
@@ -869,6 +843,55 @@ export const events: HistoricalEvent[] = [
   },
 ];
 
+/** First two sentences of a Wikipedia lead, kept short. */
+function shortSummary(text: string | null): string {
+  if (!text) return "";
+  const cleaned = text.replace(/\s*\([^)]*\)/g, "").replace(/\[\d+\]/g, "");
+  const sentences = cleaned.split(/(?<=[.!?])\s+(?=[A-Z])/);
+  let out = "";
+  for (const s of sentences) {
+    if (out && out.length + s.length > 320) break;
+    out += (out ? " " : "") + s;
+  }
+  return out;
+}
+
+const polityNameById = new Map(polities.map((p) => [p.id, p.name]));
+
+/**
+ * Battles imported from Wikidata (dates, places) and Wikipedia (summaries).
+ * Wikidata rarely records who fought, so each battle is linked to the
+ * kingdoms whose Cliopatria borders contained the site in that year, and the
+ * summary says so rather than implying they were the combatants.
+ */
+const battleEvents: HistoricalEvent[] = importedBattles.map((b) => {
+  const names = b.polityIds.map((id) => polityNameById.get(id)).filter((n): n is string => Boolean(n));
+  const where = names.length
+    ? `The site lay within the borders of ${names.join(" and ")} that year (per Cliopatria).`
+    : "The site lay outside every kingdom mapped in the atlas that year.";
+  return {
+    id: b.id,
+    slug: b.id,
+    title: b.name,
+    period: { startYear: b.year, endYear: null, startQualifier: "exact", endQualifier: "exact", confidence: "probable" },
+    summary: [shortSummary(b.extract), where].filter(Boolean).join(" "),
+    polityIds: b.polityIds,
+    placeIds: [],
+    category: "battle",
+    location: b.location as [number, number],
+    provenance: [
+      { sourceId: "wikidata", note: "Date and place." },
+      ...(b.wikipedia ? [{ sourceId: `wikipedia-battle-${b.wikidata}`, note: "Summary." }] : []),
+      { sourceId: "cliopatria", note: "Which kingdom's borders contained the site." },
+    ],
+  };
+});
+
+export const events: HistoricalEvent[] = [...curatedEvents, ...battleEvents];
+/** Hand-picked turning points: what playback pauses on and the timeline marks. */
+export const milestones: HistoricalEvent[] = events.filter((e) => e.category !== "battle");
+export const battles: HistoricalEvent[] = events.filter((e) => e.category === "battle");
+
 /**
  * The photograph here is a real, credited 10th-century Tamil temple
  * inscription (see lib/data/images.ts). The claim/interpretation text
@@ -880,9 +903,44 @@ export const events: HistoricalEvent[] = [
  */
 export const evidence: Evidence[] = [
   {
+    id: "sii-ii-85",
+    slug: "sii-ii-85",
+    title: "Rajaraja I's inventory of temple images at Thanjavur",
+    evidenceType: "inscription",
+    period: { startYear: 1014, endYear: null, confidence: "probable", startQualifier: "circa", endQualifier: "circa" },
+    material: "Stone (pillar of the west enclosure)",
+    script: "Tamil",
+    language: "Tamil",
+    placeId: "thanjavur",
+    catalogueId: "SII vol. II, no. 85",
+    imageKey: "evidence-stone-inscription",
+    imageIsIllustrative: true,
+    textIsIllustrative: false,
+    transcription: [],
+    transliteration: [],
+    translation: [
+      "Hail! Prosperity! The (following) copper images which the lord Sri-Rajarajadeva had set up until the twenty-ninth year (of his reign) in the temple of the lord Sri-Rajarajesvara-mudaiyar were measured by the cubit measure (preserved) in the temple of the lord and engraved (i.e. recorded) on stone:",
+      "2. One solid image of Pillaiyar Ganapatiyar in the dancing posture, with four divine arms, (and measuring) fourteen viral in height from the feet to the hair.",
+      "6. One solid image of Pillaiyar Ganapatiyar, in the standing posture, with four divine arms, (and measuring) fifteen viral in height from the feet to the hair.",
+      "10. One solid image of Pillaiyar Ganapatiyar, comfortably seated, with four divine arms, (and measuring) nine viral in height from the feet to the hair.",
+    ],
+    lineRegions: [],
+    claim:
+      "By the 29th year of his reign, Rajaraja I had installed a large set of copper images in the Thanjavur temple — several of Ganapati among them — and had them measured and recorded on its walls.",
+    claimIsIllustrative: false,
+    interpretation:
+      "The inscription says the images were measured against the cubit rule kept in the temple, then cut in stone. That makes it an official inventory of the temple's treasure. The length units (viral and others) are the editors' transliterations of Tamil measures.",
+    uncertainty: { dating: "medium", interpretation: "high", geographic: "high" },
+    sourceIds: ["sii-vol-2"],
+    polityIds: ["chola"],
+    provenance: [
+      { sourceId: "sii-vol-2", note: "No. 85, printed pp. 406-407: introduction and items 2, 6 and 10 of the translation." },
+    ],
+  },
+  {
     id: "inscription-014",
     slug: "inscription-014",
-    title: "Example: a Chola temple inscription",
+    title: "Example of line-by-line linking (placeholder text)",
     evidenceType: "inscription",
     period: { startYear: 985, endYear: 1014, confidence: "illustrative", startQualifier: "circa", endQualifier: "circa" },
     material: "Stone (temple wall)",

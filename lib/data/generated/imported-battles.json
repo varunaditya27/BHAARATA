@@ -1,0 +1,1923 @@
+[
+ {
+  "id": "battle-battle-of-vatapi-642",
+  "name": "Battle of Vatapi",
+  "year": 642,
+  "date": "0642-01-01",
+  "location": [
+   75.6803,
+   15.9203
+  ],
+  "wikidata": "Q4872651",
+  "wikipedia": "Battle_of_Vatapi",
+  "extract": "The Battle of Vatapi was a decisive engagement which took place between the Pallavas and Chalukyas near the Chalukya capital of Vatapi in 642. The battle resulted in the defeat of the Chalukya king Pulakeshin II in 642 CE and the commencement of Pallava occupation of Vatapi lasted until 654.",
+  "polityIds": [
+   "chalukya-badami"
+  ]
+ },
+ {
+  "id": "battle-battle-of-rasil-644",
+  "name": "Battle of Rasil",
+  "year": 644,
+  "date": "0644-01-01",
+  "location": [
+   81.7684,
+   31.2421
+  ],
+  "wikidata": "Q4872166",
+  "wikipedia": "Battle_of_Rasil",
+  "extract": "The Battle of Rasil was fought between the Rashidun Caliphate and the Rai dynasty of Sindh in early 640 AD in present-day Pakistan. It was the first battle the Muslims fought in the Indian subcontinent. The exact location of the battle is not known, but historians suggest it was fought on the western bank of the River Indus.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-chabuheluo-647",
+  "name": "Battle of Chabuheluo",
+  "year": 647,
+  "date": "0647-01-01",
+  "location": [
+   85.1414,
+   25.61
+  ],
+  "wikidata": "Q97695722",
+  "wikipedia": "Battle_of_Chabuheluo",
+  "extract": "The Battle of Chabuheluo was a battle that took place between an alliance led by the Tang dynasty and the Kingdom of Kannauj in 648 AD.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-badghis-654",
+  "name": "Battle of Badghis",
+  "year": 654,
+  "date": "0654-01-01",
+  "location": [
+   63.75,
+   35.0
+  ],
+  "wikidata": "Q16208711",
+  "wikipedia": "Revolt_of_Karen_(654)",
+  "extract": "The Persian revolts against the Rashidun Caliphate were a series of uprisings and insurgencies across former Sasanian territories between 646 and 661 CE. Following the initial Muslim conquest of Persia, these rebellions represented a major challenge to the consolidation of Rashidun control over the territories of the former Sasanian Empire. The unrest was primarily driven by the marginalization of the Persian elite and economic discontent regarding the imposition of taxes such as the Jizya and Kharaj.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-aror-712",
+  "name": "Battle of Aror",
+  "year": 712,
+  "date": "0712-06-24",
+  "location": [
+   68.9833,
+   27.65
+  ],
+  "wikidata": "Q122382759",
+  "wikipedia": "Battle_of_Aror",
+  "extract": "The Battle of Aror took place in 712 AD between the Umayyad forces under Muhammad ibn al-Qasim and the army of the Brahmin dynasty of Sindh under Raja Dahir. At the Battle of Aror, Muhammad ibn al-Qasim was met by Dahir's forces in battle. It was the last military conflict involving Raja Dahir, whose army was defeated by the Umayyads near the Indus River, and Dahir was killed.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-qandabil-720",
+  "name": "Battle of Qandabil",
+  "year": 720,
+  "date": "0720-01-01",
+  "location": [
+   67.4833,
+   28.6167
+  ],
+  "wikidata": "Q121537391",
+  "wikipedia": null,
+  "extract": null,
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-kharistan-737",
+  "name": "Battle of Kharistan",
+  "year": 737,
+  "date": "0737-12-01",
+  "location": [
+   64.75,
+   35.9333
+  ],
+  "wikidata": "Q18613312",
+  "wikipedia": "Battle_of_Kharistan",
+  "extract": "The Battle of Kharistan was fought between the forces of the Umayyad Caliphate and the Turkic Türgesh in December 737 near the town of Kharistan in Juzjan, eastern Khurasan. The Umayyads, under the governor of Khurasan, Asad ibn Abdallah al-Qasri, managed to surprise and defeat the Türgesh khagan, Suluk, and his ally, the Arab renegade al-Harith ibn Surayj.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-friday-battle-748",
+  "name": "Friday Battle",
+  "year": 748,
+  "date": "0748-01-01",
+  "location": [
+   62.0,
+   36.0
+  ],
+  "wikidata": "Q110271591",
+  "wikipedia": null,
+  "extract": null,
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-kanchi-803",
+  "name": "Battle of Kanchi",
+  "year": 803,
+  "date": "0803-01-01",
+  "location": [
+   79.7078,
+   12.8308
+  ],
+  "wikidata": "Q131453471",
+  "wikipedia": null,
+  "extract": null,
+  "polityIds": [
+   "pallava"
+  ]
+ },
+ {
+  "id": "battle-battle-of-balkh-900",
+  "name": "Battle of Balkh",
+  "year": 900,
+  "date": "0900-01-01",
+  "location": [
+   66.8989,
+   36.7581
+  ],
+  "wikidata": "Q4087412",
+  "wikipedia": "Battle_of_Balkh",
+  "extract": "The Battle of Balkh took place between the armies of the Samanid Empire under the command of Emir Isma'il ibn Ahmad and Saffarid forces under Emir Amr ibn al-Layth in 900. The Saffarid army was defeated by the Samanid forces, and Amr ibn al-Layth was captured.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-takkolam-949",
+  "name": "Battle of Takkolam",
+  "year": 949,
+  "date": "0949-01-01",
+  "location": [
+   79.7353,
+   13.0159
+  ],
+  "wikidata": "Q4872491",
+  "wikipedia": "Battle_of_Takkolam",
+  "extract": "The Battle of Takkolam (948–949) was a military engagement between a contingent of troops led by Rajaditya, crown prince and eldest son of the Chola king Parantaka I (907–955), and another led by the Rashtrakuta king Krishna III (939–967) at Takkolam in southern India. The battle resulted in the death of Rajaditya on the battlefield and the defeat of the Chola garrison at Takkolam.",
+  "polityIds": [
+   "chola"
+  ]
+ },
+ {
+  "id": "battle-battle-of-ghazni-998",
+  "name": "Battle of Ghazni",
+  "year": 998,
+  "date": "0998-03-01",
+  "location": [
+   68.4233,
+   33.5492
+  ],
+  "wikidata": "Q15224206",
+  "wikipedia": "Battle_of_Ghazni_(998)",
+  "extract": "The Battle of Ghazni was fought in March 998 AD between the rival Ghaznavid forces of Amir Ismail and those of his elder brother Mahmud of Ghazni.",
+  "polityIds": [
+   "ghaznavid"
+  ]
+ },
+ {
+  "id": "battle-battle-of-peshawar-1001",
+  "name": "Battle of Peshawar",
+  "year": 1001,
+  "date": "1001-12-03",
+  "location": [
+   71.5675,
+   34.0144
+  ],
+  "wikidata": "Q4872019",
+  "wikipedia": "Battle_of_Peshawar_(1001)",
+  "extract": "The Battle of Peshawar was fought on 27 November 1001 between the Ghaznavid army of Mahmud of Ghazni and the Hindu Shahi army of Jayapala, near Peshawar. Jayapala was defeated and captured, and as a result of the humiliation of the defeat, he later immolated himself in a funeral pyre. This is the first of many major battles in the expansion of the Ghaznavid Empire into the Indian subcontinent by Mahmud.",
+  "polityIds": [
+   "ghaznavid"
+  ]
+ },
+ {
+  "id": "battle-battle-of-chach-1009",
+  "name": "Battle of Chach",
+  "year": 1009,
+  "date": "1009-01-01",
+  "location": [
+   72.4928,
+   33.9097
+  ],
+  "wikidata": "Q23043477",
+  "wikipedia": "Battle_of_Chach",
+  "extract": "The Battle of Chach or Battle of Chaach was fought in 1009 AD between the Ghaznavid army of Mahmud of Ghazni and the Hindu Shahi army of Anandapala, near Hazro, resulting in the latter's defeat. This left the north Indian region vulnerable to further invasions.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-nandana-1014",
+  "name": "Battle of Nandana",
+  "year": 1014,
+  "date": "1014-03-01",
+  "location": [
+   73.2359,
+   32.728
+  ],
+  "wikidata": "Q138606112",
+  "wikipedia": "Battle_of_Nandana",
+  "extract": "The Battle of Nandana or Battle of Nazin was a decisive engagement in March 1014 CE during Mahmud of Ghazni's campaign against the Hindu Shahis in the Salt Range region of present-day Pakistan. Trilocanapala the Hindu Shahi ruler left his son Bhima or Bhimapala to defend the Nandana fort and received Kashmiri reinforcements from Lohara king Sangramaraja. In March 1014, Mahmud arrived at Nandana. Bhima, defending the position using the terrain and relied on hit-and-run skirmishes to keep the Ghaznavids at bay. Mahmud maneuvered to draw Bhima into open battle. In the ensued conflict the Ghaznavid contingents overwhelmed the Hindu Shahis, securing a decisive victory. Mahmud then besieged and captured Nandana. Although Bhima escaped and survived; the victory severely weakened the Hindu Shahis.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-the-river-tausi-1014",
+  "name": "Battle of the River Tausi",
+  "year": 1014,
+  "date": "1014-01-01",
+  "location": [
+   73.7485,
+   33.3323
+  ],
+  "wikidata": "Q138606277",
+  "wikipedia": "Battle_of_the_River_Tausi",
+  "extract": "The Battle of River Tausi in 1014 CE was a decisive Ghaznavid victory during Mahmud of Ghazni's campaign against the Hindu Shahis. Trilochanapala, with Kashmiri Lohara contingents under commander Tunga, held the left bank of the Tausi, modern Poonch River. Ignoring Trilochanapala's warnings, the overconfident Tunga crossed the river, won a minor skirmish against a minor Ghaznavid party, but was crushed the next day by Mahmud's main force. The Kashmiri troops fled, Tunga escaped, and Trilochanapala's rallied stand failed. Mahmud annexed the region up to the Jhelum River.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-the-ramganga-1020",
+  "name": "Battle of the Ramganga",
+  "year": 1020,
+  "date": "1020-10-01",
+  "location": [
+   79.2573,
+   30.0966
+  ],
+  "wikidata": "Q138658382",
+  "wikipedia": "Battle_of_the_Ramganga",
+  "extract": "The Battle of the Ramganga or Battle of the Rahib in December 1020 AD was a decisive battle, during Mahmud of Ghazni's second invasion of the Doab. Ghaznavid forces defeated the Hindu Shahi army of Trilocanapala at the upper course Ramganga River known as River Ruhut near Afzalgarh. Trilocanapala entrenched on the eastern bank with infantry and elephants to block the crossing. After detecting Trilocanapala's nighttime plan to flee downstream, Mahmud sent eight swimmers across on inflated skins; they repelled Hindu archers and five elephants, secured the bank, and enabled the full army to cross without loss. At dawn the Ghaznavids surprised and routed Trilocanapala's camp after a day-long battle. Trilocanapala escaped wounded; his army suffered heavy casualties, prisoners, and flight. Mahmud captured rich spoils. Trilocanapala was later assassinated by his followers while joining Chandela ruler Vidyadhara",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-somnath-1026",
+  "name": "Battle of Somnath",
+  "year": 1026,
+  "date": "1026-01-14",
+  "location": [
+   70.37,
+   20.91
+  ],
+  "wikidata": "Q22934305",
+  "wikipedia": null,
+  "extract": null,
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-sarakhs-1038",
+  "name": "Battle of Sarakhs",
+  "year": 1038,
+  "date": "1038-05-01",
+  "location": [
+   61.1578,
+   36.545
+  ],
+  "wikidata": "Q113576034",
+  "wikipedia": "Battle_of_Sarakhs_(1038)",
+  "extract": "The Battle of Sarakhs took place in 1038 between the Seljuk army under the command of Chaghri Beg, Tughril I, and Ibrahim Inal and the Ghaznavid army under the command of Begtoghdi and Subashi. As a result of the battle, the Ghaznavids were defeated.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-koppam-1054",
+  "name": "Battle of Koppam",
+  "year": 1054,
+  "date": "1054-01-01",
+  "location": [
+   76.1833,
+   10.8833
+  ],
+  "wikidata": "Q4871479",
+  "wikipedia": "Battle_of_Koppam",
+  "extract": "The Battle of Koppam was fought between the Medieval Chola kings Rajadhiraja Chola I and Rajendra Chola II with the Chalukya king Someshvara I in 1054, or in 1052 according to Sen. Though the Cholas were successful in the battle, the king and supreme commander, Rajadhiraja I lost his life in the battlefield and was succeeded to the throne by his younger brother, Rajendra Chola II.",
+  "polityIds": [
+   "chera",
+   "chola"
+  ]
+ },
+ {
+  "id": "battle-battle-of-kudal-sangamam-1062",
+  "name": "Battle of Kudal-Sangamam",
+  "year": 1062,
+  "date": "1062-01-01",
+  "location": [
+   76.06,
+   16.2036
+  ],
+  "wikidata": "Q4871498",
+  "wikipedia": "Battle_of_Kudal-Sangamam",
+  "extract": "The First Battle of Kudal-Sangamam was fought in 1062 by the forces of the Chola king Rajendra Chola II and the Western Chalukya king Someshvara I at Kudal-Sangamam, where the Krishna and the Tungabhadra meet.",
+  "polityIds": [
+   "chalukya-kalyani"
+  ]
+ },
+ {
+  "id": "battle-battle-of-vijayawada-1068",
+  "name": "Battle of Vijayawada",
+  "year": 1068,
+  "date": "1068-01-01",
+  "location": [
+   80.6167,
+   16.5167
+  ],
+  "wikidata": "Q4872672",
+  "wikipedia": "Battle_of_Vijayawada",
+  "extract": "The Battle of Vijayawada was fought in 1068 between the Chola army under Virarajendra Chola and the Western Chalukya army commanded by Vikramaditya VI near the present-day city of Vijayawada in Andhra Pradesh, India. The war resulted in the recovery of Vengi Andhra by the Cholas and coronation of Vijayaditya VII as Eastern Chalukya ruler by Virarajendra Chola.",
+  "polityIds": [
+   "chola"
+  ]
+ },
+ {
+  "id": "battle-battle-of-ghazni-1117",
+  "name": "Battle of Ghazni",
+  "year": 1117,
+  "date": "1117-01-01",
+  "location": [
+   68.4233,
+   33.5492
+  ],
+  "wikidata": "Q16207166",
+  "wikipedia": "Battle_of_Ghazni_(1117)",
+  "extract": "The Battle of Ghazni was fought in 1117 between the Seljuk forces supporting the claim of Bahram of Ghazna and the army of his brother the ruling Sultan Arslan-Shah of Ghazna.",
+  "polityIds": [
+   "ghaznavid"
+  ]
+ },
+ {
+  "id": "battle-battle-of-kachhi-1142",
+  "name": "Battle of Kachhi",
+  "year": 1142,
+  "date": "1142-01-01",
+  "location": [
+   67.3497,
+   29.106
+  ],
+  "wikidata": "Q4871361",
+  "wikipedia": "Battle_of_Kachhi",
+  "extract": "Battle of Kachhi also known as Battle of Jandari was fought between the Khanate of Kalat and Kalhora Dyansty led by Mian Noor Mohammad Kalhoro due to the territorial dispute over the Kachhi region in present-day Balochistan.",
+  "polityIds": [
+   "ghaznavid"
+  ]
+ },
+ {
+  "id": "battle-battle-of-ghazni-1148",
+  "name": "Battle of Ghazni",
+  "year": 1148,
+  "date": "1148-01-01",
+  "location": [
+   68.4233,
+   33.5492
+  ],
+  "wikidata": "Q16207176",
+  "wikipedia": "Battle_of_Ghazni_(1148)",
+  "extract": "The Battle of Ghazni was fought in 1148 between the Ghurid army of Sayf al-Din Suri and the army of the Ghaznavid Sultan Bahram-Shah of Ghazna. The Ghurid ruler defeated Bahram-Shah and took the city while Bahram-Shah fled to Kurram District in present day Pakistan.",
+  "polityIds": [
+   "ghaznavid"
+  ]
+ },
+ {
+  "id": "battle-battle-of-ghazni-1151",
+  "name": "Battle of Ghazni",
+  "year": 1151,
+  "date": "1151-01-01",
+  "location": [
+   68.4233,
+   33.5492
+  ],
+  "wikidata": "Q16207187",
+  "wikipedia": "Battle_of_Ghazni_(1151)",
+  "extract": "The Battle of Ghazni was fought in 1151 between the Ghurid army of Ala al-Din Husayn and the army of the Ghaznavid Sultan Bahram-Shah of Ghazna. The Ghurid ruler defeated Bahram-Shah, captured the city, and destroyed it as revenge for the execution of his brother Quṭb ud-Dīn in 1149.",
+  "polityIds": [
+   "ghaznavid"
+  ]
+ },
+ {
+  "id": "battle-battle-of-nettur-1188",
+  "name": "Battle of Nettur",
+  "year": 1188,
+  "date": "1188-01-01",
+  "location": [
+   75.3811,
+   31.38
+  ],
+  "wikidata": "Q4871880",
+  "wikipedia": "Battle_of_Nettur",
+  "extract": "The Battle of Nettur was an engagement between the Chola Emperor Kulothunga Chola III and Vira Pandya, the claimant to the Pandya throne in 1188. The subsequent crisis was erupted in the aftermath of the Pandyan Civil War, which led to the ascension of Vira Pandya.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-bagar-1192",
+  "name": "Battle of Bagar",
+  "year": 1192,
+  "date": "1192-09-01",
+  "location": [
+   75.5,
+   28.18
+  ],
+  "wikidata": "Q121853731",
+  "wikipedia": "Rebellion_of_Jatwan",
+  "extract": "The Rebellion of Jatwan was a revolt staged by Jatwan against the Ghurid empire in 1192 CE. The Ghurids defeated the rebel forces and Jatwan was killed in the battle.",
+  "polityIds": [
+   "chauhan"
+  ]
+ },
+ {
+  "id": "battle-second-battle-of-tarain-1192",
+  "name": "Second Battle of Tarain",
+  "year": 1192,
+  "date": "1192-01-01",
+  "location": [
+   76.94,
+   29.78
+  ],
+  "wikidata": "Q2890128",
+  "wikipedia": "Second_Battle_of_Tarain",
+  "extract": "The Second Battle of Tarain or Second Battle of Tararoi was fought in 1192 between the Ghurid forces of Muhammad Ghuri and the Rajput Confederacy of Prithviraj Chauhan. It took place near Tarain, which is 110 kilometres (68 mi), north of Delhi. The battle ended in a decisive victory for the invading Ghurids and their successful penetration into the north Indian plain.",
+  "polityIds": [
+   "ghurid"
+  ]
+ },
+ {
+  "id": "battle-battle-of-chandawar-1194",
+  "name": "Battle of Chandawar",
+  "year": 1194,
+  "date": "1194-01-01",
+  "location": [
+   78.367,
+   27.107
+  ],
+  "wikidata": "Q4870708",
+  "wikipedia": "Battle_of_Chandawar",
+  "extract": "The Battle of Chandawar was fought in 1194 between Muhammad of Ghor and Jayachandra of the Gahadavala dynasty. It took place at Chandawar, on the Yamuna River close to Agra. The victory of this battle gave Muhammad control of much of North India. The battle was hotly contested, until Jayachandra was killed and his army routed.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-andkhud-1204",
+  "name": "Battle of Andkhud",
+  "year": 1204,
+  "date": "1204-01-01",
+  "location": [
+   65.1253,
+   36.953
+  ],
+  "wikidata": "Q113993568",
+  "wikipedia": "Battle_of_Andkhud",
+  "extract": "The battle of Andkhud, also spelt as battle of Andkhui, was fought in 1204 on the bank of river Oxus near Andkhoy in present-day Afghanistan. It was fought between the Ghurid forces of Muhammad of Ghor against the Qara Khitai forces led by Tayangu of Taraz. The battle ended in a complete rout of the Ghurids, although Muhammad of Ghor managed to escape the debacle after the intervention by Uthman of Qarakhanid.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-waliyan-1221",
+  "name": "Battle of Waliyan",
+  "year": 1221,
+  "date": "1221-01-01",
+  "location": [
+   68.8786,
+   35.4783
+  ],
+  "wikidata": "Q124617395",
+  "wikipedia": "Battle_of_Waliyan",
+  "extract": "The Battle of Parwan was fought between Sultan Jalal al-Din Mangburni of the Khwarazmian Empire and the Mongols ruled by Genghis Khan in September 1221 AD during the Mongol invasion of the Khwarazmian Empire at Parwan, north of Kabul, in present-day Afghanistan. Jalal ad-Din had previously attacked a detachment of Mongols near Wilan (Waliyan), which provoked Genghis Khan into sending an army of 30,000 troops under Shigi Qutuqu. As a result of the tactics adopted by Jalal ad-Din, the Mongol army was destroyed in a two-day battle. As news of the Mongol defeat spread, several cities, including Merv and Herat, which had previously surrendered and accepted Mongol rule, rebelled. In response, Genghis Khan moved to battle Jalal ad-Din, who had lost half of his troops to desertion due to a quarrel over the division of spoils after the battle, and was forced to move to Ghazni to prepare to retreat to India. Genghis Khan intercepted Jalal ad-Din's army as he was preparing to cross the Indus River, and in the ensuing battle he lost his army, treasury and family, but survived to eventually establish a power base in Punjab and Sindh.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-parwan-1221",
+  "name": "Battle of Parwan",
+  "year": 1221,
+  "date": "1221-01-01",
+  "location": [
+   69.0,
+   35.0
+  ],
+  "wikidata": "Q3269746",
+  "wikipedia": "Battle_of_Parwan",
+  "extract": "The Battle of Parwan was fought between Sultan Jalal al-Din Mangburni of the Khwarazmian Empire and the Mongols ruled by Genghis Khan in September 1221 AD during the Mongol invasion of the Khwarazmian Empire at Parwan, north of Kabul, in present-day Afghanistan. Jalal ad-Din had previously attacked a detachment of Mongols near Wilan (Waliyan), which provoked Genghis Khan into sending an army of 30,000 troops under Shigi Qutuqu. As a result of the tactics adopted by Jalal ad-Din, the Mongol army was destroyed in a two-day battle. As news of the Mongol defeat spread, several cities, including Merv and Herat, which had previously surrendered and accepted Mongol rule, rebelled. In response, Genghis Khan moved to battle Jalal ad-Din, who had lost half of his troops to desertion due to a quarrel over the division of spoils after the battle, and was forced to move to Ghazni to prepare to retreat to India. Genghis Khan intercepted Jalal ad-Din's army as he was preparing to cross the Indus River, and in the ensuing battle he lost his army, treasury and family, but survived to eventually establish a power base in Punjab and Sindh.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-indus-1221",
+  "name": "Battle of Indus",
+  "year": 1221,
+  "date": "1221-12-01",
+  "location": [
+   72.18,
+   33.77
+  ],
+  "wikidata": "Q3269760",
+  "wikipedia": "Battle_of_the_Indus",
+  "extract": "The Battle of the Indus was fought on the banks of the Indus River, on 24 November 1221, between the armies commanded by Jalal al-Din of the Khwarazmian Empire, and Genghis Khan of the Mongol Empire. The battle, which resulted in an overwhelming Mongol victory, was the concluding engagement in the Mongol invasion of the Khwarazmian Empire.",
+  "polityIds": [
+   "delhi-sultanate"
+  ]
+ },
+ {
+  "id": "battle-battle-of-ucha-1222",
+  "name": "Battle of Ucha",
+  "year": 1222,
+  "date": "1222-01-01",
+  "location": [
+   74.0,
+   31.0
+  ],
+  "wikidata": "Q136332996",
+  "wikipedia": null,
+  "extract": null,
+  "polityIds": [
+   "delhi-sultanate"
+  ]
+ },
+ {
+  "id": "battle-battle-of-herat-1270",
+  "name": "Battle of Herat",
+  "year": 1270,
+  "date": "1270-07-29",
+  "location": [
+   61.47,
+   34.34
+  ],
+  "wikidata": "Q132675250",
+  "wikipedia": "Battle_of_Herat_(1270)",
+  "extract": "The Battle of Herat was fought between the Ilkhanid forces of Abaqa Khan and the invading Chagatai forces of Ghiyas-ud-din Baraq on 22 July 1270. The battle marked the climax of a broader power struggle within the fractured Mongol Empire, as former allies and competing ulus contended for supremacy in the aftermath of the Toluid Revolution and the succession crisis. Despite initial successes for the Chagatai forces in Khorasan, they were met with a crushing defeat at Herat by Abaqa Khan, who then retaliated by invading Bukhara but later retreated, securing the Ilkhanid-Chagatai border.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-beas-river-1285",
+  "name": "Battle of Beas River",
+  "year": 1285,
+  "date": "1285-01-01",
+  "location": [
+   77.0909,
+   32.3534
+  ],
+  "wikidata": "Q19568883",
+  "wikipedia": "Battle_of_Beas_River",
+  "extract": "The Battle of Beas River took place between the Chagatai Khanate and the Mamluk Sultanate of Delhi on 9 March 1285. Ghiyas ud din Balban arranged a military defense line across the Beas River as part of his \"blood and iron\" fortification chain strategy at Multan and Lahore as a countermeasure against the Chagatai Khanate invasion. Balban managed to repulse the invasion. However, his son Muhammad Khan was slain in battle.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-jhain-1291",
+  "name": "Battle of Jhain",
+  "year": 1291,
+  "date": "1291-03-01",
+  "location": [
+   76.4823,
+   25.8908
+  ],
+  "wikidata": "Q122808415",
+  "wikipedia": "Capture_of_Jhain",
+  "extract": "The Capture of Jhain was a military expedition carried out by the Delhi Sultanate under Jalal-ud-din Khalji against the Kingdom of Ranthambore. It took place in the March of 1291 when the Delhi forces defeated the Ranthambore forces under Gurdan Saini and captured the city of Jhain.",
+  "polityIds": [
+   "delhi-sultanate"
+  ]
+ },
+ {
+  "id": "battle-battle-of-sind-1298",
+  "name": "Battle of Sind",
+  "year": 1298,
+  "date": "1298-01-01",
+  "location": [
+   67.8629,
+   26.4234
+  ],
+  "wikidata": "Q19562964",
+  "wikipedia": "Mongol_invasion_of_Sindh",
+  "extract": "In 1298–99, a Mongol army invaded the Sindh region of the Delhi Sultanate, and occupied the fort of Sivistan in present-day Pakistan. The Delhi Sultan Alauddin Khalji dispatched his general Zafar Khan to evict the Mongols. Zafar Khan recaptured the fort, and imprisoned the Mongol leader Saldi and his companions.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-kili-1299",
+  "name": "Battle of Kili",
+  "year": 1299,
+  "date": "1299-01-01",
+  "location": [
+   77.2309,
+   28.6546
+  ],
+  "wikidata": "Q19840229",
+  "wikipedia": "Battle_of_Kili",
+  "extract": "The Battle of Kili was fought in 1299 between the Mongols of the Chagatai Khanate and the Delhi Sultanate. The Mongols, led by Qutlugh Khwaja, invaded India, intending to conquer Delhi and the Indian subcontinent. When they encamped at Kili near Delhi, the Delhi Sultan Alauddin Khalji led an army to check their advance.",
+  "polityIds": [
+   "delhi-sultanate"
+  ]
+ },
+ {
+  "id": "battle-battle-of-amroha-1305",
+  "name": "Battle of Amroha",
+  "year": 1305,
+  "date": "1305-12-28",
+  "location": [
+   78.4673,
+   28.9044
+  ],
+  "wikidata": "Q4870295",
+  "wikipedia": "Battle_of_Amroha",
+  "extract": "The Battle of Amroha was fought on 20 December 1305 between the armies of the Delhi Sultanate of India and the Mongol Chagatai Khanate of Central Asia. The Delhi force led by Malik Nayak defeated the Mongol army led by Ali Beg and Tartaq near Amroha in present-day Uttar Pradesh.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-ravi-1306",
+  "name": "Battle of Ravi",
+  "year": 1306,
+  "date": "1306-01-01",
+  "location": [
+   71.8278,
+   30.6211
+  ],
+  "wikidata": "Q24963774",
+  "wikipedia": "Mongol_invasion_of_India_(1306)",
+  "extract": "In 1306, the Chagatai Khanate ruler Duwa sent an expedition to India, to avenge the Mongol defeat in 1305. The invading army included three contingents led by Kopek, Iqbalmand, and Tai-Bu. To check the invaders' advance, the Delhi Sultanate ruler Alauddin Khalji dispatched an army led by Malik Kafur, and supported by other generals such as Malik Tughluq. The Delhi army achieved a decisive victory.",
+  "polityIds": [
+   "delhi-sultanate"
+  ]
+ },
+ {
+  "id": "battle-battle-of-mandavgad-1437",
+  "name": "Battle of Mandavgad",
+  "year": 1437,
+  "date": "1437-01-01",
+  "location": [
+   75.4158,
+   22.3353
+  ],
+  "wikidata": "Q22935913",
+  "wikipedia": null,
+  "extract": null,
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-tarnab-1448",
+  "name": "Battle of Tarnab",
+  "year": 1448,
+  "date": "1448-01-01",
+  "location": [
+   62.2031,
+   34.3419
+  ],
+  "wikidata": "Q4872511",
+  "wikipedia": "Battle_of_Tarnab_(1448)",
+  "extract": "The Battle of Tarnab took place in 1448.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-devarakonda-1458",
+  "name": "Battle of Devarakonda",
+  "year": 1458,
+  "date": "1458-01-01",
+  "location": [
+   78.933,
+   16.7
+  ],
+  "wikidata": "Q125620490",
+  "wikipedia": "Battle_of_Devarakonda",
+  "extract": "The Battle of Devarkonda took place between Gajapati Empire and Bahmani Sultanate in 1458 A.D. at Devarkonda, Telangana, India. In this battle Odia forces led by prince Hamvira Deva under king Gajapati Kapilendra Deva crushed a massive army of Bahmani Muslim forces led by Humayun Shah. The battle ended with Odia victory and thus Devarkonda became a vassal state of Gajapati Empire.",
+  "polityIds": [
+   "vijayanagara"
+  ]
+ },
+ {
+  "id": "battle-battle-of-sarakhs-1459",
+  "name": "Battle of Sarakhs",
+  "year": 1459,
+  "date": "1459-03-01",
+  "location": [
+   61.1578,
+   36.545
+  ],
+  "wikidata": "Q4872314",
+  "wikipedia": "Battle_of_Sarakhs_(1459)",
+  "extract": "Battle of Sarakhs took place in March 1459, at a location between Merv and Sarakhs.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-ghwarah-marghah-1460",
+  "name": "Battle of Ghwarah Marghah",
+  "year": 1460,
+  "date": "1460-01-01",
+  "location": [
+   69.1658,
+   34.5328
+  ],
+  "wikidata": "Q136872730",
+  "wikipedia": "Battle_of_Ghwarah_Marghah",
+  "extract": "The Battle of Ghwarah Marghah (1460) was fought between the Yusufzai Afghan tribal confederacy under Malak Sulaiman Shah Yusufzai and the combined forces of Mirza Ulugh Beg and his allies from the Gigyani tribe near Kabul, Afghanistan. The battle ended in a decisive Afghan victory, temporarily reestablishing Yusufzai influence in the Kabul region and weakening Timurid control.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-calicut-1503",
+  "name": "Battle of Calicut",
+  "year": 1503,
+  "date": "1503-01-16",
+  "location": [
+   75.7803,
+   11.2478
+  ],
+  "wikidata": "Q4870615",
+  "wikipedia": "Battle_of_Calicut_(1503)",
+  "extract": "The naval Battle of Calicut was a military encounter between the 16 ships of the 4th Portuguese Armada and a fleet led by two Arabic corsairs formed under the orders of the Zamorin of Kozhikode.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-pandarane-1504",
+  "name": "Battle of Pandarane",
+  "year": 1504,
+  "date": "1504-01-01",
+  "location": [
+   75.7,
+   11.43
+  ],
+  "wikidata": "Q4871980",
+  "wikipedia": "Battle_of_Pandarane",
+  "extract": "The Battle of Pandarane was a naval engagement between the Portuguese forces commanded by Lopo Soares de Albergaria, a famous Portuguese commander, and a large fleet of then Mamluk Sultan. The Portuguese were victorious.",
+  "polityIds": [
+   "vijayanagara"
+  ]
+ },
+ {
+  "id": "battle-battle-of-qalat-i-ghilzai-1505",
+  "name": "Battle of Qalat-i-Ghilzai",
+  "year": 1505,
+  "date": "1505-01-01",
+  "location": [
+   66.9069,
+   32.1061
+  ],
+  "wikidata": "Q4872132",
+  "wikipedia": "Battle_of_Qalat",
+  "extract": "Babur had planned an expedition against Kandahar in 1506, which was governed by Shah Shuja better known as Shah Beg Arghun. Babur had marched towards Shniz where Wardak Afghans were residents. He had not decided yet whether or not to proceed against Kandahar when he held a war council in which his brother Jahangir Mirza II and Baqi Cheghaniani suggested instead of taking Qalati Ghilji. Qalati Ghilji was bestowed on Mukim Beg Arghun by his father Dhul-Nun Beg Arghun. Mukim's partisans, Farrukh Arghun and Kara Bilut, held it at this time on his part. On reaching Tazi, Sher Ali Chihreh and Kuchek Baqi Dewana, with some others, had formed the plan of deserting. Babur instantly had them seized, Sher Ali Chihreh was executed, having deprived the others of their arms and horses, he let them go.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-chaul-1508",
+  "name": "Battle of Chaul",
+  "year": 1508,
+  "date": "1508-03-01",
+  "location": [
+   72.9272,
+   18.5461
+  ],
+  "wikidata": "Q4087480",
+  "wikipedia": "Battle_of_Chaul",
+  "extract": "The Battle of Chaul was a naval battle between the Portuguese and an Egyptian Mamluk fleet in 1508 in the harbour of Chaul in India. The battle ended in a Mamluk victory. It followed the Siege of Cannanore in which a Portuguese garrison successfully resisted an attack by Southern Indian rulers. This was the first Portuguese defeat at sea in the Indian Ocean.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-dabul-1509",
+  "name": "Battle of Dabul",
+  "year": 1509,
+  "date": "1509-01-08",
+  "location": [
+   73.1752,
+   17.5868
+  ],
+  "wikidata": "Q4870827",
+  "wikipedia": "Battle_of_Dabul",
+  "extract": "The Battle of Dabul was a retaliatory attack by the forces of the Viceroy of Portuguese India, Francisco de Almeida, upon the port city of Dabul in the Sultanate of Bijapur. It occurred on 29 December 1508, in retaliation for attacking the Portuguese armada en route to the Battle of Diu. Despite the presence of a double wooden wall and a ditch, the Portuguese using both an artillery bombardment and a pincer movement of armed soldiers, \"slammed into the town. What followed was a black day in the history of European conquest that would leave the Portuguese cursed on Indian soil.\" The conquerors were merciless--all living creatures were slaughtered then the city set on fire to burn alive those who had managed to hide in secret. The Portuguese departed on January 5, 1509. \"This massacre stood beside [Vasco de] Gama's destruction of [the Hajj pilgrim ship] the Miri as an unforgiven act that lingered long in the memory\".",
+  "polityIds": [
+   "bijapur"
+  ]
+ },
+ {
+  "id": "battle-battle-of-diu-1509",
+  "name": "Battle of Diu",
+  "year": 1509,
+  "date": "1509-02-03",
+  "location": [
+   71.0,
+   20.0
+  ],
+  "wikidata": "Q1628477",
+  "wikipedia": "Battle_of_Diu",
+  "extract": "The Battle of Diu was a naval battle fought on 3 February 1509 in the Arabian Sea, in the port of Diu, India, between the Portuguese Empire and a joint fleet of the Sultan of Gujarat, the Mamlûk Burji Sultanate of Egypt and the Zamorin of Calicut.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-ab-darrah-pass-1511",
+  "name": "Battle of Ab Darrah Pass",
+  "year": 1511,
+  "date": "1511-01-01",
+  "location": [
+   69.4667,
+   35.2667
+  ],
+  "wikidata": "Q4870206",
+  "wikipedia": "Battle_of_Ab_Darrah_Pass",
+  "extract": "Battle of Ab Darrah Pass, or Battle of Pul-i Sangin, was the battle that took place in 1511, in the place called Ab Darrah between Uzbeks and Babur of Timurids. The battle ended with the decisive Timurid victory which enabled Babur to regain Transoxiana and briefly reunite the whole of the ancestral part of the Timurid Empire. Such a decisive and significant battle is not mentioned in Babur’s Memoirs (Baburnama), in which there is a break from the year 1508 to the beginning of 1519.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-bengali-conquest-of-chittagong-1512",
+  "name": "Bengali conquest of Chittagong",
+  "year": 1512,
+  "date": "1512-01-01",
+  "location": [
+   91.5,
+   22.9167
+  ],
+  "wikidata": "Q29025861",
+  "wikipedia": "Bengal–Mrauk_U_War_(1512–1516)",
+  "extract": "The Bengal–Mrauk U War (1512–1516) was a conflict in the 16th century between the Bengal Sultanate and the Kingdom of Mrauk U.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-fatehpur-1519",
+  "name": "Battle of Fatehpur",
+  "year": 1519,
+  "date": "1519-01-01",
+  "location": [
+   67.9244,
+   24.7461
+  ],
+  "wikidata": "Q4871007",
+  "wikipedia": "Second_Battle_of_Thatta",
+  "extract": "The Second Battle of Thatta was fought near Thatta on 21st of December 1520, between the Samma Sultanate and the invading army of the Arghuns.",
+  "polityIds": [
+   "samma"
+  ]
+ },
+ {
+  "id": "battle-battle-of-raichur-1520",
+  "name": "Battle of Raichur",
+  "year": 1520,
+  "date": "1520-05-01",
+  "location": [
+   77.3506,
+   16.2
+  ],
+  "wikidata": "Q4872151",
+  "wikipedia": "Battle_of_Raichur",
+  "extract": "The Battle of Raichur was fought between the Vijayanagara Empire and the Sultanate of Bijapur in 1520 in the town of Raichur, India. It resulted in a decisive victory for Vijayanagara forces, and the Bijapur ruler was defeated and pushed across the river Krishna.",
+  "polityIds": [
+   "vijayanagara"
+  ]
+ },
+ {
+  "id": "battle-battle-of-panipat-1526",
+  "name": "Battle of Panipat",
+  "year": 1526,
+  "date": "1526-05-11",
+  "location": [
+   76.9728,
+   29.4017
+  ],
+  "wikidata": "Q605321",
+  "wikipedia": "First_Battle_of_Panipat",
+  "extract": "The First Battle of Panipat, on 21 April 1526 was fought between the invading forces of Babur against Ibrahim Khan Lodi, the Sultan of Delhi, in North India. Babur's forces, employing gunpowder firearms and cannons, defeated Ibrahim. This was one of the earliest battles involving gunpowder arms on the Indian subcontinent. The victory marked the beginning of Mughal rule in India.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-khanwa-1527",
+  "name": "Battle of Khanwa",
+  "year": 1527,
+  "date": "1527-01-01",
+  "location": [
+   77.5431,
+   27.0353
+  ],
+  "wikidata": "Q4166578",
+  "wikipedia": "Battle_of_Khanwa",
+  "extract": "The Battle of Khanwa was fought at Khanwa in modern-day Rajasthan on 16 March 1527, between the Mughal Empire, led by Babur, and the Kingdom of Mewar, led by Rana Sanga for supremacy of Northern India. The battle ended in a Mughal victory and was a major event in medieval Indian history. The Kingdom of Mewar under the rule of Rana Sanga, had turned into one of the strongest powers in northern India. The battle was among the most decisive battles in the Mughal conquest of northern India. It was one of the first battles in Northern India where gunpowder was used. The battle resulted in heavy casualties for both Timurids and Rajputs.",
+  "polityIds": [
+   "delhi-sultanate"
+  ]
+ },
+ {
+  "id": "battle-battle-of-chanderi-1528",
+  "name": "Battle of Chanderi",
+  "year": 1528,
+  "date": "1528-01-01",
+  "location": [
+   78.1,
+   24.7
+  ],
+  "wikidata": "Q20312954",
+  "wikipedia": "Battle_of_Chanderi",
+  "extract": "The Battle of Chanderi or  Siege of Chanderi (1528) took place in the aftermath of the Battle of Khanwa in which the Mughal Emperor Babur had defeated the Rajput Confederacy and firmly establish Mughal rule while crushing regrowing Rajput powers as the battle was fought for supremacy of Northern India between Rajputs and Mughals.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-ghaghra-1529",
+  "name": "Battle of Ghaghra",
+  "year": 1529,
+  "date": "1529-05-16",
+  "location": [
+   84.8,
+   25.8
+  ],
+  "wikidata": "Q4871091",
+  "wikipedia": "Battle_of_Ghaghra",
+  "extract": "The Battle of Ghaghra, fought in 1529, was a major battle for the conquest of India by the Mughal Empire. It followed the first Battle of Panipat in 1526 and the Battle of Khanwa in 1527. The forces of Mughal Emperor Babur of the emerging Mughal Empire were joined by Indian allies in battle against the Eastern Afghan Confederates under Sultan Mahmud Lodi and the Sultanate of Bengal under Sultan Nusrat Shah.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-chausa-1539",
+  "name": "Battle of Chausa",
+  "year": 1539,
+  "date": "1539-07-06",
+  "location": [
+   83.8823,
+   25.5075
+  ],
+  "wikidata": "Q12427302",
+  "wikipedia": "Battle_of_Chausa",
+  "extract": "The Battle of Chausa was a notable military engagement between the Mughal Emperor, Humayun, and the Afghan ruler, Sher Shah Suri. It was fought on 26 June 1539 at Chausa, 10 miles southwest of Buxar in modern-day Bihar, India. Sher Shah Suri was assisted by his allies, the Ujjainiya Rajputs of Bhojpur, as well as the Lohtamia and Gautam Rajputs who were led by the commander, Gajpati Ujjainia.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-sammel-1544",
+  "name": "Battle of Sammel",
+  "year": 1544,
+  "date": "1544-01-01",
+  "location": [
+   73.94,
+   26.2
+  ],
+  "wikidata": "Q4872257",
+  "wikipedia": "Battle_of_Sammel",
+  "extract": "The Battle of Sammel, also known as the Battle of Giri-Sumel, took place in 1544. It was fought near the villages of Giri and Sumel, between the Sur Empire under Sher Shah Suri and the Rathore army led by the commanders Jaita and Kumpa of Rao Maldeo Rathore.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-vedalai-1549",
+  "name": "Battle of Vedalai",
+  "year": 1549,
+  "date": "1549-01-01",
+  "location": [
+   79.1,
+   9.275
+  ],
+  "wikidata": "Q133094462",
+  "wikipedia": "Battle_of_Vedalai",
+  "extract": "The Battle of Vedalai took place in 1549 when Joao Fernandes Correa, the Portuguese captain at Vedalai, imposed tolls on Hindu pilgrims traveling to Rameswaram. This angered the Brahmins who sought assistance from Madurai leading to a Badaga invasion. A force of 6,000 soldiers, including some Muslim allies, attacked the Portuguese fort. Unable to resist, Correa and his men retreated to the coastal islands, along with many Paravas. During the chaos, Fr. Antonio Criminali, a Jesuit priest, was killed while protecting Christian converts. The fort and chapel were destroyed, and the trench blocking the pilgrimage route was filled in.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-punnaikayal-1553",
+  "name": "Battle of Punnaikayal",
+  "year": 1553,
+  "date": "1553-01-01",
+  "location": [
+   78.1119,
+   8.6322
+  ],
+  "wikidata": "Q133236850",
+  "wikipedia": "Battle_of_Punnaikayal",
+  "extract": "The Battle of Punnaikayal (1553) was a conflict between the Portuguese and a combined force of Ottomans, Kingdom of Calicut and Vijayanagara troops. Seeking to end Portuguese dominance over the Coromandel Coast and its pearl fisheries, Vitthala of Vijayanagar allied with the Ottoman-Calicut Muslim fleet under Irapali. The Muslim forces attacked by sea while Vishwanatha Nayak’s troops advanced by land. Despite fierce resistance from a small Portuguese garrison led by Captain Manoel Rodrigues Coutinho, the outnumbered defenders were eventually forced to retreat. However, they were captured by Vitthala’s forces before reaching safety. The victorious forces burned down churches, imprisoned Portuguese soldiers and priests, and proclaimed the end of Portuguese rule forcing locals to convert to Islam or face execution.",
+  "polityIds": [
+   "madurai-nayaks"
+  ]
+ },
+ {
+  "id": "battle-battle-at-machhiwara-1555",
+  "name": "Battle at Machhiwara",
+  "year": 1555,
+  "date": "1555-01-01",
+  "location": [
+   76.2,
+   30.91
+  ],
+  "wikidata": "Q29026635",
+  "wikipedia": "Battle_at_Machhiwara",
+  "extract": "The Battle of Machhiwarra was fought between Mughal Empire and Suri Empire in 1555.",
+  "polityIds": [
+   "sur"
+  ]
+ },
+ {
+  "id": "battle-battle-of-sirhind-1555",
+  "name": "Battle of Sirhind",
+  "year": 1555,
+  "date": "1555-07-02",
+  "location": [
+   76.386,
+   30.6251
+  ],
+  "wikidata": "Q30600900",
+  "wikipedia": "Battle_of_Sirhind_(1555)",
+  "extract": "The Battle of Sirhind was fought between the Mughal Empire and the Sur Empire in 1555.",
+  "polityIds": [
+   "sur"
+  ]
+ },
+ {
+  "id": "battle-battle-of-panipat-1556",
+  "name": "Battle of Panipat",
+  "year": 1556,
+  "date": "1556-11-05",
+  "location": [
+   76.97,
+   29.39
+  ],
+  "wikidata": "Q233414",
+  "wikipedia": "Second_Battle_of_Panipat",
+  "extract": "The Second Battle of Panipat was fought on 5 November 1556, between the Mughals under Akbar and king Hemu, titularly known as Hemchandra Vikramaditya. Hemchandra had conquered Delhi and Agra a few weeks earlier by defeating Mughal forces under Tardi Beg Khan in the Battle of Delhi. He crowned himself Vikramaditya at Purana Quila in Delhi.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-tughlaqabad-1556",
+  "name": "Battle of Tughlaqabad",
+  "year": 1556,
+  "date": "1556-10-07",
+  "location": [
+   77.26,
+   28.5146
+  ],
+  "wikidata": "Q4870858",
+  "wikipedia": "Battle_of_Tughlaqabad",
+  "extract": "The Battle of Tughlaqabad was a notable battle fought on 7 October 1556 between a Hindu general of the Sur known as Hemu and the forces of the Mughal Emperor Akbar led by Tardi Beg Khan at Tughlaqabad near Delhi. The battle ended in a victory for Hemu, who took possession of Delhi and claimed royal status, assuming the title of Vikramaditya. Following his failure, Tardi Beg was executed by Akbar's regent, Bairam Khan.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-mulleriyawa-1559",
+  "name": "Battle of Mulleriyawa",
+  "year": 1559,
+  "date": "1559-01-01",
+  "location": [
+   79.9482,
+   6.9363
+  ],
+  "wikidata": "Q4871824",
+  "wikipedia": "Battle_of_Mulleriyawa",
+  "extract": "The Battle of Mulleriyawa in 1559 was part of the Sinhalese–Portuguese War. It was one of the most decisive battles in Sri Lankan history and considered as the worst defeat of the Portuguese during that period. According to local chronicles, the marshlands of Mulleriyawa turned red with blood after the annihilation of the Portuguese. With this victory, Sitawaka emerged as a military power which was able to challenge the Portuguese expansion.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-talikota-1565",
+  "name": "Battle of Talikota",
+  "year": 1565,
+  "date": "1565-01-26",
+  "location": [
+   76.3118,
+   16.4733
+  ],
+  "wikidata": "Q1362188",
+  "wikipedia": "Battle_of_Talikota",
+  "extract": "The Battle of Talikota, also known as that of Rakshasi-Tangadi, was a watershed battle fought between the Vijayanagara Empire and an alliance of the Deccan sultanates. The battle resulted in the defeat of Aliya Rama Raya which led to the eventual collapse of the polity and reconfigured Deccan politics.",
+  "polityIds": [
+   "bijapur"
+  ]
+ },
+ {
+  "id": "battle-battle-of-thanesar-1567",
+  "name": "Battle of Thanesar",
+  "year": 1567,
+  "date": "1567-07-01",
+  "location": [
+   76.8249,
+   29.9688
+  ],
+  "wikidata": "Q4872536",
+  "wikipedia": "Battle_of_Thanesar_(1567)",
+  "extract": "Battle of Thanesar was fought on the eve of Solar eclipse holy bath fair on 9 April 1567, near Thanesar on the banks of the Saraswati Ghaggar River in the state of Haryana. While the Mughal Emperor Akbar was on his campaign to subdue the rebellious Rajputs of Mewar, he set up camp at a spring and established camp around that freshwater reservoir in order to properly manage his forces in the nearby regions.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-siege-of-chittorgarh-1567",
+  "name": "Siege of Chittorgarh",
+  "year": 1567,
+  "date": "1567-10-30",
+  "location": [
+   74.647,
+   24.8863
+  ],
+  "wikidata": "Q16931406",
+  "wikipedia": "Siege_of_Chittorgarh_(1567–1568)",
+  "extract": "The siege of Chittorgarh was the military expedition of the Mughal Empire under Akbar against the Kingdom of Mewar that commenced in 1567 during which the Mughals successfully captured the fort of Chittorgarh after a hard-pressed siege which lasted for several months.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-tukaroi-1575",
+  "name": "Battle of Tukaroi",
+  "year": 1575,
+  "date": "1575-03-13",
+  "location": [
+   87.284,
+   21.973
+  ],
+  "wikidata": "Q3297309",
+  "wikipedia": "Battle_of_Tukaroi",
+  "extract": "The Battle of Tukaroi, also known as the Battle of Bajhaura or the Battle of Mughulmari, was fought between the Mughal Empire and the Bengal Sultanate on 3 March 1575 near the village of Tukaroi in present-day Balasore District of Odisha. It resulted in a Mughal victory and greatly weakened the Bengal Sultanate.",
+  "polityIds": [
+   "sur"
+  ]
+ },
+ {
+  "id": "battle-battle-of-raj-mahal-1576",
+  "name": "Battle of Raj Mahal",
+  "year": 1576,
+  "date": "1576-07-22",
+  "location": [
+   87.84,
+   25.05
+  ],
+  "wikidata": "Q19895686",
+  "wikipedia": "Battle_of_Rajmahal",
+  "extract": "The Battle of Rajmahal took place between the Mughal Empire and the Karrani Dynasty that ruled the Sultanate of Bengal in the 16th century. The battle resulted in a decisive victory for the Mughals. During the battle, the last Sultan of Bengal, Daud Khan Karrani, was captured and later executed by the Mughals.",
+  "polityIds": [
+   "sur"
+  ]
+ },
+ {
+  "id": "battle-battle-of-haldighati-1576",
+  "name": "Battle of Haldighati",
+  "year": 1576,
+  "date": "1576-06-28",
+  "location": [
+   73.6978,
+   24.8922
+  ],
+  "wikidata": "Q3635360",
+  "wikipedia": "Battle_of_Haldighati",
+  "extract": "The battle of Haldighati was fought on 18 June 1576 between the Mewar forces led by Maharana Pratap, and the Mughal forces led by Man Singh I of Amber. The Mughals emerged victorious after inflicting significant casualties on Mewari forces, though they failed to capture Pratap, who reluctantly retreated persuaded by his fellow commanders.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-ahobilam-1579",
+  "name": "Battle of Ahobilam",
+  "year": 1579,
+  "date": "1579-01-01",
+  "location": [
+   78.7167,
+   15.1333
+  ],
+  "wikidata": "Q141474709",
+  "wikipedia": "Battle_of_Ahobilam",
+  "extract": "The Battle of Ahobilam was a military conflict fought between the Vijayanagara Empire and the Golconda Sultanate in the year 1579 A.D. Yatindra Mahadesikan the seventh Jiyar of the Ahobilam Mutt, accompanied the Vijayanagara commanders Kondaraju Venkataraju and Kondaraju Tirumala Raju and guided them in the expedition. Under his direction, the Vijayanagara army defeated the Golconda army and expelled it from the Ahobilam region. The victory restored Vijayanagara control over the area and allowed the Ahobilam temple to recover from the earlier Golconda Sultanate raid.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-bhuchar-mori-1591",
+  "name": "Battle of Bhuchar Mori",
+  "year": 1591,
+  "date": "1591-01-01",
+  "location": [
+   70.4,
+   22.582
+  ],
+  "wikidata": "Q24050799",
+  "wikipedia": "Battle_of_Bhuchar_Mori",
+  "extract": "The Battle of Bhuchar Mori, also known as Battle of Dhrol, was fought between the army of Kathiawar led by Nawanagar State and the Mughal army at Bhuchar Mori plateau near Dhrol, Saurashtra. It was meant to protect Muzaffar Shah III, the last Sultan of Gujarat Sultanate who had taken asylum under Jam Sataji of Nawanagar after his escape from the Mughal emperor Akbar. It was fought in July 1591. The Kathiawar army included the armies of Junagadh who betrayed Nawanagar and joined the Mughal army at last. The battle led to a large number of casualties on both sides. The battle resulted in the victory of the Mughal army.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-herat-1598",
+  "name": "Battle of Herat",
+  "year": 1598,
+  "date": "1598-08-09",
+  "location": [
+   62.2031,
+   34.3419
+  ],
+  "wikidata": "Q16537278",
+  "wikipedia": "Battle_of_Herat_(1598)",
+  "extract": "Battle of Herat took place on August 9, 1598, between the Shaybanid Khanate and the Safavid Empire for Khorasan and Balkh. The battle resulted in the complete defeat of the Uzbeks and Safavid Empire fully restored its power in Khorasan and got back the region.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-ghazni-skirmish-1601",
+  "name": "Ghazni skirmish",
+  "year": 1601,
+  "date": "1601-01-01",
+  "location": [
+   68.4233,
+   33.5492
+  ],
+  "wikidata": "Q141552428",
+  "wikipedia": "Ghazni_skirmish_(1601)",
+  "extract": "The clash at Ghazni was a brief engagement, fought between the Roshanis led by Jalala Ansari, better known as Jalala Tariki, the son of former Roshanid leader Pir Roshan, and Hazaras of Ghazni in 1601, following a conflict involving the Lohani Afghans at Ghazni. The confrontation resulted in a defeat for the Roshanis and the death of Jalala.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-balkh-1602",
+  "name": "Battle of Balkh",
+  "year": 1602,
+  "date": "1602-06-01",
+  "location": [
+   66.8989,
+   36.7581
+  ],
+  "wikidata": "Q4087411",
+  "wikipedia": null,
+  "extract": null,
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-vannarapannai-1619",
+  "name": "Battle of Vannarapannai",
+  "year": 1619,
+  "date": "1619-01-01",
+  "location": [
+   80.0167,
+   9.6833
+  ],
+  "wikidata": "Q133092642",
+  "wikipedia": "Battle_of_Vannarpannai",
+  "extract": "The Battle of Vannarpannai was a battle fought in 1619 between the forces of Cankili II, the last ruler of the Jaffna Kingdom, and the Portuguese under Phillippe de Oliveira.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-rohilla-1621",
+  "name": "Battle of Rohilla",
+  "year": 1621,
+  "date": "1621-01-01",
+  "location": [
+   75.4797,
+   31.6894
+  ],
+  "wikidata": "Q4872200",
+  "wikipedia": "Battle_of_Rohilla",
+  "extract": "The Battle of Rohilla, also known as the Battle of Hargobindpur, was a 1621 campaign by the Mughal Empire against the growing influence of the Sikhs. The battle was fought on 4 October 1621.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-amritsar-1634",
+  "name": "Battle of Amritsar",
+  "year": 1634,
+  "date": "1634-04-14",
+  "location": [
+   74.877,
+   31.6269
+  ],
+  "wikidata": "Q4870296",
+  "wikipedia": "Battle_of_Amritsar_(1634)",
+  "extract": "The Battle of Amritsar was fought during Mukhlis Khan's campaign against Guru Hargobind and the Sikhs on 14 April 1634. The battle took place over two days and was a result of increasing tensions between the Mughal government and Guru Hargobind.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-lahira-1634",
+  "name": "Battle of Lahira",
+  "year": 1634,
+  "date": "1634-10-15",
+  "location": [
+   74.9519,
+   30.2133
+  ],
+  "wikidata": "Q39050091",
+  "wikipedia": "Battle_of_Lahira",
+  "extract": "The Battle of Lahira, also known as the Battle of Gurusar or the Battle of Mehraj, was fought between the Mughal Empire and Sikhs assisted by the Kangra State in 1631 or 1634.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-five-lamas-1634",
+  "name": "Battle of Five Lamas",
+  "year": 1634,
+  "date": "1634-01-01",
+  "location": [
+   89.6694,
+   27.4381
+  ],
+  "wikidata": "Q2564494",
+  "wikipedia": "Second_Battle_of_Simtokha_Dzong",
+  "extract": "The Second Tibetan Invasion of Bhutan or the Second Battle of Simtokha Dzong was a military confrontation in 1634 between the supporters of Zhabdrung Ngawang Namgyal and the forces of the Tibetan Tsangpa dynasty and several Bhutanese lamas allied against him. The latter initially conquered Zhabdrung's seat, Simtokha Dzong, threatening to eliminate his young dominion. The castle's ammunition stores were accidentally ignited during the battle, however, resulting in an explosion that destroyed Simtokha Dzong and much of the Tibetan army. Seizing this chance, Zhabdrung's followers rallied and ousted the Tibetans from their territory, turning the battle into a decisive strategic victory of Ngawang Namgyal, paving the way for the Unification of Bhutan under his rule.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-kartarpur-1635",
+  "name": "Battle of Kartarpur",
+  "year": 1635,
+  "date": "1635-04-25",
+  "location": [
+   75.5792,
+   31.3256
+  ],
+  "wikidata": "Q4871391",
+  "wikipedia": "Battle_of_Kartarpur",
+  "extract": "The Battle of Kartarpur occurred on 25 April 1635. It was the final major military engagement of Guru Hargobind, the sixth Sikh Guru, against the imperial forces of the Mughal Empire. Following previous Sikh victories in the Battle of Amritsar (1634) and Battle of Lahira, tensions between the Guru and Shah Jahan had reached a peak.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-gannoruwa-1638",
+  "name": "Battle of Gannoruwa",
+  "year": 1638,
+  "date": "1638-03-28",
+  "location": [
+   80.6018,
+   7.2795
+  ],
+  "wikidata": "Q4871077",
+  "wikipedia": "Battle_of_Gannoruwa",
+  "extract": "The Battle of Gannoruwa was a battle of the Sinhalese–Portuguese War fought in 1638 between the occupying Portuguese forces and the Sinhalese King's army at Gannoruwa in the District of Kandy, Sri Lanka. The Portuguese had attempted three times without success to capture the Kingdom of Kandy, in order to bring the entire island under their rule. In 1635, Rajasinghe II became the king of Kandy and started negotiations with the Dutch to obtain their help in driving out the Portuguese. The Portuguese hastened their efforts to take Kandy because of this, and Diogo de Melo de Castro, the Portuguese Captain General, tried to provoke the Sinhalese on several occasions.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-kiratpur-1638",
+  "name": "Battle of Kiratpur",
+  "year": 1638,
+  "date": "1638-01-01",
+  "location": [
+   76.5635,
+   31.1821
+  ],
+  "wikidata": "Q118896808",
+  "wikipedia": "Battle_of_Kiratpur",
+  "extract": "The Battle of Kiratpur, also known as the Battle of Kiratpur Sahib, took place between the Sikhs, commanded by Guru Hargobind, and the Mughals, commanded by the Ruler and Pathans of Ropar. This skirmish is historically notable as the final military conflict involving Guru Hargobind before he focused on the spiritual consolidation of the Sikh community.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-action-of-30-september-1639-1639",
+  "name": "Action of 30 September 1639",
+  "year": 1639,
+  "date": "1639-09-30",
+  "location": [
+   73.8,
+   15.402
+  ],
+  "wikidata": "Q4677351",
+  "wikipedia": "Action_of_30_September_1639",
+  "extract": "The Battle of Goa refers to a series of naval engagements between the Portuguese Armada and the Dutch East India Company fleets attempting to blockade and conquer the city of Goa. In 1638, forces commanded by the Viceroy of Portuguese India, D. Pedro da Silva and later António Teles de Meneses, fought off a large Dutch fleet sent to block the port colony of Goa, commanded by Admiral Adam Westerwolt, who was badly defeated at this encounter.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-skirmish-at-pipli-1640",
+  "name": "Skirmish at Pipli",
+  "year": 1640,
+  "date": "1640-01-01",
+  "location": [
+   87.3364,
+   21.5642
+  ],
+  "wikidata": "Q125564920",
+  "wikipedia": "Mirza_Mumin's_assault",
+  "extract": "Mirza Mumin's assault and subsequent destruction of the Danish factory at Pipli in Bengal by Mughal forces occurred in late 1641.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-capture-of-the-ship-the-bengali-prize-1642",
+  "name": "Capture of the ship The Bengali Prize",
+  "year": 1642,
+  "date": "1642-01-01",
+  "location": [
+   85.8333,
+   20.1167
+  ],
+  "wikidata": "Q128988957",
+  "wikipedia": "Capture_of_Den_Bengalske_Prise",
+  "extract": "The capture of Den Bengalske Prise by two Danish yachts took place in late 1642 in the Bay of Bengal.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-skirmish-of-narsapur-road-1643",
+  "name": "Skirmish of Narsapur Road",
+  "year": 1643,
+  "date": "1643-12-14",
+  "location": [
+   81.6833,
+   16.4333
+  ],
+  "wikidata": "Q140570936",
+  "wikipedia": "Skirmish_of_Narsapur_Road",
+  "extract": "The skirmish of Narsapur Road took place on 14 December 1643 at the road off Narsapur in Golconda between two Danish ships and one Bengali ship.",
+  "polityIds": [
+   "golconda"
+  ]
+ },
+ {
+  "id": "battle-capture-of-st-michael-1644",
+  "name": "Capture of St. Michael",
+  "year": 1644,
+  "date": "1644-09-29",
+  "location": [
+   88.0,
+   15.0
+  ],
+  "wikidata": "Q125804243",
+  "wikipedia": "Capture_of_the_St._Michael",
+  "extract": "The Capture of St. Michael or the Seizure of St. Michael, was a Danish seizure of a Bengali ship in the Bay of Bengal. The Danes captured the Bengali ship and the vessel was subsequently incorporated into the Danish Navy given the name St. Michael.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-action-off-pipli-river-1644",
+  "name": "Action off Pipli River",
+  "year": 1644,
+  "date": "1644-01-21",
+  "location": [
+   87.3919,
+   21.555
+  ],
+  "wikidata": "Q140628708",
+  "wikipedia": "Action_off_Pipli_River",
+  "extract": "The action off Pipli River took place on 21 January 1644 at the mouth of the Pipli River in Bengal between a Danish yacht and a Bengali ship.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-capture-of-den-lille-elefant-1644",
+  "name": "Capture of Den Lille Elefant",
+  "year": 1644,
+  "date": "1644-02-01",
+  "location": [
+   88.0,
+   15.0
+  ],
+  "wikidata": "Q140628907",
+  "wikipedia": "Capture_of_Den_Lille_Elefant",
+  "extract": "The capture of Den Lille Elefant by a Danish frigate took place in February 1644 in the Bay of Bengal.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-pulicat-1644",
+  "name": "Battle of Pulicat",
+  "year": 1644,
+  "date": "1644-01-01",
+  "location": [
+   80.3185,
+   13.4177
+  ],
+  "wikidata": "Q140321045",
+  "wikipedia": "Battle_of_Pulicat",
+  "extract": "The Battle of Pulicat (1644) was a military conflict fought between the forces of the Vijayanagara Empire and the Golconda Sultanate near Pulicat on the Coromandel Coast. After advancing southward and threatening the Dutch settlement at Pulicat the Golconda army was met by a large force sent by the Sriranga III. The Vijayanagara troops defeated the Golconda Army and drove them back beyond Armagon.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-balasore-1647",
+  "name": "Battle of Balasore",
+  "year": 1647,
+  "date": "1647-12-26",
+  "location": [
+   86.925,
+   21.5033
+  ],
+  "wikidata": "Q125895227",
+  "wikipedia": "Battle_of_Balasore",
+  "extract": "The Battle of Balasore was an engagement between Bengali and English ships against Danish ships at Balasore. When the English failed to persuade the Danes, the Bengalis started attacking the English vessel, yet the English were rescued by the Dutch.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-action-of-23-march-1654-1654",
+  "name": "Action of 23 March 1654",
+  "year": 1654,
+  "date": "1654-03-23",
+  "location": [
+   79.8606,
+   6.9267
+  ],
+  "wikidata": "Q4677306",
+  "wikipedia": "Action_of_23_March_1654",
+  "extract": "The Dutch–Portuguese War was a global armed conflict involving Dutch forces, in the form of the Dutch East India Company (VOC), the Dutch West India Company (GWC), and their allies, against the Iberian Union, and after 1640, the Portuguese Empire. Beginning in 1598, the conflict primarily involved the Dutch companies and fleet invading Portuguese colonies in the Americas, Africa, and the East Indies.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-action-of-2-may-1654-1654",
+  "name": "Action of 2 May 1654",
+  "year": 1654,
+  "date": "1654-05-02",
+  "location": [
+   79.805,
+   6.952
+  ],
+  "wikidata": "Q4677341",
+  "wikipedia": "Action_of_2_May_1654",
+  "extract": "The Dutch–Portuguese War was a global armed conflict involving Dutch forces, in the form of the Dutch East India Company (VOC), the Dutch West India Company (GWC), and their allies, against the Iberian Union, and after 1640, the Portuguese Empire. Beginning in 1598, the conflict primarily involved the Dutch companies and fleet invading Portuguese colonies in the Americas, Africa, and the East Indies.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-mannar-1658",
+  "name": "Battle of Mannar",
+  "year": 1658,
+  "date": "1658-02-22",
+  "location": [
+   79.8333,
+   9.05
+  ],
+  "wikidata": "Q130478490",
+  "wikipedia": "Battle_of_Mannar_(1658)",
+  "extract": "The Battle of Mannar was a short battle fought between the Dutch and the opposing Portuguese forces on 22 February 1658. This battle, along with the subsequent capture of Jaffna would mark the end of Portuguese Ceylon.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-pratapgarh-1659",
+  "name": "Battle of Pratapgarh",
+  "year": 1659,
+  "date": "1659-11-10",
+  "location": [
+   73.5776,
+   17.9362
+  ],
+  "wikidata": "Q4872102",
+  "wikipedia": "Battle_of_Pratapgarh",
+  "extract": "The Battle of Pratapgad took place on 10 November 1659, at Pratapgad in Satara. The battle was fought between the Maratha forces led by Shivaji Maharaj and the Bijapur troops under General Afzal Khan. The Maratha emerged victorious, marking their first significant military triumph against a major regional power. In the aftermath of this victory Shivaji captured 65 elephants, 4,000 horses, 1,200 camels and 1,000,000 rupees of cash and jewellery.",
+  "polityIds": [
+   "bijapur"
+  ]
+ },
+ {
+  "id": "battle-battle-of-khajwa-1659",
+  "name": "Battle of Khajwa",
+  "year": 1659,
+  "date": "1659-01-05",
+  "location": [
+   80.524,
+   26.052
+  ],
+  "wikidata": "Q4871417",
+  "wikipedia": "Battle_of_Khajwa",
+  "extract": "The Battle of Khajuha was fought on January 5, 1659, between the newly crowned Mughal Emperor Aurangzeb and Shah Shuja who also declared himself Mughal Emperor in Bengal. Shuja's army rested by the tank of Khajwa, about 30 miles to the west of Fatehpur-\nHaswa in'the Allahabad District, between the Ganges and the Jumna.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-kolhapur-1659",
+  "name": "Battle of Kolhapur",
+  "year": 1659,
+  "date": "1659-12-28",
+  "location": [
+   74.2333,
+   16.7
+  ],
+  "wikidata": "Q4871475",
+  "wikipedia": "Battle_of_Kolhapur",
+  "extract": "Shivaji I was an Indian ruler and a member of the Bhonsle dynasty. Shivaji inherited a fiefdom from his father who served as a retainer for the Sultanate of Bijapur, which later formed the genesis of the Maratha Kingdom. In 1674, he was formally crowned the Chhatrapati of his realm at Raigad Fort.",
+  "polityIds": [
+   "bijapur"
+  ]
+ },
+ {
+  "id": "battle-battle-of-marg-o-1659",
+  "name": "Battle of Margão",
+  "year": 1659,
+  "date": "1659-01-01",
+  "location": [
+   73.9583,
+   15.2719
+  ],
+  "wikidata": "Q130377495",
+  "wikipedia": "Battle_of_Margão_(1659)",
+  "extract": "The Battle of Margão was a military conflict between the Portuguese Empire and the Sultanate of Bijapur that took place in 1659. The battle resulted in a decisive victory for the Portuguese.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-chakan-1660",
+  "name": "Battle of Chakan",
+  "year": 1660,
+  "date": "1660-08-01",
+  "location": [
+   73.8619,
+   18.7603
+  ],
+  "wikidata": "Q4870700",
+  "wikipedia": "Battle_of_Chakan",
+  "extract": "The Battle of Chakan in 1660 took place between Mughal forces led by Shaista Khan and Maratha forces commanded by Firangoji Narsala at Chakan in Maharashtra. Shaista Khan's Mughal forces emerged victorious by besieging the Chakan fort, leading to the surrender of the Maratha commander Firangoji.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-pavan-khind-1660",
+  "name": "Battle of Pavan Khind",
+  "year": 1660,
+  "date": "1660-07-13",
+  "location": [
+   73.8333,
+   16.8667
+  ],
+  "wikidata": "Q4872000",
+  "wikipedia": "Battle_of_Pavan_Khind",
+  "extract": "The Battle of Pavan Khind was a rearguard last stand that took place in September 1660, at a mountain pass in the vicinity of Vishalgad between the forces of the Maratha and the pursuing Bijapur Sultanate forces.",
+  "polityIds": [
+   "bijapur"
+  ]
+ },
+ {
+  "id": "battle-battle-of-umberkhind-1661",
+  "name": "Battle of Umberkhind",
+  "year": 1661,
+  "date": "1661-02-03",
+  "location": [
+   73.0833,
+   18.75
+  ],
+  "wikidata": "Q4872629",
+  "wikipedia": null,
+  "extract": null,
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-surat-1664",
+  "name": "Battle of Surat",
+  "year": 1664,
+  "date": "1664-01-05",
+  "location": [
+   72.8333,
+   21.1667
+  ],
+  "wikidata": "Q4872468",
+  "wikipedia": "Sack_of_Surat",
+  "extract": "The Battle of Surat, also known as the Sack of Surat, was a land battle that took place on 5 January 1664 and ended on 13 January 1664, near the city of Surat, in present-day Gujarat, India, between Shivaji, leader of the fledgling Maratha State and Inayat Khan, a Mughal commander. The Marathas defeated the Mughal military unit posted at Surat.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-purandar-1665",
+  "name": "Battle of Purandar",
+  "year": 1665,
+  "date": "1665-01-01",
+  "location": [
+   73.9833,
+   18.2833
+  ],
+  "wikidata": "Q19882272",
+  "wikipedia": "Battle_of_Purandar",
+  "extract": "The Battle of Purandar was fought between the Mughal Empire and the Marathas in 1665.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-sinhagad-1670",
+  "name": "Battle of Sinhagad",
+  "year": 1670,
+  "date": "1670-02-04",
+  "location": [
+   73.7553,
+   18.3657
+  ],
+  "wikidata": "Q4872383",
+  "wikipedia": "Battle_of_Sinhagad",
+  "extract": "The Battle of Sinhagad, also known as Battle of Kondhana, involved an attack by Marathas during the night of 4 February 1670 on the Mughal fort of Sinhagad, near the city of Pune, Maharashtra. The Marathas captured the fort.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-saraighat-1671",
+  "name": "Battle of Saraighat",
+  "year": 1671,
+  "date": "1671-03-01",
+  "location": [
+   91.6722,
+   26.1754
+  ],
+  "wikidata": "Q4872317",
+  "wikipedia": "Battle_of_Saraighat",
+  "extract": "The Battle of Saraighat was a naval battle fought in 1671 between the Mughal Empire, and the Ahom Kingdom on the Brahmaputra river at Saraighat, now in Guwahati, Assam, India. This was the decisive battle that ended the years long Mughal siege of Guwahati, with the Ahoms pushing away the Mughals west beyond the Manas river.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-attack-in-hooghly-1671",
+  "name": "Attack in Hooghly",
+  "year": 1671,
+  "date": "1671-01-01",
+  "location": [
+   88.39,
+   22.9
+  ],
+  "wikidata": "Q125881454",
+  "wikipedia": "Attack_in_Hooghly",
+  "extract": "The Attack in Hooghly was a Danish attack on two Bengali ships during the Dano-Mughal War in 1671. The Danes succeeded in blowing up the Bengali ships, and violence continued off the coasts of Kalingapatnam and Balasore.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-salher-1672",
+  "name": "Battle of Salher",
+  "year": 1672,
+  "date": "1672-02-01",
+  "location": [
+   72.8333,
+   21.1667
+  ],
+  "wikidata": "Q24925403",
+  "wikipedia": null,
+  "extract": null,
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-kohat-1674",
+  "name": "Battle of Kohat",
+  "year": 1674,
+  "date": "1674-01-01",
+  "location": [
+   71.4397,
+   33.59
+  ],
+  "wikidata": "Q139916073",
+  "wikipedia": "Battle_of_Kohat",
+  "extract": "The Battle of Kohat was a military engagement fought in 1674 between the forces of the Bangash tribe and the Afridi tribe of the Pashtun. Taking place in the aftermath of major Afghan successes against the Mughals in the region, the battle resulted in the repulse of an overconfident Afridi assault on the Kohat fort by the Bangash garrison under Sher Muhammad Bangash Kohati.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-gumbat-1675",
+  "name": "Battle of Gumbat",
+  "year": 1675,
+  "date": "1675-01-01",
+  "location": [
+   72.4737,
+   34.2595
+  ],
+  "wikidata": "Q139916068",
+  "wikipedia": "Battle_of_Gumbat",
+  "extract": "The Battle of Gumbat was a military engagement fought in Gumbat between the forces of Khushal Khan Khattak and the Bangash tribe under Sher Muhammad Bangash Kohati. The battle resulted in a defeat for the Khattak forces with Khushal Khan himself being wounded during the engagement.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-sangamner-1679",
+  "name": "Battle of Sangamner",
+  "year": 1679,
+  "date": "1679-01-01",
+  "location": [
+   74.22,
+   19.57
+  ],
+  "wikidata": "Q19882276",
+  "wikipedia": null,
+  "extract": null,
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-dodah-1680",
+  "name": "Battle of Dodah",
+  "year": 1680,
+  "date": "1680-01-01",
+  "location": [
+   72.18,
+   34.343
+  ],
+  "wikidata": "Q139916063",
+  "wikipedia": "Battle_of_Dodah",
+  "extract": "The Battle of Dodah (1680) was a military engagement fought in 1680 in the Bangash territory of the northwestern frontier, in the present-day Khyber Pakhtunkhwa region of Pakistan. The battle was fought between the forces of Khushal Khan Khattak and the Bangash tribe and resulted in a decisive Khattak victory in which 160 Bangash fighters were killed. The engagement served as the revenge for the earlier Battle of Gumbat, in which Khushal Khan had suffered a defeat and been wounded and temporarily restored Khattak prestige and influence in the Bangash region.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-itakhuli-1682",
+  "name": "Battle of Itakhuli",
+  "year": 1682,
+  "date": "1682-08-01",
+  "location": [
+   91.7502,
+   26.1806
+  ],
+  "wikidata": "Q4871290",
+  "wikipedia": "Battle_of_Itakhuli",
+  "extract": "The Battle of Itakhuli was fought in August 1682 between the Ahom Kingdom and the Mughal Empire in an area that is in modern-day Assam. The Ahoms pushed back Mughal control to the west of the Manas River. The main battle was fought at a garrison island on the Brahmaputra, in which the Mughal fauzdar, Mansur Khan, was defeated and the remnant of the Mughal forces pursued to the Manas River. With this win, the Ahoms recovered Sarkar Kamrup from the Mughals.",
+  "polityIds": []
+ },
+ {
+  "id": "battle-battle-of-kalyan-1682",
+  "name": "Battle of Kalyan",
+  "year": 1682,
+  "date": "1682-01-01",
+  "location": [
+   73.15,
+   19.25
+  ],
+  "wikidata": "Q19891589",
+  "wikipedia": "Battle_of_Kalyan",
+  "extract": "The Battle of Kalyan was a series of engagements between the Mughal Empire and the Maratha Kingdom over Kalyan in 1682–83, during the Deccan wars. Mughal forces under Bahadur Khan captured Kalyan on 28 November 1682 after defeating a Maratha force. A major counter-attack led by Rupaji Bhonslé and Moropant Trimbak Pingle in December was repelled, as was another Maratha assault on 27 February 1683.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-bhangani-1688",
+  "name": "Battle of Bhangani",
+  "year": 1688,
+  "date": "1688-09-18",
+  "location": [
+   77.7284,
+   30.4891
+  ],
+  "wikidata": "Q4870478",
+  "wikipedia": "Battle_of_Bhangani",
+  "extract": "The Battle of Bhangani was fought between Guru Gobind Singh's army and Bhim Chand (Kahlur) of Bilaspur on 18 September 1686 or 1688, at Bhangani near Paonta Sahib. An alliance of Rajput Rajas of the Shivalik Hills participated in the engagement on behalf of Bhim Chand of Bilaspur State's side, including the states of Garhwal and Kangra. It was the first battle Guru Gobind Singh, the tenth Sikh Guru, fought at the age of 19.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-nadaun-1691",
+  "name": "Battle of Nadaun",
+  "year": 1691,
+  "date": "1691-01-01",
+  "location": [
+   76.35,
+   31.7833
+  ],
+  "wikidata": "Q4871844",
+  "wikipedia": "Battle_of_Nadaun",
+  "extract": "The Battle of Nadaun, alternatively known as the Hussaini Yudh, was fought at Nadaun, between Raja Bhim Chand of Bilaspur (Kahlur) and the Mughals under Alif Khan. Bhim Chand was supported by Guru Gobind Singh and the Mughals were supported by other hill chieftains, notably Kirpal Chand from Kangra and Dayal Chand from Bijharwal. Bhim Chand and some hill chieftains, after the conclusion of the Battle of Bhangani, had refused to pay tribute to the Mughal emperor which led to the battle at Nadaun. The battle resulted in the victory of Bilaspur State and Sikh alliance.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-daman-1694",
+  "name": "Battle of Daman",
+  "year": 1694,
+  "date": "1694-03-23",
+  "location": [
+   72.85,
+   20.42
+  ],
+  "wikidata": "Q121854691",
+  "wikipedia": "Battle_of_Daman_(1694)",
+  "extract": "The Battle of Daman took place on 23 March 1694, when a Portuguese squadron, commanded by General António Machado de Brito, pursued and attacked an Omani squadron sailing off Daman.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-guler-1696",
+  "name": "Battle of Guler",
+  "year": 1696,
+  "date": "1696-01-01",
+  "location": [
+   76.16,
+   32.0
+  ],
+  "wikidata": "Q55605029",
+  "wikipedia": "Battle_of_Guler_(1696)",
+  "extract": "The Battle of Guler was fought between Mughal forces led by Hussain Khan, and the Raja of Guler, aided by the Akal Sena.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-anandpur-1700",
+  "name": "Battle of Anandpur",
+  "year": 1700,
+  "date": "1700-01-01",
+  "location": [
+   76.5,
+   31.23
+  ],
+  "wikidata": "Q5452501",
+  "wikipedia": "Battle_of_Anandpur_(1700)",
+  "extract": "The Battle of Anandpur was fought at Anandpur, between the armies of the Sikh Guru Gobind Singh and the Mughal forces aided by the Nawab of Bahawalpur state, Rajas of the Sivalik Hills.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-satara-1700",
+  "name": "Battle of Satara",
+  "year": 1700,
+  "date": "1700-04-21",
+  "location": [
+   73.98,
+   17.68
+  ],
+  "wikidata": "Q19882277",
+  "wikipedia": "Battle_of_Satara",
+  "extract": "The Battle of Satara was fought between the Mughal Empire and Maratha Kingdom between December 1699 and 21 April 1700. The battle started when the Mughal Emperor Aurangzeb personally marched towards Satara, accompanied by 10,000 Mughal soldiers.",
+  "polityIds": [
+   "mughal"
+  ]
+ },
+ {
+  "id": "battle-battle-of-taragarh-1700",
+  "name": "Battle of Taragarh",
+  "year": 1700,
+  "date": "1700-08-29",
+  "location": [
+   76.5,
+   31.23
+  ],
+  "wikidata": "Q117354816",
+  "wikipedia": "Battle_of_Taragarh",
+  "extract": "The Battle of Taragarh was fought between the Sikh forces led by Sahibzada Ajit Singh and the Rajas of the Sivalik Hills.",
+  "polityIds": [
+   "mughal"
+  ]
+ }
+]

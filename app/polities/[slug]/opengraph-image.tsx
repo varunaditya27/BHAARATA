@@ -74,7 +74,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             )}
           </div>
           <div style={{ display: "flex", fontFamily: "Ranade", fontSize: 18, color: "rgba(243,237,224,0.55)" }}>
-            Placeholder data, not yet checked against sources.
+            Borders: Cliopatria. Summary: Wikipedia.
           </div>
         </div>
       </div>
