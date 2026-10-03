@@ -23,9 +23,27 @@
  */
 export const BASEMAP_STYLE_URL = "/map-styles/bhaarata-atlas.json";
 
+/**
+ * Free, keyless elevation tiles (Terrarium-encoded) from the AWS Open Data
+ * "Terrain Tiles" set. Chosen over Mapterhorn because it covers the oceans
+ * too: Mapterhorn omits sea tiles, so every Arabian Sea / Bay of Bengal
+ * tile in view 404'd and showed up as console errors.
+ */
+export const TERRAIN_SOURCE = {
+  type: "raster-dem",
+  tiles: ["https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"],
+  encoding: "terrarium",
+  tileSize: 256,
+  maxzoom: 14,
+  attribution:
+    '<a href="https://registry.opendata.aws/terrain-tiles/">Terrain Tiles</a> (Mapzen, AWS Open Data)',
+} as const;
+
 export const SOURCE_IDS = {
   territory: "bh-territory",
   frontier: "bh-frontier",
+  dem: "bh-dem",
+  demTerrain: "bh-dem-terrain",
   kingdomLabels: "bh-kingdom-labels",
   places: "bh-places",
   routes: "bh-routes",
@@ -35,6 +53,7 @@ export const LAYER_IDS = {
   territoryFill: "bh-territory-fill",
   territoryOutline: "bh-territory-outline",
   frontierHatch: "bh-frontier-hatch",
+  hillshade: "bh-hillshade",
   kingdomLabels: "bh-kingdom-labels",
   placePoints: "bh-place-points",
   placeLabels: "bh-place-labels",

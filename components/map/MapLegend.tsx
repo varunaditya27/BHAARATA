@@ -4,12 +4,13 @@ import { Layers } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils/cn";
 
-export type LayerToggleId = "territory" | "places" | "routes";
+export type LayerToggleId = "territory" | "places" | "routes" | "relief";
 
 const LAYER_OPTIONS: { id: LayerToggleId; label: string }[] = [
   { id: "territory", label: "Political territory" },
   { id: "places", label: "Major settlements" },
   { id: "routes", label: "Trade & campaign routes" },
+  { id: "relief", label: "Terrain relief" },
 ];
 
 /**

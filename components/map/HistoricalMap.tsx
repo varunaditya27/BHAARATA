@@ -41,6 +41,7 @@ const TOGGLE_LAYER_MAP: Record<LayerToggleId, string[]> = {
   territory: [LAYER_IDS.territoryFill, LAYER_IDS.frontierHatch, LAYER_IDS.territoryOutline, LAYER_IDS.kingdomLabels],
   places: [LAYER_IDS.placePoints, LAYER_IDS.placeLabels, LAYER_IDS.placeIcons],
   routes: [LAYER_IDS.routeLines, LAYER_IDS.routeLinesDash],
+  relief: [LAYER_IDS.hillshade],
 };
 
 /** Keep the selected territory clear of whatever panel covers the map:
@@ -56,14 +57,19 @@ function fitPadding() {
  * IMPLEMENTATION_PLAN.md §23.2 ("India → South India → Thanjavur"),
  * instead of a single flat fitBounds. */
 function cinematicFitBounds(map: MapLibreMap, bounds: LngLatBounds) {
+  const camera = map.cameraForBounds(bounds, { padding: fitPadding(), maxZoom: 7 });
+  if (!camera) return;
+  // Tilt into the landscape on arrival — only where 3D terrain is on,
+  // otherwise a pitched flat map just looks skewed.
+  const pitch = map.getTerrain() ? 30 : 0;
   if (prefersReducedMotion()) {
-    map.fitBounds(bounds, { padding: fitPadding(), duration: 0, maxZoom: 7 });
+    map.jumpTo({ ...camera, pitch });
     return;
   }
   const pullBackZoom = Math.max(map.getZoom() - 1, 3.5);
-  map.easeTo({ zoom: pullBackZoom, duration: 350, essential: true });
+  map.easeTo({ zoom: pullBackZoom, pitch: 0, duration: 350, essential: true });
   map.once("moveend", () => {
-    map.fitBounds(bounds, { padding: fitPadding(), duration: 950, maxZoom: 7, essential: true });
+    map.flyTo({ ...camera, pitch, duration: 1100, curve: 1.3, essential: true });
   });
 }
 
@@ -133,9 +139,18 @@ export function HistoricalMap({
     });
 
     map.on("load", () => {
-      addHistoricalLayers(map);
+      // 3D terrain only where the GPU can afford it — phones get the
+      // (cheap, flat) hillshade alone.
+      addHistoricalLayers(map, { terrain3d: !window.matchMedia("(max-width: 767px)").matches });
 
-      map.on("click", (e: MapMouseEvent) => onSelectRef.current(polityAtPoint(map, e.point)));
+      map.on("click", (e: MapMouseEvent) => {
+        const polityId = polityAtPoint(map, e.point);
+        // Clicking open ground deselects and levels the camera back out.
+        if (!polityId && map.getPitch() > 0) {
+          map.easeTo({ pitch: 0, duration: prefersReducedMotion() ? 0 : 600 });
+        }
+        onSelectRef.current(polityId);
+      });
       map.on("mousemove", (e: MapMouseEvent) => {
         map.getCanvas().style.cursor = polityAtPoint(map, e.point) ? "pointer" : "";
       });

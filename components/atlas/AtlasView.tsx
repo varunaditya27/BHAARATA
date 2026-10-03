@@ -13,7 +13,7 @@ import { EntityPreviewPanel } from "@/components/entity/EntityPreviewPanel";
 import { getPolityBySlug, polities } from "@/lib/data/prototype";
 import { getEraForYear, getHistoricalState, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 
-const DEFAULT_VISIBLE_LAYERS: LayerToggleId[] = ["territory", "places", "routes"];
+const DEFAULT_VISIBLE_LAYERS: LayerToggleId[] = ["territory", "places", "routes", "relief"];
 const ERA_CARD_DURATION_MS = 1700;
 const URL_COMMIT_DEBOUNCE_MS = 300;
 const DEFAULT_YEAR = 1050;

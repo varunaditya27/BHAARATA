@@ -8,7 +8,7 @@ import {
   routesToFeatureCollection,
 } from "@/lib/geo/to-geojson";
 import { PLACE_ICON_EXPRESSION, registerHatchPattern, registerMapIcons } from "./mapIcons";
-import { LAYER_IDS, SOURCE_IDS } from "./mapStyle";
+import { LAYER_IDS, SOURCE_IDS, TERRAIN_SOURCE } from "./mapStyle";
 
 /** Classic "marching ants" dash-phase sequence (Mapbox/MapLibre pattern):
  * cycling through these line-dasharray values reads as the dash pattern
@@ -27,8 +27,37 @@ export const DASH_SEQUENCE: number[][] = [
  * ones show is driven purely by feature-state (see apply-state.ts), which
  * is what makes territory fade instead of pop.
  */
-export function addHistoricalLayers(map: MapLibreMap, options: { interactive?: boolean } = {}) {
+export function addHistoricalLayers(
+  map: MapLibreMap,
+  options: { interactive?: boolean; terrain3d?: boolean } = {},
+) {
   registerMapIcons(map);
+
+  // Relief first, under the basemap's rivers and water so they stay crisp.
+  // Toned to the palette — warm brown shadow, paper highlight — so the
+  // Ghats and the Deccan scarp read as engraving, not satellite shading.
+  map.addSource(SOURCE_IDS.dem, { ...TERRAIN_SOURCE, tiles: [...TERRAIN_SOURCE.tiles] });
+  map.addLayer(
+    {
+      id: LAYER_IDS.hillshade,
+      type: "hillshade",
+      source: SOURCE_IDS.dem,
+      paint: {
+        "hillshade-exaggeration": 0.42,
+        "hillshade-illumination-direction": 315,
+        "hillshade-shadow-color": "rgba(82, 62, 40, 0.6)",
+        "hillshade-highlight-color": "rgba(255, 251, 242, 0.45)",
+        "hillshade-accent-color": "rgba(82, 62, 40, 0.3)",
+      },
+    },
+    map.getLayer("waterway") ? "waterway" : undefined,
+  );
+  if (options.terrain3d) {
+    // A separate source for the 3D mesh — sharing one with the hillshade
+    // degrades both (MapLibre warns about it).
+    map.addSource(SOURCE_IDS.demTerrain, { ...TERRAIN_SOURCE, tiles: [...TERRAIN_SOURCE.tiles] });
+    map.setTerrain({ source: SOURCE_IDS.demTerrain, exaggeration: 1.6 });
+  }
   registerHatchPattern(map);
 
   map.addSource(SOURCE_IDS.territory, {
