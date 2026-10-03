@@ -1,4 +1,7 @@
 import type { Map as MapLibreMap } from "maplibre-gl";
+import { polities } from "@/lib/data/prototype";
+import { polityGeometry, silhouettePath } from "@/lib/geo/silhouette";
+import { darkenHex } from "@/lib/utils/color";
 
 /**
  * Small ink-coloured glyphs drawn on a canvas at runtime and registered
@@ -159,4 +162,37 @@ export function registerRouteIcons(map: MapLibreMap) {
     ctx.arc(12, 12, 5, 0, Math.PI * 2);
     ctx.fill();
   });
+}
+
+/** A seal for each kingdom, stamped at its capitals: a disc in its colour,
+ * a paper ring, and its outline (the site-wide emblem) inside. */
+export function registerSealImages(map: MapLibreMap) {
+  const size = 56;
+  for (const polity of polities) {
+    const id = `bh-seal-${polity.id}`;
+    const geometry = polityGeometry(polity.id);
+    if (map.hasImage(id) || !geometry) continue;
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) continue;
+    const c = size / 2;
+    ctx.beginPath();
+    ctx.arc(c, c, c - 2, 0, Math.PI * 2);
+    ctx.fillStyle = polity.accentColor;
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = darkenHex(polity.accentColor, 0.4);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(c, c, c - 6, 0, Math.PI * 2);
+    ctx.lineWidth = 1.2;
+    ctx.strokeStyle = "rgba(243,237,224,0.85)";
+    ctx.stroke();
+    ctx.fillStyle = "#f3ede0";
+    ctx.fill(new Path2D(silhouettePath(geometry, size, 14)));
+    const imageData = ctx.getImageData(0, 0, size, size);
+    map.addImage(id, { width: size, height: size, data: imageData.data }, { pixelRatio: 2 });
+  }
 }

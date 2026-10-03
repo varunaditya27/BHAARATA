@@ -51,6 +51,7 @@ export const SOURCE_IDS = {
   places: "bh-places",
   routes: "bh-routes",
   routeMovers: "bh-route-movers",
+  capitalSeals: "bh-capital-seals",
 } as const;
 
 export const LAYER_IDS = {
@@ -70,4 +71,5 @@ export const LAYER_IDS = {
   routeLinesDash: "bh-route-lines-dash",
   routeArrows: "bh-route-arrows",
   routeMovers: "bh-route-movers",
+  capitalSeals: "bh-capital-seals",
 } as const;

@@ -52,6 +52,7 @@ export function applyHistoricalState(map: MapLibreMap, year: number, selectedPol
     .filter((p) => p.placeType === "capital" && activeCapitalNames.has(p.name))
     .map((p) => p.id);
   map.setFilter(LAYER_IDS.capitalPulseOuter, ["in", ["get", "placeId"], ["literal", capitalIds]]);
+  map.setFilter(LAYER_IDS.capitalSeals, ["in", ["get", "polityId"], ["literal", state.activePolities.map((p) => p.id)]]);
 
   const routeIds = getRoutesAtYear(year).map((r) => r.id);
   for (const layerId of [LAYER_IDS.routeLines, LAYER_IDS.routeLinesDash, LAYER_IDS.routeArrows, LAYER_IDS.routeMovers]) {

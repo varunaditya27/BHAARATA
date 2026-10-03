@@ -1,13 +1,14 @@
 import type { Map as MapLibreMap } from "maplibre-gl";
-import { boundaries, places, routes } from "@/lib/data/prototype";
+import { boundaries, places, polities, routes } from "@/lib/data/prototype";
 import {
   boundariesToFeatureCollection,
+  capitalSealsToFeatureCollection,
   frontiersToFeatureCollection,
   kingdomLabelsToFeatureCollection,
   placesToFeatureCollection,
   routesToFeatureCollection,
 } from "@/lib/geo/to-geojson";
-import { PLACE_ICON_EXPRESSION, registerHatchPattern, registerMapIcons, registerRouteIcons } from "./mapIcons";
+import { PLACE_ICON_EXPRESSION, registerHatchPattern, registerMapIcons, registerRouteIcons, registerSealImages } from "./mapIcons";
 import { routeMoversFeatureCollection } from "./route-movers";
 import { LAYER_IDS, SOURCE_IDS, TERRAIN_SOURCE } from "./mapStyle";
 
@@ -61,6 +62,7 @@ export function addHistoricalLayers(
   }
   registerHatchPattern(map);
   registerRouteIcons(map);
+  registerSealImages(map);
 
   map.addSource(SOURCE_IDS.territory, {
     type: "geojson",
@@ -254,6 +256,29 @@ export function addHistoricalLayers(
       "text-font": ["Ranade Medium"],
     },
     paint: { "text-color": "#241f17", "text-halo-color": "#f3ede0", "text-halo-width": 1.2 },
+  });
+  // Each living kingdom's seal beside its capitals, once close enough to read.
+  map.addSource(SOURCE_IDS.capitalSeals, {
+    type: "geojson",
+    data: capitalSealsToFeatureCollection(polities, places),
+  });
+  map.addLayer({
+    id: LAYER_IDS.capitalSeals,
+    type: "symbol",
+    source: SOURCE_IDS.capitalSeals,
+    minzoom: 5.5,
+    filter: ["in", ["get", "polityId"], ["literal", []]],
+    layout: {
+      "icon-image": ["concat", "bh-seal-", ["get", "polityId"]],
+      "icon-size": ["interpolate", ["linear"], ["zoom"], 5.5, 0.55, 9, 0.9],
+      "icon-anchor": "bottom-right",
+      "icon-offset": [-3, -3],
+      // Drawn always, but placed above the place labels and blocking, so
+      // town names step aside to another anchor instead of hiding under it.
+      "icon-allow-overlap": true,
+      "icon-ignore-placement": false,
+    },
+    paint: { "icon-opacity": ["interpolate", ["linear"], ["zoom"], 5.5, 0, 6, 1] },
   });
 
   // Kingdom names set like a printed atlas: spaced capitals that widen as

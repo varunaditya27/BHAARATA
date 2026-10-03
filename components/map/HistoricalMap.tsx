@@ -53,7 +53,7 @@ const TOGGLE_LAYER_MAP: Record<LayerToggleId, string[]> = {
     LAYER_IDS.territoryOutline,
     LAYER_IDS.kingdomLabels,
   ],
-  places: [LAYER_IDS.placePoints, LAYER_IDS.placeLabels, LAYER_IDS.placeIcons],
+  places: [LAYER_IDS.placePoints, LAYER_IDS.placeLabels, LAYER_IDS.placeIcons, LAYER_IDS.capitalSeals],
   routes: [LAYER_IDS.routeLines, LAYER_IDS.routeLinesDash, LAYER_IDS.routeArrows, LAYER_IDS.routeMovers],
   relief: [LAYER_IDS.hillshade],
 };

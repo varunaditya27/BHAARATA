@@ -1,5 +1,5 @@
 import { polities } from "@/lib/data/prototype";
-import type { HistoricalBoundary, HistoricalRoute, Place } from "@/lib/domain/types";
+import type { HistoricalBoundary, HistoricalRoute, Place, Polity } from "@/lib/domain/types";
 import { darkenHex } from "@/lib/utils/color";
 import frontierGeometries from "@/lib/data/geo/frontiers.json";
 import labelPoints from "@/lib/data/geo/labels.json";
@@ -140,5 +140,24 @@ export function routesToFeatureCollection(routes: HistoricalRoute[]): GeoJSON.Fe
       },
       geometry: route.path,
     })),
+  };
+}
+
+/** One point per (kingdom, capital) pair, for the seal stamped at each
+ * capital. Matches capitals by name prefix, as the entity pages do
+ * ("Dorasamudra" → "Dorasamudra (Halebidu)"). */
+export function capitalSealsToFeatureCollection(polities: Polity[], places: Place[]): GeoJSON.FeatureCollection {
+  return {
+    type: "FeatureCollection",
+    features: polities.flatMap((polity) =>
+      places
+        .filter((place) => polity.capitals.some((c) => place.name.startsWith(c)))
+        .map((place) => ({
+          type: "Feature" as const,
+          id: `${polity.id}:${place.id}`,
+          properties: { polityId: polity.id, placeId: place.id },
+          geometry: { type: "Point" as const, coordinates: place.coordinates },
+        })),
+    ),
   };
 }
