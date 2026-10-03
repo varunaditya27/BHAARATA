@@ -8,6 +8,8 @@ import { EvidenceInvestigation } from "@/components/evidence/EvidenceInvestigati
 import { evidence, getPlaceById, getSourceById } from "@/lib/data/prototype";
 import { images, type ImageKey } from "@/lib/data/images";
 import { formatDateRange } from "@/lib/domain/time";
+import { PageTransition } from "@/components/primitives/PageTransition";
+import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
 export function generateStaticParams() {
   return evidence.map((e) => ({ slug: e.slug }));
@@ -25,6 +27,7 @@ export default async function EvidencePage({ params }: PageProps<"/evidence/[slu
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
 
   return (
+    <PageTransition>
     <div className="mx-auto max-w-[1100px] px-6 py-12">
       <Eyebrow>Evidence · {record.evidenceType}</Eyebrow>
       <h1 className="mt-2 font-display text-4xl text-ink">{record.title}</h1>
@@ -63,7 +66,7 @@ export default async function EvidencePage({ params }: PageProps<"/evidence/[slu
             <div>
               <Eyebrow>Location</Eyebrow>
               <p className="mt-1 text-ink">
-                <Link href={`/places/${place.slug}`} className="underline underline-offset-4 hover:text-territory-selected">
+                <Link href={`/places/${place.slug}`} transitionTypes={NAV_FORWARD} className="underline underline-offset-4 hover:text-territory-selected">
                   {place.name}
                 </Link>
               </p>
@@ -99,5 +102,6 @@ export default async function EvidencePage({ params }: PageProps<"/evidence/[slu
         </div>
       )}
     </div>
+    </PageTransition>
   );
 }

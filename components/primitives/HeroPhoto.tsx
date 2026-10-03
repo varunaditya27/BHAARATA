@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Shared } from "@/components/primitives/Shared";
 import type { ImageCredit } from "@/lib/data/images";
 
 /**
@@ -11,17 +12,17 @@ export function HeroPhoto({
   credit,
   children,
   heightClassName = "h-[46vh] min-h-[320px]",
-  viewTransitionName,
+  sharedName,
 }: {
   credit: ImageCredit;
   children: React.ReactNode;
   heightClassName?: string;
-  /** Matches the name set on a list/preview thumbnail so the browser
-   * morphs between them instead of cutting — see lib/utils/view-transition.ts. */
-  viewTransitionName?: string;
+  /** Matches the name on a list/preview thumbnail so the photo morphs
+   * between routes — see lib/utils/view-transition.ts. */
+  sharedName?: string;
 }) {
-  return (
-    <div className={`relative w-full ${heightClassName}`}>
+  const photo = (
+    <div className="bh-kenburns absolute inset-0 overflow-hidden">
       <Image
         src={credit.file}
         alt={credit.alt}
@@ -29,8 +30,13 @@ export function HeroPhoto({
         priority
         sizes="100vw"
         className="object-cover brightness-[0.55]"
-        style={viewTransitionName ? { viewTransitionName } : undefined}
       />
+    </div>
+  );
+
+  return (
+    <div className={`relative w-full overflow-hidden ${heightClassName}`}>
+      {sharedName ? <Shared name={sharedName}>{photo}</Shared> : photo}
       <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/15 to-transparent">
         {children}
       </div>

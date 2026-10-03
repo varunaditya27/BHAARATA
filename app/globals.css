@@ -296,12 +296,102 @@ body {
 }
 
 /* ---------------------------------------------------------------------- */
-/* View Transitions — tuned to our motion language (full-page transitions */
-/* stay subtle, 300-450ms) rather than the browser's snappier default.    */
+/* View Transitions — React <ViewTransition> + Link `transitionTypes`.    */
+/* Patterns from node_modules/next/dist/docs/01-app/02-guides/            */
+/* view-transitions.md: morphing shared photos, directional slides       */
+/* (forward = deeper into the record graph), a header that never moves.  */
 /* ---------------------------------------------------------------------- */
-::view-transition-group(*) {
-  animation-duration: 420ms;
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-group(.morph) {
+  animation-duration: 520ms;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: bh-via-blur;
+}
+@keyframes bh-via-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+
+::view-transition-old(.nav-forward) {
+  --bh-slide: -60px;
+  animation:
+    150ms ease-in both bh-fade reverse,
+    420ms cubic-bezier(0.65, 0, 0.35, 1) both bh-slide reverse;
+}
+::view-transition-new(.nav-forward) {
+  --bh-slide: 60px;
+  animation:
+    220ms ease-out 150ms both bh-fade,
+    420ms cubic-bezier(0.65, 0, 0.35, 1) both bh-slide;
+}
+::view-transition-old(.nav-back) {
+  --bh-slide: 60px;
+  animation:
+    150ms ease-in both bh-fade reverse,
+    420ms cubic-bezier(0.65, 0, 0.35, 1) both bh-slide reverse;
+}
+::view-transition-new(.nav-back) {
+  --bh-slide: -60px;
+  animation:
+    220ms ease-out 150ms both bh-fade,
+    420ms cubic-bezier(0.65, 0, 0.35, 1) both bh-slide;
+}
+@keyframes bh-fade {
+  from {
+    filter: blur(3px);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+@keyframes bh-slide {
+  from {
+    translate: var(--bh-slide);
+  }
+  to {
+    translate: 0;
+  }
+}
+
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* Slow settle on hero photographs — the camera easing in after a cut. */
+.bh-kenburns {
+  animation: bh-kenburns 14s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes bh-kenburns {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

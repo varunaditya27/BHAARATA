@@ -1,9 +1,12 @@
+import Link from "next/link";
 import { ButtonLink } from "@/components/primitives/Button";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { HeroPhoto } from "@/components/primitives/HeroPhoto";
 import { Magnetic } from "@/components/primitives/Magnetic";
 import { HeroReveal } from "@/components/home/HeroReveal";
 import { images } from "@/lib/data/images";
+import { PageTransition } from "@/components/primitives/PageTransition";
+import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
 const entryPoints = [
   {
@@ -25,6 +28,7 @@ const entryPoints = [
 
 export default function Home() {
   return (
+    <PageTransition>
     <div>
       <HeroPhoto credit={images["vijayanagara-virupaksha"]} heightClassName="h-[88vh] min-h-[560px]">
         <div className="flex h-full flex-col justify-end">
@@ -44,7 +48,7 @@ export default function Home() {
                 <span>c. 1565 CE</span>
               </div>
               <Magnetic className="mt-10 inline-block">
-                <ButtonLink href="/atlas" variant="solid" className="bg-paper text-ink hover:bg-paper/90">
+                <ButtonLink href="/atlas" transitionTypes={NAV_FORWARD} variant="solid" className="bg-paper text-ink hover:bg-paper/90">
                   Explore the subcontinent ↓
                 </ButtonLink>
               </Magnetic>
@@ -58,9 +62,10 @@ export default function Home() {
           <Eyebrow>Begin with a time</Eyebrow>
           <div className="mt-6 grid gap-8 md:grid-cols-3">
             {entryPoints.map((entry) => (
-              <a
+              <Link
                 key={entry.href}
                 href={entry.href}
+                transitionTypes={NAV_FORWARD}
                 className="group block border-t border-border pt-5"
               >
                 <h2 className="font-display text-xl text-ink group-hover:text-territory-selected">
@@ -69,11 +74,12 @@ export default function Home() {
                 <p className="mt-2 font-sans text-sm leading-relaxed text-ink-muted">
                   {entry.description}
                 </p>
-              </a>
+              </Link>
             ))}
           </div>
         </section>
       </div>
     </div>
+    </PageTransition>
   );
 }

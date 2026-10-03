@@ -2,14 +2,15 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import { Badge } from "@/components/primitives/Badge";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
-import { TransitionLink } from "@/components/primitives/TransitionLink";
+import { Shared } from "@/components/primitives/Shared";
 import { images, type ImageKey } from "@/lib/data/images";
 import { formatDateRange } from "@/lib/domain/time";
 import type { Polity } from "@/lib/domain/types";
 import { events, getRulersForPolity } from "@/lib/data/prototype";
-import { polityPhotoTransitionName } from "@/lib/utils/view-transition";
+import { NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 export type EntityPreviewPanelProps = {
   polity: Polity | null;
@@ -48,14 +49,11 @@ export function EntityPreviewPanel({ polity, onClose }: EntityPreviewPanelProps)
 
           {hero && (
             <div className="relative h-32 w-full">
-              <Image
-                src={hero.file}
-                alt={hero.alt}
-                fill
-                sizes="320px"
-                className="object-cover"
-                style={{ viewTransitionName: polityPhotoTransitionName(polity.slug) }}
-              />
+              <Shared name={transitionNames.polityPhoto(polity.slug)}>
+                <div className="absolute inset-0">
+                  <Image src={hero.file} alt={hero.alt} fill sizes="320px" className="object-cover" />
+                </div>
+              </Shared>
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent" />
             </div>
           )}
@@ -100,12 +98,13 @@ export function EntityPreviewPanel({ polity, onClose }: EntityPreviewPanelProps)
               <Badge tone="uncertainty">Illustrative prototype data</Badge>
             </div>
 
-            <TransitionLink
+            <Link
               href={`/polities/${polity.slug}`}
+              transitionTypes={NAV_FORWARD}
               className="mt-5 block bg-paper px-4 py-2 text-center font-sans text-sm font-medium text-ink hover:bg-paper/90"
             >
               Explore {polity.name} →
-            </TransitionLink>
+            </Link>
           </div>
         </motion.aside>
       )}

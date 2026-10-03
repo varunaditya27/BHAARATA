@@ -5,6 +5,8 @@ import { Rule } from "@/components/primitives/Rule";
 import { events, getPolityBySlug } from "@/lib/data/prototype";
 import { formatDateRange } from "@/lib/domain/time";
 import { getEraForYear } from "@/lib/geo/historical-state";
+import { PageTransition } from "@/components/primitives/PageTransition";
+import { NAV_BACK, NAV_FORWARD } from "@/lib/utils/view-transition";
 
 export const metadata = {
   title: "Chronology — BHĀRATA",
@@ -25,6 +27,7 @@ export default function ChronologyPage() {
   }
 
   return (
+    <PageTransition>
     <div className="mx-auto max-w-[760px] px-6 py-16">
       <Eyebrow>Temporal exploration</Eyebrow>
       <h1 className="mt-2 font-display text-4xl text-ink">Chronology</h1>
@@ -69,6 +72,7 @@ export default function ChronologyPage() {
                         <Link
                           key={id}
                           href={`/polities/${polity.slug}`}
+                          transitionTypes={NAV_FORWARD}
                           className="underline underline-offset-4 text-ink hover:text-territory-selected"
                         >
                           {polity.name}
@@ -77,6 +81,7 @@ export default function ChronologyPage() {
                     })}
                     <Link
                       href={`/atlas?year=${event.period.startYear}`}
+                      transitionTypes={NAV_BACK}
                       className="underline underline-offset-4 text-ink-muted hover:text-ink"
                     >
                       View on the atlas →
@@ -89,5 +94,6 @@ export default function ChronologyPage() {
         ))}
       </div>
     </div>
+    </PageTransition>
   );
 }

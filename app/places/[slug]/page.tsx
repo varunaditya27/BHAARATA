@@ -7,6 +7,8 @@ import { HeroPhoto } from "@/components/primitives/HeroPhoto";
 import { events, places, polities } from "@/lib/data/prototype";
 import { images, type ImageKey } from "@/lib/data/images";
 import { formatDateRange } from "@/lib/domain/time";
+import { PageTransition } from "@/components/primitives/PageTransition";
+import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 export function generateStaticParams() {
   return places.map((p) => ({ slug: p.slug }));
@@ -29,9 +31,10 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
   );
 
   return (
+    <PageTransition>
     <div>
       {hero ? (
-        <HeroPhoto credit={hero}>
+        <HeroPhoto credit={hero} sharedName={transitionNames.placePhoto(place.slug)}>
           <div className="flex h-full items-end">
             <div className="mx-auto w-full max-w-[760px] px-6 pb-10">{header}</div>
           </div>
@@ -60,7 +63,7 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
                 {associatedPolities.map((p, i) => (
                   <span key={p.id}>
                     {i > 0 && ", "}
-                    <Link href={`/polities/${p.slug}`} className="underline underline-offset-4 hover:text-territory-selected">
+                    <Link href={`/polities/${p.slug}`} transitionTypes={NAV_FORWARD} className="underline underline-offset-4 hover:text-territory-selected">
                       {p.name}
                     </Link>
                   </span>
@@ -87,6 +90,7 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
         <p className="mt-10 font-sans text-sm text-ink-muted">
           <Link
             href={`/atlas?year=985`}
+            transitionTypes={NAV_BACK}
             className="underline underline-offset-4 text-ink hover:text-territory-selected"
           >
             View on the atlas →
@@ -94,5 +98,6 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
         </p>
       </div>
     </div>
+    </PageTransition>
   );
 }

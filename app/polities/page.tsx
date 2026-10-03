@@ -1,11 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Badge } from "@/components/primitives/Badge";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
-import { TransitionLink } from "@/components/primitives/TransitionLink";
+import { PageTransition } from "@/components/primitives/PageTransition";
+import { Shared } from "@/components/primitives/Shared";
 import { polities } from "@/lib/data/prototype";
 import { images, type ImageKey } from "@/lib/data/images";
 import { formatDateRange } from "@/lib/domain/time";
-import { polityPhotoTransitionName } from "@/lib/utils/view-transition";
+import { NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 export const metadata = {
   title: "Kingdoms — BHĀRATA",
@@ -13,6 +15,7 @@ export const metadata = {
 
 export default function PolitiesIndexPage() {
   return (
+    <PageTransition>
     <div className="mx-auto max-w-[1000px] px-6 py-16">
       <Eyebrow>Semantic exploration</Eyebrow>
       <h1 className="mt-2 font-display text-4xl text-ink">Kingdoms</h1>
@@ -28,8 +31,9 @@ export default function PolitiesIndexPage() {
         {polities.map((polity) => {
           const hero = polity.heroImageKey ? images[polity.heroImageKey as ImageKey] : undefined;
           return (
-            <TransitionLink key={polity.id} href={`/polities/${polity.slug}`} className="group block">
+            <Link key={polity.id} href={`/polities/${polity.slug}`} transitionTypes={NAV_FORWARD} className="group block">
               {hero && (
+                <Shared name={transitionNames.polityPhoto(polity.slug)}>
                 <div className="relative aspect-[16/10] overflow-hidden bg-stone">
                   <Image
                     src={hero.file}
@@ -37,9 +41,9 @@ export default function PolitiesIndexPage() {
                     fill
                     sizes="(min-width: 640px) 480px, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    style={{ viewTransitionName: polityPhotoTransitionName(polity.slug) }}
                   />
                 </div>
+                </Shared>
               )}
               <h2 className="mt-3 font-display text-2xl text-ink group-hover:text-territory-selected">
                 {polity.name}
@@ -50,10 +54,11 @@ export default function PolitiesIndexPage() {
               <p className="mt-3 font-sans text-sm leading-relaxed text-ink-muted">
                 {polity.summary}
               </p>
-            </TransitionLink>
+            </Link>
           );
         })}
       </div>
     </div>
+    </PageTransition>
   );
 }

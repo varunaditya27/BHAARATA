@@ -1,5 +1,6 @@
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { Rule } from "@/components/primitives/Rule";
+import { PageTransition } from "@/components/primitives/PageTransition";
 
 export const metadata = {
   title: "Method — BHĀRATA",
@@ -7,6 +8,7 @@ export const metadata = {
 
 export default function MethodPage() {
   return (
+    <PageTransition>
     <div className="mx-auto max-w-[680px] px-6 py-16">
       <Eyebrow>How this corpus is built</Eyebrow>
       <h1 className="mt-2 font-display text-4xl text-ink">Method</h1>
@@ -34,5 +36,6 @@ export default function MethodPage() {
         </p>
       </section>
     </div>
+    </PageTransition>
   );
 }

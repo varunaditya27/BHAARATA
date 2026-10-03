@@ -14,7 +14,10 @@ const secondaryLinks = [{ href: "/method", label: "Method" }];
 
 export function GlobalNav() {
   return (
-    <header className="border-b border-border bg-paper/90 backdrop-blur-sm">
+    <header
+      className="relative z-40 border-b border-border bg-paper/90 backdrop-blur-sm"
+      style={{ viewTransitionName: "site-header" }}
+    >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-4">
         <Link href="/" className="shrink-0 font-display text-lg tracking-wide text-ink">
           BHĀRATA

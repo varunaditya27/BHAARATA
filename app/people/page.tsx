@@ -4,11 +4,15 @@ import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { RulerPortrait } from "@/components/entity/RulerPortrait";
 import { getPolityBySlug, people } from "@/lib/data/prototype";
 import { formatDateRange } from "@/lib/domain/time";
+import { PageTransition } from "@/components/primitives/PageTransition";
+import { NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
+import { Shared } from "@/components/primitives/Shared";
 
 export const metadata = { title: "People — BHĀRATA" };
 
 export default function PeopleIndexPage() {
   return (
+    <PageTransition>
     <div className="mx-auto max-w-[900px] px-6 py-16">
       <Eyebrow>Semantic exploration</Eyebrow>
       <h1 className="mt-2 font-display text-4xl text-ink">People</h1>
@@ -20,8 +24,10 @@ export default function PeopleIndexPage() {
         {people.map((person) => {
           const polity = person.polityId ? getPolityBySlug(person.polityId) : undefined;
           return (
-            <Link key={person.id} href={`/people/${person.slug}`} className="group flex gap-4 border-t border-border pt-5">
-              <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-20 shrink-0" />
+            <Link key={person.id} href={`/people/${person.slug}`} transitionTypes={NAV_FORWARD} className="group flex gap-4 border-t border-border pt-5">
+              <Shared name={transitionNames.personPortrait(person.slug)}>
+                <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-20 shrink-0" />
+              </Shared>
               <div>
                 <h2 className="font-display text-xl text-ink group-hover:text-territory-selected">
                   {person.name}
@@ -37,5 +43,6 @@ export default function PeopleIndexPage() {
         })}
       </div>
     </div>
+    </PageTransition>
   );
 }

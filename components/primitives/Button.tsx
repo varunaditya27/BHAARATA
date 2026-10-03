@@ -34,9 +34,10 @@ export function ButtonLink({
   variant = "solid",
   className,
   href,
-}: BaseProps & { href: string }) {
+  transitionTypes,
+}: BaseProps & { href: string; transitionTypes?: string[] }) {
   return (
-    <Link href={href} className={cn(base, variantClasses[variant], className)}>
+    <Link href={href} transitionTypes={transitionTypes} className={cn(base, variantClasses[variant], className)}>
       {children}
     </Link>
   );

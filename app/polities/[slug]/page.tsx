@@ -5,6 +5,8 @@ import { HeroPhoto } from "@/components/primitives/HeroPhoto";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { EntityTabs } from "@/components/primitives/EntityTabs";
 import { RulerPortrait } from "@/components/entity/RulerPortrait";
+import { PageTransition } from "@/components/primitives/PageTransition";
+import { Shared } from "@/components/primitives/Shared";
 import {
   evidence as evidenceData,
   events,
@@ -16,7 +18,7 @@ import {
 } from "@/lib/data/prototype";
 import { images, type ImageKey } from "@/lib/data/images";
 import { formatDateRange } from "@/lib/domain/time";
-import { polityPhotoTransitionName } from "@/lib/utils/view-transition";
+import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 export function generateStaticParams() {
   return polities.map((p) => ({ slug: p.slug }));
@@ -89,13 +91,15 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
   const rulersTab = (
     <div className="grid gap-8 sm:grid-cols-3">
       {rulers.map((ruler) => (
-        <Link key={ruler.id} href={`/people/${ruler.slug}`} className="group block">
-          <RulerPortrait
-            imageKey={ruler.imageKey}
-            name={ruler.name}
-            accentColor={polity.accentColor}
-            className="w-full"
-          />
+        <Link key={ruler.id} href={`/people/${ruler.slug}`} transitionTypes={NAV_FORWARD} className="group block">
+          <Shared name={transitionNames.personPortrait(ruler.slug)}>
+            <RulerPortrait
+              imageKey={ruler.imageKey}
+              name={ruler.name}
+              accentColor={polity.accentColor}
+              className="w-full"
+            />
+          </Shared>
           <h3 className="mt-3 font-display text-lg text-ink group-hover:text-territory-selected">
             {ruler.name}
           </h3>
@@ -111,7 +115,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
   const placesTab = (
     <div className="grid gap-8 sm:grid-cols-2">
       {relatedPlaces.map((place) => (
-        <Link key={place.id} href={`/places/${place.slug}`} className="group block border-t border-border pt-4">
+        <Link key={place.id} href={`/places/${place.slug}`} transitionTypes={NAV_FORWARD} className="group block border-t border-border pt-4">
           <h3 className="font-display text-xl text-ink group-hover:text-territory-selected">{place.name}</h3>
           <p className="font-sans text-sm text-ink-muted">{place.placeType} · {place.region}</p>
         </Link>
@@ -143,7 +147,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
     <ul className="space-y-6">
       {relatedEvidence.map((ev) => (
         <li key={ev.id} className="border-t border-border pt-4">
-          <Link href={`/evidence/${ev.slug}`} className="group block">
+          <Link href={`/evidence/${ev.slug}`} transitionTypes={NAV_FORWARD} className="group block">
             <p className="font-sans text-sm text-ink-muted">{formatDateRange(ev.period)} · {ev.evidenceType}</p>
             <h3 className="mt-1 font-display text-xl text-ink group-hover:text-territory-selected">
               {ev.title}
@@ -160,7 +164,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
   const relatedTab = (
     <div className="grid gap-8 sm:grid-cols-3">
       {otherPolities.map((p) => (
-        <Link key={p.id} href={`/polities/${p.slug}`} className="group block border-t border-border pt-4">
+        <Link key={p.id} href={`/polities/${p.slug}`} transitionTypes={NAV_FORWARD} className="group block border-t border-border pt-4">
           <h3 className="font-display text-xl text-ink group-hover:text-territory-selected">{p.name}</h3>
           <p className="font-sans text-sm text-ink-muted">{formatDateRange(p.period)}</p>
         </Link>
@@ -169,9 +173,10 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
   );
 
   return (
+    <PageTransition>
     <div>
       {hero && (
-        <HeroPhoto credit={hero} viewTransitionName={polityPhotoTransitionName(polity.slug)}>
+        <HeroPhoto credit={hero} sharedName={transitionNames.polityPhoto(polity.slug)}>
           <div className="flex h-full items-end">
             <div className="mx-auto w-full max-w-[1100px] px-6 pb-10">
               <Eyebrow className="text-paper/70">{polity.polityType} · {polity.region}</Eyebrow>
@@ -216,6 +221,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
         <p className="mt-16 border-t border-border pt-6 font-sans text-sm text-ink-muted">
           <Link
             href={`/atlas?polity=${polity.slug}&year=${polity.period.startYear}`}
+            transitionTypes={NAV_BACK}
             className="underline underline-offset-4 text-ink hover:text-territory-selected"
           >
             View {polity.name} on the atlas →
@@ -223,5 +229,6 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
         </p>
       </div>
     </div>
+    </PageTransition>
   );
 }

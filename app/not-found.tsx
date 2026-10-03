@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
+import { PageTransition } from "@/components/primitives/PageTransition";
 
 export default function NotFound() {
   return (
+    <PageTransition>
     <div className="mx-auto max-w-[600px] px-6 py-24 text-center">
       <Eyebrow>Not found</Eyebrow>
       <h1 className="mt-2 font-display text-4xl text-ink">
@@ -18,5 +20,6 @@ export default function NotFound() {
         Return to the atlas →
       </Link>
     </div>
+    </PageTransition>
   );
 }
