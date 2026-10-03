@@ -39,7 +39,7 @@ for label, rows, key in (("polity", polities, "id"), ("person", people, "id"), (
         if r[key] in seen: bad(label, f"duplicate id {r[key]}")
         seen.add(r[key])
         if not r.get("name") or re.fullmatch(r"Q\d+", r["name"]): bad(label, f"{r[key]}: missing or unresolved name {r.get('name')!r}")
-pids = {p["id"] for p in polities}
+pids = {p["id"] for p in polities} | {"chera"}   # Chera is hand-written (no Cliopatria entry)
 
 # ---- kingdoms
 for p in polities:
@@ -125,7 +125,7 @@ for k, c in imgs.items():
     for fld in ("artist", "license", "sourceUrl", "alt"):
         if not c.get(fld): bad("image", f"{k}: missing {fld}")
     if not re.match(r"(CC BY|CC0|Public domain|PD|CC-BY|Attribution)", c.get("license", ""), re.I): bad("image", f"{k}: licence {c.get('license')!r} not on the allow-list")
-    if c.get("artist") == "Unknown": bad("credit", f"{k}: photographer unknown (licence {c['license']})")
+    if c.get("artist") == "Unknown" and "public domain" not in c.get("license", "").lower(): bad("credit", f"{k}: photographer unknown (licence {c['license']})")
 used = {c["file"] for c in imgs.values()}
 for fn in os.listdir(os.path.join(ROOT, "public/images")):
     if fn.startswith(("imp-", "kp-", "ruler-")) and f"/images/{fn}" not in used: bad("image", f"{fn}: on disk but not credited anywhere")

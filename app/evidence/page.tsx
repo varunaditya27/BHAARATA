@@ -19,7 +19,7 @@ export default function EvidenceIndexPage() {
         object itself to where its reading is published.
       </p>
       <div className="mt-3">
-        <Badge tone="neutral">One real inscription translation · one placeholder example</Badge>
+        <Badge tone="neutral">Two real inscription translations from one public-domain volume</Badge>
       </div>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2">

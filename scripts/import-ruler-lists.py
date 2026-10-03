@@ -59,6 +59,7 @@ LISTS = [
 # cells). Every row is exactly what the named article states; "?" means the article gives no end year. Each was
 # cross-checked against the article before entry. polity -> (article, role, [(name, start, end), ...])
 MANUAL = {
+    "chera": ("Chera Perumals of Makotai", "Chera Perumal", [("Sthanu Ravi Kulasekhara", 844, 870), ("Rama Rajasekhara", 870, 883), ("Vijayaraga", 883, 895), ("Goda Goda", 895, 905), ("Goda Ravi", 905, 943), ("Indu Goda", 943, 962), ("Bhaskara Ravi Manukuladitya", 962, 1021), ("Ravi Goda", 1021, 1089), ("Rama Kulasekhara", 1089, 1122)]),
     "sena": ("Sena dynasty", "Sena king of Bengal", [("Samanta Sena", 1070, 1095), ("Hemanta Sena", 1095, 1096), ("Vijaya Sena", 1096, 1159), ("Ballala Sena", 1159, 1179), ("Lakshmana Sena", 1179, 1206), ("Vishvarupa Sena", 1206, 1225), ("Keshava Sena", 1225, 1230)]),
     "maitraka": ("Kingdom of Valabhi", "Maitraka king of Valabhi", [("Bhatarka", 470, 492), ("Dharasena I", 493, 499), ("Dronasinha", 500, 520), ("Dhruvasena I", 520, 550), ("Dharapatta", 550, 556), ("Guhasena", 556, 570), ("Dharasena II", 570, 595), ("Shiladitya I", 595, 615), ("Kharagraha I", 615, 626), ("Dharasena III", 626, 640), ("Dhruvasena II (Baladitya)", 640, 644), ("Dharasena IV", 644, 651), ("Dhruvasena III", 650, 655), ("Kharagraha II", 655, 658), ("Shiladitya II", 658, 685), ("Shiladitya III", 690, 710), ("Shiladitya IV", 710, 740), ("Shiladitya V", 740, 762), ("Shiladitya VI Dhrubhata", 762, 776)]),
     "turk-shahis": ("Turk Shahis", "Turk Shahi ruler of Kabul", [("Barha Tegin", 665, 680), ("Tegin Shah", 680, 739), ("Fromo Kesaro", 739, 745), ("Bo Fuzhun", 745, None), ("Khingala", 780, 785), ("Lagaturman", 815, 822)]),
@@ -218,7 +219,7 @@ def main():
                             "datesAre": "reign", "endFromNext": bool(e.get("ascension")) and r["end"] is not None, "list": e["page"],
                             "supersedes": [old["id"]] if old else []})
     for pid, (article, role_default, rows) in MANUAL.items():
-        p = polities[pid]
+        p = polities.get(pid) or {"from": 800, "to": 1124}      # Chera has no Cliopatria entry; its span is the article's
         for row in rows:
             name, start, end = row[:3]
             role = row[3] if len(row) > 3 else role_default

@@ -35,6 +35,13 @@ FIX_PERSON_ARTICLE = {
     "masud-ii": ("Mas'ud_II_of_Ghazni", "Mas'ud ibn Mawdud ibn Mas'ud, commonly known as Mas'ud II, was Ghaznavid sultan for sometime in 1048. Masud was the son and successor of Mawdud of Ghazni, and ruled for a short period."),
 }
 
+# Photographs where Commons' structured data names no creator, but the file page does. key -> (artist, where it was found)
+FIX_CREDITS = {
+    "imp-chandela": ("Hullie", "file page: uploaded by Hullie to Dutch Wikipedia, later moved to Commons"),
+    "ruler-mas-ud-i": ("PHGCOM", "file page: self-made photograph taken at the British Museum"),
+    "ruler-ibrahim-adil-shah-ii": ("Unknown Deccani painter (about 1620s)", "file page: a 17th-century miniature, public domain; the painter is not recorded"),
+}
+
 # Battles whose Wikipedia title redirects to a broader subject, so the summary described something else
 # (the whole Dutch–Portuguese war, or Shivaji's biography). They keep Wikidata's date and place only.
 STRIP_BATTLE_SUMMARY = [
@@ -78,6 +85,12 @@ def battles(d):
             b["wikipedia"] = None
     return d
 
+def credits(d):
+    for k, (artist, _why) in FIX_CREDITS.items():
+        if k in d: d[k]["artist"] = artist
+    return d
+
 if __name__ == "__main__":
+    rw("imported-images.json", credits); rw("imported-ruler-images.json", credits)
     rw("imported-people.json", people); rw("imported-polities.json", polities); rw("imported-battles.json", battles)
     print("applied", len(REMOVE_PEOPLE), "removals,", len(FIX_DATES), "date fix,", len(FIX_WIKIPEDIA), "title fix,", len(STRIP_BATTLE_SUMMARY), "battle summaries stripped")

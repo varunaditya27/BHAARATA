@@ -10,7 +10,7 @@ export type LayerToggleId = "territory" | "places" | "routes" | "relief" | "batt
 const LAYER_OPTIONS: { id: LayerToggleId; label: string }[] = [
   { id: "territory", label: "Kingdoms" },
   { id: "places", label: "Cities and places" },
-  { id: "routes", label: "Trade and war routes" },
+  { id: "routes", label: "Two example routes (drawn by hand, not sourced)" },
   { id: "relief", label: "Hills and rivers" },
   { id: "battles", label: "Battles" },
   { id: "sites", label: "Temples, forts and mosques, by year built" },

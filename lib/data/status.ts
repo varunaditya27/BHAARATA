@@ -10,6 +10,11 @@ export type DataStatus = { label: string; sourced: boolean };
 export function polityStatus(p: Polity): DataStatus {
   const ids = p.provenance.map((x) => x.sourceId);
   const borders = ids.includes("cliopatria");
+  if (ids.some((id) => id.startsWith("wikipedia-check-"))) {
+    return borders
+      ? { label: "Borders: Cliopatria · Text: checked against Wikipedia", sourced: true }
+      : { label: "Text checked against Wikipedia · Outline is a placeholder", sourced: false };
+  }
   const summary = ids.some((id) => id.startsWith("wikipedia-"));
   if (borders && summary) return { label: "Borders: Cliopatria · Summary: Wikipedia", sourced: true };
   if (borders) return { label: "Borders: Cliopatria · Text not yet checked", sourced: false };
@@ -18,6 +23,7 @@ export function polityStatus(p: Polity): DataStatus {
 
 export function personStatus(p: Person): DataStatus {
   const ids = p.provenance.map((x) => x.sourceId);
+  if (ids.some((id) => id.startsWith("wikipedia-check-person-"))) return { label: "Dates and text checked against Wikipedia", sourced: true };
   if (ids.some((id) => id.startsWith("wikipedia-list-"))) return { label: "Name and dates: Wikipedia's list of rulers", sourced: true };
   if (ids.includes("wikidata")) {
     return { label: ids.some((id) => id.startsWith("wikipedia-")) ? "Dates: Wikidata · Summary: Wikipedia" : "Dates and role: Wikidata", sourced: true };

@@ -34,7 +34,7 @@ export default function ChronologyPage() {
           means &ldquo;about&rdquo;.
         </p>
         <div className="mt-3">
-          <Badge tone="neutral">Battles: Wikidata and Wikipedia · turning points are hand-written placeholders</Badge>
+          <Badge tone="neutral">Battles: Wikidata and Wikipedia · turning points: written here, checked against Wikipedia</Badge>
         </div>
 
         <div className="mt-10">
