@@ -51,6 +51,18 @@ LISTS = [
     {"polity": "kamarupa", "page": "Varman dynasty", "heading": r"The dynasty", "role": "Varman king of Kamarupa"},
     {"polity": "anuradhapura", "page": "List of Sri Lankan monarchs", "heading": r"House of Moriya", "role": "King of Anuradhapura", "last_years": True},
     {"polity": "anuradhapura", "page": "List of Sri Lankan monarchs", "heading": r"House of Lambakanna II", "role": "King of Anuradhapura", "last_years": True},
+    {"polity": "delhi-sultanate", "page": "List of sultans of Delhi", "heading": r"Mamluk dynasty", "role": "Sultan of Delhi", "kind": "delhi"},
+    {"polity": "delhi-sultanate", "page": "List of sultans of Delhi", "heading": r"Khalji dynasty", "role": "Sultan of Delhi", "kind": "delhi"},
+    {"polity": "delhi-sultanate", "page": "List of sultans of Delhi", "heading": r"Tughluq dynasty", "role": "Sultan of Delhi", "kind": "delhi"},
+    {"polity": "delhi-sultanate", "page": "List of sultans of Delhi", "heading": r"Sayyid dynasty", "role": "Sultan of Delhi", "kind": "delhi"},
+    {"polity": "delhi-sultanate", "page": "List of sultans of Delhi", "heading": r"Lodi dynasty", "role": "Sultan of Delhi", "kind": "delhi"},
+    {"polity": "vijayanagara", "page": "List of Vijayanagara emperors", "heading": r"Sangama dynasty \(1336", "role": "Emperor of Vijayanagara", "span_to": 1650},
+    {"polity": "vijayanagara", "page": "List of Vijayanagara emperors", "heading": r"Saluva dynasty \(1485", "role": "Emperor of Vijayanagara", "span_to": 1650},
+    {"polity": "vijayanagara", "page": "List of Vijayanagara emperors", "heading": r"Tuluva dynasty \(1491", "role": "Emperor of Vijayanagara", "span_to": 1650},
+    {"polity": "vijayanagara", "page": "List of Vijayanagara emperors", "heading": r"Aravidu dynasty \(1542", "role": "Emperor of Vijayanagara", "span_to": 1650},
+    {"polity": "bahmani", "page": "List of Bahmani Sultans", "heading": r"List of Bahmani Shahs", "role": "Bahmani Sultan", "name_col": -1},
+    {"polity": "bijapur", "page": "Adil Shahi dynasty", "heading": r"Rulers", "role": "Adil Shahi Sultan of Bijapur", "name_col": 1},
+    {"polity": "golconda", "page": "Qutb Shahi dynasty", "heading": r"List of rulers", "role": "Qutb Shahi Sultan of Golconda", "last_years": True},
     {"polity": "gorkha", "page": "Gorkha Kingdom", "heading": r"List of kings of Gorkha", "role": "King of Gorkha", "kind": "succession"},
 ]
 
@@ -60,6 +72,7 @@ LISTS = [
 # cross-checked against the article before entry. polity -> (article, role, [(name, start, end), ...])
 MANUAL = {
     "chera": ("Chera Perumals of Makotai", "Chera Perumal", [("Sthanu Ravi Kulasekhara", 844, 870), ("Rama Rajasekhara", 870, 883), ("Vijayaraga", 883, 895), ("Goda Goda", 895, 905), ("Goda Ravi", 905, 943), ("Indu Goda", 943, 962), ("Bhaskara Ravi Manukuladitya", 962, 1021), ("Ravi Goda", 1021, 1089), ("Rama Kulasekhara", 1089, 1122)]),
+    "ghaznavid": ("Mahmud of Ghazni", "Ghaznavid ruler", [("Mahmud of Ghazni", 998, 1030, "Sultan of the Ghaznavid Empire"), ("Muhammad of Ghazni", 1030, 1030, "Sultan of the Ghaznavid Empire"), ("Muhammad of Ghazni (second reign)", 1040, 1041, "Sultan of the Ghaznavid Empire"), ("Alp Tigin", 962, 963, "Governor of Ghazna")]),
     "sena": ("Sena dynasty", "Sena king of Bengal", [("Samanta Sena", 1070, 1095), ("Hemanta Sena", 1095, 1096), ("Vijaya Sena", 1096, 1159), ("Ballala Sena", 1159, 1179), ("Lakshmana Sena", 1179, 1206), ("Vishvarupa Sena", 1206, 1225), ("Keshava Sena", 1225, 1230)]),
     "maitraka": ("Kingdom of Valabhi", "Maitraka king of Valabhi", [("Bhatarka", 470, 492), ("Dharasena I", 493, 499), ("Dronasinha", 500, 520), ("Dhruvasena I", 520, 550), ("Dharapatta", 550, 556), ("Guhasena", 556, 570), ("Dharasena II", 570, 595), ("Shiladitya I", 595, 615), ("Kharagraha I", 615, 626), ("Dharasena III", 626, 640), ("Dhruvasena II (Baladitya)", 640, 644), ("Dharasena IV", 644, 651), ("Dhruvasena III", 650, 655), ("Kharagraha II", 655, 658), ("Shiladitya II", 658, 685), ("Shiladitya III", 690, 710), ("Shiladitya IV", 710, 740), ("Shiladitya V", 740, 762), ("Shiladitya VI Dhrubhata", 762, 776)]),
     "turk-shahis": ("Turk Shahis", "Turk Shahi ruler of Kabul", [("Barha Tegin", 665, 680), ("Tegin Shah", 680, 739), ("Fromo Kesaro", 739, 745), ("Bo Fuzhun", 745, None), ("Khingala", 780, 785), ("Lagaturman", 815, 822)]),
@@ -76,6 +89,8 @@ MANUAL = {
 
 # Listed in a table, but the article itself says there is no direct evidence for them: not shown.
 SKIP = {("kamarupa", "Avantivarman")}
+# Rows that contradict another row in the same list (Wikipedia's Tuluva table gives Thimma Bhupala 1491–1505; its Saluva table gives 1491).
+SKIP_ROWS = {("vijayanagara", "Thimma Bhupala", 1491, 1505)}
 
 # Where a table cell holds titles run together with the name, the name the ruler is known by.
 NAME_FIX = {"Khwajah-i-Jahan Malik-us-Sharq Atabeg-i-Azam": "Malik Sarwar"}
@@ -157,11 +172,12 @@ def parse_table(entry):
         # the reign cell: the first with a year range, else the first with any year
         if entry.get("last_years"):
             # separate "from" and "until" columns: the last two numbers in the row that look like years (cells that are only a number)
-            nums = [int(c) for c in cs if re.fullmatch(r"\d{3,4}", c)]
+            nums = [int(re.search(r"(\d{3,4})$", c).group(1)) for c in cs if re.fullmatch(r"(\d{1,2}\s+\w+\s+)?\d{3,4}", c)]
             if len(nums) < 2: continue
             names = [c for c in cs if re.search(r"[^\W\d_]{2,}", c) and not c.startswith("*") and not re.fullmatch(r"\d+px|rowspan.*|colspan.*|N/A|-", c)]
             if not names: continue
-            name = re.sub(r"\s*\(.*?\)|\s*\".*?\"", "", names[0]).strip(" ,")
+            name = re.sub(r"\s*\(.*?\)|\s*\".*?\"", "", names[0])
+            name = re.sub(r"[\u0590-\u06FF\u0750-\u077F]+", "", name).strip(" ,'")
             out.append({"name": name, "start": nums[-2], "end": nums[-1]})
             continue
         yearcell = next((c for c in cs if RANGE.search(c)), None) or next((c for c in cs if re.search(r"\b[5-9]\d\d\b|\b1[0-7]\d\d\b", c) and not re.fullmatch(r"\d{1,3}", c)), None)
@@ -177,6 +193,9 @@ def parse_table(entry):
             parts = re.split(entry["name_after"], name)
             if len(parts) > 1: name = "Jam " + parts[-1].strip()
         name = re.sub(r"\s*\(.*?\)|\s*\".*?\"|^\d+px\s*", "", name).strip(" ,")
+        name = re.sub(r"[\u007d\u007b\u0027\u2019]{2,}|\s*\}\}.*$", "", name).strip(" ,'")
+        name = re.sub(r"\s+Puppet King.*$|,\s*Sultan of Delhi$", "", name)
+        name = re.sub(r"[\u0590-\u06FF\u0750-\u077F]+", "", name).strip(" ,'")      # drop Arabic-script names printed beside the English one
         name = NAME_FIX.get(name, name)
         if "interregnum" in name.lower() or len(name) < 3: continue
         fix = DATE_FIX.get((entry["polity"], name))
@@ -189,16 +208,44 @@ def parse_table(entry):
 # Dates in a Wikipedia list that contradict the ruler's own article, corrected to the article. (polity, name) -> (start, end, reason)
 DATE_FIX = {("pallava", "Paramesvaravarman II"): (725, 731, "his own article: succeeded his father Narasimhavarman II in 725 and reigned till 731; the dynasty list gives 705–710")}
 
+def parse_delhi(entry):
+    """'List of sultans of Delhi': each row has the name as '''[[Article|Label]]''' and a reign cell with line breaks."""
+    s = section(page(entry["page"]), entry["heading"])
+    out = []
+    for row in re.split(r"\n\|-", s):
+        m = re.search(r"'''\[\[([^\]|]+)(?:\|[^\]]+)?\]\]'''", row)
+        if not m: continue
+        name = re.sub(r"\s*\(.*?\)", "", m.group(1)).strip()
+        after = row[m.end():]
+        cell = next((c for c in re.split(r"\n\|", after) if re.search(r"\b(1[0-7]\d\d|[5-9]\d\d)\b", c) and "aged" not in c and "<hr" not in c), None)
+        if not cell: continue
+        cell = re.sub(r"\{\{[^}]*\}\}|\(~.*?\)", "", cell)
+        cell = re.sub(r"\b\d{1,2}\s+\w+\s+(?=\d{3,4})", "", cell)
+        years = [int(y) for y in re.findall(r"\b([5-9]\d\d|1[0-7]\d\d)\b", cell)]
+        if years: out.append({"name": name, "start": years[0], "end": years[-1] if len(years) > 1 else None})
+    return out
+
 def parse(entry):
-    return {"table": parse_table, "bullets": parse_bullets, "succession": parse_succession}[entry.get("kind", "table")](entry)
+    return {"table": parse_table, "bullets": parse_bullets, "succession": parse_succession, "delhi": parse_delhi}[entry.get("kind", "table")](entry)
 
 def main():
     polities = {p["id"]: p for p in json.load(open(f"{G}/imported-polities.json"))}
     existing = json.load(open(f"{G}/imported-people.json"))
     records, seen = [], set()
+    # Words that name a dynasty, a title or a kingdom prove nothing about which person is meant.
+    STOP = {"shah", "sultan", "khan", "deva", "devaraya", "raya", "king", "empire", "ibn", "bin", "din", "ud-din", "of", "the", "chola", "nizam", "adil",
+            "qutb", "imad", "barid", "lodi", "tughluq", "tughlaq", "khalji", "wodeyar", "pandya", "nayak", "nayaka", "sena", "pala", "bahmani", "suri", "ghazni"}
+    def tokens(n):
+        return {t for t in re.split(r"[^a-z]+", n.lower().replace("-", "")) if len(t) >= 4 and t not in STOP}
     def match(pid, name, a, b):
+        """The best Wikidata record for this ruler: same kingdom, overlapping years, and a shared first name or distinctive word."""
         key = re.sub(r"\W", "", name.lower())[:6]
-        return next((x for x in existing if x["polityId"] == pid and re.sub(r"\W", "", x["name"].lower())[:6] == key and x["start"] <= b + 5 and a <= (x["end"] or x["start"]) + 5), None)
+        best, best_score = None, 0
+        for x in existing:
+            if x["polityId"] != pid or not (x["start"] <= b + 5 and a <= (x["end"] or x["start"]) + 5): continue
+            score = (3 if re.sub(r"\W", "", x["name"].lower())[:6] == key else 0) + len(tokens(x["name"]) & tokens(name))
+            if score > best_score: best, best_score = x, score
+        return best
     def known(pid, name, a, b):
         """True if Wikidata already has this ruler with a reign. A lifetime-only record is replaced by the list's reign."""
         m = match(pid, name, a, b)
@@ -207,8 +254,8 @@ def main():
         p = polities[e["polity"]]
         for r in parse(e):
             end = r["end"] if r["end"] is not None else r["start"]
-            if not (p["from"] - 60 <= r["start"] and end <= p["to"] + 60) or end < r["start"]: continue
-            if known(e["polity"], r["name"], r["start"], end) or (e["polity"], r["name"]) in SKIP: continue
+            if not (p["from"] - 60 <= r["start"] and end <= e.get("span_to", p["to"] + 60)) or end < r["start"]: continue
+            if known(e["polity"], r["name"], r["start"], end) or (e["polity"], r["name"]) in SKIP or (e["polity"], r["name"], r["start"], end) in SKIP_ROWS: continue
             nm = r["name"]
             if (nm, e["polity"]) in seen: nm += " (second term)"          # the source lists the same ruler again (a restored reign, or a second office)
             seen.add((r["name"], e["polity"]))

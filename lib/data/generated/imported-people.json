@@ -78,32 +78,6 @@
   "summary": "Shihab-ud-Din Ahmad Shah I Bahmani, also known as Ahmad Shah Wali, was the Sultan of the Bahmani Sultanate from 1 October 1422 to 17 April 1436, and was a great patron of arts and culture."
  },
  {
-  "id": "taj-ud-din-firuz-shah",
-  "q": "Q7676751",
-  "name": "Taj ud-Din Firuz Shah",
-  "role": "Bahmani Sultan",
-  "polityId": "bahmani",
-  "start": 1371,
-  "end": 1422,
-  "datesAre": "lifetime",
-  "datesFromText": false,
-  "wikipedia": "Taj_ud-Din_Firuz_Shah",
-  "summary": "Taj ud-Din Firoz Shah, also known as Firoz Shah Bahmani, was the ruler of the Bahmani Sultanate in the Deccan Plateau of India from 16 November 1397 to 22 September 1422. Firuz Shah is considered an important ruler of the Bahamani Sultanate."
- },
- {
-  "id": "nizam-ud-din-ahmad-iii",
-  "q": "Q29167243",
-  "name": "Nizam-Ud-Din Ahmad III",
-  "role": "Bahmani Sultan",
-  "polityId": "bahmani",
-  "start": 1453,
-  "end": 1463,
-  "datesAre": "lifetime",
-  "datesFromText": false,
-  "wikipedia": "Nizam-Ud-Din_Ahmad_III",
-  "summary": "Nizam al-Din Ahmad III, also known as Nizam Ahmed Shah and Nizam Shah Bahmani, was the 12th Sultan of the Bahmani Sultanate from 1461 to 1463. During his reign, the administration of the sultanate was mainly handled by the Persian prime minister Mahmud Gawan."
- },
- {
   "id": "muhammad-shah-lashkari",
   "q": "Q4519937",
   "name": "Muhammad Shah Lashkari",
@@ -115,19 +89,6 @@
   "datesFromText": false,
   "wikipedia": "Muhammad_Shah_III_Lashkari",
   "summary": "Muhammad Shah III Lashkari, also known as Shamsuddin Muhammad Shah III, was the sultan of the Bahmani Sultanate from 1463 to 1482. During his reign, he successfully invaded Orissa, compelling its ruler Purushottam Deva to surrender. He also made his brother Hamvira Deva surrender by besieging Kondavidu fort."
- },
- {
-  "id": "mahmud-szach",
-  "q": "Q16574021",
-  "name": "Mahmud Szach",
-  "role": "Bahmani Sultan",
-  "polityId": "bahmani",
-  "start": 1470,
-  "end": 1518,
-  "datesAre": "lifetime",
-  "datesFromText": false,
-  "wikipedia": "Mahmood_Shah_Bahmani_II",
-  "summary": "Mahmood Shah or Shihab-Ud-Din Mahmud was the sultan of the Bahmani Sultanate from 1482 until his death in 1518. His long rule is noted for the disintegration of the sultanate and the creation of the independent Deccan sultanates."
  },
  {
   "id": "sikandar-shah",
@@ -604,19 +565,6 @@
   "summary": "Rajaraja II was a Chola emperor who reigned from 1150 to 1173. He was made his heir apparent and co-regent in 1146 and so the inscriptions of Rajaraja II count his reign from 1146. Rajaraja's reign began to show signs of the coming end of the dynasty."
  },
  {
-  "id": "rajadhiraja-chola-ii",
-  "q": "Q7285611",
-  "name": "Rajadhiraja Chola II",
-  "role": "Chola king",
-  "polityId": "chola",
-  "start": 1166,
-  "end": 1178,
-  "datesAre": "lifetime",
-  "datesFromText": false,
-  "wikipedia": "Rajadhiraja_II",
-  "summary": "Rajadhiraja Chola II reigned as the Chola emperor succeeding Rajaraja Chola II. Rajaraja Chola II chose Rajadhiraja II, a maternal grandson of Vikrama Chola as he had no sons. Rajadhiraja II's father was Sangama chola who was the descendant of Virarajendra chola."
- },
- {
   "id": "rajadiraja-chola-ii",
   "q": "Q7285606",
   "name": "Rajadiraja Chola II",
@@ -841,19 +789,6 @@
   "summary": "Shams ud-Din Kayumars was the eleventh sultan of Delhi, and a son of Muiz ud-Din Qaiqabad."
  },
  {
-  "id": "n-ssir-ad-din-mahmud-xah-tughluq",
-  "q": "Q3277857",
-  "name": "Nàssir-ad-Din Mahmud Xah Tughluq",
-  "role": "Sultan of Hindustan (Sultan of Delhi)",
-  "polityId": "delhi-sultanate",
-  "start": 1350,
-  "end": 1414,
-  "datesAre": "lifetime",
-  "datesFromText": false,
-  "wikipedia": "Mahmud_Shah_II",
-  "summary": "Nasir-ud-Din Mahmud Shah II, also known as Nasiruddin Mohammad Shah, was the last sultan of the Tughlaq dynasty to rule the Delhi Sultanate."
- },
- {
   "id": "nasir-ud-din-muhammad-shah-iii",
   "q": "Q3028975",
   "name": "Nasir ud din Muhammad Shah III",
@@ -959,19 +894,6 @@
   "datesFromText": false,
   "wikipedia": "Ismail_of_Ghazni",
   "summary": "Ismail of Ghazni was the emir of Ghazna, reigning for 7 months, from August 997 until March 998. He succeeded his father emir Sabuktigin, who died of an illness acquired in Balkh during a campaign in the Samanid civil war."
- },
- {
-  "id": "mohammad-ghaznavi",
-  "q": "Q32627",
-  "name": "Mohammad Ghaznavi",
-  "role": "Sultan of the Ghaznavid Empire",
-  "polityId": "ghaznavid",
-  "start": 1030,
-  "end": 1041,
-  "datesAre": "reign",
-  "datesFromText": false,
-  "wikipedia": "Muhammad_of_Ghazni",
-  "summary": "Muhammad of Ghazni was Sultan of the Ghaznavid Empire briefly in 1030, and then later from 1040 to 1041. He ascended the throne upon the death of his father Mahmud in 1030. He was the younger of a set of twins; this circumstance resulted in civil strife."
  },
  {
   "id": "mas-ud-i",
@@ -1453,19 +1375,6 @@
   "imageKey": "ruler-akbar"
  },
  {
-  "id": "khadija-sultana",
-  "q": "Q4958676",
-  "name": "Khadija Sultana",
-  "role": "Ruler",
-  "polityId": "mughal",
-  "start": 1600,
-  "end": 1665,
-  "datesAre": "lifetime",
-  "datesFromText": false,
-  "wikipedia": "Khadija_Sultana",
-  "summary": "Khadija Sultana was the regent of the Bijapur Sultanate between 1656 and 1661."
- },
- {
   "id": "jahangir-i",
   "q": "Q83653",
   "name": "Jahangir I",
@@ -1478,19 +1387,6 @@
   "wikipedia": "Jahangir",
   "summary": "Nur ud-din Muhammad Salim, known by his royal name Jahangir, was the fourth Mughal emperor of the Mughal Empire, reigning from 1605 until his death in 1627.",
   "imageKey": "ruler-jahangir-i"
- },
- {
-  "id": "gaj-singh-of-marwar",
-  "q": "Q17495715",
-  "name": "Gaj Singh of Marwar",
-  "role": "Maharaja of Jodhpur",
-  "polityId": "mughal",
-  "start": 1619,
-  "end": 1638,
-  "datesAre": "reign",
-  "datesFromText": false,
-  "wikipedia": "Gaj_Singh_I",
-  "summary": "Gaj Singh Rathore was the ruler of the Kingdom of Marwar, who reigned as Gaj Singh I from 7 September 1619 until his death in 1638. He held the title of Raja and, after c. 1630, assumed the higher title of Maharaja."
  },
  {
   "id": "shah-jahan",
@@ -1519,19 +1415,6 @@
   "wikipedia": "Aurangzeb",
   "summary": "Alamgir I, commonly known by the title Aurangzeb, was the sixth Mughal emperor, reigning from 1658 until his death in 1707. Under his reign, the Mughal Empire reached its greatest extent, with territory spanning nearly the entirety of the Indian subcontinent.",
   "imageKey": "ruler-aurangzeb"
- },
- {
-  "id": "jai-singh-ii",
-  "q": "Q2392864",
-  "name": "Jai Singh II",
-  "role": "King",
-  "polityId": "mughal",
-  "start": 1688,
-  "end": 1743,
-  "datesAre": "lifetime",
-  "datesFromText": false,
-  "wikipedia": "Sawai_Jai_Singh",
-  "summary": "Sawai Jai Singh II, was the 30th Kachhwaha ruler of the Kingdom of Amber, who later founded the fortified city of Jaipur and made it his capital. He became the ruler of Amber at the age of 11, after the untimely death of his father Mirza Raja Bishan Singh on 31 December 1699."
  },
  {
   "id": "chamaraja-wodeyar-iv",
@@ -1742,19 +1625,6 @@
   "datesFromText": false,
   "wikipedia": "Sadayavarman_Kulasekaran_I",
   "summary": "Sadayavarman Kulasekaran I was a Pandyan king from 1190 until his death in 1216."
- },
- {
-  "id": "parakrama-pandyan-ii",
-  "q": "Q7134850",
-  "name": "Parakrama Pandyan II",
-  "role": "King of Polonnaruwa",
-  "polityId": "pandya",
-  "start": 1212,
-  "end": 1215,
-  "datesAre": "reign",
-  "datesFromText": false,
-  "wikipedia": "Parakrama_Pandyan_II",
-  "summary": "Parakrama Pandyan II, also Pandu Parakramabahu of Polonnaruwa or Parakrama Pandu, was a Pandyan king who invaded the Kingdom of Polonnaruwa in the thirteenth century and ruled from 1212 to 1215 CE."
  },
  {
   "id": "maravarman-sundara-pandyan",
@@ -2099,19 +1969,6 @@
   "summary": "Hemanta Sena was the founder and the first ruler of the Sena dynasty in the Bengal region of the Indian subcontinent. He previously served as a statesman of the Pala Empire."
  },
  {
-  "id": "vijay-sena",
-  "q": "Q12452658",
-  "name": "Vijay Sena",
-  "role": "King of Sena",
-  "polityId": "sena",
-  "start": 1098,
-  "end": 1159,
-  "datesAre": "lifetime",
-  "datesFromText": false,
-  "wikipedia": "Vijaya_Sena",
-  "summary": "Vijaya Sena, also known as Vijay Sen in vernacular literature, was the son of Hemanta Sena, and the second ruler of the Sena dynasty. He conquered Bengal, fighting the kings of Gauda, Kamarupa, and Kalinga. He had capital in Vijayapuri and Bikrampur."
- },
- {
   "id": "sher-shah-suri",
   "q": "Q83680",
   "name": "Sher Shah Suri",
@@ -2163,20 +2020,6 @@
   "datesFromText": false,
   "wikipedia": "Deva_Raya_I",
   "summary": "Deva Raya I was an Yadava Emperor of the Vijayanagara Empire. After Harihara II died, there was a dispute among his sons over succession, in which Deva Raya I eventually emerged victor. He was a very capable ruler noted for his military exploits and his support to irrigation works in his empire."
- },
- {
-  "id": "bukka",
-  "q": "Q2484694",
-  "name": "Bukka",
-  "role": "Vijayanagara monarch",
-  "polityId": "vijayanagara",
-  "start": 1357,
-  "end": 1377,
-  "datesAre": "lifetime",
-  "datesFromText": false,
-  "wikipedia": "Bukka_Raya_I",
-  "summary": "Bukka Raya I was an emperor of the Vijayanagara Empire from the Sangama Dynasty. He was a son of Bhavana Sangama.",
-  "imageKey": "ruler-bukka"
  },
  {
   "id": "harihara-ii",

@@ -2697,7 +2697,9 @@
   "datesAre": "reign",
   "endFromNext": false,
   "list": "Bengal Sultanate",
-  "supersedes": []
+  "supersedes": [
+   "taj-khan-karrani"
+  ]
  },
  {
   "id": "bayazid-khan-karrani-1572-bengal-sultanate",
@@ -3143,7 +3145,9 @@
   "datesAre": "reign",
   "endFromNext": false,
   "list": "Ahmadnagar Sultanate",
-  "supersedes": []
+  "supersedes": [
+   "malik-ahmad-nizam-shah-i"
+  ]
  },
  {
   "id": "burhan-nizam-shah-i-1510-ahmadnagar",
@@ -3698,30 +3702,6 @@
   "polityId": "jaffna",
   "start": 1302,
   "end": 1325,
-  "datesAre": "reign",
-  "endFromNext": false,
-  "list": "List of Jaffna monarchs",
-  "supersedes": []
- },
- {
-  "id": "martanda-cinkaiariyan-1325-jaffna",
-  "name": "Martanda Cinkaiariyan",
-  "role": "Aryacakravarti king of Jaffna",
-  "polityId": "jaffna",
-  "start": 1325,
-  "end": 1348,
-  "datesAre": "reign",
-  "endFromNext": false,
-  "list": "List of Jaffna monarchs",
-  "supersedes": []
- },
- {
-  "id": "gunaveera-cinkaiariyan-1410-jaffna",
-  "name": "Gunaveera Cinkaiariyan",
-  "role": "Aryacakravarti king of Jaffna",
-  "polityId": "jaffna",
-  "start": 1410,
-  "end": 1440,
   "datesAre": "reign",
   "endFromNext": false,
   "list": "List of Jaffna monarchs",
@@ -4428,6 +4408,1252 @@
   ]
  },
  {
+  "id": "qutb-ud-din-aibak-1206-delhi-sultanate",
+  "name": "Qutb ud-Din Aibak",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1206,
+  "end": 1210,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "qutb-ud-din-aibak"
+  ]
+ },
+ {
+  "id": "aram-shah-1210-delhi-sultanate",
+  "name": "Aram Shah",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1210,
+  "end": 1211,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "aram-shah"
+  ]
+ },
+ {
+  "id": "iltutmish-1211-delhi-sultanate",
+  "name": "Iltutmish",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1211,
+  "end": 1236,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "iltutmish"
+  ]
+ },
+ {
+  "id": "ruknuddin-firuz-1236-delhi-sultanate",
+  "name": "Ruknuddin Firuz",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1236,
+  "end": 1236,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "jalal-ud-din-firuz-khalji"
+  ]
+ },
+ {
+  "id": "razia-sultan-1236-delhi-sultanate",
+  "name": "Razia Sultan",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1236,
+  "end": 1240,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "razia-sultana"
+  ]
+ },
+ {
+  "id": "muiz-ud-din-bahram-1240-delhi-sultanate",
+  "name": "Muiz ud din Bahram",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1240,
+  "end": 1242,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "muiz-ud-din-bahram"
+  ]
+ },
+ {
+  "id": "ala-ud-din-masud-shah-1242-delhi-sultanate",
+  "name": "Ala-ud-Din Masud Shah",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1242,
+  "end": 1246,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "nasiruddin-mahmud-shah-sultan-of-delhi-1246-delhi-sultanate",
+  "name": "Nasiruddin Mahmud Shah, Sultan of Delhi",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1246,
+  "end": 1266,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "nasir-ud-din-mahmud"
+  ]
+ },
+ {
+  "id": "ghiyas-ud-din-balban-1266-delhi-sultanate",
+  "name": "Ghiyas ud din Balban",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1266,
+  "end": 1287,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "ghiyas-ud-din-balban"
+  ]
+ },
+ {
+  "id": "muiz-ud-din-qaiqabad-1287-delhi-sultanate",
+  "name": "Muiz ud din Qaiqabad",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1287,
+  "end": 1290,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "muiz-ud-din-qaiqabad"
+  ]
+ },
+ {
+  "id": "shamsuddin-kayumars-1290-delhi-sultanate",
+  "name": "Shamsuddin Kayumars",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1290,
+  "end": 1290,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "kayumars-of-delhi"
+  ]
+ },
+ {
+  "id": "jalal-ud-din-khalji-1290-delhi-sultanate",
+  "name": "Jalal-ud-din Khalji",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1290,
+  "end": 1296,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "jalal-ud-din-firuz-khalji"
+  ]
+ },
+ {
+  "id": "ruknuddin-ibrahim-1296-delhi-sultanate",
+  "name": "Ruknuddin Ibrahim",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1296,
+  "end": 1296,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "alauddin-khalji-1296-delhi-sultanate",
+  "name": "Alauddin Khalji",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1296,
+  "end": 1316,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "shihabuddin-omar-1316-delhi-sultanate",
+  "name": "Shihabuddin Omar",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1316,
+  "end": 1316,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "qutbuddin-mubarak-shah-1316-delhi-sultanate",
+  "name": "Qutbuddin Mubarak Shah",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1316,
+  "end": 1320,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "khusrau-khan-1320-delhi-sultanate",
+  "name": "Khusrau Khan",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1320,
+  "end": 1320,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "ghiyath-al-din-tughluq-1320-delhi-sultanate",
+  "name": "Ghiyath al-Din Tughluq",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1320,
+  "end": 1325,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "muhammad-bin-tughluq-1325-delhi-sultanate",
+  "name": "Muhammad bin Tughluq",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1325,
+  "end": 1351,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "nasir-ud-din-muhammad-shah-iii"
+  ]
+ },
+ {
+  "id": "firuz-shah-tughlaq-1351-delhi-sultanate",
+  "name": "Firuz Shah Tughlaq",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1351,
+  "end": 1388,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "tughluq-khan-1388-delhi-sultanate",
+  "name": "Tughluq Khan",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1388,
+  "end": 1389,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "abu-bakr-shah-1389-delhi-sultanate",
+  "name": "Abu Bakr Shah",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1389,
+  "end": 1390,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "nasir-ud-din-muhammad-shah-iii-1390-delhi-sultanate",
+  "name": "Nasir ud din Muhammad Shah III",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1390,
+  "end": 1394,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "nasir-ud-din-muhammad-shah-iii"
+  ]
+ },
+ {
+  "id": "ala-ud-din-sikandar-shah-1394-delhi-sultanate",
+  "name": "Ala ud-din Sikandar Shah",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1394,
+  "end": 1394,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "nasir-ud-din-mahmud-shah-tughluq-1394-delhi-sultanate",
+  "name": "Nasir-ud-Din Mahmud Shah Tughluq",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1394,
+  "end": 1413,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "nasir-ud-din-muhammad-shah-iii"
+  ]
+ },
+ {
+  "id": "khizr-khan-1414-delhi-sultanate",
+  "name": "Khizr Khan",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1414,
+  "end": 1421,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "mubarak-shah-1421-delhi-sultanate",
+  "name": "Mubarak Shah",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1421,
+  "end": 1434,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "muhammad-shah-1434-delhi-sultanate",
+  "name": "Muhammad Shah",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1434,
+  "end": 1445,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "muhammad-shah"
+  ]
+ },
+ {
+  "id": "alam-shah-1445-delhi-sultanate",
+  "name": "Alam Shah",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1445,
+  "end": 1451,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": []
+ },
+ {
+  "id": "bahlul-khan-lodi-1451-delhi-sultanate",
+  "name": "Bahlul Khan Lodi",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1451,
+  "end": 1489,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "bahlul-khan-lodi"
+  ]
+ },
+ {
+  "id": "sikandar-khan-lodi-1489-delhi-sultanate",
+  "name": "Sikandar Khan Lodi",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1489,
+  "end": 1517,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "sikandar-khan-lodi"
+  ]
+ },
+ {
+  "id": "ibrahim-khan-lodi-1517-delhi-sultanate",
+  "name": "Ibrahim Khan Lodi",
+  "role": "Sultan of Delhi",
+  "polityId": "delhi-sultanate",
+  "start": 1517,
+  "end": 1526,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of sultans of Delhi",
+  "supersedes": [
+   "ibrahim-khan-lodi"
+  ]
+ },
+ {
+  "id": "harihara-i-1336-vijayanagara",
+  "name": "Harihara I",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1336,
+  "end": 1355,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "harihara-i"
+  ]
+ },
+ {
+  "id": "bukka-raya-i-1356-vijayanagara",
+  "name": "Bukka Raya I",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1356,
+  "end": 1377,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "bukka-raya-ii"
+  ]
+ },
+ {
+  "id": "harihara-ii-1377-vijayanagara",
+  "name": "Harihara II",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1377,
+  "end": 1404,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "harihara-ii"
+  ]
+ },
+ {
+  "id": "virupaksha-raya-1404-vijayanagara",
+  "name": "Virupaksha Raya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1404,
+  "end": 1405,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "virupaksha-raya"
+  ]
+ },
+ {
+  "id": "bukka-raya-ii-1404-vijayanagara",
+  "name": "Bukka Raya II",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1404,
+  "end": 1406,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "bukka-raya-ii"
+  ]
+ },
+ {
+  "id": "deva-raya-1406-vijayanagara",
+  "name": "Deva Raya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1406,
+  "end": 1423,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "deva-raya"
+  ]
+ },
+ {
+  "id": "ramachandra-raya-1423-vijayanagara",
+  "name": "Ramachandra Raya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1423,
+  "end": 1423,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": []
+ },
+ {
+  "id": "vira-vijaya-bukka-raya-1422-vijayanagara",
+  "name": "Vira Vijaya Bukka Raya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1422,
+  "end": 1424,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "veera-vijaya-bukka-raya"
+  ]
+ },
+ {
+  "id": "deva-raya-ii-1423-vijayanagara",
+  "name": "Deva Raya II",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1423,
+  "end": 1446,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "deva-raya"
+  ]
+ },
+ {
+  "id": "mallikarjuna-raya-1446-vijayanagara",
+  "name": "Mallikarjuna Raya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1446,
+  "end": 1465,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "mallikarjuna-raya"
+  ]
+ },
+ {
+  "id": "virupaksha-raya-ii-1465-vijayanagara",
+  "name": "Virupaksha Raya II",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1465,
+  "end": 1485,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "virupaksha-raya-ii"
+  ]
+ },
+ {
+  "id": "praudha-raya-1485-vijayanagara",
+  "name": "Praudha Raya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1485,
+  "end": 1485,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": []
+ },
+ {
+  "id": "saluva-narasimha-deva-raya-1485-vijayanagara",
+  "name": "Saluva Narasimha Deva Raya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1485,
+  "end": 1491,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "saluva-narasimha-deva-raya"
+  ]
+ },
+ {
+  "id": "thimma-bhupala-1491-vijayanagara",
+  "name": "Thimma Bhupala",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1491,
+  "end": 1491,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "thimma-bhupala"
+  ]
+ },
+ {
+  "id": "narasimha-raya-ii-1491-vijayanagara",
+  "name": "Narasimha Raya II",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1491,
+  "end": 1505,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "narasimha-raya-ii"
+  ]
+ },
+ {
+  "id": "viranarasimha-raya-1503-vijayanagara",
+  "name": "Viranarasimha Raya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1503,
+  "end": 1509,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "viranarasimha-raya"
+  ]
+ },
+ {
+  "id": "krishnadevaraya-1509-vijayanagara",
+  "name": "Krishnadevaraya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1509,
+  "end": 1529,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "sri-krishnadevaraya"
+  ]
+ },
+ {
+  "id": "achyuta-deva-raya-1529-vijayanagara",
+  "name": "Achyuta Deva Raya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1529,
+  "end": 1542,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": []
+ },
+ {
+  "id": "venkata-i-1542-vijayanagara",
+  "name": "Venkata I",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1542,
+  "end": 1543,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": []
+ },
+ {
+  "id": "sadasiva-raya-1542-vijayanagara",
+  "name": "Sadasiva Raya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1542,
+  "end": 1570,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "sadasiva-raya"
+  ]
+ },
+ {
+  "id": "aliya-rama-raya-1542-vijayanagara",
+  "name": "Aliya Rama Raya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1542,
+  "end": 1565,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "aliya-rama-raya"
+  ]
+ },
+ {
+  "id": "tirumala-deva-raya-1565-vijayanagara",
+  "name": "Tirumala Deva Raya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1565,
+  "end": 1572,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "tirumala-deva-raya"
+  ]
+ },
+ {
+  "id": "sriranga-i-1572-vijayanagara",
+  "name": "Sriranga I",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1572,
+  "end": 1586,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "sriranga-deva-raya"
+  ]
+ },
+ {
+  "id": "venkata-ii-1586-vijayanagara",
+  "name": "Venkata II",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1586,
+  "end": 1614,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": [
+   "venkatapati-deva-raya-ii"
+  ]
+ },
+ {
+  "id": "sriranga-ii-1614-vijayanagara",
+  "name": "Sriranga II",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1614,
+  "end": 1615,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": []
+ },
+ {
+  "id": "rama-deva-raya-1617-vijayanagara",
+  "name": "Rama Deva Raya",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1617,
+  "end": 1632,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": []
+ },
+ {
+  "id": "venkata-iii-1632-vijayanagara",
+  "name": "Venkata III",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1632,
+  "end": 1642,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": []
+ },
+ {
+  "id": "sriranga-iii-1642-vijayanagara",
+  "name": "Sriranga III",
+  "role": "Emperor of Vijayanagara",
+  "polityId": "vijayanagara",
+  "start": 1642,
+  "end": 1646,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Vijayanagara emperors",
+  "supersedes": []
+ },
+ {
+  "id": "ala-ud-din-bahman-shah-i-1347-bahmani",
+  "name": "Ala-ud-Din Bahman Shah I",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1347,
+  "end": 1358,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "mohammad-shah-i-1358-bahmani",
+  "name": "Mohammad Shah I",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1358,
+  "end": 1375,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "mujahid-shah-1375-bahmani",
+  "name": "Mujahid Shah",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1375,
+  "end": 1378,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "daud-shah-bahmani-1378-bahmani",
+  "name": "Daud Shah Bahmani",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1378,
+  "end": 1378,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "mohammad-shah-ii-1378-bahmani",
+  "name": "Mohammad Shah II",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1378,
+  "end": 1397,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "ghiyath-ad-din-shah-1397-bahmani",
+  "name": "Ghiyath-ad-din Shah",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1397,
+  "end": 1397,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "shams-ud-din-shah-1397-bahmani",
+  "name": "Shams-ud-Din Shah",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1397,
+  "end": 1397,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "feroze-shah-1397-bahmani",
+  "name": "Feroze Shah",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1397,
+  "end": 1422,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "ahmed-shah-wali-bahmani-1422-bahmani",
+  "name": "Ahmed Shah Wali Bahmani",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1422,
+  "end": 1436,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": [
+   "ahmad-shah-i-wali"
+  ]
+ },
+ {
+  "id": "ala-ud-din-ii-ahmed-shah-bahmani-1436-bahmani",
+  "name": "Ala-ud-Din II Ahmed Shah Bahmani",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1436,
+  "end": 1458,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "humayun-shah-zalim-bahmani-1458-bahmani",
+  "name": "Humayun Shah Zalim Bahmani",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1458,
+  "end": 1461,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "nizam-shah-bahmani-1461-bahmani",
+  "name": "Nizam Shah Bahmani",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1461,
+  "end": 1463,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "muhammad-shah-bahmani-iii-1463-bahmani",
+  "name": "Muhammad Shah Bahmani III",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1463,
+  "end": 1482,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": [
+   "muhammad-shah-lashkari"
+  ]
+ },
+ {
+  "id": "mahmood-shah-bahmani-ii-1482-bahmani",
+  "name": "Mahmood Shah Bahmani II",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1482,
+  "end": 1518,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "ahmed-shah-bahmani-ii-1518-bahmani",
+  "name": "Ahmed Shah Bahmani II",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1518,
+  "end": 1520,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "ala-ud-din-shah-bahmani-ii-1520-bahmani",
+  "name": "Ala-ud-Din Shah Bahmani II",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1520,
+  "end": 1522,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "waliullah-shah-bahmani-1522-bahmani",
+  "name": "Waliullah Shah Bahmani",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1522,
+  "end": 1526,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "kaleemullah-shah-bahmani-1525-bahmani",
+  "name": "Kaleemullah Shah Bahmani",
+  "role": "Bahmani Sultan",
+  "polityId": "bahmani",
+  "start": 1525,
+  "end": 1527,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "List of Bahmani Sultans",
+  "supersedes": []
+ },
+ {
+  "id": "yusuf-adil-shah-1490-bijapur",
+  "name": "Yusuf Adil Shah",
+  "role": "Adil Shahi Sultan of Bijapur",
+  "polityId": "bijapur",
+  "start": 1490,
+  "end": 1510,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Adil Shahi dynasty",
+  "supersedes": [
+   "yusuf-adil-shah"
+  ]
+ },
+ {
+  "id": "ismail-adil-shah-1510-bijapur",
+  "name": "Ismail Adil Shah",
+  "role": "Adil Shahi Sultan of Bijapur",
+  "polityId": "bijapur",
+  "start": 1510,
+  "end": 1534,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Adil Shahi dynasty",
+  "supersedes": [
+   "ismail-adil-shah"
+  ]
+ },
+ {
+  "id": "mallu-adil-shah-1534-bijapur",
+  "name": "Mallu Adil Shah",
+  "role": "Adil Shahi Sultan of Bijapur",
+  "polityId": "bijapur",
+  "start": 1534,
+  "end": 1535,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Adil Shahi dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "ibrahim-adil-shah-i-1535-bijapur",
+  "name": "Ibrahim Adil Shah I",
+  "role": "Adil Shahi Sultan of Bijapur",
+  "polityId": "bijapur",
+  "start": 1535,
+  "end": 1558,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Adil Shahi dynasty",
+  "supersedes": [
+   "ibrahim-adil-shah-i"
+  ]
+ },
+ {
+  "id": "ali-adil-shah-i-1558-bijapur",
+  "name": "Ali Adil Shah I",
+  "role": "Adil Shahi Sultan of Bijapur",
+  "polityId": "bijapur",
+  "start": 1558,
+  "end": 1580,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Adil Shahi dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "ibrahim-adil-shah-ii-1580-bijapur",
+  "name": "Ibrahim Adil Shah II",
+  "role": "Adil Shahi Sultan of Bijapur",
+  "polityId": "bijapur",
+  "start": 1580,
+  "end": 1627,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Adil Shahi dynasty",
+  "supersedes": [
+   "ibrahim-adil-shah-ii"
+  ]
+ },
+ {
+  "id": "mohammed-adil-shah-1627-bijapur",
+  "name": "Mohammed Adil Shah",
+  "role": "Adil Shahi Sultan of Bijapur",
+  "polityId": "bijapur",
+  "start": 1627,
+  "end": 1656,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Adil Shahi dynasty",
+  "supersedes": [
+   "mohammed-adil-shah"
+  ]
+ },
+ {
+  "id": "ali-adil-shah-ii-1656-bijapur",
+  "name": "Ali Adil Shah II",
+  "role": "Adil Shahi Sultan of Bijapur",
+  "polityId": "bijapur",
+  "start": 1656,
+  "end": 1672,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Adil Shahi dynasty",
+  "supersedes": [
+   "ali-adil-shah-ii"
+  ]
+ },
+ {
+  "id": "sikandar-adil-shah-1672-bijapur",
+  "name": "Sikandar Adil Shah",
+  "role": "Adil Shahi Sultan of Bijapur",
+  "polityId": "bijapur",
+  "start": 1672,
+  "end": 1686,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Adil Shahi dynasty",
+  "supersedes": [
+   "sikandar-adil-shah"
+  ]
+ },
+ {
+  "id": "sultan-quli-1518-golconda",
+  "name": "Sultan Quli",
+  "role": "Qutb Shahi Sultan of Golconda",
+  "polityId": "golconda",
+  "start": 1518,
+  "end": 1543,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Qutb Shahi dynasty",
+  "supersedes": [
+   "quli-qutb-shah"
+  ]
+ },
+ {
+  "id": "jamsheed-1543-golconda",
+  "name": "Jamsheed",
+  "role": "Qutb Shahi Sultan of Golconda",
+  "polityId": "golconda",
+  "start": 1543,
+  "end": 1550,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Qutb Shahi dynasty",
+  "supersedes": []
+ },
+ {
+  "id": "subhan-1550-golconda",
+  "name": "Subhan",
+  "role": "Qutb Shahi Sultan of Golconda",
+  "polityId": "golconda",
+  "start": 1550,
+  "end": 1550,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Qutb Shahi dynasty",
+  "supersedes": [
+   "subhan-quli-qutb-shah"
+  ]
+ },
+ {
+  "id": "ibrahim-1550-golconda",
+  "name": "Ibrahim",
+  "role": "Qutb Shahi Sultan of Golconda",
+  "polityId": "golconda",
+  "start": 1550,
+  "end": 1580,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Qutb Shahi dynasty",
+  "supersedes": [
+   "ibrahim-quli-qutb-shah-wali"
+  ]
+ },
+ {
+  "id": "muhammad-ali-1580-golconda",
+  "name": "Muhammad Ali",
+  "role": "Qutb Shahi Sultan of Golconda",
+  "polityId": "golconda",
+  "start": 1580,
+  "end": 1612,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Qutb Shahi dynasty",
+  "supersedes": [
+   "muhammad-quli-qutb-shah"
+  ]
+ },
+ {
+  "id": "sultan-muhammad-1612-golconda",
+  "name": "Sultan Muhammad",
+  "role": "Qutb Shahi Sultan of Golconda",
+  "polityId": "golconda",
+  "start": 1612,
+  "end": 1626,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Qutb Shahi dynasty",
+  "supersedes": [
+   "sultan-muhammad-qutb-shah"
+  ]
+ },
+ {
+  "id": "abdullah-1626-golconda",
+  "name": "Abdullah",
+  "role": "Qutb Shahi Sultan of Golconda",
+  "polityId": "golconda",
+  "start": 1626,
+  "end": 1672,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Qutb Shahi dynasty",
+  "supersedes": [
+   "abdullah-qutb-shah"
+  ]
+ },
+ {
+  "id": "abul-hasan-1672-golconda",
+  "name": "Abul Hasan",
+  "role": "Qutb Shahi Sultan of Golconda",
+  "polityId": "golconda",
+  "start": 1672,
+  "end": 1687,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Qutb Shahi dynasty",
+  "supersedes": []
+ },
+ {
   "id": "dravya-shah-1559-gorkha",
   "name": "Dravya Shah",
   "role": "King of Gorkha",
@@ -4654,6 +5880,58 @@
   "endFromNext": false,
   "list": "Chera Perumals of Makotai",
   "supersedes": []
+ },
+ {
+  "id": "mahmud-of-ghazni-998-ghaznavid",
+  "name": "Mahmud of Ghazni",
+  "role": "Sultan of the Ghaznavid Empire",
+  "polityId": "ghaznavid",
+  "start": 998,
+  "end": 1030,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Mahmud of Ghazni",
+  "supersedes": [
+   "mahmud-of-ghazni"
+  ]
+ },
+ {
+  "id": "muhammad-of-ghazni-1030-ghaznavid",
+  "name": "Muhammad of Ghazni",
+  "role": "Sultan of the Ghaznavid Empire",
+  "polityId": "ghaznavid",
+  "start": 1030,
+  "end": 1030,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Mahmud of Ghazni",
+  "supersedes": []
+ },
+ {
+  "id": "muhammad-of-ghazni-second-reign-1040-ghaznavid",
+  "name": "Muhammad of Ghazni (second reign)",
+  "role": "Sultan of the Ghaznavid Empire",
+  "polityId": "ghaznavid",
+  "start": 1040,
+  "end": 1041,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Mahmud of Ghazni",
+  "supersedes": []
+ },
+ {
+  "id": "alp-tigin-962-ghaznavid",
+  "name": "Alp Tigin",
+  "role": "Governor of Ghazna",
+  "polityId": "ghaznavid",
+  "start": 962,
+  "end": 963,
+  "datesAre": "reign",
+  "endFromNext": false,
+  "list": "Mahmud of Ghazni",
+  "supersedes": [
+   "alp-tigin"
+  ]
  },
  {
   "id": "samanta-sena-1070-sena",
@@ -5301,7 +6579,9 @@
   "datesAre": "reign",
   "endFromNext": false,
   "list": "Ghurid dynasty",
-  "supersedes": []
+  "supersedes": [
+   "muhammad-of-ghor"
+  ]
  },
  {
   "id": "ghiyath-al-din-muhammad-1163-ghurid",
@@ -5313,7 +6593,9 @@
   "datesAre": "reign",
   "endFromNext": false,
   "list": "Ghurid dynasty",
-  "supersedes": []
+  "supersedes": [
+   "muhammad-of-ghor"
+  ]
  },
  {
   "id": "muhammad-of-ghor-1203-ghurid",
@@ -5399,7 +6681,9 @@
   "datesAre": "reign",
   "endFromNext": false,
   "list": "Ghurid dynasty",
-  "supersedes": []
+  "supersedes": [
+   "muhammad-of-ghor"
+  ]
  },
  {
   "id": "baha-al-din-sam-ii-1192-ghurid",
