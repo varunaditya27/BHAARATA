@@ -449,14 +449,17 @@ export const routes: HistoricalRoute[] = [
     validFrom: 985,
     validTo: 1044,
     confidence: "illustrative",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Hand-drawn approximation." }],
+    provenance: [
+      { sourceId: PROTOTYPE_SOURCE.id, note: "Hand-drawn approximation, kept at sea: Palk Bay to the port of Mantai." },
+    ],
     path: {
       type: "LineString",
       coordinates: [
         [79.8428, 10.7657],
-        [80.5, 9.0],
-        [80.9, 7.5],
-        [81.0, 6.5],
+        [79.8, 10.2],
+        [79.65, 9.6],
+        [79.85, 9.2],
+        [79.95, 8.98],
       ],
     },
   },
