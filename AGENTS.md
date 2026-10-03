@@ -54,7 +54,7 @@ Read this before assuming anything is wired up. The detail is in `docs/DATA.md`.
   - *Cliopatria* (CC BY 4.0): 54 kingdoms, 465 dated border shapes, 600–1700.
     Borders are one researched version of each territory, not exact frontiers.
   - *Wikidata / Wikipedia / Wikimedia Commons* (CC0 / CC BY-SA / per-file free
-    licences): capitals, 127 battles, 4,313 protected monuments, 185 rulers,
+    licences): capitals, 127 battles, 4,313 protected monuments, ~670 rulers, 344 dated sites,
     summaries and photographs.
   - *Hand-written placeholders* in `lib/data/prototype.ts`: the text of the 10
     "curated" kingdoms, the nine turning points, the routes, and Chera's

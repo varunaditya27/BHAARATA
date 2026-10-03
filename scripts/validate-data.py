@@ -62,9 +62,10 @@ miss = pids - bids
 for m in sorted(miss): bad("border", f"{m}: no border shapes at all")
 
 # ---- people
-span = {p["id"]: (p["from"], p["to"]) for p in polities}
+span = {p["id"]: (p["from"], p["to"]) for p in polities} | {"chera": (844, 1124)}
+span["vijayanagara"] = (1336, 1646)    # the empire ran to 1646; Cliopatria's map window ends at 1571
 # Fathers who shared the throne with a son, as the sources state (not an error).
-COREGENT = {("Sevappa Nayaka", "Achuthappa Nayaka")}
+COREGENT = {("Sevappa Nayaka", "Achuthappa Nayaka"), ("Sadasiva Raya", "Aliya Rama Raya"), ("Aliya Rama Raya", "Sadasiva Raya")}   # father and son; a nominal king and his regent
 LONG_REIGNS_OK = {"Anantavarman Chodaganga"}
 by_poly = {}
 for r in people:

@@ -44,7 +44,7 @@ FIX_SUMMARY_FROM = {"anuradhapura": "Anuradhapura kingdom", "turk-shahis": "Turk
 # Rulers whose Wikidata item has no Wikipedia link here, but whose article exists under another title.
 # person id -> (Wikipedia title, opening sentences as the article gives them)
 FIX_PERSON_ARTICLE = {
-    "masud-ii": ("Mas'ud_II_of_Ghazni", "Mas'ud ibn Mawdud ibn Mas'ud, commonly known as Mas'ud II, was Ghaznavid sultan for sometime in 1048. Masud was the son and successor of Mawdud of Ghazni, and ruled for a short period."),
+    "masud-ii": ("Mas'ud_II", "Mas'ud ibn Mawdud ibn Mas'ud, commonly known as Mas'ud II, was Ghaznavid sultan for sometime in 1048. Masud was the son and successor of Mawdud of Ghazni, and ruled for a short period."),
 }
 
 # Photographs where Commons' structured data names no creator, but the file page does. key -> (artist, where it was found)

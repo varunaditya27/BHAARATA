@@ -39,7 +39,7 @@ quadrantChart
     Code licence: [0.05, 0.7]
     Correction button: [0.12, 0.62]
     Real device testing: [0.15, 0.66]
-    Rulers for 22 kingdoms: [0.62, 0.84]
+    More rulers for thin kingdoms: [0.55, 0.6]
     Cited text for curated kingdoms: [0.45, 0.76]
     Citation layer: [0.68, 0.9]
     More real inscriptions: [0.9, 0.93]
@@ -73,7 +73,7 @@ quadrantChart
 
 | ID | Item | Why it matters | Size |
 |---|---|---|---|
-| **D1** | **Rulers for the 22 kingdoms still with none** (Harsha's Empire, Pratihara, Pala, Chandela, Chauhan, Yadava, Kampili, the Nayaks, the Marathas, …), plus those with only one or two. Four (Utpala, Lohara, Kashmir Sultanate, Paramara) now come from Wikipedia's dated list tables (`import-ruler-lists.py`); each other kingdom needs its list page read by eye first, because layouts differ. A cited textbook is the other route | A kingdom page with no rulers looks unfinished | L |
+| **D1** | **More rulers where a list stops early.** Every kingdom has rulers now, but Harsha's Empire (1), Kampili (2), the Maratha kingdom (3) and the Thanjavur Nayaks (4) have few, and several lists give only "c." years. A cited book (not just Wikipedia) would fix both | A kingdom page with a handful of rulers looks unfinished, and approximate years are only as good as the one source | M |
 | **D4** | **A citation layer down to page numbers.** Add a *Claim* record (the statement) that points to a *Source* with a page or inscription number and, where possible, a quoted line. Today a record cites a source as a whole | Turns "Wikipedia" into "Nilakanta Sastri, *The Cōḻas*, p. 214", which is what a historian can check | L |
 | **D5** | **Replace the hand-written text of the 10 curated kingdoms** (summaries, taglines, "remembered for") with cited text, then have someone who knows the history review it | It is the largest remaining body of unchecked prose | M |
 | **D2** | **More real evidence.** Start with the Chola: more of the Thanjavur inscriptions in *South Indian Inscriptions* Vols. II and III; a coin with a museum catalogue number; a temple with its ASI record. Each needs a free-licence photograph **of that object** | Today there is one real translation, shown beside a photo of a *different* inscription | XL |
@@ -104,7 +104,7 @@ quadrantChart
 | **D6** | **Cited turning points.** The nine hand-written milestones become sourced; add more kinds of event (temple foundations, treaties, famines, coronations) | Playback would have more to say, honestly | L |
 | **D9** | **Dated monuments.** Find a source with construction dates (ASI registers, gazetteers, Wikipedia infoboxes) so the monuments layer can follow the timeline | Today it is "protected today", not tied to a year | L |
 | **D10** | **Battle combatants.** Read "belligerents" from Wikipedia infoboxes and Wikidata `participant`, and show "fought between X and Y" when known | Today a battle is linked to whose land it was on, which is not who fought | M |
-| **D12** | **Photographs for the 3 kingdoms that have none** (Maitraka, Lohara, Dambadeniya), and more of the ~190 rulers. Commons has no photograph of their own sites; a checked museum or archive image would do | Photo-less kingdoms feel second-class | M |
+| **D12** | **Better photographs for six kingdoms** (Maitraka, Lohara, Dambadeniya, Gahadavala, Sena, Kakatiya's gate) that currently show a coin, an inscription or a smaller monument because Commons has no photograph of their main site | Photo-less kingdoms feel second-class | M |
 | **D13** | **Check the native-script names** with a reader of each language. They are Wikidata labels, not verified, and two were already wrong (a city's name, and "Sultanate" for a Hindu dynasty) | A wrong name in a native script is worse than none | S |
 | **D16** | **More places than capitals.** Ports, temples, forts and towns from Wikidata, with dates where they exist | The map has few places between the capitals | L |
 | **D17** | **Chera outline.** The one kingdom still using a district-union placeholder; Cliopatria has no entry | A visible exception | S |
@@ -136,7 +136,7 @@ quadrantChart
 
 | ID | Item | Size |
 |---|---|---|
-| **D11** | Portraits for more of the ~190 rulers (35 have one), using coins as a fallback | M |
+| **D11** | Portraits for more of the ~670 rulers (about 35 have one), using coins as a fallback | M |
 | **D14** | Extend the range beyond 600–1700 (Cliopatria covers far more); needs new era names and a lighter map at wider ranges | L |
 | **D15** | Replace the hand-drawn trade and war routes with routes from a scholarly source | L |
 | **F5** | Sidebar filters: by region, religion or ruler; group kingdoms by era | M |
@@ -187,8 +187,10 @@ For context on what already exists, newest first.
 
 | What | Notes |
 |---|---|
-| **Rulers**, 185 from Wikidata and Wikipedia, with portraits and honest reign-or-lifetime dates | Delhi and Vijayanagara now covered; 23 kingdoms still have none |
-| **A real inscription translation** (SII Vol. II no. 85) with a "How we know" chain | One record |
+| **Rulers for every kingdom**, ~670, from Wikidata and Wikipedia's lists, with dated reigns | Replaced lifetime-only records; see the rulers section of DATA.md |
+| **A data audit** (`validate-data.py`, `apply-corrections.py`) | Corrected wrong rulers, dates, titles, battle texts, coordinates, names and credits; every hand-written statement checked against Wikipedia |
+| **A dated layer of 344 temples, mosques, churches, forts and tombs** on the map | Subcontinent and Afghanistan only |
+| **Two real inscription translations** (SII Vol. II nos. 85 and 88) with a "How we know" chain | Read from the printed pages |
 | **The homepage film**: starfield, lit globe, orbital descent | Respects reduced motion |
 | **Battles** (127) on the map and chronology, and **protected monuments** (4,300) as an optional layer | Monuments undated; battles linked by place |
 | **55 kingdoms and 466 dated border shapes** from Cliopatria, 600–1700 | Replaced the original 11 hand-drawn kingdoms |

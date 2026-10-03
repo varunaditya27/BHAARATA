@@ -132,10 +132,11 @@ BHĀRATA is an early version, and being straight about that is part of the proje
 |---|---|---|
 | Kingdom borders and dates | [Cliopatria](https://github.com/Seshat-Global-History-Databank/cliopatria) (Seshat Global History Databank, CC BY 4.0) | Researched. One version of each territory, **not exact frontiers** |
 | Kingdom summaries | Wikipedia (CC BY-SA 4.0) | Opening paragraphs, lightly trimmed |
-| Capitals, battles, monuments, rulers | Wikidata (CC0) | Real, but **uneven**: some kingdoms have 20 rulers on record, others have none |
+| Capitals, battles, monuments, rulers | Wikidata (CC0) and Wikipedia's lists of rulers | Real. Every kingdom has rulers; a few have only two or three because the sources name no more |
 | Photographs | Wikimedia Commons | Real, credited; only free licences |
 | Inscription evidence | *South Indian Inscriptions* Vol. II (1913, public domain) | **One** real translation so far |
-| Hand-written turning points, early rulers, Chera borders | This repository | **Placeholder**, labelled on the page |
+| Hand-written texts, twelve rulers, nine turning points | This repository | Written here and **checked against Wikipedia**, statement by statement; the source is named on each page |
+| Chera borders, two example routes | This repository | **Not researched**, labelled on the page and the map |
 
 Every page shows a badge saying which of these it uses. The full account, with licences and known gaps, is in [`docs/DATA.md`](docs/DATA.md).
 
