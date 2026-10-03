@@ -22,7 +22,6 @@ os.makedirs("cache", exist_ok=True)
 QUERIES = {
     "anuradhapura": ["Ruwanwelisaya", "Jetavanaramaya"],
     "chalukya-badami": ["Badami cave temples", "Pattadakal Virupaksha temple"],
-    "maitraka": ["Gop Temple Jamnagar", "Valabhi Gujarat"],
     "kamarupa": ["Kamakhya Temple"],
     "turk-shahis": ["Bala Hissar Kabul"],
     "karkota": ["Martand Sun Temple"],
@@ -33,12 +32,8 @@ QUERIES = {
     "ghaznavid": ["Minaret of Ghazni", "Tomb of Mahmud of Ghazni"],
     "paramara": ["Bhojeshwar Temple", "Udayeshwara Temple Udaipur"],
     "chauhan": ["Ranthambore Fort", "Taragarh Fort Ajmer"],
-    "lohara": ["Pandrethan temple Kashmir", "Lohara Fort Poonch"],
     "eastern-ganga": ["Konark Sun Temple", "Jagannath Temple Puri"],
-    "sena": ["Dhakeshwari Temple", "Vikrampur Bangladesh ruins"],
-    "gahadavala": ["Dhamek Stupa Sarnath", "Kannauj Jama Masjid"],
     "yadava": ["Daulatabad Fort", "Chand Minar Daulatabad"],
-    "dambadeniya": ["Dambadeniya Sri Lanka"],
     "kampili": ["Anegundi", "Anegundi Fort Karnataka"],
     "jaffna": ["Jaffna Fort", "Jaffna Nallur Kandaswamy"],
     "kashmir-sultanate": ["Jamia Masjid Srinagar", "Madin Sahib Shrine Srinagar"],
@@ -53,12 +48,18 @@ QUERIES = {
     "sur": ["Tomb of Sher Shah Suri Sasaram", "Purana Qila"],
     "mysore": ["Ranganathaswamy Temple Srirangapatna", "Srirangapatna fort"],
     "gorkha": ["Gorkha Durbar", "Gorkha Palace Nepal"],
+    "maitraka": ["Dhank caves Saurashtra", "Navlakha temple Ghumli", "Bhumli Navlakha"],
+    "lohara": ["Kashmir Lohara dynasty temple", "Loharin valley Poonch", "Lohar Kot"],
+    "sena": ["Deopara Pradyumneshwar", "Deopara Rajshahi", "Vijaya Sena Deopara inscription"],
+    "gahadavala": ["Sarnath Dhamek Stupa", "Sarnath Gahadavala Kumaradevi", "Kannauj Jaichand"],
+    "dambadeniya": ["Vijayasundararama Dambadeniya", "Dambadeniya Vihara", "Dambadeniya Rock Fort"],
     "kakatiya": ["Ramappa Temple Palampet", "Warangal Fort Kakatiya Kala Thoranam"],
     "ghurid": ["Minaret of Jam", "Qutb Minar Delhi"],
 }
 
 # kingdom id -> the exact Commons file chosen by eye from the candidate sheets.
-# Left out on purpose, because no candidate showed the kingdom's own site: maitraka, lohara, sena, dambadeniya, gahadavala (a kakatiya and ghurid pick was added in a second pass).
+# Left out on purpose, because no candidate showed the kingdom's own site: maitraka (Ghumli's temple is a later dynasty's),
+# lohara and dambadeniya. Gahadavala and Sena use real artefacts (an inscription, pottery) instead of a building.
 PICKS = {
     'anuradhapura': 'File:Ruwanweli Saya 1.jpg',
     'chalukya-badami': 'File:A-temple-at-pattadakal-badami.jpg',
@@ -88,6 +89,8 @@ PICKS = {
     'sur': 'File:Sher Shah Suri Tomb.jpg',
     'mysore': 'File:Outer Wall SW Ranganatha Swamy Temple Srirangapatna Jan24 A7C 08954.jpg',
     'gorkha': 'File:Gorkha Palace durbar.jpg',
+    'gahadavala': 'File:092 Kumaradevis Inscription, 12th.jpg',
+    'sena': 'File:Pala and Sena dynasty pottery shards.jpg',
     'kakatiya': 'File:Kakatiya kala thoranam in Warangal fort.jpg',
     'ghurid': 'File:Jam minaret ghor province Afghanistan.jpg',
 }
@@ -137,10 +140,11 @@ def search(query, limit=10):
                     "artist": re.sub(r"<[^>]+>", "", ii["extmetadata"].get("Artist", {}).get("value", "")).strip()[:50]})
     return out
 
-def candidates():
+def candidates(only=None):
     from PIL import Image, ImageDraw
     found = {}
     for kid, queries in QUERIES.items():
+        if only and kid not in only: continue
         seen, cands = set(), []
         for q in queries:
             for c in search(q)[:4]:
@@ -187,4 +191,5 @@ def download():
     print(len(credits), "photos downloaded")
 
 if __name__ == "__main__":
-    {"candidates": candidates, "download": download}[sys.argv[1] if len(sys.argv) > 1 else "candidates"]()
+    cmd = sys.argv[1] if len(sys.argv) > 1 else "candidates"
+    candidates(sys.argv[2:] or None) if cmd == "candidates" else download()

@@ -1493,19 +1493,6 @@
   "imageKey": "ruler-jahangir-i"
  },
  {
-  "id": "khas-mahal",
-  "q": "Q56274614",
-  "name": "Khas Mahal",
-  "role": "Queen regnant",
-  "polityId": "mughal",
-  "start": 1605,
-  "end": 1627,
-  "datesAre": "reign",
-  "datesFromText": false,
-  "wikipedia": "Khas_Mahal",
-  "summary": "Khas Mahal, meaning \"the Exquisite One of the Palace\", was one of the chief wives and empress of the Mughal emperor Jahangir."
- },
- {
   "id": "gaj-singh-of-marwar",
   "q": "Q17495715",
   "name": "Gaj Singh of Marwar",
@@ -1531,19 +1518,6 @@
   "wikipedia": "Shah_Jahan",
   "summary": "Shah Jahan I, also called Shah Jahan the Magnificent, was the fifth Mughal Emperor from 1628 until his deposition in 1658. His reign marked the zenith of Mughal architectural and cultural achievements.",
   "imageKey": "ruler-shah-jahan"
- },
- {
-  "id": "jaswant-singh-of-marwar",
-  "q": "Q5117540",
-  "name": "Jaswant Singh of Marwar",
-  "role": "Maharaja of Jodhpur",
-  "polityId": "mughal",
-  "start": 1638,
-  "end": 1678,
-  "datesAre": "reign",
-  "datesFromText": false,
-  "wikipedia": "Jaswant_Singh_of_Marwar",
-  "summary": "Raja Jaswant Singh I was the Rathore ruler of the Kingdom of Marwar in the western part of Rajputana. He was a distinguished man of letters and author of noted literary works like Siddhant-Bodh, Anand Vilas and Bhasha-Bhushan."
  },
  {
   "id": "aurangzeb",
@@ -1578,8 +1552,8 @@
   "name": "Chamaraja Wodeyar IV",
   "role": "Maharaja of Mysore",
   "polityId": "mysore",
-  "start": 1553,
-  "end": 1572,
+  "start": 1572,
+  "end": 1576,
   "datesAre": "reign",
   "datesFromText": false,
   "wikipedia": "Chamaraja_Wodeyar_IV",
@@ -1755,32 +1729,6 @@
   "datesFromText": true,
   "wikipedia": "Kochchadaiyan_Ranadhira",
   "summary": "Kochchadaiyan, known as Ranadhira, was a Pandya king of early medieval south India. He was the son and successor of Arikesari Maravarman c. 640–670 CE The name of the king is famously omitted in the Tamil portion of the Larger Sinnamanur Plates."
- },
- {
-  "id": "q16312506",
-  "q": "Q16312506",
-  "name": "Q16312506",
-  "role": "Pandya King",
-  "polityId": "pandya",
-  "start": 765,
-  "end": 790,
-  "datesAre": "reign",
-  "datesFromText": false,
-  "wikipedia": null,
-  "summary": ""
- },
- {
-  "id": "q16311542",
-  "q": "Q16311542",
-  "name": "Q16311542",
-  "role": "Pandya King",
-  "polityId": "pandya",
-  "start": 792,
-  "end": 835,
-  "datesAre": "reign",
-  "datesFromText": false,
-  "wikipedia": null,
-  "summary": ""
  },
  {
   "id": "parantaka-viranarayana",
