@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { HistoricalMap } from "@/components/map/HistoricalMap";
 import { MapLegend, type LayerToggleId } from "@/components/map/MapLegend";
+import { MapLoading } from "@/components/map/MapLoading";
 import { AtlasSidebar } from "@/components/atlas/AtlasSidebar";
 import { KingdomChips } from "@/components/atlas/KingdomChips";
 import { EraTitleCard } from "@/components/atlas/EraTitleCard";
@@ -48,6 +49,8 @@ export function AtlasView() {
   const urlCommitTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [caption, setCaption] = useState<HistoricalEvent | null>(null);
   const [focus, setFocus] = useState<{ key: string; center: [number, number] } | null>(null);
+  const [mapReady, setMapReady] = useState(false);
+  const handleMapReady = useCallback(() => setMapReady(true), []);
   const captionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastYearRef = useRef<number | null>(null);
 
@@ -185,8 +188,10 @@ export function AtlasView() {
             onSelectPolity={handleSelectPolity}
             visibleLayers={visibleLayers}
             focus={focus}
+            onReady={handleMapReady}
           />
           <div className="bh-map-grain pointer-events-none absolute inset-0" />
+          <MapLoading visible={!mapReady} />
 
           <KingdomChips
             allPolities={polities}

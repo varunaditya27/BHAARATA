@@ -33,6 +33,8 @@ export type HistoricalMapProps = {
   /** A place the camera should drift toward (an event during playback).
    * `key` changes trigger the move; the same key twice does nothing. */
   focus?: { key: string; center: [number, number] } | null;
+  /** Fires once, when the first frame with our layers has fully drawn. */
+  onReady?: () => void;
   initialCenter?: [number, number];
   initialZoom?: number;
 };
@@ -95,6 +97,7 @@ export function HistoricalMap({
   visibleLayers,
   onViewportChange,
   focus,
+  onReady,
   initialCenter = DEFAULT_CENTER,
   initialZoom = DEFAULT_ZOOM,
 }: HistoricalMapProps) {
@@ -106,11 +109,13 @@ export function HistoricalMap({
   const yearRafRef = useRef<number | undefined>(undefined);
   const onSelectRef = useRef(onSelectPolity);
   const onViewportChangeRef = useRef(onViewportChange);
+  const onReadyRef = useRef(onReady);
 
   useEffect(() => {
     onSelectRef.current = onSelectPolity;
     onViewportChangeRef.current = onViewportChange;
-  }, [onSelectPolity, onViewportChange]);
+    onReadyRef.current = onReady;
+  }, [onSelectPolity, onViewportChange, onReady]);
 
   /** Run now if the map is ready, else once it is. Keyed so only the
    * latest request of each kind survives the wait. */
@@ -163,6 +168,15 @@ export function HistoricalMap({
       readyRef.current = true;
       for (const fn of queue.values()) fn(map);
       queue.clear();
+      // "load" only means the style is parsed. The first frame rendered with
+      // every tile in is what a viewer would call loaded. ("idle" never
+      // fires here: the route/pulse animation repaints every frame.)
+      const onRender = () => {
+        if (!map.areTilesLoaded()) return;
+        map.off("render", onRender);
+        onReadyRef.current?.();
+      };
+      map.on("render", onRender);
     });
 
     return () => {
