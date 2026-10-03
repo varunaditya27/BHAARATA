@@ -196,5 +196,23 @@
    77.2167,
    28.6667
   ]
+ },
+ "badami": {
+  "q": "Q590751",
+  "label": "Badami",
+  "description": "Town in Karnataka India",
+  "coordinates": [
+   75.6803,
+   15.9203
+  ]
+ },
+ "sasaram": {
+  "q": "Q1949410",
+  "label": "Sasaram",
+  "description": "city in Rohtas district, Bihar, India",
+  "coordinates": [
+   84.03,
+   24.95
+  ]
  }
 }

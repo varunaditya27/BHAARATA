@@ -711,6 +711,8 @@ const curatedPlaces: Place[] = [
   { id: "delhi", slug: "delhi", name: "Delhi", placeType: "capital", coordinates: [77.209, 28.6139], region: "Delhi", imageKey: "delhi-qutb", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "gulbarga", slug: "gulbarga", name: "Gulbarga (Kalaburagi)", placeType: "capital", coordinates: [76.8343, 17.3297], region: "Karnataka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "bidar", slug: "bidar", name: "Bidar", placeType: "capital", coordinates: [77.5199, 17.9104], region: "Karnataka", imageKey: "bahmani-gawan", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
+  { id: "badami", slug: "badami", name: "Badami", placeType: "capital", coordinates: [75.6803, 15.9203], region: "Karnataka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
+  { id: "sasaram", slug: "sasaram", name: "Sasaram", placeType: "capital", coordinates: [84.03, 24.95], region: "Bihar", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "anuradhapura", slug: "anuradhapura", name: "Anuradhapura", placeType: "settlement", coordinates: [80.4037, 8.3114], region: "Sri Lanka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "polonnaruwa", slug: "polonnaruwa", name: "Polonnaruwa", placeType: "settlement", coordinates: [81.0006, 7.9403], region: "Sri Lanka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
 ];

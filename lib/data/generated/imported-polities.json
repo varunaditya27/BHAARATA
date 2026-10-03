@@ -41,8 +41,7 @@
   "title": "Chalukya dynasty",
   "summary": "The Chalukya dynasty was a Classical Indian dynasty that ruled large parts of southern and central India between the 6th and the 12th centuries. During this period, they ruled as three related yet individual dynasties. The earliest dynasty, known as the \"Badami Chalukyas\", ruled from Vatapi from the middle of the 6th century.",
   "capitals": [
-   "Manyakheta",
-   "Basavakalyan"
+   "Badami"
   ],
   "region": "Deccan",
   "accentColor": "#3c3582",
@@ -323,7 +322,7 @@
   "title": "Western Chalukya Empire",
   "summary": "The Western Chalukya Empire ruled most of the western Deccan, South India, between the 10th and 12th centuries. This Kannada dynasty is sometimes called the Kalyani Chalukya after its regal capital at Kalyani, today's Basavakalyan in the modern Bidar district of Karnataka state, and alternatively the Later Chalukya from its theoretical relationship to the 6th-century Chalukya dynasty of Badami.",
   "capitals": [
-   "Manyakheta"
+   "Basavakalyan"
   ],
   "region": "Deccan",
   "accentColor": "#35825d",
@@ -722,7 +721,6 @@
   "title": "Sultanate of Bijapur",
   "summary": "The Sultanate of Bijapur was an early modern kingdom in the western Deccan and South India, ruled by the Muslim Adil Shahi dynasty. Bijapur had been a taraf (province) of the Bahmani Kingdom prior to its independence in 1490 and before the kingdom's political decline in the last quarter of the 15th century. It was one of the Deccan sultanates, the collective name of the kingdom's five successor states.",
   "capitals": [
-   "Vijaypura District",
    "Vijayapura"
   ],
   "region": "Deccan",
@@ -826,7 +824,7 @@
   "title": "Sur Empire",
   "summary": "The Sur Empire was an empire ruled by the Afghan-origin Sur dynasty in northern India for nearly 16 or 18 years, between 1538/1540 and 1556, with Sasaram serving as its capital. It was founded by Sher Shah Suri.",
   "capitals": [
-   "Delhi"
+   "Sasaram"
   ],
   "region": "Northern India",
   "accentColor": "#7e3582",
@@ -844,8 +842,7 @@
   "summary": "The Kingdom of Mysore was a geopolitical realm in southern India founded in around 1399 in the vicinity of the modern-day city of Mysuru. Existing until 1950, the territorial boundaries and the form of government transmuted substantially throughout the kingdom's lifetime. While originally a feudal vassal under the Vijayanagara Empire, it became a princely state in the British Raj from 1799 to 1947, marked in-between by major political changes.",
   "capitals": [
    "Mysore",
-   "Srirangapatna",
-   "Bengaluru"
+   "Srirangapatna"
   ],
   "region": "Karnataka and the Deccan",
   "accentColor": "#358243",

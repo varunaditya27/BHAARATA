@@ -47,6 +47,24 @@ FIX_PERSON_ARTICLE = {
     "masud-ii": ("Mas'ud_II", "Mas'ud ibn Mawdud ibn Mas'ud, commonly known as Mas'ud II, was Ghaznavid sultan for sometime in 1048. Masud was the son and successor of Mawdud of Ghazni, and ruled for a short period."),
 }
 
+# Ruler "portraits" that do not show that ruler. image key -> reason. The file is deleted too.
+REMOVE_RULER_IMAGES = {
+    "ruler-alp-tigin": "The file is a photograph of the town of Pınarbaşı, not of Alp Tigin.",
+    "ruler-toghrul-of-ghazna": "The file is a gold dinar of Mas'ud III, a different ruler.",
+    "ruler-sultan-muhammad-qutb-shah": "The file's own title says the subject is 'Muḥammad or Sultan Mahmud': identity not established.",
+}
+
+# Capitals Wikidata files under the wrong kingdom, or as a district. kingdom id -> (capitals, reason)
+FIX_CAPITALS = {
+    "chalukya-badami": (["Badami"], "Wikidata mixes in the capitals of the Rashtrakutas (Manyakheta) and the later Kalyani Chalukyas (Basavakalyan)."),
+    "chalukya-kalyani": (["Basavakalyan"], "Manyakheta was the Rashtrakuta capital; the Kalyani Chalukyas ruled from Kalyani, today's Basavakalyan (their Wikipedia article)."),
+    "bijapur": (["Vijayapura"], "Wikidata also lists the district, which is not a city."),
+    "sur": (["Sasaram"], "The Sur Empire's own article says Sasaram was its capital; Wikidata lists Delhi."),
+    "mysore": (["Mysore", "Srirangapatna"], "Bengaluru was never the capital of the Kingdom of Mysore."),
+}
+# Alternative names Wikidata lists that are a different thing. kingdom id -> names to drop.
+REMOVE_ALIASES = {"pallava": ["Kurumba Pallava dynasty"], "chauhan": ["boy"], "maitraka": ["Mer", "Mithira"]}
+
 # Photographs where Commons' structured data names no creator, but the file page does. key -> (artist, where it was found)
 FIX_CREDITS = {
     "imp-chandela": ("Hullie", "file page: uploaded by Hullie to Dutch Wikipedia, later moved to Commons"),
@@ -81,6 +99,7 @@ def rw(name, fn):
 def people(d):
     d = [r for r in d if r["id"] not in REMOVE_PEOPLE]
     for r in d:
+        if r.get("imageKey") in REMOVE_RULER_IMAGES: del r["imageKey"]
         if r["id"] in FIX_PERSON_ARTICLE: r["wikipedia"], r["summary"] = FIX_PERSON_ARTICLE[r["id"]]
         if r["id"] in FIX_DATES: r["start"], r["end"] = FIX_DATES[r["id"]][:2]
     return d
@@ -93,6 +112,8 @@ def opening(title, sentences=3):
     return " ".join(parts[:sentences])
 
 def polities(d):
+    for p in d:
+        if p["id"] in FIX_CAPITALS: p["capitals"] = FIX_CAPITALS[p["id"]][0]
     for p in d:
         if p["id"] in FIX_SUMMARY_FROM and p["summary"].startswith("Appears in"):
             p["summary"] = opening(FIX_SUMMARY_FROM[p["id"]])
@@ -110,12 +131,27 @@ def battles(d):
         if fix: b.update(fix)
     return d
 
+def drop_images(d):
+    for k in REMOVE_RULER_IMAGES:
+        c = d.pop(k, None)
+        if c:
+            path = os.path.join(ROOT, "public" + c["file"])
+            if os.path.exists(path): os.remove(path)
+    return d
+
 def credits(d):
     for k, (artist, _why) in FIX_CREDITS.items():
         if k in d: d[k]["artist"] = artist
     return d
 
+def names(d):
+    for k, drop in REMOVE_ALIASES.items():
+        rec = d["polities"].get(k)
+        if rec and "aliases" in rec: rec["aliases"] = [a for a in rec["aliases"] if a not in drop]
+    return d
+
 if __name__ == "__main__":
-    rw("imported-images.json", credits); rw("imported-ruler-images.json", credits)
+    rw("imported-names.json", names)
+    rw("imported-images.json", credits); rw("imported-ruler-images.json", lambda d: drop_images(credits(d)))
     rw("imported-people.json", people); rw("imported-polities.json", polities); rw("imported-battles.json", battles)
     print("applied", len(REMOVE_PEOPLE), "removals,", len(FIX_DATES), "date fix,", len(FIX_WIKIPEDIA), "title fix,", len(STRIP_BATTLE_SUMMARY), "battle summaries stripped")

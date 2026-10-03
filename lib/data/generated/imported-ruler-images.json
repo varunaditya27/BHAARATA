@@ -79,14 +79,6 @@
   "license": "Public domain",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ibrahim_Lodi_at_the_Battle_of_Panipat_(1526).jpg"
  },
- "ruler-alp-tigin": {
-  "file": "/images/ruler-alp-tigin.jpg",
-  "alt": "Alp Tigin: Pınarbaşı 5",
-  "title": "Pınarbaşı 5",
-  "artist": "Vikiçizer",
-  "license": "CC BY-SA 4.0",
-  "sourceUrl": "https://commons.wikimedia.org/wiki/File:P%C4%B1narba%C5%9F%C4%B1_5.JPG"
- },
  "ruler-mahmud-of-ghazni": {
   "file": "/images/ruler-mahmud-of-ghazni.jpg",
   "alt": "Mahmud of Ghazni: Mahmud of Ghazni in caliph's robe of honour - cropped",
@@ -103,14 +95,6 @@
   "license": "CC BY-SA 3.0",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:MassudOfGhazniCoin.jpg"
  },
- "ruler-toghrul-of-ghazna": {
-  "file": "/images/ruler-toghrul-of-ghazna.jpg",
-  "alt": "Toghrul of Ghazna: Mas'ud III Gold Dinar",
-  "title": "Mas'ud III Gold Dinar",
-  "artist": "M.samei",
-  "license": "CC BY-SA 4.0",
-  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mas%27ud_III_Gold_Dinar.jpg"
- },
  "ruler-bahram-shah-of-ghazna": {
   "file": "/images/ruler-bahram-shah-of-ghazna.jpg",
   "alt": "Bahram-Shah of Ghazna: Portrait of Ghaznavid ruler Bahrām Shāh (d. 1152), from the genealogy, Zübdet-üt Tevarih (1578)",
@@ -126,14 +110,6 @@
   "artist": "Billjones94",
   "license": "CC BY-SA 4.0",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Billon_Jital_of_Khusrau_Malik_(Ghaznavid_empire),_struck_in_Lahore.jpg"
- },
- "ruler-sultan-muhammad-qutb-shah": {
-  "file": "/images/ruler-sultan-muhammad-qutb-shah.jpg",
-  "alt": "Sultan Muhammad Qutb Shah: Muḥammad or Sultan Mahmud",
-  "title": "Muḥammad or Sultan Mahmud",
-  "artist": "Golkonda Painters",
-  "license": "Public domain",
-  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mu%E1%B8%A5ammad_or_Sultan_Mahmud.jpg"
  },
  "ruler-abdullah-qutb-shah": {
   "file": "/images/ruler-abdullah-qutb-shah.jpg",

@@ -17,7 +17,7 @@ ITEMS = {
     "thanjavur": "Q41496", "gangaikondacholapuram": "Q1493439", "madurai": "Q228405", "hampi": "Q26732", "kanchipuram": "Q212332",
     "nagapattinam": "Q695585", "kodungallur": "Q1006282", "manyakheta": "Q191771", "basavakalyan": "Q712521", "dorasamudra": "Q1013556", "belur": "Q760603",
     "ellora": "Q189616", "pataliputra": "Q80484", "gauda": "Q1496277", "somapura": "Q305044", "kannauj": "Q614890", "bateshwar": "Q4868834", "delhi": "Q1353",
-    "gulbarga": "Q37112", "bidar": "Q461922", "anuradhapura": "Q5724", "polonnaruwa": "Q394443",
+    "gulbarga": "Q37112", "bidar": "Q461922", "anuradhapura": "Q5724", "polonnaruwa": "Q394443", "badami": "Q590751", "sasaram": "Q1949410",
 }
 SEARCH = {"nagapattinam": "Nagapattinam", "kodungallur": "Kodungallur", "manyakheta": "Manyakheta", "basavakalyan": "Basavakalyan",
           "dorasamudra": "Halebidu", "belur": "Belur Karnataka", "ellora": "Ellora Caves", "pataliputra": "Pataliputra", "gauda": "Gauda Bengal",
