@@ -1,0 +1,316 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------- */
+/* BHĀRATA design tokens — see PROJECT_BIBLE.md §30-31 for the rationale. */
+/* Keep this list narrow. Components must not invent their own colours   */
+/* or type scale.                                                        */
+/* ---------------------------------------------------------------------- */
+
+:root {
+  /* base */
+  --bh-paper: #f3ede0;
+  --bh-paper-raised: #faf6ec;
+  --bh-ink: #241f17;
+  --bh-ink-muted: #5c5447;
+  --bh-ash: #8a8273;
+  --bh-stone: #d8cfba;
+  --bh-border: #c9bda1;
+
+  /* geographic */
+  --bh-water: #9cb8ae;
+  --bh-water-deep: #7fa095;
+  --bh-land: #f3ede0;
+  --bh-terrain: #e4d9bf;
+
+  /* semantic */
+  --bh-territory: #b85c38;
+  --bh-territory-selected: #96341a;
+  --bh-evidence: #3a5a78;
+  --bh-uncertainty: #a68a52;
+  --bh-active: #241f17;
+
+  /* surfaces */
+  --background: var(--bh-paper);
+  --foreground: var(--bh-ink);
+}
+
+@theme inline {
+  --color-paper: var(--bh-paper);
+  --color-paper-raised: var(--bh-paper-raised);
+  --color-ink: var(--bh-ink);
+  --color-ink-muted: var(--bh-ink-muted);
+  --color-ash: var(--bh-ash);
+  --color-stone: var(--bh-stone);
+  --color-border: var(--bh-border);
+
+  --color-water: var(--bh-water);
+  --color-water-deep: var(--bh-water-deep);
+  --color-land: var(--bh-land);
+  --color-terrain: var(--bh-terrain);
+
+  --color-territory: var(--bh-territory);
+  --color-territory-selected: var(--bh-territory-selected);
+  --color-evidence: var(--bh-evidence);
+  --color-uncertainty: var(--bh-uncertainty);
+  --color-active: var(--bh-active);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-display: var(--font-zodiak);
+  --font-sans: var(--font-ranade);
+  --font-devanagari: var(--font-anek-devanagari);
+  --font-devanagari-display: var(--font-tiro-devanagari);
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-ranade), system-ui, sans-serif;
+}
+
+* {
+  border-color: var(--bh-border);
+}
+
+/* ---------------------------------------------------------------------- */
+/* MapLibre control restyling — the default blue/white controls read as   */
+/* generic web-maps. Keep the controls functional, just in our palette.   */
+/* ---------------------------------------------------------------------- */
+.maplibregl-ctrl-group {
+  background: var(--bh-paper-raised) !important;
+  border: 1px solid var(--bh-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.maplibregl-ctrl-group button {
+  border-radius: 0 !important;
+}
+.maplibregl-ctrl-group button + button {
+  border-top: 1px solid var(--bh-border) !important;
+}
+.maplibregl-ctrl-scale {
+  background: color-mix(in srgb, var(--bh-paper-raised) 85%, transparent) !important;
+  border-color: var(--bh-ink) !important;
+  color: var(--bh-ink) !important;
+  font-family: var(--font-ranade), sans-serif !important;
+}
+.maplibregl-ctrl-attrib {
+  background: color-mix(in srgb, var(--bh-paper-raised) 80%, transparent) !important;
+  font-family: var(--font-ranade), sans-serif !important;
+}
+.maplibregl-ctrl-attrib a {
+  color: var(--bh-ink-muted) !important;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Themed scrollbar — a measured margin/ruler motif echoing the map's     */
+/* scale bar, instead of the browser-default grey pill.                   */
+/* ---------------------------------------------------------------------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bh-ink-muted) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-track {
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 7px,
+      color-mix(in srgb, var(--bh-ink) 10%, transparent) 7px,
+      color-mix(in srgb, var(--bh-ink) 10%, transparent) 8px
+    ),
+    var(--bh-paper);
+  border-left: 1px solid var(--bh-border);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--bh-ink-muted);
+  border: 2px solid var(--bh-paper);
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--bh-territory-selected);
+}
+::-webkit-scrollbar-corner {
+  background: var(--bh-paper);
+}
+
+/* Dark-chrome contexts (the Atlas workspace) get an inverted treatment —
+ * apply this class on the scrolling element, not a global media query,
+ * since most of the app stays on the light/paper surface. */
+.scrollbar-dark {
+  scrollbar-color: color-mix(in srgb, var(--bh-paper) 45%, transparent) transparent;
+}
+.scrollbar-dark::-webkit-scrollbar-track {
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 7px,
+      color-mix(in srgb, var(--bh-paper) 8%, transparent) 7px,
+      color-mix(in srgb, var(--bh-paper) 8%, transparent) 8px
+    ),
+    var(--bh-ink);
+  border-left: 1px solid color-mix(in srgb, var(--bh-paper) 15%, transparent);
+}
+.scrollbar-dark::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--bh-paper) 40%, transparent);
+  border: 2px solid var(--bh-ink);
+}
+.scrollbar-dark::-webkit-scrollbar-thumb:hover {
+  background-color: var(--bh-territory);
+}
+.scrollbar-dark::-webkit-scrollbar-corner {
+  background: var(--bh-ink);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Timeline range input — a cartographic cursor (diamond thumb, filled    */
+/* progress groove) instead of the native OS slider. Lives on the dark    */
+/* atlas chrome, so colours are hardcoded to that context rather than     */
+/* themed for light/dark (this is the only range input in the app).       */
+/* ---------------------------------------------------------------------- */
+.bh-timeline-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 14px;
+  background: transparent;
+  cursor: pointer;
+}
+.bh-timeline-range::-webkit-slider-runnable-track {
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    var(--bh-territory) 0%,
+    var(--bh-territory) var(--bh-progress, 0%),
+    color-mix(in srgb, var(--bh-paper) 22%, transparent) var(--bh-progress, 0%),
+    color-mix(in srgb, var(--bh-paper) 22%, transparent) 100%
+  );
+}
+.bh-timeline-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  margin-top: -5px;
+  background: var(--bh-paper);
+  border: 2px solid var(--bh-territory);
+  transform: rotate(45deg);
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.bh-timeline-range:hover::-webkit-slider-thumb {
+  background: var(--bh-territory);
+}
+.bh-timeline-range:active::-webkit-slider-thumb {
+  transform: rotate(45deg) scale(1.15);
+}
+.bh-timeline-range:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--bh-paper);
+  outline-offset: 2px;
+}
+
+.bh-timeline-range::-moz-range-track {
+  height: 3px;
+  background: color-mix(in srgb, var(--bh-paper) 22%, transparent);
+}
+.bh-timeline-range::-moz-range-progress {
+  height: 3px;
+  background: var(--bh-territory);
+}
+.bh-timeline-range::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  background: var(--bh-paper);
+  border: 2px solid var(--bh-territory);
+  border-radius: 0;
+  transform: rotate(45deg);
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.bh-timeline-range:hover::-moz-range-thumb {
+  background: var(--bh-territory);
+}
+.bh-timeline-range:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--bh-paper);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Map grain/vignette — a faint paper-grain texture + edge darkening over */
+/* the live map, generated from an inline SVG noise filter (no image      */
+/* download). Sits above the WebGL canvas as an ordinary absolutely-      */
+/* positioned div, so it costs nothing on the GPU/render side.            */
+/* ---------------------------------------------------------------------- */
+.bh-map-grain {
+  background-image:
+    radial-gradient(ellipse at center, transparent 55%, rgba(36, 31, 23, 0.28) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Scroll-driven reveal — native CSS (animation-timeline: view()), zero   */
+/* JS, runs on the compositor thread. Browsers without support (Firefox   */
+/* stable, as of this writing) just see the element fully visible from    */
+/* the start — a correct, harmless fallback, not a broken one.            */
+/* ---------------------------------------------------------------------- */
+@supports (animation-timeline: view()) {
+  .bh-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: bh-reveal-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 25%;
+  }
+  @keyframes bh-reveal-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* The claim→interpretation→uncertainty connector draws itself in,
+   * rather than just fading — reinforces "trace the thread". */
+  .bh-thread-line {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: bh-thread-draw linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 35%;
+  }
+  @keyframes bh-thread-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* View Transitions — tuned to our motion language (full-page transitions */
+/* stay subtle, 300-450ms) rather than the browser's snappier default.    */
+/* ---------------------------------------------------------------------- */
+::view-transition-group(*) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
