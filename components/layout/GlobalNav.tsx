@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { CommandPalette } from "@/components/search/CommandPalette";
+import { MobileMenu } from "./MobileMenu";
+import { NavLinks } from "./NavLinks";
 
 const primaryLinks = [
   { href: "/atlas", label: "Atlas" },
@@ -15,28 +17,17 @@ const secondaryLinks = [{ href: "/method", label: "Method" }];
 export function GlobalNav() {
   return (
     <header
-      className="relative z-40 border-b border-border bg-paper/90 backdrop-blur-sm"
+      className="relative z-40 h-16 border-b border-border bg-paper/90 backdrop-blur-sm"
       style={{ viewTransitionName: "site-header" }}
     >
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-4">
+      <div className="mx-auto flex h-full max-w-[1400px] items-center gap-6 px-4 sm:px-6">
         <Link href="/" className="shrink-0 font-display text-lg tracking-wide text-ink">
           BHĀRATA
         </Link>
-        <nav className="flex items-center gap-5 font-sans text-sm text-ink-muted">
-          {primaryLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-ink">
-              {link.label}
-            </Link>
-          ))}
-          <span className="h-4 w-px bg-border" aria-hidden />
-          {secondaryLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-ink">
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="ml-auto shrink-0">
+        <NavLinks primary={primaryLinks} secondary={secondaryLinks} />
+        <div className="ml-auto flex shrink-0 items-center gap-2">
           <CommandPalette />
+          <MobileMenu links={[...primaryLinks, ...secondaryLinks]} />
         </div>
       </div>
     </header>

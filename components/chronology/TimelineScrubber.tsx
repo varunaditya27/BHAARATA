@@ -2,7 +2,7 @@
 
 import { Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { PROTOTYPE_PERIOD_MARKERS, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
+import { getEraForYear, PROTOTYPE_PERIOD_MARKERS, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 
 export type TimelineChangeSource = "manual" | "auto";
 
@@ -62,7 +62,10 @@ export function TimelineScrubber({ year, onYearChange }: TimelineScrubberProps) 
       </button>
 
       <div className="flex-1">
-        <div className="relative mb-1 h-4 font-sans text-[0.65rem] uppercase tracking-wide text-paper/50">
+        <div className="mb-1 h-4 font-sans text-[0.65rem] uppercase tracking-wide text-paper/60 sm:hidden">
+          {getEraForYear(year)}
+        </div>
+        <div className="relative mb-1 hidden h-4 font-sans text-[0.65rem] uppercase tracking-wide text-paper/50 sm:block">
           {PROTOTYPE_PERIOD_MARKERS.map((marker) => (
             <span
               key={marker.year}
@@ -89,7 +92,7 @@ export function TimelineScrubber({ year, onYearChange }: TimelineScrubberProps) 
         />
       </div>
 
-      <div className="w-20 shrink-0 text-right font-display text-lg text-paper">
+      <div className="w-[4.5rem] shrink-0 text-right font-display text-base text-paper sm:w-20 sm:text-lg">
         {formatCursorYear(year)}
       </div>
     </div>

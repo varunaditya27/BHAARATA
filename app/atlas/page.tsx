@@ -9,7 +9,7 @@ export const metadata = {
 export default function AtlasPage() {
   return (
     <PageTransition>
-    <Suspense fallback={<div className="h-[calc(100vh-65px)] bg-paper" />}>
+    <Suspense fallback={<div className="h-[calc(100dvh-4rem)] bg-paper" />}>
       <AtlasView />
     </Suspense>
     </PageTransition>

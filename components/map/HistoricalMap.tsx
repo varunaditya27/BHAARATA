@@ -62,15 +62,24 @@ function prefersReducedMotion(): boolean {
 /** Pull back, then fly in — the staged camera move from
  * IMPLEMENTATION_PLAN.md §23.2 ("India → South India → Thanjavur"),
  * instead of a single flat fitBounds. */
+/** Keep the selected territory clear of whatever panel covers the map:
+ * the bottom sheet on phones, the floating card on the right on desktop. */
+function fitPadding() {
+  const mobile = window.matchMedia("(max-width: 767px)").matches;
+  return mobile
+    ? { top: 64, bottom: 200, left: 24, right: 24 }
+    : { top: 60, bottom: 60, left: 220, right: 380 };
+}
+
 function cinematicFitBounds(map: MapLibreMap, bounds: LngLatBounds) {
   if (prefersReducedMotion()) {
-    map.fitBounds(bounds, { padding: 80, duration: 0, maxZoom: 7 });
+    map.fitBounds(bounds, { padding: fitPadding(), duration: 0, maxZoom: 7 });
     return;
   }
   const pullBackZoom = Math.max(map.getZoom() - 1, 3.5);
   map.easeTo({ zoom: pullBackZoom, duration: 350, essential: true });
   map.once("moveend", () => {
-    map.fitBounds(bounds, { padding: 80, duration: 950, maxZoom: 7, essential: true });
+    map.fitBounds(bounds, { padding: fitPadding(), duration: 950, maxZoom: 7, essential: true });
   });
 }
 

@@ -33,7 +33,7 @@ export function AtlasSidebar({
   }, [allPolities, query]);
 
   return (
-    <aside className="flex w-72 shrink-0 flex-col border-r border-paper/10 bg-ink">
+    <aside className="hidden w-72 shrink-0 flex-col border-r border-paper/10 bg-ink md:flex">
       <div className="p-4">
         <input
           type="search"

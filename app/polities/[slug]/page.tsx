@@ -180,7 +180,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
           <div className="flex h-full items-end">
             <div className="mx-auto w-full max-w-[1100px] px-6 pb-10">
               <Eyebrow className="text-paper/70">{polity.polityType} · {polity.region}</Eyebrow>
-              <h1 className="mt-2 font-display text-6xl text-paper">{polity.name}</h1>
+              <h1 className="mt-2 font-display text-5xl text-paper sm:text-6xl">{polity.name}</h1>
               {polity.nativeName && (
                 <p className="mt-1 font-devanagari-display text-2xl text-paper/80">{polity.nativeName}</p>
               )}

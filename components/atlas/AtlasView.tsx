@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { HistoricalMap } from "@/components/map/HistoricalMap";
 import { MapLegend, type LayerToggleId } from "@/components/map/MapLegend";
 import { AtlasSidebar } from "@/components/atlas/AtlasSidebar";
+import { KingdomChips } from "@/components/atlas/KingdomChips";
 import { EraTitleCard } from "@/components/atlas/EraTitleCard";
 import { TimelineScrubber, type TimelineChangeSource } from "@/components/chronology/TimelineScrubber";
 import { EntityPreviewPanel } from "@/components/entity/EntityPreviewPanel";
@@ -133,7 +134,7 @@ export function AtlasView() {
   }, []);
 
   return (
-    <div className="flex h-[calc(100vh-65px)] flex-col bg-ink">
+    <div className="flex h-[calc(100dvh-4rem)] flex-col bg-ink">
       <div className="flex flex-1 overflow-hidden">
         <AtlasSidebar
           allPolities={polities}
@@ -142,7 +143,7 @@ export function AtlasView() {
           onSelectPolity={handleSelectPolity}
         />
 
-        <div className="relative flex-1">
+        <div className="relative flex-1 overflow-hidden">
           <HistoricalMap
             year={displayYear}
             selectedPolityId={selectedPolity?.id ?? null}
@@ -151,7 +152,14 @@ export function AtlasView() {
           />
           <div className="bh-map-grain pointer-events-none absolute inset-0" />
 
-          <div className="pointer-events-none absolute inset-4">
+          <KingdomChips
+            allPolities={polities}
+            activePolityIds={activePolityIds}
+            selectedPolityId={selectedPolity?.id ?? null}
+            onSelectPolity={handleSelectPolity}
+          />
+
+          <div className="pointer-events-none absolute left-3 top-14 md:left-4 md:top-4">
             <div className="pointer-events-auto w-fit">
               <MapLegend visible={visibleLayers} onToggle={toggleLayer} />
             </div>
@@ -162,7 +170,7 @@ export function AtlasView() {
         </div>
       </div>
 
-      <div className="border-t border-paper/10 bg-ink px-6 py-4">
+      <div className="border-t border-paper/10 bg-ink px-4 py-3 md:px-6 md:py-4">
         <TimelineScrubber year={displayYear} onYearChange={handleYearChange} />
       </div>
     </div>

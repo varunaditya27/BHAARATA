@@ -8,6 +8,7 @@ import {
   CommandItem,
   CommandList,
 } from "cmdk";
+import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { buildSearchIndex, searchEntryGroupLabel, type SearchEntryType } from "@/lib/search";
@@ -51,10 +52,12 @@ export function CommandPalette() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-2 border border-border px-3 py-1.5 font-sans text-sm text-ink-muted hover:border-ink hover:text-ink"
+        aria-label="Search"
+        className="flex h-9 items-center gap-2 border border-border px-2.5 font-sans text-sm text-ink-muted hover:border-ink hover:text-ink sm:px-3"
       >
-        Search
-        <kbd className="rounded-sm border border-border bg-paper-raised px-1.5 py-0.5 font-sans text-[0.65rem] text-ink-muted">
+        <Search size={15} className="sm:hidden" />
+        <span className="hidden sm:inline">Search</span>
+        <kbd className="hidden rounded-sm border border-border bg-paper-raised px-1.5 py-0.5 font-sans text-[0.65rem] text-ink-muted sm:inline">
           ⌘K
         </kbd>
       </button>
@@ -64,7 +67,7 @@ export function CommandPalette() {
         onOpenChange={setOpen}
         label="Search BHĀRATA"
         overlayClassName="fixed inset-0 z-50 bg-ink/50 backdrop-blur-sm"
-        contentClassName="fixed left-1/2 top-[18vh] z-50 w-full max-w-lg -translate-x-1/2 border border-border bg-paper-raised shadow-xl"
+        contentClassName="fixed left-1/2 top-[12vh] z-50 w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 border border-border bg-paper-raised shadow-xl sm:top-[18vh]"
       >
         <CommandInput
           placeholder="Search kingdoms, people, places, events, evidence…"

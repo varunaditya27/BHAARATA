@@ -15,13 +15,13 @@ export type EntityTabItem = {
 export function EntityTabs({ items, defaultValue }: { items: EntityTabItem[]; defaultValue: string }) {
   return (
     <Tabs.Root defaultValue={defaultValue}>
-      <Tabs.List className="flex gap-6 border-b border-border font-sans text-sm">
+      <Tabs.List className="flex gap-6 overflow-x-auto border-b border-border font-sans text-sm [scrollbar-width:none]">
         {items.map((item) => (
           <Tabs.Trigger
             key={item.value}
             value={item.value}
             className={cn(
-              "border-b-2 border-transparent py-3 text-ink-muted transition-colors",
+              "shrink-0 border-b-2 border-transparent py-3 text-ink-muted transition-colors",
               "data-[state=active]:border-ink data-[state=active]:text-ink",
               "hover:text-ink",
             )}

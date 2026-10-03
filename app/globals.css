@@ -110,6 +110,12 @@ body {
 .maplibregl-ctrl-attrib a {
   color: var(--bh-ink-muted) !important;
 }
+@media (max-width: 767px) {
+  /* Phones pinch to zoom; the button stack just covers map. */
+  .maplibregl-ctrl-top-right .maplibregl-ctrl-group {
+    display: none;
+  }
+}
 
 /* ---------------------------------------------------------------------- */
 /* Themed scrollbar — a measured margin/ruler motif echoing the map's     */
@@ -383,6 +389,17 @@ body {
     animation-duration: 0s !important;
     animation-delay: 0s !important;
   }
+}
+
+/* Sheets and overlays (mobile menu, bottom sheets). */
+@keyframes bh-overlay-in {
+  from { opacity: 0; }
+}
+@keyframes bh-sheet-down {
+  from { transform: translateY(-100%); }
+}
+@keyframes bh-sheet-up {
+  from { transform: translateY(100%); }
 }
 
 /* Slow settle on hero photographs — the camera easing in after a cut. */
