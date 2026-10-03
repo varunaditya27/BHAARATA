@@ -6,7 +6,10 @@
  * recoloured to our palette. Modern roads, rail, and buildings are
  * dropped entirely — an antique-style map doesn't show a motorway, and
  * removing them is also what makes the result read as "printed" instead
- * of "Google Maps with a filter."
+ * of "Google Maps with a filter." Modern country borders and country
+ * names are dropped for the same reason PROJECT_BIBLE.md §8 gives: an
+ * 11th-century map labelled INDIA / PAKISTAN / BANGLADESH presents
+ * historical space as modern nation-states.
  *
  * We reuse CARTO's vector tiles rather than hosting our own (that's the
  * Phase II+ step, once PMTiles built from PostGIS exist) — this is how
