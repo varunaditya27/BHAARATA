@@ -26,6 +26,7 @@ export const BASEMAP_STYLE_URL = "/map-styles/bhaarata-atlas.json";
 export const SOURCE_IDS = {
   territory: "bh-territory",
   frontier: "bh-frontier",
+  kingdomLabels: "bh-kingdom-labels",
   places: "bh-places",
   routes: "bh-routes",
 } as const;
@@ -34,6 +35,7 @@ export const LAYER_IDS = {
   territoryFill: "bh-territory-fill",
   territoryOutline: "bh-territory-outline",
   frontierHatch: "bh-frontier-hatch",
+  kingdomLabels: "bh-kingdom-labels",
   placePoints: "bh-place-points",
   placeLabels: "bh-place-labels",
   placeIcons: "bh-place-icons",

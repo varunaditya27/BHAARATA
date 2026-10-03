@@ -3,6 +3,7 @@ import { boundaries, places, routes } from "@/lib/data/prototype";
 import {
   boundariesToFeatureCollection,
   frontiersToFeatureCollection,
+  kingdomLabelsToFeatureCollection,
   placesToFeatureCollection,
   routesToFeatureCollection,
 } from "@/lib/geo/to-geojson";
@@ -38,6 +39,11 @@ export function addHistoricalLayers(map: MapLibreMap, options: { interactive?: b
   map.addSource(SOURCE_IDS.frontier, {
     type: "geojson",
     data: frontiersToFeatureCollection(boundaries),
+    promoteId: "boundaryId",
+  });
+  map.addSource(SOURCE_IDS.kingdomLabels, {
+    type: "geojson",
+    data: kingdomLabelsToFeatureCollection(boundaries),
     promoteId: "boundaryId",
   });
   map.addSource(SOURCE_IDS.places, {
@@ -138,11 +144,40 @@ export function addHistoricalLayers(map: MapLibreMap, options: { interactive?: b
     layout: {
       "text-field": ["get", "name"],
       "text-size": 11,
-      "text-offset": [0, 1.3],
-      "text-anchor": "top",
+      "text-variable-anchor": ["top", "bottom", "right", "left"],
+      "text-radial-offset": 0.9,
+      "text-justify": "auto",
       "text-font": ["Ranade Medium"],
     },
     paint: { "text-color": "#241f17", "text-halo-color": "#f3ede0", "text-halo-width": 1.2 },
+  });
+
+  // Kingdom names set like a printed atlas: spaced capitals that widen as
+  // you zoom in. Topmost so they're placed first and reserve their space;
+  // settlement labels (variable anchors, above) then step around them
+  // instead of overprinting.
+  map.addLayer({
+    id: LAYER_IDS.kingdomLabels,
+    type: "symbol",
+    source: SOURCE_IDS.kingdomLabels,
+    layout: {
+      "text-field": ["get", "label"],
+      "text-font": ["Zodiak Bold"],
+      "text-transform": "uppercase",
+      "text-size": ["interpolate", ["linear"], ["zoom"], 3.5, 11, 5, 15, 7, 24],
+      "text-letter-spacing": ["interpolate", ["linear"], ["zoom"], 3.5, 0.18, 5, 0.32, 7, 0.55],
+      "text-max-width": 30,
+      "text-allow-overlap": true,
+      "text-ignore-placement": false,
+    },
+    paint: {
+      "text-color": ["get", "labelColor"],
+      "text-halo-color": "rgba(243, 237, 224, 0.55)",
+      "text-halo-width": 1.4,
+      "text-halo-blur": 0.6,
+      "text-opacity": ["coalesce", ["feature-state", "labelOpacity"], 0],
+      "text-opacity-transition": { duration: 500, delay: 0 },
+    },
   });
 
   if (options.interactive === false) {

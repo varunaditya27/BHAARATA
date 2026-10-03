@@ -2,6 +2,9 @@ import { polities } from "@/lib/data/prototype";
 import type { HistoricalBoundary, HistoricalRoute, Place } from "@/lib/domain/types";
 import { darkenHex } from "@/lib/utils/color";
 import frontierGeometries from "@/lib/data/geo/frontiers.json";
+import labelPoints from "@/lib/data/geo/labels.json";
+
+const nameByPolityId = new Map(polities.map((p) => [p.id, p.name]));
 
 const accentByPolityId = new Map(polities.map((p) => [p.id, p.accentColor]));
 
@@ -71,6 +74,32 @@ export function frontiersToFeatureCollection(boundaries: HistoricalBoundary[]): 
         type: "Feature",
         properties: { boundaryId: boundaryId(b), polityId: b.polityId },
         geometry: geoms[boundaryId(b)],
+      })),
+  };
+}
+
+/**
+ * One label point per boundary, at the shape's pole of inaccessibility
+ * (precomputed — the interior point farthest from any edge, which is
+ * where an atlas sets an area name; a centroid can fall outside an
+ * irregular shape or right on its frontier). Parentheticals are dropped
+ * for the map: "Chalukya (Kalyani)" prints as CHALUKYA.
+ */
+export function kingdomLabelsToFeatureCollection(boundaries: HistoricalBoundary[]): GeoJSON.FeatureCollection {
+  const points = labelPoints as Record<string, number[]>;
+  return {
+    type: "FeatureCollection",
+    features: boundaries
+      .filter((b) => points[boundaryId(b)])
+      .map((b) => ({
+        type: "Feature",
+        properties: {
+          boundaryId: boundaryId(b),
+          polityId: b.polityId,
+          label: (nameByPolityId.get(b.polityId) ?? b.polityId).replace(/\s*\(.*\)\s*/g, ""),
+          labelColor: darkenHex(accentByPolityId.get(b.polityId) ?? "#96341a", 0.55),
+        },
+        geometry: { type: "Point", coordinates: points[boundaryId(b)] },
       })),
   };
 }
