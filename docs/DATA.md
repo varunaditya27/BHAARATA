@@ -133,6 +133,9 @@ venv/bin/python $REPO/scripts/import-wikidata.py
 venv/bin/python $REPO/scripts/import-rulers.py
 venv/bin/python $REPO/scripts/import-names.py      # reads the caches written above
 venv/bin/python $REPO/scripts/import-sites.py
+venv/bin/python $REPO/scripts/import-ruler-lists.py   # one request per 2.5 s: Wikipedia rate-limits faster
+venv/bin/python $REPO/scripts/apply-corrections.py   # always last: re-applies the documented fixes
+venv/bin/python $REPO/scripts/validate-data.py       # audits every record and link; read what it prints
 
 # Photographs are chosen by eye, in two steps (see the docstring in the script):
 venv/bin/python $REPO/scripts/import-photos.py candidates   # writes contact sheets to cache/
@@ -143,6 +146,12 @@ venv/bin/python $REPO/scripts/import-photos.py download
 Each script prints a summary when it finishes, for example `185 rulers; 113 with reign dates, 72 lifetime only; …`. Check it, then review the diff before committing.
 
 If Wikidata times out (it sometimes does), just run the script again: finished requests are cached and it resumes where it stopped.
+
+### Corrections, and the audit
+
+`scripts/validate-data.py` checks every record against itself (duplicate ids, impossible dates, coordinates outside the map, rulers outside their kingdom's years, missing credits, files on disk) and against the web (every Wikipedia article exists and is the right subject, every Wikidata id keeps its label, every Commons photo is still there and still free-licensed). Its first run found, among other things: a consort and a Marwar ruler listed as Mughal emperors, two Mysore kings with the same reign, battle summaries that described Shivaji's whole biography or a whole war, and a kingdom whose summary came from a disambiguation page.
+
+Each fix is recorded with its reason in `scripts/apply-corrections.py`, not edited by hand into the generated files, so a re-import does not bring the error back. What the validator still reports (about 19 items) is real and open: three kingdoms without a photograph, three rulers without a summary, ten battles known only from Wikidata, and three photographs whose creator Commons lists as unknown.
 
 ### What the scripts decide by hand
 
@@ -173,7 +182,8 @@ Automatic imports need a few human judgements. They are written down in the scri
 | `public/data/monuments.geojson` | `import-wikidata` | 4,313 protected monuments (name, id, Wikipedia title) |
 | `public/data/sites.geojson` | `import-sites` | 439 temples, mosques, forts, tombs, palaces and monasteries with a known date of construction (600–1700). 271 carry a linked Commons thumbnail with its credit; the images are not copied into the repository |
 | `lib/data/generated/imported-names.json` | `import-names` | Native-script names (Tamil, Kannada, Persian, Gujarati…) and alternative English names, taken from Wikidata labels and never transliterated by us |
-| `lib/data/generated/photos.json` | `import-photos` | Credit for 30 hand-picked kingdom photographs (`public/images/kp-*.jpg`) |
+| `lib/data/generated/imported-ruler-lists.json` | `import-ruler-lists` | 80 rulers of four kingdoms read from Wikipedia's dated list tables; each names its list page. A reign given only as a start year ends where the next begins, and says so |
+| `lib/data/generated/photos.json` | `import-photos` | Credit for 32 hand-picked kingdom photographs (`public/images/kp-*.jpg`) |
 | `lib/data/generated/imported-people.json` | `import-rulers` | Rulers: dates, whether they are a reign or a lifetime, role, summary |
 | `lib/data/generated/imported-ruler-images.json` | `import-rulers` | Credit for each ruler image |
 | `lib/data/prototype.ts` | by hand, plus the merge | Hand-written records, and the code that merges everything above into typed arrays |

@@ -39,7 +39,7 @@ quadrantChart
     Code licence: [0.05, 0.7]
     Correction button: [0.12, 0.62]
     Real device testing: [0.15, 0.66]
-    Rulers for 36 kingdoms: [0.62, 0.84]
+    Rulers for 22 kingdoms: [0.62, 0.84]
     Cited text for curated kingdoms: [0.45, 0.76]
     Citation layer: [0.68, 0.9]
     More real inscriptions: [0.9, 0.93]
@@ -73,7 +73,7 @@ quadrantChart
 
 | ID | Item | Why it matters | Size |
 |---|---|---|---|
-| **D1** | **Rulers for the 36 kingdoms with none or almost none.** 23 have no rulers on record (Harsha's Empire, Chandela, Paramara, Chauhan, Yadava, Kampili, the Nayaks, the Marathas, …) and 13 have one or two. Wikidata is the limit, so the likely route is parsing Wikipedia's "List of rulers" pages with a human check on every row, or hand-entering from a cited book | A kingdom page with no rulers looks unfinished | L |
+| **D1** | **Rulers for the 22 kingdoms still with none** (Harsha's Empire, Pratihara, Pala, Chandela, Chauhan, Yadava, Kampili, the Nayaks, the Marathas, …), plus those with only one or two. Four (Utpala, Lohara, Kashmir Sultanate, Paramara) now come from Wikipedia's dated list tables (`import-ruler-lists.py`); each other kingdom needs its list page read by eye first, because layouts differ. A cited textbook is the other route | A kingdom page with no rulers looks unfinished | L |
 | **D4** | **A citation layer down to page numbers.** Add a *Claim* record (the statement) that points to a *Source* with a page or inscription number and, where possible, a quoted line. Today a record cites a source as a whole | Turns "Wikipedia" into "Nilakanta Sastri, *The Cōḻas*, p. 214", which is what a historian can check | L |
 | **D5** | **Replace the hand-written text of the 10 curated kingdoms** (summaries, taglines, "remembered for") with cited text, then have someone who knows the history review it | It is the largest remaining body of unchecked prose | M |
 | **D2** | **More real evidence.** Start with the Chola: more of the Thanjavur inscriptions in *South Indian Inscriptions* Vols. II and III; a coin with a museum catalogue number; a temple with its ASI record. Each needs a free-licence photograph **of that object** | Today there is one real translation, shown beside a photo of a *different* inscription | XL |
@@ -104,8 +104,8 @@ quadrantChart
 | **D6** | **Cited turning points.** The nine hand-written milestones become sourced; add more kinds of event (temple foundations, treaties, famines, coronations) | Playback would have more to say, honestly | L |
 | **D9** | **Dated monuments.** Find a source with construction dates (ASI registers, gazetteers, Wikipedia infoboxes) so the monuments layer can follow the timeline | Today it is "protected today", not tied to a year | L |
 | **D10** | **Battle combatants.** Read "belligerents" from Wikipedia infoboxes and Wikidata `participant`, and show "fought between X and Y" when known | Today a battle is linked to whose land it was on, which is not who fought | M |
-| **D12** | **Photographs for the 35 kingdoms that have none.** One checked, free-licence photo of a heritage site each | Photo-less kingdoms feel second-class | M |
-| **D13** | **Native-script names** (Tamil, Kannada, Telugu, Devanagari, Persian) for the imported kingdoms, from Wikidata labels | Only the hand-written kingdoms have them | S |
+| **D12** | **Photographs for the 3 kingdoms that have none** (Maitraka, Lohara, Dambadeniya), and more of the ~190 rulers. Commons has no photograph of their own sites; a checked museum or archive image would do | Photo-less kingdoms feel second-class | M |
+| **D13** | **Check the native-script names** with a reader of each language. They are Wikidata labels, not verified, and two were already wrong (a city's name, and "Sultanate" for a Hindu dynasty) | A wrong name in a native script is worse than none | S |
 | **D16** | **More places than capitals.** Ports, temples, forts and towns from Wikidata, with dates where they exist | The map has few places between the capitals | L |
 | **D17** | **Chera outline.** The one kingdom still using a district-union placeholder; Cliopatria has no entry | A visible exception | S |
 | **D18** | **Reconcile text and map dates.** Examples: the Delhi Sultanate's text says 1206 but its borders start in 1210; the Chola end in 1259 on the map and 1279 in the text | Small contradictions erode trust | S |
