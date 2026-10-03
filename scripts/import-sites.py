@@ -32,6 +32,10 @@ CATEGORY = {
 OUT_OF_SCOPE = re.compile(r"\b(Tibet|Lhasa|Gompa|Ladakh Gonpa|Potala|Drigung|Ralung|Samding|Kumbum|Shigatse)\b", re.I)
 BOX = ("Point(60 5)", "Point(93 37)")
 
+# The atlas covers the subcontinent and the lands its kingdoms reached west to Herat and Ghazni. Wikidata's box also catches
+# Tibet, Iran and Central Asia; a site is kept only if Wikidata gives one of these countries.
+COUNTRIES = {"India", "Pakistan", "Bangladesh", "Sri Lanka", "Nepal", "Bhutan", "Afghanistan", "Maldives"}
+
 def fetch(url, key, binary=False):
     path = f"cache/{key}"
     if os.path.exists(path):
@@ -46,6 +50,32 @@ def fetch(url, key, binary=False):
     if binary:
         open(path, "wb").write(data); return data
     obj = json.loads(data); json.dump(obj, open(path, "w")); return obj
+
+def countries(qids):
+    """Wikidata's 'country' (P17) for each item, by name. Cached."""
+    out, labels = {}, {}
+    ids = sorted(qids)
+    for i in range(0, len(ids), 50):
+        chunk = ids[i:i + 50]
+        r = fetch("https://www.wikidata.org/w/api.php?" + urllib.parse.urlencode({"action": "wbgetentities", "ids": "|".join(chunk), "props": "claims", "format": "json"}),
+                  "countries-" + hashlib.md5("|".join(chunk).encode()).hexdigest() + ".json")["entities"]
+        for q, e in r.items():
+            out[q] = [c["mainsnak"]["datavalue"]["value"]["id"] for c in e.get("claims", {}).get("P17", []) if "datavalue" in c["mainsnak"]]
+    allc = sorted({c for v in out.values() for c in v})
+    for i in range(0, len(allc), 50):
+        chunk = allc[i:i + 50]
+        r = fetch("https://www.wikidata.org/w/api.php?" + urllib.parse.urlencode({"action": "wbgetentities", "ids": "|".join(chunk), "props": "labels", "languages": "en", "format": "json"}),
+                  "countrynames-" + hashlib.md5("|".join(chunk).encode()).hexdigest() + ".json")["entities"]
+        labels.update({q: e["labels"]["en"]["value"] for q, e in r.items() if "en" in e.get("labels", {})})
+    return {q: {labels.get(c, c) for c in v} for q, v in out.items()}
+
+def classify(name, cat):
+    """Wikidata's type is often 'shrine' or 'building' for mosques and churches; the name is the better guide."""
+    n = name.lower()
+    if re.search(r"church|basilica|cathedral|chapel|convent", n): return "church"
+    if re.search(r"mosque|masjid|dargah|jama |jami |idgah|madrasa|mazar|imambara|shahi bari", n): return "mosque"
+    if re.search(r"tomb|roza|rouza|mausoleum|ziyarat|hajiro|qabr", n): return "tomb"
+    return cat
 
 def main():
     sparql = f"""SELECT ?s ?sLabel ?sDescription ?d ?c ?typeLabel ?img ?article WHERE {{
@@ -71,6 +101,9 @@ def main():
         if "article" in r: s["wiki"] = urllib.parse.unquote(r["article"]["value"].rsplit("/wiki/", 1)[-1])
         # A site with several types keeps the first group seen; prefer the more specific one.
         if s["cat"] in ("palace", "monastery") and cat in ("temple", "mosque", "fort", "tomb"): s["cat"] = cat
+    where = countries(sites)
+    sites = {q: s for q, s in sites.items() if (where.get(q) or COUNTRIES) & COUNTRIES}      # no country given: keep
+    for s in sites.values(): s["cat"] = classify(s["name"], s["cat"])
     print(len(sites), "dated sites after filtering")
 
     features, with_photo = [], 0

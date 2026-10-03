@@ -20,7 +20,7 @@ export default function PeopleIndexPage() {
         Kings, emperors and sultans, in order of their reigns, with the kingdoms they ruled.
       </p>
       <div className="mt-3">
-        <Badge tone="neutral">Rulers: Wikidata and Wikipedia · a few hand-written placeholders</Badge>
+        <Badge tone="neutral">Rulers: Wikidata and Wikipedia lists · a few written here and checked against Wikipedia</Badge>
       </div>
 
       <div className="mt-10 grid gap-8 sm:grid-cols-2">

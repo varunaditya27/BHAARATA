@@ -29,27 +29,23 @@ function boundaryGeometry(id: string): GeoJSON.Polygon | GeoJSON.MultiPolygon {
 }
 
 /**
- * PROTOTYPE DATA — NOT A SCHOLARLY CORPUS.
+ * The atlas's records. Most are imported (see scripts/ and docs/DATA.md):
+ * borders and dates from Cliopatria, capitals, rulers, battles and sites from
+ * Wikidata, descriptions from Wikipedia, each with its source on the record.
  *
- * Per PROJECT_BIBLE.md §10 (Data Policy): prototype records are acceptable
- * during UI development and must remain clearly illustrative. Boundary
- * geometry is deliberately coarse hand-drawn approximation — it exists to
- * prove the map engine can render zoom-dependent, time-indexed territory,
- * not to assert where a frontier actually ran in a given year.
+ * The hand-written parts are the texts of the ten "curated" kingdoms, their
+ * twelve rulers' summaries, nine turning points and the two evidence records.
+ * Every statement in them was checked against the Wikipedia article (or, for
+ * the inscriptions, the printed volume) named in the record's provenance.
+ * Still NOT researched: the Chera outline (built from modern district lines)
+ * and the two example routes, which are drawn by hand; both are labelled so.
  *
- * Widely-known facts (capitals, language, religion, approximate reign
- * dates, that a named inscription/temple/statue exists) are stated
- * straightforwardly — these aren't in dispute and don't need hedging.
- * What's illustrative is the *specific narrative detail* BHĀRATA would
- * normally derive from a cited source (a claim's exact wording, a
- * transcription's exact lines, a territory's exact frontier) — those are
- * flagged per-record (`claimIsIllustrative`, boundary `confidence`) rather
- * than blanket-disclaimed, so the distinction stays legible.
+ * Unknown is not empty and uncertain is not false: where a source gives no
+ * value, the record says so (see lib/data/status.ts for the page badges).
  *
- * Photography is real and credited (see lib/data/images.ts). Do not pair
- * a real, identifiable artifact's photo with invented scholarly content
- * about that specific artifact — see the evidence record below for how
- * that's handled.
+ * Photography is real and credited (see lib/data/images.ts). Do not pair a
+ * real artefact's photo with invented content about that specific artefact;
+ * where the photo shows a different object, say so (imageIsIllustrative).
  */
 
 export const PROTOTYPE_SOURCE: Source = {

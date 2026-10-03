@@ -93,4 +93,5 @@ export const SITE_COLORS = {
   tomb: "#8c3f5f",
   palace: "#8a6d1f",
   monastery: "#3a5a78",
+  church: "#5a5a5a",
 } as const;

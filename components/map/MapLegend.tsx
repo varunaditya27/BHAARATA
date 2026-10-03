@@ -13,7 +13,7 @@ const LAYER_OPTIONS: { id: LayerToggleId; label: string }[] = [
   { id: "routes", label: "Two example routes (drawn by hand, not sourced)" },
   { id: "relief", label: "Hills and rivers" },
   { id: "battles", label: "Battles" },
-  { id: "sites", label: "Temples, forts and mosques, by year built" },
+  { id: "sites", label: "Temples, mosques, churches, forts and tombs, by year built" },
   { id: "monuments", label: "Monuments protected today" },
 ];
 

@@ -26,11 +26,13 @@ export default function MethodPage() {
 
         <section className="mt-8 space-y-4 font-sans text-lg leading-relaxed text-ink">
           <p className="bh-dropcap">
-            This is an early working version, and it mixes two kinds of data. The kingdoms, their dates and their
-            borders come from <strong>Cliopatria</strong>, an open research dataset built by historians and
-            data scientists. The short descriptions come from <strong>Wikipedia</strong>. Rulers, events, the evidence
-            page and a few other records are still <strong>placeholders</strong> written by hand, and none of those
-            should be quoted as fact. Each page says which kind it is.
+            This is a working version. The kingdoms, their dates and their borders come from{" "}
+            <strong>Cliopatria</strong>, an open research dataset built by historians and data scientists. The
+            descriptions, ruler lists, battles and places come from <strong>Wikipedia</strong> and{" "}
+            <strong>Wikidata</strong>; a few texts written here were checked, statement by statement, against the
+            Wikipedia article named on the page. Two things are <strong>not researched</strong> and should not be
+            quoted as fact: the outline of the Chera kingdom, and the two example routes on the map, which are drawn
+            by hand. Each page says where its data comes from.
           </p>
           <p>
             Even the researched borders are one version of the past. Real frontiers moved, overlapped, and were often

@@ -62,8 +62,8 @@ export default function Home() {
           </div>
 
           <p className="mt-12 font-sans text-xs text-ink-muted">
-            Kingdom borders come from a research dataset, and summaries from Wikipedia; rulers, events and the evidence
-            page are still placeholders.{" "}
+            Kingdom borders come from a research dataset; descriptions, rulers, battles and places from Wikipedia and
+            Wikidata. Two things are still drawn by hand: the Chera outline and the example routes.{" "}
             <Link href="/method" className="underline underline-offset-4 hover:text-ink">
               Read why
             </Link>

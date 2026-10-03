@@ -25,7 +25,7 @@ export function Colophon() {
             <p className="font-display text-2xl tracking-[0.04em] text-ink">BHĀRATA</p>
             <p className="mt-3 max-w-sm font-sans text-sm leading-relaxed text-ink-muted">
               An atlas of the Indian subcontinent through time: which kingdoms held which land, when, and how we know.
-              Kingdom borders come from the Cliopatria dataset and summaries from Wikipedia. Rulers, events and evidence are still placeholders.
+              Kingdom borders come from the Cliopatria dataset; descriptions, rulers, battles and places from Wikipedia and Wikidata.
             </p>
           </div>
           <nav aria-label="Footer" className="font-sans text-sm">
