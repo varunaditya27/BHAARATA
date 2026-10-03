@@ -4,11 +4,35 @@ import { darkenHex } from "@/lib/utils/color";
 
 const accentByPolityId = new Map(polities.map((p) => [p.id, p.accentColor]));
 
-/**
+/*
  * MapLibre owns rendering; React only ever hands it GeoJSON + paint
- * expressions. Feature ids are the polity id so feature-state (selection,
- * hover) can target them without rebuilding the source.
+ * expressions. Each feature carries a stable id (promoted from its
+ * properties) so feature-state — visibility, selection — can target it
+ * without rebuilding the source.
  */
+
+/** Stable id for one dated boundary snapshot — a kingdom can have several
+ * (different extents in different centuries), so the polity id alone
+ * isn't unique enough to address feature-state. */
+export function boundaryId(b: Pick<HistoricalBoundary, "polityId" | "validFrom">): string {
+  return `${b.polityId}-${b.validFrom}`;
+}
+
+function ringArea(ring: GeoJSON.Position[]): number {
+  let sum = 0;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    sum += (ring[j][0] - ring[i][0]) * (ring[j][1] + ring[i][1]);
+  }
+  return Math.abs(sum / 2);
+}
+
+/** Planar area in degrees² — only ever compared against other boundaries
+ * (to pick the most specific one under a click), never shown. */
+function geometryArea(g: GeoJSON.Polygon | GeoJSON.MultiPolygon): number {
+  const polys = g.type === "Polygon" ? [g.coordinates] : g.coordinates;
+  return polys.reduce((acc, rings) => acc + ringArea(rings[0]) - rings.slice(1).reduce((h, r) => h + ringArea(r), 0), 0);
+}
+
 export function boundariesToFeatureCollection(
   boundaries: HistoricalBoundary[],
 ): GeoJSON.FeatureCollection {
@@ -16,8 +40,9 @@ export function boundariesToFeatureCollection(
     type: "FeatureCollection",
     features: boundaries.map((b) => ({
       type: "Feature",
-      id: b.polityId,
       properties: {
+        boundaryId: boundaryId(b),
+        area: geometryArea(b.geometry),
         polityId: b.polityId,
         confidence: b.confidence,
         accentColor: accentByPolityId.get(b.polityId) ?? "#96341a",

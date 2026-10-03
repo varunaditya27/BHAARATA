@@ -202,8 +202,8 @@ function Details({ polity }: { polity: Polity }) {
         )}
       </div>
       <div className="mt-4 flex gap-5 border-t border-paper/15 pt-3 font-sans text-xs text-paper/60">
-        <span>{rulers.length} rulers recorded</span>
-        <span>{relatedEvents.length} events recorded</span>
+        <span>{rulers.length} {rulers.length === 1 ? "ruler" : "rulers"} recorded</span>
+        <span>{relatedEvents.length} {relatedEvents.length === 1 ? "event" : "events"} recorded</span>
       </div>
       <div className="mt-3">
         <Badge tone="uncertainty">Illustrative prototype data</Badge>
