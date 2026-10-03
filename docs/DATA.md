@@ -131,6 +131,13 @@ REPO=/path/to/BHAARATA
 venv/bin/python $REPO/scripts/import-cliopatria.py
 venv/bin/python $REPO/scripts/import-wikidata.py
 venv/bin/python $REPO/scripts/import-rulers.py
+venv/bin/python $REPO/scripts/import-names.py      # reads the caches written above
+venv/bin/python $REPO/scripts/import-sites.py
+
+# Photographs are chosen by eye, in two steps (see the docstring in the script):
+venv/bin/python $REPO/scripts/import-photos.py candidates   # writes contact sheets to cache/
+# ...edit PICKS in the script, then:
+venv/bin/python $REPO/scripts/import-photos.py download
 ```
 
 Each script prints a summary when it finishes, for example `185 rulers; 113 with reign dates, 72 lifetime only; …`. Check it, then review the diff before committing.
@@ -164,6 +171,9 @@ Automatic imports need a few human judgements. They are written down in the scri
 | `lib/data/generated/imported-images.json` | `import-cliopatria` | Credit (artist, licence, link) for each kingdom photo |
 | `lib/data/generated/imported-battles.json` | `import-wikidata` | 127 battles: year, location, summary, kingdoms whose borders contained the site |
 | `public/data/monuments.geojson` | `import-wikidata` | 4,313 protected monuments (name, id, Wikipedia title) |
+| `public/data/sites.geojson` | `import-sites` | 439 temples, mosques, forts, tombs, palaces and monasteries with a known date of construction (600–1700). 271 carry a linked Commons thumbnail with its credit; the images are not copied into the repository |
+| `lib/data/generated/imported-names.json` | `import-names` | Native-script names (Tamil, Kannada, Persian, Gujarati…) and alternative English names, taken from Wikidata labels and never transliterated by us |
+| `lib/data/generated/photos.json` | `import-photos` | Credit for 30 hand-picked kingdom photographs (`public/images/kp-*.jpg`) |
 | `lib/data/generated/imported-people.json` | `import-rulers` | Rulers: dates, whether they are a reign or a lifetime, role, summary |
 | `lib/data/generated/imported-ruler-images.json` | `import-rulers` | Credit for each ruler image |
 | `lib/data/prototype.ts` | by hand, plus the merge | Hand-written records, and the code that merges everything above into typed arrays |
