@@ -8,6 +8,7 @@ import { MapLoading } from "@/components/map/MapLoading";
 import { AtlasSidebar } from "@/components/atlas/AtlasSidebar";
 import { KingdomChips } from "@/components/atlas/KingdomChips";
 import { EraTitleCard } from "@/components/atlas/EraTitleCard";
+import { EraGrade } from "@/components/atlas/EraGrade";
 import { EventCaption } from "@/components/atlas/EventCaption";
 import { ShortcutHelp, useAtlasShortcuts } from "@/components/atlas/AtlasShortcuts";
 import { EventTicks } from "@/components/chronology/EventTicks";
@@ -226,6 +227,7 @@ export function AtlasView() {
             focus={focus}
             onReady={handleMapReady}
           />
+          <EraGrade year={displayYear} />
           <div className="bh-map-grain pointer-events-none absolute inset-0" />
           <MapLoading visible={!mapReady} />
 
