@@ -73,8 +73,12 @@ body {
   font-family: var(--font-ranade), system-ui, sans-serif;
 }
 
-* {
-  border-color: var(--bh-border);
+/* In a layer so Tailwind utilities (border-transparent, border-ink…) can
+ * override it — unlayered, this rule beat every border-color utility. */
+@layer base {
+  * {
+    border-color: var(--bh-border);
+  }
 }
 
 /* ---------------------------------------------------------------------- */
