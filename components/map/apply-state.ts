@@ -1,0 +1,92 @@
+import type { Map as MapLibreMap } from "maplibre-gl";
+import { boundaries, places } from "@/lib/data/prototype";
+import { getHistoricalState, getRoutesAtYear } from "@/lib/geo/historical-state";
+import { boundaryId } from "@/lib/geo/to-geojson";
+import { LAYER_IDS, SOURCE_IDS } from "./mapStyle";
+
+export const TERRITORY_OPACITY = { inactive: 0, active: 0.58, selected: 0.8 } as const;
+
+/** How long a lost territory's outline lingers as a dashed "echo". */
+export const ECHO_YEARS = 60;
+
+/**
+ * The one place that turns "year Y, kingdom K selected" into map state.
+ * Feature-state writes are idempotent and the paint transitions (in
+ * layers.ts) do the fading, so calling this every frame of a scrub is
+ * cheap and always correct.
+ */
+export function applyHistoricalState(map: MapLibreMap, year: number, selectedPolityId: string | null) {
+  const state = getHistoricalState(year);
+  const activeBoundaryIds = new Set(state.activeBoundaries.map(boundaryId));
+  const activeCapitalNames = new Set(state.activePolities.flatMap((p) => p.capitals));
+  const polityHasActiveShape = new Set(state.activeBoundaries.map((b) => b.polityId));
+
+  for (const b of boundaries) {
+    const id = boundaryId(b);
+    const active = activeBoundaryIds.has(id);
+    const selected = active && b.polityId === selectedPolityId;
+    map.setFeatureState(
+      { source: SOURCE_IDS.territory, id },
+      {
+        active,
+        opacity: !active ? TERRITORY_OPACITY.inactive : selected ? TERRITORY_OPACITY.selected : TERRITORY_OPACITY.active,
+        lineOpacity: active ? 1 : 0,
+        selected,
+      },
+    );
+    // Echo: a territory that ended within ECHO_YEARS keeps a dashed ghost
+    // of its old outline, fading with time — unless the same kingdom
+    // already shows a newer shape. Derived from the year, so scrubbing
+    // either way is consistent.
+    const since = year - b.validTo;
+    const echo =
+      !active && since > 0 && since <= ECHO_YEARS && !polityHasActiveShape.has(b.polityId)
+        ? 0.7 * (1 - since / ECHO_YEARS)
+        : 0;
+    map.setFeatureState({ source: SOURCE_IDS.territory, id }, { echoOpacity: echo });
+    map.setFeatureState({ source: SOURCE_IDS.frontier, id }, { hatchOpacity: active ? (selected ? 0.75 : 0.5) : 0 });
+    map.setFeatureState({ source: SOURCE_IDS.kingdomLabels, id }, { labelOpacity: active ? 0.92 : 0 });
+  }
+
+  const capitalIds = places
+    // By name prefix, as elsewhere: "Gulbarga" is the place "Gulbarga (Kalaburagi)".
+    .filter((p) => p.placeType === "capital" && [...activeCapitalNames].some((c) => p.name.startsWith(c)))
+    .map((p) => p.id);
+  map.setFilter(LAYER_IDS.capitalPulseOuter, ["in", ["get", "placeId"], ["literal", capitalIds]]);
+  map.setFilter(LAYER_IDS.capitalSeals, ["in", ["get", "polityId"], ["literal", state.activePolities.map((p) => p.id)]]);
+
+  const routeIds = getRoutesAtYear(year).map((r) => r.id);
+  for (const layerId of [LAYER_IDS.routeLines, LAYER_IDS.routeLinesDash, LAYER_IDS.routeArrows, LAYER_IDS.routeMovers]) {
+    map.setFilter(layerId, ["in", ["get", "routeId"], ["literal", routeIds]]);
+  }
+}
+
+/** The boundary to frame for a kingdom in a given year — its shape for
+ * that year if it has one, otherwise its first recorded shape. */
+export function boundaryForPolity(polityId: string, year: number) {
+  const own = boundaries.filter((b) => b.polityId === polityId);
+  return own.find((b) => year >= b.validFrom && year <= b.validTo) ?? own[0];
+}
+
+/**
+ * Which kingdom a click/hover at this point means: only territory that's
+ * actually visible this year (every polygon is always loaded, invisibly),
+ * and the smallest one when several overlap — Hoysala sitting inside the
+ * Chalukya extent should win, not lose to it.
+ */
+/** The visible territory under a point — the smallest, where they overlap. */
+export function territoryAtPoint(
+  map: MapLibreMap,
+  point: { x: number; y: number },
+): { polityId: string; featureId: string } | null {
+  const hits = map
+    .queryRenderedFeatures([point.x, point.y], { layers: [LAYER_IDS.territoryFill] })
+    .filter((f) => map.getFeatureState({ source: SOURCE_IDS.territory, id: f.id as string }).active);
+  if (hits.length === 0) return null;
+  hits.sort((a, b) => (a.properties.area as number) - (b.properties.area as number));
+  return { polityId: hits[0].properties.polityId as string, featureId: hits[0].id as string };
+}
+
+export function polityAtPoint(map: MapLibreMap, point: { x: number; y: number }): string | null {
+  return territoryAtPoint(map, point)?.polityId ?? null;
+}

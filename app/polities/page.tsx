@@ -1,0 +1,68 @@
+import Image from "next/image";
+import Link from "next/link";
+import { Badge } from "@/components/primitives/Badge";
+import { Eyebrow } from "@/components/primitives/Eyebrow";
+import { PageTransition } from "@/components/primitives/PageTransition";
+import { Shared } from "@/components/primitives/Shared";
+import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
+import { polities } from "@/lib/data/prototype";
+import { images, type ImageKey } from "@/lib/data/images";
+import { formatDateRange } from "@/lib/domain/time";
+import { NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
+
+export const metadata = {
+  title: "Kingdoms — BHĀRATA",
+};
+
+export default function PolitiesIndexPage() {
+  return (
+    <PageTransition>
+    <div className="mx-auto max-w-[1000px] px-6 py-16">
+      <Eyebrow>Every kingdom in the atlas</Eyebrow>
+      <h1 className="mt-2 font-display text-4xl text-ink">Kingdoms</h1>
+      <p className="mt-3 max-w-prose font-sans text-ink-muted">
+        The kingdoms, empires and sultanates on the map, from the earliest to the latest. Each page shows where it
+        was and when, who ruled it, and who its neighbours were.
+      </p>
+      <div className="mt-3">
+        <Badge tone="uncertainty">Placeholder data, not yet checked</Badge>
+      </div>
+
+      <div className="mt-10 grid gap-10 sm:grid-cols-2">
+        {[...polities].sort((a, b) => a.period.startYear - b.period.startYear).map((polity) => {
+          const hero = polity.heroImageKey ? images[polity.heroImageKey as ImageKey] : undefined;
+          return (
+            <Link key={polity.id} href={`/polities/${polity.slug}`} transitionTypes={NAV_FORWARD} className="group block">
+              {hero && (
+                <Shared name={transitionNames.polityPhoto(polity.slug)}>
+                <div className="relative aspect-[16/10] overflow-hidden bg-stone">
+                  <Image
+                    src={hero.file}
+                    alt={hero.alt}
+                    fill
+                    sizes="(min-width: 640px) 480px, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                </div>
+                </Shared>
+              )}
+              <div className="mt-3 flex items-center gap-3">
+                <KingdomEmblem polityId={polity.id} color={polity.accentColor} className="h-9 w-9" />
+                <h2 className="font-display text-2xl text-ink group-hover:text-territory-selected">
+                  {polity.name}
+                </h2>
+              </div>
+              <p className="mt-1 font-sans text-sm text-ink-muted">
+                {formatDateRange(polity.period)} · {polity.region}
+              </p>
+              <p className="mt-3 font-sans text-sm leading-relaxed text-ink-muted">
+                {polity.summary}
+              </p>
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+    </PageTransition>
+  );
+}
