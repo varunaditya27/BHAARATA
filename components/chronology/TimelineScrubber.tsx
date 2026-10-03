@@ -1,7 +1,8 @@
 "use client";
 
 import { Pause, Play } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Odometer } from "@/components/primitives/Odometer";
 import { getEraForYear, PROTOTYPE_PERIOD_MARKERS, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 
 export type TimelineChangeSource = "manual" | "auto";
@@ -15,6 +16,9 @@ export type TimelineScrubberProps = {
   /** Years playback lands on exactly and lingers at (event dates), so an
    * event isn't skipped over at 2 years a tick. */
   holdYears?: number[];
+  /** Controlled play state (the atlas binds Space to it). Uncontrolled if omitted. */
+  playing?: boolean;
+  onPlayingChange?: (playing: boolean) => void;
 };
 
 /** The scrubber's cursor position isn't a historical claim, so it gets its
@@ -36,9 +40,25 @@ const HOLD_MS = 2400;
  * because none is owned by this component (the map handles its own
  * transitions and already resolves prefers-reduced-motion separately).
  */
-export function TimelineScrubber({ year, onYearChange, aboveTrack, holdYears = [] }: TimelineScrubberProps) {
+export function TimelineScrubber({
+  year,
+  onYearChange,
+  aboveTrack,
+  holdYears = [],
+  playing: playingProp,
+  onPlayingChange,
+}: TimelineScrubberProps) {
   const { min, max } = PROTOTYPE_YEAR_RANGE;
-  const [playing, setPlaying] = useState(false);
+  const [playingState, setPlayingState] = useState(false);
+  const playing = playingProp ?? playingState;
+  const onPlayingChangeRef = useRef(onPlayingChange);
+  useEffect(() => {
+    onPlayingChangeRef.current = onPlayingChange;
+  }, [onPlayingChange]);
+  const setPlaying = useCallback((next: boolean) => {
+    setPlayingState(next);
+    onPlayingChangeRef.current?.(next);
+  }, []);
   const yearRef = useRef(year);
   const holdUntilRef = useRef(0);
   const holdYearsRef = useRef(holdYears);
@@ -70,12 +90,12 @@ export function TimelineScrubber({ year, onYearChange, aboveTrack, holdYears = [
       onYearChange(next, "auto");
     }, PLAY_INTERVAL_MS);
     return () => clearInterval(id);
-  }, [playing, max, onYearChange]);
+  }, [playing, max, onYearChange, setPlaying]);
 
   return (
     <div className="flex w-full items-center gap-4">
       <button
-        onClick={() => setPlaying((p) => !p)}
+        onClick={() => setPlaying(!playing)}
         aria-label={playing ? "Pause" : "Play through time"}
         className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-paper/30 text-paper hover:bg-paper/10"
       >
@@ -109,13 +129,14 @@ export function TimelineScrubber({ year, onYearChange, aboveTrack, holdYears = [
             onYearChange(Number(e.target.value), "manual");
           }}
           aria-label="Year"
+          aria-valuetext={formatCursorYear(year)}
           className="bh-timeline-range w-full"
           style={{ "--bh-progress": `${((year - min) / (max - min)) * 100}%` } as React.CSSProperties}
         />
       </div>
 
-      <div className="w-[4.5rem] shrink-0 text-right font-display text-base text-paper sm:w-20 sm:text-lg">
-        {formatCursorYear(year)}
+      <div className="w-[4.5rem] shrink-0 text-right font-display text-lg text-paper sm:w-24 sm:text-2xl">
+        <Odometer value={year} suffix={year < 0 ? "BCE" : "CE"} durationMs={260} />
       </div>
     </div>
   );

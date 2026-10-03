@@ -9,6 +9,7 @@ import { AtlasSidebar } from "@/components/atlas/AtlasSidebar";
 import { KingdomChips } from "@/components/atlas/KingdomChips";
 import { EraTitleCard } from "@/components/atlas/EraTitleCard";
 import { EventCaption } from "@/components/atlas/EventCaption";
+import { ShortcutHelp, useAtlasShortcuts } from "@/components/atlas/AtlasShortcuts";
 import { EventTicks } from "@/components/chronology/EventTicks";
 import { LifespanStrip } from "@/components/chronology/LifespanStrip";
 import { TimelineScrubber, type TimelineChangeSource } from "@/components/chronology/TimelineScrubber";
@@ -52,6 +53,8 @@ export function AtlasView() {
   const [mapReady, setMapReady] = useState(false);
   const handleMapReady = useCallback(() => setMapReady(true), []);
   const captionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [playing, setPlaying] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
   const lastYearRef = useRef<number | null>(null);
 
   const urlYear = useMemo(() => {
@@ -162,6 +165,39 @@ export function AtlasView() {
     [pushParams, showEvent],
   );
 
+  const clampYear = (y: number) => Math.min(PROTOTYPE_YEAR_RANGE.max, Math.max(PROTOTYPE_YEAR_RANGE.min, y));
+
+  useAtlasShortcuts({
+    togglePlay: () => setPlaying((p) => !p),
+    stepYears: (delta) => {
+      setPlaying(false);
+      handleYearChange(clampYear(displayYear + delta), "manual");
+    },
+    stepEvent: (direction) => {
+      const sorted = [...events].sort((a, b) => a.period.startYear - b.period.startYear);
+      const next =
+        direction === 1
+          ? sorted.find((e) => e.period.startYear > displayYear)
+          : [...sorted].reverse().find((e) => e.period.startYear < displayYear);
+      if (!next) return;
+      setPlaying(false);
+      handleYearChange(next.period.startYear, "manual");
+      showEvent(next);
+    },
+    selectKingdomAt: (index) => {
+      const p = polities[index];
+      if (!p) return;
+      // Picking a kingdom that doesn't exist this year jumps to its start.
+      if (!activePolityIds.has(p.id)) handleYearChange(clampYear(p.period.startYear), "manual");
+      handleSelectPolity(p.id);
+    },
+    clearSelection: () => {
+      if (helpOpen) setHelpOpen(false);
+      else handleSelectPolity(null);
+    },
+    toggleHelp: () => setHelpOpen((o) => !o),
+  });
+
   const toggleLayer = useCallback((id: LayerToggleId) => {
     setVisibleLayers((prev) => {
       const next = new Set(prev);
@@ -209,6 +245,14 @@ export function AtlasView() {
           <EntityPreviewPanel polity={selectedPolity} onClose={() => pushParams({ polity: null })} />
           <EventCaption event={caption} />
           <EraTitleCard era={eraCard?.era ?? null} year={eraCard?.year ?? displayYear} />
+          <ShortcutHelp open={helpOpen} onClose={() => setHelpOpen(false)} />
+          <button
+            onClick={() => setHelpOpen(true)}
+            className="absolute bottom-3 left-[150px] z-10 hidden border border-ink/20 bg-paper-raised/85 px-2 py-0.5 font-sans text-[0.7rem] text-ink-muted backdrop-blur-sm hover:text-ink md:block"
+            aria-label="Keyboard shortcuts"
+          >
+            Shortcuts <kbd className="ml-1 font-sans">?</kbd>
+          </button>
         </div>
       </div>
 
@@ -217,6 +261,8 @@ export function AtlasView() {
           year={displayYear}
           onYearChange={handleYearChange}
           holdYears={EVENT_YEARS}
+          playing={playing}
+          onPlayingChange={setPlaying}
           aboveTrack={
             <>
             <LifespanStrip
