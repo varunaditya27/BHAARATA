@@ -1,4 +1,3 @@
-import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { UncertaintyMeter } from "@/components/evidence/UncertaintyMeter";
 import type { Evidence } from "@/lib/domain/types";
 
@@ -24,17 +23,17 @@ export function ClaimThread({ record }: { record: Evidence }) {
 
       <div className="grid gap-0 sm:grid-cols-3 sm:divide-x sm:divide-border">
         <div className="pb-6 sm:px-6 sm:pb-0 sm:first:pl-0">
-          <Eyebrow>What it shows</Eyebrow>
+          <h3 className="font-sans text-sm font-medium text-ink-muted">What it shows</h3>
           <p className="mt-2 font-sans text-sm leading-relaxed text-ink">{record.claim}</p>
         </div>
         <div className="py-6 sm:px-6">
-          <Eyebrow>How it&rsquo;s read</Eyebrow>
+          <h3 className="font-sans text-sm font-medium text-ink-muted">How it&rsquo;s read</h3>
           <p className="mt-2 font-sans text-sm leading-relaxed text-ink">
-            {record.interpretation ?? "—"}
+            {record.interpretation ?? "Not recorded yet."}
           </p>
         </div>
         <div className="pt-6 sm:px-6 sm:pt-0">
-          <Eyebrow>How sure we are</Eyebrow>
+          <h3 className="font-sans text-sm font-medium text-ink-muted">How sure we are</h3>
           {record.uncertainty ? (
             <div className="mt-3 space-y-2">
               <UncertaintyMeter label="The date" level={record.uncertainty.dating} />

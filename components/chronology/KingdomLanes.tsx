@@ -51,7 +51,9 @@ export function KingdomLanes() {
   };
 
   return (
-    <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+    <>
+    <p className="mb-2 font-sans text-sm text-ink-muted md:hidden">Swipe sideways to see every year.</p>
+    <div tabIndex={0} role="region" aria-label="Kingdoms and turning points, 600 to 1700" className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
       <div className="relative mx-3 min-w-[720px]">
         {/* era bands */}
         <div className="absolute inset-0 top-6 flex" aria-hidden>
@@ -61,7 +63,7 @@ export function KingdomLanes() {
               className={i % 2 === 0 ? "bg-stone/35" : ""}
               style={{ width: `${pct(era.end + 1) - pct(era.start)}%` }}
             >
-              <span className="block px-2 pt-1 font-sans text-[0.6rem] uppercase tracking-[0.14em] text-ink-muted">
+              <span className="block px-2 pt-1 font-sans text-xs text-ink-muted">
                 {era.name}
               </span>
             </div>
@@ -88,5 +90,6 @@ export function KingdomLanes() {
         )}
       </div>
     </div>
+    </>
   );
 }

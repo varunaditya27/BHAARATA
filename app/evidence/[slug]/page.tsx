@@ -16,6 +16,12 @@ export function generateStaticParams() {
   return evidence.map((e) => ({ slug: e.slug }));
 }
 
+export async function generateMetadata({ params }: PageProps<"/evidence/[slug]">) {
+  const { slug } = await params;
+  const record = evidence.find((e) => e.slug === slug);
+  return { title: record ? `${record.title} — BHĀRATA` : "Evidence — BHĀRATA" };
+}
+
 export default async function EvidencePage({ params }: PageProps<"/evidence/[slug]">) {
   const { slug } = await params;
   const record = evidence.find((e) => e.slug === slug);
@@ -30,8 +36,12 @@ export default async function EvidencePage({ params }: PageProps<"/evidence/[slu
   return (
     <PageTransition>
     <div className="mx-auto max-w-[1100px] px-6 py-12">
-      <Eyebrow>Evidence · {record.evidenceType}</Eyebrow>
-      <h1 className="mt-2 font-display text-4xl text-ink">{record.title}</h1>
+      <Eyebrow>
+        <Link href="/evidence" transitionTypes={NAV_FORWARD} className="hover:text-ink">Evidence</Link>
+        <span aria-hidden> / </span>
+        {record.evidenceType.charAt(0).toUpperCase() + record.evidenceType.slice(1)}
+      </Eyebrow>
+      <h1 className="mt-2 font-display text-4xl text-ink sm:text-5xl">{record.title}</h1>
       <p className="mt-2 font-sans text-ink-muted">{formatDateRange(record.period)}</p>
 
       <div className="mt-4 grid gap-10 md:grid-cols-[2fr_1fr]">
@@ -43,33 +53,36 @@ export default async function EvidencePage({ params }: PageProps<"/evidence/[slu
           )}
         </div>
 
-        <div className="space-y-6 font-sans text-sm">
+        <dl className="space-y-5 font-sans text-sm">
           {record.material && (
-            <div><Eyebrow>Material</Eyebrow><p className="mt-1 text-ink">{record.material}</p></div>
+            <div><dt className="text-xs text-ink-muted">Made of</dt><dd className="mt-0.5 text-ink">{record.material}</dd></div>
           )}
           {record.script && (
-            <div><Eyebrow>Script</Eyebrow><p className="mt-1 text-ink">{record.script}</p></div>
+            <div><dt className="text-xs text-ink-muted">Written in the script</dt><dd className="mt-0.5 text-ink">{record.script}</dd></div>
           )}
           {record.language && (
-            <div><Eyebrow>Language</Eyebrow><p className="mt-1 text-ink">{record.language}</p></div>
+            <div><dt className="text-xs text-ink-muted">Language</dt><dd className="mt-0.5 text-ink">{record.language}</dd></div>
           )}
           {place && (
             <div>
-              <Eyebrow>Location</Eyebrow>
-              <p className="mt-1 text-ink">
+              <dt className="text-xs text-ink-muted">Where it is</dt>
+              <dd className="mt-0.5 text-ink">
                 <Link href={`/places/${place.slug}`} transitionTypes={NAV_FORWARD} className="underline underline-offset-4 hover:text-territory-selected">
                   {place.name}
                 </Link>
-              </p>
+              </dd>
             </div>
           )}
           {record.catalogueId && (
-            <div><Eyebrow>Catalogue ID</Eyebrow><p className="mt-1 text-ink">{record.catalogueId}</p></div>
+            <div>
+              <dt className="text-xs text-ink-muted">Published in</dt>
+              <dd className="mt-0.5 text-ink">{record.catalogueId.replace(/^SII /, "South Indian Inscriptions, ")}</dd>
+            </div>
           )}
           {record.condition && (
-            <div><Eyebrow>Condition</Eyebrow><p className="mt-1 text-ink">{record.condition}</p></div>
+            <div><dt className="text-xs text-ink-muted">Condition</dt><dd className="mt-0.5 text-ink">{record.condition}</dd></div>
           )}
-        </div>
+        </dl>
       </div>
 
       <Rule className="mt-12" />

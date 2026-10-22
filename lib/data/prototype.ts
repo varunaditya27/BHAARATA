@@ -178,7 +178,7 @@ const curatedPolities: Polity[] = [
     },
     capitals: ["Kodungallur"],
     summary:
-      "Kings of the Kerala coast, known in this period as the Chera Perumals, who ruled from Kodungallur. Their ports sent pepper and other spices across the Indian Ocean to the Middle East. Copper-plate charters record grants to Christian and Jewish traders, and West Asian Muslim merchants settled there too.",
+      "Kings of the Kerala coast, known in this period as the Chera Perumals, who ruled from Kodungallur. Their ports sent pepper and other spices across the Indian Ocean to the Middle East. Royal grants engraved on copper plates record gifts to Christian and Jewish traders, and West Asian Muslim merchants settled there too.",
     accentColor: "#2f6b5e",
     heroImageKey: "chera-vadakkunnathan",
     rulerIds: [],
@@ -220,7 +220,7 @@ const curatedPolities: Polity[] = [
     region: "Deccan",
     language: "Kannada, Sanskrit",
     religion: "Hinduism, Jainism",
-    notableFor: "Temples at Lakkundi and Itagi; counting years from Vikramaditya VI's accession",
+    notableFor: "Temples at Lakkundi and Itagi, and a count of years that began when Vikramaditya VI became king",
     quote: "Rulers of the western Deccan from Kalyani, who overthrew the Rashtrakutas.",
     period: {
       startYear: 973,
@@ -231,7 +231,7 @@ const curatedPolities: Polity[] = [
     },
     capitals: ["Basavakalyan"],
     summary:
-      "The Chalukyas of Kalyani, who overthrew the Rashtrakutas in 973 and ruled the western Deccan for two centuries. Under Vikramaditya VI, inscriptions counted the years from his accession in 1076.",
+      "The Chalukyas of Kalyani, who overthrew the Rashtrakutas in 973 and ruled the western Deccan for two centuries. Under Vikramaditya VI, inscriptions counted the years from 1076, when he became king.",
     accentColor: "#b06b2c",
     heroImageKey: "chalukya-itagi",
     rulerIds: ["vikramaditya-vi"],
@@ -274,7 +274,7 @@ const curatedPolities: Polity[] = [
     region: "Bengal and Bihar",
     language: "Sanskrit",
     religion: "Buddhism, Shaivism",
-    notableFor: "Patronage of the great Buddhist monasteries of eastern India — Nalanda, Vikramashila and Somapura",
+    notableFor: "Supporting the great Buddhist monasteries of eastern India: Nalanda, Vikramashila and Somapura",
     quote: "Kings of Bengal and Bihar, and great patrons of Buddhist monasteries.",
     period: { startYear: 750, endYear: 1161, startQualifier: "circa", endQualifier: "circa", confidence: "probable" },
     capitals: ["Pataliputra", "Gauda"],

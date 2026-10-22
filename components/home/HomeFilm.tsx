@@ -72,13 +72,13 @@ export function HomeFilm() {
           aria-hidden
         />
         <div className="pointer-events-none absolute right-4 top-4 text-right md:right-8 md:top-8">
-          <p className="font-sans text-[0.65rem] uppercase tracking-[0.25em] text-paper/60">
+          <p className="font-sans text-sm text-paper/70">
             {chapter ? `Chapter ${chapterIndex + 1} of ${storyChapters.length}` : "The Indian subcontinent"}
           </p>
           <Odometer value={year} suffix="CE" className="mt-1 font-display text-4xl text-paper md:text-6xl" />
         </div>
 
-        <div className="pointer-events-none absolute bottom-6 left-4 flex gap-2 md:left-8" aria-hidden>
+        <div className="pointer-events-none absolute bottom-16 left-4 flex gap-2 md:bottom-6 md:left-8" aria-hidden>
           {storyChapters.map((c, i) => (
             <span
               key={c.id}
@@ -92,7 +92,7 @@ export function HomeFilm() {
       <div ref={scrollerRef} className="relative -mt-[calc(100dvh-4rem)]">
         <div data-chapter="" className="flex h-[calc(100dvh-4rem)] items-end px-4 pb-20 md:px-8 md:pb-24">
           <div className="max-w-xl">
-            <p className="bh-fade-in font-sans text-xs uppercase tracking-[0.25em] text-paper/70" style={{ animationDelay: "200ms" }}>
+            <p className="bh-fade-in font-sans text-base text-paper/80" style={{ animationDelay: "200ms" }}>
               A historical atlas
             </p>
             <h1 className="mt-4">
@@ -116,15 +116,15 @@ export function HomeFilm() {
               data-chapter={c.id}
               className="flex min-h-[100dvh] items-end px-4 pb-14 md:items-center md:px-8 md:pb-0"
             >
-              <div className="w-full max-w-md border border-paper/15 bg-ink/88 shadow-2xl backdrop-blur-sm">
+              <div className="w-full max-w-md bg-ink shadow-xl">
                 <div className="relative aspect-[16/6] overflow-hidden md:aspect-[16/9]">
                   <Image src={image.file} alt={image.alt} fill sizes="448px" className="object-cover" />
                 </div>
                 <div className="p-5 md:p-6">
                   <div className="flex items-center gap-3">
                     {polity && <KingdomEmblem polityId={polity.id} color={polity.accentColor} className="h-8 w-8" />}
-                    <p className="font-sans text-[0.65rem] uppercase tracking-[0.22em] text-paper/60">
-                      Chapter {i + 1} · c. {c.year} CE
+                    <p className="font-sans text-sm text-paper/70">
+                      Chapter {i + 1}, c. {c.year} CE
                     </p>
                   </div>
                   <h2 className="mt-3 font-display text-2xl md:text-3xl">{c.title}</h2>
@@ -135,7 +135,7 @@ export function HomeFilm() {
                       transitionTypes={NAV_FORWARD}
                       className="text-paper underline underline-offset-4 hover:text-paper/80"
                     >
-                      See {c.year} on the atlas →
+                      Show {c.year} CE on the map
                     </Link>
                     {polity && (
                       <Link

@@ -209,7 +209,7 @@ export function EvidenceViewer({
         </div>
       </div>
 
-      <div className="absolute bottom-3 right-3 flex border border-paper/25 bg-ink/80 font-sans text-sm text-paper backdrop-blur-sm">
+      <div className="absolute bottom-3 right-3 flex border border-paper/25 bg-ink font-sans text-sm text-paper">
         <button onClick={animated(() => zoomAt(1.4))} className="h-8 w-8 hover:bg-paper/10" aria-label="Zoom in">
           +
         </button>

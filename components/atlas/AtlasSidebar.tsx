@@ -42,10 +42,11 @@ export function AtlasSidebar({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Find a kingdom…"
-          className="w-full border border-paper/20 bg-ink px-3 py-2 font-sans text-sm text-paper placeholder:text-paper/40 focus:border-paper/50 focus:outline-none"
+          aria-label="Find a kingdom"
+          className="w-full border border-paper/20 bg-ink px-3 py-2 font-sans text-sm text-paper placeholder:text-paper/40 focus:border-paper/60 focus:outline-2 focus:outline-paper/60"
         />
       </div>
-      <div className="flex items-center justify-between px-4 font-sans text-[0.65rem] uppercase tracking-wide text-paper/50">
+      <div className="flex items-center justify-between px-4 font-sans text-xs text-paper/50">
         <span>Kingdoms</span>
         <span>{allPolities.length}</span>
       </div>

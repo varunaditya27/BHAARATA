@@ -19,7 +19,7 @@ const RECENT_KEY = "bh-recent";
 const RECENT_MAX = 5;
 
 const GROUP_CLASS =
-  "[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:font-sans [&_[cmdk-group-heading]]:text-[0.65rem] [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wide [&_[cmdk-group-heading]]:text-ink-muted";
+  "[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:font-sans [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-ink-muted";
 const ITEM_CLASS =
   "flex cursor-pointer items-center gap-3 px-3 py-2 font-sans text-sm text-ink data-[selected=true]:bg-stone/60";
 
@@ -128,7 +128,7 @@ export function CommandPalette() {
         open={open}
         onOpenChange={setOpen}
         label="Search BHĀRATA"
-        overlayClassName="fixed inset-0 z-50 bg-ink/50 backdrop-blur-sm"
+        overlayClassName="fixed inset-0 z-50 bg-ink/50"
         contentClassName="fixed left-1/2 top-[12vh] z-50 w-[calc(100%-2rem)] max-w-xl -translate-x-1/2 border border-border bg-paper-raised shadow-xl sm:top-[18vh]"
       >
         <CommandInput

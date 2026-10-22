@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Badge } from "@/components/primitives/Badge";
-import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
 import { KingdomLanes } from "@/components/chronology/KingdomLanes";
@@ -26,15 +25,14 @@ export default function ChronologyPage() {
   return (
     <PageTransition>
       <div className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6">
-        <Eyebrow>Events in order</Eyebrow>
-        <h1 className="mt-2 font-display text-5xl text-ink">Chronology</h1>
-        <p className="mt-4 max-w-prose font-sans text-ink-muted">
-          Each coloured line shows how long a kingdom lasted, and each diamond marks a turning point. Click a diamond
+        <h1 className="font-display text-5xl text-ink">Chronology</h1>
+        <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
+          Every turning point and battle in the atlas, in order. Each coloured line shows how long a kingdom lasted, and each diamond marks a turning point. Click a diamond
           to jump to it below. Under each period you&rsquo;ll also find its battles. &ldquo;c.&rdquo; in front of a date
           means &ldquo;about&rdquo;.
         </p>
         <div className="mt-3">
-          <Badge tone="neutral">Battles: Wikidata and Wikipedia · turning points: written here, checked against Wikipedia</Badge>
+          <Badge tone="neutral">Battles from Wikidata and Wikipedia. Turning points written here and checked against Wikipedia.</Badge>
         </div>
 
         <div className="mt-10">
@@ -49,9 +47,9 @@ export default function ChronologyPage() {
               <p className="bh-outline-numeral pointer-events-none select-none font-display text-[5.5rem] leading-none sm:text-[8rem]" aria-hidden>
                 {era.start}
               </p>
-              <div className="sticky top-16 z-10 mb-8 border-b border-border bg-paper/95 py-2 backdrop-blur-sm">
-                <h2 className="font-sans text-xs uppercase tracking-[0.16em] text-ink">
-                  {era.name} <span className="text-ink-muted">· {era.start}–{era.end}</span>
+              <div className="sticky top-16 z-10 mb-8 border-b border-border bg-paper py-2">
+                <h2 className="font-display text-2xl text-ink">
+                  {era.name} <span className="font-sans text-base text-ink-muted">{era.start} to {era.end}</span>
                 </h2>
               </div>
 
@@ -88,7 +86,7 @@ export default function ChronologyPage() {
                           transitionTypes={NAV_BACK}
                           className="text-ink-muted underline underline-offset-4 hover:text-ink"
                         >
-                          See {event.period.startYear} on the atlas
+                          Show {event.period.startYear} CE on the map
                         </Link>
                       </div>
                     </li>
@@ -98,7 +96,7 @@ export default function ChronologyPage() {
 
               {fights.length > 0 && (
                 <div className="mt-14">
-                  <h3 className="font-sans text-xs uppercase tracking-[0.16em] text-ink-muted">
+                  <h3 className="font-sans text-sm font-medium text-ink-muted">
                     Battles of this period ({fights.length})
                   </h3>
                   <ul className="mt-3 divide-y divide-border border-y border-border">

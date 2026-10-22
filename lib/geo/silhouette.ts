@@ -1,4 +1,4 @@
-import { boundaries } from "@/lib/data/prototype";
+import { boundaries, getBoundariesForPolity } from "@/lib/data/prototype";
 
 type Geometry = GeoJSON.Polygon | GeoJSON.MultiPolygon;
 
@@ -10,7 +10,10 @@ type Geometry = GeoJSON.Polygon | GeoJSON.MultiPolygon;
  */
 export function silhouettePath(geometry: Geometry, size = 100, padding = 4): string {
   const polys = geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
-  const outerRings = polys.map((p) => p[0]);
+  const rings = polys.map((p) => p[0]);
+  // Specks (small islands) would stretch the box and shrink the main shape to a sliver.
+  const largest = Math.max(...rings.map(ringArea));
+  const outerRings = rings.filter((ring) => ringArea(ring) >= largest * 0.05);
   const all = outerRings.flat();
   const meanLat = all.reduce((s, [, lat]) => s + lat, 0) / all.length;
   const k = Math.cos((meanLat * Math.PI) / 180);
@@ -33,9 +36,40 @@ export function silhouettePath(geometry: Geometry, size = 100, padding = 4): str
     .join("");
 }
 
-/** A kingdom's emblem shape: its earliest recorded boundary. */
+/** Shoelace area of a ring, longitude scaled by cos(latitude). */
+function ringArea(ring: GeoJSON.Position[]): number {
+  let twice = 0;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = [ring[i][0] * Math.cos((ring[i][1] * Math.PI) / 180), ring[i][1]];
+    const [xj, yj] = [ring[j][0] * Math.cos((ring[j][1] * Math.PI) / 180), ring[j][1]];
+    twice += xj * yi - xi * yj;
+  }
+  return Math.abs(twice) / 2;
+}
+
+/** Area of the outer rings, the parts silhouettePath draws. */
+function outlineArea(geometry: Geometry): number {
+  const polys = geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
+  return polys.reduce((sum, [ring]) => sum + ringArea(ring), 0);
+}
+
+function largestBoundary(polityId: string): { geometry: Geometry; area: number } | undefined {
+  let best: { geometry: Geometry; area: number } | undefined;
+  for (const { geometry } of getBoundariesForPolity(polityId)) {
+    const area = outlineArea(geometry);
+    if (!best || area > best.area) best = { geometry, area };
+  }
+  return best;
+}
+
+/** A kingdom's emblem shape: its largest recorded boundary, the extent it is best known by. */
 export function polityGeometry(polityId: string): Geometry | undefined {
-  return boundaries.find((b) => b.polityId === polityId)?.geometry;
+  return largestBoundary(polityId)?.geometry;
+}
+
+/** The most land a kingdom held at one time, in the same relative units as outlineArea. For comparing kingdoms, not a real km² figure. */
+export function polityPeakArea(polityId: string): number {
+  return largestBoundary(polityId)?.area ?? 0;
 }
 
 function pointInRing([x, y]: [number, number], ring: GeoJSON.Position[]): boolean {
@@ -63,12 +97,13 @@ export function boundariesContaining(point: [number, number]) {
 }
 
 /**
- * Several geometries + one point projected into a shared box (same
- * projection as silhouettePath) — for a place's "held by" mini map.
+ * Several geometries + points projected into a shared box (same
+ * projection as silhouettePath) — for a place's "held by" mini map and
+ * the places index map.
  */
-export function projectTogether(geometries: Geometry[], point: [number, number], size = 100, padding = 6) {
+export function projectTogether(geometries: Geometry[], points: [number, number][], size = 100, padding = 6) {
   const rings = geometries.flatMap((g) => (g.type === "Polygon" ? [g.coordinates[0]] : g.coordinates.map((p) => p[0])));
-  const all = [...rings.flat(), point];
+  const all = [...rings.flat(), ...points];
   const meanLat = all.reduce((s, p) => s + p[1], 0) / all.length;
   const k = Math.cos((meanLat * Math.PI) / 180);
   const xs = all.map((p) => p[0] * k);
@@ -83,5 +118,5 @@ export function projectTogether(geometries: Geometry[], point: [number, number],
     (g.type === "Polygon" ? [g.coordinates[0]] : g.coordinates.map((p) => p[0]))
       .map((ring) => "M" + ring.map(([lng, lat]) => `${tx(lng).toFixed(1)},${ty(lat).toFixed(1)}`).join("L") + "Z")
       .join("");
-  return { paths: geometries.map(pathOf), point: [tx(point[0]), ty(point[1])] as const };
+  return { paths: geometries.map(pathOf), points: points.map(([lng, lat]) => [tx(lng), ty(lat)] as const) };
 }

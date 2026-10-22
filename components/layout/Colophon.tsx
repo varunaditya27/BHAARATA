@@ -8,7 +8,7 @@ const LINKS = [
   { href: "/people", label: "People" },
   { href: "/places", label: "Places" },
   { href: "/evidence", label: "Evidence" },
-  { href: "/method", label: "Method" },
+  { href: "/method", label: "How it works" },
 ];
 
 /**
@@ -29,7 +29,7 @@ export function Colophon() {
             </p>
           </div>
           <nav aria-label="Footer" className="font-sans text-sm">
-            <p className="text-xs uppercase tracking-[0.16em] text-ink-muted">Pages</p>
+            <p className="text-sm font-medium text-ink-muted">Pages</p>
             <ul className="mt-3 grid grid-cols-2 gap-y-2">
               {LINKS.map((l) => (
                 <li key={l.href}>
@@ -41,7 +41,7 @@ export function Colophon() {
             </ul>
           </nav>
           <div className="font-sans text-sm text-ink-muted">
-            <p className="text-xs uppercase tracking-[0.16em]">Made with</p>
+            <p className="text-sm font-medium">Made with</p>
             <p className="mt-3 leading-relaxed">
               Fonts: Zodiak and Ranade, with Anek and Tiro for Indian scripts. Photographs from Wikimedia Commons; map
               data from OpenStreetMap contributors and CARTO.

@@ -307,7 +307,7 @@ export function addHistoricalLayers(
     minzoom: 4.5,
     filter: ["==", ["get", "year"], -1],
     layout: {
-      "text-field": ["concat", ["get", "name"], " · ", ["to-string", ["get", "year"]]],
+      "text-field": ["concat", ["get", "name"], ", ", ["to-string", ["get", "year"]]],
       "text-size": 11,
       "text-anchor": "top",
       "text-offset": [0, 0.9],

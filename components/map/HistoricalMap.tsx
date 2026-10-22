@@ -11,7 +11,7 @@ import {
   ScaleControl,
   setWorkerUrl,
 } from "maplibre-gl";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { prefersReducedMotion, startMapAnimations } from "./animations";
 import { applyHistoricalState, boundaryForPolity, polityAtPoint, territoryAtPoint } from "./apply-state";
 import { captureMapCanvas } from "./export-image";
@@ -152,6 +152,7 @@ export function HistoricalMap({
   const onSelectRef = useRef(onSelectPolity);
   const onViewportChangeRef = useRef(onViewportChange);
   const onReadyRef = useRef(onReady);
+  const [loadProblem, setLoadProblem] = useState(false);
 
   useEffect(() => {
     onSelectRef.current = onSelectPolity;
@@ -182,8 +183,20 @@ export function HistoricalMap({
     });
     mapRef.current = map;
     if (captureRef) captureRef.current = () => captureMapCanvas(map);
-    map.addControl(new NavigationControl({ showCompass: true, visualizePitch: false }), "top-right");
+    // The right side belongs to the kingdom preview card. Bottom corners stack
+    // upwards in the order added, so zoom sits above the scale.
     map.addControl(new ScaleControl({ maxWidth: 120, unit: "metric" }), "bottom-left");
+    map.addControl(new NavigationControl({ showCompass: true, visualizePitch: false }), "bottom-left");
+
+    // A failed basemap or history tile, or anything failing before the map is
+    // ready (it may then never load). Terrain is decoration, so its tiles are
+    // ignored; other errors, such as a bad icon, are left to the console.
+    map.on("error", (e) => {
+      // MapLibre attaches these to tile errors but does not declare them in its types.
+      const { tile, sourceId } = e as typeof e & { tile?: unknown; sourceId?: string };
+      if (sourceId === SOURCE_IDS.dem || sourceId === SOURCE_IDS.demTerrain) return;
+      if (!readyRef.current || tile) setLoadProblem(true);
+    });
 
     map.on("move", () => {
       const c = map.getCenter();
@@ -211,13 +224,13 @@ export function HistoricalMap({
           const box = document.createElement("div");
           if (hit.layer.id === LAYER_IDS.battleRings) {
             const ev = events.find((x) => x.id === props.eventId);
-            popupLine(box, "p", `Battle · ${props.year}`, "bh-popup-eyebrow");
+            popupLine(box, "p", `Battle, ${props.year} CE`, "bh-popup-eyebrow");
             popupLine(box, "p", String(props.name), "bh-popup-title");
             if (ev) popupLine(box, "p", ev.summary.length > 260 ? ev.summary.slice(0, 257).replace(/\s+\S*$/, "") + "…" : ev.summary, "bh-popup-text");
-            popupLine(box, "a", "More in the chronology →", "bh-popup-link", `/chronology#${props.slug}`);
+            popupLine(box, "a", "More in the chronology", "bh-popup-link", `/chronology#${props.slug}`);
           } else if (hit.layer.id === LAYER_IDS.sitePoints) {
             const kind = String(props.t);
-            popupLine(box, "p", `${kind.charAt(0).toUpperCase()}${kind.slice(1)} · built c. ${props.y}`, "bh-popup-eyebrow");
+            popupLine(box, "p", `${kind.charAt(0).toUpperCase()}${kind.slice(1)}, built c. ${props.y} CE`, "bh-popup-eyebrow");
             popupLine(box, "p", String(props.n), "bh-popup-title");
             if (props.i) {
               // A thumbnail linked from Wikimedia Commons, with its credit; nothing is copied into the site.
@@ -233,13 +246,13 @@ export function HistoricalMap({
             }
             if (props.d) popupLine(box, "p", String(props.d), "bh-popup-text");
             popupLine(box, "p", "Date of construction from Wikidata; many such dates are approximate.", "bh-popup-note");
-            if (props.w) popupLine(box, "a", "Read on Wikipedia →", "bh-popup-link", `https://en.wikipedia.org/wiki/${encodeURIComponent(String(props.w))}`);
+            if (props.w) popupLine(box, "a", "Read on Wikipedia", "bh-popup-link", `https://en.wikipedia.org/wiki/${encodeURIComponent(String(props.w))}`);
           } else {
             popupLine(box, "p", "Protected monument today", "bh-popup-eyebrow");
             popupLine(box, "p", String(props.n), "bh-popup-title");
             popupLine(box, "p", "Looked after by the Archaeological Survey of India. Not tied to a year on this map.", "bh-popup-text");
-            if (props.w) popupLine(box, "a", "Read on Wikipedia →", "bh-popup-link", `https://en.wikipedia.org/wiki/${encodeURIComponent(String(props.w))}`);
-            else popupLine(box, "a", "See it on Wikidata →", "bh-popup-link", `https://www.wikidata.org/wiki/${props.q}`);
+            if (props.w) popupLine(box, "a", "Read on Wikipedia", "bh-popup-link", `https://en.wikipedia.org/wiki/${encodeURIComponent(String(props.w))}`);
+            else popupLine(box, "a", "See it on Wikidata", "bh-popup-link", `https://www.wikidata.org/wiki/${props.q}`);
           }
           new Popup({ offset: 12, maxWidth: "280px", closeButton: true }).setLngLat(coords).setDOMContent(box).addTo(map);
           return;
@@ -408,6 +421,19 @@ export function HistoricalMap({
         <p className="font-display text-sm leading-tight text-ink" />
         <p className="font-sans text-[0.7rem] text-ink-muted" />
       </div>
+      {loadProblem && (
+        <div role="status" className="absolute inset-x-3 top-3 z-30 mx-auto flex max-w-lg flex-wrap items-center gap-x-4 gap-y-2 bg-ink px-4 py-3 font-sans text-sm text-paper shadow-xl">
+          <p className="min-w-0 flex-1">
+            Part of the map did not load. The connection may have dropped, or the map server may be busy.
+          </p>
+          <button onClick={() => window.location.reload()} className="min-h-9 bg-paper px-3 font-medium text-ink hover:bg-paper/90">
+            Reload the page
+          </button>
+          <button onClick={() => setLoadProblem(false)} className="min-h-9 text-paper/70 underline underline-offset-4 hover:text-paper">
+            Hide
+          </button>
+        </div>
+      )}
     </div>
   );
 }

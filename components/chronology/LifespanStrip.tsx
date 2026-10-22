@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { formatDateRange, yearInRange } from "@/lib/domain/time";
+import { formatDateRange } from "@/lib/domain/time";
 import type { Polity } from "@/lib/domain/types";
 import { cn } from "@/lib/utils/cn";
 import { lightenHex } from "@/lib/utils/color";
@@ -15,12 +15,15 @@ const THUMB_INSET = 6.5;
 /**
  * One band per kingdom across the timeline's full span — which kingdoms
  * existed when, and how they overlapped, readable at a glance without
- * scrubbing. Bands for kingdoms present in the current year are lit;
- * clicking a band jumps to that kingdom's first year and selects it.
+ * scrubbing. Bands for kingdoms present in the current year (from
+ * getHistoricalState, via activePolityIds) are lit; clicking a band jumps
+ * to that kingdom's first year and selects it. A fixed caption above names
+ * the band you point at, so no tooltip covers its neighbours.
  */
 export function LifespanStrip({
   polities,
   year,
+  activePolityIds,
   min,
   max,
   selectedPolityId,
@@ -28,6 +31,7 @@ export function LifespanStrip({
 }: {
   polities: Polity[];
   year: number;
+  activePolityIds: Set<string>;
   min: number;
   max: number;
   selectedPolityId: string | null;
@@ -49,16 +53,24 @@ export function LifespanStrip({
     rowOf.set(p.id, row);
   }
   const rows = rowEnds.length;
-  const hoveredPolity = sorted.find((p) => p.id === hovered);
-  const hoveredRow = hoveredPolity ? rowOf.get(hoveredPolity.id) ?? 0 : 0;
+  const named = sorted.find((p) => p.id === (hovered ?? selectedPolityId));
 
   return (
     <div className="relative mb-2" style={{ paddingInline: THUMB_INSET }}>
+      <p className="mb-1.5 h-5 truncate font-sans text-xs text-paper/70">
+        {named ? (
+          <>
+            <span className="text-paper">{named.name}</span>, {formatDateRange(named.period)}
+          </>
+        ) : (
+          `${activePolityIds.size} kingdoms held land in ${year} CE. Point at a line to see its name.`
+        )}
+      </p>
       <div className="relative" style={{ height: rows * (BAND + GAP) - GAP }}>
         {sorted.map((p) => {
           const left = pct(p.period.startYear);
           const right = pct(p.period.endYear ?? max);
-          const active = yearInRange(year, p.period);
+          const active = activePolityIds.has(p.id);
           const selected = selectedPolityId === p.id;
           return (
             <button
@@ -70,7 +82,7 @@ export function LifespanStrip({
               onBlur={() => setHovered(null)}
               aria-label={`${p.name}, ${formatDateRange(p.period)}. Jump to its first year.`}
               className={cn(
-                "absolute rounded-[1px] transition-[opacity,box-shadow] duration-200 focus-visible:outline-none",
+                "absolute rounded-[1px] transition-opacity duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper",
                 selected && "ring-1 ring-paper ring-offset-1 ring-offset-ink",
               )}
               style={{
@@ -91,17 +103,6 @@ export function LifespanStrip({
           aria-hidden
         />
 
-        {hoveredPolity && (
-          <div
-            className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full whitespace-nowrap border border-paper/20 bg-ink px-2 py-1 font-sans text-[0.7rem] text-paper shadow-lg"
-            style={{
-              left: `${(pct(hoveredPolity.period.startYear) + pct(hoveredPolity.period.endYear ?? max)) / 2}%`,
-              top: hoveredRow * (BAND + GAP) - 4,
-            }}
-          >
-            {hoveredPolity.name} · {formatDateRange(hoveredPolity.period)}
-          </div>
-        )}
       </div>
     </div>
   );

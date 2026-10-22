@@ -27,16 +27,16 @@ export function EventCaption({ event, raised = false }: { event: HistoricalEvent
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           className={`pointer-events-none absolute left-3 right-3 z-40 md:left-6 md:right-auto md:max-w-md ${raised ? "bottom-[15vh]" : "bottom-14 md:bottom-10"}`}
         >
-          <div className="pointer-events-auto flex gap-4 border border-paper/15 bg-ink/90 p-4 text-paper shadow-2xl backdrop-blur-sm">
+          <div className="pointer-events-auto flex gap-4 bg-ink p-4 text-paper shadow-xl">
             <span
               className="w-1 shrink-0 self-stretch"
               style={{ backgroundColor: lightenHex(polity?.accentColor ?? "#b85c38", 0.2) }}
               aria-hidden
             />
             <div className="min-w-0">
-              <p className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-paper/60">
+              <p className="font-sans text-xs text-paper/70">
                 {formatDateRange(event.period)}
-                {polity && <> · {polity.name}</>}
+                {polity && <>, {polity.name}</>}
               </p>
               <p className="mt-1 font-display text-xl leading-snug">{event.title}</p>
               <p className="mt-1.5 line-clamp-2 font-sans text-sm leading-relaxed text-paper/75">{event.summary}</p>
@@ -45,7 +45,7 @@ export function EventCaption({ event, raised = false }: { event: HistoricalEvent
                 transitionTypes={NAV_FORWARD}
                 className="mt-2 inline-block font-sans text-xs text-paper/80 underline underline-offset-4 hover:text-paper"
               >
-                Read in the chronology →
+                Read more in the chronology
               </Link>
             </div>
           </div>

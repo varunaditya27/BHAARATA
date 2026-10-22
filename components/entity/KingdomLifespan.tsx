@@ -57,7 +57,7 @@ export function KingdomLifespan({ polity }: { polity: Polity }) {
           />
         </div>
         <p className="relative mt-1 font-sans text-xs text-ink" style={{ marginLeft: `${pct(polity.period.startYear)}%` }}>
-          {polity.name} · {formatDateRange(polity.period)}
+          {polity.name}, {formatDateRange(polity.period)}
         </p>
 
         <ul className="relative mt-4 space-y-2.5">
@@ -83,7 +83,7 @@ export function KingdomLifespan({ polity }: { polity: Polity }) {
                 className="relative mt-0.5 inline-block font-sans text-[0.7rem] text-ink-muted hover:text-ink"
                 style={{ marginLeft: `${Math.min(pct(from), 78)}%` }}
               >
-                {p.name} <span className="text-ink-muted/70">· both existed {from}–{to}</span>
+                {p.name} <span className="text-ink-muted/70">both existed {from}–{to}</span>
               </Link>
             </li>
           ))}

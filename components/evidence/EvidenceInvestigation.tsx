@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { EvidenceViewer } from "@/components/evidence/EvidenceViewer";
 import { RakingLight } from "@/components/evidence/RakingLight";
 import { cn } from "@/lib/utils/cn";
@@ -105,7 +104,7 @@ export function EvidenceInvestigation({
           {record.transcription.length > 0 && (
             <div>
               <div className="flex items-baseline justify-between gap-3">
-                <Eyebrow>Transcription</Eyebrow>
+                <h2 className="font-sans text-sm font-medium text-ink-muted">Transcription</h2>
                 {hasRoman && (
                   <div role="group" aria-label="Show the transcription in" className="flex border border-border font-sans text-[0.7rem]">
                     {(
@@ -147,7 +146,7 @@ export function EvidenceInvestigation({
           )}
           {record.translation.length > 0 && (
             <div>
-              <Eyebrow>Translation</Eyebrow>
+              <h2 className="font-sans text-sm font-medium text-ink-muted">Translation</h2>
               <ol className="mt-3 space-y-1">
                 {record.translation.map((line, i) => (
                   <li key={i}>

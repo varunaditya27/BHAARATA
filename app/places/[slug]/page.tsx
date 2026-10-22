@@ -10,6 +10,7 @@ import { RisingTitle } from "@/components/entity/RisingTitle";
 import { images, type ImageKey } from "@/lib/data/images";
 import { events, getPolityBySlug, places, polities } from "@/lib/data/prototype";
 import { placeStatus } from "@/lib/data/status";
+import { placeKindLabel } from "@/lib/domain/labels";
 import { formatDateRange } from "@/lib/domain/time";
 import { boundariesContaining, projectTogether } from "@/lib/geo/silhouette";
 import { darkenHex } from "@/lib/utils/color";
@@ -53,13 +54,14 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
     else existing.ranges.push([b.validFrom, b.validTo]);
     existing.boundary = b;
   }
-  const miniMap = heldBy.length > 0 ? projectTogether(heldBy.map((h) => h.boundary.geometry), place.coordinates) : null;
+  const projected = heldBy.length > 0 ? projectTogether(heldBy.map((h) => h.boundary.geometry), [place.coordinates]) : null;
+  const miniMap = projected && { paths: projected.paths, point: projected.points[0] };
   const firstYear = heldBy[0]?.ranges[0][0] ?? 985;
 
   const header = (dark: boolean) => (
     <>
-      <Eyebrow className={`capitalize ${dark ? "text-paper/70" : ""}`}>
-        {place.placeType} · {place.region}
+      <Eyebrow className={dark ? "text-paper/80" : undefined}>
+        {placeKindLabel(place.placeType)} in {place.region}
       </Eyebrow>
       <RisingTitle text={place.name} className={`mt-2 text-5xl sm:text-6xl ${dark ? "text-paper" : "text-ink"}`} />
       {place.nativeName && (
@@ -92,7 +94,7 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
 
           <div className="mt-10 grid gap-12 md:grid-cols-[1fr_1.2fr]">
             <section>
-              <Eyebrow>Held by</Eyebrow>
+              <h2 className="font-sans text-sm font-medium text-ink-muted">Held by</h2>
               {miniMap ? (
                 <>
                   <svg viewBox="0 0 100 100" className="mt-4 w-full max-w-sm" role="img" aria-label={`Kingdoms whose territory included ${place.name}`}>
@@ -134,8 +136,8 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
                         {h.polity.name}
                       </Link>
                       <p className="font-sans text-sm text-ink-muted">
-                        {h.ranges.map(([a, z]) => `c. ${a}–${z}`).join(", ")} CE
-                        {capitalOf.some((c) => c.id === h.polity.id) && " · its capital"}
+                        {h.ranges.map(([a, z]) => `c. ${a}–${z}`).join(" and ")} CE
+                        {capitalOf.some((c) => c.id === h.polity.id) && ", as its capital"}
                       </p>
                     </div>
                   </li>
@@ -144,7 +146,7 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
 
               {relatedEvents.length > 0 && (
                 <div className="mt-10">
-                  <Eyebrow>Events here</Eyebrow>
+                  <h2 className="font-sans text-sm font-medium text-ink-muted">Events here</h2>
                   <ul className="mt-3 space-y-3">
                     {relatedEvents.map((e) => (
                       <li key={e.id} className="font-sans text-sm">
@@ -163,7 +165,7 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
                 transitionTypes={NAV_BACK}
                 className="mt-10 inline-block border border-ink px-4 py-2 font-sans text-sm text-ink transition-colors hover:bg-ink hover:text-paper"
               >
-                See it on the atlas
+                Show it on the map in {firstYear} CE
               </Link>
             </section>
           </div>

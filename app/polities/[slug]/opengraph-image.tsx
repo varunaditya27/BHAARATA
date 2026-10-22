@@ -52,8 +52,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           }}
         />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "56px 0 56px 64px", width: 600, height: 630 }}>
-          <div style={{ display: "flex", fontFamily: "Ranade", fontSize: 20, letterSpacing: 6, color: "rgba(243,237,224,0.7)" }}>
-            BHĀRATA · HISTORICAL ATLAS
+          <div style={{ display: "flex", fontFamily: "Ranade", fontSize: 20, color: "rgba(243,237,224,0.7)" }}>
+            BHĀRATA, a historical atlas
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             {polity && geometry && (
@@ -61,8 +61,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
                 <path d={silhouettePath(geometry, 100, 4)} fill={polity.accentColor} stroke={darkenHex(polity.accentColor, 0.4)} strokeWidth="1.5" />
               </svg>
             )}
-            <div style={{ display: "flex", fontFamily: "Ranade", fontSize: 20, letterSpacing: 4, color: "rgba(243,237,224,0.65)", textTransform: "uppercase" }}>
-              {polity ? `${polity.polityType} · ${polity.region}` : "Kingdom"}
+            <div style={{ display: "flex", fontFamily: "Ranade", fontSize: 22, color: "rgba(243,237,224,0.75)" }}>
+              {polity ? `${polity.polityType} in ${polity.region}` : "Kingdom"}
             </div>
             <div style={{ display: "flex", fontFamily: "Zodiak", fontSize: nameSize, lineHeight: 1.05, marginTop: 10 }}>
               {name}

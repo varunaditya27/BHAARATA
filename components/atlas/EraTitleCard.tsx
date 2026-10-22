@@ -27,10 +27,10 @@ export function EraTitleCard({ era, year }: { era: string | null; year: number }
             transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
             className="text-center"
           >
-            <p className="font-sans text-sm uppercase tracking-[0.3em] text-paper/70">
+            <p className="font-sans text-base text-paper/70">
               {year < 0 ? `${Math.abs(year)} BCE` : `${year} CE`}
             </p>
-            <h2 className="mt-2 font-display text-5xl uppercase tracking-wide text-paper md:text-6xl">
+            <h2 className="mt-2 font-display text-5xl text-paper md:text-7xl">
               {era}
             </h2>
           </motion.div>
