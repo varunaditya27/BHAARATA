@@ -88,7 +88,7 @@ quadrantChart
 
 | ID | Item | Why it matters | Size |
 |---|---|---|---|
-| **T5** | **Loading and error states.** Themed `loading.tsx` skeletons; a clear message when map tiles fail; error boundaries around the map and the evidence viewer | A failed tile server currently means a blank map | M |
+| **T5** | **Loading states.** Error pages (`app/error.tsx`, `app/global-error.tsx`) and a notice when map tiles fail are built. `loading.tsx` skeletons were left out: every page is pre-rendered and prefetched, so they would almost never show | Only worth doing if pages start fetching data at request time | S |
 | **T6** | **Accessibility audit.** Test with VoiceOver and NVDA; check colour contrast on every pigment; give the map a proper text alternative (a readable list of "what is on the map in this year") | The site is designed to be accessible but has never been checked with real assistive technology | M |
 | **T7** | **Performance budget.** Bundle analysis, Lighthouse on a mid-range phone, and a target for the atlas and the homepage | MapLibre is large; this is where regressions will creep in | M |
 
@@ -118,7 +118,6 @@ quadrantChart
 | **F1** | **IIIF viewer.** Deep zoom for real archive images, with region annotations linking a stretch of an inscription to a transcribed line and a claim | The signature feature the evidence page is built towards. Needs real images first (D2) | XL |
 | **F2** | **A search page** with filters (kingdom, century, type) and queries like "11th century" or "Tamil Nadu" | The palette finds names and years but cannot filter | M |
 | **F3** | **Guided tours.** Curated paths such as "The Chola world in 1014" that set the year, the camera and the layers, with a sentence at each stop | The best way in for a first-time visitor | L |
-| **F4** | **Camera and layers in the URL**, so a link reproduces exactly what you were looking at | Today only the year and kingdom are saved | S |
 | **F17** | **A sources index** (`/sources`): every source the site cites, what it supports, and its licence | Makes provenance browsable, not just per-page | M |
 
 ### Tests and tooling
@@ -158,7 +157,6 @@ Small, real problems, kept honest.
 | ID | Issue | Where |
 |---|---|---|
 | **K1** | In crowded periods (the 1500s Deccan), kingdom names overlap on the map | Atlas, ~1500–1600 |
-| **K2** | The timeline strip is dense with 55 kingdoms, and the hover tooltip can sit over neighbouring bars | Atlas bottom panel |
 | **K3** | Compare view is hidden below tablet width | Atlas on phones |
 | **K4** | Some imported summaries start mid-thought or are replaced by a dataset line ("Appears in the Cliopatria … dataset from 561 to 874") | Turk Shahis, Anuradhapura |
 | **K5** | The evidence index lists only two records, one of them a labelled placeholder | `/evidence` |
@@ -187,6 +185,7 @@ For context on what already exists, newest first.
 
 | What | Notes |
 |---|---|
+| **Interface redesign** | Plain-language labels everywhere (no spaced capitals, middle dots or arrows); People grouped by kingdom with search; ruler pages lead with the kingdom outline and reign; Kingdoms as a dark board sized by territory with a year dial; Places with a drawn map; tidier atlas controls; dark menu on dark pages; map view and layers saved in the link; error pages and a map-failure notice; skip link |
 | **Rulers for every kingdom**, ~670, from Wikidata and Wikipedia's lists, with dated reigns | Replaced lifetime-only records; see the rulers section of DATA.md |
 | **A data audit** (`validate-data.py`, `apply-corrections.py`) | Corrected wrong rulers, dates, titles, battle texts, coordinates, names and credits; every hand-written statement checked against Wikipedia |
 | **A dated layer of 344 temples, mosques, churches, forts and tombs** on the map | Subcontinent and Afghanistan only |

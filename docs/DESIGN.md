@@ -56,7 +56,7 @@ Four families, each with one job. All are wired through `lib/fonts.ts`; no compo
 
 Rules of thumb:
 
-- **Tracking carries hierarchy.** Small caps-style labels ("eyebrows") use wide letter-spacing (`0.14em` to `0.25em`); large headings use none.
+- **Labels are plain text.** Small labels above headings (`Eyebrow`) and source labels (`Badge`) are sentence case with normal spacing, not spaced-out capitals. Use a label only when it says something the heading does not. Write details as a phrase or a sentence, not joined with middle dots, and do not add "→" to buttons. Spaced capitals were dropped because, across the web, they now read as template decoration.
 - **Numbers are tabular** wherever they align in a column (dates, years).
 - **Line length** for reading text is capped around 65 characters (`max-w-prose`).
 - **The same fonts draw the map's labels.** Glyphs were generated from Zodiak and Ranade (`public/map-glyphs/`), so a name on the map matches a name on the page.
@@ -87,7 +87,7 @@ A narrow palette of paper, ink and a few meaningful pigments. Tokens are CSS var
 
 **Colour never carries meaning alone.** Selection is also shown by a thicker outline and a card; uncertainty is also shown by a hatched or dashed edge and words.
 
-**Dark and light.** The atlas is deliberately dark (a lit map table); text pages are light (paper). They are two moods of one palette, not a theme switch.
+**Dark and light.** The atlas and the Kingdoms board are deliberately dark (a lit map table, a wall of photographs); reading pages are light (paper). They are two moods of one palette, not a theme switch. A page opts into the dark menu and footer by carrying `data-dark-page`; `globals.css` then swaps the colour variables inside the header and footer, so no component needs a dark variant.
 
 ---
 
@@ -134,6 +134,9 @@ Notable patterns:
 | `Odometer` | A year as rolling digits, so a change reads as a counter turning |
 | `ProvenanceChain` | The vertical "How we know" thread with real / partly real / placeholder marks |
 | `PageTransition`, `Shared` | Wrap a page and a shared element so it morphs between a list and its page |
+| `KingdomBoard` | The Kingdoms page: photo tiles sized by each kingdom's largest recorded territory, a year dial that dims kingdoms with no land that year, and a find box |
+| `PeopleDirectory` | The People page: rulers grouped by kingdom with an accent-insensitive find box. Rows are rendered on the server and only filtered in the browser |
+| `PlacesAtlas` | The Places page: a drawn map of every place beside the list, grouped by a rough area worked out from coordinates (`lib/geo/areas.ts`) |
 
 ---
 
