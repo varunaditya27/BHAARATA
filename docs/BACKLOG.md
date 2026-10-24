@@ -135,7 +135,7 @@ quadrantChart
 
 | ID | Item | Size |
 |---|---|---|
-| **D11** | Portraits for more of the ~670 rulers (20 show one), using coins as a fallback. First restore the 14 already downloaded (K10) | M |
+| **D11** | Portraits for more of the ~670 rulers (31 show one), using coins as a fallback | M |
 | **D14** | Extend the range beyond 600–1700 (Cliopatria covers far more); needs new era names and a lighter map at wider ranges | L |
 | **D15** | Replace the hand-drawn trade and war routes with routes from a scholarly source | L |
 | **F5** | Sidebar filters: by region, religion or ruler; group kingdoms by era | M |
@@ -164,7 +164,8 @@ Small, real problems, kept honest.
 | **K7** | The first paint of the homepage film waits for map tiles; on a slow connection it shows only stars and the title for a few seconds | `/` |
 | **K8** | Region names on imported kingdoms come from a rough position rule with a few manual overrides; some read slightly off | Kingdom pages |
 | **K9** | The share-image generator reads fonts converted from the web fonts; a rare glyph may be missing | Link previews |
-| **K10** | Fourteen ruler portraits are downloaded and credited but not shown. Twelve belonged to a Wikidata record that a Wikipedia list's dated reign later replaced, and the replacement carries no image. One more is a hand-written record with no image set, and one belongs to a record that no longer exists (`ruler-bukka`) | People pages: Razia Sultana, Sher Shah Suri, Mahmud of Ghazni, the Adil Shahs and others |
+| **K10** | Krishnadevaraya appears twice among the Vijayanagara rulers: the hand-written record and a record read from Wikipedia's list. List records are not checked against hand-written ones, as Wikidata records are | Vijayanagara page, People |
+| **K11** | A credit can print the artist twice ("Unknown authorUnknown author") | Under some ruler portraits |
 
 ---
 

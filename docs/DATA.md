@@ -200,7 +200,7 @@ Automatic imports need a few human judgements. They are written down in the scri
 | `lib/data/generated/place-wikidata.json` | `check-places` | Wikidata item and coordinates for each of the 24 hand-written places (it found Halebidu typed 25 km off) |
 | `lib/data/generated/photos.json` | `import-photos` | Credit for 35 hand-picked kingdom photographs (`public/images/kp-*.jpg`) |
 | `lib/data/generated/imported-people.json` | `import-rulers` | Rulers: dates, whether they are a reign or a lifetime, role, summary |
-| `lib/data/generated/imported-ruler-images.json` | `import-rulers` | Credit for each ruler image (32; 14 are not shown, see section 7) |
+| `lib/data/generated/imported-ruler-images.json` | `import-rulers` | Credit for each ruler image (32; 3 are not shown, see section 7) |
 | `lib/data/prototype.ts` | by hand, plus the merge | Hand-written records, and the code that merges everything above into typed arrays |
 | `lib/data/images.ts` | by hand, plus the merge | Credits for hand-picked photographs |
 | `lib/data/story.ts` | by hand | The four homepage chapters |
@@ -253,7 +253,7 @@ What is still thin, and why:
 - **Evidence:** two real inscription translations (SII Vol. II, nos. 85 and 88), each read from the printed page. The photograph beside each is of a *different* inscription and is labelled so. There is no transcription of the Tamil text.
 - **Hand-written text** for the eleven curated kingdoms, their eleven rulers and the nine turning points was checked, statement by statement, against the Wikipedia article named in each record (the audit corrected about 25 statements). It is still our paraphrase, not a scholarly text.
 - **Not researched:** the **routes** (two example lines, drawn by hand and labelled so on the map) and the **Chera outline**.
-- **Portraits:** 20 of 671 rulers show a free-licence portrait; the rest show an initial. Fourteen more portraits are downloaded and credited (`imported-ruler-images.json`) but not shown: twelve belong to a Wikidata record that a list's dated reign replaced, one to a hand-written record that has no image set, and one to a record that no longer exists. See K10 in the backlog.
+- **Portraits:** 31 of 671 rulers show a free-licence portrait; the rest show an initial. A ruler read from a Wikipedia list keeps the portrait of the Wikidata record it replaces, but only when the names match. Three of the 32 downloaded portraits are not shown: Vishnuvardhana (a temple sculpture; nothing confirms it depicts him), Bukka (his record no longer exists) and Krishnadevaraya's second file (the hand-written record has its own).
 - **Photographs:** every kingdom has one. Three (Maitraka, Lohara, Dambadeniya) show a coin or temples of the period rather than the capital's best-known building; Gahadavala and Sena show an inscription and pottery.
 - **Battles:** 6 of 127 have only a date and place from Wikidata; no source describing them was found.
 - **Native-script names** were checked against the same-language Wikipedia titles; one (Kalyani Chalukya) has none because no article title could be confirmed.

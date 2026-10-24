@@ -670,12 +670,16 @@ const importedPeopleRecords: Person[] = importedPeople
       ...(p.summary ? [{ sourceId: `wikipedia-ruler-${p.q}`, note: "Summary." }] : []),
     ],
   }));
+// A list record keeps the portrait of the Wikidata record it replaces, but only when it is the same person's name.
+const portraitOf = (r: (typeof importedRulerLists)[number]) =>
+  importedPeople.find((p) => (r.supersedes as string[]).includes(p.id) && "imageKey" in p && sameName(p.name, r.name)) as { imageKey?: string } | undefined;
 // Rulers of kingdoms Wikidata has no monarch records for, read from Wikipedia's own lists.
 const listedRulerRecords: Person[] = importedRulerLists.map(
   (r): Person => ({
     id: r.id,
     slug: r.id,
     name: r.name,
+    imageKey: portraitOf(r)?.imageKey,
     role: r.role,
     polityId: r.polityId,
     datesAre: "reign",
