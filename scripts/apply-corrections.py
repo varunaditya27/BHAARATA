@@ -141,10 +141,22 @@ def drop_images(d):
             if os.path.exists(path): os.remove(path)
     return d
 
+def undouble(text):
+    """Commons gives some artist fields twice ("Unknown authorUnknown author"); keep one copy."""
+    return re.sub(r"\s{2,}", " ", re.sub(r"^(.+?)\1(?=\W|$)", r"\1", text))
+
 def credits(d):
+    for rec in d.values():
+        if "artist" in rec: rec["artist"] = undouble(rec["artist"])
     for k, (artist, _why) in FIX_CREDITS.items():
         if k in d: d[k]["artist"] = artist
     return d
+
+def site_credits():
+    p = os.path.join(ROOT, "public/data/sites.geojson"); d = json.load(open(p))
+    for f in d["features"]:
+        if "c" in f["properties"]: f["properties"]["c"] = undouble(f["properties"]["c"])
+    json.dump(d, open(p, "w"), separators=(",", ":"), ensure_ascii=False)
 
 def names(d):
     for k, drop in REMOVE_ALIASES.items():
@@ -156,4 +168,5 @@ if __name__ == "__main__":
     rw("imported-names.json", names)
     rw("imported-images.json", credits); rw("imported-ruler-images.json", lambda d: drop_images(credits(d)))
     rw("imported-people.json", people); rw("imported-polities.json", polities); rw("imported-battles.json", battles)
+    site_credits()
     print("applied", len(REMOVE_PEOPLE), "removals,", len(FIX_DATES), "date fix,", len(FIX_WIKIPEDIA), "title fix,", len(STRIP_BATTLE_SUMMARY), "battle summaries stripped")

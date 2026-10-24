@@ -164,8 +164,6 @@ Small, real problems, kept honest.
 | **K7** | The first paint of the homepage film waits for map tiles; on a slow connection it shows only stars and the title for a few seconds | `/` |
 | **K8** | Region names on imported kingdoms come from a rough position rule with a few manual overrides; some read slightly off | Kingdom pages |
 | **K9** | The share-image generator reads fonts converted from the web fonts; a rare glyph may be missing | Link previews |
-| **K10** | Krishnadevaraya appears twice among the Vijayanagara rulers: the hand-written record and a record read from Wikipedia's list. List records are not checked against hand-written ones, as Wikidata records are | Vijayanagara page, People |
-| **K11** | A credit can print the artist twice ("Unknown authorUnknown author") | Under some ruler portraits |
 
 ---
 
@@ -189,6 +187,7 @@ For context on what already exists, newest first.
 |---|---|
 | **Interface redesign** | Plain-language labels everywhere (no spaced capitals, middle dots or arrows); People grouped by kingdom with search; ruler pages lead with the kingdom outline and reign; Kingdoms as a dark board sized by territory with a year dial; Places with a drawn map; tidier atlas controls; dark menu on dark pages; map view and layers saved in the link; error pages and a map-failure notice; skip link |
 | **Photographs for every kingdom** (35 chosen by eye) and 11 places, and **native-script names** from Wikidata | All credited, free licences only; see `import-photos`, `import-place-photos`, `import-names` in DATA.md |
+| **Portraits and credits repaired** | 11 ruler portraits restored after list records replaced their Wikidata records; Krishnadevaraya, Iltutmish and the Bahmani founder no longer appear twice; doubled artist names in credits fixed |
 | **Rulers for every kingdom**, ~670, from Wikidata and Wikipedia's lists, with dated reigns | Replaced lifetime-only records; see the rulers section of DATA.md |
 | **A data audit** (`validate-data.py`, `apply-corrections.py`) | Corrected wrong rulers, dates, titles, battle texts, coordinates, names and credits; every hand-written statement checked against Wikipedia |
 | **A dated layer of 344 temples, mosques, churches, forts and tombs** on the map | Subcontinent and Afghanistan only |

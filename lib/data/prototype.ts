@@ -646,11 +646,13 @@ const sameName = (a: string, b: string) => {
   const [x, y] = [n(a), n(b)];
   return x === y || x.startsWith(y.slice(0, 7)) || y.startsWith(x.slice(0, 7));
 };
+const coveredByCurated = (polityId: string, name: string, start: number, end: number | null | undefined) =>
+  curatedPeople.some((c) => c.polityId === polityId && sameName(c.name, name) && c.period.startYear <= (end ?? start) + 5 && start <= (c.period.endYear ?? c.period.startYear) + 5);
 // A lifetime-only record is dropped where a list gives the same ruler's actual reign.
 const supersededRulerIds = new Set(importedRulerLists.flatMap((r) => r.supersedes));
 const importedPeopleRecords: Person[] = importedPeople
   .filter((p) => !supersededRulerIds.has(p.id))
-  .filter((p) => !curatedPeople.some((c) => c.polityId === p.polityId && sameName(c.name, p.name) && c.period.startYear <= (p.end ?? p.start) + 5 && p.start <= (c.period.endYear ?? c.period.startYear) + 5))
+  .filter((p) => !coveredByCurated(p.polityId, p.name, p.start, p.end))
   .map((p): Person => ({
     id: p.id,
     slug: p.id,
@@ -674,7 +676,9 @@ const importedPeopleRecords: Person[] = importedPeople
 const portraitOf = (r: (typeof importedRulerLists)[number]) =>
   importedPeople.find((p) => (r.supersedes as string[]).includes(p.id) && "imageKey" in p && sameName(p.name, r.name)) as { imageKey?: string } | undefined;
 // Rulers of kingdoms Wikidata has no monarch records for, read from Wikipedia's own lists.
-const listedRulerRecords: Person[] = importedRulerLists.map(
+const listedRulerRecords: Person[] = importedRulerLists
+  .filter((r) => !coveredByCurated(r.polityId, r.name, r.start, r.end))
+  .map(
   (r): Person => ({
     id: r.id,
     slug: r.id,

@@ -232,7 +232,7 @@ These are known limits of the current data, not bugs. They are tracked in [`BACK
 
 ### Rulers
 
-Every kingdom now has at least one ruler, about 670 in all, with reign dates. They come from three routes: Wikidata (office and dates), Wikipedia's dated lists of rulers (`import-ruler-lists.py`), and a few hand-written records checked against their Wikipedia article. Where a list gives a reign and Wikidata only a lifetime, the reign replaces it. The biggest lists: Anuradhapura (52), Bengal Sultanate (36), Delhi Sultanate (33), Kashmir Sultanate (32), Vijayanagara (29), Chola (20).
+Every kingdom now has at least one ruler, about 670 in all, with reign dates. They come from three routes: Wikidata (office and dates), Wikipedia's dated lists of rulers (`import-ruler-lists.py`), and a few hand-written records checked against their Wikipedia article. Where a list gives a reign and Wikidata only a lifetime, the reign replaces it. The biggest lists: Anuradhapura (52), Bengal Sultanate (36), Delhi Sultanate (32), Kashmir Sultanate (32), Vijayanagara (28), Chola (20).
 
 What is still thin, and why:
 
@@ -253,7 +253,7 @@ What is still thin, and why:
 - **Evidence:** two real inscription translations (SII Vol. II, nos. 85 and 88), each read from the printed page. The photograph beside each is of a *different* inscription and is labelled so. There is no transcription of the Tamil text.
 - **Hand-written text** for the eleven curated kingdoms, their eleven rulers and the nine turning points was checked, statement by statement, against the Wikipedia article named in each record (the audit corrected about 25 statements). It is still our paraphrase, not a scholarly text.
 - **Not researched:** the **routes** (two example lines, drawn by hand and labelled so on the map) and the **Chera outline**.
-- **Portraits:** 31 of 671 rulers show a free-licence portrait; the rest show an initial. A ruler read from a Wikipedia list keeps the portrait of the Wikidata record it replaces, but only when the names match. Three of the 32 downloaded portraits are not shown: Vishnuvardhana (a temple sculpture; nothing confirms it depicts him), Bukka (his record no longer exists) and Krishnadevaraya's second file (the hand-written record has its own).
+- **Portraits:** 31 of 668 rulers show a free-licence portrait; the rest show an initial. A list record is dropped where a hand-written record covers the same ruler (same kingdom, overlapping years, similar name). A ruler read from a Wikipedia list keeps the portrait of the Wikidata record it replaces, but only when the names match. Three of the 32 downloaded portraits are not shown: Vishnuvardhana (a temple sculpture; nothing confirms it depicts him), Bukka (his record no longer exists) and Krishnadevaraya's second file (the hand-written record has its own).
 - **Photographs:** every kingdom has one. Three (Maitraka, Lohara, Dambadeniya) show a coin or temples of the period rather than the capital's best-known building; Gahadavala and Sena show an inscription and pottery.
 - **Battles:** 6 of 127 have only a date and place from Wikidata; no source describing them was found.
 - **Native-script names** were checked against the same-language Wikipedia titles; one (Kalyani Chalukya) has none because no article title could be confirmed.
