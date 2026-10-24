@@ -36,7 +36,7 @@ export function MapLoading({ visible }: { visible: boolean }) {
           <circle r="2" fill="#24201a" stroke="currentColor" strokeWidth="0.8" />
         </g>
       </svg>
-      <p className="mt-5 font-sans text-xs uppercase tracking-[0.2em] text-paper/60">Loading the map</p>
+      <p className="mt-5 font-sans text-sm text-paper/70">Loading the map…</p>
     </div>
   );
 }

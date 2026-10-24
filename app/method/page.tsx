@@ -1,10 +1,9 @@
-import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
 import { images } from "@/lib/data/images";
 
 export const metadata = {
-  title: "Method — BHĀRATA",
+  title: "How it works — BHĀRATA",
 };
 
 const DATE_KEY = [
@@ -19,18 +18,19 @@ export default function MethodPage() {
   return (
     <PageTransition>
       <div className="mx-auto max-w-[720px] px-4 py-16 sm:px-6">
-        <Eyebrow>How to read this atlas</Eyebrow>
-        <h1 className="mt-2 font-display text-5xl text-ink">Method</h1>
+        <h1 className="font-display text-5xl text-ink">How this atlas works</h1>
 
         <Rule className="mt-8" />
 
         <section className="mt-8 space-y-4 font-sans text-lg leading-relaxed text-ink">
           <p className="bh-dropcap">
-            This is an early working version, and it mixes two kinds of data. The kingdoms, their dates and their
-            borders come from <strong>Cliopatria</strong>, an open research dataset built by historians and
-            data scientists. The short descriptions come from <strong>Wikipedia</strong>. Rulers, events, the evidence
-            page and a few other records are still <strong>placeholders</strong> written by hand, and none of those
-            should be quoted as fact. Each page says which kind it is.
+            This is a working version. The kingdoms, their dates and their borders come from{" "}
+            <strong>Cliopatria</strong>, an open research dataset built by historians and data scientists. The
+            descriptions, ruler lists, battles and places come from <strong>Wikipedia</strong> and{" "}
+            <strong>Wikidata</strong>; a few texts written here were checked, statement by statement, against the
+            Wikipedia article named on the page. Two things are <strong>not researched</strong> and should not be
+            quoted as fact: the outline of the Chera kingdom, and the two example routes on the map, which are drawn
+            by hand. Each page says where its data comes from.
           </p>
           <p>
             Even the researched borders are one version of the past. Real frontiers moved, overlapped, and were often
@@ -44,7 +44,7 @@ export default function MethodPage() {
         </section>
 
         <section className="mt-14">
-          <Eyebrow>Reading a date</Eyebrow>
+          <h2 className="font-display text-3xl text-ink">Reading a date</h2>
           <dl className="mt-4 divide-y divide-border border-y border-border font-sans">
             {DATE_KEY.map(([term, meaning]) => (
               <div key={term} className="grid gap-1 py-3 sm:grid-cols-[160px_1fr]">
@@ -56,27 +56,27 @@ export default function MethodPage() {
         </section>
 
         <section className="mt-14">
-          <Eyebrow>Reading the map</Eyebrow>
+          <h2 className="font-display text-3xl text-ink">Reading the map</h2>
           <ul className="mt-4 space-y-3 font-sans text-ink-muted">
             <li>
-              <span className="text-ink">Shaded area</span> — the territory a kingdom held in that year, as far as the
+              <span className="text-ink">Shaded area</span>: the territory a kingdom held in that year, as far as the
               outline shows it.
             </li>
             <li>
-              <span className="text-ink">Hatched edge</span> — the frontier&rsquo;s exact line isn&rsquo;t known; it
+              <span className="text-ink">Hatched edge</span>: the frontier&rsquo;s exact line isn&rsquo;t known; it
               lay somewhere in that band.
             </li>
             <li>
-              <span className="text-ink">Dashed outline</span> — land a kingdom lost in the last 60 years. It fades as
+              <span className="text-ink">Dashed outline</span>: land a kingdom lost in the last 60 years. It fades as
               the years pass.
             </li>
             <li>
-              <span className="text-ink">Red dot with a name</span> — a battle. It appears in the year it was fought and
+              <span className="text-ink">Red dot with a name</span>: a battle. It appears in the year it was fought and
               stays for ten years. Click it for a short description. Wikidata rarely records who fought, so each battle
               is linked to the kingdoms whose borders contained the site that year, which is not always the combatants.
             </li>
             <li>
-              <span className="text-ink">Dark dots (off by default)</span> — monuments the Archaeological Survey of
+              <span className="text-ink">Dark dots (off by default)</span>: monuments the Archaeological Survey of
               India protects today. The data has no construction dates for them, so they are not tied to a year.
             </li>
             <li>
@@ -87,9 +87,9 @@ export default function MethodPage() {
         </section>
 
         <section id="credits" className="mt-14 scroll-mt-24">
-          <Eyebrow>Credits</Eyebrow>
+          <h2 className="font-display text-3xl text-ink">Credits</h2>
 
-          <h2 className="mt-6 font-display text-2xl text-ink">Photographs</h2>
+          <h3 className="mt-6 font-display text-xl text-ink">Photographs</h3>
           <p className="mt-1 font-sans text-sm text-ink-muted">
             All from Wikimedia Commons, used under the licence each photographer chose.
           </p>
@@ -104,7 +104,7 @@ export default function MethodPage() {
             ))}
           </ul>
 
-          <h2 className="mt-10 font-display text-2xl text-ink">Maps</h2>
+          <h3 className="mt-10 font-display text-xl text-ink">Maps</h3>
           <ul className="mt-3 space-y-2 font-sans text-sm text-ink-muted">
             <li>Base map © CARTO, map data © OpenStreetMap contributors.</li>
             <li>Terrain from Terrain Tiles (Mapzen, AWS Open Data).</li>
@@ -123,7 +123,7 @@ export default function MethodPage() {
             </li>
           </ul>
 
-          <h2 className="mt-10 font-display text-2xl text-ink">Type</h2>
+          <h3 className="mt-10 font-display text-xl text-ink">Type</h3>
           <ul className="mt-3 space-y-2 font-sans text-sm text-ink-muted">
             <li>Zodiak and Ranade by the Indian Type Foundry, from Fontshare.</li>
             <li>Anek Tamil, Kannada, Telugu and Devanagari by Ek Type.</li>

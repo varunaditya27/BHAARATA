@@ -136,8 +136,7 @@ export function ShortcutHelp({ open, onClose }: { open: boolean; onClose: () => 
             role="region"
             aria-label="Keyboard shortcuts"
           >
-            <p className="font-sans text-xs uppercase tracking-[0.18em] text-paper/60">Keyboard</p>
-            <h2 className="mt-1 font-display text-2xl">Shortcuts</h2>
+            <h2 className="font-display text-2xl">Keyboard shortcuts</h2>
             <dl className="mt-5 space-y-2.5 font-sans text-sm">
               {SHORTCUTS.map((s) => (
                 <div key={s.does} className="flex items-baseline justify-between gap-6 border-t border-paper/10 pt-2.5">

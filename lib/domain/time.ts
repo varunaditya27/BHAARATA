@@ -49,6 +49,8 @@ export function formatDateRange(range: DateRange): string {
   let text: string;
   if (startUnknown && endUnknown) text = "date unknown";
   else if (range.endYear === null) text = formatDatePoint(range.startQualifier, range.startYear);
+  // A reign that began and ended in the same year reads as one date, not "c. 524 CE – c. 524 CE".
+  else if (range.endYear === range.startYear && range.endQualifier === range.startQualifier) text = formatDatePoint(range.startQualifier, range.startYear);
   else text = `${formatDatePoint(range.startQualifier, range.startYear)} – ${formatDatePoint(range.endQualifier, range.endYear)}`;
   return range.confidence === "disputed" ? `${text} (disputed)` : text;
 }

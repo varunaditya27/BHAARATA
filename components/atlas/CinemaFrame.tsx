@@ -30,7 +30,7 @@ export function CinemaFrame({ on, year, onExit }: { on: boolean; year: number; o
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="absolute inset-x-0 bottom-0 z-30 flex h-[13vh] items-center justify-between bg-black px-6 text-paper md:px-10"
           >
-            <p className="font-sans text-xs uppercase tracking-[0.24em] text-paper/60">{getEraForYear(year)}</p>
+            <p className="font-sans text-sm text-paper/70">{getEraForYear(year)}</p>
             <div className="font-display text-4xl md:text-5xl">
               <Odometer value={year} suffix={year < 0 ? "BCE" : "CE"} durationMs={300} />
             </div>

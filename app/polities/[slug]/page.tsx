@@ -23,6 +23,7 @@ import {
   polities,
 } from "@/lib/data/prototype";
 import { polityStatus } from "@/lib/data/status";
+import { placeKindLabel } from "@/lib/domain/labels";
 import { formatDateRange, formatPersonDates } from "@/lib/domain/time";
 import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
@@ -69,7 +70,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
         )}
 
         <section className="mt-12">
-          <Eyebrow>Who else was around</Eyebrow>
+          <h2 className="font-sans text-sm font-medium text-ink-muted">Who else was around</h2>
           <p className="mt-1 font-sans text-sm text-ink-muted">
             {polity.name} lasted about {span} years (between the dashed lines). The bars below are the other kingdoms of
             the time — darker where their years overlap.
@@ -81,7 +82,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
 
         {sourceRecords.length > 0 && (
           <section className="mt-12">
-            <Eyebrow>Sources</Eyebrow>
+            <h2 className="font-sans text-sm font-medium text-ink-muted">Sources</h2>
             <ul className="mt-3 space-y-3">
               {sourceRecords.map((s) => (
                 <li key={s.id} className="border-t border-border pt-3 font-sans text-sm text-ink">
@@ -100,43 +101,43 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
       </div>
 
       <aside className="bh-accent-rule h-fit border-t-2 pt-5 font-sans text-sm md:sticky md:top-24">
-        <Eyebrow>At a glance</Eyebrow>
+        <h2 className="font-sans text-sm font-medium text-ink-muted">At a glance</h2>
         <dl className="mt-4 space-y-4">
           {polity.capitals.length > 0 && (
             <div>
-              <dt className="text-xs uppercase tracking-wide text-ink-muted">Capital{polity.capitals.length > 1 ? "s" : ""}</dt>
+              <dt className="text-xs text-ink-muted">Capital{polity.capitals.length > 1 ? "s" : ""}</dt>
               <dd className="mt-0.5 text-ink">{polity.capitals.join(", ")}</dd>
             </div>
           )}
           <div>
-            <dt className="text-xs uppercase tracking-wide text-ink-muted">Region</dt>
+            <dt className="text-xs text-ink-muted">Region</dt>
             <dd className="mt-0.5 text-ink">{polity.region}</dd>
           </div>
           {polity.language && (
             <div>
-              <dt className="text-xs uppercase tracking-wide text-ink-muted">Language</dt>
+              <dt className="text-xs text-ink-muted">Language</dt>
               <dd className="mt-0.5 text-ink">{polity.language}</dd>
             </div>
           )}
           {polity.religion && (
             <div>
-              <dt className="text-xs uppercase tracking-wide text-ink-muted">Religion</dt>
+              <dt className="text-xs text-ink-muted">Religion</dt>
               <dd className="mt-0.5 text-ink">{polity.religion}</dd>
             </div>
           )}
           {polity.alternativeNames.length > 0 && (
             <div>
-              <dt className="text-xs uppercase tracking-wide text-ink-muted">Also known as</dt>
+              <dt className="text-xs text-ink-muted">Also known as</dt>
               <dd className="mt-0.5 text-ink">{polity.alternativeNames.join(", ")}</dd>
             </div>
           )}
           {rulers.length + relatedEvents.length + relatedEvidence.length > 0 && (
           <div>
-            <dt className="text-xs uppercase tracking-wide text-ink-muted">In this atlas</dt>
+            <dt className="text-xs text-ink-muted">In this atlas</dt>
             <dd className="mt-0.5 text-ink">
-              {rulers.length} {rulers.length === 1 ? "ruler" : "rulers"} · {relatedEvents.length}{" "}
-              {relatedEvents.length === 1 ? "event" : "events"} · {relatedEvidence.length} evidence{" "}
-              {relatedEvidence.length === 1 ? "record" : "records"}
+              {rulers.length} {rulers.length === 1 ? "ruler" : "rulers"}, {relatedEvents.length + relatedBattles.length}{" "}
+              {relatedEvents.length + relatedBattles.length === 1 ? "event" : "events"} and {relatedEvidence.length}{" "}
+              {relatedEvidence.length === 1 ? "piece" : "pieces"} of evidence
             </dd>
           </div>
           )}
@@ -146,7 +147,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
           transitionTypes={NAV_BACK}
           className="mt-6 block border border-ink px-4 py-2 text-center text-ink transition-colors hover:bg-ink hover:text-paper"
         >
-          See it on the atlas
+          Show it on the map
         </Link>
       </aside>
     </div>
@@ -157,7 +158,9 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
       <p className="font-sans text-sm text-ink-muted">No rulers recorded yet for this kingdom.</p>
     ) : (
       <div>
-        <Eyebrow>{rulers.some((r) => r.datesAre === "lifetime") ? "Reigns (paler bars: only the lifetime is known)" : "Reigns"}</Eyebrow>
+        <h2 className="font-sans text-sm font-medium text-ink-muted">
+          {rulers.some((r) => r.datesAre === "lifetime") ? "Reigns. A paler bar means only the ruler's lifetime is known." : "Reigns"}
+        </h2>
         <div className="relative mt-4 h-10 border-b border-border">
           {rulers.map((r) => {
             const start = polity.period.startYear;
@@ -184,20 +187,24 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
           <span>{polity.period.endYear}</span>
         </div>
 
-        <div className="mt-10 grid gap-8 sm:grid-cols-3">
+        <ul className="mt-10 sm:columns-2 sm:gap-x-12">
           {rulers.map((ruler) => (
-            <Link key={ruler.id} href={`/people/${ruler.slug}`} transitionTypes={NAV_FORWARD} className="group block">
-              <Shared name={transitionNames.personPortrait(ruler.slug)}>
-                <RulerPortrait imageKey={ruler.imageKey} name={ruler.name} accentColor={polity.accentColor} className="w-full" />
-              </Shared>
-              <h3 className="mt-3 font-display text-lg text-ink transition-colors group-hover:[color:var(--bh-accent)]">
-                {ruler.name}
-              </h3>
-              <p className="font-sans text-xs text-ink-muted">{ruler.role} · {formatPersonDates(ruler)}</p>
-              {ruler.summary && <p className="mt-2 line-clamp-3 font-sans text-sm leading-relaxed text-ink-muted">{ruler.summary}</p>}
-            </Link>
+            <li key={ruler.id} className="break-inside-avoid">
+              <Link href={`/people/${ruler.slug}`} transitionTypes={NAV_FORWARD} className="group flex min-h-12 items-center gap-3 border-b border-border py-2">
+                <span className="min-w-0 flex-1">
+                  <span className="block font-display text-lg text-ink transition-colors group-hover:[color:var(--bh-accent)]">{ruler.name}</span>
+                  {ruler.summary && <span className="block truncate font-sans text-sm text-ink-muted">{ruler.summary}</span>}
+                </span>
+                <span className="shrink-0 font-sans text-sm tabular-nums text-ink-muted">{formatPersonDates(ruler)}</span>
+                {ruler.imageKey && images[ruler.imageKey as ImageKey] && (
+                  <Shared name={transitionNames.personPortrait(ruler.slug)}>
+                    <RulerPortrait imageKey={ruler.imageKey} name={ruler.name} className="w-9 shrink-0" />
+                  </Shared>
+                )}
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     );
 
@@ -218,8 +225,8 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
               <h3 className="mt-3 font-display text-xl text-ink transition-colors group-hover:[color:var(--bh-accent)]">
                 {place.name}
               </h3>
-              <p className="font-sans text-sm capitalize text-ink-muted">
-                {place.placeType} · {place.region}
+              <p className="font-sans text-sm text-ink-muted">
+                {placeKindLabel(place.placeType)} in {place.region}
               </p>
             </Link>
           );
@@ -230,7 +237,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
   const battlesList =
     relatedBattles.length > 0 ? (
       <div className={relatedEvents.length > 0 ? "mt-12" : ""}>
-        <Eyebrow>Battles fought within its borders ({relatedBattles.length})</Eyebrow>
+        <h2 className="font-sans text-sm font-medium text-ink-muted">Battles fought within its borders ({relatedBattles.length})</h2>
         <ul className="mt-3 divide-y divide-border border-y border-border">
           {relatedBattles.map((b) => (
             <li key={b.id} className="py-3 font-sans">
@@ -244,7 +251,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
           ))}
         </ul>
         <p className="mt-2 text-xs text-ink-muted">
-          Listed by where the battle was fought, not who fought it: the borders come from Cliopatria.
+          Listed by where each battle was fought, not by who fought it. The borders come from the Cliopatria dataset.
         </p>
       </div>
     ) : null;
@@ -267,7 +274,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
               transitionTypes={NAV_BACK}
               className="mt-2 inline-block font-sans text-xs text-ink underline underline-offset-4"
             >
-              See {event.period.startYear} on the atlas
+              Show {event.period.startYear} CE on the map
             </Link>
           </li>
         ))}
@@ -285,8 +292,8 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
         {relatedEvidence.map((ev) => (
           <li key={ev.id} className="border-t border-border pt-4">
             <Link href={`/evidence/${ev.slug}`} transitionTypes={NAV_FORWARD} className="group block">
-              <p className="font-sans text-sm capitalize text-ink-muted">
-                {formatDateRange(ev.period)} · {ev.evidenceType}
+              <p className="font-sans text-sm text-ink-muted">
+                {ev.evidenceType.charAt(0).toUpperCase() + ev.evidenceType.slice(1)}, {formatDateRange(ev.period)}
               </p>
               <h3 className="mt-1 font-display text-xl text-ink transition-colors group-hover:[color:var(--bh-accent)]">
                 {ev.title}
@@ -321,20 +328,18 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
       </div>
     );
 
+  const emblem = <KingdomEmblem polityId={polity.id} color={polity.accentColor} draw className="h-16 w-16 shrink-0" />;
+
+  // Over a photo the emblem's colour can vanish into the stone, so photo heroes show it below, on paper.
   const title = (dark: boolean) => (
     <>
-      <KingdomEmblem
-        polityId={polity.id}
-        color={polity.accentColor}
-        draw
-        className="mb-4 h-16 w-16 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]"
-      />
-      <Eyebrow className={dark ? "text-paper/70" : undefined}>
-        {polity.polityType} · {polity.region}
+      {!dark && <div className="mb-4">{emblem}</div>}
+      <Eyebrow className={dark ? "text-paper/80" : undefined}>
+        {polity.polityType} in {polity.region}
       </Eyebrow>
       <RisingTitle text={polity.name} className={`mt-2 text-5xl sm:text-7xl ${dark ? "text-paper" : "text-ink"}`} />
       {polity.nativeName && (
-        <InkName text={polity.nativeName} className={`mt-2 text-2xl sm:text-3xl ${dark ? "text-paper/85" : "text-ink-muted"}`} />
+        <InkName text={polity.nativeName} lang={polity.nativeLang} className={`mt-2 text-2xl sm:text-3xl ${dark ? "text-paper/85" : "text-ink-muted"}`} />
       )}
       {polity.quote && (
         <p className={`bh-fade-in mt-4 max-w-xl font-sans text-lg ${dark ? "text-paper/80" : "text-ink-muted"}`} style={{ animationDelay: "1200ms" }}>
@@ -360,6 +365,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
 
         <div className="mx-auto max-w-[1100px] px-4 py-10 sm:px-6">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            {hero && emblem}
             <p className="font-display text-xl text-ink">{formatDateRange(polity.period)}</p>
             <Badge tone={status.sourced ? "neutral" : "uncertainty"}>{status.label}</Badge>
           </div>

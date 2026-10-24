@@ -80,7 +80,7 @@ export function ComparePane({
       <div className="bh-map-grain pointer-events-none absolute inset-0" />
       <div className="pointer-events-none absolute inset-x-0 top-4 flex justify-center">
         <p className="bg-ink/85 px-3 py-1 font-display text-lg text-paper">
-          {year} CE <span className="ml-1 font-sans text-[0.65rem] uppercase tracking-[0.16em] text-paper/60">{getEraForYear(year)}</span>
+          {year} CE <span className="ml-1 font-sans text-xs text-paper/70">{getEraForYear(year)}</span>
         </p>
       </div>
       <div className="absolute inset-x-6 bottom-16 z-10 flex items-center gap-3 bg-ink/85 px-3 py-2">

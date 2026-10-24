@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Badge } from "@/components/primitives/Badge";
-import { Eyebrow } from "@/components/primitives/Eyebrow";
 import type { ImageCredit } from "@/lib/data/images";
 import type { Evidence, Place, Source } from "@/lib/domain/types";
 import { NAV_FORWARD } from "@/lib/utils/view-transition";
@@ -42,7 +41,7 @@ export function ProvenanceChain({
               </Link>
             </>
           )}
-          {record.catalogueId && <span className="text-ink-muted"> · catalogue {record.catalogueId}</span>}
+          {record.catalogueId && <span className="text-ink-muted">, published in {record.catalogueId.replace(/^SII /, "South Indian Inscriptions, ")}</span>}
         </>
       ),
       status: record.catalogueId?.startsWith("EXAMPLE") ? "placeholder" : "real",
@@ -123,7 +122,7 @@ export function ProvenanceChain({
 
   return (
     <section className="mt-14">
-      <Eyebrow>How we know</Eyebrow>
+      <h2 className="font-display text-3xl text-ink">How we know</h2>
       <p className="mt-1 max-w-prose font-sans text-sm text-ink-muted">
         Each step from the stone to the claim, in order. A claim is only as strong as its weakest step.
       </p>
@@ -137,7 +136,7 @@ export function ProvenanceChain({
               aria-hidden
             />
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <p className="font-sans text-xs uppercase tracking-[0.14em] text-ink-muted">
+              <p className="font-sans text-sm font-medium text-ink-muted">
                 {i + 1}. {l.step}
               </p>
               <Badge tone={l.status === "real" ? "neutral" : "uncertainty"}>{STATUS_LABEL[l.status]}</Badge>

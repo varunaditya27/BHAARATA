@@ -85,6 +85,7 @@ flowchart LR
 
 ### A map with depth
 - **127 battles** appear in the year they were fought
+- **344 temples, mosques, forts and tombs** appear in the year they were built
 - **4,300 protected monuments**, clustered, off by default
 - Ships and travellers move along trade and war routes
 - Capital seals, river flow, relief, and an era tint
@@ -132,10 +133,11 @@ BHĀRATA is an early version, and being straight about that is part of the proje
 |---|---|---|
 | Kingdom borders and dates | [Cliopatria](https://github.com/Seshat-Global-History-Databank/cliopatria) (Seshat Global History Databank, CC BY 4.0) | Researched. One version of each territory, **not exact frontiers** |
 | Kingdom summaries | Wikipedia (CC BY-SA 4.0) | Opening paragraphs, lightly trimmed |
-| Capitals, battles, monuments, rulers | Wikidata (CC0) | Real, but **uneven**: some kingdoms have 20 rulers on record, others have none |
+| Capitals, battles, dated sites, monuments, rulers | Wikidata (CC0) and Wikipedia's lists of rulers | Real. Every kingdom has rulers; a few have only two or three because the sources name no more |
 | Photographs | Wikimedia Commons | Real, credited; only free licences |
-| Inscription evidence | *South Indian Inscriptions* Vol. II (1913, public domain) | **One** real translation so far |
-| Hand-written turning points, early rulers, Chera borders | This repository | **Placeholder**, labelled on the page |
+| Inscription evidence | *South Indian Inscriptions* Vol. II (1913, public domain) | **Two** real translations so far |
+| Hand-written texts, eleven rulers, nine turning points | This repository | Written here and **checked against Wikipedia**, statement by statement; the source is named on each page |
+| Chera borders, two example routes | This repository | **Not researched**, labelled on the page and the map |
 
 Every page shows a badge saying which of these it uses. The full account, with licences and known gaps, is in [`docs/DATA.md`](docs/DATA.md).
 
@@ -143,7 +145,7 @@ Every page shows a badge saying which of these it uses. The full account, with l
 
 ## How it works
 
-BHĀRATA is a Next.js app with no database yet. Open data is imported once by three Python scripts, validated, and written to JSON that ships with the site. Server components render the pages; only the map, timeline and search run in the browser.
+BHĀRATA is a Next.js app with no database yet. Open data is imported once by Python scripts (the three main ones are drawn below), validated, and written to JSON that ships with the site. Server components render the pages; only the map, timeline and search run in the browser.
 
 ```mermaid
 flowchart TB

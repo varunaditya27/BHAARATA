@@ -10,8 +10,9 @@ import {
   routesToFeatureCollection,
 } from "@/lib/geo/to-geojson";
 import { PLACE_ICON_EXPRESSION, registerHatchPattern, registerMapIcons, registerRouteIcons, registerSealImages } from "./mapIcons";
+import { currentYear } from "./apply-state";
 import { routeMoversFeatureCollection } from "./route-movers";
-import { LAYER_IDS, SOURCE_IDS, TERRAIN_SOURCE } from "./mapStyle";
+import { LAYER_IDS, SITE_COLORS, SOURCE_IDS, TERRAIN_SOURCE } from "./mapStyle";
 
 /** Classic "marching ants" dash-phase sequence (Mapbox/MapLibre pattern):
  * cycling through these line-dasharray values reads as the dash pattern
@@ -306,7 +307,7 @@ export function addHistoricalLayers(
     minzoom: 4.5,
     filter: ["==", ["get", "year"], -1],
     layout: {
-      "text-field": ["concat", ["get", "name"], " · ", ["to-string", ["get", "year"]]],
+      "text-field": ["concat", ["get", "name"], ", ", ["to-string", ["get", "year"]]],
       "text-size": 11,
       "text-anchor": "top",
       "text-offset": [0, 0.9],
@@ -421,5 +422,50 @@ export function ensureMonuments(map: MapLibreMap) {
       "circle-stroke-color": "#f3ede0",
       "circle-stroke-width": 1.2,
     },
+  });
+}
+
+
+
+/**
+ * Temples, mosques, forts, tombs, palaces and monasteries with a known date
+ * of construction (Wikidata). Added the first time the layer is needed; each
+ * appears in the year it was built (the filter is kept in step by
+ * applyHistoricalState).
+ */
+export function ensureSites(map: MapLibreMap) {
+  if (map.getSource(SOURCE_IDS.sites)) return;
+  const year = currentYear(map);
+  map.addSource(SOURCE_IDS.sites, { type: "geojson", data: "/data/sites.geojson" });
+  map.addLayer({
+    id: LAYER_IDS.sitePoints,
+    type: "circle",
+    source: SOURCE_IDS.sites,
+    minzoom: 3.8,
+    filter: ["<=", ["get", "y"], year],
+    paint: {
+      "circle-radius": ["interpolate", ["linear"], ["zoom"], 3.8, 3.2, 6, 4.8, 9, 7.5],
+      "circle-color": ["match", ["get", "t"], ...Object.entries(SITE_COLORS).flat(), "#5c5447"] as never,
+      "circle-stroke-color": "#f3ede0",
+      "circle-stroke-width": 1.5,
+      "circle-opacity": 1,
+    },
+  });
+  map.addLayer({
+    id: LAYER_IDS.siteLabels,
+    type: "symbol",
+    source: SOURCE_IDS.sites,
+    minzoom: 7,
+    filter: ["<=", ["get", "y"], year],
+    layout: {
+      "text-field": ["get", "n"],
+      "text-size": 10.5,
+      "text-anchor": "top",
+      "text-offset": [0, 0.8],
+      "text-font": ["Ranade Medium"],
+      "text-optional": true,
+      "text-max-width": 8,
+    },
+    paint: { "text-color": "#3f3a2f", "text-halo-color": "#f3ede0", "text-halo-width": 1.3 },
   });
 }

@@ -99,6 +99,14 @@ body::before {
   * {
     border-color: var(--bh-border);
   }
+  /* No heading or paragraph ends on a lone word. Browsers without
+     support just wrap normally. */
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
 }
 
 /* ---------------------------------------------------------------------- */
@@ -123,17 +131,39 @@ body::before {
   color: var(--bh-ink) !important;
   font-family: var(--font-ranade), sans-serif !important;
 }
+/* On dark pages (the atlas, the kingdoms board) the top menu and footer take
+   the page's ink, so the screen reads as one piece. Search and the phone
+   menu open in portals outside the header, so they keep their paper colours. */
+body:has([data-dark-page]) > header,
+body:has([data-dark-page]) > footer {
+  --bh-paper: #241f17;
+  --bh-paper-raised: #2e281f;
+  --bh-ink: #f3ede0;
+  --bh-ink-muted: #b3a994;
+  --bh-border: #4a4235;
+  background-color: var(--bh-paper);
+}
+
+/* CARTO's terms ask for its credit and OpenStreetMap's to stay visible,
+   so the credit line is kept, only made quiet. */
 .maplibregl-ctrl-attrib {
-  background: color-mix(in srgb, var(--bh-paper-raised) 80%, transparent) !important;
+  background: color-mix(in srgb, var(--bh-paper) 55%, transparent) !important;
+  border-radius: 0 !important;
   font-family: var(--font-ranade), sans-serif !important;
+  font-size: 10px !important;
+  line-height: 1.5 !important;
 }
 .maplibregl-ctrl-attrib a {
   color: var(--bh-ink-muted) !important;
 }
 @media (max-width: 767px) {
   /* Phones pinch to zoom; the button stack just covers map. */
-  .maplibregl-ctrl-top-right .maplibregl-ctrl-group {
+  .maplibregl-ctrl-bottom-left .maplibregl-ctrl-group {
     display: none;
+  }
+  /* Leave room for the scale bar so the two share the bottom row. */
+  .maplibregl-ctrl-attrib {
+    max-width: calc(100vw - 150px);
   }
 }
 
@@ -569,7 +599,6 @@ body::before {
 
 /* Cinema view: map controls step away; the attribution stays readable
  * above the lower letterbox bar (it must remain visible). */
-.bh-cinema .maplibregl-ctrl-top-right,
 .bh-cinema .maplibregl-ctrl-bottom-left {
   display: none;
 }
@@ -588,9 +617,13 @@ body::before {
 }
 .maplibregl-popup-tip { display: none; }
 .maplibregl-popup-close-button { color: var(--bh-ink-muted); font-size: 1.1rem; padding: 0.1rem 0.45rem; }
-.bh-popup-eyebrow { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--bh-ink-muted); }
+.bh-popup-eyebrow { font-size: 0.75rem; color: var(--bh-ink-muted); }
 .bh-popup-title { margin-top: 0.2rem; font-family: var(--font-zodiak), serif; font-size: 1.15rem; line-height: 1.2; color: var(--bh-ink); }
 .bh-popup-text { margin-top: 0.4rem; font-size: 0.8rem; line-height: 1.45; color: var(--bh-ink-muted); }
+.bh-popup-photo { margin-top: 0.5rem; }
+.bh-popup-photo img { display: block; width: 100%; max-height: 118px; object-fit: cover; background: var(--bh-stone); }
+.bh-popup-credit { display: block; margin-top: 0.2rem; font-size: 0.62rem; color: var(--bh-ink-muted); text-decoration: underline; text-underline-offset: 2px; }
+.bh-popup-note { margin-top: 0.4rem; font-size: 0.68rem; font-style: italic; color: var(--bh-ink-muted); }
 .bh-popup-link { display: inline-block; margin-top: 0.55rem; font-size: 0.8rem; color: var(--bh-ink); text-decoration: underline; text-underline-offset: 3px; }
 
 /* Wordmark letters: each rises, then a band of light crosses it. The delays come from a

@@ -12,12 +12,12 @@ const primaryLinks = [
   { href: "/evidence", label: "Evidence" },
 ];
 
-const secondaryLinks = [{ href: "/method", label: "Method" }];
+const secondaryLinks = [{ href: "/method", label: "How it works" }];
 
 export function GlobalNav() {
   return (
     <header
-      className="sticky top-0 z-40 h-16 border-b border-border bg-paper/90 backdrop-blur-sm"
+      className="sticky top-0 z-40 h-16 border-b border-border bg-paper"
       style={{ viewTransitionName: "site-header" }}
     >
       <div className="mx-auto flex h-full max-w-[1400px] items-center gap-6 px-4 sm:px-6">

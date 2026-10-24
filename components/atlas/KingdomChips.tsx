@@ -35,10 +35,10 @@ export function KingdomChips({
           key={polity.id}
           onClick={() => onSelectPolity(polity.id)}
           className={cn(
-            "flex shrink-0 items-center gap-2 border px-3 py-1.5 font-sans text-xs backdrop-blur-sm transition-colors",
+            "flex shrink-0 items-center gap-2 border px-3 py-1.5 font-sans text-xs transition-colors",
             selectedPolityId === polity.id
               ? "border-paper bg-paper text-ink"
-              : "border-paper/25 bg-ink/85 text-paper",
+              : "border-paper/25 bg-ink text-paper",
           )}
         >
           <span className="h-2 w-2 rounded-full" style={{ backgroundColor: lightenHex(polity.accentColor, 0.25) }} aria-hidden />

@@ -102,11 +102,11 @@ export function TimelineScrubber({
         {playing ? <Pause size={14} /> : <Play size={14} className="translate-x-0.5" />}
       </button>
 
-      <div className="flex-1">
-        <div className="mb-1 h-4 font-sans text-[0.65rem] uppercase tracking-wide text-paper/60 sm:hidden">
+      <div className="min-w-0 flex-1">
+        <div className="mb-1 h-4 font-sans text-xs text-paper/70 sm:hidden">
           {getEraForYear(year)}
         </div>
-        <div className="relative mb-1 hidden h-4 font-sans text-[0.65rem] uppercase tracking-wide text-paper/50 sm:block">
+        <div className="relative mb-1 hidden h-4 font-sans text-xs text-paper/60 sm:block">
           {PROTOTYPE_PERIOD_MARKERS.map((marker) => (
             <span
               key={marker.year}

@@ -2,9 +2,8 @@ import type { ImageKey } from "./images";
 
 /**
  * The homepage's four chapters — one moment each, in order. Text sticks to
- * widely agreed outlines (who held power where, roughly when) rather than
- * specific claims that would need a citation; the atlas records behind
- * them remain illustrative prototype data, and the page says so.
+ * what each kingdom's Wikipedia article states; every claim was checked
+ * against it (see docs/DATA.md). The camera and year are the only choices made here.
  */
 export type StoryChapter = {
   id: string;
@@ -43,7 +42,7 @@ export const storyChapters: StoryChapter[] = [
     polityId: "pandya",
     title: "The Pandyas return",
     body:
-      "As the Cholas weaken, the Pandya kings of Madurai rise again. Under Jatavarman Sundara Pandyan I they take over most of the Chola lands and become the strongest power in the far south.",
+      "As the Cholas weaken, the Pandya kings of Madurai rise again. Under Jatavarman Sundara Pandyan I they make the last Chola king accept their overlordship, and push north to Kanchipuram and as far as Nellore.",
     imageKey: "pandya-meenakshi",
     camera: { center: [78.3, 9.7], zoom: 6 },
   },
@@ -53,7 +52,7 @@ export const storyChapters: StoryChapter[] = [
     polityId: "vijayanagara",
     title: "Vijayanagara at its height",
     body:
-      "Under Krishnadevaraya, Vijayanagara is at its largest, ruled from a city of temples and markets on the Tungabhadra river. Forty-five years later, after its defeat at Talikota, the city is sacked.",
+      "Under Krishnadevaraya, Vijayanagara is at its largest, ruled from a city of temples and markets on the Tungabhadra river. Forty-five years later, after its defeat at Talikota, the royal centre is plundered and never rebuilt.",
     imageKey: "vijayanagara-virupaksha",
     camera: { center: [76.6, 15.0], zoom: 5.5 },
   },

@@ -53,8 +53,8 @@
    35.0
   ],
   "wikidata": "Q16208711",
-  "wikipedia": "Revolt_of_Karen_(654)",
-  "extract": "The Persian revolts against the Rashidun Caliphate were a series of uprisings and insurgencies across former Sasanian territories between 646 and 661 CE. Following the initial Muslim conquest of Persia, these rebellions represented a major challenge to the consolidation of Rashidun control over the territories of the former Sasanian Empire. The unrest was primarily driven by the marginalization of the Persian elite and economic discontent regarding the imposition of taxes such as the Jizya and Kharaj.",
+  "wikipedia": null,
+  "extract": "Battle of Badghis, 654. Wikidata records its date and place; there is no article that describes this battle on its own.",
   "polityIds": []
  },
  {
@@ -81,8 +81,8 @@
    28.6167
   ],
   "wikidata": "Q121537391",
-  "wikipedia": null,
-  "extract": null,
+  "wikipedia": "Al-Mufaddal_ibn_al-Muhallab",
+  "extract": "In 720, the sons of al-Muhallab, who had rebelled against the Umayyads, fled to Qandabil in Sind hoping for refuge. Their ally shut the gates against them, and they were killed fighting their Umayyad pursuer, Hilal ibn Ahwaz al-Tamimi.",
   "polityIds": []
  },
  {
@@ -257,8 +257,8 @@
    20.91
   ],
   "wikidata": "Q22934305",
-  "wikipedia": null,
-  "extract": null,
+  "wikipedia": "Sack_of_Somnath",
+  "extract": "The sack of Somnath, on 6–8 January 1026, was a campaign led by Mahmud of Ghazni against the Chaulukya dynasty of Gujarat, his fifteenth invasion of India. It ended with the destruction of the Somnath Temple.",
   "polityIds": []
  },
  {
@@ -651,7 +651,7 @@
   ],
   "wikidata": "Q4872511",
   "wikipedia": "Battle_of_Tarnab_(1448)",
-  "extract": "The Battle of Tarnab took place in 1448.",
+  "extract": "In spring 1448, east of Herat, the Timurid ruler Ulugh Beg of Samarkand decisively defeated Ala al-Dawla Mirza of Khurasan, during the Second Timurid Succession Crisis.",
   "polityIds": []
  },
  {
@@ -1344,8 +1344,8 @@
    15.402
   ],
   "wikidata": "Q4677351",
-  "wikipedia": "Action_of_30_September_1639",
-  "extract": "The Battle of Goa refers to a series of naval engagements between the Portuguese Armada and the Dutch East India Company fleets attempting to blockade and conquer the city of Goa. In 1638, forces commanded by the Viceroy of Portuguese India, D. Pedro da Silva and later António Teles de Meneses, fought off a large Dutch fleet sent to block the port colony of Goa, commanded by Admiral Adam Westerwolt, who was badly defeated at this encounter.",
+  "wikipedia": null,
+  "extract": "Action of 30 September 1639, 1639. Wikidata records its date and place; there is no article that describes this battle on its own.",
   "polityIds": []
  },
  {
@@ -1480,8 +1480,8 @@
    6.9267
   ],
   "wikidata": "Q4677306",
-  "wikipedia": "Action_of_23_March_1654",
-  "extract": "The Dutch–Portuguese War was a global armed conflict involving Dutch forces, in the form of the Dutch East India Company (VOC), the Dutch West India Company (GWC), and their allies, against the Iberian Union, and after 1640, the Portuguese Empire. Beginning in 1598, the conflict primarily involved the Dutch companies and fleet invading Portuguese colonies in the Americas, Africa, and the East Indies.",
+  "wikipedia": null,
+  "extract": "Action of 23 March 1654, 1654. Wikidata records its date and place; there is no article that describes this battle on its own.",
   "polityIds": []
  },
  {
@@ -1494,8 +1494,8 @@
    6.952
   ],
   "wikidata": "Q4677341",
-  "wikipedia": "Action_of_2_May_1654",
-  "extract": "The Dutch–Portuguese War was a global armed conflict involving Dutch forces, in the form of the Dutch East India Company (VOC), the Dutch West India Company (GWC), and their allies, against the Iberian Union, and after 1640, the Portuguese Empire. Beginning in 1598, the conflict primarily involved the Dutch companies and fleet invading Portuguese colonies in the Americas, Africa, and the East Indies.",
+  "wikipedia": null,
+  "extract": "Action of 2 May 1654, 1654. Wikidata records its date and place; there is no article that describes this battle on its own.",
   "polityIds": []
  },
  {
@@ -1554,11 +1554,15 @@
    16.7
   ],
   "wikidata": "Q4871475",
-  "wikipedia": "Battle_of_Kolhapur",
-  "extract": "Shivaji I was an Indian ruler and a member of the Bhonsle dynasty. Shivaji inherited a fiefdom from his father who served as a retainer for the Sultanate of Bijapur, which later formed the genesis of the Maratha Kingdom. In 1674, he was formally crowned the Chhatrapati of his realm at Raigad Fort.",
+  "wikipedia": null,
+  "extract": "On 28 December 1659, near Kolhapur, a Maratha force under Shivaji defeated a larger Bijapur army led by Rustam Zaman, who fled the field. It was the Marathas' second major victory over Bijapur, after Pratapgad.",
   "polityIds": [
    "bijapur"
-  ]
+  ],
+  "otherSource": {
+   "title": "Military History Wiki: Battle of Kolhapur",
+   "url": "https://military-history.fandom.com/wiki/Battle_of_Kolhapur"
+  }
  },
  {
   "id": "battle-battle-of-marg-o-1659",
@@ -1617,10 +1621,14 @@
   ],
   "wikidata": "Q4872629",
   "wikipedia": null,
-  "extract": null,
+  "extract": "On 3 February 1661, in the Umberkhind pass of the Sahyadri hills near Khopoli, Shivaji's Maratha forces ambushed a Mughal army led by Kartalab Khan. After about two hours the Mughals surrendered their arms and paid a ransom to be allowed to leave.",
   "polityIds": [
    "mughal"
-  ]
+  ],
+  "otherSource": {
+   "title": "Military History Wiki: Battle of Umberkhind",
+   "url": "https://military-history.fandom.com/wiki/Battle_of_Umberkhind"
+  }
  },
  {
   "id": "battle-battle-of-surat-1664",
@@ -1711,8 +1719,12 @@
   ],
   "wikidata": "Q24925403",
   "wikipedia": null,
-  "extract": null,
-  "polityIds": []
+  "extract": "In February 1672, near the fort of Salher in Nashik district, Maratha forces under Prataprao Gujar and Moropant Pingle defeated a larger Mughal force. It is described as the first battle in which the Mughals lost in the open field.",
+  "polityIds": [],
+  "otherSource": {
+   "title": "Military History Wiki: Battle of Salher",
+   "url": "https://military-history.fandom.com/wiki/Battle_of_Salher"
+  }
  },
  {
   "id": "battle-battle-of-kohat-1674",

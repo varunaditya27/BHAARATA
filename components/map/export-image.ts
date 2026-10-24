@@ -62,7 +62,7 @@ export function composeMapPrint(
   let cy = y + pad + 14 * s;
   ctx.fillStyle = MUTED;
   ctx.font = `500 ${11 * s}px ${sans}`;
-  ctx.fillText("BHĀRATA · HISTORICAL ATLAS", x + pad, cy);
+  ctx.fillText("BHĀRATA, a historical atlas", x + pad, cy);
   cy += 40 * s;
   ctx.fillStyle = INK;
   ctx.font = `400 ${36 * s}px ${display}`;

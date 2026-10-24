@@ -8,7 +8,7 @@ import { Badge } from "@/components/primitives/Badge";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { Shared } from "@/components/primitives/Shared";
 import { images, type ImageKey } from "@/lib/data/images";
-import { getRulersForPolity, milestones } from "@/lib/data/prototype";
+import { events, getRulersForPolity } from "@/lib/data/prototype";
 import { polityStatus } from "@/lib/data/status";
 import { formatDateRange } from "@/lib/domain/time";
 import type { Polity } from "@/lib/domain/types";
@@ -134,7 +134,7 @@ function CloseButton({ onClose, inline }: { onClose: () => void; inline?: boolea
       className={
         inline
           ? "shrink-0 font-sans text-xs text-paper/70 hover:text-paper"
-          : "absolute right-3 top-3 z-10 font-sans text-xs text-paper/70 hover:text-paper"
+          : "absolute right-3 top-3 z-10 bg-ink px-2 py-1 font-sans text-xs text-paper/80 hover:text-paper"
       }
     >
       Close
@@ -177,7 +177,8 @@ function TitleBlock({ polity, compact }: { polity: Polity; compact?: boolean }) 
 
 function Details({ polity }: { polity: Polity }) {
   const rulers = getRulersForPolity(polity.id);
-  const relatedEvents = milestones.filter((e) => e.polityIds.includes(polity.id));
+  // Turning points and battles together, matching the "Events" tab on the kingdom page.
+  const relatedEvents = events.filter((e) => e.polityIds.includes(polity.id));
   const status = polityStatus(polity);
   return (
     <>
@@ -212,7 +213,9 @@ function Details({ polity }: { polity: Polity }) {
         </div>
       )}
       <div className="mt-3">
-        <Badge tone={status.sourced ? "neutral" : "uncertainty"}>{status.label}</Badge>
+        <Badge tone={status.sourced ? "neutral" : "uncertainty"} className={status.sourced ? "bg-paper/10 text-paper/80" : undefined}>
+          {status.label}
+        </Badge>
       </div>
     </>
   );
@@ -225,7 +228,7 @@ function ExploreLink({ polity, className }: { polity: Polity; className?: string
       transitionTypes={NAV_FORWARD}
       className={`block bg-paper px-4 py-2 text-center font-sans text-sm font-medium text-ink hover:bg-paper/90 ${className ?? ""}`}
     >
-      Open the {polity.name} page →
+      Open the {polity.name} page
     </Link>
   );
 }

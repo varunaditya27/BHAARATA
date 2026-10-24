@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { HistoricalMap } from "@/components/map/HistoricalMap";
-import { MapLegend, type LayerToggleId } from "@/components/map/MapLegend";
+import { LAYER_TOGGLE_IDS, MapLegend, type LayerToggleId } from "@/components/map/MapLegend";
 import { MapLoading } from "@/components/map/MapLoading";
 import { composeMapPrint, downloadCanvas } from "@/components/map/export-image";
 import { AtlasSidebar } from "@/components/atlas/AtlasSidebar";
@@ -26,9 +26,23 @@ import { getPlaceById, milestones, getPolityBySlug, polities } from "@/lib/data/
 import type { HistoricalEvent } from "@/lib/domain/types";
 import { getEraForYear, getHistoricalState, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 
-const DEFAULT_VISIBLE_LAYERS: LayerToggleId[] = ["territory", "places", "routes", "relief", "battles"];
+const DEFAULT_VISIBLE_LAYERS: LayerToggleId[] = ["territory", "places", "routes", "relief", "battles", "sites"];
 const ERA_CARD_DURATION_MS = 1700;
 const URL_COMMIT_DEBOUNCE_MS = 300;
+const CAMERA_COMMIT_DEBOUNCE_MS = 600;
+
+/** Layers from a shared link; unknown names are dropped, and no list means the defaults. */
+function layersFromUrl(raw: string | null): Set<LayerToggleId> {
+  if (raw === null) return new Set(DEFAULT_VISIBLE_LAYERS);
+  return new Set(raw.split(",").filter((id): id is LayerToggleId => (LAYER_TOGGLE_IDS as string[]).includes(id)));
+}
+
+/** "lng,lat,zoom" from a shared link, or undefined if it is missing or not a real place on the map. */
+function cameraFromUrl(raw: string | null): { center: [number, number]; zoom: number } | undefined {
+  const [lng, lat, zoom] = (raw ?? "").split(",").map(Number);
+  if (![lng, lat, zoom].every(Number.isFinite) || Math.abs(lng) > 180 || Math.abs(lat) > 85 || zoom < 1 || zoom > 14) return undefined;
+  return { center: [lng, lat], zoom };
+}
 const CAPTION_MS = 5200;
 const EVENT_YEARS = milestones.map((e) => e.period.startYear);
 const DEFAULT_YEAR = 1050;
@@ -49,9 +63,9 @@ export function AtlasView() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [visibleLayers, setVisibleLayers] = useState<Set<LayerToggleId>>(
-    () => new Set(DEFAULT_VISIBLE_LAYERS),
-  );
+  const [visibleLayers, setVisibleLayers] = useState<Set<LayerToggleId>>(() => layersFromUrl(searchParams.get("layers")));
+  const [initialCamera] = useState(() => cameraFromUrl(searchParams.get("at")));
+  const cameraCommitTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [eraCard, setEraCard] = useState<{ era: string; year: number } | null>(null);
   const prevEraRef = useRef<string | null>(null);
   const eraCardTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -129,14 +143,17 @@ export function AtlasView() {
   // the debounced year commit below fires ~300ms later, and building from
   // a stale snapshot would silently drop a polity selected in between.
   const pushParams = useCallback(
-    (next: { year?: number; polity?: string | null }) => {
+    (next: { year?: number; polity?: string | null; at?: string; layers?: string | null }) => {
       const params = new URLSearchParams(window.location.search);
       if (next.year !== undefined) params.set("year", String(next.year));
-      if (next.polity !== undefined) {
-        if (next.polity) params.set("polity", next.polity);
-        else params.delete("polity");
+      for (const key of ["polity", "layers"] as const) {
+        if (next[key] === undefined) continue;
+        if (next[key]) params.set(key, next[key]);
+        else params.delete(key);
       }
-      router.replace(`/atlas?${params.toString()}`, { scroll: false });
+      if (next.at !== undefined) params.set("at", next.at);
+      const query = params.toString();
+      if (query !== window.location.search.slice(1)) router.replace(`/atlas?${query}`, { scroll: false });
     },
     [router],
   );
@@ -297,8 +314,26 @@ export function AtlasView() {
     });
   }, []);
 
+  // Layers go into the link only when they differ from the defaults, so ordinary links stay short.
+  useEffect(() => {
+    const isDefault =
+      visibleLayers.size === DEFAULT_VISIBLE_LAYERS.length && DEFAULT_VISIBLE_LAYERS.every((id) => visibleLayers.has(id));
+    pushParams({ layers: isDefault ? null : LAYER_TOGGLE_IDS.filter((id) => visibleLayers.has(id)).join(",") });
+  }, [visibleLayers, pushParams]);
+
+  const handleViewportChange = useCallback(
+    (center: [number, number], zoom: number) => {
+      if (cameraCommitTimeoutRef.current) clearTimeout(cameraCommitTimeoutRef.current);
+      cameraCommitTimeoutRef.current = setTimeout(
+        () => pushParams({ at: `${center[0].toFixed(2)},${center[1].toFixed(2)},${zoom.toFixed(2)}` }),
+        CAMERA_COMMIT_DEBOUNCE_MS,
+      );
+    },
+    [pushParams],
+  );
+
   return (
-    <div className={cinema ? "bh-cinema fixed inset-0 z-50 flex flex-col bg-black" : "flex h-[calc(100dvh-4rem)] flex-col bg-ink"}>
+    <div data-dark-page className={cinema ? "bh-cinema fixed inset-0 z-50 flex flex-col bg-black" : "flex h-[calc(100dvh-4rem)] flex-col bg-ink"}>
       <div className="flex flex-1 overflow-hidden">
         {!cinema && <AtlasSidebar
           allPolities={polities}
@@ -325,13 +360,16 @@ export function AtlasView() {
             onReady={handleMapReady}
             captureRef={captureRef}
             instanceRef={mainMapRef}
+            onViewportChange={handleViewportChange}
+            initialCenter={initialCamera?.center}
+            initialZoom={initialCamera?.zoom}
           />
           <EraGrade year={displayYear} />
           {compareFrom !== null && !cinema && (
             <div className="pointer-events-none absolute inset-x-0 top-4 z-10 hidden justify-end pr-14 md:flex">
               <p className="bg-ink/85 px-3 py-1 font-display text-lg text-paper">
                 {displayYear} CE{" "}
-                <span className="ml-1 font-sans text-[0.65rem] uppercase tracking-[0.16em] text-paper/60">
+                <span className="ml-1 font-sans text-xs text-paper/70">
                   {getEraForYear(displayYear)}
                 </span>
               </p>
@@ -360,40 +398,12 @@ export function AtlasView() {
           <CinemaFrame on={cinema} year={displayYear} onExit={toggleCinema} />
           <EraTitleCard era={eraCard?.era ?? null} year={eraCard?.year ?? displayYear} />
           <ShortcutHelp open={helpOpen} onClose={() => setHelpOpen(false)} />
-          <button
-            hidden={cinema}
-            onClick={() => setHelpOpen(true)}
-            className="absolute bottom-3 left-[150px] z-10 hidden border border-ink/20 bg-paper-raised/85 px-2 py-0.5 font-sans text-[0.7rem] text-ink-muted backdrop-blur-sm hover:text-ink md:block"
-            aria-label="Keyboard shortcuts"
-          >
-            Shortcuts <kbd className="ml-1 font-sans">?</kbd>
-          </button>
-          <button
-            hidden={cinema}
-            onClick={saveImage}
-            className="absolute bottom-3 left-[240px] z-10 hidden border border-ink/20 bg-paper-raised/85 px-2 py-0.5 font-sans text-[0.7rem] text-ink-muted backdrop-blur-sm hover:text-ink md:block"
-          >
-            Save image <kbd className="ml-1 font-sans">S</kbd>
-          </button>
-          <button
-            hidden={cinema}
-            onClick={toggleSound}
-            aria-pressed={soundOn}
-            className="absolute bottom-3 left-[345px] z-10 hidden items-center gap-1 border border-ink/20 bg-paper-raised/85 px-2 py-0.5 font-sans text-[0.7rem] text-ink-muted backdrop-blur-sm hover:text-ink md:flex"
-          >
-            {soundOn ? <Volume2 size={12} aria-hidden /> : <VolumeX size={12} aria-hidden />}
-            Sound {soundOn ? "on" : "off"} <kbd className="ml-1 font-sans">M</kbd>
-          </button>
-          {savedNote && (
-            <p role="status" className="bh-fade-in absolute bottom-10 left-[150px] z-10 bg-ink/90 px-2.5 py-1 font-sans text-xs text-paper">
-              {savedNote}
-            </p>
-          )}
         </div>
       </div>
 
       {/* Hidden, not unmounted, in cinema view: the scrubber owns the playback clock. */}
-      <div hidden={cinema} className="border-t border-paper/10 bg-ink px-4 py-3 md:px-6 md:py-4">
+      <div hidden={cinema} className="flex items-center gap-6 border-t border-paper/10 bg-ink px-4 py-3 md:px-6 md:py-4">
+        <div className="min-w-0 flex-1">
         <TimelineScrubber
           year={displayYear}
           onYearChange={handleYearChange}
@@ -405,6 +415,7 @@ export function AtlasView() {
             <LifespanStrip
               polities={polities}
               year={displayYear}
+              activePolityIds={activePolityIds}
               min={PROTOTYPE_YEAR_RANGE.min}
               max={PROTOTYPE_YEAR_RANGE.max}
               selectedPolityId={selectedPolity?.id ?? null}
@@ -426,6 +437,24 @@ export function AtlasView() {
             </>
           }
         />
+        </div>
+        <div className="relative hidden shrink-0 flex-col items-start gap-1 border-l border-paper/15 pl-5 font-sans text-xs text-paper/70 md:flex">
+          {savedNote && (
+            <p role="status" className="bh-fade-in absolute bottom-full right-0 mb-2 whitespace-nowrap bg-paper px-2.5 py-1 text-ink">
+              {savedNote}
+            </p>
+          )}
+          <button onClick={saveImage} className="flex items-center gap-2 py-0.5 hover:text-paper">
+            Save as image <kbd className="border border-paper/20 px-1 text-[0.65rem] text-paper/50">S</kbd>
+          </button>
+          <button onClick={toggleSound} aria-pressed={soundOn} className="flex items-center gap-2 py-0.5 hover:text-paper">
+            {soundOn ? <Volume2 size={13} aria-hidden /> : <VolumeX size={13} aria-hidden />}
+            Sound {soundOn ? "on" : "off"} <kbd className="border border-paper/20 px-1 text-[0.65rem] text-paper/50">M</kbd>
+          </button>
+          <button onClick={() => setHelpOpen(true)} className="flex items-center gap-2 py-0.5 hover:text-paper">
+            Keyboard shortcuts <kbd className="border border-paper/20 px-1 text-[0.65rem] text-paper/50">?</kbd>
+          </button>
+        </div>
       </div>
     </div>
   );

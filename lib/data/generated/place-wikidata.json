@@ -1,0 +1,218 @@
+{
+ "thanjavur": {
+  "q": "Q41496",
+  "label": "Thanjavur",
+  "description": "City in Tamil Nadu, India",
+  "coordinates": [
+   79.1378,
+   10.787
+  ]
+ },
+ "gangaikondacholapuram": {
+  "q": "Q1493439",
+  "label": "Gangaikonda Cholapuram",
+  "description": "Village in Thanjavur District, Tamil Nadu, India",
+  "coordinates": [
+   79.4528,
+   11.2052
+  ]
+ },
+ "madurai": {
+  "q": "Q228405",
+  "label": "Madurai",
+  "description": "city of Tamil Nadu in southern India",
+  "coordinates": [
+   78.1194,
+   9.9197
+  ]
+ },
+ "hampi": {
+  "q": "Q26732",
+  "label": "Hampi",
+  "description": "ancient and medieval monuments, a UNESCO World Heritage Site in Karnataka, India",
+  "coordinates": [
+   76.4622,
+   15.3345
+  ]
+ },
+ "kanchipuram": {
+  "q": "Q212332",
+  "label": "Kanchipuram",
+  "description": "city in Tamil Nadu, India",
+  "coordinates": [
+   79.7078,
+   12.8308
+  ]
+ },
+ "nagapattinam": {
+  "q": "Q695585",
+  "label": "Nagapattinam",
+  "description": "town in Tamil Nadu, India",
+  "coordinates": [
+   79.8333,
+   10.7667
+  ]
+ },
+ "manyakheta": {
+  "q": "Q191771",
+  "label": "Manyakheta",
+  "description": "village in Karnataka, India",
+  "coordinates": [
+   77.1608,
+   17.195
+  ]
+ },
+ "pataliputra": {
+  "q": "Q80484",
+  "label": "Patna",
+  "description": "metropolis and state capital of Bihar, India",
+  "coordinates": [
+   85.1414,
+   25.61
+  ]
+ },
+ "somapura": {
+  "q": "Q305044",
+  "label": "Q305044",
+  "description": "Buddhist Monastery",
+  "coordinates": [
+   88.9769,
+   25.0311
+  ]
+ },
+ "kannauj": {
+  "q": "Q614890",
+  "label": "Kannauj",
+  "description": "town in India",
+  "coordinates": [
+   79.922,
+   27.0313
+  ]
+ },
+ "gulbarga": {
+  "q": "Q37112",
+  "label": "Kalaburagi",
+  "description": "city in Karnataka, India",
+  "coordinates": [
+   76.8333,
+   17.3333
+  ]
+ },
+ "bidar": {
+  "q": "Q461922",
+  "label": "Bidar",
+  "description": "city in Karnataka, India",
+  "coordinates": [
+   77.55,
+   17.9
+  ]
+ },
+ "anuradhapura": {
+  "q": "Q5724",
+  "label": "Anuradhapura",
+  "description": "city in North Central Province, Sri Lanka",
+  "coordinates": [
+   80.4108,
+   8.335
+  ]
+ },
+ "polonnaruwa": {
+  "q": "Q394443",
+  "label": "Polonnaruwa",
+  "description": "town in North Central Province, Sri Lanka",
+  "coordinates": [
+   81,
+   7.9333
+  ]
+ },
+ "kodungallur": {
+  "q": "Q1006282",
+  "label": "Kodungallur",
+  "description": "town in Thrissur district, Kerala, India",
+  "coordinates": [
+   76.22,
+   10.22
+  ]
+ },
+ "basavakalyan": {
+  "q": "Q712521",
+  "label": "Basavakalyan",
+  "description": "City in Bidar district",
+  "coordinates": [
+   76.95,
+   17.87
+  ]
+ },
+ "dorasamudra": {
+  "q": "Q1013556",
+  "label": "Halebidu",
+  "description": "town in Hassan District, Karnataka, India",
+  "coordinates": [
+   75.9917,
+   13.2169
+  ]
+ },
+ "belur": {
+  "q": "Q760603",
+  "label": "Belur",
+  "description": "town in Karnataka, India",
+  "coordinates": [
+   75.8647,
+   13.1642
+  ]
+ },
+ "ellora": {
+  "q": "Q189616",
+  "label": "Ellora Caves",
+  "description": "ancient cave temples of Hinduism, Buddhism and Jainism in Maharashtra, India",
+  "coordinates": [
+   75.1792,
+   20.0264
+  ]
+ },
+ "gauda": {
+  "q": "Q1496277",
+  "label": "Gauḍa",
+  "description": "ancient city in India and Bangladesh",
+  "coordinates": [
+   88.128,
+   24.8829
+  ]
+ },
+ "bateshwar": {
+  "q": "Q4868834",
+  "label": "Bateshwar Hindu temples",
+  "description": "8th-century stone temples group near Gwalior and Morena, Madhya Pradesh, India",
+  "coordinates": [
+   78.1967,
+   26.4271
+  ]
+ },
+ "delhi": {
+  "q": "Q1353",
+  "label": "Delhi",
+  "description": "megacity and union territory of India",
+  "coordinates": [
+   77.2167,
+   28.6667
+  ]
+ },
+ "badami": {
+  "q": "Q590751",
+  "label": "Badami",
+  "description": "Town in Karnataka India",
+  "coordinates": [
+   75.6803,
+   15.9203
+  ]
+ },
+ "sasaram": {
+  "q": "Q1949410",
+  "label": "Sasaram",
+  "description": "city in Rohtas district, Bihar, India",
+  "coordinates": [
+   84.03,
+   24.95
+  ]
+ }
+}

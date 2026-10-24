@@ -54,13 +54,16 @@ Read this before assuming anything is wired up. The detail is in `docs/DATA.md`.
   - *Cliopatria* (CC BY 4.0): 54 kingdoms, 465 dated border shapes, 600–1700.
     Borders are one researched version of each territory, not exact frontiers.
   - *Wikidata / Wikipedia / Wikimedia Commons* (CC0 / CC BY-SA / per-file free
-    licences): capitals, 127 battles, 4,313 protected monuments, 185 rulers,
+    licences): capitals, 127 battles, 4,313 protected monuments, ~670 rulers, 344 dated sites,
     summaries and photographs.
-  - *Hand-written placeholders* in `lib/data/prototype.ts`: the text of the 10
-    "curated" kingdoms, the nine turning points, the routes, and Chera's
-    outline. These must be labelled as placeholders wherever they appear.
-- **Evidence:** one real translation (*South Indian Inscriptions* Vol. II no. 85)
-  and one clearly labelled placeholder example. There is no Tamil transcription:
+  - *Hand-written text* in `lib/data/prototype.ts`: the summaries of the 11
+    "curated" kingdoms, 11 rulers, nine turning points. Each statement was
+    checked against the Wikipedia article named in its provenance; keep it that
+    way (check before editing, cite the article).
+  - *Not researched, and labelled so:* Chera's outline and the two example
+    routes, which are drawn by hand.
+- **Evidence:** two real translations (*South Indian Inscriptions* Vol. II nos. 85
+  and 88), each read from the printed page. There is no Tamil transcription:
   the scan's machine-read Tamil is garbled and must not be used.
 - **Not built:** a database, IIIF, PMTiles, a citation layer down to page
   numbers, automated tests, CI. See `docs/BACKLOG.md`.

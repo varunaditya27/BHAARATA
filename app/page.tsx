@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ButtonLink } from "@/components/primitives/Button";
-import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { Magnetic } from "@/components/primitives/Magnetic";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { HomeFilm } from "@/components/home/HomeFilm";
@@ -33,8 +32,7 @@ export default function Home() {
         <section className="mx-auto max-w-[1400px] px-4 py-20 sm:px-6">
           <div className="flex flex-col items-start gap-8 border-b border-border pb-14 md:flex-row md:items-end md:justify-between">
             <div className="max-w-xl">
-              <Eyebrow>Explore it yourself</Eyebrow>
-              <h2 className="mt-3 font-display text-4xl text-ink md:text-5xl">Every year, every kingdom, on one map.</h2>
+              <h2 className="font-display text-4xl text-ink md:text-5xl">Every year, every kingdom, on one map.</h2>
               <p className="mt-4 font-sans leading-relaxed text-ink-muted">
                 Those were four moments. In the atlas you can move to any year from 600 to 1700, click a kingdom to
                 read about it, and see what evidence each claim rests on.
@@ -42,7 +40,7 @@ export default function Home() {
             </div>
             <Magnetic className="inline-block">
               <ButtonLink href="/atlas" transitionTypes={NAV_FORWARD} variant="solid">
-                Open the atlas →
+                Open the atlas
               </ButtonLink>
             </Magnetic>
           </div>
@@ -62,8 +60,8 @@ export default function Home() {
           </div>
 
           <p className="mt-12 font-sans text-xs text-ink-muted">
-            Kingdom borders come from a research dataset, and summaries from Wikipedia; rulers, events and the evidence
-            page are still placeholders.{" "}
+            Kingdom borders come from a research dataset; descriptions, rulers, battles and places from Wikipedia and
+            Wikidata. Two things are still drawn by hand: the Chera outline and the example routes.{" "}
             <Link href="/method" className="underline underline-offset-4 hover:text-ink">
               Read why
             </Link>

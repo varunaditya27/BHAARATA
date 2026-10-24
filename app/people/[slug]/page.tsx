@@ -62,68 +62,71 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
         style={{ "--bh-accent": accent } as React.CSSProperties}
       >
         <div className="bh-reading-progress" aria-hidden />
-        <div className="grid gap-10 md:grid-cols-[280px_1fr] md:items-end">
-          <div>
-            <Shared name={transitionNames.personPortrait(person.slug)}>
-              <div className="relative">
-                <RulerPortrait imageKey={person.imageKey} name={person.name} accentColor={accent} className="w-full" />
-                <span className="pointer-events-none absolute inset-2 border border-paper/50" aria-hidden />
-              </div>
-            </Shared>
-            {portrait ? (
+        <div className="grid items-end gap-6 sm:grid-cols-[auto_1fr] sm:gap-10">
+          {portrait ? (
+            <div className="w-40 sm:w-56">
+              <Shared name={transitionNames.personPortrait(person.slug)}>
+                <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-full" />
+              </Shared>
               <p className="mt-2 font-sans text-xs text-ink-muted">
-                {portrait.title} ·{" "}
+                {portrait.title}.{" "}
                 <a href={portrait.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ink">
                   {portrait.artist}, {portrait.license}
                 </a>
               </p>
-            ) : (
-              <p className="mt-2 font-sans text-xs text-ink-muted">
-                No old portrait or statue of this ruler is on file, so none is shown.
-              </p>
-            )}
-          </div>
+            </div>
+          ) : (
+            polity && <KingdomEmblem polityId={polity.id} color={accent} draw className="h-20 w-20 sm:h-28 sm:w-28" />
+          )}
 
           <div>
             <Eyebrow>{person.role}</Eyebrow>
             <RisingTitle text={person.name} className="mt-2 text-5xl text-ink sm:text-6xl" />
-            {person.nativeName && <InkName text={person.nativeName} className="mt-2 text-2xl text-ink-muted" />}
-            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-              <p className="font-display text-xl text-ink">{formatPersonDates(person)}</p>
+            {person.nativeName && <InkName text={person.nativeName} lang={person.nativeLang} className="mt-2 text-2xl text-ink-muted" />}
+            <p className="mt-4 font-display text-xl text-ink">
+              {lifetimeOnly ? formatPersonDates(person) : `Ruled ${formatDateRange(person.period)}`}
+            </p>
+            <div className="mt-3">
               <Badge tone={status.sourced ? "neutral" : "uncertainty"}>{status.label}</Badge>
             </div>
           </div>
         </div>
+
+        {polity && (
+          <section className="mt-12">
+            <h2 className="font-sans text-sm font-medium text-ink-muted">
+              Where this {lifetimeOnly ? "lifetime" : "reign"} falls in the history of{" "}
+              <Link href={`/polities/${polity.slug}`} transitionTypes={NAV_FORWARD} className="text-ink underline underline-offset-4 hover:[color:var(--bh-accent)]">
+                {polity.name}
+              </Link>
+            </h2>
+            <div className="relative mt-4 h-3 bg-stone/60">
+              <div
+                className="bh-grow-x absolute h-full"
+                style={{ left: `${pct(reignStart)}%`, width: `${Math.max(1.5, pct(reignEnd) - pct(reignStart))}%`, backgroundColor: accent }}
+              />
+            </div>
+            <div className="mt-2 flex justify-between font-sans text-xs text-ink-muted">
+              <span>Begins {formatDatePoint(polity.period.startQualifier, kingdomStart)}</span>
+              <span>{polity.period.endYear === null ? "End not known" : `Ends ${formatDatePoint(polity.period.endQualifier, kingdomEnd)}`}</span>
+            </div>
+          </section>
+        )}
 
         <Rule className="mt-12" />
 
         <div className="mt-10 grid gap-12 md:grid-cols-[1.5fr_1fr]">
           <div>
             {person.summary && <p className="bh-dropcap max-w-prose font-sans text-lg leading-relaxed text-ink">{person.summary}</p>}
-
-            {polity && (
-              <section className="mt-12">
-                <Eyebrow>{lifetimeOnly ? "Their lifetime in the kingdom's history" : "The reign in the kingdom's history"}</Eyebrow>
-                <div className="relative mt-5 h-3 bg-stone/60">
-                  <div
-                    className="bh-grow-x absolute h-full"
-                    style={{ left: `${pct(reignStart)}%`, width: `${Math.max(1.5, pct(reignEnd) - pct(reignStart))}%`, backgroundColor: accent }}
-                  />
-                </div>
-                <div className="mt-2 flex justify-between font-sans text-xs text-ink-muted">
-                  <span>
-                    {polity.name} begins {formatDatePoint(polity.period.startQualifier, kingdomStart)}
-                  </span>
-                  <span>
-                    ends {polity.period.endYear === null ? "—" : formatDatePoint(polity.period.endQualifier, kingdomEnd)}
-                  </span>
-                </div>
-              </section>
+            {!person.summary && (
+              <p className="max-w-prose font-sans text-base leading-relaxed text-ink-muted">
+                The sources give only {person.name}&rsquo;s title and dates, so there is no description yet.
+              </p>
             )}
 
             {reignEvents.length > 0 && (
               <section className="mt-12">
-                <Eyebrow>{lifetimeOnly ? "During their lifetime" : "During the reign"}</Eyebrow>
+                <h2 className="font-sans text-sm font-medium text-ink-muted">{lifetimeOnly ? "During their lifetime" : "During the reign"}</h2>
                 <ol className="bh-accent-rule mt-4 space-y-6 border-l pl-6">
                   {reignEvents.map((e) => (
                     <li key={e.id} className="relative">
@@ -135,7 +138,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
                         transitionTypes={NAV_BACK}
                         className="mt-1 inline-block font-sans text-xs text-ink underline underline-offset-4"
                       >
-                        See {e.period.startYear} on the atlas
+                        Show {e.period.startYear} CE on the map
                       </Link>
                     </li>
                   ))}
@@ -147,7 +150,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
           <aside className="space-y-10">
             {sourceRecords.length > 0 && (
               <section>
-                <Eyebrow>Sources</Eyebrow>
+                <h2 className="font-sans text-sm font-medium text-ink-muted">Sources</h2>
                 <ul className="mt-3 space-y-3">
                   {sourceRecords.map((pv) => (
                     <li key={pv.sourceId} className="border-t border-border pt-3 font-sans text-sm text-ink">
@@ -158,19 +161,8 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
                 </ul>
               </section>
             )}
-            {polity && (
-              <Link href={`/polities/${polity.slug}`} transitionTypes={NAV_FORWARD} className="bh-accent-rule group flex gap-4 border-t-2 pt-4">
-                <KingdomEmblem polityId={polity.id} color={polity.accentColor} className="h-12 w-12" />
-                <div>
-                  <Eyebrow>Ruled</Eyebrow>
-                  <p className="mt-1 font-display text-xl text-ink group-hover:[color:var(--bh-accent)]">{polity.name}</p>
-                  <p className="font-sans text-xs text-ink-muted">{formatDateRange(polity.period)}</p>
-                </div>
-              </Link>
-            )}
-
             <section>
-              <Eyebrow>Ruling elsewhere at the same time</Eyebrow>
+              <h2 className="font-sans text-sm font-medium text-ink-muted">Ruling elsewhere at the same time</h2>
               {contemporaries.length === 0 ? (
                 <p className="mt-3 font-sans text-sm text-ink-muted">No other ruler in the atlas reigned at the same time.</p>
               ) : (
@@ -182,7 +174,8 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
                         <Link href={`/people/${p.slug}`} transitionTypes={NAV_FORWARD} className="group block font-sans text-sm">
                           <span className="text-ink group-hover:underline">{p.name}</span>
                           <span className="block text-xs text-ink-muted">
-                            {theirs?.name} · {formatDateRange(p.period)}
+                            {theirs ? `${theirs.name}, ` : ""}
+                            {formatDateRange(p.period)}
                           </span>
                         </Link>
                       </li>

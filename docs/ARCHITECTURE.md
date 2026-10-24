@@ -69,7 +69,7 @@ flowchart TB
     RSC -- "HTML + data as props" --> TL
     ZOD -- "bundled" --> MAP
     EXT[("Map tiles<br/>CARTO, AWS terrain")] --> MAP
-    STATIC[("public/data/<br/>monuments.geojson")] -. "fetched when the layer is switched on" .-> MAP
+    STATIC[("public/data/<br/>monuments.geojson<br/>sites.geojson")] -. "fetched when the layer is switched on" .-> MAP
 
     classDef node fill:#faf6ec,stroke:#241f17,color:#241f17;
     class PY,JSON,HAND,MERGE,ZOD,RSC,OG,MAP,TL,EXT,STATIC node;
@@ -156,13 +156,13 @@ flowchart BT
     F --> G["Battles<br/>ring and name, ten-year window"]
     G --> H["Capital seals<br/>one per living kingdom"]
     H --> I["Kingdom names<br/>drawn last so they claim space first"]
-    J["Monuments<br/>clustered, added on first use"] -.-> I
+    J["Monuments and sites<br/>added on first use"] -.-> I
 
     classDef node fill:#faf6ec,stroke:#241f17,color:#241f17;
     class A,B,C,D,E,F,G,H,I,J node;
 ```
 
-The definitions live in `components/map/layers.ts`; ids are in `mapStyle.ts`. Four toggles in the legend map onto groups of these layers (`TOGGLE_LAYER_MAP` in `HistoricalMap.tsx`).
+The definitions live in `components/map/layers.ts`; ids are in `mapStyle.ts`. Each legend toggle maps onto a group of these layers (`TOGGLE_LAYER_MAP` in `HistoricalMap.tsx`).
 
 ### What drives each layer
 
@@ -175,6 +175,7 @@ The definitions live in `components/map/layers.ts`; ids are in `mapStyle.ts`. Fo
 | Ships and travellers | A GeoJSON source rewritten ~30 times a second | `animations.ts`, one shared clock |
 | Hover glow and label | `feature-state: hover` plus a DOM label | Written directly; no React render per mouse move |
 | Monuments | Static GeoJSON with clustering | Fetched when first switched on |
+| Sites (344 temples, forts, tombs…) | Static GeoJSON; a `filter` on each site's build year | Fetched when first switched on; `setFilter` once per year change |
 
 ### Related behaviours
 
@@ -321,7 +322,7 @@ flowchart TB
 | Concern | What is done |
 |---|---|
 | Scrubbing with 466 shapes | Only changed shapes are written each frame (see section 4). A 900-year drag held 60 fps in a software-rendered test browser |
-| 4,300 monuments | A separate 600 KB file, fetched only when the layer is first enabled, clustered by MapLibre |
+| 4,300 monuments, 344 sites | Separate GeoJSON files (780 KB together), fetched only when the layer is first enabled, clustered by MapLibre |
 | 60+ kingdoms on the timeline | Kingdoms that never overlap share a row, so about 14 rows instead of 60 |
 | Map load time | Terrain tiles are not waited for; the cover lifts as soon as the basemap and borders are drawn (about 1–3 s) |
 | Homepage globe | Starfield on a plain 2D canvas; the nebula is painted once off-screen; the camera path is one `requestAnimationFrame` loop |

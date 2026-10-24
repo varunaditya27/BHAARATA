@@ -54,6 +54,7 @@ export const SOURCE_IDS = {
   capitalSeals: "bh-capital-seals",
   battles: "bh-battles",
   monuments: "bh-monuments",
+  sites: "bh-sites",
 } as const;
 
 export const LAYER_IDS = {
@@ -80,4 +81,17 @@ export const LAYER_IDS = {
   monumentClusters: "bh-monument-clusters",
   monumentClusterCount: "bh-monument-cluster-count",
   monumentPoints: "bh-monument-points",
+  sitePoints: "bh-site-points",
+  siteLabels: "bh-site-labels",
+} as const;
+
+/** Colour of each kind of site on the map (and in the legend key). */
+export const SITE_COLORS = {
+  temple: "#b06b2c",
+  mosque: "#2f6b5e",
+  fort: "#5c3a6e",
+  tomb: "#8c3f5f",
+  palace: "#8a6d1f",
+  monastery: "#3a5a78",
+  church: "#5a5a5a",
 } as const;

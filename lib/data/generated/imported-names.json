@@ -1,0 +1,2021 @@
+{
+ "polities": {
+  "pallava": {
+   "native": {
+    "lang": "ta",
+    "text": "பல்லவர்"
+   },
+   "aliases": []
+  },
+  "chalukya-badami": {
+   "native": {
+    "lang": "kn",
+    "text": "ಚಾಲುಕ್ಯ"
+   },
+   "aliases": [
+    "Chalukyas",
+    "Chalukya Kingdom",
+    "Chalukya"
+   ]
+  },
+  "maitraka": {
+   "native": {
+    "lang": "gu",
+    "text": "મૈત્રકકાળ"
+   },
+   "aliases": []
+  },
+  "kamarupa": {
+   "native": {
+    "lang": "as",
+    "text": "কামৰূপ ৰাজ্য"
+   }
+  },
+  "turk-shahis": {
+   "native": {
+    "lang": "fa",
+    "text": "کابل شاهی"
+   }
+  },
+  "karkota": {
+   "native": {
+    "lang": "ks",
+    "text": "کارکوٹا خاندان"
+   },
+   "aliases": [
+    "Karkoṭa Empire",
+    "Karkota Kingdom"
+   ]
+  },
+  "pandya": {
+   "native": {
+    "lang": "ta",
+    "text": "பாண்டியர்"
+   },
+   "aliases": [
+    "Pandyan dynasty",
+    "Pandyas of Madurai"
+   ]
+  },
+  "harsha": {
+   "native": {
+    "lang": "hi",
+    "text": "हर्षवर्द्धन"
+   },
+   "aliases": [
+    "Harsha Vardhana",
+    "Harshavardhana",
+    "Harṣa"
+   ]
+  },
+  "pratihara": {
+   "native": {
+    "lang": "hi",
+    "text": "गुर्जर-प्रतिहार राजवंश"
+   }
+  },
+  "pala": {
+   "native": {
+    "lang": "bn",
+    "text": "পাল সাম্রাজ্য"
+   },
+   "aliases": [
+    "Pala dynasty"
+   ]
+  },
+  "rashtrakuta": {
+   "native": {
+    "lang": "kn",
+    "text": "ರಾಷ್ಟ್ರಕೂಟ"
+   },
+   "aliases": [
+    "Rashtrakuta Empire"
+   ]
+  },
+  "chola": {
+   "native": {
+    "lang": "ta",
+    "text": "இடைக்காலச் சோழர்கள்"
+   },
+   "aliases": [
+    "Medieval Cholas",
+    "Imperial Cholas",
+    "Chola empire"
+   ]
+  },
+  "habbarid": {
+   "native": {
+    "lang": "ur",
+    "text": "ہباری امارت"
+   }
+  },
+  "chandra": {
+   "native": {
+    "lang": "bn",
+    "text": "চন্দ্র রাজবংশ"
+   }
+  },
+  "chaulukya": {
+   "native": {
+    "lang": "gu",
+    "text": "સોલંકી વંશ"
+   },
+   "aliases": [
+    "Solankis"
+   ]
+  },
+  "chandela": {
+   "native": {
+    "lang": "hi",
+    "text": "जेजाकभुक्ति के चन्देल"
+   },
+   "aliases": [
+    "Chandela Empire",
+    "Chandel Empire"
+   ]
+  },
+  "utpala": {
+   "native": {
+    "lang": "ks",
+    "text": "اُتپالا خاندان"
+   }
+  },
+  "ghaznavid": {
+   "native": {
+    "lang": "fa",
+    "text": "غزنویان"
+   },
+   "aliases": [
+    "Ghaznavid Emirate"
+   ]
+  },
+  "chalukya-kalyani": {
+   "native": {
+    "lang": "te",
+    "text": "పశ్చిమ చాళుక్యులు"
+   }
+  },
+  "paramara": {
+   "native": {
+    "lang": "hi",
+    "text": "परमार वंश"
+   }
+  },
+  "chauhan": {
+   "native": {
+    "lang": "hi",
+    "text": "चौहान"
+   },
+   "aliases": []
+  },
+  "lohara": {
+   "aliases": [
+    "Khasha Lohara"
+   ]
+  },
+  "eastern-ganga": {
+   "native": {
+    "lang": "or",
+    "text": "ଗଙ୍ଗବଂଶ"
+   }
+  },
+  "sena": {
+   "native": {
+    "lang": "bn",
+    "text": "সেন রাজবংশ"
+   }
+  },
+  "polonnaruwa": {
+   "native": {
+    "lang": "si",
+    "text": "රජරට රාජධානියේ පොළොන්නරු යුගය"
+   }
+  },
+  "gahadavala": {
+   "native": {
+    "lang": "hi",
+    "text": "गाहड़वाल वंश"
+   },
+   "aliases": [
+    "Gahadvala"
+   ]
+  },
+  "hoysala": {
+   "native": {
+    "lang": "kn",
+    "text": "ಹೊಯ್ಸಳ"
+   }
+  },
+  "ghurid": {
+   "native": {
+    "lang": "fa",
+    "text": "سلسله غوریان"
+   },
+   "aliases": [
+    "Ghuri",
+    "Ghorid dynasty"
+   ]
+  },
+  "kakatiya": {
+   "native": {
+    "lang": "kn",
+    "text": "ಕಾಕತೀಯ"
+   }
+  },
+  "yadava": {
+   "native": {
+    "lang": "kn",
+    "text": "ಸೇವುಣ"
+   },
+   "aliases": [
+    "Yadavas of Devagiri",
+    "Yadavs of Devagiri",
+    "Seuna (Yadava) Dynasty"
+   ]
+  },
+  "delhi-sultanate": {
+   "native": {
+    "lang": "fa",
+    "text": "سلطنت دهلی"
+   },
+   "aliases": [
+    "Sultanate of Delhi"
+   ]
+  },
+  "dambadeniya": {
+   "native": {
+    "lang": "si",
+    "text": "දඹදෙණිය යුගය"
+   }
+  },
+  "kampili": {
+   "native": {
+    "lang": "kn",
+    "text": "ಕಂಪ್ಲಿ ಸಂಸ್ಥಾನ"
+   },
+   "aliases": [
+    "Kampili kingdom",
+    "Basnaga kingdom"
+   ]
+  },
+  "jaffna": {
+   "native": {
+    "lang": "si",
+    "text": "යාපනය රාජධානිය"
+   },
+   "aliases": [
+    "Kingdom of Jaffna"
+   ]
+  },
+  "kashmir-sultanate": {
+   "native": {
+    "lang": "ur",
+    "text": "سلطنت کشمیر"
+   }
+  },
+  "bengal-sultanate": {
+   "native": {
+    "lang": "fa",
+    "text": "شاهی بنگاله"
+   },
+   "aliases": [
+    "Bangalah"
+   ]
+  },
+  "samma": {
+   "native": {
+    "lang": "sd",
+    "text": "سما شاهي گهراڻو"
+   }
+  },
+  "vijayanagara": {
+   "native": {
+    "lang": "kn",
+    "text": "ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯ"
+   },
+   "aliases": [
+    "Vijayanagar Empire",
+    "Kingdom of Bisnegar",
+    "Karnata Kingdom",
+    "Vijayangara"
+   ]
+  },
+  "bahmani": {
+   "native": {
+    "lang": "kn",
+    "text": "ಬಹಮನಿ ಸುಲ್ತಾನರು"
+   },
+   "aliases": [
+    "Bahamani Sultanate"
+   ]
+  },
+  "jaunpur": {
+   "native": {
+    "lang": "ur",
+    "text": "سلطنت جونپور"
+   }
+  },
+  "ahmadnagar": {
+   "native": {
+    "lang": "fa",
+    "text": "نظام‌شاهیان احمدنگر"
+   }
+  },
+  "berar": {
+   "native": {
+    "lang": "fa",
+    "text": "عمادشاهیان"
+   },
+   "aliases": [
+    "Berar",
+    "Imad Shahi Sultanate",
+    "Imad Shahi dynasty",
+    "'Imād Sẖāhī Dynasty"
+   ]
+  },
+  "bijapur": {
+   "native": {
+    "lang": "fa",
+    "text": "عادل‌شاهیان"
+   },
+   "aliases": [
+    "Sultanate of Bijapur"
+   ]
+  },
+  "bidar-sultanate": {
+   "native": {
+    "lang": "fa",
+    "text": "بریدشاهیان"
+   }
+  },
+  "golconda": {
+   "native": {
+    "lang": "fa",
+    "text": "قطب‌شاهیان"
+   },
+   "aliases": [
+    "Quṭb Shāhī dynasty"
+   ]
+  },
+  "madurai-nayaks": {
+   "native": {
+    "lang": "ta",
+    "text": "மதுரை நாயக்கர்கள்"
+   }
+  },
+  "mughal": {
+   "native": {
+    "lang": "fa",
+    "text": "امپراتوری گورکانی"
+   },
+   "aliases": [
+    "Mogul Empire",
+    "Mughal India",
+    "Moghul Empire",
+    "Mogul India",
+    "Moghul India"
+   ]
+  },
+  "thanjavur-nayaks": {
+   "native": {
+    "lang": "ta",
+    "text": "தஞ்சை நாயக்கர்கள்"
+   }
+  },
+  "sur": {
+   "native": {
+    "lang": "hi",
+    "text": "सूरी साम्राज्य"
+   }
+  },
+  "mysore": {
+   "native": {
+    "lang": "kn",
+    "text": "ಮೈಸೂರು ಸಂಸ್ಥಾನ"
+   },
+   "aliases": [
+    "Mysore State",
+    "Princely State of Mysore",
+    "State of Mysore",
+    "Mysore"
+   ]
+  },
+  "gorkha": {
+   "native": {
+    "lang": "ne",
+    "text": "गोरखा राज्य"
+   },
+   "aliases": [
+    "Gorkhā",
+    "Kingdom of Gorkha"
+   ]
+  },
+  "maratha": {
+   "native": {
+    "lang": "kn",
+    "text": "ಮರಾಠ ಸಾಮ್ರಾಜ್ಯ"
+   },
+   "aliases": [
+    "Maratha Confederacy",
+    "Maratha"
+   ]
+  },
+  "thanjavur-marathas": {
+   "native": {
+    "lang": "ta",
+    "text": "தஞ்சாவூர் மராத்திய இராச்சியம்"
+   }
+  }
+ },
+ "people": {
+  "malik-ahmad-nizam-shah-i": {
+   "native": {
+    "lang": "hi",
+    "text": "मलिक अहमद निज़ाम शाह I"
+   }
+  },
+  "burhan-shah-i": {
+   "native": {
+    "lang": "hi",
+    "text": "बुरहान निजाम शाह I"
+   }
+  },
+  "murtaza-nizam-shah-ii": {
+   "native": {
+    "lang": "hi",
+    "text": "मुर्तजाशाह द्वितीय"
+   }
+  },
+  "sena-ii-of-anuradhapura": {
+   "native": {
+    "lang": "ta",
+    "text": "இரண்டாம் சேனன்"
+   }
+  },
+  "mahinda-v-of-anuradhapura": {
+   "native": {
+    "lang": "si",
+    "text": "Vවන මහින්ද රජ"
+   }
+  },
+  "ahmad-shah-i-wali": {
+   "native": {
+    "lang": "hi",
+    "text": "अहमद शाह वली"
+   }
+  },
+  "taj-ud-din-firuz-shah": {
+   "native": {
+    "lang": "hi",
+    "text": "ताजुद्दीन फ़िरोज़ शाह बहमनी"
+   }
+  },
+  "nizam-ud-din-ahmad-iii": {
+   "native": {
+    "lang": "hi",
+    "text": "निज़ामउद्दीन अहमद तृतीय"
+   }
+  },
+  "muhammad-shah-lashkari": {
+   "native": {
+    "lang": "hi",
+    "text": "मुहम्मद शाह तृतीय लश्करी"
+   },
+   "aliases": [
+    "Muhammad III Szach"
+   ]
+  },
+  "mahmud-szach": {
+   "native": {
+    "lang": "hi",
+    "text": "महमूद शाह बहमनी द्वितीय"
+   },
+   "aliases": [
+    "Mahmood Shah Bahmani II"
+   ]
+  },
+  "sikandar-shah": {
+   "native": {
+    "lang": "bn",
+    "text": "সিকান্দার শাহ"
+   }
+  },
+  "shamsuddin-ilyas-shah": {
+   "native": {
+    "lang": "bn",
+    "text": "শামসুদ্দীন ইলিয়াস শাহ"
+   },
+   "aliases": [
+    "Ilyas Shah"
+   ]
+  },
+  "alauddin-husain-shah": {
+   "native": {
+    "lang": "bn",
+    "text": "আলাউদ্দিন হোসেন শাহ"
+   },
+   "aliases": [
+    "Ala al-Din Husayn Xah"
+   ]
+  },
+  "taj-khan-karrani": {
+   "native": {
+    "lang": "bn",
+    "text": "তাজ খান কররানী"
+   }
+  },
+  "yusuf-adil-shah": {
+   "native": {
+    "lang": "te",
+    "text": "యూసుఫ్ ఆదిల్ షా"
+   }
+  },
+  "ismail-adil-shah": {
+   "native": {
+    "lang": "te",
+    "text": "ఇస్మాయిల్ ఆదిల్ షా"
+   },
+   "aliases": [
+    "Ismāʿīl ʿĀdil Shah"
+   ]
+  },
+  "ibrahim-adil-shah-i": {
+   "native": {
+    "lang": "hi",
+    "text": "इब्राहीम आदिल शाह प्रथम"
+   },
+   "aliases": [
+    "Ibrahim Adil Shah Buzurg"
+   ]
+  },
+  "ibrahim-adil-shah-ii": {
+   "native": {
+    "lang": "te",
+    "text": "రెండవ ఇబ్రహీం ఆదిల్‌షా"
+   }
+  },
+  "mohammed-adil-shah": {
+   "native": {
+    "lang": "te",
+    "text": "మహమ్మద్ ఆదిల్ షా, బీజాపూర్ సుల్తాన్"
+   }
+  },
+  "ali-adil-shah-ii": {
+   "native": {
+    "lang": "kn",
+    "text": "ಅಲಿ ಆದಿಲ್ ಷಾ II"
+   }
+  },
+  "sikandar-adil-shah": {
+   "native": {
+    "lang": "hi",
+    "text": "सिकंदर आदिल शाह"
+   }
+  },
+  "mangalesa": {
+   "native": {
+    "lang": "te",
+    "text": "మంగలేశ"
+   }
+  },
+  "pulakeshi-ii": {
+   "native": {
+    "lang": "kn",
+    "text": "ಇಮ್ಮಡಿ ಪುಲಿಕೇಶಿ"
+   },
+   "aliases": [
+    "Pulakeśi 2"
+   ]
+  },
+  "vikramaditya-i": {
+   "native": {
+    "lang": "te",
+    "text": "మొదటి విక్రమాదిత్య"
+   }
+  },
+  "vinayaditya": {
+   "native": {
+    "lang": "kn",
+    "text": "ವಿನಯಾದಿತ್ಯ"
+   }
+  },
+  "vijayaditya": {
+   "native": {
+    "lang": "kn",
+    "text": "ವಿಜಯಾದಿತ್ಯ"
+   }
+  },
+  "vikramaditya-ii": {
+   "native": {
+    "lang": "kn",
+    "text": "ಎರಡನೇ ವಿಕ್ರಮಾದಿತ್ಯ"
+   }
+  },
+  "kirtivarman-ii": {
+   "native": {
+    "lang": "hi",
+    "text": "कीर्तिवर्मन् २"
+   }
+  },
+  "jayasimha-siddharaja": {
+   "native": {
+    "lang": "gu",
+    "text": "સિદ્ધરાજ જયસિંહ"
+   },
+   "aliases": [
+    "Jaisinh Solanki",
+    "Siddharaj Jaisinh"
+   ]
+  },
+  "kumarapala": {
+   "native": {
+    "lang": "gu",
+    "text": "કુમારપાળ"
+   },
+   "aliases": [
+    "Kumarpal"
+   ]
+  },
+  "vijayalaya-chola": {
+   "native": {
+    "lang": "ta",
+    "text": "விசயாலய சோழன்"
+   }
+  },
+  "aditya-i": {
+   "native": {
+    "lang": "ta",
+    "text": "ஆதித்த சோழன்"
+   }
+  },
+  "parantaka-i": {
+   "native": {
+    "lang": "ta",
+    "text": "முதலாம் பராந்தக சோழன்"
+   }
+  },
+  "arinjaya-chola": {
+   "native": {
+    "lang": "ta",
+    "text": "அரிஞ்சய சோழன்"
+   }
+  },
+  "parantaka-chola-ii": {
+   "native": {
+    "lang": "ta",
+    "text": "பராந்தக சோழன்"
+   }
+  },
+  "uththama-chola": {
+   "native": {
+    "lang": "ta",
+    "text": "உத்தம சோழன்"
+   }
+  },
+  "rajaraja-i": {
+   "native": {
+    "lang": "ta",
+    "text": "முதலாம் இராஜராஜ சோழன்"
+   }
+  },
+  "rajendra-chola-i": {
+   "native": {
+    "lang": "ta",
+    "text": "இராசேந்திர சோழன்"
+   }
+  },
+  "rajadhiraja-chola": {
+   "native": {
+    "lang": "ta",
+    "text": "இராஜாதிராஜ சோழன்"
+   }
+  },
+  "rajendra-chola-ii": {
+   "native": {
+    "lang": "ta",
+    "text": "இரண்டாம் இராஜேந்திர சோழன்"
+   }
+  },
+  "virarajendra-chola": {
+   "native": {
+    "lang": "ta",
+    "text": "வீரராஜேந்திர சோழன்"
+   }
+  },
+  "kulothunga-chola-i": {
+   "native": {
+    "lang": "ta",
+    "text": "முதலாம் குலோத்துங்க சோழன்"
+   },
+   "aliases": [
+    "Kulothunga"
+   ]
+  },
+  "athirajendra-chola": {
+   "native": {
+    "lang": "ta",
+    "text": "அதிராஜேந்திர சோழன்"
+   }
+  },
+  "vikrama-chola": {
+   "native": {
+    "lang": "ta",
+    "text": "விக்கிரம சோழன்"
+   }
+  },
+  "kulothunga-chola-ii": {
+   "native": {
+    "lang": "ta",
+    "text": "இரண்டாம் குலோத்துங்க சோழன்"
+   },
+   "aliases": [
+    "Rajakesarivarman"
+   ]
+  },
+  "rajaraja-ii": {
+   "native": {
+    "lang": "ta",
+    "text": "இரண்டாம் இராஜராஜ சோழன்"
+   }
+  },
+  "rajadhiraja-chola-ii": {
+   "native": {
+    "lang": "ta",
+    "text": "இரண்டாம் இராஜாதிராஜ சோழன்"
+   },
+   "aliases": [
+    "Rajakesarivarman"
+   ]
+  },
+  "kulothunga-chola-iii": {
+   "native": {
+    "lang": "ta",
+    "text": "மூன்றாம் குலோத்துங்க சோழன்"
+   }
+  },
+  "rajaraja-iii": {
+   "native": {
+    "lang": "ta",
+    "text": "மூன்றாம் இராஜராஜ சோழன்"
+   }
+  },
+  "rajendra-chola-iii": {
+   "native": {
+    "lang": "ta",
+    "text": "மூன்றாம் இராஜேந்திர சோழன்"
+   }
+  },
+  "parakramabahu-ii": {
+   "native": {
+    "lang": "si",
+    "text": "දෙවන පරාක්‍රමබාහු රජ"
+   },
+   "aliases": [
+    "Parakrama Bãhu II",
+    "Parrakkamabahu II",
+    "Parrakkama Bãhu II",
+    "Parakkamabahu II of Dambadeniya"
+   ]
+  },
+  "vijayabahu-iv-of-dambadeniya": {
+   "native": {
+    "lang": "si",
+    "text": "හතරවන විජයබාහු රජ"
+   },
+   "aliases": [
+    "Vijaya Bãhu IV"
+   ]
+  },
+  "bhuvanaikabahu-i-of-dambadeniya": {
+   "native": {
+    "lang": "si",
+    "text": "පළමු බුවනෙකබාහු රජ"
+   },
+   "aliases": [
+    "Bhuvanaika Bãhu I",
+    "Buvaneka Bãhu I",
+    "Buwaneka Baahu I"
+   ]
+  },
+  "qutb-ud-din-aibak": {
+   "native": {
+    "lang": "hi",
+    "text": "कुतुब-उद-दीन ऐबक"
+   },
+   "aliases": [
+    "Qutb al-Din Aibak"
+   ]
+  },
+  "aram-shah": {
+   "native": {
+    "lang": "hi",
+    "text": "आरामशाह"
+   }
+  },
+  "iltutmish": {
+   "native": {
+    "lang": "hi",
+    "text": "इल्तुतमिश"
+   },
+   "aliases": [
+    "Shams-ud-din Iltutmish"
+   ]
+  },
+  "ghiyas-ud-din-balban": {
+   "native": {
+    "lang": "hi",
+    "text": "गयासुद्दीन बलबन"
+   }
+  },
+  "razia-sultana": {
+   "native": {
+    "lang": "hi",
+    "text": "रज़िया सुल्तान"
+   },
+   "aliases": [
+    "Razia Sultan",
+    "Razia",
+    "Radiyya bint Iltutmish"
+   ]
+  },
+  "muiz-ud-din-bahram": {
+   "native": {
+    "lang": "hi",
+    "text": "मुईज़ुद्दीन बहरामशाह"
+   }
+  },
+  "jalal-ud-din-firuz-khalji": {
+   "native": {
+    "lang": "hi",
+    "text": "जलालुद्दीन खिलजी"
+   },
+   "aliases": [
+    "Jalal-ud-din Khalji"
+   ]
+  },
+  "nasir-ud-din-mahmud": {
+   "native": {
+    "lang": "hi",
+    "text": "नासिरुद्दीन महमूद"
+   },
+   "aliases": [
+    "Sultan Nasiruddin Mahmud Shah",
+    "Nasir ud din Mahmud Shah"
+   ]
+  },
+  "muiz-ud-din-qaiqabad": {
+   "native": {
+    "lang": "hi",
+    "text": "कैकूबाद"
+   }
+  },
+  "kayumars-of-delhi": {
+   "native": {
+    "lang": "hi",
+    "text": "शमशुद्दीन क्यूम़र्श"
+   },
+   "aliases": [
+    "Kayumarth"
+   ]
+  },
+  "n-ssir-ad-din-mahmud-xah-tughluq": {
+   "native": {
+    "lang": "hi",
+    "text": "महमूद तुग़लक़"
+   },
+   "aliases": [
+    "Nassir-ad-Din Mahmud Xah Tughluq",
+    "Nasir-ud-Din Mahmud Shah Tughluq"
+   ]
+  },
+  "nasir-ud-din-muhammad-shah-iii": {
+   "native": {
+    "lang": "ur",
+    "text": "ناصر الدین محمد شاہ سوم"
+   }
+  },
+  "muhammad-shah": {
+   "native": {
+    "lang": "ur",
+    "text": "محمد شاہ سید"
+   },
+   "aliases": [
+    "Muhammad Shah (Sayyid dynasty)",
+    "Mohammed Schah IV."
+   ]
+  },
+  "bahlul-khan-lodi": {
+   "native": {
+    "lang": "hi",
+    "text": "बहलूल खान लोदी"
+   }
+  },
+  "sikandar-khan-lodi": {
+   "native": {
+    "lang": "hi",
+    "text": "सिकन्दर लोदी"
+   }
+  },
+  "ibrahim-khan-lodi": {
+   "native": {
+    "lang": "hi",
+    "text": "इब्राहीम लोदी"
+   }
+  },
+  "kalinga-magha": {
+   "native": {
+    "lang": "or",
+    "text": "କଳିଙ୍ଗ ମଘା"
+   },
+   "aliases": [
+    "Magha the Tyrant",
+    "Kulankayan Cinkai Ariyan",
+    "Kulankayan Singai Aryan"
+   ]
+  },
+  "alp-tigin": {
+   "native": {
+    "lang": "fa",
+    "text": "آلپ تکین"
+   }
+  },
+  "mahmud-of-ghazni": {
+   "native": {
+    "lang": "fa",
+    "text": "سلطان محمود غزنوی"
+   },
+   "aliases": [
+    "Sultan Mahmood Ghaznavi",
+    "Mahmud of Ghazna"
+   ]
+  },
+  "ismail-of-ghazni": {
+   "native": {
+    "lang": "fa",
+    "text": "اسماعیل بن سبکتگین"
+   }
+  },
+  "mohammad-ghaznavi": {
+   "native": {
+    "lang": "fa",
+    "text": "محمد غزنوی"
+   }
+  },
+  "mas-ud-i": {
+   "native": {
+    "lang": "fa",
+    "text": "سلطان مسعود غزنوی"
+   },
+   "aliases": [
+    "Mas'ud ibn Mahmud"
+   ]
+  },
+  "maw-dud-ghaznavi": {
+   "native": {
+    "lang": "fa",
+    "text": "مودود غزنوی"
+   }
+  },
+  "ali-bin-masud": {
+   "native": {
+    "lang": "fa",
+    "text": "علی غزنوی"
+   },
+   "aliases": [
+    "Ali of Ghazna"
+   ]
+  },
+  "masud-ii": {
+   "native": {
+    "lang": "ur",
+    "text": "مسعود ثانی"
+   }
+  },
+  "abd-al-rashid-ben-mahmud": {
+   "native": {
+    "lang": "fa",
+    "text": "عبدالرشید غزنوی"
+   }
+  },
+  "toghrul-of-ghazna": {
+   "native": {
+    "lang": "fa",
+    "text": "طغرل غزنوی"
+   }
+  },
+  "farrukh-zad-of-ghazna": {
+   "native": {
+    "lang": "fa",
+    "text": "ابوشجاع فرخزاد"
+   }
+  },
+  "ibrahim-of-ghazna": {
+   "native": {
+    "lang": "fa",
+    "text": "ابراهیم غزنوی"
+   }
+  },
+  "mas-ud-iii-of-ghazna": {
+   "native": {
+    "lang": "fa",
+    "text": "مسعود بن ابراهیم"
+   },
+   "aliases": [
+    "Mas'ud III of Ghazni"
+   ]
+  },
+  "arslan-shah-of-ghazna": {
+   "native": {
+    "lang": "fa",
+    "text": "ارسلان‌شاه"
+   }
+  },
+  "shir-zad-of-ghazna": {
+   "native": {
+    "lang": "fa",
+    "text": "عضدالدوله شیرزاد"
+   }
+  },
+  "bahram-shah-of-ghazna": {
+   "native": {
+    "lang": "fa",
+    "text": "بهرام‌شاه"
+   }
+  },
+  "khosro-of-ghazni": {
+   "native": {
+    "lang": "fa",
+    "text": "خسروشاه غزنوی"
+   },
+   "aliases": [
+    "Khusrau-Shah"
+   ]
+  },
+  "khusrau-malik": {
+   "native": {
+    "lang": "fa",
+    "text": "خسروملک"
+   }
+  },
+  "muhammad-of-ghor": {
+   "native": {
+    "lang": "fa",
+    "text": "سلطان معزالدین محمد غوری"
+   }
+  },
+  "quli-qutb-shah": {
+   "native": {
+    "lang": "te",
+    "text": "సుల్తాన్ కులీ కుత్బుల్ ముల్క్"
+   },
+   "aliases": [
+    "Sultan Quli Qutb-ul-Mulk",
+    "Sultan-Quli Qutb-ul-Mulk"
+   ]
+  },
+  "ibrahim-quli-qutb-shah-wali": {
+   "native": {
+    "lang": "te",
+    "text": "ఇబ్రహీం కులీ కుతుబ్ షా"
+   },
+   "aliases": [
+    "Ibrahim Qutb Shah Wali"
+   ]
+  },
+  "subhan-quli-qutb-shah": {
+   "native": {
+    "lang": "te",
+    "text": "సుభాన్ కులీ కుతుబ్ షా"
+   }
+  },
+  "muhammad-quli-qutb-shah": {
+   "native": {
+    "lang": "te",
+    "text": "ముహమ్మద్ కులీ కుతుబ్ షా"
+   }
+  },
+  "sultan-muhammad-qutb-shah": {
+   "native": {
+    "lang": "te",
+    "text": "సుల్తాన్ మహమ్మద్ కుతుబ్ షా"
+   }
+  },
+  "abdullah-qutb-shah": {
+   "native": {
+    "lang": "te",
+    "text": "అబ్దుల్లా కుతుబ్ షా"
+   },
+   "aliases": [
+    "the twelve-year-old king of Deccan"
+   ]
+  },
+  "vishnuvardhana": {
+   "native": {
+    "lang": "kn",
+    "text": "ಹೊಯ್ಸಳ ವಿಷ್ಣುವರ್ಧನ"
+   }
+  },
+  "narasimha-i": {
+   "native": {
+    "lang": "hi",
+    "text": "नरसिंह १"
+   }
+  },
+  "veera-ballala-ii": {
+   "native": {
+    "lang": "kn",
+    "text": "ವೀರ ಬಲ್ಲಾಳ 2"
+   }
+  },
+  "vira-narasimha-ii": {
+   "native": {
+    "lang": "hi",
+    "text": "वीर नरसिंह २"
+   }
+  },
+  "vira-someshwara": {
+   "native": {
+    "lang": "mr",
+    "text": "वीर सोमेश्वर"
+   }
+  },
+  "narasimha-iii": {
+   "native": {
+    "lang": "hi",
+    "text": "नृसिंह तृतीय"
+   }
+  },
+  "veera-ballala-iii": {
+   "native": {
+    "lang": "hi",
+    "text": "वीर बल्लाला तृतीय"
+   }
+  },
+  "gunabhooshana-cinkaiariyan": {
+   "native": {
+    "lang": "ta",
+    "text": "குணபூஷண சிங்கையாரியன்"
+   },
+   "aliases": [
+    "Gunabhooshana Singai Aryan",
+    "Cekaracacekaran IV"
+   ]
+  },
+  "virodaya-cinkaiariyan": {
+   "native": {
+    "lang": "ta",
+    "text": "வீரோதய சிங்கையாரியன்"
+   },
+   "aliases": [
+    "Virodaya Singai Aryan",
+    "Pararacacekaran IV"
+   ]
+  },
+  "jeyaveera-cinkaiariyan": {
+   "native": {
+    "lang": "ta",
+    "text": "செயவீர சிங்கையாரியன்"
+   },
+   "aliases": [
+    "Jeyaveera Singai Aryan",
+    "Jaya Wera Cinkai Aryan",
+    "Cekaracacekaran V"
+   ]
+  },
+  "rudrama-devi": {
+   "native": {
+    "lang": "kn",
+    "text": "ರುದ್ರಮ ದೇವಿ"
+   },
+   "aliases": [
+    "Rani Rudrama Devi"
+   ]
+  },
+  "lalitaditya-muktapida": {
+   "native": {
+    "lang": "ks",
+    "text": "لَلِت ادِتیہ مُکتَپِدا"
+   }
+  },
+  "babur": {
+   "native": {
+    "lang": "fa",
+    "text": "بابر"
+   },
+   "aliases": [
+    "Zahīr ud-Dīn Muhammad Bābur",
+    "Zahir-ud-din Muhammad",
+    "Baber",
+    "Zahir al-Din Muhammad",
+    "Babar"
+   ]
+  },
+  "humayun": {
+   "native": {
+    "lang": "fa",
+    "text": "نصیرالدین همایون"
+   },
+   "aliases": [
+    "Mirza Nasiruddin Baig Mohammad Humayun",
+    "Nasir ud-Din Muhammad",
+    "Naser al-Din Muhammad",
+    "Nāṣer-al-Din Moḥammad",
+    "Humāyūn Pādešāh"
+   ]
+  },
+  "akbar": {
+   "native": {
+    "lang": "fa",
+    "text": "اکبر کبیر"
+   },
+   "aliases": [
+    "Jalal-ud-Din Muhammad Akbar",
+    "Akbar the Great",
+    "Akbar Mahan",
+    "Abu'l-Fath Jalal-ud-din Muhammad Akbar",
+    "Akbar I"
+   ]
+  },
+  "khadija-sultana": {
+   "native": {
+    "lang": "bn",
+    "text": "খাদিজা সুলতানা"
+   },
+   "aliases": [
+    "Bari Sahiba"
+   ]
+  },
+  "jahangir-i": {
+   "native": {
+    "lang": "fa",
+    "text": "جهانگیرشاه"
+   },
+   "aliases": [
+    "Nur-ud-din Mohammad Salim",
+    "Nur al-Dīn MuỌhammad Jahāngīr Gūrkānī",
+    "empereur moghol de l'Inde Jahangīr",
+    "Emperor of Hindustan Jahangir",
+    "Großmogul Jahangir Mogulreich"
+   ]
+  },
+  "gaj-singh-of-marwar": {
+   "native": {
+    "lang": "ur",
+    "text": "گج سنگھ اول"
+   },
+   "aliases": [
+    "Gaj Singh Rathore"
+   ]
+  },
+  "shah-jahan": {
+   "native": {
+    "lang": "fa",
+    "text": "شاه جهان"
+   },
+   "aliases": [
+    "Shah Jahan the Magnificent",
+    "Shahabuddin Muhammad Shah Jahan",
+    "Shahjahan",
+    "Shahab-ud-din Muhammad Khurram",
+    "Shah-Jehan"
+   ]
+  },
+  "aurangzeb": {
+   "native": {
+    "lang": "fa",
+    "text": "اورنگ‌زیب"
+   },
+   "aliases": [
+    "Aurangezeb",
+    "Alamgir I",
+    "Alamgir Shah",
+    "Alamgir Aurangzeb",
+    "Aurungzebe"
+   ]
+  },
+  "jai-singh-ii": {
+   "native": {
+    "lang": "ur",
+    "text": "جے سنگھ دوم"
+   },
+   "aliases": [
+    "Maharaja of Jaipur Jai Singh II",
+    "Sawai Jai Singh II",
+    "Sawai Jai Singh",
+    "Majaraja Jai Singh II",
+    "Raja Jai Singh II"
+   ]
+  },
+  "chamaraja-wodeyar-iv": {
+   "native": {
+    "lang": "mr",
+    "text": "चौथा चामराज वोडेयार"
+   }
+  },
+  "timmaraja-wodeyar-ii": {
+   "native": {
+    "lang": "mr",
+    "text": "दुसरा तिम्मराज वोडेयार"
+   }
+  },
+  "chamaraja-wodeyar-v": {
+   "native": {
+    "lang": "mr",
+    "text": "पाचवा चामराज वोडेयार"
+   }
+  },
+  "raja-wodeyar-i": {
+   "native": {
+    "lang": "kn",
+    "text": "ಒಡೆಯರ ಕಾಲದ ಕನ್ನಡ ಸಾಹಿತ್ಯ"
+   }
+  },
+  "chamaraja-wodeyar-vi": {
+   "native": {
+    "lang": "mr",
+    "text": "सहावा चामराज वोडेयार"
+   }
+  },
+  "raja-wodeyar-ii": {
+   "native": {
+    "lang": "mr",
+    "text": "दुसरा राज वोडेयार"
+   }
+  },
+  "kanthirava-narasaraja-i": {
+   "native": {
+    "lang": "kn",
+    "text": "ಮೊದಲು ಕಂಠೀರವ ನರಸರಾಜ"
+   }
+  },
+  "dodda-kempadevaraja": {
+   "native": {
+    "lang": "mr",
+    "text": "दोड्डा केम्पदेवराज वोडेयार"
+   }
+  },
+  "chikka-devaraja-wodeyar": {
+   "native": {
+    "lang": "kn",
+    "text": "ಚಿಕ್ಕ ದೇವರಾಜ ಒಡೆಯರ್"
+   },
+   "aliases": [
+    "Devaraja Wodeyar II"
+   ]
+  },
+  "mahendravarman-i": {
+   "native": {
+    "lang": "ta",
+    "text": "முதலாம் மகேந்திரவர்ம பல்லவன்"
+   },
+   "aliases": [
+    "Mahendravarman I."
+   ]
+  },
+  "narasimhavarman-i": {
+   "native": {
+    "lang": "ta",
+    "text": "முதலாம் நரசிம்ம பல்லவன்"
+   },
+   "aliases": [
+    "Mamallan"
+   ]
+  },
+  "paramesvaravarman-i": {
+   "native": {
+    "lang": "ta",
+    "text": "முதலாம் பரமேஸ்வரவர்மன்"
+   }
+  },
+  "narasimhavarman-ii": {
+   "native": {
+    "lang": "ta",
+    "text": "இரண்டாம் நரசிம்ம பல்லவன்"
+   },
+   "aliases": [
+    "Rajasimha"
+   ]
+  },
+  "kochadaiyan-ranadhiran": {
+   "native": {
+    "lang": "ta",
+    "text": "ரணதீரன்"
+   }
+  },
+  "parantaka-viranarayana": {
+   "native": {
+    "lang": "ta",
+    "text": "பராந்தகப் பாண்டியன்"
+   }
+  },
+  "sadayavarman-kulasekaran-i": {
+   "native": {
+    "lang": "ta",
+    "text": "முதலாம் சடையவர்மன் குலசேகரன்"
+   }
+  },
+  "parakrama-pandyan-ii": {
+   "native": {
+    "lang": "si",
+    "text": "පරාක්‍රම පාණ්ඩ්‍ය"
+   },
+   "aliases": [
+    "Parakrama Pandya",
+    "Parakrama Pandu"
+   ]
+  },
+  "maravarman-sundara-pandyan": {
+   "native": {
+    "lang": "ta",
+    "text": "முதலாம் மாறவர்மன் சுந்தரபாண்டியன்"
+   }
+  },
+  "vijayabahu-i-of-polonnaruwa": {
+   "native": {
+    "lang": "si",
+    "text": "පළමුවන විජයබාහු රජ"
+   },
+   "aliases": [
+    "Vijaya Bãhu I"
+   ]
+  },
+  "jayabahu-i-of-polonnaruwa": {
+   "native": {
+    "lang": "si",
+    "text": "පොලොන්නරුවේ පළමුවන ජයබාහු රජ"
+   },
+   "aliases": [
+    "Jaya Bãhu I"
+   ]
+  },
+  "vikramabahu-i-of-polonnaruwa": {
+   "native": {
+    "lang": "si",
+    "text": "පළමුවන වික්‍රමබාහු රජ"
+   },
+   "aliases": [
+    "Vikrama Bãhu I",
+    "Weekramabahu I",
+    "Weekrama Bãhu I"
+   ]
+  },
+  "gajabahu-ii-of-polonnaruwa": {
+   "native": {
+    "lang": "si",
+    "text": "පොලොන්නරුවේ දෙවන ගජබාහු රජ"
+   },
+   "aliases": [
+    "Gaja Bãhu II"
+   ]
+  },
+  "parakramabahu-i": {
+   "native": {
+    "lang": "si",
+    "text": "පළමුවන පරාක් රමබාහු රජ"
+   }
+  },
+  "vijayabahu-ii-of-polonnaruwa": {
+   "native": {
+    "lang": "ta",
+    "text": "இரண்டாம் விஜயபாகு"
+   },
+   "aliases": [
+    "Vijaya Bãhu II"
+   ]
+  },
+  "nissanka-malla-of-polonnaruwa": {
+   "native": {
+    "lang": "si",
+    "text": "නිශ්ශංකමල්ල රජ"
+   }
+  },
+  "mahinda-vi-of-polonnaruwa": {
+   "native": {
+    "lang": "ta",
+    "text": "ஐந்தாம் மகிந்தன்"
+   },
+   "aliases": [
+    "Mahinda VI"
+   ]
+  },
+  "vira-bahu-i-of-polonnaruwa": {
+   "aliases": [
+    "Virabahu I",
+    "Weera Bahu I"
+   ]
+  },
+  "lilavati-of-polonnaruwa": {
+   "native": {
+    "lang": "si",
+    "text": "ලීලාවතී රැජින"
+   }
+  },
+  "sahassa-malla-of-polonnaruwa": {
+   "aliases": [
+    "The lion-hearted king"
+   ]
+  },
+  "kalyanavati-of-polonnaruwa": {
+   "native": {
+    "lang": "si",
+    "text": "කල්‍යාණවතී රැජින"
+   }
+  },
+  "dharmasoka-of-polonnaruwa": {
+   "native": {
+    "lang": "si",
+    "text": "ධර්මාශෝක රජ (සිංහලේ)"
+   }
+  },
+  "anikanga-of-polonnaruwa": {
+   "native": {
+    "lang": "si",
+    "text": "අනිකාංග රජ"
+   },
+   "aliases": [
+    "Anikanga Mahadipada"
+   ]
+  },
+  "dantidurga": {
+   "native": {
+    "lang": "kn",
+    "text": "ದಂತಿದುರ್ಗ"
+   }
+  },
+  "krishna-i": {
+   "native": {
+    "lang": "kn",
+    "text": "ಮೊದಲನೇ ಕೃಷ್ಣ"
+   }
+  },
+  "govinda-ii": {
+   "native": {
+    "lang": "kn",
+    "text": "ಗೋವಿಂದ II"
+   }
+  },
+  "dhruva-dharavarsha": {
+   "native": {
+    "lang": "te",
+    "text": "ధ్రువ ధారావర్షుడు"
+   }
+  },
+  "govinda-iii": {
+   "native": {
+    "lang": "kn",
+    "text": "ಗೋವಿಂದ III"
+   },
+   "aliases": [
+    "Raktabahu",
+    "Rakta Bahu"
+   ]
+  },
+  "jam-sanjar": {
+   "native": {
+    "lang": "sd",
+    "text": "ڄام سنجر"
+   }
+  },
+  "jam-feruzudin": {
+   "native": {
+    "lang": "sd",
+    "text": "ڄام فيروز"
+   },
+   "aliases": [
+    "Jam Feroz",
+    "Firuz Shah II"
+   ]
+  },
+  "hemanta-sena": {
+   "native": {
+    "lang": "bn",
+    "text": "হেমন্ত সেন"
+   }
+  },
+  "vijay-sena": {
+   "native": {
+    "lang": "bn",
+    "text": "বিজয় সেন"
+   }
+  },
+  "sher-shah-suri": {
+   "native": {
+    "lang": "hi",
+    "text": "शेर शाह सूरी"
+   },
+   "aliases": [
+    "Sher Khan"
+   ]
+  },
+  "harihara-i": {
+   "native": {
+    "lang": "kn",
+    "text": "ಹರಿಹರ ೧"
+   }
+  },
+  "bukka-raya-ii": {
+   "native": {
+    "lang": "te",
+    "text": "రెండవ బుక్క రాయలు"
+   },
+   "aliases": [
+    "photos"
+   ]
+  },
+  "deva-raya": {
+   "native": {
+    "lang": "te",
+    "text": "మొదటి దేవరాయలు"
+   }
+  },
+  "bukka": {
+   "native": {
+    "lang": "kn",
+    "text": "ಬುಕ್ಕ"
+   },
+   "aliases": [
+    "Bukka Raya I"
+   ]
+  },
+  "harihara-ii": {
+   "native": {
+    "lang": "kn",
+    "text": "ಹರಿಹರ ರಾಯ II"
+   }
+  },
+  "virupaksha-raya": {
+   "native": {
+    "lang": "kn",
+    "text": "ವಿರೂಪಾಕ್ಷ ರಾಯ"
+   }
+  },
+  "veera-vijaya-bukka-raya": {
+   "native": {
+    "lang": "hi",
+    "text": "वीर विजय बुक्क राय"
+   },
+   "aliases": [
+    "Veera Vijaya",
+    "Bukka Raya III",
+    "Vijaya Raya"
+   ]
+  },
+  "mallikarjuna-raya": {
+   "native": {
+    "lang": "te",
+    "text": "మల్లికార్జున రాయలు"
+   },
+   "aliases": [
+    "Deva Raya III"
+   ]
+  },
+  "narasimha-raya-ii": {
+   "native": {
+    "lang": "te",
+    "text": "రెండవ నరసింహ రాయలు"
+   }
+  },
+  "thimma-bhupala": {
+   "native": {
+    "lang": "te",
+    "text": "తిమ్మ భూపాలుడు"
+   }
+  },
+  "viranarasimha-raya": {
+   "native": {
+    "lang": "te",
+    "text": "వీరనరసింహ రాయలు"
+   }
+  },
+  "virupaksha-raya-ii": {
+   "native": {
+    "lang": "te",
+    "text": "రెండవ విరూపాక్ష రాయలు"
+   }
+  },
+  "sri-krishnadevaraya": {
+   "native": {
+    "lang": "kn",
+    "text": "ಕೃಷ್ಣದೇವರಾಯ"
+   },
+   "aliases": [
+    "Srikrishna Devaraya",
+    "Sri Krishnadevarya",
+    "Krishnadevarya",
+    "Krishna Deva Raya",
+    "Krishnadeva Raya"
+   ]
+  },
+  "aliya-rama-raya": {
+   "native": {
+    "lang": "kn",
+    "text": "ಅಳಿಯ ರಾಮರಾಯ"
+   },
+   "aliases": [
+    "Rama Raya",
+    "Ram Raya"
+   ]
+  },
+  "saluva-narasimha-deva-raya": {
+   "native": {
+    "lang": "te",
+    "text": "సాళువ నరసింహదేవ రాయలు"
+   },
+   "aliases": [
+    "Saluva Narasimha Deva",
+    "Saluva Narasimha",
+    "Saluva Narasimha I"
+   ]
+  },
+  "tirumala-deva-raya": {
+   "native": {
+    "lang": "te",
+    "text": "తిరుమల దేవ రాయలు"
+   }
+  },
+  "sadasiva-raya": {
+   "native": {
+    "lang": "te",
+    "text": "సదాశివ రాయలు"
+   }
+  },
+  "sriranga-deva-raya": {
+   "native": {
+    "lang": "te",
+    "text": "శ్రీరంగ దేవ రాయలు"
+   }
+  },
+  "venkatapati-deva-raya-ii": {
+   "native": {
+    "lang": "te",
+    "text": "వేంకటపతి దేవ రాయలు"
+   }
+  }
+ },
+ "places": {
+  "kanchipuram": {
+   "native": {
+    "lang": "ta",
+    "text": "காஞ்சிபுரம்"
+   }
+  },
+  "manyakheta": {
+   "native": {
+    "lang": "kn",
+    "text": "ಮಾನ್ಯಖೇಟ"
+   }
+  },
+  "basavakalyan": {
+   "native": {
+    "lang": "kn",
+    "text": "ಬಸವಕಲ್ಯಾಣ"
+   }
+  },
+  "vallabhi": {
+   "native": {
+    "lang": "gu",
+    "text": "વલ્લભીપુર"
+   }
+  },
+  "guwahati": {
+   "native": {
+    "lang": "bn",
+    "text": "গুয়াহাটি"
+   }
+  },
+  "kabul": {
+   "native": {
+    "lang": "fa",
+    "text": "کابل"
+   }
+  },
+  "srinagar": {
+   "native": {
+    "lang": "ks",
+    "text": "سِریٖنَگَر"
+   }
+  },
+  "madurai": {
+   "native": {
+    "lang": "ta",
+    "text": "மதுரை"
+   }
+  },
+  "kannauj": {
+   "native": {
+    "lang": "hi",
+    "text": "कन्नौज"
+   }
+  },
+  "pataliputra": {
+   "native": {
+    "lang": "hi",
+    "text": "पाटलीपुत्र"
+   }
+  },
+  "gangaikonda-cholapuram": {
+   "native": {
+    "lang": "ta",
+    "text": "கங்கைகொண்ட சோழபுரம்"
+   }
+  },
+  "khajuraho": {
+   "native": {
+    "lang": "hi",
+    "text": "खजुराहो"
+   }
+  },
+  "awantipora": {
+   "native": {
+    "lang": "ks",
+    "text": "ووٗنٛتؠ پور"
+   }
+  },
+  "nabadwip": {
+   "native": {
+    "lang": "bn",
+    "text": "নবদ্বীপ"
+   }
+  },
+  "polonnaruwa": {
+   "native": {
+    "lang": "si",
+    "text": "පොළොන්නරු යුගය"
+   }
+  },
+  "halebidu": {
+   "native": {
+    "lang": "kn",
+    "text": "ಹಳೇಬೀಡು"
+   }
+  },
+  "warangal": {
+   "native": {
+    "lang": "kn",
+    "text": "ವರಂಗಲ್"
+   }
+  },
+  "delhi": {
+   "native": {
+    "lang": "hi",
+    "text": "दिल्ली"
+   }
+  },
+  "lahore": {
+   "native": {
+    "lang": "ks",
+    "text": "لوہوٗر"
+   }
+  },
+  "budaun": {
+   "native": {
+    "lang": "hi",
+    "text": "बदायूँ"
+   }
+  },
+  "dambadeniya": {
+   "native": {
+    "lang": "si",
+    "text": "දඹදෙණිය"
+   }
+  },
+  "kammatadurga": {
+   "native": {
+    "lang": "ur",
+    "text": "کماٹا درگا"
+   }
+  },
+  "nallur": {
+   "native": {
+    "lang": "ta",
+    "text": "நல்லூர் (யாழ்ப்பாணம்)"
+   }
+  },
+  "baramulla": {
+   "native": {
+    "lang": "ks",
+    "text": "وَرمُل"
+   }
+  },
+  "nowhatta": {
+   "native": {
+    "lang": "ks",
+    "text": "نَوُیٛٹ"
+   }
+  },
+  "thatta": {
+   "native": {
+    "lang": "sd",
+    "text": "ٺٽو"
+   }
+  },
+  "penukonda": {
+   "native": {
+    "lang": "kn",
+    "text": "ಪೆನುಕೊಂಡ"
+   }
+  },
+  "chandragiri": {
+   "native": {
+    "lang": "ta",
+    "text": "சந்திரகிரி மண்டலம்"
+   }
+  },
+  "kalaburagi": {
+   "native": {
+    "lang": "kn",
+    "text": "ಗುಲ್ಬರ್ಗ"
+   }
+  },
+  "bidar": {
+   "native": {
+    "lang": "kn",
+    "text": "ಬೀದರ್"
+   }
+  },
+  "jaunpur": {
+   "native": {
+    "lang": "hi",
+    "text": "जौनपुर"
+   }
+  },
+  "ahilyanagar": {
+   "native": {
+    "lang": "kn",
+    "text": "ಅಹ್ಮದ್ ನಗರ"
+   }
+  },
+  "achalpur": {
+   "native": {
+    "lang": "hi",
+    "text": "अचलपुर"
+   }
+  },
+  "vijayapura": {
+   "native": {
+    "lang": "kn",
+    "text": "ವಿಜಯಪುರ ಜಿಲ್ಲೆ"
+   }
+  },
+  "golconda": {
+   "native": {
+    "lang": "kn",
+    "text": "ಗೋಲ್ಕೊಂಡ"
+   }
+  },
+  "hyderabad": {
+   "native": {
+    "lang": "kn",
+    "text": "ಹೈದರಾಬಾದ್‌, ಆಂಧ್ರ ಪ್ರದೇಶ"
+   }
+  },
+  "agra": {
+   "native": {
+    "lang": "hi",
+    "text": "आगरा"
+   }
+  },
+  "fatehpur-sikri": {
+   "native": {
+    "lang": "hi",
+    "text": "फ़तेहपुर सीकरी"
+   }
+  },
+  "old-delhi": {
+   "native": {
+    "lang": "hi",
+    "text": "पुरानी दिल्ली"
+   }
+  },
+  "thanjavur": {
+   "native": {
+    "lang": "ta",
+    "text": "தஞ்சாவூர்"
+   }
+  },
+  "mysore": {
+   "native": {
+    "lang": "ta",
+    "text": "மைசூர்"
+   }
+  },
+  "srirangapatna": {
+   "native": {
+    "lang": "ta",
+    "text": "ஸ்ரீரங்கப்பட்டணம்"
+   }
+  },
+  "bengaluru": {
+   "native": {
+    "lang": "kn",
+    "text": "ಬೆಂಗಳೂರು"
+   }
+  },
+  "raigad-fort": {
+   "native": {
+    "lang": "te",
+    "text": "రాయ్‌ఘడ్ కోట"
+   }
+  }
+ }
+}

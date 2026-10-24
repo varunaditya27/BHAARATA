@@ -14,6 +14,10 @@ import importedPolities from "./generated/imported-polities.json";
 import importedPlaces from "./generated/imported-places.json";
 import importedBattles from "./generated/imported-battles.json";
 import importedPeople from "./generated/imported-people.json";
+import { images } from "./images";
+import importedNames from "./generated/imported-names.json";
+import importedRulerLists from "./generated/imported-ruler-lists.json";
+import placeWikidata from "./generated/place-wikidata.json";
 
 /** Boundary geometry lives in geo/boundaries.json (keyed by boundary id,
  * `${polityId}-${validFrom}`) — tens of thousands of coordinates don't
@@ -25,27 +29,23 @@ function boundaryGeometry(id: string): GeoJSON.Polygon | GeoJSON.MultiPolygon {
 }
 
 /**
- * PROTOTYPE DATA — NOT A SCHOLARLY CORPUS.
+ * The atlas's records. Most are imported (see scripts/ and docs/DATA.md):
+ * borders and dates from Cliopatria, capitals, rulers, battles and sites from
+ * Wikidata, descriptions from Wikipedia, each with its source on the record.
  *
- * Per PROJECT_BIBLE.md §10 (Data Policy): prototype records are acceptable
- * during UI development and must remain clearly illustrative. Boundary
- * geometry is deliberately coarse hand-drawn approximation — it exists to
- * prove the map engine can render zoom-dependent, time-indexed territory,
- * not to assert where a frontier actually ran in a given year.
+ * The hand-written parts are the texts of the eleven "curated" kingdoms, their
+ * eleven rulers' summaries, nine turning points and the two evidence records.
+ * Every statement in them was checked against the Wikipedia article (or, for
+ * the inscriptions, the printed volume) named in the record's provenance.
+ * Still NOT researched: the Chera outline (built from modern district lines)
+ * and the two example routes, which are drawn by hand; both are labelled so.
  *
- * Widely-known facts (capitals, language, religion, approximate reign
- * dates, that a named inscription/temple/statue exists) are stated
- * straightforwardly — these aren't in dispute and don't need hedging.
- * What's illustrative is the *specific narrative detail* BHĀRATA would
- * normally derive from a cited source (a claim's exact wording, a
- * transcription's exact lines, a territory's exact frontier) — those are
- * flagged per-record (`claimIsIllustrative`, boundary `confidence`) rather
- * than blanket-disclaimed, so the distinction stays legible.
+ * Unknown is not empty and uncertain is not false: where a source gives no
+ * value, the record says so (see lib/data/status.ts for the page badges).
  *
- * Photography is real and credited (see lib/data/images.ts). Do not pair
- * a real, identifiable artifact's photo with invented scholarly content
- * about that specific artifact — see the evidence record below for how
- * that's handled.
+ * Photography is real and credited (see lib/data/images.ts). Do not pair a
+ * real artefact's photo with invented content about that specific artefact;
+ * where the photo shows a different object, say so (imageIsIllustrative).
  */
 
 export const PROTOTYPE_SOURCE: Source = {
@@ -67,13 +67,6 @@ const baseSources: Source[] = [
     url: "https://archive.org/details/in.ernet.dli.2015.34674",
   },
   {
-    id: "sii-vol-3",
-    title: "South Indian Inscriptions, Vol. III",
-    sourceType: "epigraphic",
-    citation:
-      "Archaeological Survey of India, South Indian Inscriptions, Volume III: Miscellaneous Inscriptions from the Tamil Country.",
-  },
-  {
     id: "nilakanta-sastri-cholas",
     title: "The Cōḻas",
     sourceType: "bibliographic",
@@ -87,13 +80,13 @@ const curatedPolities: Polity[] = [
     id: "chola",
     slug: "chola",
     name: "Chola",
-    nativeName: "சோழர்",
+    nativeName: "இடைக்காலச் சோழர்கள்",
     alternativeNames: ["Cholas", "Chola dynasty"],
     polityType: "Empire",
     region: "Southern India",
     language: "Tamil",
     religion: "Shaivism, Vaishnavism",
-    notableFor: "Its navy, its great temples, and well-organised village government",
+    notableFor: "Its navy and its great temples",
     quote: "Tamil kings who built great temples and sent fleets to Sri Lanka and Southeast Asia.",
     period: {
       startYear: 850,
@@ -104,11 +97,11 @@ const curatedPolities: Polity[] = [
     },
     capitals: ["Thanjavur", "Gangaikonda Cholapuram"],
     summary:
-      "A Tamil dynasty from the Kaveri delta. Under Rajaraja I and his son Rajendra I it ruled most of southern India and northern Sri Lanka, and its fleets crossed the Bay of Bengal. It is remembered for its great temples and its well-organised village government.",
+      "A Tamil dynasty from the Kaveri delta. Under Rajaraja I and his son Rajendra I it ruled most of southern India and northern Sri Lanka, and its fleets crossed the Bay of Bengal. It is remembered for its great temples, such as the Brihadisvara Temple at Thanjavur.",
     accentColor: "#96341a",
     heroImageKey: "chola-brihadisvara",
     rulerIds: ["rajaraja-i", "rajendra-i"],
-    provenance: [{ sourceId: "nilakanta-sastri-cholas", note: "General historical framing." }],
+    provenance: [{ sourceId: "wikipedia-check-chola", note: "Written here; each statement was checked against this article." }],
   },
   {
     id: "pandya",
@@ -119,9 +112,9 @@ const curatedPolities: Polity[] = [
     polityType: "Kingdom",
     region: "Southern India",
     language: "Tamil",
-    religion: "Shaivism, Vaishnavism, Jainism",
-    notableFor: "Its return to power in the 1250s, and sea trade through its ports",
-    quote: "The kings of Madurai, who came back to rule the far south in the 1200s.",
+    religion: "Hinduism, Jainism, Buddhism",
+    notableFor: "Its rise in the 1250s, and sea trade through its ports",
+    quote: "The kings of Madurai, who rose to rule the far south in the 1200s.",
     period: {
       startYear: 1190,
       endYear: 1345,
@@ -131,17 +124,17 @@ const curatedPolities: Polity[] = [
     },
     capitals: ["Madurai"],
     summary:
-      "One of the oldest Tamil dynasties, ruling from Madurai. In the 1250s, under Jatavarman Sundara Pandyan I, it overtook the weakened Cholas and became the strongest power in the far south, until the Delhi Sultanate's raids of 1311.",
+      "One of the oldest Tamil dynasties, ruling from Madurai. In the 1250s, under Jatavarman Sundara Pandyan I, it expanded north into the Telugu country and conquered northern Sri Lanka, until the Delhi Sultanate's invasion of 1310–11.",
     accentColor: "#3a5a78",
     heroImageKey: "pandya-meenakshi",
     rulerIds: ["jatavarman-sundara-pandyan-i"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+    provenance: [{ sourceId: "wikipedia-check-pandya", note: "Written here; each statement was checked against this article." }],
   },
   {
     id: "vijayanagara",
     slug: "vijayanagara",
     name: "Vijayanagara",
-    nativeName: "విజయనగర",
+    nativeName: "విజయనగర సామ్రాజ్యం",
     alternativeNames: ["Vijayanagara Empire"],
     polityType: "Empire",
     region: "Deccan / Southern India",
@@ -162,7 +155,7 @@ const curatedPolities: Polity[] = [
     accentColor: "#8a6d1f",
     heroImageKey: "vijayanagara-virupaksha",
     rulerIds: ["krishnadevaraya"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+    provenance: [{ sourceId: "wikipedia-check-vijayanagara", note: "Written here; each statement was checked against this article." }],
   },
   {
     id: "chera",
@@ -172,12 +165,12 @@ const curatedPolities: Polity[] = [
     alternativeNames: ["Cheras", "Chera Perumals"],
     polityType: "Kingdom",
     region: "Southern India",
-    language: "Malayalam, Tamil",
-    religion: "Hinduism, with early Christian, Jewish, and Muslim trading communities",
-    notableFor: "The Malabar spice trade with West Asia and China",
+    language: "Early Malayalam",
+    religion: "Hinduism, with Christian, Jewish and Muslim trading communities",
+    notableFor: "The Malabar spice trade with the Middle East",
     quote: "Kings of the Kerala coast, rich from the pepper and spice trade.",
     period: {
-      startYear: 800,
+      startYear: 844,
       endYear: 1124,
       startQualifier: "circa",
       endQualifier: "circa",
@@ -185,11 +178,11 @@ const curatedPolities: Polity[] = [
     },
     capitals: ["Kodungallur"],
     summary:
-      "Kings of the Kerala coast, known in this period as the Chera Perumals, who ruled from Kodungallur. Their ports shipped pepper and other spices to West Asia and China, and drew Jewish, Christian and Muslim merchant communities.",
+      "Kings of the Kerala coast, known in this period as the Chera Perumals, who ruled from Kodungallur. Their ports sent pepper and other spices across the Indian Ocean to the Middle East. Royal grants engraved on copper plates record gifts to Christian and Jewish traders, and West Asian Muslim merchants settled there too.",
     accentColor: "#2f6b5e",
     heroImageKey: "chera-vadakkunnathan",
-    rulerIds: ["rajashekhara-varman"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+    rulerIds: [],
+    provenance: [{ sourceId: "wikipedia-check-chera", note: "Written here; each statement was checked against this article." }],
   },
   {
     id: "rashtrakuta",
@@ -216,19 +209,18 @@ const curatedPolities: Polity[] = [
     accentColor: "#5c3a6e",
     heroImageKey: "rashtrakuta-kailasa",
     rulerIds: ["amoghavarsha-i"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+    provenance: [{ sourceId: "wikipedia-check-rashtrakuta", note: "Written here; each statement was checked against this article." }],
   },
   {
     id: "chalukya-kalyani",
     slug: "chalukya-kalyani",
     name: "Chalukya (Kalyani)",
-    nativeName: "ಕಲ್ಯಾಣಿ ಚಾಲುಕ್ಯ",
     alternativeNames: ["Western Chalukyas", "Later Chalukyas"],
     polityType: "Empire",
     region: "Deccan",
     language: "Kannada, Sanskrit",
     religion: "Hinduism, Jainism",
-    notableFor: "Temples at Lakkundi and Itagi; counting years from Vikramaditya VI's accession",
+    notableFor: "Temples at Lakkundi and Itagi, and a count of years that began when Vikramaditya VI became king",
     quote: "Rulers of the western Deccan from Kalyani, who overthrew the Rashtrakutas.",
     period: {
       startYear: 973,
@@ -239,11 +231,11 @@ const curatedPolities: Polity[] = [
     },
     capitals: ["Basavakalyan"],
     summary:
-      "The Chalukyas of Kalyani, who overthrew the Rashtrakutas in 973 and ruled the western Deccan for two centuries. Under Vikramaditya VI, inscriptions counted the years from his accession in 1076.",
+      "The Chalukyas of Kalyani, who overthrew the Rashtrakutas in 973 and ruled the western Deccan for two centuries. Under Vikramaditya VI, inscriptions counted the years from 1076, when he became king.",
     accentColor: "#b06b2c",
     heroImageKey: "chalukya-itagi",
     rulerIds: ["vikramaditya-vi"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+    provenance: [{ sourceId: "wikipedia-check-chalukya-kalyani", note: "Written here; each statement was checked against this article." }],
   },
   {
     id: "hoysala",
@@ -270,19 +262,19 @@ const curatedPolities: Polity[] = [
     accentColor: "#8c3f5f",
     heroImageKey: "hoysala-chennakeshava",
     rulerIds: ["vishnuvardhana"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+    provenance: [{ sourceId: "wikipedia-check-hoysala", note: "Written here; each statement was checked against this article." }],
   },
   {
     id: "pala",
     slug: "pala",
     name: "Pala",
-    nativeName: "पाल",
+    nativeName: "पाल वंश",
     alternativeNames: ["Palas", "Pala Empire"],
     polityType: "Empire",
     region: "Bengal and Bihar",
     language: "Sanskrit",
     religion: "Buddhism, Shaivism",
-    notableFor: "Patronage of the great Buddhist monasteries of eastern India — Nalanda, Vikramashila and Somapura",
+    notableFor: "Supporting the great Buddhist monasteries of eastern India: Nalanda, Vikramashila and Somapura",
     quote: "Kings of Bengal and Bihar, and great patrons of Buddhist monasteries.",
     period: { startYear: 750, endYear: 1161, startQualifier: "circa", endQualifier: "circa", confidence: "probable" },
     capitals: ["Pataliputra", "Gauda"],
@@ -291,28 +283,28 @@ const curatedPolities: Polity[] = [
     accentColor: "#5e6b2a",
     heroImageKey: "pala-somapura",
     rulerIds: ["dharmapala"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+    provenance: [{ sourceId: "wikipedia-check-pala", note: "Written here; each statement was checked against this article." }],
   },
   {
     id: "pratihara",
     slug: "pratihara",
     name: "Gurjara-Pratihara",
-    nativeName: "प्रतिहार",
+    nativeName: "गुर्जर-प्रतिहार राजवंश",
     alternativeNames: ["Pratiharas", "Imperial Pratiharas"],
     polityType: "Empire",
     region: "Northern and western India",
     language: "Sanskrit",
     religion: "Vaishnavism, Shaivism",
-    notableFor: "Ruling northern India from Kannauj, and holding back Arab armies from Sindh",
+    notableFor: "Ruling northern India from Kannauj, and holding back Arab armies west of the Indus",
     quote: "Rulers of northern India from Kannauj for about two centuries.",
     period: { startYear: 730, endYear: 1036, startQualifier: "circa", endQualifier: "circa", confidence: "probable" },
     capitals: ["Kannauj"],
     summary:
-      "A dynasty that rose in Malwa and Rajasthan in the 8th century and, from about 816, ruled from Kannauj. At its height under Mihira Bhoja it stretched across much of northern India, before shrinking back to the Kannauj region in the 10th century.",
+      "A dynasty that rose in Malwa and Rajasthan in the 8th century and secured the throne of Kannauj in 816, which became the centre of its state. It reached its peak under Mihira Bhoja and his successor Mahendrapala I, across much of northern India, before shrinking back to a small state around Kannauj by the end of the 10th century.",
     accentColor: "#3f4f86",
     heroImageKey: "pratihara-bateshwar",
     rulerIds: ["mihira-bhoja"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+    provenance: [{ sourceId: "wikipedia-check-pratihara", note: "Written here; each statement was checked against this article." }],
   },
   {
     id: "delhi-sultanate",
@@ -325,7 +317,7 @@ const curatedPolities: Polity[] = [
     language: "Persian",
     religion: "Islam",
     notableFor: "Five dynasties in turn on one throne; the Qutb Minar; Persian as the language of government",
-    quote: "Five dynasties of sultans, one after another, all ruling from Delhi.",
+    quote: "Five dynasties of sultans, one after another, ruling mostly from Delhi.",
     period: { startYear: 1206, endYear: 1526, startQualifier: "exact", endQualifier: "exact", confidence: "probable" },
     capitals: ["Delhi"],
     summary:
@@ -333,13 +325,13 @@ const curatedPolities: Polity[] = [
     accentColor: "#2f5d3a",
     heroImageKey: "delhi-qutb",
     rulerIds: ["iltutmish"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+    provenance: [{ sourceId: "wikipedia-check-delhi-sultanate", note: "Written here; each statement was checked against this article." }],
   },
   {
     id: "bahmani",
     slug: "bahmani",
     name: "Bahmani",
-    nativeName: "سلطنت بهمنی",
+    nativeName: "سلطان‌نشین بهمنی",
     alternativeNames: ["Bahmani Sultanate"],
     polityType: "Sultanate",
     region: "Northern Deccan",
@@ -350,11 +342,11 @@ const curatedPolities: Polity[] = [
     period: { startYear: 1347, endYear: 1527, startQualifier: "exact", endQualifier: "circa", confidence: "probable" },
     capitals: ["Gulbarga", "Bidar"],
     summary:
-      "Founded in 1347 when Deccan nobles revolted against Delhi and made Alauddin Hasan Bahman Shah their king at Gulbarga. The capital later moved to Bidar; by the end of the 15th century the sultanate had broken up into five successor states.",
+      "Founded in 1347 when Deccan nobles revolted against Delhi and made Alauddin Hasan Bahman Shah their king at Gulbarga. The capital moved to Bidar in 1429. After 1518 the sultanate broke up into five states: Ahmadnagar, Berar, Bidar, Bijapur and Golconda.",
     accentColor: "#1f7083",
     heroImageKey: "bahmani-gawan",
     rulerIds: ["alauddin-hasan-bahman-shah"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+    provenance: [{ sourceId: "wikipedia-check-bahmani", note: "Written here; each statement was checked against this article." }],
   },
 ];
 
@@ -380,6 +372,10 @@ export const WIKIDATA_SOURCE: Source = {
   citation: "Wikidata, wikidata.org (CC0). Capital cities and their coordinates.",
 };
 
+// Native-script names and aliases from Wikidata (see scripts/import-names.py). Keyed by record id.
+type NameRecord = { native?: { lang: string; text: string }; aliases?: string[] };
+const names = importedNames as { polities: Record<string, NameRecord>; people: Record<string, NameRecord>; places: Record<string, NameRecord> };
+
 type ImportedPolity = (typeof importedPolities)[number];
 const importedById = new Map<string, ImportedPolity>(importedPolities.map((p) => [p.id, p]));
 
@@ -390,8 +386,44 @@ function polityKind(name: string): string {
   return "Kingdom";
 }
 
+// The Wikipedia article each hand-written kingdom summary was checked against.
+const CHECKED_ARTICLES: Record<string, string> = {"chola": "Chola dynasty", "pandya": "Pandya dynasty", "vijayanagara": "Vijayanagara Empire", "chera": "Chera Perumals of Makotai", "rashtrakuta": "Rashtrakuta dynasty", "chalukya-kalyani": "Western Chalukya Empire", "hoysala": "Hoysala Empire", "pala": "Pala Empire", "pratihara": "Gurjara-Pratihara dynasty", "delhi-sultanate": "Delhi Sultanate", "bahmani": "Bahmani Sultanate"};
+
+// The Wikipedia article each hand-written ruler record was checked against.
+const CHECKED_PEOPLE: Record<string, string> = {"rajaraja-i": "Rajaraja I", "rajendra-i": "Rajendra Chola I", "jatavarman-sundara-pandyan-i": "Jatavarman Sundara Pandyan", "krishnadevaraya": "Krishnadevaraya", "amoghavarsha-i": "Amoghavarsha", "vikramaditya-vi": "Vikramaditya VI", "vishnuvardhana": "Vishnuvardhana", "dharmapala": "Dharmapala of Bengal", "mihira-bhoja": "Mihira Bhoja", "iltutmish": "Iltutmish", "alauddin-hasan-bahman-shah": "Alauddin Bahman Shah"};
+
+// Wikipedia articles the hand-written turning points were checked against.
+const CHECKED_EVENT_ARTICLES = ["Bahmani Sultanate", "Battle of Talikota", "Chennakeshava Temple, Belur", "Gangaikonda Cholapuram", "Kailasa temple, Ellora", "Qutb al-Din Aibak", "Rajaraja I", "Tripartite Struggle", "Vijayabahu I"];
+
 export const sources: Source[] = [
   ...baseSources,
+  ...CHECKED_EVENT_ARTICLES.map(
+    (article): Source => ({
+      id: `wikipedia-article-${article.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`,
+      title: `Wikipedia: ${article}`,
+      sourceType: "digital",
+      citation: `English Wikipedia, "${article}", en.wikipedia.org/wiki/${article.replace(/ /g, "_")} (CC BY-SA 4.0). The text here is written in our own words; the date and each statement in it were checked against this article.`,
+      url: `https://en.wikipedia.org/wiki/${article.replace(/ /g, "_")}`,
+    }),
+  ),
+  ...Object.entries(CHECKED_PEOPLE).map(
+    ([id, article]): Source => ({
+      id: `wikipedia-check-person-${id}`,
+      title: `Wikipedia: ${article}`,
+      sourceType: "digital",
+      citation: `English Wikipedia, "${article}", en.wikipedia.org/wiki/${article.replace(/ /g, "_")} (CC BY-SA 4.0). The summary here is written in our own words; the reign dates and each statement in it were checked against this article.`,
+      url: `https://en.wikipedia.org/wiki/${article.replace(/ /g, "_")}`,
+    }),
+  ),
+  ...Object.entries(CHECKED_ARTICLES).map(
+    ([id, article]): Source => ({
+      id: `wikipedia-check-${id}`,
+      title: `Wikipedia: ${article}`,
+      sourceType: "digital",
+      citation: `English Wikipedia, "${article}", en.wikipedia.org/wiki/${article.replace(/ /g, "_")} (CC BY-SA 4.0). The summary here is written in our own words; each statement in it was checked against this article.`,
+      url: `https://en.wikipedia.org/wiki/${article.replace(/ /g, "_")}`,
+    }),
+  ),
   CLIOPATRIA_SOURCE,
   WIKIDATA_SOURCE,
   ...importedPeople
@@ -404,6 +436,22 @@ export const sources: Source[] = [
         citation: `English Wikipedia, "${p.wikipedia?.replace(/_/g, " ")}", en.wikipedia.org/wiki/${p.wikipedia} (CC BY-SA 4.0). Opening sentences, trimmed.`,
       }),
     ),
+  // One source per Wikipedia list page that rulers were read from (see scripts/import-ruler-lists.py).
+  ...[...new Set(importedRulerLists.map((r) => r.list))].map(
+    (page): Source => ({
+      id: `wikipedia-list-${page.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+      title: `Wikipedia: ${page}`,
+      sourceType: "digital",
+      citation: `English Wikipedia, "${page}", en.wikipedia.org/wiki/${page.replace(/ /g, "_")} (CC BY-SA 4.0). Names and reign years from the article's list of rulers.`,
+      url: `https://en.wikipedia.org/wiki/${page.replace(/ /g, "_")}`,
+    }),
+  ),
+  // Battles described from a source other than Wikipedia (see scripts/apply-corrections.py).
+  ...importedBattles.flatMap((b): Source[] =>
+    "otherSource" in b && b.otherSource
+      ? [{ id: `web-battle-${b.wikidata}`, title: b.otherSource.title, sourceType: "digital", citation: `${b.otherSource.title}, ${b.otherSource.url} (CC BY-SA). The description here is written in our own words from this page.`, url: b.otherSource.url }]
+      : [],
+  ),
   ...importedBattles
     .filter((b) => b.wikipedia)
     .map(
@@ -443,14 +491,17 @@ export const polities: Polity[] = [
         id: p.id,
         slug: p.id,
         name: p.name,
-        alternativeNames: [],
+        nativeName: names.polities[p.id]?.native?.text,
+        nativeLang: names.polities[p.id]?.native?.lang,
+        alternativeNames: names.polities[p.id]?.aliases ?? [],
         polityType: polityKind(p.name),
         region: p.region,
         capitals: p.capitals,
         summary: p.summary,
         period: { startYear: p.from, endYear: p.to, startQualifier: "circa", endQualifier: "circa", confidence: "probable" },
         accentColor: p.accentColor,
-        heroImageKey: p.imageKey ?? undefined,
+        // Kingdoms the first photo pass missed got a hand-picked one later (scripts/import-photos.py), keyed "kp-<id>".
+        heroImageKey: p.imageKey ?? (`kp-${p.id}` in images ? `kp-${p.id}` : undefined),
         rulerIds: [],
         provenance: [
           { sourceId: CLIOPATRIA_SOURCE.id, note: "Borders and dates." },
@@ -466,26 +517,26 @@ const curatedPeople: Person[] = [
     id: "rajaraja-i",
     slug: "rajaraja-i",
     name: "Rajaraja I",
-    nativeName: "இராஜராஜ சோழன்",
+    nativeName: "முதலாம் இராஜராஜ சோழன்",
     role: "Chola emperor",
     polityId: "chola",
     period: { startYear: 985, endYear: 1014, confidence: "probable", startQualifier: "circa", endQualifier: "circa" },
     summary:
       "Built the Brihadisvara Temple at Thanjavur. His armies and fleets took northern Sri Lanka and the Maldives.",
     imageKey: "ruler-rajaraja-mural",
-    provenance: [{ sourceId: "nilakanta-sastri-cholas" }],
+    provenance: [{ sourceId: "wikipedia-check-person-rajaraja-i", note: "Written here; the dates and each statement were checked against this article." }],
   },
   {
     id: "rajendra-i",
     slug: "rajendra-i",
     name: "Rajendra I",
-    nativeName: "இராஜேந்திர சோழன்",
+    nativeName: "இராசேந்திர சோழன்",
     role: "Chola emperor",
     polityId: "chola",
     period: { startYear: 1014, endYear: 1044, confidence: "probable", startQualifier: "circa", endQualifier: "circa" },
     summary:
       "Built the new capital of Gangaikonda Cholapuram, named after his army's expedition to the Ganges, and sent a fleet against Srivijaya in Southeast Asia.",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder summary." }],
+    provenance: [{ sourceId: "wikipedia-check-person-rajendra-i", note: "Written here; the dates and each statement were checked against this article." }],
   },
   {
     id: "jatavarman-sundara-pandyan-i",
@@ -494,8 +545,8 @@ const curatedPeople: Person[] = [
     role: "Pandya emperor",
     polityId: "pandya",
     period: { startYear: 1251, endYear: 1268, confidence: "probable", startQualifier: "circa", endQualifier: "circa" },
-    summary: "Led the Pandya return to power in the 1250s, taking over most of the weakened Chola kingdom.",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder summary." }],
+    summary: "Forced the Chola king Rajendra III to accept Pandya overlordship, defeated the Cheras and the Hoysalas, and took Kanchipuram in 1258. Local rulers in Sri Lanka also submitted to him.",
+    provenance: [{ sourceId: "wikipedia-check-person-jatavarman-sundara-pandyan-i", note: "Written here; the dates and each statement were checked against this article." }],
   },
   {
     id: "krishnadevaraya",
@@ -508,17 +559,7 @@ const curatedPeople: Person[] = [
     summary:
       "Widely regarded as Vijayanagara's greatest ruler; expanded the empire's territory and was a noted patron of Telugu and Sanskrit literature.",
     imageKey: "ruler-krishnadevaraya",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder summary." }],
-  },
-  {
-    id: "rajashekhara-varman",
-    slug: "rajashekhara-varman",
-    name: "Rajashekhara Varman",
-    role: "Chera Perumal",
-    polityId: "chera",
-    period: { startYear: 820, endYear: 844, confidence: "probable", startQualifier: "circa", endQualifier: "circa" },
-    summary: "One of the first Chera Perumal kings. The Kollam era, the calendar still used in Kerala, is traditionally said to start in his reign, in 825.",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder summary." }],
+    provenance: [{ sourceId: "wikipedia-check-person-krishnadevaraya", note: "Written here; the dates and each statement were checked against this article." }],
   },
   {
     id: "amoghavarsha-i",
@@ -527,8 +568,8 @@ const curatedPeople: Person[] = [
     role: "Rashtrakuta emperor",
     polityId: "rashtrakuta",
     period: { startYear: 814, endYear: 878, confidence: "probable", startQualifier: "circa", endQualifier: "circa" },
-    summary: "A Rashtrakuta emperor who reigned for over sixty years. The Kavirajamarga, the oldest surviving book on Kannada poetry, is credited to him or to a poet at his court.",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder summary." }],
+    summary: "A Rashtrakuta emperor whose reign of about 64 years is one of the longest precisely dated on record. He is credited, with the Jain teacher Jinasena, with the Kavirajamarga, the earliest surviving work on Kannada poetry.",
+    provenance: [{ sourceId: "wikipedia-check-person-amoghavarsha-i", note: "Written here; the dates and each statement were checked against this article." }],
   },
   {
     id: "vikramaditya-vi",
@@ -537,8 +578,8 @@ const curatedPeople: Person[] = [
     role: "Chalukya emperor",
     polityId: "chalukya-kalyani",
     period: { startYear: 1076, endYear: 1126, confidence: "probable", startQualifier: "circa", endQualifier: "circa" },
-    summary: "The best-known Kalyani Chalukya king, who reigned for about fifty years. Inscriptions of the time counted the years from his accession in 1076.",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder summary." }],
+    summary: "Called the greatest of the Western Chalukya kings, and on the throne for fifty years. He began a new era, the Chalukya-Vikrama era, counted from his accession in 1076.",
+    provenance: [{ sourceId: "wikipedia-check-person-vikramaditya-vi", note: "Written here; the dates and each statement were checked against this article." }],
   },
   {
     id: "vishnuvardhana",
@@ -547,8 +588,8 @@ const curatedPeople: Person[] = [
     role: "Hoysala king",
     polityId: "hoysala",
     period: { startYear: 1108, endYear: 1152, confidence: "probable", startQualifier: "circa", endQualifier: "circa" },
-    summary: "Built the Chennakeshava Temple at Belur — by the usual account, to mark his victory over the Cholas at Talakad in 1116.",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder summary." }],
+    summary: "Built the Chennakeshava Temple at Belur to celebrate his success. His campaigns against the Cholas earned him the title Talakadugonda, “taker of Talakad”.",
+    provenance: [{ sourceId: "wikipedia-check-person-vishnuvardhana", note: "Written here; the dates and each statement were checked against this article." }],
   },
   {
     id: "dharmapala",
@@ -557,10 +598,10 @@ const curatedPeople: Person[] = [
     nativeName: "धर्मपाल",
     role: "Pala emperor",
     polityId: "pala",
-    period: { startYear: 770, endYear: 810, startQualifier: "circa", endQualifier: "circa", confidence: "probable" },
+    period: { startYear: 783, endYear: 815, startQualifier: "circa", endQualifier: "circa", confidence: "disputed" },
     summary:
-      "Extended Pala rule from Bengal across Bihar and fought the Pratiharas and Rashtrakutas over Kannauj. Remembered as the founder of the monastery at Vikramashila.",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+      "Ruled Bengal and Bihar directly, and fought the Pratiharas and Rashtrakutas over Kannauj. Founded the Vikramashila monastery and built the great Somapura Mahavihara at Paharpur. Historians date his reign differently, between 770–810 and 783–820.",
+    provenance: [{ sourceId: "wikipedia-check-person-dharmapala", note: "Written here; the dates and each statement were checked against this article." }],
   },
   {
     id: "mihira-bhoja",
@@ -570,8 +611,8 @@ const curatedPeople: Person[] = [
     role: "Pratihara emperor",
     polityId: "pratihara",
     period: { startYear: 836, endYear: 885, startQualifier: "circa", endQualifier: "circa", confidence: "probable" },
-    summary: "The longest-reigning Pratihara king, under whom the empire ruled from Kannauj reached its widest extent.",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+    summary: "Ruled from Kannauj. At its height his empire reached the Narmada in the south, the Sutlej in the north-west and Bengal in the east.",
+    provenance: [{ sourceId: "wikipedia-check-person-mihira-bhoja", note: "Written here; the dates and each statement were checked against this article." }],
   },
   {
     id: "iltutmish",
@@ -581,7 +622,7 @@ const curatedPeople: Person[] = [
     polityId: "delhi-sultanate",
     period: { startYear: 1211, endYear: 1236, startQualifier: "exact", endQualifier: "exact", confidence: "probable" },
     summary: "Held the young Sultanate together after Aibak's death, made Delhi its capital, and completed the Qutb Minar.",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+    provenance: [{ sourceId: "wikipedia-check-person-iltutmish", note: "Written here; the dates and each statement were checked against this article." }],
   },
   {
     id: "alauddin-hasan-bahman-shah",
@@ -590,8 +631,8 @@ const curatedPeople: Person[] = [
     role: "Founder of the Bahmani Sultanate",
     polityId: "bahmani",
     period: { startYear: 1347, endYear: 1358, startQualifier: "exact", endQualifier: "exact", confidence: "probable" },
-    summary: "Led the revolt of the Deccan nobles against Delhi and was crowned at Gulbarga in 1347.",
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder record." }],
+    summary: "Rose to power in the Deccan rebellion of 1347 and was crowned at Gulbarga on 3 August 1347, founding the Bahmani Sultanate.",
+    provenance: [{ sourceId: "wikipedia-check-person-alauddin-hasan-bahman-shah", note: "Written here; the dates and each statement were checked against this article." }],
   },
 ];
 
@@ -605,12 +646,17 @@ const sameName = (a: string, b: string) => {
   const [x, y] = [n(a), n(b)];
   return x === y || x.startsWith(y.slice(0, 7)) || y.startsWith(x.slice(0, 7));
 };
+// A lifetime-only record is dropped where a list gives the same ruler's actual reign.
+const supersededRulerIds = new Set(importedRulerLists.flatMap((r) => r.supersedes));
 const importedPeopleRecords: Person[] = importedPeople
+  .filter((p) => !supersededRulerIds.has(p.id))
   .filter((p) => !curatedPeople.some((c) => c.polityId === p.polityId && sameName(c.name, p.name) && c.period.startYear <= (p.end ?? p.start) + 5 && p.start <= (c.period.endYear ?? c.period.startYear) + 5))
   .map((p): Person => ({
     id: p.id,
     slug: p.id,
     name: p.name,
+    nativeName: names.people[p.id]?.native?.text,
+    nativeLang: names.people[p.id]?.native?.lang,
     role: p.role,
     polityId: p.polityId,
     datesAre: p.datesAre as "reign" | "lifetime",
@@ -624,7 +670,25 @@ const importedPeopleRecords: Person[] = importedPeople
       ...(p.summary ? [{ sourceId: `wikipedia-ruler-${p.q}`, note: "Summary." }] : []),
     ],
   }));
-export const people: Person[] = [...curatedPeople, ...importedPeopleRecords];
+// Rulers of kingdoms Wikidata has no monarch records for, read from Wikipedia's own lists.
+const listedRulerRecords: Person[] = importedRulerLists.map(
+  (r): Person => ({
+    id: r.id,
+    slug: r.id,
+    name: r.name,
+    role: r.role,
+    polityId: r.polityId,
+    datesAre: "reign",
+    period: { startYear: r.start, endYear: r.end ?? null, startQualifier: "circa", endQualifier: r.end == null ? "unknown" : "circa", confidence: "probable" },
+    provenance: [
+      {
+        sourceId: `wikipedia-list-${r.list.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+        note: r.endFromNext ? "Name and start of reign. The list gives only the year each ruler took the throne, so the reign is shown as ending where the next one begins." : "Name and reign years.",
+      },
+    ],
+  }),
+);
+export const people: Person[] = [...curatedPeople, ...importedPeopleRecords, ...listedRulerRecords];
 
 const curatedPlaces: Place[] = [
   { id: "thanjavur", slug: "thanjavur", name: "Thanjavur", placeType: "capital", coordinates: [79.1378, 10.787], region: "Tamil Nadu", imageKey: "chola-brihadisvara", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
@@ -633,10 +697,10 @@ const curatedPlaces: Place[] = [
   { id: "hampi", slug: "hampi", name: "Hampi", placeType: "capital", coordinates: [76.4600, 15.3350], region: "Karnataka", imageKey: "vijayanagara-virupaksha", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "kanchipuram", slug: "kanchipuram", name: "Kanchipuram", placeType: "settlement", coordinates: [79.7036, 12.8342], region: "Tamil Nadu", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "nagapattinam", slug: "nagapattinam", name: "Nagapattinam", placeType: "port", coordinates: [79.8428, 10.7657], region: "Tamil Nadu", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
-  { id: "kodungallur", slug: "kodungallur", name: "Kodungallur", placeType: "capital", coordinates: [76.195, 10.2297], region: "Kerala", imageKey: "chera-vadakkunnathan", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
-  { id: "manyakheta", slug: "manyakheta", name: "Manyakheta", placeType: "capital", coordinates: [77.2058, 17.1964], region: "Karnataka", imageKey: "rashtrakuta-kailasa", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
-  { id: "basavakalyan", slug: "basavakalyan", name: "Basavakalyan", placeType: "capital", coordinates: [76.94, 17.8697], region: "Karnataka", imageKey: "chalukya-itagi", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
-  { id: "dorasamudra", slug: "dorasamudra", name: "Dorasamudra (Halebidu)", placeType: "capital", coordinates: [76.2437, 13.2132], region: "Karnataka", imageKey: "hoysala-chennakeshava", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
+  { id: "kodungallur", slug: "kodungallur", name: "Kodungallur", placeType: "capital", coordinates: [76.195, 10.2297], region: "Kerala", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
+  { id: "manyakheta", slug: "manyakheta", name: "Manyakheta", placeType: "capital", coordinates: [77.2058, 17.1964], region: "Karnataka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
+  { id: "basavakalyan", slug: "basavakalyan", name: "Basavakalyan", placeType: "capital", coordinates: [76.94, 17.8697], region: "Karnataka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
+  { id: "dorasamudra", slug: "dorasamudra", name: "Dorasamudra (Halebidu)", placeType: "capital", coordinates: [76.2437, 13.2132], region: "Karnataka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "belur", slug: "belur", name: "Belur", placeType: "capital", coordinates: [75.8648, 13.1629], region: "Karnataka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "ellora", slug: "ellora", name: "Ellora", placeType: "monument", coordinates: [75.1791, 20.0268], region: "Maharashtra", imageKey: "rashtrakuta-kailasa", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "pataliputra", slug: "pataliputra", name: "Pataliputra (Patna)", placeType: "capital", coordinates: [85.1376, 25.5941], region: "Bihar", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
@@ -647,9 +711,19 @@ const curatedPlaces: Place[] = [
   { id: "delhi", slug: "delhi", name: "Delhi", placeType: "capital", coordinates: [77.209, 28.6139], region: "Delhi", imageKey: "delhi-qutb", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "gulbarga", slug: "gulbarga", name: "Gulbarga (Kalaburagi)", placeType: "capital", coordinates: [76.8343, 17.3297], region: "Karnataka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "bidar", slug: "bidar", name: "Bidar", placeType: "capital", coordinates: [77.5199, 17.9104], region: "Karnataka", imageKey: "bahmani-gawan", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
+  { id: "badami", slug: "badami", name: "Badami", placeType: "capital", coordinates: [75.6803, 15.9203], region: "Karnataka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
+  { id: "sasaram", slug: "sasaram", name: "Sasaram", placeType: "capital", coordinates: [84.03, 24.95], region: "Bihar", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "anuradhapura", slug: "anuradhapura", name: "Anuradhapura", placeType: "settlement", coordinates: [80.4037, 8.3114], region: "Sri Lanka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
   { id: "polonnaruwa", slug: "polonnaruwa", name: "Polonnaruwa", placeType: "settlement", coordinates: [81.0006, 7.9403], region: "Sri Lanka", provenance: [{ sourceId: PROTOTYPE_SOURCE.id }] },
 ];
+
+// Each hand-written place takes its coordinates from the Wikidata item it was matched to (scripts/check-places.py).
+const wikidataPlaces = placeWikidata as unknown as Record<string, { q: string; coordinates: [number, number] }>;
+const checkedPlaces: Place[] = curatedPlaces.map((p) => {
+  const wd = wikidataPlaces[p.id];
+  const photo = `place-${p.id}` in images ? { imageKey: `place-${p.id}` as NonNullable<Place["imageKey"]> } : {};
+  return wd ? { ...p, ...photo, coordinates: wd.coordinates, provenance: [{ sourceId: WIKIDATA_SOURCE.id, note: `Name and location (Wikidata ${wd.q}).` }] } : p;
+});
 
 /** Capitals from Wikidata, except where a hand-written place already covers the same city. */
 const importedPlaceRecords: Place[] = importedPlaces
@@ -658,12 +732,14 @@ const importedPlaceRecords: Place[] = importedPlaces
     id: pl.id,
     slug: pl.id,
     name: pl.name,
+    nativeName: names.places[pl.id]?.native?.text,
+    nativeLang: names.places[pl.id]?.native?.lang,
     placeType: "capital",
     coordinates: pl.coordinates as [number, number],
     region: pl.region,
     provenance: [{ sourceId: WIKIDATA_SOURCE.id, note: "Name and location." }],
   }));
-export const places: Place[] = [...curatedPlaces, ...importedPlaceRecords];
+export const places: Place[] = [...checkedPlaces, ...importedPlaceRecords];
 
 /**
  * Borders. Almost all come from Cliopatria — dated snapshots of one
@@ -748,10 +824,10 @@ const curatedEvents: HistoricalEvent[] = [
     title: "Rajaraja I's southern and Sri Lankan campaigns",
     period: { startYear: 985, endYear: 1014, confidence: "probable", startQualifier: "circa", endQualifier: "circa" },
     summary:
-      "Rajaraja I's armies take over the Pandya and Chera lands and northern Sri Lanka, and fight the Chalukyas in the Deccan.",
+      "Rajaraja I's armies conquer the Pandya and Kerala lands and northern Sri Lanka, and in 1004 defeat a Chalukya army in the Gangavadi region of the Deccan.",
     polityIds: ["chola"],
     placeIds: ["thanjavur"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder summary." }],
+    provenance: [{ sourceId: "wikipedia-article-rajaraja-i", note: "Written here; the date and each statement were checked against this article." }],
   },
   {
     id: "gangaikondacholapuram-founding",
@@ -759,10 +835,10 @@ const curatedEvents: HistoricalEvent[] = [
     title: "Founding of Gangaikonda Cholapuram",
     period: { startYear: 1025, endYear: null, confidence: "probable", startQualifier: "circa", endQualifier: "circa" },
     summary:
-      "Rajendra I builds a new Chola capital and names it after his army's expedition to the Ganges.",
+      "Rajendra I founds a new Chola capital, c. 1025, to celebrate his victory in the north. The name means “the city of the Chola who took the Ganges”.",
     polityIds: ["chola"],
     placeIds: ["gangaikondacholapuram"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder summary." }],
+    provenance: [{ sourceId: "wikipedia-article-gangaikonda-cholapuram", note: "Written here; the date and each statement were checked against this article." }],
   },
   {
     id: "talikota",
@@ -770,10 +846,10 @@ const curatedEvents: HistoricalEvent[] = [
     title: "Battle of Talikota",
     period: { startYear: 1565, endYear: null, confidence: "probable", startQualifier: "exact", endQualifier: "exact" },
     summary:
-      "An alliance of the Deccan sultanates defeats Vijayanagara's army. The capital at Hampi is then sacked and abandoned.",
+      "An alliance of five Deccan sultanates defeats Vijayanagara's army on 23 January 1565. Hampi's royal centre is plundered and never rebuilt, and the rulers move south to Penukonda. Historians now doubt the older accounts that the whole city was destroyed.",
     polityIds: ["vijayanagara"],
     placeIds: ["hampi"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder summary." }],
+    provenance: [{ sourceId: "wikipedia-article-battle-of-talikota", note: "Written here; the date and each statement were checked against this article." }],
   },
   {
     id: "kailasa-temple-construction",
@@ -784,7 +860,7 @@ const curatedEvents: HistoricalEvent[] = [
       "Under Krishna I, the Kailasa Temple at Ellora is cut downward out of a single rock face — one of the largest rock-cut buildings in the world.",
     polityIds: ["rashtrakuta"],
     placeIds: ["ellora"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder summary." }],
+    provenance: [{ sourceId: "wikipedia-article-kailasa-temple-ellora", note: "Written here; the date and each statement were checked against this article." }],
   },
   {
     id: "chennakeshava-temple-consecration",
@@ -792,10 +868,10 @@ const curatedEvents: HistoricalEvent[] = [
     title: "The Chennakeshava Temple at Belur is dedicated",
     period: { startYear: 1117, endYear: null, confidence: "probable", startQualifier: "circa", endQualifier: "circa" },
     summary:
-      "Vishnuvardhana dedicates the Chennakeshava Temple at Belur — by the usual account, to mark his victory over the Cholas at Talakad.",
+      "Vishnuvardhana commissions the Chennakeshava Temple at Belur, dedicated to Vishnu, in 1117.",
     polityIds: ["hoysala"],
     placeIds: ["belur"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative placeholder summary." }],
+    provenance: [{ sourceId: "wikipedia-article-chennakeshava-temple-belur", note: "Written here; the date and each statement were checked against this article." }],
   },
   {
     id: "rajaraja-anuradhapura",
@@ -803,10 +879,10 @@ const curatedEvents: HistoricalEvent[] = [
     title: "Rajaraja I takes Anuradhapura",
     period: { startYear: 993, endYear: null, startQualifier: "circa", endQualifier: "circa", confidence: "probable" },
     summary:
-      "Chola forces take the old Sri Lankan capital. The north of the island is ruled from Polonnaruwa as a Chola province until Vijayabahu I drives them out around 1070.",
+      "Chola forces take the old Sri Lankan capital (Wikipedia's articles give 992 or 993). The Cholas hold the north of the island until Vijayabahu I drives them out in 1070.",
     polityIds: ["chola"],
     placeIds: ["anuradhapura"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Placeholder summary of a widely reported event; not yet cited." }],
+    provenance: [{ sourceId: "wikipedia-article-rajaraja-i", note: "Written here; the date and each statement were checked against this article." }, { sourceId: "wikipedia-article-vijayabahu-i", note: "Written here; the date and each statement were checked against this article." }],
   },
   {
     id: "kannauj-taken",
@@ -814,10 +890,10 @@ const curatedEvents: HistoricalEvent[] = [
     title: "Nagabhata II takes Kannauj",
     period: { startYear: 816, endYear: null, startQualifier: "circa", endQualifier: "circa", confidence: "probable" },
     summary:
-      "The Pratihara king captures Kannauj, which becomes his dynasty's capital — and the prize the Pratiharas, Palas and Rashtrakutas fought over for a century.",
+      "The Pratihara king Nagabhata II defeats Chakrayudha and proclaims himself king of Kannauj. The Pratiharas, Palas and Rashtrakutas had been fighting over the throne of Kannauj since 785.",
     polityIds: ["pratihara", "pala", "rashtrakuta"],
     placeIds: ["kannauj"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Placeholder summary of a widely reported event; not yet cited." }],
+    provenance: [{ sourceId: "wikipedia-article-tripartite-struggle", note: "Written here; the date and each statement were checked against this article." }],
   },
   {
     id: "delhi-sultanate-founded",
@@ -825,10 +901,10 @@ const curatedEvents: HistoricalEvent[] = [
     title: "Aibak becomes the first Sultan of Delhi",
     period: { startYear: 1206, endYear: null, startQualifier: "exact", endQualifier: "circa", confidence: "probable" },
     summary:
-      "After the death of Muhammad of Ghor, his general Qutb ud-Din Aibak governs the Indian conquests as their own ruler — the start of the Delhi Sultanate.",
+      "After Muhammad of Ghor is assassinated in 1206, his general Qutb ud-Din Aibak takes power on 25 June and rules independently from Lahore. Formal recognition came in 1208–09. This is counted as the start of the Delhi Sultanate.",
     polityIds: ["delhi-sultanate"],
     placeIds: ["delhi"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Placeholder summary of a widely reported event; not yet cited." }],
+    provenance: [{ sourceId: "wikipedia-article-qutb-al-din-aibak", note: "Written here; the date and each statement were checked against this article." }],
   },
   {
     id: "bahmani-founded",
@@ -836,10 +912,10 @@ const curatedEvents: HistoricalEvent[] = [
     title: "Founding of the Bahmani Sultanate",
     period: { startYear: 1347, endYear: null, startQualifier: "exact", endQualifier: "circa", confidence: "probable" },
     summary:
-      "Deccan nobles in revolt against Delhi crown Alauddin Hasan Bahman Shah at Gulbarga, founding the Deccan's first independent sultanate.",
+      "Deccan nobles in rebellion crown Alauddin Hasan Bahman Shah at Gulbarga (Hasanabad) on 3 August 1347, founding the first independent Muslim sultanate of the Deccan.",
     polityIds: ["bahmani"],
     placeIds: ["gulbarga"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Placeholder summary of a widely reported event; not yet cited." }],
+    provenance: [{ sourceId: "wikipedia-article-bahmani-sultanate", note: "Written here; the date and each statement were checked against this article." }],
   },
 ];
 
@@ -882,6 +958,7 @@ const battleEvents: HistoricalEvent[] = importedBattles.map((b) => {
     provenance: [
       { sourceId: "wikidata", note: "Date and place." },
       ...(b.wikipedia ? [{ sourceId: `wikipedia-battle-${b.wikidata}`, note: "Summary." }] : []),
+      ...("otherSource" in b && b.otherSource ? [{ sourceId: `web-battle-${b.wikidata}`, note: "Summary." }] : []),
       { sourceId: "cliopatria", note: "Which kingdom's borders contained the site." },
     ],
   };
@@ -938,48 +1015,36 @@ export const evidence: Evidence[] = [
     ],
   },
   {
-    id: "inscription-014",
-    slug: "inscription-014",
-    title: "Example of line-by-line linking (placeholder text)",
+    id: "sii-ii-88",
+    slug: "sii-ii-88",
+    title: "A bell-metal dish for the Ganapati shrine, given by a tax official",
     evidenceType: "inscription",
-    period: { startYear: 985, endYear: 1014, confidence: "illustrative", startQualifier: "circa", endQualifier: "circa" },
-    material: "Stone (temple wall)",
+    period: { startYear: 1014, endYear: null, confidence: "probable", startQualifier: "circa", endQualifier: "circa" },
+    material: "Stone (pillar of the west enclosure)",
     script: "Tamil",
     language: "Tamil",
     placeId: "thanjavur",
-    catalogueId: "EXAMPLE-001",
-    condition: "Partial, weathered",
+    catalogueId: "SII vol. II, no. 88",
     imageKey: "evidence-stone-inscription",
     imageIsIllustrative: true,
-    textIsIllustrative: true,
-    transcription: [
-      "ஸ்வஸ்தி ஸ்ரீ … [placeholder]",
-      "இராஜராஜ தேவர் … [placeholder]",
-      "தஞ்சாவூர் பெருவுடையார் கோயில் … [placeholder]",
-    ],
-    transliteration: [
-      "svasti śrī … [placeholder]",
-      "irājarāja tēvar … [placeholder]",
-      "tañcāvūr peruvuṭaiyār kōyil … [placeholder]",
-    ],
+    textIsIllustrative: false,
+    transcription: [],
+    transliteration: [],
     translation: [
-      "Hail! Prosperity! … [placeholder]",
-      "In the reign of the glorious Rajaraja … [placeholder]",
-      "At the great temple of Thanjavur … [placeholder]",
+      "Hail! Prosperity! One bell-metal dish (taligai), weighing twenty-nine palam, was presented, until the twenty-ninth year (of the reign) of the lord Sri-Rajarajadeva, to (the shrine of) Pillaiyar Ganapatiyar in the parivaralaya of the temple of the lord Sri-Rajarajesvaramudaiyar by Kanjan Kondaiyan, a native of Kamadamangalam in Purakkiliyur-nadu, (a subdivision) of Pandyakulasani-valanadu, a servant (panimagan) of the lord Sri-Rajarajadeva and the master of the rent roll in the department (tinaikkalam) of taxes (levied from) endowments.",
     ],
-    lineRegions: [
-      { x: 0.06, y: 0.12, w: 0.88, h: 0.22 },
-      { x: 0.06, y: 0.4, w: 0.88, h: 0.22 },
-      { x: 0.06, y: 0.68, w: 0.88, h: 0.22 },
-    ],
-    claim: "Example only: an inscription from Rajaraja I's reign that names the great temple at Thanjavur.",
-    claimIsIllustrative: true,
+    lineRegions: [],
+    claim:
+      "By the 29th year of Rajaraja I's reign, a servant of the king named Kanjan Kondaiyan, from Kamadamangalam, had given a bell-metal dish weighing 29 palam to the Ganapati shrine in the Thanjavur temple, and the gift was recorded on a pillar.",
+    claimIsIllustrative: false,
     interpretation:
-      "This page shows how a claim will be linked to the exact lines of an inscription, and to where its reading is published. The lines shown are placeholders, not a reading of the stone in the photo.",
+      "Gifts to the temple were cut in stone beside the shrine they went to, with the donor's name, home village and post. This donor is called a servant of the king and master of the rent roll in the department of taxes on endowments. The editors say he was \"apparently\" employed in the department that regulated those taxes, so the job is their reading of the text. The palam is a unit of weight.",
     uncertainty: { dating: "medium", interpretation: "medium", geographic: "high" },
-    sourceIds: ["sii-vol-3"],
+    sourceIds: ["sii-vol-2"],
     polityIds: ["chola"],
-    provenance: [{ sourceId: PROTOTYPE_SOURCE.id, note: "Illustrative claim/evidence worked example." }],
+    provenance: [
+      { sourceId: "sii-vol-2", note: "No. 88, printed p. 412: the editors' introduction and the whole translation, read from the scan." },
+    ],
   },
 ];
 

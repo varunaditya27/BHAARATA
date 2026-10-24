@@ -24,7 +24,7 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
         <Menu size={16} />
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/40 backdrop-blur-[2px] data-[state=open]:animate-[bh-overlay-in_200ms_ease-out]" />
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/50 data-[state=open]:animate-[bh-overlay-in_200ms_ease-out]" />
         <Dialog.Content className="fixed inset-x-0 top-0 z-50 border-b border-border bg-paper px-6 pb-8 pt-4 shadow-xl data-[state=open]:animate-[bh-sheet-down_320ms_cubic-bezier(0.22,1,0.36,1)]">
           <div className="flex items-center justify-between">
             <Dialog.Title className="font-display text-lg tracking-wide text-ink">BHĀRATA</Dialog.Title>

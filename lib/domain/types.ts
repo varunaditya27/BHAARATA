@@ -22,6 +22,8 @@ export const PolitySchema = z.object({
   slug: z.string(),
   name: z.string(),
   nativeName: z.string().optional(),
+  /** Language code of `nativeName` (ta, kn, hi, fa…), so it is announced and shaped correctly. */
+  nativeLang: z.string().optional(),
   alternativeNames: z.array(z.string()).default([]),
   polityType: z.string(),
   period: DateRangeSchema,
@@ -44,6 +46,7 @@ export const PersonSchema = z.object({
   slug: z.string(),
   name: z.string(),
   nativeName: z.string().optional(),
+  nativeLang: z.string().optional(),
   role: z.string(),
   period: DateRangeSchema,
   /** Whether `period` is a reign (the default) or only the person's lifetime,
@@ -60,6 +63,8 @@ export const PlaceSchema = z.object({
   id: z.string(),
   slug: z.string(),
   name: z.string(),
+  nativeName: z.string().optional(),
+  nativeLang: z.string().optional(),
   placeType: z.string(),
   coordinates: z.tuple([z.number(), z.number()]), // [lng, lat]
   region: z.string(),
