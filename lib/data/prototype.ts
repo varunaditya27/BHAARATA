@@ -33,8 +33,8 @@ function boundaryGeometry(id: string): GeoJSON.Polygon | GeoJSON.MultiPolygon {
  * borders and dates from Cliopatria, capitals, rulers, battles and sites from
  * Wikidata, descriptions from Wikipedia, each with its source on the record.
  *
- * The hand-written parts are the texts of the ten "curated" kingdoms, their
- * twelve rulers' summaries, nine turning points and the two evidence records.
+ * The hand-written parts are the texts of the eleven "curated" kingdoms, their
+ * eleven rulers' summaries, nine turning points and the two evidence records.
  * Every statement in them was checked against the Wikipedia article (or, for
  * the inscriptions, the printed volume) named in the record's provenance.
  * Still NOT researched: the Chera outline (built from modern district lines)

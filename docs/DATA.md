@@ -153,7 +153,7 @@ If Wikidata times out (it sometimes does), just run the script again: finished r
 
 `scripts/validate-data.py` checks every record against itself (duplicate ids, impossible dates, coordinates outside the map, rulers outside their kingdom's years, missing credits, files on disk) and against the web (every Wikipedia article exists and is the right subject, every Wikidata id keeps its label, every Commons photo is still there and still free-licensed). Its first run found, among other things: a consort and a Marwar ruler listed as Mughal emperors, two Mysore kings with the same reign, battle summaries that described Shivaji's whole biography or a whole war, and a kingdom whose summary came from a disambiguation page.
 
-Each fix is recorded with its reason in `scripts/apply-corrections.py`, not edited by hand into the generated files, so a re-import does not bring the error back. What the validator still reports (about 19 items) is real and open: three kingdoms without a photograph, three rulers without a summary, ten battles known only from Wikidata, and three photographs whose creator Commons lists as unknown.
+Each fix is recorded with its reason in `scripts/apply-corrections.py`, not edited by hand into the generated files, so a re-import does not bring the error back. What the validator still reports (11 items) is real and open: six battles known only from Wikidata, the Chera with no border shapes, two rulers without a summary, and two Wikipedia titles that redirect to a differently named article (to be checked as the same subject).
 
 ### What the scripts decide by hand
 
@@ -184,9 +184,9 @@ Automatic imports need a few human judgements. They are written down in the scri
 | `public/data/monuments.geojson` | `import-wikidata` | 4,313 protected monuments (name, id, Wikipedia title) |
 | `public/data/sites.geojson` | `import-sites` | 344 temples, mosques, churches, forts, tombs and palaces in the subcontinent and Afghanistan with a known date of construction (600–1700; Tibet, Iran and Central Asia are filtered out by Wikidata's country). 252 carry a linked Commons thumbnail with its credit; the images are not copied into the repository |
 | `lib/data/generated/imported-names.json` | `import-names` | Native-script names (Tamil, Kannada, Persian, Gujarati…) and alternative English names, taken from Wikidata labels and never transliterated by us |
-| `lib/data/generated/imported-ruler-lists.json` | `import-ruler-lists` | About 550 rulers of 30 kingdoms, read from Wikipedia's dated lists (tables, bullet lists, or rows entered by hand from the article, all in the script); each names its list page. A reign given only as a start year ends where the next begins, and says so. Where a list gives a reign and Wikidata only a lifetime, the list replaces it |
+| `lib/data/generated/imported-ruler-lists.json` | `import-ruler-lists` | About 560 rulers of 44 kingdoms, read from Wikipedia's dated lists (tables, bullet lists, or rows entered by hand from the article, all in the script); each names its list page. A reign given only as a start year ends where the next begins, and says so. Where a list gives a reign and Wikidata only a lifetime, the list replaces it |
 | `lib/data/generated/place-photos.json` | `import-place-photos` | Credit for the Wikidata image of 11 places, each checked for a free licence. Two places (Manyakheta, Kannauj) were left without a picture because Wikidata's image was a railway station and a different town's temple |
-| `lib/data/generated/place-wikidata.json` | `check-places` | Wikidata item and coordinates for each of the 22 hand-written places (it found Halebidu typed 25 km off) |
+| `lib/data/generated/place-wikidata.json` | `check-places` | Wikidata item and coordinates for each of the 24 hand-written places (it found Halebidu typed 25 km off) |
 | `lib/data/generated/photos.json` | `import-photos` | Credit for 35 hand-picked kingdom photographs (`public/images/kp-*.jpg`) |
 | `lib/data/generated/imported-people.json` | `import-rulers` | Rulers: dates, whether they are a reign or a lifetime, role, summary |
 | `lib/data/generated/imported-ruler-images.json` | `import-rulers` | Credit for each ruler image |
@@ -239,11 +239,11 @@ What is still thin, and why:
 ### Content
 
 - **Evidence:** two real inscription translations (SII Vol. II, nos. 85 and 88), each read from the printed page. The photograph beside each is of a *different* inscription and is labelled so. There is no transcription of the Tamil text.
-- **Hand-written text** for the eleven curated kingdoms, their twelve rulers and the nine turning points was checked, statement by statement, against the Wikipedia article named in each record (the audit corrected about 25 statements). It is still our paraphrase, not a scholarly text.
+- **Hand-written text** for the eleven curated kingdoms, their eleven rulers and the nine turning points was checked, statement by statement, against the Wikipedia article named in each record (the audit corrected about 25 statements). It is still our paraphrase, not a scholarly text.
 - **Not researched:** the **routes** (two example lines, drawn by hand and labelled so on the map) and the **Chera outline**.
-- **Portraits:** about 35 of roughly 670 rulers have a free-licence depiction; the rest show an initial.
+- **Portraits:** 32 of about 670 rulers have a free-licence depiction; the rest show an initial.
 - **Photographs:** every kingdom has one. Three (Maitraka, Lohara, Dambadeniya) show a coin or temples of the period rather than the capital's best-known building; Gahadavala and Sena show an inscription and pottery.
-- **Battles:** 10 of 127 have only a date and place from Wikidata; no source describing them was found.
+- **Battles:** 6 of 127 have only a date and place from Wikidata; no source describing them was found.
 - **Native-script names** were checked against the same-language Wikipedia titles; one (Kalyani Chalukya) has none because no article title could be confirmed.
 
 ---
