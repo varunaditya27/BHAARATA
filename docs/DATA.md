@@ -40,9 +40,9 @@ Three related rules follow from it:
 | Data | Source | Licence | Where it is credited |
 |---|---|---|---|
 | Kingdom borders and dates | [Cliopatria](https://github.com/Seshat-Global-History-Databank/cliopatria), Seshat Global History Databank. Bennett et al., *Scientific Data* 12, 247 (2025). [doi:10.1038/s41597-025-04516-9](https://doi.org/10.1038/s41597-025-04516-9) | CC BY 4.0 | Each kingdom page (Sources), the Method page, the footer, and saved map images |
-| Kingdom and ruler summaries, battle descriptions | English Wikipedia, opening paragraph, lightly trimmed | CC BY-SA 4.0 | Each page's Sources list names the article |
-| Capitals and their coordinates; battles; rulers' roles and dates; protected monuments | [Wikidata](https://www.wikidata.org) | CC0 | Each page's Sources list; Method page |
-| Photographs and portraits | [Wikimedia Commons](https://commons.wikimedia.org) | Per file: only CC BY, CC BY-SA, CC0 and public domain are accepted | Photographer, licence and link under every image; full list on the Method page |
+| Kingdom and ruler summaries, battle descriptions; ruler names and reigns for kingdoms Wikidata has no monarchs for | English Wikipedia: opening paragraphs, lightly trimmed, and the dated tables in its "List of …" articles | CC BY-SA 4.0 | Each page's Sources list names the article or list |
+| Capitals and their coordinates; battles; rulers' roles and dates; protected monuments; dated temples, mosques, forts and tombs; native-script and alternative names | [Wikidata](https://www.wikidata.org) | CC0 | Each page's Sources list; Method page |
+| Photographs of kingdoms and places, ruler portraits, and the thumbnails shown for dated sites (linked from Commons, not copied) | [Wikimedia Commons](https://commons.wikimedia.org) | Per file: only CC BY, CC BY-SA, CC0 and public domain are accepted | Photographer, licence and link under every image; full list on the Method page |
 | Inscription translation | *South Indian Inscriptions*, Vol. II (Archaeological Survey of India, 1913), scan from the Digital Library of India | Public domain | The evidence page's source chain, with a link to the scan |
 | Chera outline (placeholder) | [indian-district-boundaries](https://github.com/guneetnarula/indian-district-boundaries) | MIT | Method page |
 | Base map | © CARTO, © OpenStreetMap contributors | ODbL (data); CARTO terms (tiles) | Map attribution control, Method page |
@@ -54,7 +54,7 @@ Wikipedia's licence (CC BY-SA 4.0) requires attribution and share-alike. Each su
 
 ## 3. The pipeline
 
-Data is imported by three Python scripts that you run by hand. Their output is committed to the repository, so the site builds offline and every data change is a reviewable diff.
+Data is imported by Python scripts that you run by hand. Their output is committed to the repository, so the site builds offline and every data change is a reviewable diff. The diagram shows the three main importers; the table under it lists the rest.
 
 ```mermaid
 flowchart TB
@@ -103,7 +103,18 @@ flowchart TB
     class CZ,WD,WP,CM,A1,A2,A3,B1,B2,B3,C1,C2,C3,O1,O2,O3 node;
 ```
 
-Order matters: run `import-cliopatria.py` first, then the other two, which read its output.
+Order matters: run `import-cliopatria.py` first, then the others, which read its output.
+
+| Script | Reads | Writes |
+|---|---|---|
+| `import-names.py` | The caches the three importers above wrote | Native-script and alternative names |
+| `import-sites.py` | Wikidata | `public/data/sites.geojson` |
+| `import-ruler-lists.py` | Wikipedia's lists of rulers, and the kingdom list | Rulers for kingdoms Wikidata lacks, and which Wikidata records they replace |
+| `check-places.py` | Wikidata | Item and coordinates for each hand-written place |
+| `import-place-photos.py` | `check-places.py` output, Commons | Photographs and credits for places |
+| `import-photos.py` | Commons (a human picks) | Photographs and credits for kingdoms |
+| `apply-corrections.py` | The generated files | The documented fixes, re-applied after any import |
+| `validate-data.py` | Everything, and the web | A list of problems; changes nothing |
 
 All network responses are cached in a `cache/` folder inside the directory you run from, so reruns are fast, offline, and give identical results.
 
@@ -119,7 +130,7 @@ mkdir -p ~/bharata-import && cd ~/bharata-import
 
 # 2. Python with shapely
 python3 -m venv venv
-venv/bin/pip install shapely
+venv/bin/pip install shapely pillow     # Pillow is only for import-photos.py candidates
 
 # 3. The Cliopatria dataset (about 44 MB zipped)
 curl -L -o clio.zip \
@@ -189,7 +200,7 @@ Automatic imports need a few human judgements. They are written down in the scri
 | `lib/data/generated/place-wikidata.json` | `check-places` | Wikidata item and coordinates for each of the 24 hand-written places (it found Halebidu typed 25 km off) |
 | `lib/data/generated/photos.json` | `import-photos` | Credit for 35 hand-picked kingdom photographs (`public/images/kp-*.jpg`) |
 | `lib/data/generated/imported-people.json` | `import-rulers` | Rulers: dates, whether they are a reign or a lifetime, role, summary |
-| `lib/data/generated/imported-ruler-images.json` | `import-rulers` | Credit for each ruler image |
+| `lib/data/generated/imported-ruler-images.json` | `import-rulers` | Credit for each ruler image (32; 14 are not shown, see section 7) |
 | `lib/data/prototype.ts` | by hand, plus the merge | Hand-written records, and the code that merges everything above into typed arrays |
 | `lib/data/images.ts` | by hand, plus the merge | Credits for hand-picked photographs |
 | `lib/data/story.ts` | by hand | The four homepage chapters |
@@ -221,11 +232,12 @@ These are known limits of the current data, not bugs. They are tracked in [`BACK
 
 ### Rulers
 
-Every kingdom now has at least one ruler, about 670 in all, with reign dates. They come from three routes: Wikidata (office and dates), Wikipedia's dated lists of rulers (`import-ruler-lists.py`), and a few hand-written records checked against their Wikipedia article. Where a list gives a reign and Wikidata only a lifetime, the reign replaces it. The biggest lists: Anuradhapura (52), Bengal Sultanate (36), Kashmir Sultanate (32), Delhi Sultanate (32), Vijayanagara (28), Chola (20).
+Every kingdom now has at least one ruler, about 670 in all, with reign dates. They come from three routes: Wikidata (office and dates), Wikipedia's dated lists of rulers (`import-ruler-lists.py`), and a few hand-written records checked against their Wikipedia article. Where a list gives a reign and Wikidata only a lifetime, the reign replaces it. The biggest lists: Anuradhapura (52), Bengal Sultanate (36), Delhi Sultanate (33), Kashmir Sultanate (32), Vijayanagara (29), Chola (20).
 
 What is still thin, and why:
 
 - **Harsha's Empire (1), Kampili (2), the Maratha kingdom (3), the Thanjavur Nayaks (4):** the sources name no more rulers in the years the atlas covers.
+- **Pala, Gurjara-Pratihara and the Kalyani Chalukya (1 each):** only the hand-written ruler; no list has been imported for them yet.
 - **Reign dates are approximate** wherever a source gives "c." years (Maitraka, Chera, Habbarid), and some sources disagree by a few years (the page gives the table's figure).
 - **Few have a summary.** Rulers from lists have a name, role and dates only; the page says so instead of leaving a blank.
 - 211 Wikidata candidates were skipped because Wikidata gave no usable dates for them.
@@ -241,7 +253,7 @@ What is still thin, and why:
 - **Evidence:** two real inscription translations (SII Vol. II, nos. 85 and 88), each read from the printed page. The photograph beside each is of a *different* inscription and is labelled so. There is no transcription of the Tamil text.
 - **Hand-written text** for the eleven curated kingdoms, their eleven rulers and the nine turning points was checked, statement by statement, against the Wikipedia article named in each record (the audit corrected about 25 statements). It is still our paraphrase, not a scholarly text.
 - **Not researched:** the **routes** (two example lines, drawn by hand and labelled so on the map) and the **Chera outline**.
-- **Portraits:** 32 of about 670 rulers have a free-licence depiction; the rest show an initial.
+- **Portraits:** 20 of 671 rulers show a free-licence portrait; the rest show an initial. Fourteen more portraits are downloaded and credited (`imported-ruler-images.json`) but not shown: twelve belong to a Wikidata record that a list's dated reign replaced, one to a hand-written record that has no image set, and one to a record that no longer exists. See K10 in the backlog.
 - **Photographs:** every kingdom has one. Three (Maitraka, Lohara, Dambadeniya) show a coin or temples of the period rather than the capital's best-known building; Gahadavala and Sena show an inscription and pottery.
 - **Battles:** 6 of 127 have only a date and place from Wikidata; no source describing them was found.
 - **Native-script names** were checked against the same-language Wikipedia titles; one (Kalyani Chalukya) has none because no article title could be confirmed.

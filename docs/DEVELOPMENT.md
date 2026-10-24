@@ -111,6 +111,7 @@ For data, also:
 - [ ] Every new record has `provenance`, and the page's badge is correct
 - [ ] Dates use the right qualifiers; a lifetime is never shown as a reign
 - [ ] Anything uncertain says so
+- [ ] `scripts/validate-data.py` reports nothing new ([`DATA.md`](DATA.md#corrections-and-the-audit))
 
 ### Automated tests
 
@@ -138,7 +139,8 @@ New kingdoms come from the importer, not from hand-editing:
 
 1. Add the Cliopatria name to `INCLUDE` in `scripts/import-cliopatria.py` with an id and display name.
 2. Re-run the importers ([`DATA.md`](DATA.md#4-running-the-importers)) and review the diff.
-3. Optionally add a checked photo id to `IMAGE_OK`, or a hand-written record to `lib/data/prototype.ts` (and list its id in `CURATED`).
+3. Photograph: pick one with `import-photos.py candidates` then `download` ([`DATA.md`](DATA.md#4-running-the-importers)). Rulers: add the kingdom's Wikipedia list to `LISTS` in `scripts/import-ruler-lists.py` if Wikidata has no monarchs for it. Optionally add a hand-written record to `lib/data/prototype.ts` (and list its id in `CURATED`).
+4. Run `scripts/validate-data.py` and read what it prints.
 
 ### Add an evidence record
 
@@ -185,8 +187,8 @@ After a deploy, check:
 - Work on a branch; merge to `main` when it builds and you have used it.
 - Keep commit messages **short and plain**: "Add battles layer", not a paragraph.
 - **Do not add AI co-author trailers** to commits.
-- Commit generated data (`lib/data/generated`, `public/data`, `public/images/imp-*`) together with the script change that produced it, so the diff explains itself.
-- Do not commit `.env.local` or the importers' `cache/` folder.
+- Commit generated data (`lib/data/generated`, `public/data`, and the photographs the scripts download to `public/images/`) together with the script change that produced it, so the diff explains itself.
+- Do not commit `.env.local`. Run the importers from a scratch directory outside the repository, so their `cache/` folder never lands in it.
 
 ---
 

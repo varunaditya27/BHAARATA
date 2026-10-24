@@ -20,7 +20,7 @@ Then follow any claim back to the evidence it rests on.
 
 <br />
 
-<img src="docs/assets/globe.jpg" alt="The BHĀRATA homepage: a globe turning from Africa towards the Indian subcontinent, with kingdoms inked in" width="860" />
+<img src="docs/assets/globe.jpg" alt="The BHĀRATA homepage: the subcontinent seen from above in 1050 CE with kingdoms inked in, the title, and a prompt to scroll" width="860" />
 
 <br />
 <br />
@@ -119,7 +119,7 @@ flowchart LR
 <td width="50%"><img src="docs/assets/evidence.jpg" alt="An evidence page showing a stone inscription viewer and the English translation" /><br /><sub><b>Evidence.</b> A translation from <i>South Indian Inscriptions</i>, with the viewer above it.</sub></td>
 </tr>
 <tr>
-<td colspan="2"><img src="docs/assets/chronology.jpg" alt="The chronology page with one coloured line per kingdom and diamonds for events" /><br /><sub><b>The chronology.</b> One line per kingdom, one diamond per turning point, battles listed under each period.</sub></td>
+<td colspan="2"><img src="docs/assets/chronology.jpg" alt="The chronology page with one coloured line per kingdom, diamonds for events, and a button to show the other 48 kingdoms" /><br /><sub><b>The chronology.</b> One line per kingdom (the seven with turning points first, the other 48 one click away), one diamond per turning point, battles listed under each period.</sub></td>
 </tr>
 </table>
 
@@ -133,8 +133,9 @@ BHĀRATA is an early version, and being straight about that is part of the proje
 |---|---|---|
 | Kingdom borders and dates | [Cliopatria](https://github.com/Seshat-Global-History-Databank/cliopatria) (Seshat Global History Databank, CC BY 4.0) | Researched. One version of each territory, **not exact frontiers** |
 | Kingdom summaries | Wikipedia (CC BY-SA 4.0) | Opening paragraphs, lightly trimmed |
-| Capitals, battles, dated sites, monuments, rulers | Wikidata (CC0) and Wikipedia's lists of rulers | Real. Every kingdom has rulers; a few have only two or three because the sources name no more |
+| Capitals, battles, dated sites, monuments, rulers | Wikidata (CC0) and Wikipedia's lists of rulers | Real. Every kingdom has rulers; a few have only one to four because the sources name no more |
 | Photographs | Wikimedia Commons | Real, credited; only free licences |
+| Names in Tamil, Kannada, Persian and other scripts | Wikidata labels | Real, but **not yet checked by a reader of each language** |
 | Inscription evidence | *South Indian Inscriptions* Vol. II (1913, public domain) | **Two** real translations so far |
 | Hand-written texts, eleven rulers, nine turning points | This repository | Written here and **checked against Wikipedia**, statement by statement; the source is named on each page |
 | Chera borders, two example routes | This repository | **Not researched**, labelled on the page and the map |
@@ -160,6 +161,7 @@ flowchart TB
         I1["import-cliopatria.py"]
         I2["import-wikidata.py"]
         I3["import-rulers.py"]
+        I4["and six more: names, sites,<br/>ruler lists, photographs,<br/>checks, corrections"]
     end
 
     subgraph DATA["Committed data"]
@@ -180,9 +182,13 @@ flowchart TB
     W --> I2
     W --> I3
     P --> I3
+    W --> I4
+    P --> I4
+    M --> I4
     I1 --> G
     I2 --> G
     I3 --> G
+    I4 --> G
     G --> D
     H --> D
     D --> S
@@ -190,7 +196,7 @@ flowchart TB
     S --> CC
 
     classDef box fill:#faf6ec,stroke:#241f17,color:#241f17;
-    class C,W,P,M,I1,I2,I3,G,H,D,S,SC,CC box;
+    class C,W,P,M,I1,I2,I3,I4,G,H,D,S,SC,CC box;
 ```
 
 One function, `getHistoricalState(year)`, answers *what does the world look like in year Y*. The timeline, the map and the preview panel all call it, so they can never disagree. The deeper tour, with the map's layer stack and the per-frame update path, is in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
@@ -204,9 +210,9 @@ One function, `getHistoricalState(year)`, answers *what does the world look like
 | **Framework** | [Next.js](https://nextjs.org) 16 (App Router, React Server Components), React 19, TypeScript 5 |
 | **Map** | [MapLibre GL JS](https://maplibre.org) 6: globe projection, hillshade, 3D terrain, `feature-state`. Glyphs generated from the project's own fonts |
 | **Styling** | Tailwind CSS 4 with design tokens; [Motion](https://motion.dev) for animation; the browser's View Transitions for page changes |
-| **Interface parts** | Radix UI (dialog, tabs, popover), [cmdk](https://cmdk.paco.me) for search, Lucide icons |
+| **Interface parts** | Radix UI (dialog, tabs, popover, tooltip), [cmdk](https://cmdk.paco.me) for search, Lucide icons |
 | **Data contracts** | [Zod](https://zod.dev) 4 |
-| **Import scripts** | Python 3 with `shapely` |
+| **Import scripts** | Python 3 with `shapely` (and Pillow, only to choose photographs) |
 | **Hosting** | [Vercel](https://vercel.com) |
 
 <br />
@@ -267,7 +273,10 @@ lib/
   domain/            Zod schemas and types, date formatting
   data/              Hand-written records, generated data, image credits
   geo/               getHistoricalState(year), GeoJSON conversion
-scripts/             Python importers and the MapLibre worker copy
+  search/            The search index behind the ⌘K palette
+  utils/             Small helpers (class names, colour, stored flags, page-transition types)
+scripts/             Python importers, the data checker, and the MapLibre worker copy
+assets/              Fonts for the share images
 docs/                Architecture, data, design, development, backlog
 public/              Fonts, map glyphs and style, images, monuments
 ```

@@ -73,7 +73,7 @@ quadrantChart
 
 | ID | Item | Why it matters | Size |
 |---|---|---|---|
-| **D1** | **More rulers where a list stops early.** Every kingdom has rulers now, but Harsha's Empire (1), Kampili (2), the Maratha kingdom (3) and the Thanjavur Nayaks (4) have few, and several lists give only "c." years. A cited book (not just Wikipedia) would fix both | A kingdom page with a handful of rulers looks unfinished, and approximate years are only as good as the one source | M |
+| **D1** | **More rulers where a list stops early.** Every kingdom has rulers now, but Pala, Gurjara-Pratihara, the Kalyani Chalukya and Harsha's Empire (1 each), Kampili (2), the Maratha kingdom (3) and the Thanjavur Nayaks (4) have few, and several lists give only "c." years. A cited book (not just Wikipedia) would fix both | A kingdom page with a handful of rulers looks unfinished, and approximate years are only as good as the one source | M |
 | **D4** | **A citation layer down to page numbers.** Add a *Claim* record (the statement) that points to a *Source* with a page or inscription number and, where possible, a quoted line. Today a record cites a source as a whole | Turns "Wikipedia" into "Nilakanta Sastri, *The Cōḻas*, p. 214", which is what a historian can check | L |
 | **D5** | **Replace the hand-written text of the 11 curated kingdoms** (summaries, taglines, "remembered for") with cited text, then have someone who knows the history review it | It is the largest remaining body of unchecked prose | M |
 | **D2** | **More real evidence.** Start with the Chola: more of the Thanjavur inscriptions in *South Indian Inscriptions* Vols. II and III; a coin with a museum catalogue number; a temple with its ASI record. Each needs a free-licence photograph **of that object** | Today there are two real translations, each shown beside a photo of a *different* inscription | XL |
@@ -135,7 +135,7 @@ quadrantChart
 
 | ID | Item | Size |
 |---|---|---|
-| **D11** | Portraits for more of the ~670 rulers (32 have one), using coins as a fallback | M |
+| **D11** | Portraits for more of the ~670 rulers (20 show one), using coins as a fallback. First restore the 14 already downloaded (K10) | M |
 | **D14** | Extend the range beyond 600–1700 (Cliopatria covers far more); needs new era names and a lighter map at wider ranges | L |
 | **D15** | Replace the hand-drawn trade and war routes with routes from a scholarly source | L |
 | **F5** | Sidebar filters: by region, religion or ruler; group kingdoms by era | M |
@@ -164,6 +164,7 @@ Small, real problems, kept honest.
 | **K7** | The first paint of the homepage film waits for map tiles; on a slow connection it shows only stars and the title for a few seconds | `/` |
 | **K8** | Region names on imported kingdoms come from a rough position rule with a few manual overrides; some read slightly off | Kingdom pages |
 | **K9** | The share-image generator reads fonts converted from the web fonts; a rare glyph may be missing | Link previews |
+| **K10** | Fourteen ruler portraits are downloaded and credited but not shown. Twelve belonged to a Wikidata record that a Wikipedia list's dated reign later replaced, and the replacement carries no image. One more is a hand-written record with no image set, and one belongs to a record that no longer exists (`ruler-bukka`) | People pages: Razia Sultana, Sher Shah Suri, Mahmud of Ghazni, the Adil Shahs and others |
 
 ---
 

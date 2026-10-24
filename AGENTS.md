@@ -55,7 +55,7 @@ Read this before assuming anything is wired up. The detail is in `docs/DATA.md`.
     Borders are one researched version of each territory, not exact frontiers.
   - *Wikidata / Wikipedia / Wikimedia Commons* (CC0 / CC BY-SA / per-file free
     licences): capitals, 127 battles, 4,313 protected monuments, ~670 rulers, 344 dated sites,
-    summaries and photographs.
+    native-script names, summaries and photographs.
   - *Hand-written text* in `lib/data/prototype.ts`: the summaries of the 11
     "curated" kingdoms, 11 rulers, nine turning points. Each statement was
     checked against the Wikipedia article named in its provenance; keep it that
@@ -67,8 +67,8 @@ Read this before assuming anything is wired up. The detail is in `docs/DATA.md`.
   the scan's machine-read Tamil is garbled and must not be used.
 - **Not built:** a database, IIIF, PMTiles, a citation layer down to page
   numbers, automated tests, CI. See `docs/BACKLOG.md`.
-- `legacy/frontend-v1` holds a prior, deliberately parked attempt. Don't pull
-  from it without being asked.
+- The git branch `legacy/frontend-v1` holds a prior, deliberately parked attempt.
+  Don't pull from it without being asked.
 
 ## Architecture boundaries
 

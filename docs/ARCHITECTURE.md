@@ -88,6 +88,7 @@ Pages are server components. Only the parts that need the browser are client com
 | All `app/**/page.tsx` routes | `AtlasView` and everything inside it |
 | Kingdom, person, place and evidence pages | `HistoricalMap`, `StoryMap` (the homepage globe) |
 | `KingdomLanes`, `ProvenanceChain`, `Colophon` | `TimelineScrubber`, `LifespanStrip`, `EventTicks` |
+| | `KingdomBoard`, `PeopleDirectory`, `PlacesAtlas` (the Kingdoms, People and Places pages: their rows are built on the server and the find box filters them in the browser) |
 | Share images (`opengraph-image.tsx`, rendered once at build) | `CommandPalette`, `EvidenceViewer`, `RakingLight` |
 | Static metadata and `generateStaticParams` | `EntityPreviewPanel`, `MobileMenu`, `NavLinks` |
 
@@ -182,7 +183,7 @@ The definitions live in `components/map/layers.ts`; ids are in `mapStyle.ts`. Ea
 - **Selecting a kingdom** flies the camera to its borders, tilts it when terrain is on, and pads the view so the shape sits clear of the preview card (desktop) or bottom sheet (mobile).
 - **Compare view** runs a second `HistoricalMap` at its own year. The two cameras are linked in both directions with a re-entrancy guard so they cannot echo each other.
 - **Save as image** copies the WebGL canvas inside the next `render` event (the buffer is cleared after each frame) and draws a key and credits onto it.
-- **Click handling** gives battles, monuments and clusters priority over the kingdom underneath. Popup content is built with `textContent`, never HTML, because names come from Wikidata.
+- **Click handling** gives battles, sites, monuments and clusters priority over the kingdom underneath. Popup content is built with `textContent`, never HTML, because names come from Wikidata.
 
 ---
 
@@ -253,7 +254,7 @@ A few choices worth knowing:
 
 ## 7. Provenance
 
-Every record that carries a claim has a `provenance` list pointing at `Source` records. A small helper turns that list into the badge shown on the page, so the label can never disagree with the data.
+Every record that carries a claim has a `provenance` list pointing at `Source` records. `polityStatus`, `personStatus` and `placeStatus` turn that list into the badge shown on the page, so the label can never disagree with the data. The diagram shows the main cases; a hand-written record whose text was checked against Wikipedia gets "Text checked against Wikipedia", and a ruler read from one of Wikipedia's lists gets "Name and dates from Wikipedia's list of rulers".
 
 ```mermaid
 flowchart LR
@@ -261,10 +262,10 @@ flowchart LR
     P --> S["Source<br/>title, citation, url"]
     P --> H["lib/data/status.ts"]
     H --> B{"What does it cite?"}
-    B -- "Cliopatria and Wikipedia" --> G["Badge: Borders: Cliopatria<br/>Summary: Wikipedia"]
-    B -- "Cliopatria only" --> Y["Badge: Borders: Cliopatria<br/>Text not yet checked"]
-    B -- "Wikidata" --> W["Badge: Dates: Wikidata"]
-    B -- "nothing but the<br/>placeholder source" --> X["Badge: Placeholder data,<br/>not yet checked"]
+    B -- "Cliopatria and Wikipedia" --> G["Borders from the Cliopatria dataset.<br/>Summary from Wikipedia."]
+    B -- "Cliopatria only" --> Y["Borders from the Cliopatria dataset.<br/>Text not checked yet."]
+    B -- "Wikidata" --> W["Dates and title from Wikidata."]
+    B -- "nothing but the<br/>placeholder source" --> X["Placeholder, not checked yet."]
 
     classDef node fill:#faf6ec,stroke:#241f17,color:#241f17;
     class R,P,S,H,B,G,Y,W,X node;
@@ -278,12 +279,12 @@ The evidence page goes one step further. `ProvenanceChain` lists each link betwe
 
 | State | Where it lives | Why |
 |---|---|---|
-| Year and selected kingdom | URL (`?year=1050&polity=chola`) | A link is a saved historical viewpoint |
+| Year, selected kingdom, layers, camera | URL (`?year=1050&polity=chola&layers=…&at=…`) | A link is a saved historical viewpoint. `layers` appears only when it differs from the default; `at` is the map view, written after the camera stops moving |
 | The year while dragging | React state in `AtlasView` | Instant; the URL follows 300 ms later |
 | Layer toggles, playing, cinema, compare, help | React state in `AtlasView` | Short-lived interface state |
 | Sound on/off | `localStorage` via `useStoredFlag` | A remembered preference; reads as "off" during server render |
 | Recent searches | `localStorage` | A convenience; every access is wrapped in `try/catch` |
-| Map camera | MapLibre | Never mirrored into React |
+| Map camera | MapLibre | Never mirrored into React state; only copied into the link (`at`) once it settles |
 
 ---
 
@@ -323,7 +324,7 @@ flowchart TB
 |---|---|
 | Scrubbing with 466 shapes | Only changed shapes are written each frame (see section 4). A 900-year drag held 60 fps in a software-rendered test browser |
 | 4,300 monuments, 344 sites | Separate GeoJSON files (780 KB together), fetched only when the layer is first enabled, clustered by MapLibre |
-| 60+ kingdoms on the timeline | Kingdoms that never overlap share a row, so about 14 rows instead of 60 |
+| 55 kingdoms on the chronology | One row per kingdom; those with recorded events come first and the rest sit behind a toggle, so the chart does not open as 55 rows |
 | Map load time | Terrain tiles are not waited for; the cover lifts as soon as the basemap and borders are drawn (about 1–3 s) |
 | Homepage globe | Starfield on a plain 2D canvas; the nebula is painted once off-screen; the camera path is one `requestAnimationFrame` loop |
 | Share images | Rendered once per kingdom at build time and cached |

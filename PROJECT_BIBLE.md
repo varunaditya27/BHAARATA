@@ -452,7 +452,7 @@ docs/
 
 The exact folders may evolve. Separation of concerns should not.
 
-This is the **target**. The structure that exists today is described in `docs/ARCHITECTURE.md`; `server/`, `hooks/`, `tests/` and `queries/` do not exist yet (see `docs/BACKLOG.md`).
+This is the **target**. The structure that exists today is described in `docs/ARCHITECTURE.md`; `server/`, `hooks/`, `tests/`, `queries/` and `components/ui/` do not exist yet (the small building blocks are in `components/primitives/`) (see `docs/BACKLOG.md`).
 
 ## 17. Quality bar
 
