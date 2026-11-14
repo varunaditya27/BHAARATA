@@ -14,43 +14,42 @@ const LINKS = [
 ];
 
 /**
- * The closing page of every page, set like a book's colophon: what this
- * is, how it was made, and who made the things it borrows. Not shown on
- * the Atlas, which fills the screen.
+ * Minimal editorial colophon shown at the bottom of reading pages.
+ * Hidden on the full-screen /atlas route.
  */
 export function Colophon() {
   return (
     <HideOnRoutes routes={["/atlas"]}>
-      <footer className="border-t border-border">
-        <div className="mx-auto grid max-w-[1100px] gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.3fr_1fr_1fr]">
-          <div>
+      <footer className="border-t border-border bg-paper">
+        <div className="mx-auto max-w-[1200px] px-4 py-10 sm:px-6">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-3">
-              <BrandMark size={26} className="text-ink" />
-              <p className="font-display text-2xl tracking-[0.04em] text-ink">BHĀRATA</p>
+              <BrandMark size={22} className="shrink-0 text-ink" />
+              <div>
+                <p className="font-display text-lg tracking-[0.05em] text-ink">
+                  BHĀRATA
+                </p>
+                <p className="font-sans text-xs text-ink-muted">
+                  An atlas of the Indian subcontinent, 600–1700 CE.
+                </p>
+              </div>
             </div>
-            <p className="mt-3 max-w-sm font-sans text-sm leading-relaxed text-ink-muted">
-              An atlas of the Indian subcontinent through time: which kingdoms held which land, when, and how we know.
-              Kingdom borders come from Cliopatria; descriptions, rulers, battles and places from Wikipedia and Wikidata.
-            </p>
-          </div>
-          <nav aria-label="Footer" className="font-sans text-sm">
-            <p className="text-sm font-medium text-ink-muted">Pages</p>
-            <ul className="mt-3 grid grid-cols-2 gap-y-2">
+
+            <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2 font-sans text-xs">
               {LINKS.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="text-ink hover:underline">
-                    {l.label}
-                  </Link>
-                </li>
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="text-ink-muted transition-colors hover:text-ink"
+                >
+                  {l.label}
+                </Link>
               ))}
-            </ul>
-          </nav>
-          <div className="font-sans text-sm text-ink-muted">
-            <p className="text-sm font-medium">Made with</p>
-            <p className="mt-3 leading-relaxed">
-              Fonts: Zodiak and Ranade, with Anek and Tiro for Indian scripts. Photographs from Wikimedia Commons; map
-              data from OpenStreetMap contributors and CARTO.
-            </p>
+            </nav>
+          </div>
+
+          <div className="mt-6 border-t border-border/70 pt-4 font-sans text-[11px] text-ink-soft">
+            Borders from Cliopatria. Descriptions, rulers, battles, and places from Wikipedia, Wikidata, and Wikimedia Commons. Map tiles from CARTO and OpenStreetMap.
           </div>
         </div>
       </footer>

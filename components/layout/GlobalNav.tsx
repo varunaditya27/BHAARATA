@@ -13,7 +13,10 @@ const primaryLinks = [
   { href: "/evidence", label: "Evidence" },
 ];
 
-const secondaryLinks = [{ href: "/data", label: "Browse data" }, { href: "/connections", label: "ER diagram" }];
+const secondaryLinks = [
+  { href: "/data", label: "Browse data" },
+  { href: "/connections", label: "ER diagram" },
+];
 
 export function GlobalNav() {
   return (
@@ -21,16 +24,27 @@ export function GlobalNav() {
       className="sticky top-0 z-40 h-16 border-b border-border bg-paper"
       style={{ viewTransitionName: "site-header" }}
     >
-      <div className="mx-auto flex h-full max-w-[1400px] items-center gap-6 px-4 sm:px-6">
-        <Link
-          href="/"
-          className="flex shrink-0 items-center gap-2.5 font-display text-lg tracking-wide text-ink"
-        >
-          <BrandMark size={22} className="text-ink" />
-          <span>BHĀRATA</span>
-        </Link>
+      <div className="mx-auto flex h-full max-w-[1400px] items-center justify-between gap-6 px-4 sm:px-6">
+        <div className="flex shrink-0 items-center gap-3.5">
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 font-display text-lg tracking-[0.06em] text-ink transition-opacity hover:opacity-80"
+          >
+            <BrandMark size={22} className="text-ink" />
+            <span>BHĀRATA</span>
+          </Link>
+          <span
+            className="hidden h-4 w-px bg-border sm:inline-block"
+            aria-hidden
+          />
+          <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-ink-soft xl:inline">
+            600–1700 CE
+          </span>
+        </div>
+
         <NavLinks primary={primaryLinks} secondary={secondaryLinks} />
-        <div className="ml-auto flex shrink-0 items-center gap-2">
+
+        <div className="flex shrink-0 items-center gap-2">
           <CommandPalette />
           <MobileMenu links={[...primaryLinks, ...secondaryLinks]} />
         </div>
