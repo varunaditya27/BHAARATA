@@ -2,7 +2,7 @@
 
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useAtlasData } from "@/components/layout/AtlasDataProvider";
-import { Map as MapLibreMap, setWorkerUrl } from "maplibre-gl";
+import { Map as MapLibreMap, setWorkerUrl, type GeoJSONSource } from "maplibre-gl";
 import { useEffect, useRef, useState } from "react";
 import { prefersReducedMotion, startMapAnimations } from "@/components/map/animations";
 import { applyHistoricalState } from "@/components/map/apply-state";
@@ -20,9 +20,18 @@ const DESCENT_MS = 6400;
 const easeInOut = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+const clamp = (v: number, lo: number, hi: number) =>
+  Math.max(lo, Math.min(hi, v));
 
 /** Where the film opens: orbital view over the Arabian Sea / East Africa with India visible on the eastern limb. */
 const ORBIT_START = { lng: 36, lat: 16, zoom: 1.45, bearing: -18, pitch: 18 };
+
+const STORY_FLIGHT_SOURCE = "bh-story-flight-source";
+const STORY_BEACON_SOURCE = "bh-story-beacon-source";
+const STORY_FLIGHT_GLOW_LAYER = "bh-story-flight-glow";
+const STORY_FLIGHT_LINE_LAYER = "bh-story-flight-line";
+const STORY_BEACON_OUTER_LAYER = "bh-story-beacon-outer";
+const STORY_BEACON_CORE_LAYER = "bh-story-beacon-core";
 
 function heroRightPadding(container: HTMLElement) {
   const wide = window.matchMedia("(min-width: 1024px)").matches;
@@ -78,9 +87,75 @@ export type MapTelemetry = {
 };
 
 /**
+ * Generates an arched geodesic-like curve between two `[lng, lat]` coordinates,
+ * progressively drawn up to `progress` (0..1) so the trajectory visibly traces
+ * across the subcontinent as the camera flies between chapters.
+ */
+function buildFlightArcGeoJSON(
+  from: [number, number],
+  to: [number, number],
+  progress: number,
+): GeoJSON.FeatureCollection {
+  const p = clamp(progress, 0, 1);
+  const dx = to[0] - from[0];
+  const dy = to[1] - from[1];
+  const dist = Math.hypot(dx, dy);
+  if (dist < 0.05 || p <= 0.01) {
+    return { type: "FeatureCollection", features: [] };
+  }
+
+  const nx = -dy / dist;
+  const ny = dx / dist;
+  const arcLift = Math.min(3.8, dist * 0.22);
+
+  const totalSegments = 48;
+  const activeSegments = Math.max(2, Math.round(totalSegments * p));
+  const coordinates: [number, number][] = [];
+
+  for (let i = 0; i <= activeSegments; i++) {
+    const s = (i / totalSegments) * p;
+    const bend = Math.sin(s * Math.PI) * arcLift;
+    const lng = lerp(from[0], to[0], s) + nx * bend;
+    const lat = lerp(from[1], to[1], s) + ny * bend;
+    coordinates.push([lng, lat]);
+  }
+
+  return {
+    type: "FeatureCollection",
+    features: [
+      {
+        type: "Feature",
+        properties: {},
+        geometry: {
+          type: "LineString",
+          coordinates,
+        },
+      },
+    ],
+  };
+}
+
+function buildBeaconGeoJSON(center: [number, number]): GeoJSON.FeatureCollection {
+  return {
+    type: "FeatureCollection",
+    features: [
+      {
+        type: "Feature",
+        properties: {},
+        geometry: {
+          type: "Point",
+          coordinates: center,
+        },
+      },
+    ],
+  };
+}
+
+/**
  * Unified 60fps camera and historical-year engine for the homepage film.
  * Seamlessly transitions from the opening orbital descent into continuous,
- * spring-damped scroll flight across the four historical chapters.
+ * spring-damped scroll flight across the four historical chapters, while drawing
+ * an animated trajectory arc and pulsing capital shockwave on the globe.
  */
 export function StoryMap({
   chapter,
@@ -168,6 +243,98 @@ export function StoryMap({
 
     map.on("load", () => {
       addHistoricalLayers(map, data, { interactive: false });
+
+      // Add homepage-exclusive cartographic trajectory arc & pulsing focal beacon
+      if (!map.getSource(STORY_FLIGHT_SOURCE)) {
+        map.addSource(STORY_FLIGHT_SOURCE, {
+          type: "geojson",
+          data: { type: "FeatureCollection", features: [] },
+        });
+      }
+      if (!map.getSource(STORY_BEACON_SOURCE)) {
+        map.addSource(STORY_BEACON_SOURCE, {
+          type: "geojson",
+          data: buildBeaconGeoJSON(STORY_OVERVIEW.center),
+        });
+      }
+
+      const beforeLayer = map.getLayer(LAYER_IDS.capitalPulseOuter)
+        ? LAYER_IDS.capitalPulseOuter
+        : undefined;
+
+      if (!map.getLayer(STORY_FLIGHT_GLOW_LAYER)) {
+        map.addLayer(
+          {
+            id: STORY_FLIGHT_GLOW_LAYER,
+            type: "line",
+            source: STORY_FLIGHT_SOURCE,
+            layout: { "line-cap": "round", "line-join": "round" },
+            paint: {
+              "line-color": "#d4a359",
+              "line-width": ["interpolate", ["linear"], ["zoom"], 3, 5, 6, 11],
+              "line-blur": ["interpolate", ["linear"], ["zoom"], 3, 4, 6, 8],
+              "line-opacity": 0.42,
+            },
+          },
+          beforeLayer,
+        );
+      }
+
+      if (!map.getLayer(STORY_FLIGHT_LINE_LAYER)) {
+        map.addLayer(
+          {
+            id: STORY_FLIGHT_LINE_LAYER,
+            type: "line",
+            source: STORY_FLIGHT_SOURCE,
+            layout: { "line-cap": "round", "line-join": "round" },
+            paint: {
+              "line-color": "#f3ede0",
+              "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.4, 6, 2.2],
+              "line-dasharray": [2, 2.4],
+              "line-opacity": 0.85,
+            },
+          },
+          beforeLayer,
+        );
+      }
+
+      if (!map.getLayer(STORY_BEACON_OUTER_LAYER)) {
+        map.addLayer(
+          {
+            id: STORY_BEACON_OUTER_LAYER,
+            type: "circle",
+            source: STORY_BEACON_SOURCE,
+            paint: {
+              "circle-radius": 18,
+              "circle-color": "rgba(212, 163, 89, 0.09)",
+              "circle-stroke-color": "#d4a359",
+              "circle-stroke-width": 1.5,
+              "circle-stroke-opacity": 0.72,
+              "circle-pitch-alignment": "map",
+            },
+          },
+          beforeLayer,
+        );
+      }
+
+      if (!map.getLayer(STORY_BEACON_CORE_LAYER)) {
+        map.addLayer(
+          {
+            id: STORY_BEACON_CORE_LAYER,
+            type: "circle",
+            source: STORY_BEACON_SOURCE,
+            paint: {
+              "circle-radius": 4.5,
+              "circle-color": "#f3ede0",
+              "circle-stroke-color": "#96341a",
+              "circle-stroke-width": 2,
+              "circle-pitch-alignment": "map",
+            },
+          },
+          beforeLayer,
+        );
+      }
+
       const paint = (id: string, prop: string, value: unknown) => {
         if (map.getLayer(id))
           map.setPaintProperty(id, prop as never, value as never);
@@ -234,6 +401,10 @@ export function StoryMap({
 
         const descentT = Math.min(1, Math.max(0, (now - t0) / DESCENT_MS));
 
+        let arcFrom: [number, number] = [STORY_OVERVIEW.center[0], STORY_OVERVIEW.center[1]];
+        let arcTo: [number, number] = [STORY_OVERVIEW.center[0], STORY_OVERVIEW.center[1]];
+        let arcProgress = 0;
+
         if (!reduced && !descentInterrupted && descentT < 1) {
           // Phase 1: Choreographed opening orbital descent
           const spin = easeInOut(descentT);
@@ -272,6 +443,10 @@ export function StoryMap({
           const a = WAYPOINTS[idx];
           const b = WAYPOINTS[idx + 1];
 
+          arcFrom = [a.lng, a.lat];
+          arcTo = [b.lng, b.lat];
+          arcProgress = smoothFrac;
+
           const cOffsets = chapterOffsets(map.getContainer());
           const targetLng = lerp(a.lng, b.lng, smoothFrac);
           const targetLat = lerp(a.lat, b.lat, smoothFrac);
@@ -308,11 +483,18 @@ export function StoryMap({
           cur.year = lerp(cur.year, targetYear, alpha);
         }
 
+        // Subtle idle breath when resting on a chapter
+        const idlePhase = now * 0.00045;
+        const driftBearing =
+          !reduced && descentT >= 1 ? Math.sin(idlePhase) * 1.15 : 0;
+        const driftPitch =
+          !reduced && descentT >= 1 ? Math.cos(idlePhase * 0.8) * 0.55 : 0;
+
         map.jumpTo({
           center: [cur.lng, cur.lat],
           zoom: cur.zoom,
-          bearing: cur.bearing,
-          pitch: cur.pitch,
+          bearing: cur.bearing + driftBearing,
+          pitch: clamp(cur.pitch + driftPitch, 0, 60),
           padding: {
             left: Math.round(cur.padLeft),
             right: 0,
@@ -320,6 +502,37 @@ export function StoryMap({
             bottom: Math.round(cur.padBottom),
           },
         });
+
+        // Update trajectory arc & pulsing focal beacon
+        const beaconSource = map.getSource(STORY_BEACON_SOURCE) as GeoJSONSource | undefined;
+        if (beaconSource) {
+          beaconSource.setData(buildBeaconGeoJSON([cur.lng, cur.lat]));
+        }
+
+        const flightSource = map.getSource(STORY_FLIGHT_SOURCE) as GeoJSONSource | undefined;
+        if (flightSource) {
+          if (step > 0.02) {
+            flightSource.setData(
+              buildFlightArcGeoJSON(arcFrom, arcTo, arcProgress),
+            );
+          } else {
+            flightSource.setData({ type: "FeatureCollection", features: [] });
+          }
+        }
+
+        if (!reduced && map.getLayer(STORY_BEACON_OUTER_LAYER)) {
+          const pulse = (Math.sin(now * 0.0038) + 1) * 0.5;
+          map.setPaintProperty(
+            STORY_BEACON_OUTER_LAYER,
+            "circle-radius",
+            12 + pulse * 18,
+          );
+          map.setPaintProperty(
+            STORY_BEACON_OUTER_LAYER,
+            "circle-stroke-opacity",
+            0.78 - pulse * 0.58,
+          );
+        }
 
         const roundedYear = Math.round(cur.year);
         const nearestIdx = Math.round(step);

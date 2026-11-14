@@ -4,10 +4,23 @@ import { getHistoricalState, getRoutesAtYear } from "@/lib/geo/historical-state"
 import { boundaryId } from "@/lib/geo/to-geojson";
 import { LAYER_IDS, SOURCE_IDS } from "./mapStyle";
 
-export const TERRITORY_OPACITY = { inactive: 0, active: 0.58, selected: 0.8 } as const;
+export const TERRITORY_OPACITY = {
+  inactive: 0,
+  active: 0.36,
+  muted: 0.19,
+  selected: 0.58,
+} as const;
 
 /** How long a lost territory's outline lingers as a dashed "echo". */
 export const ECHO_YEARS = 60;
+
+/** Soft cross-dissolve ramp (in years) at boundary transitions so shapes morph instead of popping. */
+const BLEND_YEARS = 14;
+
+function smoothstep(edge0: number, edge1: number, x: number): number {
+  const t = Math.max(0, Math.min(1, (x - edge0) / Math.max(0.0001, edge1 - edge0)));
+  return t * t * (3 - 2 * t);
+}
 
 /**
  * The one place that turns "year Y, kingdom K selected" into map state.
@@ -15,8 +28,6 @@ export const ECHO_YEARS = 60;
  * layers.ts) do the fading, so calling this every frame of a scrub is
  * cheap and always correct.
  */
-/** What was last written to each boundary on each map, so a scrub frame only
- * touches the few shapes that actually changed (there are hundreds). */
 const lastWritten = new WeakMap<MapLibreMap, Map<string, string>>();
 
 /** The year most recently applied to a map, so layers added later (lazily) can start in step. */
@@ -32,32 +43,64 @@ export function applyHistoricalState(map: MapLibreMap, year: number, selectedPol
   const activeBoundaryIds = new Set(state.activeBoundaries.map(boundaryId));
   const activeCapitalNames = new Set(state.activePolities.flatMap((p) => p.capitals));
   const polityHasActiveShape = new Set(state.activeBoundaries.map((b) => b.polityId));
+  const hasSelection = selectedPolityId !== null;
 
   for (const b of boundaries) {
     const id = boundaryId(b);
-    const active = activeBoundaryIds.has(id);
-    const selected = active && b.polityId === selectedPolityId;
-    const opacity = !active ? TERRITORY_OPACITY.inactive : selected ? TERRITORY_OPACITY.selected : TERRITORY_OPACITY.active;
+    const strictlyActive = activeBoundaryIds.has(id);
+    const selected = strictlyActive && b.polityId === selectedPolityId;
+
+    // Compute smooth temporal presence across [validFrom - BLEND_YEARS, validTo + BLEND_YEARS]
+    let presence = 0;
+    if (strictlyActive) {
+      const fadeIn = smoothstep(b.validFrom - BLEND_YEARS, b.validFrom + 4, year);
+      const fadeOut = 1 - smoothstep(b.validTo - 4, b.validTo + BLEND_YEARS, year);
+      presence = Math.min(fadeIn, fadeOut);
+    } else if (year >= b.validFrom - BLEND_YEARS && year < b.validFrom) {
+      presence = smoothstep(b.validFrom - BLEND_YEARS, b.validFrom + 4, year) * 0.65;
+    } else if (year > b.validTo && year <= b.validTo + BLEND_YEARS) {
+      presence = (1 - smoothstep(b.validTo - 4, b.validTo + BLEND_YEARS, year)) * 0.65;
+    }
+
+    const baseFill = selected
+      ? TERRITORY_OPACITY.selected
+      : hasSelection
+        ? TERRITORY_OPACITY.muted
+        : TERRITORY_OPACITY.active;
+    const baseLine = selected ? 0.96 : hasSelection ? 0.42 : 0.78;
+    const baseGlow = selected ? 0.68 : hasSelection ? 0.12 : 0.28;
+    const baseInnerBleed = selected ? 0.52 : hasSelection ? 0.16 : 0.34;
+
+    const opacity = Number((baseFill * presence).toFixed(2));
+    const lineOpacity = Number((baseLine * presence).toFixed(2));
+    const glowOpacity = Number((baseGlow * presence).toFixed(2));
+    const innerBleedOpacity = Number((baseInnerBleed * presence).toFixed(2));
 
     // Echo: a territory that ended within ECHO_YEARS keeps a dashed ghost
     // of its old outline, fading with time — unless the same kingdom
-    // already shows a newer shape. Derived from the year, so scrubbing
-    // either way is consistent.
+    // already shows a newer shape.
     const since = year - b.validTo;
     const echo =
-      !active && since > 0 && since <= ECHO_YEARS && !polityHasActiveShape.has(b.polityId)
-        ? 0.7 * (1 - since / ECHO_YEARS)
+      !strictlyActive && since > BLEND_YEARS && since <= ECHO_YEARS && !polityHasActiveShape.has(b.polityId)
+        ? 0.55 * (1 - since / ECHO_YEARS)
         : 0;
-    const hatch = active ? (selected ? 0.75 : 0.5) : 0;
-    const label = active ? 0.92 : 0;
-    const signature = `${active}|${opacity}|${selected}|${echo.toFixed(2)}`;
+    const hatch = strictlyActive ? (selected ? 0.75 : 0.45) : 0;
+    const label = strictlyActive ? (selected ? 0.98 : hasSelection ? 0.55 : 0.9) : 0;
+    const signature = `${strictlyActive}|${opacity}|${lineOpacity}|${selected}|${echo.toFixed(2)}|${label}`;
     if (written.get(id) === signature) continue;
     written.set(id, signature);
     map.setFeatureState(
       { source: SOURCE_IDS.territory, id },
-      { active, opacity, lineOpacity: active ? 1 : 0, selected, echoOpacity: echo },
+      {
+        active: strictlyActive,
+        opacity,
+        lineOpacity,
+        glowOpacity,
+        innerBleedOpacity,
+        selected,
+        echoOpacity: echo,
+      },
     );
-    // Only some shapes have a frontier band (Chera); the rest simply have no such feature.
     if (id in data.frontiers) map.setFeatureState({ source: SOURCE_IDS.frontier, id }, { hatchOpacity: hatch });
     map.setFeatureState({ source: SOURCE_IDS.kingdomLabels, id }, { labelOpacity: label });
   }

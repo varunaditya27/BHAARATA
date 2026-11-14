@@ -100,13 +100,14 @@ export function addHistoricalLayers(
     source: SOURCE_IDS.territory,
     paint: {
       "fill-color": ["get", "accentColor"],
+      "fill-antialias": true,
       // Hovering lifts the shade a touch, so the pointer reads as "this one".
       "fill-opacity": [
         "+",
         ["coalesce", ["feature-state", "opacity"], 0],
-        ["case", ["boolean", ["feature-state", "hover"], false], 0.12, 0],
+        ["case", ["boolean", ["feature-state", "hover"], false], 0.1, 0],
       ],
-      "fill-opacity-transition": { duration: 500, delay: 0 },
+      "fill-opacity-transition": { duration: 850, delay: 0 },
     },
   });
   map.addLayer({
@@ -116,7 +117,7 @@ export function addHistoricalLayers(
     paint: {
       "fill-pattern": "bh-hatch",
       "fill-opacity": ["coalesce", ["feature-state", "hatchOpacity"], 0],
-      "fill-opacity-transition": { duration: 500, delay: 0 },
+      "fill-opacity-transition": { duration: 850, delay: 0 },
     },
   });
   // Dashed ghost of a recently lost territory (see ECHO_YEARS).
@@ -124,39 +125,75 @@ export function addHistoricalLayers(
     id: LAYER_IDS.territoryEcho,
     type: "line",
     source: SOURCE_IDS.territory,
-    layout: { "line-join": "round" },
+    layout: { "line-join": "round", "line-cap": "round" },
     paint: {
       "line-color": ["get", "outlineColor"],
-      "line-width": 1.4,
-      "line-dasharray": [2, 2],
+      "line-width": 1.3,
+      "line-blur": 0.4,
+      "line-dasharray": [2, 2.5],
       "line-opacity": ["coalesce", ["feature-state", "echoOpacity"], 0],
-      "line-opacity-transition": { duration: 500, delay: 0 },
+      "line-opacity-transition": { duration: 850, delay: 0 },
     },
   });
-  // A soft halo under the outline, shown only on hover.
+  // Outer feathered atmospheric bleed — softens polygon boundaries into the basemap.
   map.addLayer({
     id: LAYER_IDS.territoryGlow,
     type: "line",
     source: SOURCE_IDS.territory,
-    layout: { "line-join": "round" },
+    layout: { "line-join": "round", "line-cap": "round" },
     paint: {
       "line-color": ["get", "accentColor"],
-      "line-width": 12,
-      "line-blur": 10,
-      "line-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 0.7, 0],
-      "line-opacity-transition": { duration: 250, delay: 0 },
+      "line-width": ["interpolate", ["linear"], ["zoom"], 2, 7, 4.5, 13, 7, 20],
+      "line-blur": ["interpolate", ["linear"], ["zoom"], 2, 5, 4.5, 10, 7, 15],
+      "line-offset": 1.5,
+      "line-opacity": [
+        "min",
+        0.85,
+        [
+          "+",
+          ["coalesce", ["feature-state", "glowOpacity"], 0],
+          ["case", ["boolean", ["feature-state", "hover"], false], 0.35, 0],
+        ],
+      ],
+      "line-opacity-transition": { duration: 850, delay: 0 },
+    },
+  });
+  // Inner watercolor pigment pool — darker, feathered band pulled just inside the border.
+  map.addLayer({
+    id: LAYER_IDS.territoryInnerBleed,
+    type: "line",
+    source: SOURCE_IDS.territory,
+    layout: { "line-join": "round", "line-cap": "round" },
+    paint: {
+      "line-color": ["get", "outlineColor"],
+      "line-width": ["interpolate", ["linear"], ["zoom"], 2, 2.5, 4.5, 5.5, 7, 9],
+      "line-blur": ["interpolate", ["linear"], ["zoom"], 2, 2, 4.5, 4, 7, 6.5],
+      "line-offset": -2,
+      "line-opacity": ["coalesce", ["feature-state", "innerBleedOpacity"], 0],
+      "line-opacity-transition": { duration: 850, delay: 0 },
     },
   });
   map.addLayer({
     id: LAYER_IDS.territoryOutline,
     type: "line",
     source: SOURCE_IDS.territory,
-    layout: { "line-join": "round" },
+    layout: { "line-join": "round", "line-cap": "round" },
     paint: {
       "line-color": ["get", "outlineColor"],
-      "line-width": ["case", ["boolean", ["feature-state", "selected"], false], 3.5, 2],
+      "line-blur": 0.45,
+      "line-width": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        2,
+        ["case", ["boolean", ["feature-state", "selected"], false], 1.8, 0.95],
+        5,
+        ["case", ["boolean", ["feature-state", "selected"], false], 3.1, 1.65],
+        8,
+        ["case", ["boolean", ["feature-state", "selected"], false], 4.0, 2.2],
+      ],
       "line-opacity": ["coalesce", ["feature-state", "lineOpacity"], 0],
-      "line-opacity-transition": { duration: 500, delay: 0 },
+      "line-opacity-transition": { duration: 850, delay: 0 },
     },
   });
 

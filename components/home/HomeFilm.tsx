@@ -40,17 +40,124 @@ const ERA_GLINTS = [
   "radial-gradient(58% 52% at 74% 20%, rgba(230,138,86,0.26), rgba(150,52,26,0.09) 48%, transparent 74%)",
 ];
 
-/** Syncs Lenis smooth scroll ticks with GSAP ScrollTrigger. */
+/** Syncs Lenis smooth scroll ticks with GSAP ScrollTrigger (`lagSmoothing(0)`). */
 function LenisScrollTriggerBridge() {
   useLenis(() => {
     ScrollTrigger.update();
   });
+
+  useEffect(() => {
+    gsap.ticker.lagSmoothing(0);
+  }, []);
+
   return null;
 }
 
 /**
- * Tactile chapter card with GSAP quickTo hover tilt (Preset #2/#3)
- * and ScrollTrigger image parallax + staggered reveal.
+ * Contextual cartographic cursor follower for desktop pointers.
+ * Uses `gsap.quickTo` for zero-rerender spring lag and expands into a labeled
+ * editorial lens pill whenever hovering an element with `[data-cursor-label]`.
+ */
+function CustomCursor({
+  reducedMotion,
+  accentColor,
+}: {
+  reducedMotion: boolean;
+  accentColor: string;
+}) {
+  const dotRef = useRef<HTMLDivElement | null>(null);
+  const ringRef = useRef<HTMLDivElement | null>(null);
+  const [label, setLabel] = useState<string | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+    if (!isFinePointer || !dotRef.current || !ringRef.current) return;
+
+    const xDot = gsap.quickTo(dotRef.current, "x", {
+      duration: 0.08,
+      ease: "power3.out",
+    });
+    const yDot = gsap.quickTo(dotRef.current, "y", {
+      duration: 0.08,
+      ease: "power3.out",
+    });
+    const xRing = gsap.quickTo(ringRef.current, "x", {
+      duration: 0.3,
+      ease: "power3.out",
+    });
+    const yRing = gsap.quickTo(ringRef.current, "y", {
+      duration: 0.3,
+      ease: "power3.out",
+    });
+
+    const onMove = (e: MouseEvent) => {
+      setVisible((prev) => (prev ? prev : true));
+      xDot(e.clientX);
+      yDot(e.clientY);
+      xRing(e.clientX);
+      yRing(e.clientY);
+
+      const target = (e.target as HTMLElement | null)?.closest?.(
+        "[data-cursor-label]",
+      );
+      const nextLabel = target?.getAttribute("data-cursor-label") ?? null;
+      setLabel((prev) => (prev === nextLabel ? prev : nextLabel));
+    };
+
+    const onLeave = () => setVisible(false);
+
+    window.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mouseleave", onLeave);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseleave", onLeave);
+    };
+  }, [reducedMotion]);
+
+  if (reducedMotion) return null;
+
+  return (
+    <div
+      aria-hidden="true"
+      className={`pointer-events-none fixed inset-0 z-50 hidden lg:block transition-opacity duration-300 ${
+        visible ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      <div
+        ref={dotRef}
+        className="fixed top-0 left-0 -ml-1 -mt-1 h-2 w-2 rounded-full transition-colors duration-500"
+        style={{
+          backgroundColor: accentColor,
+          boxShadow: `0 0 10px ${accentColor}`,
+        }}
+      />
+      <div
+        ref={ringRef}
+        className={`fixed top-0 left-0 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          label
+            ? "h-8 border-paper/45 bg-ink/90 px-3.5 shadow-[0_12px_30px_-8px_rgba(14,11,8,0.85)] backdrop-blur-md"
+            : "h-9 w-9 border-paper/30 bg-paper/[0.03]"
+        }`}
+      >
+        {label && (
+          <span className="font-mono text-[10px] font-medium tracking-[0.18em] whitespace-nowrap text-paper uppercase">
+            {label}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Luxury Double-Bezel (Doppelrand) chapter plate with:
+ * - Outer translucent architectural shell + inner dark manuscript core with top specular highlight
+ * - Clip-path curtain image reveal (`inset(0 0 100% 0)` → `inset(0 0 0% 0)`) + inner image parallax
+ * - Masked word-by-word kinetic title reveal (`yPercent: 112 → 0`, `blur(6px) → blur(0px)`)
+ * - 60fps GSAP quickTo 3D tilt + radial cursor spotlight glow
+ * - Button-in-Button trailing icon architecture
  */
 function ChapterPlate({
   chapter,
@@ -71,38 +178,62 @@ function ChapterPlate({
   image: { file: string; alt: string; artist: string; license: string };
   onNext?: () => void;
 }) {
-  const cardRef = useRef<HTMLDivElement>(null);
+  const shellRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const imageCurtainRef = useRef<HTMLDivElement>(null);
+
+  const titleWords = chapter.title.split(" ");
 
   useGSAP(
     () => {
-      const el = cardRef.current;
+      const el = shellRef.current;
       if (!el) return;
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        // ScrollTrigger card entrance + inner image parallax
+        // ScrollTrigger card entrance
         gsap.fromTo(
           el,
-          { opacity: 0.15, y: 42 },
+          { opacity: 0.15, y: 46, scale: 0.975 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.65,
-            ease: "power2.out",
+            scale: 1,
+            duration: 0.75,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: el,
-              start: "top 86%",
-              end: "top 40%",
+              start: "top 88%",
+              end: "top 42%",
               scrub: 0.4,
             },
-          }
+          },
         );
 
+        // Clip-path curtain image reveal
+        if (imageCurtainRef.current) {
+          gsap.fromTo(
+            imageCurtainRef.current,
+            { clipPath: "inset(0% 0% 100% 0%)" },
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              duration: 1.05,
+              ease: "power4.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 80%",
+                toggleActions: "play none none reverse",
+              },
+            },
+          );
+        }
+
+        // Inner image parallax + scale settle
         const imgWrap = el.querySelector(".gsap-chapter-img");
         if (imgWrap) {
           gsap.fromTo(
             imgWrap,
-            { scale: 1.12, yPercent: -6 },
+            { scale: 1.15, yPercent: -6 },
             {
               scale: 1,
               yPercent: 6,
@@ -113,48 +244,82 @@ function ChapterPlate({
                 end: "bottom top",
                 scrub: true,
               },
-            }
+            },
           );
         }
 
-        const copyItems = el.querySelectorAll(".gsap-chapter-item");
-        if (copyItems.length > 0) {
-          gsap.from(copyItems, {
-            opacity: 0,
-            y: 16,
-            duration: 0.45,
-            stagger: 0.07,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 78%",
-              toggleActions: "play none none reverse",
+        // Masked word-by-word kinetic title reveal
+        const words = el.querySelectorAll(".gsap-title-word");
+        if (words.length > 0) {
+          gsap.fromTo(
+            words,
+            { yPercent: 112, autoAlpha: 0, filter: "blur(6px)" },
+            {
+              yPercent: 0,
+              autoAlpha: 1,
+              filter: "blur(0px)",
+              duration: 0.78,
+              stagger: 0.035,
+              ease: "power4.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 78%",
+                toggleActions: "play none none reverse",
+              },
             },
-          });
+          );
         }
 
-        // Preset #2/#3: 60fps quickTo subtle tilt on pointer move
-        gsap.set(el, { transformPerspective: 900 });
+        // Staggered metadata & body reveal
+        const copyItems = el.querySelectorAll(".gsap-chapter-item");
+        if (copyItems.length > 0) {
+          gsap.fromTo(
+            copyItems,
+            { autoAlpha: 0, y: 18, filter: "blur(4px)" },
+            {
+              autoAlpha: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 0.65,
+              stagger: 0.065,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 76%",
+                toggleActions: "play none none reverse",
+              },
+            },
+          );
+        }
+
+        // 60fps quickTo 3D tilt + radial cursor spotlight on pointer move
+        gsap.set(el, { transformPerspective: 950 });
         const rxTo = gsap.quickTo(el, "rotateX", {
-          duration: 0.35,
-          ease: "power2.out",
+          duration: 0.38,
+          ease: "power3.out",
         });
         const ryTo = gsap.quickTo(el, "rotateY", {
-          duration: 0.35,
-          ease: "power2.out",
+          duration: 0.38,
+          ease: "power3.out",
         });
         const yTo = gsap.quickTo(el, "y", {
-          duration: 0.25,
-          ease: "power2.out",
+          duration: 0.28,
+          ease: "power3.out",
         });
 
         const onMove = (e: PointerEvent) => {
           const r = el.getBoundingClientRect();
-          const nx = (e.clientX - r.left) / r.width - 0.5;
-          const ny = (e.clientY - r.top) / r.height - 0.5;
-          rxTo(-ny * 4.5);
-          ryTo(nx * 5.5);
+          const x = e.clientX - r.left;
+          const y = e.clientY - r.top;
+          const nx = x / r.width - 0.5;
+          const ny = y / r.height - 0.5;
+          rxTo(-ny * 4.2);
+          ryTo(nx * 5.2);
           yTo(-3);
+
+          if (glowRef.current) {
+            glowRef.current.style.background = `radial-gradient(420px circle at ${x}px ${y}px, ${accentColor}28, transparent 70%)`;
+          }
         };
         const onLeave = () => {
           rxTo(0);
@@ -172,85 +337,126 @@ function ChapterPlate({
 
       return () => mm.revert();
     },
-    { scope: cardRef }
+    { scope: shellRef, dependencies: [accentColor] },
   );
 
   return (
     <div
-      ref={cardRef}
-      className="relative w-full max-w-md overflow-hidden border border-paper/15 bg-ink/95 shadow-2xl will-change-transform"
+      ref={shellRef}
+      className="group relative w-full max-w-md rounded-[6px] border border-paper/15 bg-paper/[0.035] p-1.5 shadow-[0_32px_90px_-24px_rgba(0,0,0,0.92)] backdrop-blur-md will-change-transform"
     >
-      <div className="h-1 w-full" style={{ backgroundColor: accentColor }} />
+      {/* Inner Core (Double-Bezel / Doppelrand architecture) */}
+      <div className="relative overflow-hidden rounded-[3px] border border-paper/12 bg-ink/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]">
+        {/* Interactive radial pigment spotlight */}
+        <div
+          ref={glowRef}
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        />
 
-      <div className="relative aspect-[16/6] overflow-hidden md:aspect-[16/9]">
-        <div className="gsap-chapter-img relative h-full w-full will-change-transform">
-          <Image
-            src={image.file}
-            alt={image.alt}
-            fill
-            sizes="448px"
-            className="object-cover"
-          />
-        </div>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-80" />
-        <span className="absolute bottom-2.5 right-3 border border-paper/20 bg-ink/80 px-2 py-0.5 font-mono text-[10px] tracking-[0.14em] text-paper/85">
-          c. {chapter.year} CE
-        </span>
-      </div>
+        {/* Top hairline accent in the kingdom's historical pigment */}
+        <div
+          className="relative z-10 h-[3px] w-full transition-colors duration-500"
+          style={{ backgroundColor: accentColor }}
+        />
 
-      <div className="p-5 md:p-6">
-        <div className="gsap-chapter-item flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            {polityId && (
-              <KingdomEmblem
-                polityId={polityId}
-                color={accentColor}
-                className="h-8 w-8"
-              />
-            )}
-            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/55">
-              Chapter 0{index + 1} · {polityName}
-            </p>
+        {/* Clip-path curtain image frame */}
+        <div
+          ref={imageCurtainRef}
+          className="relative z-10 aspect-[16/6] overflow-hidden md:aspect-[16/9]"
+        >
+          <div className="gsap-chapter-img relative h-full w-full will-change-transform">
+            <Image
+              src={image.file}
+              alt={image.alt}
+              fill
+              sizes="448px"
+              className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+            />
           </div>
-          {onNext && (
-            <button
-              type="button"
-              onClick={onNext}
-              className="font-mono text-[10px] uppercase tracking-[0.14em] text-paper/50 transition-colors hover:text-paper"
-            >
-              Next ↓
-            </button>
-          )}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-85" />
+          <span className="absolute bottom-2.5 right-3 rounded-[2px] border border-paper/20 bg-ink/85 px-2.5 py-0.5 font-mono text-[10px] tracking-[0.14em] text-paper/90 backdrop-blur-sm">
+            c. {chapter.year} CE
+          </span>
         </div>
 
-        <h2 className="gsap-chapter-item mt-3 font-display text-2xl text-paper md:text-3xl">
-          {chapter.title}
-        </h2>
-        <p className="gsap-chapter-item mt-3 font-sans text-[0.95rem] leading-relaxed text-paper/80 md:text-base">
-          {chapter.body}
-        </p>
+        <div className="relative z-10 p-5 md:p-6">
+          <div className="gsap-chapter-item flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              {polityId && (
+                <KingdomEmblem
+                  polityId={polityId}
+                  color={accentColor}
+                  className="h-8 w-8"
+                />
+              )}
+              <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/60">
+                Chapter 0{index + 1} · {polityName}
+              </p>
+            </div>
+            {onNext && (
+              <button
+                type="button"
+                onClick={onNext}
+                data-cursor-label="Next Chapter"
+                className="font-mono text-[10px] uppercase tracking-[0.14em] text-paper/55 transition-colors hover:text-paper"
+              >
+                Next ↓
+              </button>
+            )}
+          </div>
 
-        <div className="gsap-chapter-item mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-paper/10 pt-4 font-sans text-sm">
-          <Link
-            href={`/atlas?year=${chapter.year}${politySlug ? `&polity=${politySlug}` : ""}`}
-            transitionTypes={NAV_FORWARD}
-            className="text-paper underline underline-offset-4 hover:text-paper/80"
-          >
-            Show {chapter.year} CE on the map
-          </Link>
-          {politySlug && (
+          {/* Masked Word-by-Word Kinetic Title */}
+          <h2 className="mt-3 font-display text-2xl leading-[1.12] text-paper md:text-3xl">
+            {titleWords.map((word, wIdx) => (
+              <span
+                key={`${chapter.id}-w-${wIdx}`}
+                className="mr-[0.26em] inline-block overflow-hidden align-bottom pb-[0.05em]"
+              >
+                <span className="gsap-title-word inline-block will-change-transform">
+                  {word}
+                </span>
+              </span>
+            ))}
+          </h2>
+
+          <p className="gsap-chapter-item mt-3 font-sans text-[0.95rem] leading-relaxed text-paper/82 md:text-base">
+            {chapter.body}
+          </p>
+
+          {/* Action links with Button-in-Button trailing icon */}
+          <div className="gsap-chapter-item mt-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-paper/12 pt-4 font-sans text-sm">
             <Link
-              href={`/polities/${politySlug}`}
+              href={`/atlas?year=${chapter.year}${politySlug ? `&polity=${politySlug}` : ""}`}
               transitionTypes={NAV_FORWARD}
-              className="text-paper/70 underline underline-offset-4 hover:text-paper"
+              data-cursor-label="Inspect Map"
+              className="group/cta inline-flex items-center gap-2.5 font-medium text-paper transition-colors hover:text-paper/85"
             >
-              More about {polityName}
+              <span className="underline decoration-paper/35 underline-offset-4 group-hover/cta:decoration-paper">
+                Show {chapter.year} CE on the map
+              </span>
+              <span
+                aria-hidden="true"
+                className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-paper/25 bg-paper/10 text-[11px] text-paper transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/cta:translate-x-0.5 group-hover/cta:border-paper group-hover/cta:bg-paper group-hover/cta:text-ink"
+              >
+                →
+              </span>
             </Link>
-          )}
+            {politySlug && (
+              <Link
+                href={`/polities/${politySlug}`}
+                transitionTypes={NAV_FORWARD}
+                data-cursor-label="Read Kingdom"
+                className="text-xs text-paper/70 underline decoration-paper/25 underline-offset-4 transition-colors hover:text-paper"
+              >
+                More about {polityName}
+              </Link>
+            )}
+          </div>
+          <p className="gsap-chapter-item mt-3 font-sans text-[0.68rem] text-paper/45">
+            Photo: {image.artist}, {image.license}
+          </p>
         </div>
-        <p className="gsap-chapter-item mt-3 font-sans text-[0.68rem] text-paper/45">
-          Photo: {image.artist}, {image.license}
-        </p>
       </div>
     </div>
   );
@@ -259,7 +465,7 @@ function ChapterPlate({
 export function HomeFilm() {
   const { images } = useAtlasData();
   const { getPolityById } = useAtlasAccess();
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = Boolean(useReducedMotion());
 
   const [activeId, setActiveId] = useState<string | null>(null);
   const [scrollStep, setScrollStep] = useState(0);
@@ -279,17 +485,22 @@ export function HomeFilm() {
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        // Hero copy entrance stagger
-        gsap.from(".gsap-hero-item", {
-          opacity: 0,
-          y: 20,
-          duration: 0.7,
-          stagger: 0.12,
-          delay: 0.25,
-          ease: "power2.out",
-        });
+        // Hero copy entrance stagger with subtle blur-to-crisp resolve
+        gsap.fromTo(
+          ".gsap-hero-item",
+          { autoAlpha: 0, y: 22, filter: "blur(6px)" },
+          {
+            autoAlpha: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 0.85,
+            stagger: 0.12,
+            delay: 0.2,
+            ease: "power3.out",
+          },
+        );
 
-        // Multi-layer depth parallax on classical script watermarks (Preset #14)
+        // Multi-layer depth parallax on classical script watermarks
         gsap.utils.toArray<HTMLElement>(".gsap-ghost-script").forEach((layer, i) => {
           gsap.fromTo(
             layer,
@@ -300,7 +511,7 @@ export function HomeFilm() {
               duration: 1.2,
               delay: 0.1 + i * 0.12,
               ease: "power2.out",
-            }
+            },
           );
           gsap.to(layer, {
             yPercent: (i + 1) * -18,
@@ -314,7 +525,7 @@ export function HomeFilm() {
           });
         });
 
-        // Hallmark #3: 2px vertical progress spine scaled by ScrollTrigger
+        // 2px vertical progress spine scaled by ScrollTrigger
         if (spineFillRef.current && sectionRef.current) {
           gsap.fromTo(
             spineFillRef.current,
@@ -328,14 +539,14 @@ export function HomeFilm() {
                 end: "bottom bottom",
                 scrub: 0.2,
               },
-            }
+            },
           );
         }
       });
 
       return () => mm.revert();
     },
-    { scope: sectionRef }
+    { scope: sectionRef },
   );
 
   // Continuous scroll-step calculation (0 = hero, 1..4 = chapters 1..4)
@@ -367,7 +578,7 @@ export function HomeFilm() {
           setScrollStep(step);
           const nearest = Math.round(step);
           setActiveId(
-            nearest >= 1 ? (storyChapters[nearest - 1]?.id ?? null) : null
+            nearest >= 1 ? (storyChapters[nearest - 1]?.id ?? null) : null,
           );
           return;
         }
@@ -391,7 +602,11 @@ export function HomeFilm() {
   const activePolity = chapter ? getPolityById(chapter.polityId) : undefined;
   const year = mapYear ?? chapter?.year ?? STORY_OVERVIEW.year;
   const chapterIndex = chapter ? storyChapters.indexOf(chapter) : -1;
-  const glintIndex = Math.min(ERA_GLINTS.length - 1, Math.max(0, chapterIndex + 1));
+  const glintIndex = Math.min(
+    ERA_GLINTS.length - 1,
+    Math.max(0, chapterIndex + 1),
+  );
+  const activeAccent = activePolity?.accentColor ?? "#d4a359";
 
   const scrollToStage = (idx: number) => {
     const target = chapterRefs.current[idx];
@@ -406,12 +621,17 @@ export function HomeFilm() {
     <ReactLenis
       root
       options={{
-        lerp: prefersReducedMotion ? 1 : 0.09,
+        lerp: prefersReducedMotion ? 1 : 0.088,
         smoothWheel: !prefersReducedMotion,
         syncTouch: false,
       }}
     >
       <LenisScrollTriggerBridge />
+      <CustomCursor
+        reducedMotion={prefersReducedMotion}
+        accentColor={activeAccent}
+      />
+
       <section ref={sectionRef} className="relative bg-ink text-paper">
         {/* Sticky Cinematic Stage */}
         <div className="sticky top-16 h-[calc(100dvh-4rem)] overflow-hidden">
@@ -427,7 +647,7 @@ export function HomeFilm() {
             lng={telemetry.lng}
             lat={telemetry.lat}
             bearing={telemetry.bearing}
-            accentColor={activePolity?.accentColor ?? "#d4a359"}
+            accentColor={activeAccent}
             activeChapterId={activeId}
           />
 
@@ -476,7 +696,10 @@ export function HomeFilm() {
               {activePolity && (
                 <span
                   className="inline-block h-2 w-2 rounded-full transition-colors duration-500"
-                  style={{ backgroundColor: activePolity.accentColor }}
+                  style={{
+                    backgroundColor: activePolity.accentColor,
+                    boxShadow: `0 0 10px ${activePolity.accentColor}`,
+                  }}
                 />
               )}
               <p className="font-sans text-sm text-paper/75">
@@ -501,6 +724,7 @@ export function HomeFilm() {
             <button
               type="button"
               onClick={() => scrollToStage(0)}
+              data-cursor-label="Orbit View"
               className="group flex items-center gap-2 py-1 text-left"
               aria-label="Jump to opening overview"
             >
@@ -526,6 +750,7 @@ export function HomeFilm() {
                   key={c.id}
                   type="button"
                   onClick={() => scrollToStage(i + 1)}
+                  data-cursor-label={`Jump ${c.year} CE`}
                   className="group flex items-center gap-2 py-1 text-left"
                   aria-label={`Jump to chapter ${i + 1}: ${c.title} (${c.year} CE)`}
                 >
@@ -597,14 +822,18 @@ export function HomeFilm() {
                 The kingdoms of the Indian subcontinent from 600 to 1700: where
                 they ruled, when, and how we know.
               </p>
-              <div className="gsap-hero-item mt-10 flex items-center gap-6">
+              <div className="gsap-hero-item mt-10 flex flex-wrap items-center gap-5">
                 <button
                   type="button"
                   onClick={() => scrollToStage(1)}
-                  className="group inline-flex items-center gap-2.5 font-sans text-sm text-paper/80 transition-colors hover:text-paper"
+                  data-cursor-label="Begin Descent"
+                  className="group inline-flex items-center gap-3 rounded-[3px] border border-paper/20 bg-paper/[0.06] px-4 py-2.5 font-sans text-sm text-paper/90 backdrop-blur-sm transition-all duration-300 hover:border-paper/45 hover:bg-paper/12 hover:text-paper"
                 >
                   <span>Scroll or click to begin the descent</span>
-                  <span className="inline-block transition-transform duration-300 group-hover:translate-y-1">
+                  <span
+                    aria-hidden="true"
+                    className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-paper/25 bg-paper/10 text-xs transition-transform duration-300 group-hover:translate-y-0.5"
+                  >
                     ↓
                   </span>
                 </button>

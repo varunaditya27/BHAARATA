@@ -57,6 +57,7 @@ const DEFAULT_ZOOM = 3.95;
 const TOGGLE_LAYER_MAP: Record<LayerToggleId, string[]> = {
   territory: [
     LAYER_IDS.territoryFill,
+    LAYER_IDS.territoryInnerBleed,
     LAYER_IDS.frontierHatch,
     LAYER_IDS.territoryGlow,
     LAYER_IDS.territoryEcho,

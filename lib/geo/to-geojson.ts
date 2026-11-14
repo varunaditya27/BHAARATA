@@ -31,6 +31,57 @@ function geometryArea(g: GeoJSON.Polygon | GeoJSON.MultiPolygon): number {
   return polys.reduce((acc, rings) => acc + ringArea(rings[0]) - rings.slice(1).reduce((h, r) => h + ringArea(r), 0), 0);
 }
 
+/**
+ * Chaikin corner-cutting subdivision for closed GeoJSON rings.
+ * Turns coarse, angular Cliopatria vertices into smooth, hand-inked
+ * cartographic curves while keeping the ring closed and topology intact.
+ */
+function smoothRing(ring: GeoJSON.Position[], iterations = 2): GeoJSON.Position[] {
+  if (ring.length < 5) return ring;
+  // Strip closing duplicate vertex before subdivision
+  let pts = ring.slice(0, -1);
+  for (let iter = 0; iter < iterations; iter++) {
+    if (pts.length > 420) break; // Avoid over-subdividing already dense rings
+    const next: GeoJSON.Position[] = [];
+    const n = pts.length;
+    for (let i = 0; i < n; i++) {
+      const p0 = pts[i];
+      const p1 = pts[(i + 1) % n];
+      const dx = p1[0] - p0[0];
+      const dy = p1[1] - p0[1];
+      // Only subdivide segments long enough to show visible angularity
+      if (dx * dx + dy * dy < 0.0025) {
+        next.push(p0);
+        continue;
+      }
+      next.push([0.75 * p0[0] + 0.25 * p1[0], 0.75 * p0[1] + 0.25 * p1[1]]);
+      next.push([0.25 * p0[0] + 0.75 * p1[0], 0.25 * p0[1] + 0.75 * p1[1]]);
+    }
+    pts = next;
+  }
+  if (pts.length > 0) {
+    pts.push([pts[0][0], pts[0][1]]);
+  }
+  return pts;
+}
+
+function smoothGeometry(
+  g: GeoJSON.Polygon | GeoJSON.MultiPolygon
+): GeoJSON.Polygon | GeoJSON.MultiPolygon {
+  if (g.type === "Polygon") {
+    return {
+      type: "Polygon",
+      coordinates: g.coordinates.map((ring) => smoothRing(ring, 2)),
+    };
+  }
+  return {
+    type: "MultiPolygon",
+    coordinates: g.coordinates.map((poly) =>
+      poly.map((ring) => smoothRing(ring, 2))
+    ),
+  };
+}
+
 export function boundariesToFeatureCollection(
   boundaries: HistoricalBoundary[], data: AtlasData,
 ): GeoJSON.FeatureCollection {
@@ -45,9 +96,9 @@ export function boundariesToFeatureCollection(
         polityId: b.polityId,
         confidence: b.confidence,
         accentColor: accentByPolityId.get(b.polityId) ?? "#96341a",
-        outlineColor: darkenHex(accentByPolityId.get(b.polityId) ?? "#96341a", 0.35),
+        outlineColor: darkenHex(accentByPolityId.get(b.polityId) ?? "#96341a", 0.32),
       },
-      geometry: b.geometry,
+      geometry: smoothGeometry(b.geometry),
     })),
   };
 }
