@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Badge } from "@/components/primitives/Badge";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
@@ -12,7 +11,6 @@ import { RulerPortrait } from "@/components/entity/RulerPortrait";
 import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
-import { personStatus } from "@/lib/data/status";
 import { formatDatePoint, formatDateRange, formatPersonDates } from "@/lib/domain/time";
 import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
@@ -30,16 +28,14 @@ const overlaps = (aStart: number, aEnd: number, bStart: number, bEnd: number) =>
 export default async function PersonPage({ params }: PageProps<"/people/[slug]">) {
   const data = await getAtlasData();
   const { people, images } = data;
-  const { getPolityById, getSourceById, milestones: events } = atlasAccess(data);
+  const { getPolityById, milestones: events } = atlasAccess(data);
   const { slug } = await params;
   const person = people.find((p) => p.slug === slug);
   if (!person) notFound();
 
   const polity = person.polityId ? getPolityById(person.polityId) : undefined;
   const accent = polity?.accentColor ?? "#5c5447";
-  const status = personStatus(person);
   const lifetimeOnly = person.datesAre === "lifetime";
-  const sourceRecords = person.provenance.filter((pv) => getSourceById(pv.sourceId));
   const personDateKnown = person.period.startQualifier !== "unknown";
   const kingdomDatesKnown = polity && polity.period.startQualifier !== "unknown" && polity.period.endQualifier !== "unknown" && polity.period.endYear !== null;
   const reignStart = person.period.startYear;
@@ -73,12 +69,6 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
               <Shared name={transitionNames.personPortrait(person.slug)}>
                 <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-full" />
               </Shared>
-              <p className="mt-2 font-sans text-xs text-ink-muted">
-                {portrait.title}.{" "}
-                <a href={portrait.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ink">
-                  {portrait.artist}, {portrait.license}
-                </a>
-              </p>
             </div>
           ) : (
             polity && <KingdomEmblem polityId={polity.id} color={accent} draw className="h-20 w-20 sm:h-28 sm:w-28" />
@@ -91,9 +81,6 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
             <p className="mt-4 font-display text-xl text-ink">
               {person.period.startQualifier === "unknown" ? formatDateRange(person.period) : person.datesAre === "reign" ? `Ruled ${formatDateRange(person.period)}` : formatPersonDates(person)}
             </p>
-            <div className="mt-3">
-              <Badge tone={status.sourced ? "neutral" : "uncertainty"}>{status.label}</Badge>
-            </div>
           </div>
         </div>
 
@@ -153,19 +140,6 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
           </div>
 
           <aside className="space-y-10">
-            {sourceRecords.length > 0 && (
-              <section>
-                <h2 className="font-sans text-sm font-medium text-ink-muted">Sources</h2>
-                <ul className="mt-3 space-y-3">
-                  {sourceRecords.map((pv) => (
-                    <li key={pv.sourceId} className="border-t border-border pt-3 font-sans text-sm text-ink">
-                      {getSourceById(pv.sourceId)?.title}
-                      {pv.note && <span className="block text-xs text-ink-muted">{pv.note}</span>}
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
             <section>
               <h2 className="font-sans text-sm font-medium text-ink-muted">People around the same time</h2>
               {contemporaries.length === 0 ? (

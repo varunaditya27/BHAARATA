@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps<"/polities/[slug]">
 export default async function PolityPage({ params }: PageProps<"/polities/[slug]">) {
   const data = await getAtlasData();
   const { evidence: evidenceData, events, places, polities, images } = data;
-  const { getPolityBySlug, getRulersForPolity, getSourceById } = atlasAccess(data);
+  const { getPolityBySlug, getRulersForPolity } = atlasAccess(data);
   const { slug } = await params;
   const polity = getPolityBySlug(slug);
   if (!polity) notFound();
@@ -46,9 +46,6 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
     .sort((a, b) => a.period.startYear - b.period.startYear);
   const relatedPlaces = places.filter((p) => polity.capitals.some((c) => p.name.startsWith(c)));
   const relatedEvidence = evidenceData.filter((e) => e.polityIds.includes(polity.id));
-  const sourceRecords = polity.provenance
-    .map((p) => getSourceById(p.sourceId))
-    .filter((s): s is NonNullable<typeof s> => Boolean(s));
   const contemporaries = contemporariesOf(polity, polities);
   const fullPeriodKnown = polity.period.startQualifier !== "unknown" && polity.period.endQualifier !== "unknown" && polity.period.endYear !== null;
   const span = (polity.period.endYear ?? polity.period.startYear) - polity.period.startYear;
@@ -72,25 +69,6 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
             <KingdomLifespan polity={polity} polities={polities} />
           </div>
         </section>
-
-        {sourceRecords.length > 0 && (
-          <section className="mt-12">
-            <h2 className="font-sans text-sm font-medium text-ink-muted">Sources</h2>
-            <ul className="mt-3 space-y-3">
-              {sourceRecords.map((s) => (
-                <li key={s.id} className="border-t border-border pt-3 font-sans text-sm text-ink">
-                  {s.title}
-                  <span className="block text-xs text-ink-muted">{s.citation}</span>
-                  {s.url && (
-                    <a href={s.url} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-xs underline underline-offset-4">
-                      Open the source
-                    </a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
       </div>
 
       <aside className="bh-accent-rule h-fit border-t-2 pt-5 font-sans text-sm md:sticky md:top-24">

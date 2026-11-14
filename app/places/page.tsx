@@ -57,13 +57,7 @@ export default async function PlacesIndexPage() {
       <div className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6">
         <h1 className="font-display text-5xl text-ink">Places</h1>
         <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
-          Capitals, ports, towns and monuments on the map, listed from north to south. Each page shows which kingdoms
-          held the place, and when.
-        </p>
-        <p className="mt-3 max-w-prose font-sans text-sm text-ink-muted">
-          Names and locations come from Wikidata, Wikipedia&rsquo;s open database. The areas are worked out from each
-          place&rsquo;s location only, to help you find it; they are not historical regions. The shapes on the map are
-          the kingdoms&rsquo; recorded borders, drawn over each other.
+          Capitals, ports, towns and monuments on the map, listed from north to south.
         </p>
 
         <div className="mt-12">
