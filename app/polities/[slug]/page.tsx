@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Badge } from "@/components/primitives/Badge";
 import { EntityTabs } from "@/components/primitives/EntityTabs";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { HeroPhoto } from "@/components/primitives/HeroPhoto";
@@ -16,7 +15,6 @@ import { RulerPortrait } from "@/components/entity/RulerPortrait";
 import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
-import { polityStatus } from "@/lib/data/status";
 import { placeKindLabel } from "@/lib/domain/labels";
 import { formatDateRange, formatPersonDates } from "@/lib/domain/time";
 import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
@@ -52,7 +50,6 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
     .map((p) => getSourceById(p.sourceId))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
   const contemporaries = contemporariesOf(polity, polities);
-  const status = polityStatus(polity);
   const fullPeriodKnown = polity.period.startQualifier !== "unknown" && polity.period.endQualifier !== "unknown" && polity.period.endYear !== null;
   const span = (polity.period.endYear ?? polity.period.startYear) - polity.period.startYear;
 
@@ -363,7 +360,6 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             {hero && emblem}
             <p className="font-display text-xl text-ink">{formatDateRange(polity.period)}</p>
-            <Badge tone={status.sourced ? "neutral" : "uncertainty"}>{status.label}</Badge>
           </div>
 
           <div className="mt-8">
