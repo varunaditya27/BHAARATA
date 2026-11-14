@@ -135,7 +135,7 @@ quadrantChart
 
 | ID | Item | Size |
 |---|---|---|
-| **D11** | Portraits for more of the ~670 rulers (31 show one), using coins as a fallback | M |
+| **D11** | Portraits for more of the 606 rulers (30 show one), using coins as a fallback | M |
 | **D14** | Extend the range beyond 600–1700 (Cliopatria covers far more); needs new era names and a lighter map at wider ranges | L |
 | **D15** | Replace the hand-drawn trade and war routes with routes from a scholarly source | L |
 | **F5** | Sidebar filters: by region, religion or ruler; group kingdoms by era | M |
@@ -146,7 +146,6 @@ quadrantChart
 | **T4** | PMTiles for borders and monuments, instead of GeoJSON | L |
 | **T9** | Replace the CARTO basemap with the project's own tiles | L |
 | **T12** | Image weight (about 54 MB in `public/images`): compress, or move to a CDN | S |
-| **T13** | Split the ~1,000-line `lib/data/prototype.ts` into separate files per record type | M |
 
 ---
 

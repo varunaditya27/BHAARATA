@@ -84,10 +84,9 @@ flowchart LR
 <td width="50%" valign="top">
 
 ### A map with depth
-- **127 battles** are listed on the timeline; 46 with directly recorded coordinates also appear on the map.
-- A recorded coordinate may still be approximate. The other 81 battles remain on the timeline without a map marker.
+- **26 geolocated battles** and **9 turning points** appear on the map and timeline
 - **344 temples, mosques, forts and tombs** appear in the year they were built
-- **4,300 protected monuments**, clustered, off by default
+- **154 ASI-protected historical monuments**, clustered, off by default
 - Ships and travellers move along trade and war routes
 - Capital seals, river flow, relief, and an era tint
 - A 3D-tilted camera that flies to what you select
@@ -232,14 +231,15 @@ components/
   search/            The ⌘K palette
 lib/
   domain/            Zod schemas and types, date formatting
-  data/              Hand-written records, generated data, image credits
+  data/              PostgreSQL database readers (read-atlas.ts, atlas-server.ts)
   geo/               getHistoricalState(year), GeoJSON conversion
   search/            The search index behind the ⌘K palette
   utils/             Small helpers (class names, colour, stored flags, page-transition types)
-scripts/             Python importers, the data checker, and the MapLibre worker copy
+prisma/              Schema, migration, and deterministic SQL seed (seed.sql)
+scripts/             Database seed, integrity checker, and MapLibre worker copy
 assets/              Fonts for the share images
-docs/                Architecture, data, design, development, backlog
-public/              Fonts, map glyphs and style, images, monuments
+docs/                Architecture, database, data, design, development, backlog
+public/              Fonts, map glyphs and style, images
 ```
 
 <br />

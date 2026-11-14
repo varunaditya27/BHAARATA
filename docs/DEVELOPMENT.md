@@ -136,23 +136,13 @@ Everything that decides "what exists in year Y" goes through `getHistoricalState
 4. If it should be toggleable, add an id to `LayerToggleId` and `LAYER_OPTIONS` in `MapLegend.tsx`, and list its layers in `TOGGLE_LAYER_MAP` in `HistoricalMap.tsx`. **A toggle must control something real.**
 5. Explain it on the Method page and, if it uses new data, in [`DATA.md`](DATA.md).
 
-### Add a kingdom
+### Add or update historical records
 
-New kingdoms come from the importer, not from hand-editing:
+All historical records live in PostgreSQL (`prisma/seed.sql` is the deterministic snapshot):
 
-1. Add the Cliopatria name to `INCLUDE` in `scripts/import-cliopatria.py` with an id and display name.
-2. Re-run the importers ([`DATA.md`](DATA.md#4-running-the-importers)) and review the diff.
-3. Photograph: pick one with `import-photos.py candidates` then `download` ([`DATA.md`](DATA.md#4-running-the-importers)). Rulers: add the kingdom's Wikipedia list to `LISTS` in `scripts/import-ruler-lists.py` if Wikidata has no monarchs for it. Optionally add a hand-written record to `lib/data/prototype.ts` (and list its id in `CURATED`).
-4. Run `scripts/validate-data.py` and read what it prints.
-
-### Add an evidence record
-
-Add an entry to `evidence` in `lib/data/prototype.ts`, and a `Source` with a link to where it can be checked. Be exact about what is real:
-
-- Set `imageIsIllustrative` if the photograph shows a different object.
-- Set `textIsIllustrative` / `claimIsIllustrative` only for placeholders.
-- Leave `transcription` empty rather than paste text you cannot trust.
-- Put the volume, number and page range in the provenance note.
+1. Insert or update the rows in PostgreSQL (`kingdoms`, `kingdom_borders`, `people`, `places`, `events`, `historical_items`, `item_text_lines`, `sources`, `images`, `information_sources`).
+2. Run `npm run db:check` to verify all 17 tables, PostGIS geometry validity (`ST_IsValid`), foreign keys, and Zod domain schemas.
+3. Export the updated snapshot into `prisma/seed.sql`.
 
 ### Add a page
 

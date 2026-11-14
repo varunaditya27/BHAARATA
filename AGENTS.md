@@ -54,10 +54,10 @@ Read this before assuming anything is wired up. The detail is in `docs/DATA.md`.
   - *Cliopatria* (CC BY 4.0): 54 kingdoms, 465 dated border shapes, 600–1700.
     Borders are one researched version of each territory, not exact frontiers.
   - *Wikidata / Wikipedia / Wikimedia Commons* (CC0 / CC BY-SA / per-file free
-    licences): capitals, 127 battles, 4,313 protected monuments, ~670 rulers, 344 dated sites,
+    licences): capitals, 26 geolocated battles, 154 protected monuments, 606 rulers, 344 dated sites,
     native-script names, summaries and photographs.
-  - *Hand-written text* in `lib/data/prototype.ts`: the summaries of the 11
-    "curated" kingdoms, 11 rulers, nine turning points. Each statement was
+  - *Curated historical text* in PostgreSQL (`prisma/seed.sql`): the summaries of the 11
+    curated kingdoms, 11 rulers, nine turning points. Each statement was
     checked against the Wikipedia article named in its provenance; keep it that
     way (check before editing, cite the article).
   - *Not researched, and labelled so:* Chera's outline and the two example
@@ -65,9 +65,9 @@ Read this before assuming anything is wired up. The detail is in `docs/DATA.md`.
 - **Evidence:** two real translations (*South Indian Inscriptions* Vol. II nos. 85
   and 88), each read from the printed page. There is no Tamil transcription:
   the scan's machine-read Tamil is garbled and must not be used.
-- **Database:** the atlas, data and connections pages read PostgreSQL; the checked-in files supply the initial import. See `docs/DATABASE.md`.
-- **Checks:** database reconciliation and date self-checks exist in `scripts/`; the broader automated test suite and CI remain to be built.
-- **Not built:** reviewed refreshes of an existing database, IIIF, PMTiles, or a citation layer down to page
+- **Database:** PostgreSQL + PostGIS is the single source of truth (`prisma/schema.prisma`, `prisma/seed.sql`, `scripts/seed.mjs`). See `docs/DATABASE.md`.
+- **Checks:** `npm run db:check` (`scripts/check-database.mjs`) verifies all 17 tables, PostGIS geometries, referential links, and domain schemas.
+- **Not built:** IIIF, PMTiles, or a citation layer down to page
   numbers. See `docs/BACKLOG.md`.
 - The git branch `legacy/frontend-v1` holds a prior, deliberately parked attempt.
   Don't pull from it without being asked.
@@ -76,14 +76,14 @@ Read this before assuming anything is wired up. The detail is in `docs/DATA.md`.
 
 ```
 lib/domain      Zod schemas + types (Polity, Person, Place, Event, Evidence, DateRange…), date formatting
-lib/data        atlas-server.ts and read-atlas.ts read PostgreSQL; prototype.ts supplies the initial import
+lib/data        atlas-server.ts and read-atlas.ts read PostgreSQL directly
 lib/geo         getHistoricalState(year, data), GeoJSON conversion, point-in-polygon, route motion
 components/primitives   Small, logic-free pieces (Eyebrow, Rule, Badge, Plate, Odometer…). No app logic
 components/map          The only code that touches MapLibre. React never re-renders the map;
                         it calls setFeatureState / setFilter / flyTo
 components/atlas, chronology, entity, evidence, home, search, layout   Compose primitives and the map
 app/*           Routes. Server components by default; "use client" only where interaction needs it
-scripts/        Source importers, database setup and checks, and the MapLibre worker copy
+scripts/        Database seeding (seed.mjs), integrity checks (check-database.mjs), and MapLibre worker copy
 ```
 
 Dependencies point down: routes → feature components → map/primitives → `lib/geo`
