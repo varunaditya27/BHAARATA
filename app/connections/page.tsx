@@ -37,10 +37,7 @@ export default async function ConnectionsPage({
       <div className="border-b border-ink pb-8">
         <div className="flex flex-wrap items-baseline justify-between gap-4">
           <div>
-            <p className="font-sans text-sm text-ink-muted">
-              How everything links together
-            </p>
-            <h1 className="mt-1 font-display text-4xl text-ink sm:text-5xl">
+            <h1 className="font-display text-4xl text-ink sm:text-5xl">
               How the data connects
             </h1>
           </div>

@@ -10,8 +10,7 @@ const LINKS = [
   { href: "/places", label: "Places" },
   { href: "/evidence", label: "Evidence" },
   { href: "/data", label: "Browse data" },
-  { href: "/connections", label: "How data connects" },
-  { href: "/method", label: "How it works" },
+  { href: "/connections", label: "ER diagram" },
 ];
 
 /**
@@ -52,9 +51,6 @@ export function Colophon() {
               Fonts: Zodiak and Ranade, with Anek and Tiro for Indian scripts. Photographs from Wikimedia Commons; map
               data from OpenStreetMap contributors and CARTO.
             </p>
-            <Link href="/method#credits" className="mt-2 inline-block text-ink underline underline-offset-4">
-              Full credits
-            </Link>
           </div>
         </div>
       </footer>

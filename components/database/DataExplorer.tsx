@@ -229,6 +229,27 @@ export function DataExplorer({
     return score(a.name) - score(b.name);
   });
 
+  const tableColumns = (() => {
+    const lowPriority = new Set([
+      "provenance",
+      "geo_json",
+      "geometry",
+      "slug",
+      "hero_image_id",
+      "image_id",
+      "summary",
+      "description",
+      "notes",
+      "uncertainty_note",
+      "created_at",
+      "updated_at",
+      "accent_color",
+    ]);
+    const preferred = orderedColumns.filter((c) => !lowPriority.has(c.name));
+    const list = preferred.length >= 3 ? preferred : orderedColumns;
+    return list.slice(0, 5);
+  })();
+
   const inspectedRow =
     inspectedIndex !== null && rows[inspectedIndex] ? rows[inspectedIndex] : null;
   const inspectedCoords = inspectedRow ? parsePointCoords(inspectedRow) : null;
@@ -251,14 +272,11 @@ export function DataExplorer({
       <div className="border-b border-ink pb-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest text-territory-selected">
-              Inside the archive
-            </p>
-            <h1 className="mt-1.5 font-display text-4xl text-ink sm:text-5xl">
+            <h1 className="font-display text-4xl text-ink sm:text-5xl">
               Browse all the data
             </h1>
             <p className="mt-3 max-w-2xl font-sans text-base leading-relaxed text-ink-muted">
-              Look through all 17 lists behind BHĀRATA—from 55 kingdoms and 584 rulers to 466 map borders, 392 places, and 1,026 images.
+              Look through all 17 lists behind BHĀRATA, from 55 kingdoms and 584 rulers to 466 map borders, 392 places, and 1,026 images.
             </p>
           </div>
           <Link
@@ -713,11 +731,11 @@ export function DataExplorer({
                 <table className="w-full border-collapse text-left font-sans text-sm">
                   <thead>
                     <tr className="border-b border-ink bg-paper">
-                      {orderedColumns.map((column) => (
+                      {tableColumns.map((column) => (
                         <th
                           key={column.name}
                           scope="col"
-                          className="min-w-32 px-3.5 py-3 font-medium text-ink"
+                          className="px-3.5 py-3 font-medium text-ink"
                         >
                           <div className="flex flex-col gap-0.5">
                             <span title={column.name}>{columnLabel(column.name)}</span>
@@ -743,7 +761,7 @@ export function DataExplorer({
                               : "hover:bg-paper text-ink-muted"
                           }`}
                         >
-                          {orderedColumns.map((column) => {
+                          {tableColumns.map((column) => {
                             const rawValue = row[column.name];
                             const text = formatCellText(rawValue);
                             const isTitle =

@@ -39,7 +39,7 @@ export const tableDetails: Record<
   places: {
     category: "core",
     summary:
-      "392 places on the map—capitals, temples, forts, mosques, tombs, monasteries, and protected monuments—with their coordinates.",
+      "392 places on the map: capitals, temples, forts, mosques, tombs, monasteries, and protected monuments, with their coordinates.",
     primaryRoute: "/places/",
   },
   events: {

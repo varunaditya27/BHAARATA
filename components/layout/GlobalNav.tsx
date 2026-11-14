@@ -13,7 +13,7 @@ const primaryLinks = [
   { href: "/evidence", label: "Evidence" },
 ];
 
-const secondaryLinks = [{ href: "/data", label: "Browse data" }, { href: "/method", label: "How it works" }];
+const secondaryLinks = [{ href: "/data", label: "Browse data" }, { href: "/connections", label: "ER diagram" }];
 
 export function GlobalNav() {
   return (

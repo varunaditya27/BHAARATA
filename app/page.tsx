@@ -61,11 +61,7 @@ export default function Home() {
 
           <p className="mt-12 font-sans text-xs text-ink-muted">
             Kingdom borders come from a research collection; descriptions, rulers, battles and places from Wikipedia and
-            Wikidata. Two things are still drawn by hand: the Chera outline and the example routes.{" "}
-            <Link href="/method" className="underline underline-offset-4 hover:text-ink">
-              Read why
-            </Link>
-            .
+            Wikidata. Two things are still drawn by hand: the Chera outline and the example routes.
           </p>
         </section>
       </div>
