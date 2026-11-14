@@ -1,4 +1,4 @@
-import type { ImageKey } from "./images";
+import type { ImageKey } from "@/lib/domain/types";
 
 /**
  * The homepage's four chapters — one moment each, in order. Text sticks to

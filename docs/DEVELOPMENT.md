@@ -24,7 +24,7 @@ Setting up, changing things safely, shipping, and fixing what breaks.
 
 ## 1. Setup
 
-**You need:** Node.js 20 or newer, npm, and a browser with WebGL. Python is only needed to refresh data ([`DATA.md`](DATA.md#4-running-the-importers)).
+**You need:** Node.js 20.19 or newer, npm, Docker Compose, and a browser with WebGL. Python is only needed to refresh data ([`DATA.md`](DATA.md#4-running-the-importers)).
 
 ```bash
 git clone git@github.com:varunaditya27/BHAARATA.git
@@ -32,20 +32,23 @@ cd BHAARATA
 
 npm install
 cp .env.example .env.local
+docker compose up -d database
+npm run db:setup
 npm run dev
 ```
 
 Open <http://localhost:3000>.
 
-`npm install` runs a `postinstall` step (`scripts/copy-maplibre-worker.mjs`) that copies MapLibre's web worker into `public/vendor/`. That folder is git-ignored and recreated on every install. If it is missing, the map shows "Worker failed to load".
+`npm install` generates the Prisma client and runs `scripts/copy-maplibre-worker.mjs`, which copies MapLibre's web worker into `public/vendor/`. That folder is git-ignored and recreated on every install. If it is missing, the map shows "Worker failed to load".
 
 ### Environment
 
 | Variable | Needed for | Default |
 |---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | The absolute address used in link-preview images (Open Graph). Set it to the deployed origin, with no trailing slash | `http://localhost:3000` |
+| `DATABASE_URL` | PostgreSQL connection with PostGIS enabled | Local Docker database on port 55432 |
 
-Nothing else is configured by environment. There are no API keys: the base map and terrain tiles are public.
+There are no API keys: the base map and terrain tiles are public.
 
 ### Read the Next.js docs that ship with the package
 
@@ -58,7 +61,7 @@ This project uses a recent Next.js whose APIs differ from older releases. Before
 | Command | What it does |
 |---|---|
 | `npm run dev` | Development server with hot reload on port 3000 |
-| `npm run build` | Production build. It also type-checks, and pre-renders every kingdom, person, place and evidence page |
+| `npm run build` | Production build. It also type-checks; historical pages are rendered on request from the database |
 | `npm run start` | Serves the production build (use `-- -p 3100` for another port) |
 | `npm run lint` | ESLint, with the React compiler rules |
 | `npx tsc --noEmit` | Type-check without building |
@@ -154,7 +157,7 @@ Add an entry to `evidence` in `lib/data/prototype.ts`, and a `Source` with a lin
 ### Add a page
 
 1. Create `app/<route>/page.tsx` as a server component, wrapped in `<PageTransition>`.
-2. For dynamic routes, export `generateStaticParams` and `generateMetadata`.
+2. For dynamic routes, provide `generateMetadata` where a page needs a record-specific title. Records are read on request.
 3. Add it to the navigation in `components/layout/GlobalNav.tsx` and the footer in `Colophon.tsx` if it should be linked.
 4. Use `<Link transitionTypes={NAV_FORWARD}>` (or `NAV_BACK`) so the page transition has a direction.
 5. Add a share image if it is a shareable record (see `app/polities/[slug]/opengraph-image.tsx`).
@@ -167,11 +170,12 @@ Follow [`DESIGN.md`](DESIGN.md#7-writing-the-interface). In short: plain words, 
 
 ## 5. Deployment
 
-The site is deployed on [Vercel](https://vercel.com) at <https://bhaarata.vercel.app>.
+An earlier version is available at <https://bhaarata.vercel.app>. The database-backed changes in this checkout have not been deployed or verified there.
 
 1. Import the repository in Vercel. The framework is detected as Next.js; no build settings are needed.
-2. Set `NEXT_PUBLIC_SITE_URL` for Production to the public origin (for example `https://bhaarata.vercel.app`), with no trailing slash. Without it, link previews point at `localhost`.
-3. Push to the production branch. Vercel runs `npm install` (which runs the worker copy) and `npm run build`.
+2. Provision PostgreSQL with PostGIS, import the reviewed data into a new empty database, and set `DATABASE_URL` in the deployment environment. Do not use the local Docker credentials in production.
+3. Set `NEXT_PUBLIC_SITE_URL` to the public origin, with no trailing slash. Without it, link previews point at `localhost`.
+4. Deploy the reviewed code. The build generates the Prisma client and copies the map worker.
 
 After a deploy, check:
 

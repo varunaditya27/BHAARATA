@@ -1,0 +1,23 @@
+# Database
+
+The atlas, search, map layers, and data pages read PostgreSQL + PostGIS directly as the single source of truth. There is no secondary JSON or TypeScript runtime store.
+
+## Setup & Seeding
+
+To run locally:
+1. Start the PostGIS container with `docker compose up -d`.
+2. Run `npm run db:setup` once. This applies `prisma/migrations` and populates all 17 tables from the deterministic PostgreSQL seed (`prisma/seed.sql` via `scripts/seed.mjs`).
+3. Run `npm run db:check` to verify schema integrity, PostGIS geometry validity, referential links, and domain schema validation.
+
+## Schema Structure (17 Populated Tables)
+
+`prisma/migrations` and `prisma/schema.prisma` define the 17 project tables:
+- **Core records:** `kingdoms` (55), `people` (668), `places` (4,554 deduplicated cities, dated sites, and protected monuments), `events` (135 turning points and battles), `historical_items` (2 inscriptions with statements and uncertainty ratings), `item_text_lines` (38 translation lines), `sources` (396 cited sources with URLs and licences), and `images` (60 credited Wikimedia Commons images).
+- **Geography:** `kingdom_borders` (466 validated PostGIS `MultiPolygon` shapes with `CHECK (ST_IsValid(outline))`) and `routes` (2 PostGIS `LineString` paths).
+- **Relationships:** `kingdom_capitals`, `event_kingdoms`, `event_places`, `route_kingdoms`, `item_kingdoms`, `other_names`, and `information_sources`.
+
+## Pages & Endpoints
+
+- `/data` ("Browse the data") lets visitors inspect and search all 17 tables.
+- `/connections` ("How the data connects") queries `pg_constraint` to display foreign-key relationships across the 17 tables.
+- `/api/map/sites` and `/api/map/monuments` serve GeoJSON `FeatureCollection` layers directly from `places` using PostGIS `ST_AsGeoJSON`.

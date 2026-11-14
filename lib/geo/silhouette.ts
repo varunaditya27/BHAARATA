@@ -1,4 +1,4 @@
-import { boundaries, getBoundariesForPolity } from "@/lib/data/prototype";
+import type { AtlasData } from "@/lib/data/atlas-data";
 
 type Geometry = GeoJSON.Polygon | GeoJSON.MultiPolygon;
 
@@ -53,9 +53,9 @@ function outlineArea(geometry: Geometry): number {
   return polys.reduce((sum, [ring]) => sum + ringArea(ring), 0);
 }
 
-function largestBoundary(polityId: string): { geometry: Geometry; area: number } | undefined {
+function largestBoundary(polityId: string, data: AtlasData): { geometry: Geometry; area: number } | undefined {
   let best: { geometry: Geometry; area: number } | undefined;
-  for (const { geometry } of getBoundariesForPolity(polityId)) {
+  for (const { geometry } of data.boundaries.filter(b => b.polityId === polityId)) {
     const area = outlineArea(geometry);
     if (!best || area > best.area) best = { geometry, area };
   }
@@ -63,13 +63,13 @@ function largestBoundary(polityId: string): { geometry: Geometry; area: number }
 }
 
 /** A kingdom's emblem shape: its largest recorded boundary, the extent it is best known by. */
-export function polityGeometry(polityId: string): Geometry | undefined {
-  return largestBoundary(polityId)?.geometry;
+export function polityGeometry(polityId: string, data: AtlasData): Geometry | undefined {
+  return largestBoundary(polityId, data)?.geometry;
 }
 
 /** The most land a kingdom held at one time, in the same relative units as outlineArea. For comparing kingdoms, not a real km² figure. */
-export function polityPeakArea(polityId: string): number {
-  return largestBoundary(polityId)?.area ?? 0;
+export function polityPeakArea(polityId: string, data: AtlasData): number {
+  return largestBoundary(polityId, data)?.area ?? 0;
 }
 
 function pointInRing([x, y]: [number, number], ring: GeoJSON.Position[]): boolean {
@@ -92,8 +92,8 @@ export function pointInGeometry(point: [number, number], geometry: Geometry): bo
 
 /** Every recorded boundary that contains a point — i.e. which kingdoms
  * held a place, and when (per the illustrative boundaries). */
-export function boundariesContaining(point: [number, number]) {
-  return boundaries.filter((b) => pointInGeometry(point, b.geometry)).sort((a, b) => a.validFrom - b.validFrom);
+export function boundariesContaining(point: [number, number], data: AtlasData) {
+  return data.boundaries.filter((b) => pointInGeometry(point, b.geometry)).sort((a, b) => a.validFrom - b.validFrom);
 }
 
 /**

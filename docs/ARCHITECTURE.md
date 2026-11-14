@@ -33,8 +33,8 @@ Four ideas decide most questions.
 
 | Principle | What it means in practice |
 |---|---|
-| **The interface shows relationships, not records** | A page links outward (a ruler to a kingdom, a battle to the borders it fell inside, a claim to its source) instead of listing fields. |
-| **One function answers "what is the world like in year Y?"** | `getHistoricalState(year)` in `lib/geo/historical-state.ts`. The timeline, the map and the preview panel all call it. Nothing else re-derives "is this kingdom active?". |
+| **The interface shows relationships, not records** | A page links outward (a ruler to a kingdom, a battle's recorded point to surrounding borders, a claim to its source) instead of listing fields. |
+| **One function answers "what is the world like in year Y?"** | `getHistoricalState(year, data)` in `lib/geo/historical-state.ts`. The timeline, the map and the preview panel all call it. Nothing else re-derives "is this kingdom active?". |
 | **The map owns geography; React owns everything around it** | React never re-renders the map. It calls MapLibre's own APIs (`setFeatureState`, `setFilter`, `flyTo`), and the map is never remounted when the year or selection changes. |
 | **Unknown is not empty** | Every date carries a confidence and a qualifier. A record without a source says so on its page. Data that is missing is shown as missing, never as zero. |
 
@@ -42,57 +42,29 @@ Four ideas decide most questions.
 
 ## 2. The big picture
 
-There is no database and no API server. All data is committed to the repository as JSON, validated by Zod schemas, and read at build time.
+The running atlas and the data pages read PostgreSQL through Prisma. PostGIS stores map shapes. The checked-in source files are used for the initial import, not as a runtime fallback. See [DATABASE.md](DATABASE.md) for setup and the remaining limits.
 
 ```mermaid
-flowchart TB
-    subgraph BUILD["Build time"]
-        direction LR
-        PY["Python importers<br/>scripts/*.py"] --> JSON["JSON in the repo<br/>lib/data/geo<br/>lib/data/generated<br/>public/data"]
-        HAND["Hand-written records<br/>lib/data/prototype.ts"] --> MERGE
-        JSON --> MERGE["prototype.ts merges<br/>both into typed arrays"]
-        MERGE --> ZOD["lib/domain<br/>Zod schemas + types"]
-    end
-
-    subgraph SERVER["Server (Vercel)"]
-        RSC["React Server Components<br/>every page"]
-        OG["Share images<br/>opengraph-image.tsx"]
-    end
-
-    subgraph BROWSER["Browser"]
-        MAP["MapLibre GL<br/>HistoricalMap"]
-        TL["Timeline, search,<br/>evidence viewer"]
-    end
-
-    ZOD --> RSC
-    ZOD --> OG
-    RSC -- "HTML + data as props" --> TL
-    ZOD -- "bundled" --> MAP
-    EXT[("Map tiles<br/>CARTO, AWS terrain")] --> MAP
-    STATIC[("public/data/<br/>monuments.geojson<br/>sites.geojson")] -. "fetched when the layer is switched on" .-> MAP
-
-    classDef node fill:#faf6ec,stroke:#241f17,color:#241f17;
-    class PY,JSON,HAND,MERGE,ZOD,RSC,OG,MAP,TL,EXT,STATIC node;
+flowchart LR
+  SRC["Published sources"] --> FILES["Reviewed import files"]
+  FILES --> DB["PostgreSQL + PostGIS"]
+  DB --> READER["readAtlas: one database snapshot"]
+  READER --> PAGES["Server-rendered pages"]
+  READER --> UI["Map, timeline and search"]
+  DB --> LAYERS["Map sites and monuments routes"]
+  LAYERS --> UI
+  DB --> BROWSE["Data and connections pages"]
 ```
 
-The importers are run by hand and their output is committed. That keeps builds fast and offline, makes every data change reviewable in a diff, and means the deployed site never depends on Wikidata or Wikipedia being reachable.
+The source importers run by hand. Updating their output does not automatically update an existing database; reviewed refreshes remain work to do.
 
 ---
 
 ## 3. Server and client
 
-Pages are server components. Only the parts that need the browser are client components.
+Pages read the same database through `getAtlasData()`. The reader gathers the records in a consistent database transaction; the root provider gives the map and other interactive components that snapshot. On a path change, the provider reloads its data before showing the next page. Map sites and protected monuments are fetched separately when their layers are enabled.
 
-| Runs on the server | Runs in the browser (`"use client"`) |
-|---|---|
-| All `app/**/page.tsx` routes | `AtlasView` and everything inside it |
-| Kingdom, person, place and evidence pages | `HistoricalMap`, `StoryMap` (the homepage globe) |
-| `KingdomLanes`, `ProvenanceChain`, `Colophon` | `TimelineScrubber`, `LifespanStrip`, `EventTicks` |
-| | `KingdomBoard`, `PeopleDirectory`, `PlacesAtlas` (the Kingdoms, People and Places pages: their rows are built on the server and the find box filters them in the browser) |
-| Share images (`opengraph-image.tsx`, rendered once at build) | `CommandPalette`, `EvidenceViewer`, `RakingLight` |
-| Static metadata and `generateStaticParams` | `EntityPreviewPanel`, `MobileMenu`, `NavLinks` |
-
-Every kingdom, person, place and evidence page is pre-rendered with `generateStaticParams`. Next.js splits code per route, so MapLibre only ships with the homepage and the atlas; the homepage additionally loads its globe lazily (`dynamic(..., { ssr: false })` in `HomeFilm.tsx`) so the title and text paint first.
+Pages are rendered on request. The map, timeline, search and other interactive components run in the browser. MapLibre is loaded lazily on the homepage.
 
 ---
 
@@ -175,8 +147,8 @@ The definitions live in `components/map/layers.ts`; ids are in `mapStyle.ts`. Ea
 | Routes, capitals, seals, battles | A `filter` expression | `setFilter` once per year change |
 | Ships and travellers | A GeoJSON source rewritten ~30 times a second | `animations.ts`, one shared clock |
 | Hover glow and label | `feature-state: hover` plus a DOM label | Written directly; no React render per mouse move |
-| Monuments | Static GeoJSON with clustering | Fetched when first switched on |
-| Sites (344 temples, forts, tombs…) | Static GeoJSON; a `filter` on each site's build year | Fetched when first switched on; `setFilter` once per year change |
+| Monuments | Database-backed GeoJSON with clustering | Fetched when first switched on |
+| Sites (344 temples, forts, tombs…) | Database-backed GeoJSON; a `filter` on each site's build year | Fetched when first switched on; `setFilter` once per year change |
 
 ### Related behaviours
 
@@ -246,7 +218,7 @@ erDiagram
 A few choices worth knowing:
 
 - **Places do not belong to a kingdom.** Which kingdoms held a place is *computed*, by testing the place's coordinates against every border shape (`boundariesContaining` in `lib/geo/silhouette.ts`). Nothing is entered by hand, so it cannot drift out of date.
-- **Battles are linked to kingdoms the same way**: by whose borders contained the site that year, not by who fought. Wikidata rarely records the combatants, and the pages say so.
+- **Battles are linked to kingdoms by recorded points**, not by combatants. Only direct Wikidata points are used; they may still be approximate and a border match does not prove the battle site.
 - **A polity can have many boundary shapes.** A shape is valid for a range of years; the id is `${polityId}-${validFrom}`.
 - **`DateRange` carries a confidence and a qualifier** for each end (`exact`, `circa`, `before`, `after`, `unknown`). `formatDateRange()` is the only way dates are printed.
 
@@ -323,11 +295,11 @@ flowchart TB
 | Concern | What is done |
 |---|---|
 | Scrubbing with 466 shapes | Only changed shapes are written each frame (see section 4). A 900-year drag held 60 fps in a software-rendered test browser |
-| 4,300 monuments, 344 sites | Separate GeoJSON files (780 KB together), fetched only when the layer is first enabled, clustered by MapLibre |
+| 4,300 monuments, 344 sites | Database-backed GeoJSON, fetched when each layer is first enabled; monuments are clustered by MapLibre |
 | 55 kingdoms on the chronology | One row per kingdom; those with recorded events come first and the rest sit behind a toggle, so the chart does not open as 55 rows |
 | Map load time | Terrain tiles are not waited for; the cover lifts as soon as the basemap and borders are drawn (about 1–3 s) |
 | Homepage globe | Starfield on a plain 2D canvas; the nebula is painted once off-screen; the camera path is one `requestAnimationFrame` loop |
-| Share images | Rendered once per kingdom at build time and cached |
+| Share images | Rendered on request using the current kingdom record |
 | Fonts | Latin fonts are self-hosted; the Indic-script fonts are not preloaded, so they download only when a page uses them |
 | Reduced motion | Starfield stays still, the globe jumps to its final view, the map's ambient animation does not start |
 
@@ -337,7 +309,7 @@ flowchart TB
 
 | Decision | Why | Revisit when |
 |---|---|---|
-| **No database yet** | The dataset is small enough to ship as JSON; builds stay offline and reviewable | Users can submit corrections, or the data outgrows the bundle |
+| **PostgreSQL for the running app** | The atlas and data browser use the same records | Add a reviewed update workflow for new imports |
 | **Cliopatria for borders** | A published, cited, openly licensed dataset beats borders drawn by hand | A scholar supplies better outlines for a region |
 | **Python importers, committed output** | Reproducible and cached, and the live site never calls Wikidata | The importers need to run on a schedule |
 | **Own map glyphs** | The default font server blocks cross-origin requests, and labels should match the site's type | Never, unless the type changes |
@@ -350,11 +322,11 @@ flowchart TB
 
 ## 12. Where this is heading
 
-Planned, not built. Items and their sizes are in [`BACKLOG.md`](BACKLOG.md).
+The running app uses PostgreSQL. Reviewed refreshes and the other items below are still planned; see [`BACKLOG.md`](BACKLOG.md).
 
 ```mermaid
 flowchart LR
-    NOW["<b>Today</b><br/>JSON in the repo,<br/>read at build time"] --> PG["<b>PostgreSQL + PostGIS</b><br/>queries, spatial indexes,<br/>editable records"]
+    NOW["<b>Today</b><br/>The atlas and data pages<br/>read PostgreSQL"] --> PG["<b>Next</b><br/>Reviewed updates<br/>to the database"]
     PG --> PM["<b>PMTiles</b><br/>vector tiles instead of<br/>GeoJSON for borders"]
     PG --> IIIF["<b>IIIF</b><br/>deep-zoom archives and<br/>region-level evidence"]
     PG --> ING["<b>Scheduled ingestion</b><br/>importers as jobs,<br/>review before publish"]

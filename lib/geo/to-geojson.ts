@@ -1,12 +1,6 @@
-import { polities } from "@/lib/data/prototype";
+import type { AtlasData } from "@/lib/data/atlas-data";
 import type { HistoricalBoundary, HistoricalEvent, HistoricalRoute, Place, Polity } from "@/lib/domain/types";
 import { darkenHex } from "@/lib/utils/color";
-import frontierGeometries from "@/lib/data/geo/frontiers.json";
-import labelPoints from "@/lib/data/geo/labels.json";
-
-const nameByPolityId = new Map(polities.map((p) => [p.id, p.name]));
-
-const accentByPolityId = new Map(polities.map((p) => [p.id, p.accentColor]));
 
 /*
  * MapLibre owns rendering; React only ever hands it GeoJSON + paint
@@ -38,8 +32,9 @@ function geometryArea(g: GeoJSON.Polygon | GeoJSON.MultiPolygon): number {
 }
 
 export function boundariesToFeatureCollection(
-  boundaries: HistoricalBoundary[],
+  boundaries: HistoricalBoundary[], data: AtlasData,
 ): GeoJSON.FeatureCollection {
+  const accentByPolityId = new Map(data.polities.map(p => [p.id, p.accentColor]));
   return {
     type: "FeatureCollection",
     features: boundaries.map((b) => ({
@@ -65,10 +60,9 @@ export function boundariesToFeatureCollection(
  * footnoted (PROJECT_BIBLE.md §8).
  */
 /** Ids of the boundaries that have a hatched frontier band. */
-export const hasFrontier: ReadonlySet<string> = new Set(Object.keys(frontierGeometries));
 
-export function frontiersToFeatureCollection(boundaries: HistoricalBoundary[]): GeoJSON.FeatureCollection {
-  const geoms = frontierGeometries as Record<string, GeoJSON.Polygon | GeoJSON.MultiPolygon>;
+export function frontiersToFeatureCollection(boundaries: HistoricalBoundary[], data: AtlasData): GeoJSON.FeatureCollection {
+  const geoms = data.frontiers;
   return {
     type: "FeatureCollection",
     features: boundaries
@@ -88,8 +82,10 @@ export function frontiersToFeatureCollection(boundaries: HistoricalBoundary[]): 
  * irregular shape or right on its frontier). Parentheticals are dropped
  * for the map: "Chalukya (Kalyani)" prints as CHALUKYA.
  */
-export function kingdomLabelsToFeatureCollection(boundaries: HistoricalBoundary[]): GeoJSON.FeatureCollection {
-  const points = labelPoints as Record<string, number[]>;
+export function kingdomLabelsToFeatureCollection(boundaries: HistoricalBoundary[], data: AtlasData): GeoJSON.FeatureCollection {
+  const points = data.labels;
+  const nameByPolityId = new Map(data.polities.map(p => [p.id, p.name]));
+  const accentByPolityId = new Map(data.polities.map(p => [p.id, p.accentColor]));
   return {
     type: "FeatureCollection",
     features: boundaries
@@ -131,7 +127,7 @@ export function battlesToFeatureCollection(events: HistoricalEvent[]): GeoJSON.F
   return {
     type: "FeatureCollection",
     features: events
-      .filter((e) => e.category === "battle" && e.location)
+      .filter((e) => e.category === "battle" && e.location && e.period.startQualifier !== "unknown")
       .map((e) => ({
         type: "Feature",
         id: e.id,
@@ -141,7 +137,8 @@ export function battlesToFeatureCollection(events: HistoricalEvent[]): GeoJSON.F
   };
 }
 
-export function routesToFeatureCollection(routes: HistoricalRoute[]): GeoJSON.FeatureCollection {
+export function routesToFeatureCollection(routes: HistoricalRoute[], data: AtlasData): GeoJSON.FeatureCollection {
+  const accentByPolityId = new Map(data.polities.map(p => [p.id, p.accentColor]));
   return {
     type: "FeatureCollection",
     features: routes.map((route) => ({

@@ -12,12 +12,12 @@ export function polityStatus(p: Polity): DataStatus {
   const borders = ids.includes("cliopatria");
   if (ids.some((id) => id.startsWith("wikipedia-check-"))) {
     return borders
-      ? { label: "Borders from the Cliopatria dataset. Text checked against Wikipedia.", sourced: true }
+      ? { label: "Borders from Cliopatria. Text checked against Wikipedia.", sourced: true }
       : { label: "Text checked against Wikipedia. The outline is a rough placeholder.", sourced: false };
   }
   const summary = ids.some((id) => id.startsWith("wikipedia-"));
-  if (borders && summary) return { label: "Borders from the Cliopatria dataset. Summary from Wikipedia.", sourced: true };
-  if (borders) return { label: "Borders from the Cliopatria dataset. Text not checked yet.", sourced: false };
+  if (borders && summary) return { label: "Borders from Cliopatria. Summary from Wikipedia.", sourced: true };
+  if (borders) return { label: "Borders from Cliopatria. Text not checked yet.", sourced: false };
   return { label: "Placeholder, not checked yet.", sourced: false };
 }
 

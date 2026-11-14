@@ -60,7 +60,7 @@ quadrantChart
 
 | ID | Item | Why it matters | Size |
 |---|---|---|---|
-| **T1** | **Automated tests.** Unit tests (Vitest) for `formatDateRange`, `formatPersonDates`, `getHistoricalState`, the status badges and the importers' outputs. Browser tests (Playwright) for: open the atlas, select a kingdom, scrub, open its page, search, go back | Every check today is manual. A date-formatting bug would silently print wrong history | M |
+| **T1** | **Automated tests.** Unit tests (Vitest) for `formatDateRange`, `formatPersonDates`, `getHistoricalState`, the status badges and the importers' outputs. Browser tests (Playwright) for: open the atlas, select a kingdom, scrub, open its page, search, go back | Database reconciliation and date self-check scripts exist, but there is no complete automated suite. A date-formatting bug could silently print wrong history | M |
 | **T2** | **Continuous integration.** A GitHub Action running lint, type-check, build and the tests on every pull request | Catches the breakage that "it built on my machine" misses | S |
 | **T8** | **Real-device testing.** An ordinary Android phone, an iPhone with Safari, an older laptop. Especially compare view (two maps), 3D terrain, and the homepage globe | Everything so far was tested in a desktop and a software-rendered headless browser | S |
 | **T14** | **Choose a licence for the code.** The repository has none, so by default nobody may reuse it. The data has its own licences ([`DATA.md`](DATA.md#2-sources-and-licences)) | Needed before anyone can contribute or reuse it. Needs an owner decision | S |
@@ -124,7 +124,7 @@ quadrantChart
 
 | ID | Item | Why it matters | Size |
 |---|---|---|---|
-| **T3** | **PostgreSQL with PostGIS**, and importers run as jobs with a review step before data goes live | Needed once records are edited or the data outgrows the bundle | XL |
+| **T3** | **Reviewed database refreshes**: imports run as jobs with a review step before updated records go live. The atlas and data browser now read PostgreSQL | Needed once records are edited or the data outgrows the bundle | XL |
 | **T10** | **Analytics and error tracking** (Vercel Analytics, web vitals) | To see which pages people use and where the app fails | S |
 | **T11** | **Harden the importers:** validate every output with the Zod schemas, pin the Python dependencies in a `requirements.txt`, and add one `npm run import:data` wrapper | Today they are scripts you must know how to run | M |
 | **T15** | **Search-engine basics:** `robots`, a sitemap, share images for people, places and evidence, structured data | Only kingdom pages have share images | S |
@@ -174,7 +174,7 @@ Small, real problems, kept honest.
 | **Which licence for the code?** (T14) | Affects who may reuse and contribute |
 | **Who reviews the history?** (D5, D8) | Imported data is only as good as its sources; a named reviewer would let records move from "not yet checked" to "reviewed" |
 | **Stay at 600–1700, or widen?** (D14) | Widening multiplies the data and the review work |
-| **A database, or keep JSON?** (T3) | JSON works until people can submit corrections |
+| **How should database updates be reviewed?** (T3) | Source files are imported initially; updating an existing database still needs a reviewable workflow |
 | **Where do corrections go?** (F11) | GitHub issues are simple; a form is friendlier but needs a backend |
 
 ---
@@ -193,7 +193,7 @@ For context on what already exists, newest first.
 | **A dated layer of 344 temples, mosques, churches, forts and tombs** on the map | Subcontinent and Afghanistan only |
 | **Two real inscription translations** (SII Vol. II nos. 85 and 88) with a "How we know" chain | Read from the printed pages |
 | **The homepage film**: starfield, lit globe, orbital descent | Respects reduced motion |
-| **Battles** (127) on the map and chronology, and **protected monuments** (4,300) as an optional layer | Monuments undated; battles linked by place |
+| **Battles** (127) on the chronology, with 46 directly recorded points on the map, and **protected monuments** (4,300) as an optional layer | Monuments undated; battle points can be approximate |
 | **55 kingdoms and 466 dated border shapes** from Cliopatria, 600–1700 | Replaced the original 11 hand-drawn kingdoms |
 | **Atlas tools:** cinema view, compare two years, save as image, keyboard shortcuts, era sound | |
 | **Search upgrades:** dates in a column, jump to a year, recent items | |

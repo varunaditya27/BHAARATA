@@ -31,7 +31,7 @@ Then follow any claim back to the evidence it rests on.
 
 Most maps of Indian history are a single picture: one year, one set of borders, no way to ask *how do we know?* BHĀRATA is built around that question.
 
-It is an interactive atlas where **time is a control**. Move the slider and the map redraws itself: kingdoms fade in as they rise, change shape as they grow, and leave a dashed ghost of their old borders when they fall. Click a kingdom to see who ruled it, what happened there, which battles were fought on its land, and which neighbours it shared the century with. Open a piece of evidence and the page shows every step between the original object and the claim, marking each step as **real**, **partly real** or **placeholder**.
+It is an interactive atlas where **time is a control**. Move the slider and the map redraws itself: kingdoms fade in as they rise, change shape as they grow, and leave a dashed ghost of their old borders when they fall. Click a kingdom to explore its rulers, events, nearby recorded battle locations and neighbours. Open a piece of evidence and the page shows every step between the original object and the claim, marking each step as **real**, **partly real** or **placeholder**.
 
 It is not a Wikipedia clone, and it is not a chatbot with a history skin. Every date, border and name is labelled with where it came from, and anything that is still a placeholder says so on the page.
 
@@ -84,7 +84,8 @@ flowchart LR
 <td width="50%" valign="top">
 
 ### A map with depth
-- **127 battles** appear in the year they were fought
+- **127 battles** are listed on the timeline; 46 with directly recorded coordinates also appear on the map.
+- A recorded coordinate may still be approximate. The other 81 battles remain on the timeline without a map marker.
 - **344 temples, mosques, forts and tombs** appear in the year they were built
 - **4,300 protected monuments**, clustered, off by default
 - Ships and travellers move along trade and war routes
@@ -146,60 +147,17 @@ Every page shows a badge saying which of these it uses. The full account, with l
 
 ## How it works
 
-BHĀRATA is a Next.js app with no database yet. Open data is imported once by Python scripts (the three main ones are drawn below), validated, and written to JSON that ships with the site. Server components render the pages; only the map, timeline and search run in the browser.
+BHĀRATA stores its historical records in PostgreSQL. The atlas, search, data browser and relationship page read the same database through Prisma. The checked-in files are the initial import source; they are not read by the running atlas. See [database setup](docs/DATABASE.md).
 
 ```mermaid
-flowchart TB
-    subgraph SRC["Open sources"]
-        C["Cliopatria<br/>borders and dates"]
-        W["Wikidata<br/>capitals, battles,<br/>monuments, rulers"]
-        P["Wikipedia<br/>summaries"]
-        M["Wikimedia Commons<br/>photographs"]
-    end
-
-    subgraph IMP["scripts/ (Python, run by hand)"]
-        I1["import-cliopatria.py"]
-        I2["import-wikidata.py"]
-        I3["import-rulers.py"]
-        I4["and six more: names, sites,<br/>ruler lists, photographs,<br/>checks, corrections"]
-    end
-
-    subgraph DATA["Committed data"]
-        G["lib/data/geo<br/>lib/data/generated<br/>public/data"]
-        H["lib/data/prototype.ts<br/>hand-written records"]
-    end
-
-    subgraph APP["Next.js app"]
-        D["lib/domain<br/>Zod schemas"]
-        S["lib/geo<br/>getHistoricalState(year)"]
-        SC["Server components<br/>pages"]
-        CC["Client components<br/>map, timeline, search"]
-    end
-
-    C --> I1
-    P --> I1
-    M --> I1
-    W --> I2
-    W --> I3
-    P --> I3
-    W --> I4
-    P --> I4
-    M --> I4
-    I1 --> G
-    I2 --> G
-    I3 --> G
-    I4 --> G
-    G --> D
-    H --> D
-    D --> S
-    S --> SC
-    S --> CC
-
-    classDef box fill:#faf6ec,stroke:#241f17,color:#241f17;
-    class C,W,P,M,I1,I2,I3,I4,G,H,D,S,SC,CC box;
+flowchart LR
+  A["Published sources"] --> B["Import files and checks"]
+  B --> C["PostgreSQL and map data"]
+  C --> D["Atlas, search and pages"]
+  C --> E["Browse data and connections"]
 ```
 
-One function, `getHistoricalState(year)`, answers *what does the world look like in year Y*. The timeline, the map and the preview panel all call it, so they can never disagree. The deeper tour, with the map's layer stack and the per-frame update path, is in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+One function, `getHistoricalState(year, data)`, answers *what does the world look like in year Y*. The timeline, the map and the preview panel all call it, so they can never disagree. The deeper tour, with the map's layer stack and the per-frame update path, is in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 <br />
 
@@ -211,6 +169,7 @@ One function, `getHistoricalState(year)`, answers *what does the world look like
 | **Map** | [MapLibre GL JS](https://maplibre.org) 6: globe projection, hillshade, 3D terrain, `feature-state`. Glyphs generated from the project's own fonts |
 | **Styling** | Tailwind CSS 4 with design tokens; [Motion](https://motion.dev) for animation; the browser's View Transitions for page changes |
 | **Interface parts** | Radix UI (dialog, tabs, popover, tooltip), [cmdk](https://cmdk.paco.me) for search, Lucide icons |
+| **Database** | PostgreSQL with PostGIS, accessed through Prisma |
 | **Data contracts** | [Zod](https://zod.dev) 4 |
 | **Import scripts** | Python 3 with `shapely` (and Pillow, only to choose photographs) |
 | **Hosting** | [Vercel](https://vercel.com) |
@@ -219,7 +178,7 @@ One function, `getHistoricalState(year)`, answers *what does the world look like
 
 ## Getting started
 
-You need **Node.js 20 or newer** and npm.
+You need **Node.js 20.19 or newer**, npm, Docker and Docker Compose.
 
 ```bash
 git clone git@github.com:varunaditya27/BHAARATA.git
@@ -227,6 +186,8 @@ cd BHAARATA
 
 npm install            # also copies MapLibre's web worker into public/vendor
 cp .env.example .env.local
+docker compose up -d database
+npm run db:setup       # once for a new, empty local database
 
 npm run dev            # http://localhost:3000
 ```
@@ -238,7 +199,7 @@ npm run dev            # http://localhost:3000
 | `npm run start` | Serve the production build |
 | `npm run lint` | ESLint |
 
-Only one environment variable is used: `NEXT_PUBLIC_SITE_URL`, the public address of the site, which link previews need. See [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) for deployment, the verification checklist and troubleshooting.
+Set `DATABASE_URL` to the PostgreSQL database and `NEXT_PUBLIC_SITE_URL` to the public address used in link previews. See [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) for setup, deployment, the verification checklist and troubleshooting.
 
 <br />
 
@@ -288,6 +249,7 @@ public/              Fonts, map glyphs and style, images, monuments
 | Document | Read it for |
 |---|---|
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | How the app is put together, with diagrams |
+| [`docs/DATABASE.md`](docs/DATABASE.md) | Local database setup and current limitations |
 | [`docs/DATA.md`](docs/DATA.md) | Every data source, its licence, how to refresh it, known gaps |
 | [`docs/DESIGN.md`](docs/DESIGN.md) | Typography, colour, motion, and the rules for writing the interface's words |
 | [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) | Setup, deployment, verification, troubleshooting |

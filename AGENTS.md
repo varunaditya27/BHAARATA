@@ -1,6 +1,6 @@
 <!-- BEGIN:nextjs-agent-rules -->
 
-# This is NOT the Next.js you know
+## This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
@@ -48,7 +48,7 @@ Read this before assuming anything is wired up. The detail is in `docs/DATA.md`.
   ships, capital seals, battles, optional monuments, river flow, era tint,
   keyboard shortcuts, cinema view, compare two years, save as image, opt-in era
   sound); the Chronology (kingdom lanes, battles by period); Kingdom, People,
-  Places and Evidence pages; the ⌘K search (with year jump and recent items);
+  Places and Evidence pages; the database browser and connections diagram; the ⌘K search (with year jump and recent items);
   share images per kingdom; Method (with credits); a colophon footer; a 404 page.
 - **Data comes from three kinds of source, and every page says which:**
   - *Cliopatria* (CC BY 4.0): 54 kingdoms, 465 dated border shapes, 600–1700.
@@ -65,8 +65,10 @@ Read this before assuming anything is wired up. The detail is in `docs/DATA.md`.
 - **Evidence:** two real translations (*South Indian Inscriptions* Vol. II nos. 85
   and 88), each read from the printed page. There is no Tamil transcription:
   the scan's machine-read Tamil is garbled and must not be used.
-- **Not built:** a database, IIIF, PMTiles, a citation layer down to page
-  numbers, automated tests, CI. See `docs/BACKLOG.md`.
+- **Database:** the atlas, data and connections pages read PostgreSQL; the checked-in files supply the initial import. See `docs/DATABASE.md`.
+- **Checks:** database reconciliation and date self-checks exist in `scripts/`; the broader automated test suite and CI remain to be built.
+- **Not built:** reviewed refreshes of an existing database, IIIF, PMTiles, or a citation layer down to page
+  numbers. See `docs/BACKLOG.md`.
 - The git branch `legacy/frontend-v1` holds a prior, deliberately parked attempt.
   Don't pull from it without being asked.
 
@@ -74,21 +76,21 @@ Read this before assuming anything is wired up. The detail is in `docs/DATA.md`.
 
 ```
 lib/domain      Zod schemas + types (Polity, Person, Place, Event, Evidence, DateRange…), date formatting
-lib/data        Records. prototype.ts merges hand-written and imported data; status.ts turns provenance into badges
-lib/geo         getHistoricalState(year), GeoJSON conversion, point-in-polygon, route motion
+lib/data        atlas-server.ts and read-atlas.ts read PostgreSQL; prototype.ts supplies the initial import
+lib/geo         getHistoricalState(year, data), GeoJSON conversion, point-in-polygon, route motion
 components/primitives   Small, logic-free pieces (Eyebrow, Rule, Badge, Plate, Odometer…). No app logic
 components/map          The only code that touches MapLibre. React never re-renders the map;
                         it calls setFeatureState / setFilter / flyTo
 components/atlas, chronology, entity, evidence, home, search, layout   Compose primitives and the map
 app/*           Routes. Server components by default; "use client" only where interaction needs it
-scripts/        Python importers (run by hand, output committed) and the MapLibre worker copy
+scripts/        Source importers, database setup and checks, and the MapLibre worker copy
 ```
 
 Dependencies point down: routes → feature components → map/primitives → `lib/geo`
 → `lib/data` → `lib/domain`. Keep domain logic (date formatting, year-range
 tests) in `lib/`, not in components.
 
-`getHistoricalState(year)` is the one function the timeline, map and preview
+`getHistoricalState(year, data)` is the one function the timeline, map and preview
 panel all call. Do not reimplement "is this kingdom active in year Y" anywhere.
 
 ## Data policy (non-negotiable)
@@ -101,10 +103,11 @@ panel all call. Do not reimplement "is this kingdom active in year Y" anywhere.
   (`exact`/`circa`/`before`/`after`/`unknown`). Print with `formatDateRange()`;
   for a person use `formatPersonDates()`. Never print a bare year the record
   doesn't support.
-- **A lifetime is not a reign.** A `Person` has `datesAre: "reign" | "lifetime"`;
-  pages word them differently.
-- **Battles are linked to the kingdoms whose borders contained the site, not to
-  combatants.** Say "fought within its borders", never "fought by".
+- **A lifetime is not a reign.** A `Person` can have `datesAre: "reign" | "lifetime"` or an unspecified date type;
+  pages word them differently and do not guess an unspecified type.
+- **Battle links use directly recorded coordinates, not combatants.** Points
+  can still be approximate, and a border match alone does not establish where
+  the battle was fought. Do not restore coordinates borrowed from a related place.
 - **Monuments are "protected today"**, not dated.
 - Images must be real, freely licensed, and credited. Never pair a real artifact
   photo with invented content about that specific artifact; if the photo shows a

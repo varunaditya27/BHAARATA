@@ -1,5 +1,5 @@
-import { boundaries, events, polities, routes } from "@/lib/data/prototype";
-import { yearInRange } from "@/lib/domain/time";
+import type { AtlasData } from "@/lib/data/atlas-data";
+import { hasKnownStart, yearInRange } from "@/lib/domain/time";
 import type { HistoricalBoundary, HistoricalEvent, HistoricalRoute, Polity } from "@/lib/domain/types";
 
 export type HistoricalState = {
@@ -15,7 +15,8 @@ export type HistoricalState = {
  * (map filters, panel content, active-polity list) derives from this —
  * don't duplicate the "is this polity active this year" logic elsewhere.
  */
-export function getHistoricalState(year: number): HistoricalState {
+export function getHistoricalState(year: number, data: AtlasData): HistoricalState {
+  const { boundaries, events, polities } = data;
   const activeBoundaries = boundaries.filter(
     (b) => year >= b.validFrom && year <= b.validTo,
   );
@@ -24,19 +25,19 @@ export function getHistoricalState(year: number): HistoricalState {
   const mapped = new Set(boundaries.map((b) => b.polityId));
   const withBorders = new Set(activeBoundaries.map((b) => b.polityId));
   const activePolities = polities.filter(
-    (p) => yearInRange(year, p.period) && (!mapped.has(p.id) || withBorders.has(p.id)),
+    (p) => (hasKnownStart(p.period) ? yearInRange(year, p.period) : withBorders.has(p.id) && (p.period.endYear === null || p.period.endQualifier === "unknown" || year <= p.period.endYear)) && (!mapped.has(p.id) || withBorders.has(p.id)),
   );
   const activeEvents = events.filter((e) => yearInRange(year, e.period));
 
   return { year, activePolities, activeBoundaries, activeEvents };
 }
 
-export function getBoundariesAtYear(year: number): HistoricalBoundary[] {
-  return boundaries.filter((b) => year >= b.validFrom && year <= b.validTo);
+export function getBoundariesAtYear(year: number, data: AtlasData): HistoricalBoundary[] {
+  return data.boundaries.filter((b) => year >= b.validFrom && year <= b.validTo);
 }
 
-export function getRoutesAtYear(year: number): HistoricalRoute[] {
-  return routes.filter((r) => year >= r.validFrom && year <= r.validTo);
+export function getRoutesAtYear(year: number, data: AtlasData): HistoricalRoute[] {
+  return data.routes.filter((r) => year >= r.validFrom && year <= r.validTo);
 }
 
 export const PROTOTYPE_YEAR_RANGE = { min: 600, max: 1700 } as const;

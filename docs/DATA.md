@@ -54,7 +54,7 @@ Wikipedia's licence (CC BY-SA 4.0) requires attribution and share-alike. Each su
 
 ## 3. The pipeline
 
-Data is imported by Python scripts that you run by hand. Their output is committed to the repository, so the site builds offline and every data change is a reviewable diff. The diagram shows the three main importers; the table under it lists the rest.
+Data is imported by Python scripts that you run by hand. Their output is committed to the repository for review. The initial database import reads those files; the running site reads PostgreSQL. Changing an import file does not automatically update an existing database. The diagram shows the three main importers; the table under it lists the rest.
 
 ```mermaid
 flowchart TB
@@ -73,7 +73,7 @@ flowchart TB
 
     subgraph S2["import-wikidata.py"]
         direction TB
-        B1["Battles dated 600 to 1700<br/>inside the subcontinent"] --> B2["Link each to the kingdoms whose<br/>borders contained the site that year"]
+        B1["Battles dated 600 to 1700<br/>inside the subcontinent"] --> B2["Use direct recorded points for map markers<br/>and compare those points with borders"]
         B3["ASI-protected monuments<br/>with coordinates"]
     end
 
@@ -164,7 +164,7 @@ If Wikidata times out (it sometimes does), just run the script again: finished r
 
 `scripts/validate-data.py` checks every record against itself (duplicate ids, impossible dates, coordinates outside the map, rulers outside their kingdom's years, missing credits, files on disk) and against the web (every Wikipedia article exists and is the right subject, every Wikidata id keeps its label, every Commons photo is still there and still free-licensed). Its first run found, among other things: a consort and a Marwar ruler listed as Mughal emperors, two Mysore kings with the same reign, battle summaries that described Shivaji's whole biography or a whole war, and a kingdom whose summary came from a disambiguation page.
 
-Each fix is recorded with its reason in `scripts/apply-corrections.py`, not edited by hand into the generated files, so a re-import does not bring the error back. What the validator still reports (11 items) is real and open: six battles known only from Wikidata, the Chera with no border shapes, two rulers without a summary, and two Wikipedia titles that redirect to a differently named article (to be checked as the same subject).
+Each fix is recorded with its reason in `scripts/apply-corrections.py`, not edited by hand into the generated files, so a re-import does not bring the error back. The offline check flags short battle descriptions, missing ruler summaries and Chera's lack of a researched border; the app uses a labelled hand-drawn placeholder for Chera. Online source checks can report additional issues and need to be run separately.
 
 ### What the scripts decide by hand
 
@@ -191,7 +191,8 @@ Automatic imports need a few human judgements. They are written down in the scri
 | `lib/data/generated/imported-polities.json` | `import-cliopatria` | 54 kingdoms: name, dates, summary, capitals, region, colour, image key |
 | `lib/data/generated/imported-places.json` | `import-cliopatria` | Capital cities with coordinates and Wikidata ids |
 | `lib/data/generated/imported-images.json` | `import-cliopatria` | Credit (artist, licence, link) for each kingdom photo |
-| `lib/data/generated/imported-battles.json` | `import-wikidata` | 127 battles: year, location, summary, kingdoms whose borders contained the site |
+| `lib/data/generated/imported-battles.json` | `import-wikidata` | 127 battles: year, summary and, where directly recorded, a map point and kingdoms containing that point. The other 81 have no map point or inferred kingdom link |
+| `lib/data/generated/battle-coordinate-review.json` | `review-battle-coordinates.py` | The Wikidata check that identified points removed from the initial import |
 | `public/data/monuments.geojson` | `import-wikidata` | 4,313 protected monuments (name, id, Wikipedia title) |
 | `public/data/sites.geojson` | `import-sites` | 344 temples, mosques, churches, forts, tombs and palaces in the subcontinent and Afghanistan with a known date of construction (600–1700; Tibet, Iran and Central Asia are filtered out by Wikidata's country). 252 carry a linked Commons thumbnail with its credit; the images are not copied into the repository |
 | `lib/data/generated/imported-names.json` | `import-names` | Native-script names (Tamil, Kannada, Persian, Gujarati…) and alternative English names, taken from Wikidata labels and never transliterated by us |
@@ -218,7 +219,7 @@ Automatic imports need a few human judgements. They are written down in the scri
 | **`datesAre: "reign" \| "lifetime"`** | Wikidata often has only life dates. These are shown as "Lived …", with a paler bar, never as a reign |
 | **Dates read from text are marked** | Six reigns were read from Wikipedia sentences (`r. 1296–1316`) because Wikidata lacked them. Their provenance says so |
 | **Date qualifiers** | `formatDateRange()` prints `c.`, `before`, `after` or `unknown`; it never invents precision |
-| **Battles linked by place, not by combatants** | Wikidata rarely records who fought, so each battle lists the kingdoms whose borders contained the site that year, and says exactly that |
+| **Battle links use recorded points** | Only directly recorded Wikidata points are used. A point can still be approximate, and a border match does not establish where the battle was fought or who fought |
 | **Monuments are "protected today"** | Wikidata has no construction date in 600–1700 for any of them; inventing one would break the rule, so the layer is not tied to a year |
 | **The provenance chain on evidence pages** | Each step from object to claim is marked real, partly real, or placeholder; a missing step (the Tamil text) is shown as missing |
 | **No guessing at machine-read text** | The scan of *South Indian Inscriptions* has garbled Tamil. Only the clean English translation is used |

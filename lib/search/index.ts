@@ -1,4 +1,4 @@
-import { evidence, events, people, places, polities } from "@/lib/data/prototype";
+import type { AtlasData } from "@/lib/data/atlas-data";
 import { formatDateRange, formatPersonDates } from "@/lib/domain/time";
 import { getHistoricalState, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 
@@ -36,7 +36,8 @@ export function searchEntryGroupLabel(type: SearchEntryType): string {
  * a database;
  * the shape callers use (SearchEntry[]) shouldn't need to change.
  */
-export function buildSearchIndex(): SearchEntry[] {
+export function buildSearchIndex(data: AtlasData): SearchEntry[] {
+  const { evidence, events, people, places, polities } = data;
   const entries: SearchEntry[] = [];
 
   for (const p of polities) {
@@ -93,10 +94,10 @@ export function buildSearchIndex(): SearchEntry[] {
  * the atlas at that year, with the kingdoms on the map then. Years
  * outside the atlas's range get a note instead of a dead link.
  */
-export function yearCommand(query: string): { year: number; inRange: boolean; kingdoms: string[] } | null {
+export function yearCommand(query: string, data: AtlasData): { year: number; inRange: boolean; kingdoms: string[] } | null {
   const m = query.trim().toLowerCase().match(/^(?:year\s+)?(\d{3,4})(?:\s*(?:ce|ad))?$/);
   if (!m) return null;
   const year = Number(m[1]);
   const inRange = year >= PROTOTYPE_YEAR_RANGE.min && year <= PROTOTYPE_YEAR_RANGE.max;
-  return { year, inRange, kingdoms: inRange ? getHistoricalState(year).activePolities.map((p) => p.name) : [] };
+  return { year, inRange, kingdoms: inRange ? getHistoricalState(year, data).activePolities.map((p) => p.name) : [] };
 }
