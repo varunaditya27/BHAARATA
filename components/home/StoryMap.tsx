@@ -16,32 +16,34 @@ if (typeof window !== "undefined") {
 }
 
 const START_YEAR = 600;
-const DESCENT_MS = 9500;
+const DESCENT_MS = 5200;
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-/** Where the film opens: high over the Atlantic, looking at Africa and Arabia, tilted a little. */
-const ORBIT_START = { lng: -32, lat: 14, zoom: 1.25, bearing: -22 };
+/** Where the film opens: high over the Arabian Sea with the Indian subcontinent already in view. */
+const ORBIT_START = { lng: 68, lat: 18, zoom: 2.1, bearing: -6, pitch: 14 };
+
+function initialPadding(container: HTMLElement) {
+  const wide = window.matchMedia("(min-width: 1024px)").matches;
+  return wide ? Math.round(container.clientWidth * 0.28) : 0;
+}
 
 /**
- * The opening swoop, drawn by hand so each part of the camera can move on its
- * own clock: the globe spins east (Atlantic, Africa, Arabia, India) on one
- * ease; the zoom holds back, then dives late; the pitch swells mid-swoop and
- * settles flat; the bearing unwinds. MapLibre's flyTo can't do that — it moves
- * centre and zoom along a single curve.
+ * The opening swoop: India is framed on the globe from frame 0, glides to
+ * the overview position over the first ~65% of the intro, and settles flat
+ * while the kingdoms ink in across the subcontinent.
  */
 function orbitFrame(map: MapLibreMap, t: number) {
-  const spin = easeInOut(t);
-  // On wide screens the title sits on the left, so the globe starts in the right half and centres as it dives.
-  const wide = window.matchMedia("(min-width: 1024px)").matches;
-  const shift = wide ? Math.round(map.getContainer().clientWidth * 0.3 * (1 - easeInOut(Math.min(1, t * 1.1)))) : 0;
-  const dive = easeInOut(Math.max(0, (t - 0.18) / 0.82));
+  const camT = Math.min(1, t / 0.65);
+  const glide = easeInOut(camT);
+  const baseShift = initialPadding(map.getContainer());
+  const shift = Math.round(baseShift * (1 - glide));
   const target = STORY_OVERVIEW;
   map.jumpTo({
-    center: [lerp(ORBIT_START.lng, target.center[0], spin), lerp(ORBIT_START.lat, target.center[1], spin)],
-    zoom: lerp(ORBIT_START.zoom, target.zoom, Math.pow(dive, 1.15)),
-    bearing: lerp(ORBIT_START.bearing, 0, easeInOut(Math.min(1, t * 1.25))),
-    pitch: 34 * Math.sin(Math.PI * Math.pow(dive, 0.8)),
+    center: [lerp(ORBIT_START.lng, target.center[0], glide), lerp(ORBIT_START.lat, target.center[1], glide)],
+    zoom: lerp(ORBIT_START.zoom, target.zoom, glide),
+    bearing: lerp(ORBIT_START.bearing, 0, glide),
+    pitch: lerp(ORBIT_START.pitch, 0, glide) + 10 * Math.sin(Math.PI * glide),
     padding: { left: shift, right: 0, top: 0, bottom: 0 },
   });
 }
@@ -145,9 +147,11 @@ export function StoryMap({
       center: [ORBIT_START.lng, ORBIT_START.lat],
       zoom: ORBIT_START.zoom,
       bearing: ORBIT_START.bearing,
+      pitch: ORBIT_START.pitch,
       interactive: false,
       attributionControl: { compact: true },
     });
+    map.setPadding({ left: initialPadding(containerRef.current), right: 0, top: 0, bottom: 0 });
     mapRef.current = map;
 
     map.on("style.load", () => {
@@ -198,15 +202,16 @@ export function StoryMap({
         onYearRef.current?.(STORY_OVERVIEW.year);
       } else {
         orbitFrame(map, 0);
-        const hold = 250;
+        const hold = 200;
         const t0 = performance.now() + hold;
         let lastYearWrite = 0;
         const frame = (now: number) => {
           const t = Math.min(1, Math.max(0, (now - t0) / DESCENT_MS));
           orbitFrame(map, t);
-          if (t > 0 && (now - lastYearWrite > 80 || t === 1)) {
+          const yearT = Math.min(1, Math.max(0, (t - 0.2) / 0.8));
+          if (yearT > 0 && (now - lastYearWrite > 80 || t === 1)) {
             lastYearWrite = now;
-            const y = Math.round(START_YEAR + (STORY_OVERVIEW.year - START_YEAR) * easeInOut(t));
+            const y = Math.round(START_YEAR + (STORY_OVERVIEW.year - START_YEAR) * easeInOut(yearT));
             if (y !== yearRef.current || t === 1) {
               yearRef.current = y;
               applyHistoricalState(map, y, null, data);
