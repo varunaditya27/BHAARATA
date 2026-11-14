@@ -76,7 +76,12 @@ export function HomeFilm() {
           <p className="font-sans text-sm text-paper/70">
             {chapter ? `Chapter ${chapterIndex + 1} of ${storyChapters.length}` : "The Indian subcontinent"}
           </p>
-          <Odometer value={year} suffix="CE" className="mt-1 font-display text-4xl text-paper md:text-6xl" />
+          <Odometer
+            value={year}
+            suffix="CE"
+            durationMs={90}
+            className="mt-1 font-display text-4xl text-paper md:text-6xl"
+          />
         </div>
 
         <div className="pointer-events-none absolute bottom-16 left-4 flex gap-2 md:bottom-6 md:left-8" aria-hidden>
@@ -93,16 +98,16 @@ export function HomeFilm() {
       <div ref={scrollerRef} className="relative -mt-[calc(100dvh-4rem)]">
         <div data-chapter="" className="flex h-[calc(100dvh-4rem)] items-end px-4 pb-20 md:px-8 md:pb-24">
           <div className="max-w-xl">
-            <p className="bh-fade-in font-sans text-base text-paper/80" style={{ animationDelay: "200ms" }}>
+            <p className="bh-fade-in font-sans text-base text-paper/80" style={{ animationDelay: "80ms" }}>
               A historical atlas
             </p>
             <h1 className="mt-4">
               <Wordmark className="text-6xl text-paper md:text-8xl" />
             </h1>
-            <p className="bh-fade-in mt-6 max-w-md font-sans text-lg leading-relaxed text-paper/85" style={{ animationDelay: "1300ms" }}>
+            <p className="bh-fade-in mt-6 max-w-md font-sans text-lg leading-relaxed text-paper/85" style={{ animationDelay: "320ms" }}>
               The kingdoms of the Indian subcontinent from 600 to 1700: where they ruled, when, and how we know.
             </p>
-            <p className="bh-fade-in mt-10 font-sans text-sm text-paper/60" style={{ animationDelay: "1800ms" }}>
+            <p className="bh-fade-in mt-10 font-sans text-sm text-paper/60" style={{ animationDelay: "520ms" }}>
               Scroll down to begin ↓
             </p>
           </div>

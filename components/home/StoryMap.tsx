@@ -162,6 +162,8 @@ export function StoryMap({
         "fog-ground-blend": 0.2,
         "atmosphere-blend": ["interpolate", ["linear"], ["zoom"], 0, 1, 3, 0.85, 5.5, 0],
       });
+      // Reveal the globe immediately once the basemap style and globe projection are active.
+      setShown(true);
     });
 
     map.on("load", () => {
@@ -178,17 +180,15 @@ export function StoryMap({
       paint(LAYER_IDS.hillshade, "hillshade-shadow-color", "rgba(48, 34, 20, 0.78)");
       // Kingdom names only once the camera is close enough to read them; from orbit they just pile up.
       if (map.getLayer(LAYER_IDS.kingdomLabels)) map.setLayerZoomRange(LAYER_IDS.kingdomLabels, 3.7, 24);
-      // Fade the globe in once its first tiles are drawn, instead of showing a blank grey ball while they load.
-      const reveal = () => setShown(true);
-      map.once("idle", reveal);
-      setTimeout(reveal, 1800);
+      // Ensure globe is visible even if style.load fired before mount completed.
+      setShown(true);
       applyHistoricalState(map, START_YEAR, null, data);
+      onYearRef.current?.(START_YEAR);
       stopAnimations = startMapAnimations(map, data);
       readyRef.current = true;
 
       // The descent: from orbit onto the subcontinent, kingdoms inking in
-      // as the years run forward. If a chapter is already on screen (deep
-      // link / restored scroll), go straight to it instead.
+      // on the exact same clock as the camera and year counter.
       if (chapterRef.current) {
         showChapter(map, chapterRef.current, 2400);
       } else if (prefersReducedMotion()) {
@@ -198,13 +198,21 @@ export function StoryMap({
         onYearRef.current?.(STORY_OVERVIEW.year);
       } else {
         orbitFrame(map, 0);
-        sweepYear(map, STORY_OVERVIEW.year, DESCENT_MS * 0.9, null);
-        // A beat of stillness on the orbit shot so the title can land, then the swoop.
-        const hold = 900;
+        const hold = 250;
         const t0 = performance.now() + hold;
+        let lastYearWrite = 0;
         const frame = (now: number) => {
           const t = Math.min(1, Math.max(0, (now - t0) / DESCENT_MS));
           orbitFrame(map, t);
+          if (t > 0 && (now - lastYearWrite > 80 || t === 1)) {
+            lastYearWrite = now;
+            const y = Math.round(START_YEAR + (STORY_OVERVIEW.year - START_YEAR) * easeInOut(t));
+            if (y !== yearRef.current || t === 1) {
+              yearRef.current = y;
+              applyHistoricalState(map, y, null, data);
+              onYearRef.current?.(y);
+            }
+          }
           descentRef.current = t < 1 ? requestAnimationFrame(frame) : undefined;
         };
         descentRef.current = requestAnimationFrame(frame);
@@ -230,7 +238,7 @@ export function StoryMap({
     <div className="absolute inset-0 bg-[#070605]" aria-hidden>
       <SpaceBackdrop />
       {/* The map canvas is transparent outside the globe, so the sky above shows through. */}
-      <div className={`absolute inset-0 transition-opacity duration-[1400ms] ${shown ? "opacity-100" : "opacity-0"}`}>
+      <div className={`absolute inset-0 transition-opacity duration-500 ${shown ? "opacity-100" : "opacity-0"}`}>
         <div ref={containerRef} className="h-full w-full" />
       </div>
     </div>

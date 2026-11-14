@@ -25,7 +25,7 @@ export function Odometer({
     <span className={cn("inline-flex items-baseline tabular-nums", className)} aria-label={`${text}${suffix ? ` ${suffix}` : ""}`}>
       <span className="inline-flex overflow-hidden" style={{ height: "1em", lineHeight: 1 }} aria-hidden>
         {text.split("").map((ch, i) => (
-          <span key={`${text.length}-${i}`} className="relative inline-block" style={{ width: "0.62em" }}>
+          <span key={text.length - 1 - i} className="relative inline-block" style={{ width: "0.62em" }}>
             <span
               className="absolute inset-x-0 top-0 flex flex-col items-center transition-transform ease-[cubic-bezier(0.22,1,0.36,1)]"
               style={{
