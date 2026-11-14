@@ -67,25 +67,13 @@ export function ProvenanceChain({
         : "A photograph of this object.",
     });
   }
-  if (record.transcription.length === 0 && record.translation.length > 0) {
+  if (record.translation.length > 0) {
     links.push({
       step: "The original text",
       what: `${record.script ?? "Original"}, printed in the volume`,
       status: "partly",
       note: "Not typed out here. The machine-read scan garbles the Tamil, and we won't guess at it. Read it in the scan linked below.",
     });
-  }
-  if (record.transcription.length > 0) {
-    links.push({
-      step: "Words from the object",
-      what: `${record.transcription.length} lines in ${record.script ?? "the original script"}`,
-      status: record.textIsIllustrative ? "placeholder" : "real",
-      note: record.textIsIllustrative
-        ? "Placeholder lines written to show the layout, not read from the stone."
-        : "Read from the object.",
-    });
-  }
-  if (record.translation.length > 0) {
     links.push({
       step: "The translation",
       what: `${record.translation.length} lines in English`,

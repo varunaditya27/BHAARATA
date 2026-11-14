@@ -4,14 +4,8 @@ import { useState } from "react";
 import { EvidenceViewer } from "@/components/evidence/EvidenceViewer";
 import { RakingLight } from "@/components/evidence/RakingLight";
 import { cn } from "@/lib/utils/cn";
-import type { ImageCredit } from "@/lib/domain/types";
-import type { Evidence } from "@/lib/domain/types";
+import type { Evidence, ImageCredit } from "@/lib/domain/types";
 
-/**
- * Owns the shared state between the photo and the text: which line is
- * chosen (the viewer glides to its region) and which is hovered (its box
- * and both its lines light up, from either side).
- */
 export function EvidenceInvestigation({
   record,
   image,
@@ -19,34 +13,13 @@ export function EvidenceInvestigation({
   record: Evidence;
   image: ImageCredit;
 }) {
-  const [activeLine, setActiveLine] = useState<number | null>(null);
-  const [hoverLine, setHoverLine] = useState<number | null>(null);
-  const hasRoman = record.transliteration.length === record.transcription.length && record.transcription.length > 0;
-  const [script, setScript] = useState<"original" | "roman">("original");
   const [raking, setRaking] = useState(false);
   const [azimuth, setAzimuth] = useState(300);
-  const shownLines = script === "roman" && hasRoman ? record.transliteration : record.transcription;
-  const lit = (i: number) => activeLine === i || hoverLine === i;
-  const lineProps = (i: number) => ({
-    onClick: () => setActiveLine(activeLine === i ? null : i),
-    onMouseEnter: () => setHoverLine(i),
-    onMouseLeave: () => setHoverLine(null),
-    onFocus: () => setHoverLine(i),
-    onBlur: () => setHoverLine(null),
-    "aria-pressed": activeLine === i,
-    // With no hand-placed regions there is nothing to zoom to: the lines are just text.
-    disabled: record.lineRegions.length === 0,
-  });
 
   return (
     <div>
       <EvidenceViewer
         credit={image}
-        regions={record.lineRegions}
-        focus={activeLine}
-        highlighted={hoverLine}
-        onHoverRegion={setHoverLine}
-        onPickRegion={(i) => setActiveLine(activeLine === i ? null : i)}
         overlay={raking ? <RakingLight src={image.file} azimuth={azimuth} /> : undefined}
       />
       <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border border-border px-3 py-2 font-sans text-xs">
@@ -92,79 +65,17 @@ export function EvidenceInvestigation({
           {image.artist}, {image.license}
         </a>
       </p>
-      {record.lineRegions.length > 0 && (
-        <p className="mt-1 font-sans text-xs text-ink-muted">
-          Point at a line to see where it is on the stone; click it to zoom in. Scroll to zoom and drag to move around.
-          The boxes were placed by hand and are approximate.{hasRoman && " These spellings use Latin letters to show how the words sound."}
-        </p>
-      )}
 
-      {(record.transcription.length > 0 || record.translation.length > 0) && (
-        <div className={cn("mt-8 grid gap-8", record.transcription.length > 0 && record.translation.length > 0 && "sm:grid-cols-2")}>
-          {record.transcription.length > 0 && (
-            <div>
-              <div className="flex items-baseline justify-between gap-3">
-                <h2 className="font-sans text-sm font-medium text-ink-muted">Words from the object</h2>
-                {hasRoman && (
-                  <div role="group" aria-label="Choose how to show the words" className="flex border border-border font-sans text-[0.7rem]">
-                    {(
-                      [
-                        ["original", record.script ? `${record.script} script` : "Original"],
-                        ["roman", "Latin letters"],
-                      ] as const
-                    ).map(([value, label]) => (
-                      <button
-                        key={value}
-                        onClick={() => setScript(value)}
-                        aria-pressed={script === value}
-                        className={cn("px-2 py-0.5 transition-colors", script === value ? "bg-ink text-paper" : "text-ink-muted hover:text-ink")}
-                      >
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <ol className="mt-3 space-y-1" lang={script === "roman" ? "ta-Latn" : "ta"}>
-                {shownLines.map((line, i) => (
-                  <li key={i}>
-                    <button
-                      {...lineProps(i)}
-                      className={cn(
-                        "flex w-full gap-2 px-2 py-1.5 text-left text-sm transition-colors",
-                        script === "roman" ? "font-sans italic" : "font-indic",
-                        lit(i) ? "bg-territory/15 text-ink" : "text-ink",
-                      )}
-                    >
-                      {record.lineRegions.length > 0 && <span className="text-ink-muted tabular-nums">{i + 1}</span>}
-                      <span>{line}</span>
-                    </button>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          )}
-          {record.translation.length > 0 && (
-            <div>
-              <h2 className="font-sans text-sm font-medium text-ink-muted">English translation</h2>
-              <ol className="mt-3 space-y-1">
-                {record.translation.map((line, i) => (
-                  <li key={i}>
-                    <button
-                      {...lineProps(i)}
-                      className={cn(
-                        "flex w-full gap-2 px-2 py-1.5 text-left font-sans text-sm transition-colors",
-                        lit(i) ? "bg-territory/15 text-ink" : "text-ink",
-                      )}
-                    >
-                      {record.lineRegions.length > 0 && <span className="text-ink-muted tabular-nums">{i + 1}</span>}
-                      <span>{line}</span>
-                    </button>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          )}
+      {record.translation.length > 0 && (
+        <div className="mt-8">
+          <h2 className="font-sans text-sm font-medium text-ink-muted">English translation</h2>
+          <ol className="mt-3 space-y-1">
+            {record.translation.map((line, i) => (
+              <li key={i} className="px-2 py-1.5 font-sans text-sm text-ink">
+                {line}
+              </li>
+            ))}
+          </ol>
         </div>
       )}
     </div>

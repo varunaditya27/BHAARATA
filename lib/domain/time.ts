@@ -63,7 +63,6 @@ export function formatPersonDates(person: { period: DateRange; datesAre?: "reign
 
 /** Unknown years use an internal sorting placeholder and must not be plotted. */
 export const hasKnownStart = (range: DateRange) => range.startQualifier !== "unknown";
-export const hasKnownEnd = (range: DateRange) => range.endYear !== null && range.endQualifier !== "unknown";
 
 /** True when `year` falls inside the range, using endYear=null as "ongoing/unknown end". */
 export function yearInRange(year: number, range: DateRange): boolean {

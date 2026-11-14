@@ -32,10 +32,6 @@ export function getHistoricalState(year: number, data: AtlasData): HistoricalSta
   return { year, activePolities, activeBoundaries, activeEvents };
 }
 
-export function getBoundariesAtYear(year: number, data: AtlasData): HistoricalBoundary[] {
-  return data.boundaries.filter((b) => year >= b.validFrom && year <= b.validTo);
-}
-
 export function getRoutesAtYear(year: number, data: AtlasData): HistoricalRoute[] {
   return data.routes.filter((r) => year >= r.validFrom && year <= r.validTo);
 }

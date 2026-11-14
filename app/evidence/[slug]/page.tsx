@@ -82,9 +82,6 @@ export default async function EvidencePage({ params }: PageProps<"/evidence/[slu
               <dd className="mt-0.5 text-ink">{record.catalogueId.replace(/^SII /, "South Indian Inscriptions, ")}</dd>
             </div>
           )}
-          {record.condition && (
-            <div><dt className="text-xs text-ink-muted">Condition</dt><dd className="mt-0.5 text-ink">{record.condition}</dd></div>
-          )}
         </dl>
       </div>
 

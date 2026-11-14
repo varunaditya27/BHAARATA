@@ -36,7 +36,6 @@ export const PolitySchema = z.object({
   quote: z.string().optional(),
   accentColor: z.string(),
   heroImageKey: z.string().optional(),
-  rulerIds: z.array(z.string()).default([]),
   provenance: z.array(ProvenanceSchema).default([]),
 });
 export type Polity = z.infer<typeof PolitySchema>;
@@ -160,23 +159,10 @@ export const EvidenceSchema = z.object({
   language: z.string().optional(),
   placeId: z.string().optional(),
   catalogueId: z.string().optional(),
-  condition: z.string().optional(),
   imageKey: z.string().optional(),
   imageIsIllustrative: z.boolean().default(false),
-  transcription: z.array(z.string()).default([]),
-  /** True while the transcription/translation are placeholder lines, not a reading of a real text. */
   textIsIllustrative: z.boolean().default(false),
-  /** The transcription in Latin letters (ISO 15919), index-matched to it. */
-  transliteration: z.array(z.string()).default([]),
   translation: z.array(z.string()).default([]),
-  /** Approximate, hand-placed regions (0-1 fractions of image width/height)
-   * — not derived from real OCR/IIIF annotation. Index-matched to
-   * `transcription`. Lets a reader click a line and see roughly where on
-   * the image it would sit; see imageIsIllustrative for the honesty
-   * caveat this inherits. */
-  lineRegions: z
-    .array(z.object({ x: z.number(), y: z.number(), w: z.number(), h: z.number() }))
-    .default([]),
   claim: z.string(),
   claimIsIllustrative: z.boolean().default(false),
   interpretation: z.string().optional(),
