@@ -9,137 +9,122 @@ import { applyHistoricalState } from "@/components/map/apply-state";
 import { addHistoricalLayers } from "@/components/map/layers";
 import { BASEMAP_STYLE_URL, LAYER_IDS } from "@/components/map/mapStyle";
 import { SpaceBackdrop } from "@/components/home/SpaceBackdrop";
-import { STORY_OVERVIEW, type StoryChapter } from "@/lib/data/story";
+import { STORY_OVERVIEW, storyChapters, type StoryChapter } from "@/lib/data/story";
 
 if (typeof window !== "undefined") {
   setWorkerUrl("/vendor/maplibre-gl-worker.js");
 }
 
 const START_YEAR = 600;
-const DESCENT_MS = 6800;
-const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const DESCENT_MS = 6400;
+const easeInOut = (t: number) =>
+  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 /** Where the film opens: orbital view over the Arabian Sea / East Africa with India visible on the eastern limb. */
 const ORBIT_START = { lng: 36, lat: 16, zoom: 1.45, bearing: -18, pitch: 18 };
 
-function initialPadding(container: HTMLElement) {
+function heroRightPadding(container: HTMLElement) {
   const wide = window.matchMedia("(min-width: 1024px)").matches;
   return wide ? Math.round(container.clientWidth * 0.28) : 0;
 }
 
-/**
- * The opening swoop: spins smoothly from orbit onto the Indian subcontinent
- * while pitching into the horizon and settling flat over the Deccan.
- */
-function orbitFrame(map: MapLibreMap, t: number) {
-  const spin = easeInOut(t);
-  const dive = easeInOut(Math.max(0, (t - 0.12) / 0.88));
-  const baseShift = initialPadding(map.getContainer());
-  const shift = Math.round(baseShift * (1 - easeInOut(Math.min(1, t * 1.15))));
-  const target = STORY_OVERVIEW;
-  map.jumpTo({
-    center: [lerp(ORBIT_START.lng, target.center[0], spin), lerp(ORBIT_START.lat, target.center[1], spin)],
-    zoom: lerp(ORBIT_START.zoom, target.zoom, Math.pow(dive, 1.1)),
-    bearing: lerp(ORBIT_START.bearing, 0, easeInOut(Math.min(1, t * 1.2))),
-    pitch: lerp(ORBIT_START.pitch, 0, spin) + 22 * Math.sin(Math.PI * dive),
-    padding: { left: shift, right: 0, top: 0, bottom: 0 },
-  });
+function chapterOffsets(container: HTMLElement) {
+  const h = container.clientHeight;
+  const isMobile = window.matchMedia("(max-width: 767px)").matches;
+  return isMobile
+    ? { top: 40, bottom: Math.round(h * 0.52), left: 0 }
+    : { top: 0, bottom: 0, left: 480 };
 }
 
+type Waypoint = {
+  lng: number;
+  lat: number;
+  zoom: number;
+  year: number;
+  bearing: number;
+  pitch: number;
+  polityId: string | null;
+  isChapter: boolean;
+};
+
+const WAYPOINTS: Waypoint[] = [
+  {
+    lng: STORY_OVERVIEW.center[0],
+    lat: STORY_OVERVIEW.center[1],
+    zoom: STORY_OVERVIEW.zoom,
+    year: STORY_OVERVIEW.year,
+    bearing: 0,
+    pitch: 0,
+    polityId: null,
+    isChapter: false,
+  },
+  ...storyChapters.map((c, idx) => ({
+    lng: c.camera.center[0],
+    lat: c.camera.center[1],
+    zoom: c.camera.zoom,
+    year: c.year,
+    bearing: idx % 2 === 0 ? -8 : 8,
+    pitch: 22,
+    polityId: c.polityId,
+    isChapter: true,
+  })),
+];
+
+export type MapTelemetry = {
+  lng: number;
+  lat: number;
+  bearing: number;
+};
+
 /**
- * The homepage film's camera. Opens on the globe seen from orbit, descends
- * onto the subcontinent while the kingdoms ink in year by year, then
- * follows whichever chapter is on screen. Not user-interactive: the page
- * scroll is the only control, so it must never capture wheel or touch.
+ * Unified 60fps camera and historical-year engine for the homepage film.
+ * Seamlessly transitions from the opening orbital descent into continuous,
+ * spring-damped scroll flight across the four historical chapters.
  */
 export function StoryMap({
   chapter,
+  scrollStep = 0,
   onYear,
+  onTelemetry,
 }: {
   chapter: StoryChapter | null;
-  /** Fired as the year sweeps (throttled), so the page's counter turns
-   * in step with the territory inking in. */
+  /** Continuous scroll progress: 0 = hero overview, 1..4 = chapters 1..4 */
+  scrollStep?: number;
   onYear?: (year: number) => void;
+  onTelemetry?: (t: MapTelemetry) => void;
 }) {
   const data = useAtlasData();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
-  const readyRef = useRef(false);
-  const yearRef = useRef(START_YEAR);
-  const yearAnimRef = useRef<number | undefined>(undefined);
-  const descentRef = useRef<number | undefined>(undefined);
   const [shown, setShown] = useState(false);
+
+  const scrollStepRef = useRef(scrollStep);
   const chapterRef = useRef(chapter);
   const onYearRef = useRef(onYear);
+  const onTelemetryRef = useRef(onTelemetry);
+
+  useEffect(() => {
+    scrollStepRef.current = scrollStep;
+  }, [scrollStep]);
+
+  useEffect(() => {
+    chapterRef.current = chapter;
+  }, [chapter]);
 
   useEffect(() => {
     onYearRef.current = onYear;
   }, [onYear]);
 
-  /** Sweep the year so territory inks in/out in sequence instead of
-   * jumping — feature-state writes throttled to ~12/s; the map's own
-   * paint transitions smooth between them. */
-  const sweepYear = (map: MapLibreMap, to: number, ms: number, selected: string | null) => {
-    if (yearAnimRef.current !== undefined) cancelAnimationFrame(yearAnimRef.current);
-    const from = yearRef.current;
-    if (prefersReducedMotion() || ms === 0) {
-      yearRef.current = to;
-      applyHistoricalState(map, to, selected, data);
-      onYearRef.current?.(to);
-      return;
-    }
-    const started = performance.now();
-    let lastWrite = 0;
-    const step = (now: number) => {
-      const t = Math.min(1, (now - started) / ms);
-      const y = Math.round(from + (to - from) * easeInOut(t));
-      if (now - lastWrite > 80 || t === 1) {
-        lastWrite = now;
-        yearRef.current = y;
-        applyHistoricalState(map, y, selected, data);
-        onYearRef.current?.(y);
-      }
-      if (t < 1) yearAnimRef.current = requestAnimationFrame(step);
-    };
-    yearAnimRef.current = requestAnimationFrame(step);
-  };
-
-  /** Keep the chapter's subject clear of its text card: the card sits on
-   * the left on desktop, across the bottom on phones. The overview (no
-   * card, just the title) gets no offset. */
-  const chapterPadding = (map: MapLibreMap, c: StoryChapter | null) => {
-    if (!c) return { top: 0, bottom: 0, left: 0, right: 0 };
-    const h = map.getContainer().clientHeight;
-    return window.matchMedia("(max-width: 767px)").matches
-      ? { top: 40, bottom: Math.round(h * 0.55), left: 0, right: 0 }
-      : { top: 0, bottom: 0, left: 500, right: 0 };
-  };
-
-  const showChapter = (map: MapLibreMap, c: StoryChapter | null, duration: number) => {
-    // A chapter taking over (the reader scrolled) ends the opening swoop where it is.
-    if (descentRef.current !== undefined) {
-      cancelAnimationFrame(descentRef.current);
-      descentRef.current = undefined;
-    }
-    const target = c?.camera ?? STORY_OVERVIEW;
-    const camera = { center: target.center, zoom: target.zoom, padding: chapterPadding(map, c) };
-    sweepYear(map, c?.year ?? STORY_OVERVIEW.year, duration * 0.75, c?.polityId ?? null);
-    if (prefersReducedMotion()) map.jumpTo(camera);
-    else map.flyTo({ ...camera, duration, curve: 1.25, essential: true });
-  };
-
   useEffect(() => {
-    chapterRef.current = chapter;
-    const map = mapRef.current;
-    if (map && readyRef.current) showChapter(map, chapter, 2400);
-    // showChapter only touches refs and the map instance.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chapter]);
+    onTelemetryRef.current = onTelemetry;
+  }, [onTelemetry]);
 
   useEffect(() => {
     if (!containerRef.current) return;
     let stopAnimations = () => {};
+    let rafId: number | undefined;
+
     const map = new MapLibreMap({
       container: containerRef.current,
       style: BASEMAP_STYLE_URL,
@@ -150,12 +135,16 @@ export function StoryMap({
       interactive: false,
       attributionControl: { compact: true },
     });
-    map.setPadding({ left: initialPadding(containerRef.current), right: 0, top: 0, bottom: 0 });
+    map.setPadding({
+      left: heroRightPadding(containerRef.current),
+      right: 0,
+      top: 0,
+      bottom: 0,
+    });
     mapRef.current = map;
 
     map.on("style.load", () => {
       map.setProjection({ type: "globe" });
-      // A thin amber-to-blue atmosphere around the limb, fading as the camera nears the ground.
       map.setSky({
         "sky-color": "#1d3350",
         "sky-horizon-blend": 0.7,
@@ -163,69 +152,216 @@ export function StoryMap({
         "horizon-fog-blend": 0.6,
         "fog-color": "#8aa6c4",
         "fog-ground-blend": 0.2,
-        "atmosphere-blend": ["interpolate", ["linear"], ["zoom"], 0, 1, 3, 0.85, 5.5, 0],
+        "atmosphere-blend": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          0,
+          1,
+          3,
+          0.85,
+          5.5,
+          0,
+        ],
       });
     });
 
     map.on("load", () => {
       addHistoricalLayers(map, data, { interactive: false });
-      // Recolour for the night view: land stays warm parchment, the sea goes deep teal,
-      // and relief is pushed up so continents have texture even from orbit.
       const paint = (id: string, prop: string, value: unknown) => {
-        if (map.getLayer(id)) map.setPaintProperty(id, prop as never, value as never);
+        if (map.getLayer(id))
+          map.setPaintProperty(id, prop as never, value as never);
       };
       paint("background", "background-color", "#d4c49b");
       paint("water", "fill-color", "#17353b");
       paint("waterway", "line-color", "#3d6f72");
-      paint(LAYER_IDS.hillshade, "hillshade-exaggeration", ["interpolate", ["linear"], ["zoom"], 0, 1, 5, 0.6]);
-      paint(LAYER_IDS.hillshade, "hillshade-shadow-color", "rgba(48, 34, 20, 0.78)");
-      // Kingdom names only once the camera is close enough to read them; from orbit they just pile up.
-      if (map.getLayer(LAYER_IDS.kingdomLabels)) map.setLayerZoomRange(LAYER_IDS.kingdomLabels, 3.7, 24);
-      // Ensure globe is visible even if style.load fired before mount completed.
+      paint(LAYER_IDS.hillshade, "hillshade-exaggeration", [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        0,
+        1,
+        5,
+        0.6,
+      ]);
+      paint(
+        LAYER_IDS.hillshade,
+        "hillshade-shadow-color",
+        "rgba(48, 34, 20, 0.78)"
+      );
+      if (map.getLayer(LAYER_IDS.kingdomLabels)) {
+        map.setLayerZoomRange(LAYER_IDS.kingdomLabels, 3.7, 24);
+      }
+
       setShown(true);
       applyHistoricalState(map, START_YEAR, null, data);
       onYearRef.current?.(START_YEAR);
       stopAnimations = startMapAnimations(map, data);
-      readyRef.current = true;
 
-      // The descent: from orbit onto the subcontinent, kingdoms inking in
-      // on the exact same clock as the camera and year counter.
-      if (chapterRef.current) {
-        showChapter(map, chapterRef.current, 2400);
-      } else if (prefersReducedMotion()) {
-        map.jumpTo({ center: STORY_OVERVIEW.center, zoom: STORY_OVERVIEW.zoom });
-        applyHistoricalState(map, STORY_OVERVIEW.year, null, data);
-        yearRef.current = STORY_OVERVIEW.year;
-        onYearRef.current?.(STORY_OVERVIEW.year);
-      } else {
-        orbitFrame(map, 0);
-        const t0 = performance.now();
-        let lastYearWrite = 0;
-        const frame = (now: number) => {
-          const t = Math.min(1, Math.max(0, (now - t0) / DESCENT_MS));
-          orbitFrame(map, t);
-          // Begin sweeping years once India is centered in view (t >= 0.35).
-          const yearT = Math.min(1, Math.max(0, (t - 0.35) / 0.65));
-          if (yearT > 0 && (now - lastYearWrite > 80 || t === 1)) {
-            lastYearWrite = now;
-            const y = Math.round(START_YEAR + (STORY_OVERVIEW.year - START_YEAR) * easeInOut(yearT));
-            if (y !== yearRef.current || t === 1) {
-              yearRef.current = y;
-              applyHistoricalState(map, y, null, data);
-              onYearRef.current?.(y);
-            }
+      const reduced = prefersReducedMotion();
+      const t0 = performance.now();
+      let lastFrame = t0;
+      let lastStateWrite = 0;
+      let lastTelemetryWrite = 0;
+      let descentInterrupted = scrollStepRef.current > 0.04;
+
+      // Live damped state
+      const cur = {
+        lng: reduced ? STORY_OVERVIEW.center[0] : ORBIT_START.lng,
+        lat: reduced ? STORY_OVERVIEW.center[1] : ORBIT_START.lat,
+        zoom: reduced ? STORY_OVERVIEW.zoom : ORBIT_START.zoom,
+        bearing: reduced ? 0 : ORBIT_START.bearing,
+        pitch: reduced ? 0 : ORBIT_START.pitch,
+        padLeft: heroRightPadding(map.getContainer()),
+        padBottom: 0,
+        padTop: 0,
+        year: reduced ? STORY_OVERVIEW.year : START_YEAR,
+      };
+      let appliedYear = -1;
+      let appliedPolity: string | null = "__init__";
+
+      const tick = (now: number) => {
+        const dt = Math.min(0.06, Math.max(0.001, (now - lastFrame) / 1000));
+        lastFrame = now;
+
+        const step = Math.max(
+          0,
+          Math.min(WAYPOINTS.length - 1, scrollStepRef.current)
+        );
+        if (step > 0.04) {
+          descentInterrupted = true;
+        }
+
+        const descentT = Math.min(1, Math.max(0, (now - t0) / DESCENT_MS));
+
+        if (!reduced && !descentInterrupted && descentT < 1) {
+          // Phase 1: Choreographed opening orbital descent
+          const spin = easeInOut(descentT);
+          const dive = easeInOut(Math.max(0, (descentT - 0.12) / 0.88));
+          const baseShift = heroRightPadding(map.getContainer());
+
+          cur.lng = lerp(ORBIT_START.lng, STORY_OVERVIEW.center[0], spin);
+          cur.lat = lerp(ORBIT_START.lat, STORY_OVERVIEW.center[1], spin);
+          cur.zoom = lerp(
+            ORBIT_START.zoom,
+            STORY_OVERVIEW.zoom,
+            Math.pow(dive, 1.1)
+          );
+          cur.bearing = lerp(
+            ORBIT_START.bearing,
+            0,
+            easeInOut(Math.min(1, descentT * 1.2))
+          );
+          cur.pitch =
+            lerp(ORBIT_START.pitch, 0, spin) + 22 * Math.sin(Math.PI * dive);
+          cur.padLeft = Math.round(
+            baseShift * (1 - easeInOut(Math.min(1, descentT * 1.15)))
+          );
+          cur.padBottom = 0;
+          cur.padTop = 0;
+
+          const yearT = Math.min(1, Math.max(0, (descentT - 0.32) / 0.68));
+          cur.year =
+            START_YEAR +
+            (STORY_OVERVIEW.year - START_YEAR) * easeInOut(yearT);
+        } else {
+          // Phase 2: Continuous scroll-scrubbed flight across chapters
+          const idx = Math.min(WAYPOINTS.length - 2, Math.floor(step));
+          const frac = step - idx;
+          const smoothFrac = easeInOut(frac);
+          const a = WAYPOINTS[idx];
+          const b = WAYPOINTS[idx + 1];
+
+          const cOffsets = chapterOffsets(map.getContainer());
+          const targetLng = lerp(a.lng, b.lng, smoothFrac);
+          const targetLat = lerp(a.lat, b.lat, smoothFrac);
+          // Slight zoom-out mid-flight between chapters so long jumps breathe
+          const flightArc = Math.sin(Math.PI * frac);
+          const targetZoom =
+            lerp(a.zoom, b.zoom, smoothFrac) - (idx >= 1 ? 0.35 * flightArc : 0);
+          const targetPitch =
+            lerp(a.pitch, b.pitch, smoothFrac) + 14 * flightArc;
+          const targetBearing =
+            lerp(a.bearing, b.bearing, smoothFrac) + 6 * flightArc;
+
+          const aPadLeft = a.isChapter ? cOffsets.left : 0;
+          const bPadLeft = b.isChapter ? cOffsets.left : 0;
+          const aPadBottom = a.isChapter ? cOffsets.bottom : 0;
+          const bPadBottom = b.isChapter ? cOffsets.bottom : 0;
+          const aPadTop = a.isChapter ? cOffsets.top : 0;
+          const bPadTop = b.isChapter ? cOffsets.top : 0;
+
+          const targetPadLeft = lerp(aPadLeft, bPadLeft, smoothFrac);
+          const targetPadBottom = lerp(aPadBottom, bPadBottom, smoothFrac);
+          const targetPadTop = lerp(aPadTop, bPadTop, smoothFrac);
+          const targetYear = lerp(a.year, b.year, smoothFrac);
+
+          const alpha = reduced ? 1 : 1 - Math.exp(-dt * 7.5);
+          cur.lng = lerp(cur.lng, targetLng, alpha);
+          cur.lat = lerp(cur.lat, targetLat, alpha);
+          cur.zoom = lerp(cur.zoom, targetZoom, alpha);
+          cur.pitch = lerp(cur.pitch, targetPitch, alpha);
+          cur.bearing = lerp(cur.bearing, targetBearing, alpha);
+          cur.padLeft = lerp(cur.padLeft, targetPadLeft, alpha);
+          cur.padBottom = lerp(cur.padBottom, targetPadBottom, alpha);
+          cur.padTop = lerp(cur.padTop, targetPadTop, alpha);
+          cur.year = lerp(cur.year, targetYear, alpha);
+        }
+
+        map.jumpTo({
+          center: [cur.lng, cur.lat],
+          zoom: cur.zoom,
+          bearing: cur.bearing,
+          pitch: cur.pitch,
+          padding: {
+            left: Math.round(cur.padLeft),
+            right: 0,
+            top: Math.round(cur.padTop),
+            bottom: Math.round(cur.padBottom),
+          },
+        });
+
+        const roundedYear = Math.round(cur.year);
+        const nearestIdx = Math.round(step);
+        const activePolity =
+          step > 0.45
+            ? (WAYPOINTS[nearestIdx]?.polityId ??
+              chapterRef.current?.polityId ??
+              null)
+            : null;
+
+        if (
+          now - lastStateWrite > 65 ||
+          (roundedYear !== appliedYear && Math.abs(roundedYear - appliedYear) >= 2) ||
+          activePolity !== appliedPolity
+        ) {
+          lastStateWrite = now;
+          if (roundedYear !== appliedYear || activePolity !== appliedPolity) {
+            appliedYear = roundedYear;
+            appliedPolity = activePolity;
+            applyHistoricalState(map, roundedYear, activePolity, data);
+            onYearRef.current?.(roundedYear);
           }
-          descentRef.current = t < 1 ? requestAnimationFrame(frame) : undefined;
-        };
-        descentRef.current = requestAnimationFrame(frame);
-      }
+        }
+
+        if (now - lastTelemetryWrite > 90) {
+          lastTelemetryWrite = now;
+          onTelemetryRef.current?.({
+            lng: cur.lng,
+            lat: cur.lat,
+            bearing: cur.bearing,
+          });
+        }
+
+        rafId = requestAnimationFrame(tick);
+      };
+
+      rafId = requestAnimationFrame(tick);
     });
 
     return () => {
       stopAnimations();
-      if (yearAnimRef.current !== undefined) cancelAnimationFrame(yearAnimRef.current);
-      if (descentRef.current !== undefined) cancelAnimationFrame(descentRef.current);
-      readyRef.current = false;
+      if (rafId !== undefined) cancelAnimationFrame(rafId);
       map.remove();
       mapRef.current = null;
     };
@@ -233,14 +369,14 @@ export function StoryMap({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // MapLibre forces `position: relative` on its container, so the
-  // absolute positioning has to live on a wrapper or the canvas collapses
-  // to its 300px default height.
   return (
     <div className="absolute inset-0 bg-[#070605]" aria-hidden>
       <SpaceBackdrop />
-      {/* The map canvas is transparent outside the globe, so the sky above shows through. */}
-      <div className={`absolute inset-0 transition-opacity duration-500 ${shown ? "opacity-100" : "opacity-0"}`}>
+      <div
+        className={`absolute inset-0 transition-opacity duration-500 ${
+          shown ? "opacity-100" : "opacity-0"
+        }`}
+      >
         <div ref={containerRef} className="h-full w-full" />
       </div>
     </div>
