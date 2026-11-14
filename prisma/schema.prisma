@@ -1,0 +1,342 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model event_kingdoms {
+  event_id   String
+  kingdom_id String
+  connection String
+  events     events   @relation(fields: [event_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  kingdoms   kingdoms @relation(fields: [kingdom_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([event_id, kingdom_id, connection])
+}
+
+model event_places {
+  event_id String
+  place_id String
+  events   events @relation(fields: [event_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  places   places @relation(fields: [place_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([event_id, place_id])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model events {
+  id                  String                   @id
+  page_name           String                   @unique
+  title               String
+  category            String?
+  summary             String
+  map_point           Unsupported("geometry")?
+  start_year          Int?
+  end_year            Int?
+  start_date_type     date_type                @default(unknown)
+  end_date_type       date_type                @default(unknown)
+  date_confidence     date_confidence
+  event_kingdoms      event_kingdoms[]
+  event_places        event_places[]
+  information_sources information_sources[]
+
+  @@index([map_point], map: "events_geom_idx", type: Gist)
+  @@index([start_year, end_year], map: "events_year_idx")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model historical_items {
+  id                   String                @id
+  page_name            String                @unique
+  title                String
+  item_type            String
+  material             String?
+  script               String?
+  language             String?
+  place_id             String?
+  book_number          String?
+  image_id             String?
+  image_is_example     Boolean               @default(false)
+  text_is_example      Boolean               @default(false)
+  start_year           Int?
+  start_date_type      date_type             @default(unknown)
+  date_confidence      date_confidence
+  statement            String
+  what_it_means        String?
+  date_doubt           certainty_level?
+  place_doubt          certainty_level?
+  meaning_doubt        certainty_level?
+  statement_is_example Boolean               @default(false)
+  images               images?               @relation(fields: [image_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  places               places?               @relation(fields: [place_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  information_sources  information_sources[]
+  item_kingdoms        item_kingdoms[]
+  item_text_lines      item_text_lines[]
+}
+
+model images {
+  id               String             @id
+  file_path_or_url String
+  title            String?
+  image_creator    String?
+  licence          String
+  source_url       String?
+  alt_text         String?
+  historical_items historical_items[]
+  kingdoms         kingdoms[]
+  people           people[]
+  places           places[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model information_sources {
+  id               BigInt            @id @default(autoincrement())
+  source_id        String
+  note             String?
+  kingdom_id       String?
+  person_id        String?
+  place_id         String?
+  event_id         String?
+  border_id        String?
+  route_id         String?
+  item_id          String?
+  kingdom_borders  kingdom_borders?  @relation(fields: [border_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  events           events?           @relation(fields: [event_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  historical_items historical_items? @relation(fields: [item_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  kingdoms         kingdoms?         @relation(fields: [kingdom_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  people           people?           @relation(fields: [person_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  places           places?           @relation(fields: [place_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  routes           routes?           @relation(fields: [route_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  sources          sources           @relation(fields: [source_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([source_id], map: "record_sources_source_idx")
+  @@index([kingdom_id], map: "info_sources_kingdom_idx")
+  @@index([person_id], map: "info_sources_person_idx")
+  @@index([place_id], map: "info_sources_place_idx")
+  @@index([event_id], map: "info_sources_event_idx")
+  @@index([border_id], map: "info_sources_border_idx")
+}
+
+model item_kingdoms {
+  item_id          String
+  kingdom_id       String
+  historical_items historical_items @relation(fields: [item_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  kingdoms         kingdoms         @relation(fields: [kingdom_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([item_id, kingdom_id])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model item_text_lines {
+  id               BigInt           @id @default(autoincrement())
+  item_id          String
+  line_number      Int
+  english_words    String?
+  historical_items historical_items @relation(fields: [item_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([item_id, line_number])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model kingdom_borders {
+  id                  String                   @id
+  kingdom_id          String
+  from_year           Int
+  to_year             Int
+  outline             Unsupported("geometry")
+  uncertain_edge      Unsupported("geometry")?
+  label_point         Unsupported("geometry")?
+  confidence          map_confidence
+  is_default          Boolean                  @default(true)
+  information_sources information_sources[]
+  kingdoms            kingdoms                 @relation(fields: [kingdom_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([outline], map: "boundaries_geom_idx", type: Gist)
+  @@index([from_year, to_year], map: "boundaries_year_idx")
+}
+
+model kingdom_capitals {
+  id               BigInt   @id @default(autoincrement())
+  kingdom_id       String
+  place_id         String
+  name_as_recorded String?
+  display_order    Int?
+  kingdoms         kingdoms @relation(fields: [kingdom_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  places           places   @relation(fields: [place_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([kingdom_id, place_id])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model kingdoms {
+  id                  String                @id
+  page_name           String                @unique
+  name                String
+  kingdom_type        String
+  region              String
+  language            String?
+  religion            String?
+  notable_for         String?
+  summary             String
+  quote               String?
+  accent_color        String
+  main_image_id       String?
+  start_year          Int?
+  end_year            Int?
+  start_date_type     date_type             @default(unknown)
+  end_date_type       date_type             @default(unknown)
+  date_confidence     date_confidence
+  display_order       Int?
+  event_kingdoms      event_kingdoms[]
+  information_sources information_sources[]
+  item_kingdoms       item_kingdoms[]
+  kingdom_borders     kingdom_borders[]
+  kingdom_capitals    kingdom_capitals[]
+  images              images?               @relation(fields: [main_image_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  other_names         other_names[]
+  people              people[]
+  route_kingdoms      route_kingdoms[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model other_names {
+  id            BigInt    @id @default(autoincrement())
+  kingdom_id    String?
+  person_id     String?
+  place_id      String?
+  name_text     String
+  language_code String?
+  name_kind     String?
+  kingdoms      kingdoms? @relation(fields: [kingdom_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  people        people?   @relation(fields: [person_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  places        places?   @relation(fields: [place_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([kingdom_id], map: "other_names_kingdom_idx")
+  @@index([person_id], map: "other_names_person_idx")
+  @@index([place_id], map: "other_names_place_idx")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model people {
+  id                  String                @id
+  page_name           String                @unique
+  name                String
+  role                String
+  kingdom_id          String?
+  date_kind           person_date_type?
+  summary             String?
+  portrait_id         String?
+  start_year          Int?
+  end_year            Int?
+  start_date_type     date_type             @default(unknown)
+  end_date_type       date_type             @default(unknown)
+  date_confidence     date_confidence
+  information_sources information_sources[]
+  other_names         other_names[]
+  kingdoms            kingdoms?             @relation(fields: [kingdom_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  images              images?               @relation(fields: [portrait_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([kingdom_id], map: "people_polity_idx")
+}
+
+model places {
+  id                  String                  @id
+  page_name           String?                 @unique
+  name                String
+  place_kind          String
+  region              String?
+  map_point           Unsupported("geometry")
+  protected_place     Boolean                 @default(false)
+  main_image_id       String?
+  start_year          Int?
+  map_properties      Json?
+  event_places        event_places[]
+  historical_items    historical_items[]
+  information_sources information_sources[]
+  kingdom_capitals    kingdom_capitals[]
+  other_names         other_names[]
+  images              images?                 @relation(fields: [main_image_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([map_point], map: "places_geom_idx", type: Gist)
+}
+
+model route_kingdoms {
+  route_id   String
+  kingdom_id String
+  kingdoms   kingdoms @relation(fields: [kingdom_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  routes     routes   @relation(fields: [route_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([route_id, kingdom_id])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model routes {
+  id                  String                  @id
+  label               String
+  route_type          String
+  from_year           Int
+  to_year             Int
+  map_path            Unsupported("geometry")
+  confidence          map_confidence
+  information_sources information_sources[]
+  route_kingdoms      route_kingdoms[]
+
+  @@index([map_path], map: "routes_geom_idx", type: Gist)
+}
+
+model sources {
+  id                  String                @id
+  title               String
+  source_type         String
+  source_details      String
+  url                 String?
+  licence             String?
+  information_sources information_sources[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model spatial_ref_sys {
+  srid      Int     @id
+  auth_name String? @db.VarChar(256)
+  auth_srid Int?
+  srtext    String? @db.VarChar(2048)
+  proj4text String? @db.VarChar(2048)
+}
+
+enum certainty_level {
+  high
+  medium
+  low
+}
+
+enum date_confidence {
+  recorded
+  likely
+  debated
+  example
+  unknown
+}
+
+enum date_type {
+  exact
+  about
+  before
+  after
+  unknown
+}
+
+enum map_confidence {
+  high
+  medium
+  low
+  example
+}
+
+enum person_date_type {
+  time_as_ruler
+  life
+}
