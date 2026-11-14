@@ -38,21 +38,21 @@ export default async function ConnectionsPage({
         <div className="flex flex-wrap items-baseline justify-between gap-4">
           <div>
             <p className="font-sans text-sm text-ink-muted">
-              PostgreSQL + PostGIS relational architecture
+              How everything links together
             </p>
             <h1 className="mt-1 font-display text-4xl text-ink sm:text-5xl">
-              How the database connects
+              How the data connects
             </h1>
           </div>
           <Link
             href="/data"
             className="border border-ink bg-paper-raised px-4 py-2 font-sans text-sm text-ink transition-colors hover:bg-ink hover:text-paper"
           >
-            Open archival data ledger
+            Browse all lists
           </Link>
         </div>
         <p className="mt-3 max-w-2xl font-sans text-base text-ink-muted">
-          Every historical record in BHĀRATA is linked by foreign-key constraints across 17 PostgreSQL tables. Select any table below to highlight its incoming and outgoing relationships, inspect its column schema, or trace the relational path between any two tables.
+          Every kingdom, ruler, place, battle, and source is stored in 17 connected lists. Pick any list below to see what it connects to, what fields it holds, or how two lists link together.
         </p>
       </div>
 

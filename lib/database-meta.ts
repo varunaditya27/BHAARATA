@@ -39,93 +39,93 @@ export const tableDetails: Record<
   places: {
     category: "core",
     summary:
-      "392 geolocated places—capitals, dated temples, forts, mosques, tombs, monasteries, and protected monuments—stored as PostGIS points.",
+      "392 places on the map—capitals, temples, forts, mosques, tombs, monasteries, and protected monuments—with their coordinates.",
     primaryRoute: "/places/",
   },
   events: {
     category: "core",
     summary:
-      "35 dated turning points and geolocated battles with coordinates, summaries, and confidence qualifiers.",
+      "35 dated turning points and battles with map coordinates, summaries, and how sure we are of the dates.",
     primaryRoute: "/chronology#",
   },
   historical_items: {
     category: "core",
     summary:
-      "Primary inscriptions and material evidence with physical medium, script, language, catalogue number, and historical claim.",
+      "Inscriptions and objects, with what they are made of, their script, language, and what they tell us.",
     primaryRoute: "/evidence/",
   },
   item_text_lines: {
     category: "core",
     summary:
-      "Line-by-line English translations read from published epigraphical volumes for each historical item.",
+      "Line-by-line English translations read from printed books for each inscription.",
   },
   sources: {
     category: "core",
     summary:
-      "209 cited works, epigraphical volumes, datasets, and encyclopaedic references with full citation, URL, and licence.",
+      "209 books, inscription volumes, datasets, and articles with full citations and web links.",
   },
   images: {
     category: "core",
     summary:
-      "1,026 credited photographs, coins, manuscripts, and architectural views with creator, licence, source page, and descriptive alt text.",
+      "1,026 credited photos, coins, manuscripts, and building views with creator, licence, and description.",
   },
   kingdom_borders: {
     category: "spatial",
     summary:
-      "466 dated PostGIS MultiPolygon territory shapes, uncertain frontier lines, and map label anchor points from Cliopatria.",
+      "466 dated kingdom border shapes, uncertain frontier lines, and map label spots from Cliopatria.",
   },
   routes: {
     category: "spatial",
     summary:
-      "PostGIS LineString maritime and overland corridors active during specific historical windows.",
+      "Sea and land trade routes drawn on the map for the years they were active.",
   },
   kingdom_capitals: {
     category: "relations",
     summary:
-      "Links each kingdom to its capital city or cities in the places table, preserving capital sequence and historical name as recorded.",
+      "Connects each kingdom to its capital city or cities, in order.",
   },
   event_kingdoms: {
     category: "relations",
     summary:
-      "Connects turning points and battles to participating or territory-holding kingdoms.",
+      "Connects turning points and battles to the kingdoms involved.",
   },
   event_places: {
     category: "relations",
-    summary: "Links historical events to the specific places where they occurred.",
+    summary: "Links battles and events to the places where they happened.",
   },
   route_kingdoms: {
     category: "relations",
     summary:
-      "Connects trade and maritime routes to the kingdoms that maintained or sailed them.",
+      "Connects trade and sea routes to the kingdoms that used them.",
   },
   item_kingdoms: {
     category: "relations",
-    summary: "Links inscriptions and material artifacts to the kingdoms they attest.",
+    summary: "Links inscriptions and objects to the kingdoms they mention.",
   },
   other_names: {
     category: "relations",
     summary:
-      "Native-script names (Tamil, Devanagari, Kannada, Telugu) and alternate historical spellings for kingdoms, people, and places.",
+      "Local-script names (Tamil, Devanagari, Kannada, Telugu) and alternate spellings for kingdoms, people, and places.",
   },
   information_sources: {
     category: "relations",
     summary:
-      "1,798 provenance links connecting every kingdom, person, place, event, border, route, and inscription to its cited source.",
+      "1,798 source links showing where each fact about a kingdom, ruler, place, battle, or border came from.",
   },
 };
 
 export const categoryLabels: Record<TableCategory, { title: string; subtitle: string }> = {
   core: {
-    title: "Core historical records",
-    subtitle: "Primary entities, primary sources, and media assets",
+    title: "Main records",
+    subtitle: "Kingdoms, people, places, battles, inscriptions, sources, and photos",
   },
   spatial: {
-    title: "PostGIS geography layers",
-    subtitle: "Dated territory polygons, frontier lines, and trade corridors",
+    title: "Map shapes",
+    subtitle: "Dated kingdom borders, frontier lines, and trade routes",
   },
   relations: {
-    title: "Relational bridges & provenance",
-    subtitle: "Foreign-key join tables, native-script names, and source citations",
+    title: "Links & names",
+    subtitle: "Connections between lists, local-script names, and source citations",
   },
 };
 

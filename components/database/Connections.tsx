@@ -313,7 +313,7 @@ export function Connections({
       <div className="flex flex-wrap items-center justify-between gap-4 border border-border bg-paper-raised p-4">
         <div className="flex flex-wrap items-center gap-2">
           <span className="mr-1 font-sans text-[11px] uppercase tracking-[0.14em] text-ink-muted">
-            Canvas
+            View
           </span>
           <button
             type="button"
@@ -324,7 +324,7 @@ export function Connections({
                 : "border-border bg-paper text-ink hover:bg-paper-deep"
             }`}
           >
-            Architecture Flow
+            All lists
           </button>
           <button
             type="button"
@@ -335,7 +335,7 @@ export function Connections({
                 : "border-border bg-paper text-ink hover:bg-paper-deep"
             }`}
           >
-            Radial Ego-Graph ({names[selected] ?? selected})
+            Around {names[selected] ?? selected}
           </button>
         </div>
 
@@ -385,12 +385,12 @@ export function Connections({
             <div className="flex items-center gap-3">
               <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/65">
                 {viewMode === "architecture"
-                  ? `PostgreSQL + PostGIS · ${allTables.length} Tables · ${links.length} Foreign Keys`
-                  : `Ego-Graph · ${selected} (${radialGraph.nodes.length} direct relations)`}
+                  ? `${allTables.length} Lists · ${links.length} Connections`
+                  : `${names[selected] ?? selected} · ${radialGraph.nodes.length} direct links`}
               </span>
             </div>
             <span className="font-mono text-[11px] text-paper/60">
-              Click any node to inspect · Select target to trace SQL join
+              Click any box to inspect it · Pick a second list to see how they connect
             </span>
           </div>
 
@@ -450,9 +450,9 @@ export function Connections({
 
                 {/* Column Headers */}
                 {[
-                  { x: archCanvas.colX[0], label: "01 · CORE ENTITIES & MEDIA" },
-                  { x: archCanvas.colX[1], label: "02 · SPATIAL & EVENT LINKS" },
-                  { x: archCanvas.colX[2], label: "03 · EPIGRAPHY & PROVENANCE" },
+                  { x: archCanvas.colX[0], label: "01 · MAIN RECORDS & MEDIA" },
+                  { x: archCanvas.colX[1], label: "02 · MAP SHAPES & LINKS" },
+                  { x: archCanvas.colX[2], label: "03 · INSCRIPTIONS & SOURCES" },
                 ].map((col) => (
                   <text
                     key={col.label}
@@ -905,10 +905,10 @@ export function Connections({
 
             <div className="mt-4 flex flex-wrap gap-2">
               <Link
-                href={`/data?table=${selected}`}
+                href={`/data?list=${selected}`}
                 className="border border-ink bg-ink px-3 py-1.5 font-sans text-xs text-paper transition-colors hover:border-territory-selected hover:bg-territory-selected"
               >
-                Browse rows in /data →
+                Browse in /data →
               </Link>
               <button
                 type="button"
@@ -920,35 +920,35 @@ export function Connections({
                 className="border border-border bg-paper px-3 py-1.5 font-sans text-xs text-ink hover:bg-paper-deep"
               >
                 {viewMode === "architecture"
-                  ? "Focus in Radial Graph"
-                  : "Back to Architecture"}
+                  ? "Focus on this list"
+                  : "Show all lists"}
               </button>
             </div>
           </div>
 
-          {/* Shortest-path & SQL JOIN generator */}
+          {/* Step-by-step link finder */}
           <div className="border border-border bg-paper-raised p-5">
             <p className="font-sans text-[11px] uppercase tracking-[0.14em] text-ink-muted">
-              Trace Shortest Join Path
+              How two lists connect
             </p>
             <p className="mt-1 font-sans text-xs text-ink-muted">
-              Find how <span className="font-mono text-ink">{selected}</span>{" "}
-              connects to any other table:
+              See how <span className="font-medium text-ink">{names[selected] ?? selected}</span>{" "}
+              connects to another list:
             </p>
 
             <div className="mt-3 flex gap-2">
               <select
                 value={pathTarget}
                 onChange={(e) => setPathTarget(e.target.value)}
-                aria-label="Target table for join path"
+                aria-label="Second list to connect to"
                 className="min-w-0 flex-1 border border-border bg-paper px-2.5 py-1.5 font-sans text-xs text-ink"
               >
-                <option value="">Select target table…</option>
+                <option value="">Pick another list…</option>
                 {allTables
                   .filter((t) => t !== selected)
                   .map((t) => (
                     <option key={t} value={t}>
-                      {names[t] ?? t} ({t})
+                      {names[t] ?? t}
                     </option>
                   ))}
               </select>
@@ -965,15 +965,15 @@ export function Connections({
 
             {tracedPath && (
               <div className="mt-4 space-y-3">
-                <div className="flex flex-wrap items-center gap-1.5 font-mono text-[11px]">
+                <div className="flex flex-wrap items-center gap-1.5 font-sans text-xs">
                   {tracedPath.tables.map((t, idx) => (
                     <span key={t} className="flex items-center gap-1.5">
                       <button
                         type="button"
                         onClick={() => setSelected(t)}
-                        className="border border-border bg-paper px-1.5 py-0.5 text-ink hover:border-ink"
+                        className="border border-border bg-paper px-2 py-0.5 text-ink hover:border-ink"
                       >
-                        {t}
+                        {names[t] ?? t}
                       </button>
                       {idx < tracedPath.tables.length - 1 && (
                         <span className="text-territory-selected">→</span>
@@ -985,30 +985,43 @@ export function Connections({
                 <div className="border border-border bg-ink p-3 text-paper">
                   <div className="mb-2 flex items-center justify-between">
                     <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-paper/65">
-                      SQL JOIN ({tracedPath.hops.length}{" "}
-                      {tracedPath.hops.length === 1 ? "hop" : "hops"})
+                      {tracedPath.hops.length}{" "}
+                      {tracedPath.hops.length === 1 ? "step" : "steps"}
                     </span>
                     <button
                       type="button"
                       onClick={handleCopySql}
                       className="border border-paper/25 px-2 py-0.5 font-mono text-[10px] text-paper hover:bg-paper/10"
                     >
-                      {copiedSql ? "Copied" : "Copy SQL"}
+                      {copiedSql ? "Copied" : "Copy query"}
                     </button>
                   </div>
-                  <pre className="overflow-x-auto font-mono text-[11px] leading-relaxed text-paper/90">
-                    {sqlSnippet}
-                  </pre>
+                  <ul className="space-y-1 font-sans text-xs text-paper/90">
+                    {tracedPath.hops.map((hop) => (
+                      <li key={`${hop.a}-${hop.b}`}>
+                        <span className="font-medium text-paper">
+                          {names[hop.a] ?? hop.a}
+                        </span>{" "}
+                        <span className="text-paper/65">matches</span>{" "}
+                        <span className="font-medium text-paper">
+                          {names[hop.b] ?? hop.b}
+                        </span>{" "}
+                        <span className="font-mono text-[10px] text-paper/55">
+                          ({hop.fromCol} = {hop.toCol})
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Schema columns */}
+          {/* Fields */}
           <div className="border border-border bg-paper-raised p-5">
             <div className="flex items-center justify-between">
               <p className="font-sans text-[11px] uppercase tracking-[0.14em] text-ink-muted">
-                Columns ({selectedColumns.length})
+                Fields ({selectedColumns.length})
               </p>
               <p className="font-mono text-[11px] text-ink-soft">
                 {directNeighbors.incoming.length} in ·{" "}
@@ -1025,12 +1038,12 @@ export function Connections({
                     {col.column_name}
                     {col.is_primary && (
                       <span className="ml-1.5 bg-territory-selected px-1 py-0.5 text-[9px] text-paper">
-                        PK
+                        ID
                       </span>
                     )}
                     {fkColumnSet.has(col.column_name) && (
                       <span className="ml-1.5 bg-evidence px-1 py-0.5 text-[9px] text-paper">
-                        FK
+                        Link
                       </span>
                     )}
                   </span>

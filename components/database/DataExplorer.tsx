@@ -252,22 +252,22 @@ export function DataExplorer({
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="font-sans text-xs uppercase tracking-widest text-territory-selected">
-              PostgreSQL + PostGIS Archive
+              Inside the archive
             </p>
             <h1 className="mt-1.5 font-display text-4xl text-ink sm:text-5xl">
-              Explore the historical database
+              Browse all the data
             </h1>
             <p className="mt-3 max-w-2xl font-sans text-base leading-relaxed text-ink-muted">
-              Inspect all 17 relational tables powering BHĀRATA—from 55 kingdoms and 584 rulers to 466 PostGIS borders, 392 geolocated places, and 1,026 visual records.
+              Look through all 17 lists behind BHĀRATA—from 55 kingdoms and 584 rulers to 466 map borders, 392 places, and 1,026 images.
             </p>
           </div>
           <Link
             href="/connections"
             className="inline-flex items-center gap-2 border border-ink bg-ink px-4 py-2.5 font-sans text-sm text-paper transition-colors hover:bg-paper hover:text-ink"
           >
-            <span>Open Schema Constellation</span>
+            <span>See how the data connects</span>
             <span className="border border-paper/30 px-1.5 py-0.5 text-xs tabular-nums">
-              {connections.length} FKs
+              {connections.length} links
             </span>
           </Link>
         </div>
@@ -276,19 +276,19 @@ export function DataExplorer({
         <div className="mt-7 grid gap-6 border-t border-border pt-6 lg:grid-cols-[1.2fr_1fr] lg:items-end">
           <dl className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             <div className="border-l-2 border-territory-selected pl-3">
-              <dt className="font-sans text-xs text-ink-muted">Total records</dt>
+              <dt className="font-sans text-xs text-ink-muted">Total entries</dt>
               <dd className="mt-0.5 font-display text-2xl tabular-nums text-ink">
                 {totalCorpusRecords.toLocaleString()}
               </dd>
             </div>
             <div className="border-l-2 border-ink pl-3">
-              <dt className="font-sans text-xs text-ink-muted">Populated tables</dt>
+              <dt className="font-sans text-xs text-ink-muted">Lists</dt>
               <dd className="mt-0.5 font-display text-2xl tabular-nums text-ink">
                 {Object.keys(tableNames).length}
               </dd>
             </div>
             <div className="border-l-2 border-evidence pl-3">
-              <dt className="font-sans text-xs text-ink-muted">PostGIS shapes</dt>
+              <dt className="font-sans text-xs text-ink-muted">Map shapes</dt>
               <dd className="mt-0.5 font-display text-2xl tabular-nums text-ink">
                 {(
                   (tableCounts.kingdom_borders ?? 0) +
@@ -306,11 +306,11 @@ export function DataExplorer({
             </div>
           </dl>
 
-          {/* Proportional Corpus Composition Bar */}
+          {/* Proportional Composition Bar */}
           <div>
             <div className="mb-1.5 flex items-center justify-between font-sans text-xs text-ink-muted">
-              <span>Corpus composition across layers</span>
-              <span className="tabular-nums">100% PostgreSQL</span>
+              <span>What&apos;s in the archive</span>
+              <span className="tabular-nums">{totalCorpusRecords.toLocaleString()} total</span>
             </div>
             <div className="flex h-3 w-full overflow-hidden border border-ink/20 bg-stone">
               {categoryTotals.map((item) => {
@@ -334,15 +334,15 @@ export function DataExplorer({
             <div className="mt-2 flex flex-wrap gap-4 font-sans text-[11px] text-ink-muted">
               <span className="inline-flex items-center gap-1.5">
                 <span className="h-2 w-2 bg-territory-selected" />
-                Core records ({categoryTotals[0].count.toLocaleString()})
+                Main records ({categoryTotals[0].count.toLocaleString()})
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <span className="h-2 w-2 bg-evidence" />
-                PostGIS shapes ({categoryTotals[1].count.toLocaleString()})
+                Map shapes ({categoryTotals[1].count.toLocaleString()})
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <span className="h-2 w-2 bg-uncertainty" />
-                Bridges &amp; provenance ({categoryTotals[2].count.toLocaleString()})
+                Links &amp; sources ({categoryTotals[2].count.toLocaleString()})
               </span>
             </div>
           </div>
@@ -511,7 +511,7 @@ export function DataExplorer({
                       <div className="flex items-center gap-1">
                         {col.isPrimary && (
                           <span className="border border-ink px-1.5 py-0.2 text-[10px] font-medium text-ink">
-                            PK
+                            ID
                           </span>
                         )}
                         {!col.nullable && !col.isPrimary && (
@@ -878,7 +878,7 @@ export function DataExplorer({
                     onClick={() => handleCopyJson(inspectedRow)}
                     className="shrink-0 border border-border bg-paper px-2.5 py-1 font-sans text-xs text-ink hover:border-ink"
                   >
-                    {copied ? "Copied" : "Copy JSON"}
+                    {copied ? "Copied" : "Copy"}
                   </button>
                 </div>
 
@@ -948,7 +948,7 @@ export function DataExplorer({
                         : "border-transparent text-ink-muted hover:text-ink"
                     }`}
                   >
-                    Formatted fields ({columns.length})
+                    Details ({columns.length})
                   </button>
                   <button
                     type="button"
@@ -959,7 +959,7 @@ export function DataExplorer({
                         : "border-transparent text-ink-muted hover:text-ink"
                     }`}
                   >
-                    Raw JSON
+                    Raw data
                   </button>
                 </div>
 
