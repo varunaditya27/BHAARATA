@@ -54,104 +54,6 @@ function LenisScrollTriggerBridge() {
 }
 
 /**
- * Contextual cartographic cursor follower for desktop pointers.
- * Uses `gsap.quickTo` for zero-rerender spring lag and expands into a labeled
- * editorial lens pill whenever hovering an element with `[data-cursor-label]`.
- */
-function CustomCursor({
-  reducedMotion,
-  accentColor,
-}: {
-  reducedMotion: boolean;
-  accentColor: string;
-}) {
-  const dotRef = useRef<HTMLDivElement | null>(null);
-  const ringRef = useRef<HTMLDivElement | null>(null);
-  const [label, setLabel] = useState<string | null>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (reducedMotion) return;
-    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
-    if (!isFinePointer || !dotRef.current || !ringRef.current) return;
-
-    const xDot = gsap.quickTo(dotRef.current, "x", {
-      duration: 0.08,
-      ease: "power3.out",
-    });
-    const yDot = gsap.quickTo(dotRef.current, "y", {
-      duration: 0.08,
-      ease: "power3.out",
-    });
-    const xRing = gsap.quickTo(ringRef.current, "x", {
-      duration: 0.3,
-      ease: "power3.out",
-    });
-    const yRing = gsap.quickTo(ringRef.current, "y", {
-      duration: 0.3,
-      ease: "power3.out",
-    });
-
-    const onMove = (e: MouseEvent) => {
-      setVisible((prev) => (prev ? prev : true));
-      xDot(e.clientX);
-      yDot(e.clientY);
-      xRing(e.clientX);
-      yRing(e.clientY);
-
-      const target = (e.target as HTMLElement | null)?.closest?.(
-        "[data-cursor-label]",
-      );
-      const nextLabel = target?.getAttribute("data-cursor-label") ?? null;
-      setLabel((prev) => (prev === nextLabel ? prev : nextLabel));
-    };
-
-    const onLeave = () => setVisible(false);
-
-    window.addEventListener("mousemove", onMove, { passive: true });
-    document.addEventListener("mouseleave", onLeave);
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseleave", onLeave);
-    };
-  }, [reducedMotion]);
-
-  if (reducedMotion) return null;
-
-  return (
-    <div
-      aria-hidden="true"
-      className={`pointer-events-none fixed inset-0 z-50 hidden lg:block transition-opacity duration-300 ${
-        visible ? "opacity-100" : "opacity-0"
-      }`}
-    >
-      <div
-        ref={dotRef}
-        className="fixed top-0 left-0 -ml-1 -mt-1 h-2 w-2 rounded-full transition-colors duration-500"
-        style={{
-          backgroundColor: accentColor,
-          boxShadow: `0 0 10px ${accentColor}`,
-        }}
-      />
-      <div
-        ref={ringRef}
-        className={`fixed top-0 left-0 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          label
-            ? "h-8 border-paper/45 bg-ink/90 px-3.5 shadow-[0_12px_30px_-8px_rgba(14,11,8,0.85)] backdrop-blur-md"
-            : "h-9 w-9 border-paper/30 bg-paper/[0.03]"
-        }`}
-      >
-        {label && (
-          <span className="font-mono text-[10px] font-medium tracking-[0.18em] whitespace-nowrap text-paper uppercase">
-            {label}
-          </span>
-        )}
-      </div>
-    </div>
-  );
-}
-
-/**
  * Luxury Double-Bezel (Doppelrand) chapter plate with:
  * - Outer translucent architectural shell + inner dark manuscript core with top specular highlight
  * - Clip-path curtain image reveal (`inset(0 0 100% 0)` → `inset(0 0 0% 0)`) + inner image parallax
@@ -398,7 +300,6 @@ function ChapterPlate({
               <button
                 type="button"
                 onClick={onNext}
-                data-cursor-label="Next Chapter"
                 className="font-mono text-[10px] uppercase tracking-[0.14em] text-paper/55 transition-colors hover:text-paper"
               >
                 Next ↓
@@ -429,7 +330,6 @@ function ChapterPlate({
             <Link
               href={`/atlas?year=${chapter.year}${politySlug ? `&polity=${politySlug}` : ""}`}
               transitionTypes={NAV_FORWARD}
-              data-cursor-label="Inspect Map"
               className="group/cta inline-flex items-center gap-2.5 font-medium text-paper transition-colors hover:text-paper/85"
             >
               <span className="underline decoration-paper/35 underline-offset-4 group-hover/cta:decoration-paper">
@@ -446,7 +346,6 @@ function ChapterPlate({
               <Link
                 href={`/polities/${politySlug}`}
                 transitionTypes={NAV_FORWARD}
-                data-cursor-label="Read Kingdom"
                 className="text-xs text-paper/70 underline decoration-paper/25 underline-offset-4 transition-colors hover:text-paper"
               >
                 More about {polityName}
@@ -627,10 +526,6 @@ export function HomeFilm() {
       }}
     >
       <LenisScrollTriggerBridge />
-      <CustomCursor
-        reducedMotion={prefersReducedMotion}
-        accentColor={activeAccent}
-      />
 
       <section ref={sectionRef} className="relative bg-ink text-paper">
         {/* Sticky Cinematic Stage */}
@@ -724,7 +619,6 @@ export function HomeFilm() {
             <button
               type="button"
               onClick={() => scrollToStage(0)}
-              data-cursor-label="Orbit View"
               className="group flex items-center gap-2 py-1 text-left"
               aria-label="Jump to opening overview"
             >
@@ -750,7 +644,6 @@ export function HomeFilm() {
                   key={c.id}
                   type="button"
                   onClick={() => scrollToStage(i + 1)}
-                  data-cursor-label={`Jump ${c.year} CE`}
                   className="group flex items-center gap-2 py-1 text-left"
                   aria-label={`Jump to chapter ${i + 1}: ${c.title} (${c.year} CE)`}
                 >
@@ -826,7 +719,6 @@ export function HomeFilm() {
                 <button
                   type="button"
                   onClick={() => scrollToStage(1)}
-                  data-cursor-label="Begin Descent"
                   className="group inline-flex items-center gap-3 rounded-[3px] border border-paper/20 bg-paper/[0.06] px-4 py-2.5 font-sans text-sm text-paper/90 backdrop-blur-sm transition-all duration-300 hover:border-paper/45 hover:bg-paper/12 hover:text-paper"
                 >
                   <span>Scroll or click to begin the descent</span>

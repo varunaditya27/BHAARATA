@@ -19,7 +19,6 @@ interface EntryPoint {
   subtitle: string;
   description: string;
   cta: string;
-  cursorLabel: string;
 }
 
 const ENTRY_POINTS: EntryPoint[] = [
@@ -31,7 +30,6 @@ const ENTRY_POINTS: EntryPoint[] = [
     description:
       "Drag the timeline and watch kingdoms grow, shrink and disappear across eleven centuries.",
     cta: "Open the atlas",
-    cursorLabel: "Explore Map",
   },
   {
     index: "02",
@@ -41,7 +39,6 @@ const ENTRY_POINTS: EntryPoint[] = [
     description:
       "Every event in order, with each kingdom on its own line and dated battles below.",
     cta: "View the timeline",
-    cursorLabel: "Inspect Lanes",
   },
   {
     index: "03",
@@ -51,7 +48,6 @@ const ENTRY_POINTS: EntryPoint[] = [
     description:
       "One page per kingdom: its rulers, places, neighbours and surviving stone or copper-plate evidence.",
     cta: "Browse kingdoms",
-    cursorLabel: "Browse Index",
   },
 ];
 
@@ -115,7 +111,6 @@ function ClosingEntryCard({
       <Link
         href={entry.href}
         transitionTypes={NAV_FORWARD}
-        data-cursor-label={entry.cursorLabel}
         className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[3px] border border-border/80 bg-paper p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] transition-colors duration-300 hover:border-territory-selected/60 sm:p-7"
       >
         <div
