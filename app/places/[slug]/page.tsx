@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Badge } from "@/components/primitives/Badge";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { HeroPhoto } from "@/components/primitives/HeroPhoto";
 import { PageTransition } from "@/components/primitives/PageTransition";
@@ -10,7 +9,6 @@ import { RisingTitle } from "@/components/entity/RisingTitle";
 import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
-import { placeStatus } from "@/lib/data/status";
 import { placeKindLabel } from "@/lib/domain/labels";
 import { formatDateRange } from "@/lib/domain/time";
 import { boundariesContaining, projectTogether } from "@/lib/geo/silhouette";
@@ -37,7 +35,6 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
   const hero = place.imageKey ? images[place.imageKey as ImageKey] : undefined;
   const capitalOf = polities.filter((p) => p.capitals.some((c) => place.name.startsWith(c)));
   const relatedEvents = events.filter((e) => e.placeIds.includes(place.id));
-  const status = placeStatus(place);
 
   // Which recorded kingdoms' territory contains this point, in time order —
   // computed from the boundaries, not hand-entered.
@@ -90,7 +87,6 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
             <p className="font-sans text-ink-muted">
               {place.coordinates[1].toFixed(3)}°N, {place.coordinates[0].toFixed(3)}°E
             </p>
-            <Badge tone={status.sourced ? "neutral" : "uncertainty"}>{status.label}</Badge>
           </div>
 
           <Rule className="mt-8" />
@@ -117,7 +113,6 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
                   </svg>
                   <p className="mt-2 font-sans text-xs text-ink-muted">
                     The outlines of every kingdom in the atlas whose land included this place, drawn over each other.
-                    The outlines are rough.
                   </p>
                 </>
               ) : (

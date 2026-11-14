@@ -46,8 +46,7 @@ export default async function EvidenceIndexPage() {
 
           <div>
             <p className="max-w-prose font-sans text-ink">
-              There are {evidence.length} records so far. Each is read from a published English translation, and each
-              page says what is still missing. More will be added only once they are checked.
+              There are {evidence.length} records so far. Each is read from a published English translation.
             </p>
             <ul className="mt-8">
               {evidence.map((ev) => {
