@@ -9,17 +9,17 @@ import { InkName } from "@/components/entity/InkName";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { RisingTitle } from "@/components/entity/RisingTitle";
 import { RulerPortrait } from "@/components/entity/RulerPortrait";
-import { images, type ImageKey } from "@/lib/data/images";
-import { getPolityBySlug, getSourceById, milestones as events, people } from "@/lib/data/prototype";
+import type { ImageKey } from "@/lib/domain/types";
+import { getAtlasData } from "@/lib/data/atlas-server";
+import { atlasAccess } from "@/lib/data/atlas-data";
 import { personStatus } from "@/lib/data/status";
 import { formatDatePoint, formatDateRange, formatPersonDates } from "@/lib/domain/time";
 import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
-export function generateStaticParams() {
-  return people.map((p) => ({ slug: p.slug }));
-}
+
 
 export async function generateMetadata({ params }: PageProps<"/people/[slug]">) {
+  const { people } = await getAtlasData();
   const { slug } = await params;
   const person = people.find((p) => p.slug === slug);
   return { title: person ? `${person.name} — BHĀRATA` : "Person — BHĀRATA", description: person?.summary };
@@ -28,15 +28,20 @@ export async function generateMetadata({ params }: PageProps<"/people/[slug]">) 
 const overlaps = (aStart: number, aEnd: number, bStart: number, bEnd: number) => aStart <= bEnd && bStart <= aEnd;
 
 export default async function PersonPage({ params }: PageProps<"/people/[slug]">) {
+  const data = await getAtlasData();
+  const { people, images } = data;
+  const { getPolityById, getSourceById, milestones: events } = atlasAccess(data);
   const { slug } = await params;
   const person = people.find((p) => p.slug === slug);
   if (!person) notFound();
 
-  const polity = person.polityId ? getPolityBySlug(person.polityId) : undefined;
+  const polity = person.polityId ? getPolityById(person.polityId) : undefined;
   const accent = polity?.accentColor ?? "#5c5447";
   const status = personStatus(person);
   const lifetimeOnly = person.datesAre === "lifetime";
   const sourceRecords = person.provenance.filter((pv) => getSourceById(pv.sourceId));
+  const personDateKnown = person.period.startQualifier !== "unknown";
+  const kingdomDatesKnown = polity && polity.period.startQualifier !== "unknown" && polity.period.endQualifier !== "unknown" && polity.period.endYear !== null;
   const reignStart = person.period.startYear;
   const reignEnd = person.period.endYear ?? reignStart;
   const portrait = person.imageKey ? images[person.imageKey as ImageKey] : undefined;
@@ -44,12 +49,12 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
   // Events of this ruler's own kingdom that fall inside the reign.
   const reignEvents = events
     .filter((e) => (person.polityId ? e.polityIds.includes(person.polityId) : false))
-    .filter((e) => overlaps(e.period.startYear, e.period.endYear ?? e.period.startYear, reignStart, reignEnd));
+    .filter((e) => personDateKnown && e.period.startQualifier !== "unknown" && overlaps(e.period.startYear, e.period.endYear ?? e.period.startYear, reignStart, reignEnd));
 
   // Rulers of *other* kingdoms whose reigns overlapped this one.
   const contemporaries = people
     .filter((p) => p.id !== person.id && p.polityId !== person.polityId)
-    .filter((p) => overlaps(p.period.startYear, p.period.endYear ?? p.period.startYear, reignStart, reignEnd));
+    .filter((p) => personDateKnown && p.period.startQualifier !== "unknown" && overlaps(p.period.startYear, p.period.endYear ?? p.period.startYear, reignStart, reignEnd));
 
   const kingdomStart = polity?.period.startYear ?? reignStart;
   const kingdomEnd = polity?.period.endYear ?? reignEnd;
@@ -84,7 +89,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
             <RisingTitle text={person.name} className="mt-2 text-5xl text-ink sm:text-6xl" />
             {person.nativeName && <InkName text={person.nativeName} lang={person.nativeLang} className="mt-2 text-2xl text-ink-muted" />}
             <p className="mt-4 font-display text-xl text-ink">
-              {lifetimeOnly ? formatPersonDates(person) : `Ruled ${formatDateRange(person.period)}`}
+              {person.period.startQualifier === "unknown" ? formatDateRange(person.period) : person.datesAre === "reign" ? `Ruled ${formatDateRange(person.period)}` : formatPersonDates(person)}
             </p>
             <div className="mt-3">
               <Badge tone={status.sourced ? "neutral" : "uncertainty"}>{status.label}</Badge>
@@ -92,10 +97,10 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
           </div>
         </div>
 
-        {polity && (
+        {polity && personDateKnown && kingdomDatesKnown && (
           <section className="mt-12">
             <h2 className="font-sans text-sm font-medium text-ink-muted">
-              Where this {lifetimeOnly ? "lifetime" : "reign"} falls in the history of{" "}
+              Where {lifetimeOnly ? "this lifetime falls" : person.datesAre === "reign" ? "this reign falls" : "these dates fall"} in the history of{" "}
               <Link href={`/polities/${polity.slug}`} transitionTypes={NAV_FORWARD} className="text-ink underline underline-offset-4 hover:[color:var(--bh-accent)]">
                 {polity.name}
               </Link>
@@ -120,13 +125,13 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
             {person.summary && <p className="bh-dropcap max-w-prose font-sans text-lg leading-relaxed text-ink">{person.summary}</p>}
             {!person.summary && (
               <p className="max-w-prose font-sans text-base leading-relaxed text-ink-muted">
-                The sources give only {person.name}&rsquo;s title and dates, so there is no description yet.
+                There is no description for {person.name} yet.
               </p>
             )}
 
             {reignEvents.length > 0 && (
               <section className="mt-12">
-                <h2 className="font-sans text-sm font-medium text-ink-muted">{lifetimeOnly ? "During their lifetime" : "During the reign"}</h2>
+                <h2 className="font-sans text-sm font-medium text-ink-muted">{lifetimeOnly ? "During their lifetime" : person.datesAre === "reign" ? "During the reign" : "During these years"}</h2>
                 <ol className="bh-accent-rule mt-4 space-y-6 border-l pl-6">
                   {reignEvents.map((e) => (
                     <li key={e.id} className="relative">
@@ -162,13 +167,13 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
               </section>
             )}
             <section>
-              <h2 className="font-sans text-sm font-medium text-ink-muted">Ruling elsewhere at the same time</h2>
+              <h2 className="font-sans text-sm font-medium text-ink-muted">People around the same time</h2>
               {contemporaries.length === 0 ? (
-                <p className="mt-3 font-sans text-sm text-ink-muted">No other ruler in the atlas reigned at the same time.</p>
+                <p className="mt-3 font-sans text-sm text-ink-muted">No other people in the atlas have overlapping dates.</p>
               ) : (
                 <ul className="mt-3 space-y-3">
                   {contemporaries.map((p) => {
-                    const theirs = p.polityId ? getPolityBySlug(p.polityId) : undefined;
+                    const theirs = p.polityId ? getPolityById(p.polityId) : undefined;
                     return (
                       <li key={p.id} className="border-t border-border pt-3">
                         <Link href={`/people/${p.slug}`} transitionTypes={NAV_FORWARD} className="group block font-sans text-sm">

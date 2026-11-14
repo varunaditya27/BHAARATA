@@ -1,6 +1,6 @@
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
-import { images } from "@/lib/data/images";
+import { getAtlasData } from "@/lib/data/atlas-server";
 
 export const metadata = {
   title: "How it works — BHĀRATA",
@@ -14,7 +14,8 @@ const DATE_KEY = [
   ["(disputed)", "Historians disagree about this date; the one shown is a common reading, not a settled one."],
 ] as const;
 
-export default function MethodPage() {
+export default async function MethodPage() {
+  const { images } = await getAtlasData();
   return (
     <PageTransition>
       <div className="mx-auto max-w-[720px] px-4 py-16 sm:px-6">
@@ -25,7 +26,7 @@ export default function MethodPage() {
         <section className="mt-8 space-y-4 font-sans text-lg leading-relaxed text-ink">
           <p className="bh-dropcap">
             This is a working version. The kingdoms, their dates and their borders come from{" "}
-            <strong>Cliopatria</strong>, an open research dataset built by historians and data scientists. The
+            <strong>Cliopatria</strong>, an open research collection built by historians and data scientists. The
             descriptions, ruler lists, battles and places come from <strong>Wikipedia</strong> and{" "}
             <strong>Wikidata</strong>; a few texts written here were checked, statement by statement, against the
             Wikipedia article named on the page. Two things are <strong>not researched</strong> and should not be
@@ -33,13 +34,13 @@ export default function MethodPage() {
             by hand. Each page says where its data comes from.
           </p>
           <p>
-            Even the researched borders are one version of the past. Real frontiers moved, overlapped, and were often
+            Even the researched borders are one version of the past. Real borders moved, overlapped, and were often
             never fixed lines at all, and historians disagree about many of them. The map shows each kingdom at the
             moment its record was drawn, and moves to the next record when that one ends.
           </p>
           <p>
-            The aim is for every record to name the source it comes from, so you can follow any claim back to the
-            inscription, coin, text or study behind it. Where a record can&rsquo;t do that yet, it is labelled.
+            The aim is for every record to name the source it comes from, so you can follow information back to the
+            object, book or study behind it. Where a record can&rsquo;t do that yet, it is labelled.
           </p>
         </section>
 
@@ -63,7 +64,7 @@ export default function MethodPage() {
               outline shows it.
             </li>
             <li>
-              <span className="text-ink">Hatched edge</span>: the frontier&rsquo;s exact line isn&rsquo;t known; it
+              <span className="text-ink">Striped edge</span>: the border&rsquo;s exact line isn&rsquo;t known; it
               lay somewhere in that band.
             </li>
             <li>
@@ -72,8 +73,8 @@ export default function MethodPage() {
             </li>
             <li>
               <span className="text-ink">Red dot with a name</span>: a battle. It appears in the year it was fought and
-              stays for ten years. Click it for a short description. Wikidata rarely records who fought, so each battle
-              is linked to the kingdoms whose borders contained the site that year, which is not always the combatants.
+              stays for ten years. Click it for a short description. Only battles with a directly recorded location
+              appear on the map. A point may be approximate, and a border match does not tell us who fought.
             </li>
             <li>
               <span className="text-ink">Dark dots (off by default)</span>: monuments the Archaeological Survey of

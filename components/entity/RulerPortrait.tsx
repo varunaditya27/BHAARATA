@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
-import { images, type ImageKey } from "@/lib/data/images";
+import type { ImageKey } from "@/lib/domain/types";
+import { useAtlasData } from "@/components/layout/AtlasDataProvider";
 import { cn } from "@/lib/utils/cn";
 
 /**
@@ -19,6 +22,7 @@ export function RulerPortrait({
   accentColor?: string;
   className?: string;
 }) {
+  const { images } = useAtlasData();
   const credit = imageKey ? images[imageKey as ImageKey] : undefined;
 
   if (!credit) {

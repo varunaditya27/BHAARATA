@@ -42,7 +42,7 @@ export function LifespanStrip({
   // Pack kingdoms onto as few rows as possible: a kingdom goes on the first
   // row where the previous one has already ended (with a small gap), so 60+
   // kingdoms fit in a dozen or so rows instead of 60.
-  const sorted = [...polities].sort((a, b) => a.period.startYear - b.period.startYear);
+  const sorted = polities.filter(p => p.period.startQualifier !== "unknown" && p.period.endQualifier !== "unknown" && p.period.endYear !== null).sort((a, b) => a.period.startYear - b.period.startYear);
   const rowEnds: number[] = [];
   const rowOf = new Map<string, number>();
   for (const p of sorted) {
@@ -66,7 +66,7 @@ export function LifespanStrip({
           `${activePolityIds.size} kingdoms held land in ${year} CE. Point at a line to see its name.`
         )}
       </p>
-      <div className="relative" style={{ height: rows * (BAND + GAP) - GAP }}>
+      <div className="relative" style={{ height: Math.max(0, rows * (BAND + GAP) - GAP) }}>
         {sorted.map((p) => {
           const left = pct(p.period.startYear);
           const right = pct(p.period.endYear ?? max);

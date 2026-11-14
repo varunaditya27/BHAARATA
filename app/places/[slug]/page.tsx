@@ -7,8 +7,9 @@ import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
 import { InkName } from "@/components/entity/InkName";
 import { RisingTitle } from "@/components/entity/RisingTitle";
-import { images, type ImageKey } from "@/lib/data/images";
-import { events, getPolityBySlug, places, polities } from "@/lib/data/prototype";
+import type { ImageKey } from "@/lib/domain/types";
+import { getAtlasData } from "@/lib/data/atlas-server";
+import { atlasAccess } from "@/lib/data/atlas-data";
 import { placeStatus } from "@/lib/data/status";
 import { placeKindLabel } from "@/lib/domain/labels";
 import { formatDateRange } from "@/lib/domain/time";
@@ -16,17 +17,19 @@ import { boundariesContaining, projectTogether } from "@/lib/geo/silhouette";
 import { darkenHex } from "@/lib/utils/color";
 import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
-export function generateStaticParams() {
-  return places.map((p) => ({ slug: p.slug }));
-}
+
 
 export async function generateMetadata({ params }: PageProps<"/places/[slug]">) {
+  const { places } = await getAtlasData();
   const { slug } = await params;
   const place = places.find((p) => p.slug === slug);
   return { title: place ? `${place.name} — BHĀRATA` : "Place — BHĀRATA" };
 }
 
 export default async function PlacePage({ params }: PageProps<"/places/[slug]">) {
+  const data = await getAtlasData();
+  const { events, places, polities, images } = data;
+  const { getPolityById } = atlasAccess(data);
   const { slug } = await params;
   const place = places.find((p) => p.slug === slug);
   if (!place) notFound();
@@ -40,9 +43,9 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
   // computed from the boundaries, not hand-entered.
   // A kingdom has many dated border shapes; merge them into one entry per kingdom, with the year ranges
   // it held the place (consecutive shapes join up, a real gap stays a gap) and its latest shape for the map.
-  const heldBy: { polity: NonNullable<ReturnType<typeof getPolityBySlug>>; ranges: [number, number][]; boundary: ReturnType<typeof boundariesContaining>[number] }[] = [];
-  for (const b of boundariesContaining(place.coordinates)) {
-    const polity = getPolityBySlug(b.polityId);
+  const heldBy: { polity: NonNullable<ReturnType<typeof getPolityById>>; ranges: [number, number][]; boundary: ReturnType<typeof boundariesContaining>[number] }[] = [];
+  for (const b of boundariesContaining(place.coordinates, data)) {
+    const polity = getPolityById(b.polityId);
     if (!polity) continue;
     const existing = heldBy.find((h) => h.polity.id === polity.id);
     if (!existing) {

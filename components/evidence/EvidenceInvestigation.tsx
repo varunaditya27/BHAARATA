@@ -4,7 +4,7 @@ import { useState } from "react";
 import { EvidenceViewer } from "@/components/evidence/EvidenceViewer";
 import { RakingLight } from "@/components/evidence/RakingLight";
 import { cn } from "@/lib/utils/cn";
-import type { ImageCredit } from "@/lib/data/images";
+import type { ImageCredit } from "@/lib/domain/types";
 import type { Evidence } from "@/lib/domain/types";
 
 /**
@@ -95,7 +95,7 @@ export function EvidenceInvestigation({
       {record.lineRegions.length > 0 && (
         <p className="mt-1 font-sans text-xs text-ink-muted">
           Point at a line to see where it is on the stone; click it to zoom in. Scroll to zoom and drag to move around.
-          The boxes were placed by hand and are approximate.{hasRoman && " Romanised spellings follow the ISO 15919 standard."}
+          The boxes were placed by hand and are approximate.{hasRoman && " These spellings use Latin letters to show how the words sound."}
         </p>
       )}
 
@@ -104,13 +104,13 @@ export function EvidenceInvestigation({
           {record.transcription.length > 0 && (
             <div>
               <div className="flex items-baseline justify-between gap-3">
-                <h2 className="font-sans text-sm font-medium text-ink-muted">Transcription</h2>
+                <h2 className="font-sans text-sm font-medium text-ink-muted">Words from the object</h2>
                 {hasRoman && (
-                  <div role="group" aria-label="Show the transcription in" className="flex border border-border font-sans text-[0.7rem]">
+                  <div role="group" aria-label="Choose how to show the words" className="flex border border-border font-sans text-[0.7rem]">
                     {(
                       [
                         ["original", record.script ? `${record.script} script` : "Original"],
-                        ["roman", "Romanised"],
+                        ["roman", "Latin letters"],
                       ] as const
                     ).map(([value, label]) => (
                       <button
@@ -146,7 +146,7 @@ export function EvidenceInvestigation({
           )}
           {record.translation.length > 0 && (
             <div>
-              <h2 className="font-sans text-sm font-medium text-ink-muted">Translation</h2>
+              <h2 className="font-sans text-sm font-medium text-ink-muted">English translation</h2>
               <ol className="mt-3 space-y-1">
                 {record.translation.map((line, i) => (
                   <li key={i}>

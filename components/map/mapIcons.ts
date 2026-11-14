@@ -1,5 +1,5 @@
 import type { Map as MapLibreMap } from "maplibre-gl";
-import { polities } from "@/lib/data/prototype";
+import type { AtlasData } from "@/lib/data/atlas-data";
 import { polityGeometry, silhouettePath } from "@/lib/geo/silhouette";
 import { darkenHex } from "@/lib/utils/color";
 
@@ -165,11 +165,11 @@ export function registerRouteIcons(map: MapLibreMap) {
 
 /** A seal for each kingdom, stamped at its capitals: a disc in its colour,
  * a paper ring, and its outline (the site-wide emblem) inside. */
-export function registerSealImages(map: MapLibreMap) {
+export function registerSealImages(map: MapLibreMap, data: AtlasData) {
   const size = 56;
-  for (const polity of polities) {
+  for (const polity of data.polities) {
     const id = `bh-seal-${polity.id}`;
-    const geometry = polityGeometry(polity.id);
+    const geometry = polityGeometry(polity.id, data);
     if (map.hasImage(id) || !geometry) continue;
     const canvas = document.createElement("canvas");
     canvas.width = size;

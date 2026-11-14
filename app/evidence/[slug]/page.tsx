@@ -6,23 +6,26 @@ import { Rule } from "@/components/primitives/Rule";
 import { ClaimThread } from "@/components/evidence/ClaimThread";
 import { EvidenceInvestigation } from "@/components/evidence/EvidenceInvestigation";
 import { ProvenanceChain } from "@/components/evidence/ProvenanceChain";
-import { evidence, getPlaceById, getSourceById } from "@/lib/data/prototype";
-import { images, type ImageKey } from "@/lib/data/images";
+import type { ImageKey } from "@/lib/domain/types";
+import { getAtlasData } from "@/lib/data/atlas-server";
+import { atlasAccess } from "@/lib/data/atlas-data";
 import { formatDateRange } from "@/lib/domain/time";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
-export function generateStaticParams() {
-  return evidence.map((e) => ({ slug: e.slug }));
-}
+
 
 export async function generateMetadata({ params }: PageProps<"/evidence/[slug]">) {
+  const { evidence } = await getAtlasData();
   const { slug } = await params;
   const record = evidence.find((e) => e.slug === slug);
   return { title: record ? `${record.title} — BHĀRATA` : "Evidence — BHĀRATA" };
 }
 
 export default async function EvidencePage({ params }: PageProps<"/evidence/[slug]">) {
+  const data = await getAtlasData();
+  const { evidence, images } = data;
+  const { getPlaceById, getSourceById } = atlasAccess(data);
   const { slug } = await params;
   const record = evidence.find((e) => e.slug === slug);
   if (!record) notFound();

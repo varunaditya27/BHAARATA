@@ -192,3 +192,14 @@ export const EvidenceSchema = z.object({
   provenance: z.array(ProvenanceSchema).default([]),
 });
 export type Evidence = z.infer<typeof EvidenceSchema>;
+
+export type ImageCredit = {
+  file: string;
+  alt: string;
+  title: string;
+  artist: string;
+  license: string;
+  sourceUrl: string;
+};
+
+export type ImageKey = string;

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { ImageCredit } from "@/lib/data/images";
+import type { ImageCredit } from "@/lib/domain/types";
 import { cn } from "@/lib/utils/cn";
 
 export type ImageRegion = { x: number; y: number; w: number; h: number };

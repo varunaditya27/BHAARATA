@@ -4,14 +4,18 @@ import { PeopleDirectory, type DirectoryGroup } from "@/components/entity/People
 import { RulerPortrait } from "@/components/entity/RulerPortrait";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { Shared } from "@/components/primitives/Shared";
-import { images, type ImageKey } from "@/lib/data/images";
-import { getRulersForPolity, polities } from "@/lib/data/prototype";
+import type { ImageKey } from "@/lib/domain/types";
+import { getAtlasData } from "@/lib/data/atlas-server";
+import { atlasAccess } from "@/lib/data/atlas-data";
 import { formatDateRange, formatPersonDates } from "@/lib/domain/time";
 import { NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 export const metadata = { title: "People — BHĀRATA" };
 
-export default function PeopleIndexPage() {
+export default async function PeopleIndexPage() {
+  const data = await getAtlasData();
+  const { images, polities } = data;
+  const { getRulersForPolity } = atlasAccess(data);
   const groups: DirectoryGroup[] = [...polities]
     .sort((a, b) => a.period.startYear - b.period.startYear)
     .map((polity) => {
@@ -64,8 +68,7 @@ export default function PeopleIndexPage() {
       <div className="mx-auto max-w-[1000px] px-4 py-16 sm:px-6">
         <h1 className="font-display text-5xl text-ink">People</h1>
         <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
-          Every ruler in the atlas, grouped by kingdom and listed in the order they ruled. The kingdoms run from the
-          earliest to the latest.
+          People in the atlas, grouped by kingdom and sorted by their recorded dates. Some dates describe a lifetime rather than a reign.
         </p>
         <p className="mt-3 max-w-prose font-sans text-sm text-ink-muted">
           Most names and dates come from Wikipedia&rsquo;s lists of rulers and from Wikidata, Wikipedia&rsquo;s open

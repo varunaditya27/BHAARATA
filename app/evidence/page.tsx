@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PageTransition } from "@/components/primitives/PageTransition";
-import { images, type ImageKey } from "@/lib/data/images";
-import { evidence, getPlaceById } from "@/lib/data/prototype";
+import type { ImageKey } from "@/lib/domain/types";
+import { getAtlasData } from "@/lib/data/atlas-server";
+import { atlasAccess } from "@/lib/data/atlas-data";
 import { formatDateRange } from "@/lib/domain/time";
 import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
@@ -10,7 +11,10 @@ export const metadata = { title: "Evidence — BHĀRATA" };
 
 const expandCatalogue = (id: string) => id.replace(/^SII /, "South Indian Inscriptions, ");
 
-export default function EvidenceIndexPage() {
+export default async function EvidenceIndexPage() {
+  const data = await getAtlasData();
+  const { images, evidence } = data;
+  const { getPlaceById } = atlasAccess(data);
   // Records often share one stand-in photograph; show each distinct photo once.
   const photoKeys = [...new Set(evidence.map((e) => e.imageKey).filter((k): k is string => Boolean(k)))];
   const photo = photoKeys.length === 1 ? images[photoKeys[0] as ImageKey] : undefined;
@@ -21,8 +25,7 @@ export default function EvidenceIndexPage() {
       <div className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6">
         <h1 className="font-display text-5xl text-ink">Evidence</h1>
         <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
-          Evidence is the real object a claim rests on: words cut in stone, a coin, a building. Each page follows one
-          object from the stone itself to the book where its reading was published.
+          Objects can help us learn about the past. Here you can explore words carved in stone and the books where they were translated.
         </p>
 
         <div className="mt-12 grid gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-16">

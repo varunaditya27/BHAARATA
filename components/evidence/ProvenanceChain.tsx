@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Badge } from "@/components/primitives/Badge";
-import type { ImageCredit } from "@/lib/data/images";
+import type { ImageCredit } from "@/lib/domain/types";
 import type { Evidence, Place, Source } from "@/lib/domain/types";
 import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
@@ -46,8 +46,8 @@ export function ProvenanceChain({
       ),
       status: record.catalogueId?.startsWith("EXAMPLE") ? "placeholder" : "real",
       note: record.catalogueId?.startsWith("EXAMPLE")
-        ? "A made-up catalogue number standing in for a real inscription."
-        : "A catalogued object.",
+        ? "An example reference number, not a real one."
+        : "An object listed in a published record.",
     },
   ];
   if (image) {
@@ -77,7 +77,7 @@ export function ProvenanceChain({
   }
   if (record.transcription.length > 0) {
     links.push({
-      step: "The transcription",
+      step: "Words from the object",
       what: `${record.transcription.length} lines in ${record.script ?? "the original script"}`,
       status: record.textIsIllustrative ? "placeholder" : "real",
       note: record.textIsIllustrative
@@ -90,14 +90,14 @@ export function ProvenanceChain({
       step: "The translation",
       what: `${record.translation.length} lines in English`,
       status: record.textIsIllustrative ? "placeholder" : "real",
-      note: record.textIsIllustrative ? "Placeholder lines matching the placeholder transcription." : "Translated into English by the volume's editors. Shown here in part.",
+      note: record.textIsIllustrative ? "Example lines, not a reading from the object." : "Translated into English by the volume's editors. Shown here in part.",
     });
   }
   links.push({
-    step: "The claim",
+    step: "What it tells us",
     what: record.claim,
     status: record.claimIsIllustrative ? "placeholder" : "real",
-    note: record.claimIsIllustrative ? "A worked example of how a claim links to its evidence." : "What this evidence is taken to show.",
+    note: record.claimIsIllustrative ? "An example of how a statement can be linked to an object." : "What this evidence is taken to show.",
   });
   for (const s of sources) {
     links.push({
@@ -124,7 +124,7 @@ export function ProvenanceChain({
     <section className="mt-14">
       <h2 className="font-display text-3xl text-ink">How we know</h2>
       <p className="mt-1 max-w-prose font-sans text-sm text-ink-muted">
-        Each step from the stone to the claim, in order. A claim is only as strong as its weakest step.
+        Follow each step from the stone to the published account. Some parts are still missing.
       </p>
       <ol className="relative mt-6 border-l border-border pl-8">
         {links.map((l, i) => (

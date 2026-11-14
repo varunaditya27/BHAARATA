@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { polities } from "@/lib/data/prototype";
 import { formatDateRange } from "@/lib/domain/time";
 import type { Polity } from "@/lib/domain/types";
 import { PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
@@ -8,11 +7,12 @@ import { NAV_FORWARD } from "@/lib/utils/view-transition";
 const TICKS = [600, 800, 1000, 1200, 1400, 1600];
 
 /** Kingdoms whose recorded span overlaps this one's, with the shared years. */
-export function contemporariesOf(polity: Polity) {
+export function contemporariesOf(polity: Polity, polities: Polity[]) {
+  if (polity.period.startQualifier === "unknown" || polity.period.endQualifier === "unknown" || polity.period.endYear === null) return [];
   const start = polity.period.startYear;
   const end = polity.period.endYear ?? PROTOTYPE_YEAR_RANGE.max;
   return polities
-    .filter((p) => p.id !== polity.id)
+    .filter((p) => p.id !== polity.id && p.period.startQualifier !== "unknown" && p.period.endQualifier !== "unknown" && p.period.endYear !== null)
     .map((p) => {
       const from = Math.max(start, p.period.startYear);
       const to = Math.min(end, p.period.endYear ?? PROTOTYPE_YEAR_RANGE.max);
@@ -27,11 +27,12 @@ export function contemporariesOf(polity: Polity) {
  * kingdom that overlapped it stacked beneath and the shared years marked.
  * Answers "who else was around?" at a glance.
  */
-export function KingdomLifespan({ polity }: { polity: Polity }) {
+export function KingdomLifespan({ polity, polities }: { polity: Polity; polities: Polity[] }) {
+  if (polity.period.startQualifier === "unknown" || polity.period.endQualifier === "unknown" || polity.period.endYear === null) return <p className="text-sm text-ink-muted">The full date range is not known.</p>;
   const { min, max } = PROTOTYPE_YEAR_RANGE;
   const pct = (y: number) => ((Math.min(max, Math.max(min, y)) - min) / (max - min)) * 100;
   const end = polity.period.endYear ?? max;
-  const all = contemporariesOf(polity);
+  const all = contemporariesOf(polity, polities);
   // The chart shows the ten longest overlaps; the "Same period" tab lists every one.
   const others = [...all].sort((a, b) => b.to - b.from - (a.to - a.from)).slice(0, 10).sort((a, b) => a.from - b.from);
 

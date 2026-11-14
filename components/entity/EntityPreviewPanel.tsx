@@ -7,8 +7,8 @@ import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/primitives/Badge";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { Shared } from "@/components/primitives/Shared";
-import { images, type ImageKey } from "@/lib/data/images";
-import { events, getRulersForPolity } from "@/lib/data/prototype";
+import type { ImageKey } from "@/lib/domain/types";
+import { useAtlasData, useAtlasAccess } from "@/components/layout/AtlasDataProvider";
 import { polityStatus } from "@/lib/data/status";
 import { formatDateRange } from "@/lib/domain/time";
 import type { Polity } from "@/lib/domain/types";
@@ -143,6 +143,7 @@ function CloseButton({ onClose, inline }: { onClose: () => void; inline?: boolea
 }
 
 function HeroStrip({ polity }: { polity: Polity }) {
+  const { images } = useAtlasData();
   const hero = polity.heroImageKey ? images[polity.heroImageKey as ImageKey] : undefined;
   if (!hero) return null;
   return (
@@ -176,6 +177,8 @@ function TitleBlock({ polity, compact }: { polity: Polity; compact?: boolean }) 
 }
 
 function Details({ polity }: { polity: Polity }) {
+  const { events } = useAtlasData();
+  const { getRulersForPolity } = useAtlasAccess();
   const rulers = getRulersForPolity(polity.id);
   // Turning points and battles together, matching the "Events" tab on the kingdom page.
   const relatedEvents = events.filter((e) => e.polityIds.includes(polity.id));

@@ -8,6 +8,7 @@ import {
   CommandItem,
   CommandList,
 } from "cmdk";
+import { useAtlasData } from "@/components/layout/AtlasDataProvider";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -61,13 +62,14 @@ function ResultRow({ item }: { item: SearchEntry }) {
  * same prototype data every page already reads — see lib/search/index.ts.
  */
 export function CommandPalette() {
+  const data = useAtlasData();
   const router = useRouter();
   const [open, setOpenState] = useState(false);
   const [query, setQuery] = useState("");
   const [recent, setRecent] = useState<string[]>([]);
-  const entries = useMemo(() => buildSearchIndex(), []);
+  const entries = useMemo(() => buildSearchIndex(data), [data]);
   const byHref = useMemo(() => new Map(entries.map((e) => [e.href, e])), [entries]);
-  const jump = yearCommand(query);
+  const jump = yearCommand(query, data);
 
   const openRef = useRef(false);
   useEffect(() => {

@@ -1,5 +1,5 @@
 import type { Map as MapLibreMap } from "maplibre-gl";
-import { boundaries, events, places, polities, routes } from "@/lib/data/prototype";
+import type { AtlasData } from "@/lib/data/atlas-data";
 import {
   battlesToFeatureCollection,
   boundariesToFeatureCollection,
@@ -33,8 +33,10 @@ export const DASH_SEQUENCE: number[][] = [
  */
 export function addHistoricalLayers(
   map: MapLibreMap,
+  data: AtlasData,
   options: { interactive?: boolean; terrain3d?: boolean } = {},
 ) {
+  const { boundaries, events, places, polities, routes } = data;
   registerMapIcons(map);
 
   // Relief first, under the basemap's rivers and water so they stay crisp.
@@ -64,21 +66,21 @@ export function addHistoricalLayers(
   }
   registerHatchPattern(map);
   registerRouteIcons(map);
-  registerSealImages(map);
+  registerSealImages(map, data);
 
   map.addSource(SOURCE_IDS.territory, {
     type: "geojson",
-    data: boundariesToFeatureCollection(boundaries),
+    data: boundariesToFeatureCollection(boundaries, data),
     promoteId: "boundaryId",
   });
   map.addSource(SOURCE_IDS.frontier, {
     type: "geojson",
-    data: frontiersToFeatureCollection(boundaries),
+    data: frontiersToFeatureCollection(boundaries, data),
     promoteId: "boundaryId",
   });
   map.addSource(SOURCE_IDS.kingdomLabels, {
     type: "geojson",
-    data: kingdomLabelsToFeatureCollection(boundaries),
+    data: kingdomLabelsToFeatureCollection(boundaries, data),
     promoteId: "boundaryId",
   });
   map.addSource(SOURCE_IDS.places, {
@@ -88,7 +90,7 @@ export function addHistoricalLayers(
   });
   map.addSource(SOURCE_IDS.routes, {
     type: "geojson",
-    data: routesToFeatureCollection(routes),
+    data: routesToFeatureCollection(routes, data),
     promoteId: "routeId",
   });
 
@@ -218,7 +220,7 @@ export function addHistoricalLayers(
     paint: { "icon-color": ["get", "glyphColor"], "icon-opacity": 0.9 },
   });
   // One ship or traveller per route, moved by the animation clock.
-  map.addSource(SOURCE_IDS.routeMovers, { type: "geojson", data: routeMoversFeatureCollection(0) });
+  map.addSource(SOURCE_IDS.routeMovers, { type: "geojson", data: routeMoversFeatureCollection(0, data) });
   map.addLayer({
     id: LAYER_IDS.routeMovers,
     type: "symbol",
@@ -385,7 +387,7 @@ export function ensureMonuments(map: MapLibreMap) {
   if (map.getSource(SOURCE_IDS.monuments)) return;
   map.addSource(SOURCE_IDS.monuments, {
     type: "geojson",
-    data: "/data/monuments.geojson",
+    data: "/api/map/monuments",
     cluster: true,
     clusterRadius: 44,
     clusterMaxZoom: 8,
@@ -436,7 +438,7 @@ export function ensureMonuments(map: MapLibreMap) {
 export function ensureSites(map: MapLibreMap) {
   if (map.getSource(SOURCE_IDS.sites)) return;
   const year = currentYear(map);
-  map.addSource(SOURCE_IDS.sites, { type: "geojson", data: "/data/sites.geojson" });
+  map.addSource(SOURCE_IDS.sites, { type: "geojson", data: "/api/map/sites" });
   map.addLayer({
     id: LAYER_IDS.sitePoints,
     type: "circle",

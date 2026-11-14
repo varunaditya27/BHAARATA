@@ -32,7 +32,7 @@ export function EventTicks({
 
   return (
     <div className="relative h-3" style={{ marginInline: THUMB_INSET }}>
-      {events.map((e) => {
+      {events.filter(e => e.period.startQualifier !== "unknown").map((e) => {
         const current = year >= e.period.startYear && year <= (e.period.endYear ?? e.period.startYear);
         return (
           <div key={e.id} className="absolute top-0 -translate-x-1/2" style={{ left: `${pct(e.period.startYear)}%` }}>

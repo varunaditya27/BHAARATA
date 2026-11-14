@@ -3,19 +3,22 @@ import { Badge } from "@/components/primitives/Badge";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
 import { KingdomLanes } from "@/components/chronology/KingdomLanes";
-import { battles, getPolityBySlug, milestones } from "@/lib/data/prototype";
+import { getAtlasData } from "@/lib/data/atlas-server";
+import { atlasAccess } from "@/lib/data/atlas-data";
 import { formatDateRange } from "@/lib/domain/time";
 import { PROTOTYPE_ERAS } from "@/lib/geo/historical-state";
 import { NAV_BACK, NAV_FORWARD } from "@/lib/utils/view-transition";
 
 export const metadata = {
-  title: "Chronology — BHĀRATA",
+  title: "Timeline — BHĀRATA",
 };
 
-export default function ChronologyPage() {
+export default async function ChronologyPage() {
+  const { battles, getPolityById, milestones } = atlasAccess(await getAtlasData());
+  const undated = [...milestones, ...battles].filter(e => e.period.startQualifier === "unknown");
   const byYear = (a: { period: { startYear: number } }, b: { period: { startYear: number } }) => a.period.startYear - b.period.startYear;
-  const inEra = (era: { start: number; end: number }) => (e: { period: { startYear: number } }) =>
-    e.period.startYear >= era.start && e.period.startYear <= era.end;
+  const inEra = (era: { start: number; end: number }) => (e: { period: { startYear: number; startQualifier: string } }) =>
+    e.period.startQualifier !== "unknown" && e.period.startYear >= era.start && e.period.startYear <= era.end;
   const groups = PROTOTYPE_ERAS.map((era) => ({
     era,
     items: [...milestones].sort(byYear).filter(inEra(era)),
@@ -25,7 +28,7 @@ export default function ChronologyPage() {
   return (
     <PageTransition>
       <div className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6">
-        <h1 className="font-display text-5xl text-ink">Chronology</h1>
+        <h1 className="font-display text-5xl text-ink">Timeline</h1>
         <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
           Every turning point and battle in the atlas, in order. Each coloured line shows how long a kingdom lasted, and each diamond marks a turning point. Click a diamond
           to jump to it below. Under each period you&rsquo;ll also find its battles. &ldquo;c.&rdquo; in front of a date
@@ -55,7 +58,7 @@ export default function ChronologyPage() {
 
               <ol className="relative space-y-12 border-l border-border pl-8">
                 {items.map((event) => {
-                  const lead = getPolityBySlug(event.polityIds[0]);
+                  const lead = getPolityById(event.polityIds[0]);
                   return (
                     <li key={event.id} id={event.slug} className="bh-reveal relative scroll-mt-32">
                       <span
@@ -68,7 +71,7 @@ export default function ChronologyPage() {
                       <p className="mt-2 max-w-prose font-sans leading-relaxed text-ink-muted">{event.summary}</p>
                       <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-sans text-sm">
                         {event.polityIds.map((id) => {
-                          const polity = getPolityBySlug(id);
+                          const polity = getPolityById(id);
                           if (!polity) return null;
                           return (
                             <Link
@@ -113,7 +116,7 @@ export default function ChronologyPage() {
                           </Link>
                           {b.polityIds.length > 0 && (
                             <span className="text-xs text-ink-muted">
-                              in {b.polityIds.map((id) => getPolityBySlug(id)?.name).filter(Boolean).join(", ")}
+                              recorded location: {b.polityIds.map((id) => getPolityById(id)?.name).filter(Boolean).join(", ")}
                             </span>
                           )}
                         </div>
@@ -125,6 +128,12 @@ export default function ChronologyPage() {
               )}
             </section>
           ))}
+          {undated.length > 0 && <section className="mt-16">
+            <h2 className="font-display text-2xl text-ink">Dates not known</h2>
+            <ul className="mt-4 divide-y divide-border border-y border-border">
+              {undated.map(event => <li key={event.id} id={event.slug} className="scroll-mt-32 py-3"><h3 className="font-display text-lg text-ink">{event.title}</h3><p className="mt-1 text-sm text-ink-muted">{event.summary}</p></li>)}
+            </ul>
+          </section>}
         </div>
       </div>
     </PageTransition>

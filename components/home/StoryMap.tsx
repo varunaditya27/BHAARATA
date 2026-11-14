@@ -1,6 +1,7 @@
 "use client";
 
 import "maplibre-gl/dist/maplibre-gl.css";
+import { useAtlasData } from "@/components/layout/AtlasDataProvider";
 import { Map as MapLibreMap, setWorkerUrl } from "maplibre-gl";
 import { useEffect, useRef, useState } from "react";
 import { prefersReducedMotion, startMapAnimations } from "@/components/map/animations";
@@ -60,6 +61,7 @@ export function StoryMap({
    * in step with the territory inking in. */
   onYear?: (year: number) => void;
 }) {
+  const data = useAtlasData();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const readyRef = useRef(false);
@@ -82,7 +84,7 @@ export function StoryMap({
     const from = yearRef.current;
     if (prefersReducedMotion() || ms === 0) {
       yearRef.current = to;
-      applyHistoricalState(map, to, selected);
+      applyHistoricalState(map, to, selected, data);
       onYearRef.current?.(to);
       return;
     }
@@ -94,7 +96,7 @@ export function StoryMap({
       if (now - lastWrite > 80 || t === 1) {
         lastWrite = now;
         yearRef.current = y;
-        applyHistoricalState(map, y, selected);
+        applyHistoricalState(map, y, selected, data);
         onYearRef.current?.(y);
       }
       if (t < 1) yearAnimRef.current = requestAnimationFrame(step);
@@ -163,7 +165,7 @@ export function StoryMap({
     });
 
     map.on("load", () => {
-      addHistoricalLayers(map, { interactive: false });
+      addHistoricalLayers(map, data, { interactive: false });
       // Recolour for the night view: land stays warm parchment, the sea goes deep teal,
       // and relief is pushed up so continents have texture even from orbit.
       const paint = (id: string, prop: string, value: unknown) => {
@@ -180,8 +182,8 @@ export function StoryMap({
       const reveal = () => setShown(true);
       map.once("idle", reveal);
       setTimeout(reveal, 1800);
-      applyHistoricalState(map, START_YEAR, null);
-      stopAnimations = startMapAnimations(map);
+      applyHistoricalState(map, START_YEAR, null, data);
+      stopAnimations = startMapAnimations(map, data);
       readyRef.current = true;
 
       // The descent: from orbit onto the subcontinent, kingdoms inking in
@@ -191,7 +193,7 @@ export function StoryMap({
         showChapter(map, chapterRef.current, 2400);
       } else if (prefersReducedMotion()) {
         map.jumpTo({ center: STORY_OVERVIEW.center, zoom: STORY_OVERVIEW.zoom });
-        applyHistoricalState(map, STORY_OVERVIEW.year, null);
+        applyHistoricalState(map, STORY_OVERVIEW.year, null, data);
         yearRef.current = STORY_OVERVIEW.year;
         onYearRef.current?.(STORY_OVERVIEW.year);
       } else {

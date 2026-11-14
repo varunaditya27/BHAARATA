@@ -18,7 +18,7 @@ import { captureMapCanvas } from "./export-image";
 import { addHistoricalLayers, ensureMonuments, ensureSites } from "./layers";
 import type { LayerToggleId } from "./MapLegend";
 import { BASEMAP_STYLE_URL, LAYER_IDS, SOURCE_IDS } from "./mapStyle";
-import { events, getPolityBySlug } from "@/lib/data/prototype";
+import { useAtlasData, useAtlasAccess } from "@/components/layout/AtlasDataProvider";
 import { formatDateRange } from "@/lib/domain/time";
 
 // MapLibre resolves its worker via `import.meta.url` inside node_modules,
@@ -142,6 +142,9 @@ export function HistoricalMap({
   initialCenter = DEFAULT_CENTER,
   initialZoom = DEFAULT_ZOOM,
 }: HistoricalMapProps) {
+  const data = useAtlasData();
+  const { events } = data;
+  const { getPolityById } = useAtlasAccess();
   const containerRef = useRef<HTMLDivElement>(null);
   const hoverLabelRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
@@ -206,7 +209,7 @@ export function HistoricalMap({
     map.on("load", () => {
       // 3D terrain only where the GPU can afford it — phones get the
       // (cheap, flat) hillshade alone.
-      addHistoricalLayers(map, { terrain3d: !window.matchMedia("(max-width: 767px)").matches });
+      addHistoricalLayers(map, data, { terrain3d: !window.matchMedia("(max-width: 767px)").matches });
 
       map.on("click", (e: MapMouseEvent) => {
         // Battles, monuments and clusters take the click before any kingdom underneath.
@@ -227,7 +230,7 @@ export function HistoricalMap({
             popupLine(box, "p", `Battle, ${props.year} CE`, "bh-popup-eyebrow");
             popupLine(box, "p", String(props.name), "bh-popup-title");
             if (ev) popupLine(box, "p", ev.summary.length > 260 ? ev.summary.slice(0, 257).replace(/\s+\S*$/, "") + "…" : ev.summary, "bh-popup-text");
-            popupLine(box, "a", "More in the chronology", "bh-popup-link", `/chronology#${props.slug}`);
+            popupLine(box, "a", "More in the timeline", "bh-popup-link", `/chronology#${props.slug}`);
           } else if (hit.layer.id === LAYER_IDS.sitePoints) {
             const kind = String(props.t);
             popupLine(box, "p", `${kind.charAt(0).toUpperCase()}${kind.slice(1)}, built c. ${props.y} CE`, "bh-popup-eyebrow");
@@ -281,7 +284,7 @@ export function HistoricalMap({
         setHover(hit?.featureId ?? null);
         const label = hoverLabelRef.current;
         if (!label) return;
-        const polity = hit ? getPolityBySlug(hit.polityId) : undefined;
+        const polity = hit ? getPolityById(hit.polityId) : undefined;
         if (!polity) {
           label.style.opacity = "0";
           return;
@@ -297,7 +300,7 @@ export function HistoricalMap({
         if (hoverLabelRef.current) hoverLabelRef.current.style.opacity = "0";
       });
 
-      stopAnimations = startMapAnimations(map);
+      stopAnimations = startMapAnimations(map, data);
       readyRef.current = true;
       for (const fn of queue.values()) fn(map);
       queue.clear();
@@ -350,10 +353,10 @@ export function HistoricalMap({
       if (yearRafRef.current !== undefined) cancelAnimationFrame(yearRafRef.current);
       yearRafRef.current = requestAnimationFrame(() => {
         yearRafRef.current = undefined;
-        applyHistoricalState(map, year, selectedPolityId);
+        applyHistoricalState(map, year, selectedPolityId, data);
 
         if (selectedPolityId && selectedPolityId !== prevSelectedRef.current) {
-          const boundary = boundaryForPolity(selectedPolityId, year);
+          const boundary = boundaryForPolity(selectedPolityId, year, data);
           if (boundary) {
             const bounds = new LngLatBounds();
             const rings =
@@ -367,7 +370,7 @@ export function HistoricalMap({
         prevSelectedRef.current = selectedPolityId;
       });
     });
-  }, [year, selectedPolityId, whenReady]);
+  }, [year, selectedPolityId, whenReady, data]);
 
   useEffect(() => {
     return () => {

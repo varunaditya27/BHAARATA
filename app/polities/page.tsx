@@ -4,8 +4,9 @@ import { KingdomBoard, type BoardTile, type TileSize } from "@/components/entity
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { Shared } from "@/components/primitives/Shared";
-import { images, type ImageKey } from "@/lib/data/images";
-import { polities } from "@/lib/data/prototype";
+import type { ImageKey } from "@/lib/domain/types";
+import { getAtlasData } from "@/lib/data/atlas-server";
+import type { AtlasData } from "@/lib/data/atlas-data";
 import { formatDateRange } from "@/lib/domain/time";
 import { getHistoricalState, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 import { polityPeakArea } from "@/lib/geo/silhouette";
@@ -18,10 +19,10 @@ export const metadata = {
 const { min, max } = PROTOTYPE_YEAR_RANGE;
 
 /** Year ranges per kingdom, from getHistoricalState for every year, so the board never re-derives "present in year Y". */
-function presenceRanges(): Map<string, [number, number][]> {
+function presenceRanges(data: AtlasData): Map<string, [number, number][]> {
   const ranges = new Map<string, [number, number][]>();
   for (let year = min; year <= max; year++) {
-    for (const p of getHistoricalState(year).activePolities) {
+    for (const p of getHistoricalState(year, data).activePolities) {
       const list = ranges.get(p.id) ?? [];
       const last = list.at(-1);
       if (last && last[1] === year - 1) last[1] = year;
@@ -44,9 +45,11 @@ const NAME_SIZE: Record<TileSize, string> = {
   s: "text-lg sm:text-xl",
 };
 
-export default function PolitiesIndexPage() {
-  const presence = presenceRanges();
-  const byArea = [...polities].sort((a, b) => polityPeakArea(b.id) - polityPeakArea(a.id));
+export default async function PolitiesIndexPage() {
+  const data = await getAtlasData();
+  const { polities, images } = data;
+  const presence = presenceRanges(data);
+  const byArea = [...polities].sort((a, b) => polityPeakArea(b.id, data) - polityPeakArea(a.id, data));
   const rank = new Map(byArea.map((p, i) => [p.id, i]));
   const pct = (y: number) => ((Math.min(Math.max(y, min), max) - min) / (max - min)) * 100;
 
@@ -95,12 +98,12 @@ export default function PolitiesIndexPage() {
               {size === "xl" && polity.summary && (
                 <p className="mt-2 hidden max-w-lg font-sans text-sm leading-snug text-paper/80 line-clamp-2 md:block">{polity.summary}</p>
               )}
-              <div className="relative mt-3 h-1 bg-paper/15" aria-hidden>
+              {polity.period.startQualifier !== "unknown" && polity.period.endQualifier !== "unknown" && polity.period.endYear !== null && <div className="relative mt-3 h-1 bg-paper/15" aria-hidden>
                 <div
                   className="absolute inset-y-0"
                   style={{ left: `${pct(polity.period.startYear)}%`, width: `${Math.max(1, pct(end) - pct(polity.period.startYear))}%`, backgroundColor: polity.accentColor }}
                 />
-              </div>
+              </div>}
             </div>
           </Link>
         ),
@@ -123,7 +126,7 @@ export default function PolitiesIndexPage() {
               </p>
               <p className="mt-4 max-w-xl font-sans text-sm text-paper/70">
                 The coloured line on each tile shows when the kingdom existed, on a scale from {min} to {max}. Borders come
-                from the Cliopatria dataset and summaries from Wikipedia. Each kingdom&rsquo;s page says what is still
+                from Cliopatria and summaries from Wikipedia. Each kingdom&rsquo;s page says what is still
                 unchecked.
               </p>
             </>

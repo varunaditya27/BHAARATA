@@ -1,7 +1,7 @@
 import type { ExpressionSpecification, Map as MapLibreMap } from "maplibre-gl";
-import { boundaries, places } from "@/lib/data/prototype";
+import type { AtlasData } from "@/lib/data/atlas-data";
 import { getHistoricalState, getRoutesAtYear } from "@/lib/geo/historical-state";
-import { boundaryId, hasFrontier } from "@/lib/geo/to-geojson";
+import { boundaryId } from "@/lib/geo/to-geojson";
 import { LAYER_IDS, SOURCE_IDS } from "./mapStyle";
 
 export const TERRITORY_OPACITY = { inactive: 0, active: 0.58, selected: 0.8 } as const;
@@ -23,11 +23,12 @@ const lastWritten = new WeakMap<MapLibreMap, Map<string, string>>();
 const appliedYear = new WeakMap<MapLibreMap, number>();
 export const currentYear = (map: MapLibreMap, fallback = 1050) => appliedYear.get(map) ?? fallback;
 
-export function applyHistoricalState(map: MapLibreMap, year: number, selectedPolityId: string | null) {
+export function applyHistoricalState(map: MapLibreMap, year: number, selectedPolityId: string | null, data: AtlasData) {
+  const { boundaries, places } = data;
   appliedYear.set(map, year);
   let written = lastWritten.get(map);
   if (!written) lastWritten.set(map, (written = new Map()));
-  const state = getHistoricalState(year);
+  const state = getHistoricalState(year, data);
   const activeBoundaryIds = new Set(state.activeBoundaries.map(boundaryId));
   const activeCapitalNames = new Set(state.activePolities.flatMap((p) => p.capitals));
   const polityHasActiveShape = new Set(state.activeBoundaries.map((b) => b.polityId));
@@ -57,7 +58,7 @@ export function applyHistoricalState(map: MapLibreMap, year: number, selectedPol
       { active, opacity, lineOpacity: active ? 1 : 0, selected, echoOpacity: echo },
     );
     // Only some shapes have a frontier band (Chera); the rest simply have no such feature.
-    if (hasFrontier.has(id)) map.setFeatureState({ source: SOURCE_IDS.frontier, id }, { hatchOpacity: hatch });
+    if (id in data.frontiers) map.setFeatureState({ source: SOURCE_IDS.frontier, id }, { hatchOpacity: hatch });
     map.setFeatureState({ source: SOURCE_IDS.kingdomLabels, id }, { labelOpacity: label });
   }
 
@@ -81,7 +82,7 @@ export function applyHistoricalState(map: MapLibreMap, year: number, selectedPol
   map.setFilter(LAYER_IDS.capitalPulseOuter, ["in", ["get", "placeId"], ["literal", capitalIds]]);
   map.setFilter(LAYER_IDS.capitalSeals, ["in", ["get", "polityId"], ["literal", state.activePolities.map((p) => p.id)]]);
 
-  const routeIds = getRoutesAtYear(year).map((r) => r.id);
+  const routeIds = getRoutesAtYear(year, data).map((r) => r.id);
   for (const layerId of [LAYER_IDS.routeLines, LAYER_IDS.routeLinesDash, LAYER_IDS.routeArrows, LAYER_IDS.routeMovers]) {
     map.setFilter(layerId, ["in", ["get", "routeId"], ["literal", routeIds]]);
   }
@@ -89,8 +90,8 @@ export function applyHistoricalState(map: MapLibreMap, year: number, selectedPol
 
 /** The boundary to frame for a kingdom in a given year — its shape for
  * that year if it has one, otherwise its first recorded shape. */
-export function boundaryForPolity(polityId: string, year: number) {
-  const own = boundaries.filter((b) => b.polityId === polityId);
+export function boundaryForPolity(polityId: string, year: number, data: AtlasData) {
+  const own = data.boundaries.filter((b) => b.polityId === polityId);
   return own.find((b) => year >= b.validFrom && year <= b.validTo) ?? own[0];
 }
 

@@ -1,3 +1,6 @@
+"use client";
+
+import { useAtlasData } from "@/components/layout/AtlasDataProvider";
 import { polityGeometry, silhouettePath } from "@/lib/geo/silhouette";
 import { cn } from "@/lib/utils/cn";
 import { darkenHex } from "@/lib/utils/color";
@@ -22,7 +25,8 @@ export function KingdomEmblem({
   draw?: boolean;
   title?: string;
 }) {
-  const geometry = polityGeometry(polityId);
+  const data = useAtlasData();
+  const geometry = polityGeometry(polityId, data);
   if (!geometry) return null;
   const d = silhouettePath(geometry);
   return (

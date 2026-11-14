@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Colophon } from "@/components/layout/Colophon";
+import { AtlasDataProvider } from "@/components/layout/AtlasDataProvider";
+import { getAtlasData } from "@/lib/data/atlas-server";
 import { GlobalNav } from "@/components/layout/GlobalNav";
 import { fontVariables } from "@/lib/fonts";
 import "./globals.css";
@@ -13,7 +15,10 @@ export const metadata: Metadata = {
     "A map of the Indian subcontinent from 600 to 1700: which kingdoms held which land, when, and what evidence that rests on.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export const dynamic = "force-dynamic";
+
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const data = await getAtlasData();
   return (
     <html lang="en" className={`${fontVariables} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-paper text-ink">
@@ -23,9 +28,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to the page content
         </a>
+        <AtlasDataProvider data={data}>
         <GlobalNav />
         <main id="main" className="flex-1">{children}</main>
         <Colophon />
+        </AtlasDataProvider>
       </body>
     </html>
   );

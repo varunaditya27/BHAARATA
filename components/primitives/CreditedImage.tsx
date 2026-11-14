@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils/cn";
-import type { ImageCredit } from "@/lib/data/images";
+import type { ImageCredit } from "@/lib/domain/types";
 
 /**
  * Every photograph in BHĀRATA carries its credit — archival/museum

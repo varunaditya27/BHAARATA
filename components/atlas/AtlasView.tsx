@@ -22,7 +22,7 @@ import { EventTicks } from "@/components/chronology/EventTicks";
 import { LifespanStrip } from "@/components/chronology/LifespanStrip";
 import { TimelineScrubber, type TimelineChangeSource } from "@/components/chronology/TimelineScrubber";
 import { EntityPreviewPanel } from "@/components/entity/EntityPreviewPanel";
-import { getPlaceById, milestones, getPolityBySlug, polities } from "@/lib/data/prototype";
+import { useAtlasAccess, useAtlasData } from "@/components/layout/AtlasDataProvider";
 import type { HistoricalEvent } from "@/lib/domain/types";
 import { getEraForYear, getHistoricalState, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 
@@ -44,7 +44,6 @@ function cameraFromUrl(raw: string | null): { center: [number, number]; zoom: nu
   return { center: [lng, lat], zoom };
 }
 const CAPTION_MS = 5200;
-const EVENT_YEARS = milestones.map((e) => e.period.startYear);
 const DEFAULT_YEAR = 1050;
 
 /**
@@ -60,6 +59,10 @@ const DEFAULT_YEAR = 1050;
  * debounce once the year settles, so sharing a link still works.
  */
 export function AtlasView() {
+  const data = useAtlasData();
+  const { polities } = data;
+  const { getPlaceById, milestones, getPolityById, getPolityBySlug } = useAtlasAccess();
+  const EVENT_YEARS = useMemo(() => milestones.filter(e => e.period.startQualifier !== "unknown").map(e => e.period.startYear), [milestones]);
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -125,6 +128,7 @@ export function AtlasView() {
     return () => {
       if (eraCardTimeoutRef.current) clearTimeout(eraCardTimeoutRef.current);
       if (urlCommitTimeoutRef.current) clearTimeout(urlCommitTimeoutRef.current);
+      if (cameraCommitTimeoutRef.current) clearTimeout(cameraCommitTimeoutRef.current);
       if (captionTimeoutRef.current) clearTimeout(captionTimeoutRef.current);
     };
     // Only seed on mount — subsequent era tracking happens in handleYearChange.
@@ -133,7 +137,7 @@ export function AtlasView() {
 
   const selectedSlug = searchParams.get("polity");
   const selectedPolity = selectedSlug ? getPolityBySlug(selectedSlug) ?? null : null;
-  const historicalState = useMemo(() => getHistoricalState(displayYear), [displayYear]);
+  const historicalState = useMemo(() => getHistoricalState(displayYear, data), [displayYear, data]);
   const activePolityIds = useMemo(
     () => new Set(historicalState.activePolities.map((p) => p.id)),
     [historicalState],
@@ -160,10 +164,9 @@ export function AtlasView() {
 
   const handleSelectPolity = useCallback(
     (polityId: string | null) => {
-      // boundaries/polities share id === slug in the prototype dataset.
-      pushParams({ polity: polityId });
+      pushParams({ polity: polityId ? getPolityById(polityId)?.slug ?? null : null });
     },
-    [pushParams],
+    [getPolityById, pushParams],
   );
 
   /** Lower-third + a camera drift toward the event's first place. */
@@ -174,7 +177,7 @@ export function AtlasView() {
     const place = event.placeIds[0] ? getPlaceById(event.placeIds[0]) : undefined;
     const center = place?.coordinates ?? event.location;
     if (center) setFocus({ key: `${event.id}-${Date.now()}`, center });
-  }, []);
+  }, [getPlaceById]);
 
   // Era title cards only fire during auto-play, not manual scrubbing —
   // otherwise dragging the slider across a boundary would interrupt the
@@ -195,7 +198,7 @@ export function AtlasView() {
       const previous = lastYearRef.current;
       lastYearRef.current = nextYear;
       if (source === "auto" && previous !== null) {
-        const reached = milestones.find((e) => e.period.startYear > previous && e.period.startYear <= nextYear);
+        const reached = milestones.find((e) => e.period.startQualifier !== "unknown" && e.period.startYear > previous && e.period.startYear <= nextYear);
         if (reached) showEvent(reached);
       } else if (source === "manual") {
         setCaption(null);
@@ -212,7 +215,7 @@ export function AtlasView() {
       }
       prevEraRef.current = era;
     },
-    [pushParams, showEvent],
+    [pushParams, showEvent, milestones],
   );
 
   const currentEra = getEraForYear(displayYear);
@@ -275,7 +278,7 @@ export function AtlasView() {
       handleYearChange(clampYear(displayYear + delta), "manual");
     },
     stepEvent: (direction) => {
-      const sorted = [...milestones].sort((a, b) => a.period.startYear - b.period.startYear);
+      const sorted = milestones.filter(e => e.period.startQualifier !== "unknown").sort((a, b) => a.period.startYear - b.period.startYear);
       const next =
         direction === 1
           ? sorted.find((e) => e.period.startYear > displayYear)
@@ -289,7 +292,7 @@ export function AtlasView() {
       const p = polities[index];
       if (!p) return;
       // Picking a kingdom that doesn't exist this year jumps to its start.
-      if (!activePolityIds.has(p.id)) handleYearChange(clampYear(p.period.startYear), "manual");
+      if (!activePolityIds.has(p.id) && p.period.startQualifier !== "unknown") handleYearChange(clampYear(p.period.startYear), "manual");
       handleSelectPolity(p.id);
     },
     clearSelection: () => {

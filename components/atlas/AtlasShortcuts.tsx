@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef } from "react";
-import { polities } from "@/lib/data/prototype";
 
 export type AtlasShortcutActions = {
   togglePlay: () => void;
@@ -21,7 +20,7 @@ export const SHORTCUTS: { keys: string[]; does: string }[] = [
   { keys: ["Space"], does: "Play or pause" },
   { keys: ["J", "K"], does: "Back or forward 10 years (hold Shift for 50)" },
   { keys: [",", "."], does: "Previous or next event" },
-  { keys: ["1", "–", String(Math.min(9, polities.length))], does: "Select a kingdom, in list order" },
+  { keys: ["1", "–", "9"], does: "Select a kingdom, in list order" },
   { keys: ["Esc"], does: "Deselect the kingdom" },
   { keys: ["C"], does: "Full screen: hide everything but the map and play through time" },
   { keys: ["V"], does: "Compare two years side by side" },

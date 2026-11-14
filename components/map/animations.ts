@@ -1,3 +1,4 @@
+import type { AtlasData } from "@/lib/data/atlas-data";
 import type { GeoJSONSource, Map as MapLibreMap } from "maplibre-gl";
 import { DASH_SEQUENCE } from "./layers";
 import { LAYER_IDS, SOURCE_IDS } from "./mapStyle";
@@ -12,7 +13,7 @@ export function prefersReducedMotion(): boolean {
  * moving along them, river flow, and the pulse on active capitals — on one shared clock. Skipped entirely under reduced motion
  * (not frozen mid-frame). Returns a stop function for unmount.
  */
-export function startMapAnimations(map: MapLibreMap): () => void {
+export function startMapAnimations(map: MapLibreMap, data: AtlasData): () => void {
   if (prefersReducedMotion()) return () => {};
 
   let raf = 0;
@@ -42,7 +43,7 @@ export function startMapAnimations(map: MapLibreMap): () => void {
     if (now - lastMove > 33) {
       lastMove = now;
       const source = map.getSource(SOURCE_IDS.routeMovers) as GeoJSONSource | undefined;
-      source?.setData(routeMoversFeatureCollection((now - startedAt) / 1000));
+      source?.setData(routeMoversFeatureCollection((now - startedAt) / 1000, data));
     }
     const phase = (Math.sin(((now - startedAt) / 1000) * 2.2) + 1) / 2;
     if (map.getLayer(LAYER_IDS.capitalPulseOuter)) {

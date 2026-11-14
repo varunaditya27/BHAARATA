@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Shared } from "@/components/primitives/Shared";
-import type { ImageCredit } from "@/lib/data/images";
+import type { ImageCredit } from "@/lib/domain/types";
 
 /**
  * Full-bleed hero treatment: darkened photo, gradient for text legibility,

@@ -12,32 +12,27 @@ import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { contemporariesOf, KingdomLifespan } from "@/components/entity/KingdomLifespan";
 import { RisingTitle } from "@/components/entity/RisingTitle";
 import { RulerPortrait } from "@/components/entity/RulerPortrait";
-import { images, type ImageKey } from "@/lib/data/images";
-import {
-  evidence as evidenceData,
-  events,
-  getPolityBySlug,
-  getRulersForPolity,
-  getSourceById,
-  places,
-  polities,
-} from "@/lib/data/prototype";
+import type { ImageKey } from "@/lib/domain/types";
+import { getAtlasData } from "@/lib/data/atlas-server";
+import { atlasAccess } from "@/lib/data/atlas-data";
 import { polityStatus } from "@/lib/data/status";
 import { placeKindLabel } from "@/lib/domain/labels";
 import { formatDateRange, formatPersonDates } from "@/lib/domain/time";
 import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
-export function generateStaticParams() {
-  return polities.map((p) => ({ slug: p.slug }));
-}
+
 
 export async function generateMetadata({ params }: PageProps<"/polities/[slug]">) {
+  const { getPolityBySlug } = atlasAccess(await getAtlasData());
   const { slug } = await params;
   const polity = getPolityBySlug(slug);
   return { title: polity ? `${polity.name} — BHĀRATA` : "Kingdom — BHĀRATA", description: polity?.summary };
 }
 
 export default async function PolityPage({ params }: PageProps<"/polities/[slug]">) {
+  const data = await getAtlasData();
+  const { evidence: evidenceData, events, places, polities, images } = data;
+  const { getPolityBySlug, getRulersForPolity, getSourceById } = atlasAccess(data);
   const { slug } = await params;
   const polity = getPolityBySlug(slug);
   if (!polity) notFound();
@@ -55,8 +50,9 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
   const sourceRecords = polity.provenance
     .map((p) => getSourceById(p.sourceId))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
-  const contemporaries = contemporariesOf(polity);
+  const contemporaries = contemporariesOf(polity, polities);
   const status = polityStatus(polity);
+  const fullPeriodKnown = polity.period.startQualifier !== "unknown" && polity.period.endQualifier !== "unknown" && polity.period.endYear !== null;
   const span = (polity.period.endYear ?? polity.period.startYear) - polity.period.startYear;
 
   const overviewTab = (
@@ -72,11 +68,10 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
         <section className="mt-12">
           <h2 className="font-sans text-sm font-medium text-ink-muted">Who else was around</h2>
           <p className="mt-1 font-sans text-sm text-ink-muted">
-            {polity.name} lasted about {span} years (between the dashed lines). The bars below are the other kingdoms of
-            the time — darker where their years overlap.
+            {fullPeriodKnown ? `${polity.name} lasted about ${span} years. The bars below show other kingdoms of the time.` : "The full date range is not known, so a comparison is not available."}
           </p>
           <div className="mt-5">
-            <KingdomLifespan polity={polity} />
+            <KingdomLifespan polity={polity} polities={polities} />
           </div>
         </section>
 
@@ -143,7 +138,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
           )}
         </dl>
         <Link
-          href={`/atlas?polity=${polity.slug}&year=${polity.period.startYear}`}
+          href={polity.period.startQualifier === "unknown" ? `/atlas?polity=${polity.slug}` : `/atlas?polity=${polity.slug}&year=${polity.period.startYear}`}
           transitionTypes={NAV_BACK}
           className="mt-6 block border border-ink px-4 py-2 text-center text-ink transition-colors hover:bg-ink hover:text-paper"
         >
@@ -161,8 +156,8 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
         <h2 className="font-sans text-sm font-medium text-ink-muted">
           {rulers.some((r) => r.datesAre === "lifetime") ? "Reigns. A paler bar means only the ruler's lifetime is known." : "Reigns"}
         </h2>
-        <div className="relative mt-4 h-10 border-b border-border">
-          {rulers.map((r) => {
+        {fullPeriodKnown && <><div className="relative mt-4 h-10 border-b border-border">
+          {rulers.filter(r => r.period.startQualifier !== "unknown").map((r) => {
             const start = polity.period.startYear;
             const total = Math.max(1, (polity.period.endYear ?? start) - start);
             // Ruler dates (Wikidata) and kingdom dates (Cliopatria) can disagree by a few years: clamp to the track.
@@ -185,7 +180,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
         <div className="mt-2 flex justify-between font-sans text-[0.65rem] text-ink-muted">
           <span>{polity.period.startYear}</span>
           <span>{polity.period.endYear}</span>
-        </div>
+        </div></>}
 
         <ul className="mt-10 sm:columns-2 sm:gap-x-12">
           {rulers.map((ruler) => (
@@ -237,12 +232,12 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
   const battlesList =
     relatedBattles.length > 0 ? (
       <div className={relatedEvents.length > 0 ? "mt-12" : ""}>
-        <h2 className="font-sans text-sm font-medium text-ink-muted">Battles fought within its borders ({relatedBattles.length})</h2>
+        <h2 className="font-sans text-sm font-medium text-ink-muted">Battles with recorded locations inside its borders ({relatedBattles.length})</h2>
         <ul className="mt-3 divide-y divide-border border-y border-border">
           {relatedBattles.map((b) => (
             <li key={b.id} className="py-3 font-sans">
               <div className="flex flex-wrap items-baseline gap-x-3">
-                <span className="w-12 shrink-0 text-sm tabular-nums text-ink-muted">{b.period.startYear}</span>
+                <span className="w-12 shrink-0 text-sm tabular-nums text-ink-muted">{b.period.startQualifier === "unknown" ? "Date unknown" : b.period.startYear}</span>
                 <Link href={`/chronology#${b.slug}`} transitionTypes={NAV_FORWARD} className="font-display text-lg text-ink underline-offset-4 hover:underline">
                   {b.title}
                 </Link>
@@ -251,14 +246,14 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
           ))}
         </ul>
         <p className="mt-2 text-xs text-ink-muted">
-          Listed by where each battle was fought, not by who fought it. The borders come from the Cliopatria dataset.
+          These links compare recorded points with Cliopatria&rsquo;s borders. A point may be approximate and does not establish who fought.
         </p>
       </div>
     ) : null;
 
   const eventsTab =
     relatedEvents.length + relatedBattles.length === 0 ? (
-      <p className="font-sans text-sm text-ink-muted">No events recorded yet.</p>
+      <p className="font-sans text-sm text-ink-muted">No linked events recorded yet.</p>
     ) : (
       <>
         {relatedEvents.length > 0 && (
@@ -269,13 +264,13 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
             <p className="font-sans text-sm text-ink-muted">{formatDateRange(event.period)}</p>
             <h3 className="mt-1 font-display text-xl text-ink">{event.title}</h3>
             <p className="mt-1 max-w-prose font-sans text-sm leading-relaxed text-ink-muted">{event.summary}</p>
-            <Link
+            {event.period.startQualifier !== "unknown" && <Link
               href={`/atlas?year=${event.period.startYear}&polity=${polity.slug}`}
               transitionTypes={NAV_BACK}
               className="mt-2 inline-block font-sans text-xs text-ink underline underline-offset-4"
             >
               Show {event.period.startYear} CE on the map
-            </Link>
+            </Link>}
           </li>
         ))}
       </ol>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { milestones as events, polities } from "@/lib/data/prototype";
+import { getAtlasData } from "@/lib/data/atlas-server";
 import { PROTOTYPE_ERAS, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
@@ -11,10 +11,12 @@ const TICKS = [600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 170
  * a marker jumps to that event in the list below. Scrolls sideways on
  * narrow screens rather than squashing the years together.
  */
-export function KingdomLanes() {
+export async function KingdomLanes() {
+  const { polities, events: allEvents } = await getAtlasData();
+  const events = allEvents.filter(e => e.category !== "battle" && e.period.startQualifier !== "unknown");
   const { min, max } = PROTOTYPE_YEAR_RANGE;
   const pct = (y: number) => ((Math.min(max, Math.max(min, y)) - min) / (max - min)) * 100;
-  const sorted = [...polities].sort((a, b) => a.period.startYear - b.period.startYear);
+  const sorted = polities.filter(p => p.period.startQualifier !== "unknown" && p.period.endQualifier !== "unknown" && p.period.endYear !== null).sort((a, b) => a.period.startYear - b.period.startYear);
   // Kingdoms with recorded events lead; the rest sit behind a native
   // <details> toggle so the chart doesn't run to sixty rows.
   const hasEvents = (id: string) => events.some((e) => e.polityIds[0] === id);

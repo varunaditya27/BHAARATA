@@ -5,14 +5,14 @@ import { NavLinks } from "./NavLinks";
 
 const primaryLinks = [
   { href: "/atlas", label: "Atlas" },
-  { href: "/chronology", label: "Chronology" },
+  { href: "/chronology", label: "Timeline" },
   { href: "/polities", label: "Kingdoms" },
   { href: "/people", label: "People" },
   { href: "/places", label: "Places" },
   { href: "/evidence", label: "Evidence" },
 ];
 
-const secondaryLinks = [{ href: "/method", label: "How it works" }];
+const secondaryLinks = [{ href: "/data", label: "Browse data" }, { href: "/method", label: "How it works" }];
 
 export function GlobalNav() {
   return (

@@ -1,8 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { images, type ImageKey } from "@/lib/data/images";
-import { getPolityBySlug, polities } from "@/lib/data/prototype";
+import type { ImageKey } from "@/lib/domain/types";
+import { getAtlasData } from "@/lib/data/atlas-server";
+import { atlasAccess } from "@/lib/data/atlas-data";
 import { formatDateRange } from "@/lib/domain/time";
 import { polityGeometry, silhouettePath } from "@/lib/geo/silhouette";
 import { darkenHex } from "@/lib/utils/color";
@@ -11,15 +12,16 @@ export const alt = "A kingdom in the BHĀRATA atlas";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export function generateStaticParams() {
-  return polities.map((p) => ({ slug: p.slug }));
-}
+
 
 const font = (file: string) => readFile(join(process.cwd(), "assets/og-fonts", file));
 
 /** The card shown when a kingdom's page is shared: its photograph, its
  * outline, its name and dates — and the placeholder-data note. */
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
+  const data = await getAtlasData();
+  const { images } = data;
+  const { getPolityBySlug } = atlasAccess(data);
   const { slug } = await params;
   const polity = getPolityBySlug(slug);
   const [zodiak, ranade] = await Promise.all([font("Zodiak-400.ttf"), font("Ranade-400.ttf")]);
@@ -28,7 +30,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const photo = hero
     ? `data:image/jpeg;base64,${(await readFile(join(process.cwd(), "public", hero.file))).toString("base64")}`
     : null;
-  const geometry = polity ? polityGeometry(polity.id) : undefined;
+  const geometry = polity ? polityGeometry(polity.id, data) : undefined;
   const name = polity?.name ?? "Unknown kingdom";
   // Shrink long names so they stay inside the text panel.
   const nameSize = Math.min(104, Math.floor(880 / Math.max(6, name.length)));

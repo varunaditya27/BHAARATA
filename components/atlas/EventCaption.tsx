@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
-import { getPolityBySlug } from "@/lib/data/prototype";
+import { useAtlasAccess } from "@/components/layout/AtlasDataProvider";
 import { formatDateRange } from "@/lib/domain/time";
 import type { HistoricalEvent } from "@/lib/domain/types";
 import { lightenHex } from "@/lib/utils/color";
@@ -15,7 +15,8 @@ import { NAV_FORWARD } from "@/lib/utils/view-transition";
  */
 /** `raised` lifts it clear of the cinema-view letterbox bar. */
 export function EventCaption({ event, raised = false }: { event: HistoricalEvent | null; raised?: boolean }) {
-  const polity = event?.polityIds[0] ? getPolityBySlug(event.polityIds[0]) : undefined;
+  const { getPolityById } = useAtlasAccess();
+  const polity = event?.polityIds[0] ? getPolityById(event.polityIds[0]) : undefined;
   return (
     <AnimatePresence>
       {event && (
@@ -45,7 +46,7 @@ export function EventCaption({ event, raised = false }: { event: HistoricalEvent
                 transitionTypes={NAV_FORWARD}
                 className="mt-2 inline-block font-sans text-xs text-paper/80 underline underline-offset-4 hover:text-paper"
               >
-                Read more in the chronology
+                Read more in the timeline
               </Link>
             </div>
           </div>

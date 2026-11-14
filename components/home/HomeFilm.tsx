@@ -6,8 +6,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { Odometer } from "@/components/primitives/Odometer";
-import { images } from "@/lib/data/images";
-import { getPolityBySlug } from "@/lib/data/prototype";
+import { useAtlasData, useAtlasAccess } from "@/components/layout/AtlasDataProvider";
 import { STORY_OVERVIEW, storyChapters } from "@/lib/data/story";
 import { NAV_FORWARD } from "@/lib/utils/view-transition";
 import { Wordmark } from "./Wordmark";
@@ -25,6 +24,8 @@ const StoryMap = dynamic(() => import("./StoryMap").then((m) => m.StoryMap), {
  * on screen drives the camera and the year. Scrolling is the only control.
  */
 export function HomeFilm() {
+  const { images } = useAtlasData();
+  const { getPolityById } = useAtlasAccess();
   const [activeId, setActiveId] = useState<string | null>(null);
   const [mapYear, setMapYear] = useState<number | null>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -108,7 +109,7 @@ export function HomeFilm() {
         </div>
 
         {storyChapters.map((c, i) => {
-          const polity = getPolityBySlug(c.polityId);
+          const polity = getPolityById(c.polityId);
           const image = images[c.imageKey];
           return (
             <article
@@ -131,7 +132,7 @@ export function HomeFilm() {
                   <p className="mt-3 font-sans text-[0.95rem] leading-relaxed text-paper/80 md:text-base">{c.body}</p>
                   <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 font-sans text-sm">
                     <Link
-                      href={`/atlas?year=${c.year}&polity=${c.polityId}`}
+                      href={`/atlas?year=${c.year}${polity ? `&polity=${polity.slug}` : ""}`}
                       transitionTypes={NAV_FORWARD}
                       className="text-paper underline underline-offset-4 hover:text-paper/80"
                     >
