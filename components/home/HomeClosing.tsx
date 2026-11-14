@@ -232,10 +232,7 @@ export function HomeClosing() {
     >
       <div className="flex flex-col items-start gap-8 border-b border-border pb-14 md:flex-row md:items-end md:justify-between">
         <div className="max-w-xl">
-          <p className="gsap-closing-head font-mono text-[11px] uppercase tracking-[0.2em] text-territory-selected">
-            Interactive Historical Atlas
-          </p>
-          <h2 className="mt-2 font-display text-4xl leading-[1.08] text-ink md:text-5xl">
+          <h2 className="font-display text-4xl leading-[1.08] text-ink md:text-5xl">
             {headingWords.map((word, idx) => (
               <span
                 key={word}
