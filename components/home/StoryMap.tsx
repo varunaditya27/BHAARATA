@@ -16,12 +16,12 @@ if (typeof window !== "undefined") {
 }
 
 const START_YEAR = 600;
-const DESCENT_MS = 5200;
+const DESCENT_MS = 6800;
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-/** Where the film opens: high over the Arabian Sea with the Indian subcontinent already in view. */
-const ORBIT_START = { lng: 68, lat: 18, zoom: 2.1, bearing: -6, pitch: 14 };
+/** Where the film opens: orbital view over the Arabian Sea / East Africa with India visible on the eastern limb. */
+const ORBIT_START = { lng: 36, lat: 16, zoom: 1.45, bearing: -18, pitch: 18 };
 
 function initialPadding(container: HTMLElement) {
   const wide = window.matchMedia("(min-width: 1024px)").matches;
@@ -29,21 +29,20 @@ function initialPadding(container: HTMLElement) {
 }
 
 /**
- * The opening swoop: India is framed on the globe from frame 0, glides to
- * the overview position over the first ~65% of the intro, and settles flat
- * while the kingdoms ink in across the subcontinent.
+ * The opening swoop: spins smoothly from orbit onto the Indian subcontinent
+ * while pitching into the horizon and settling flat over the Deccan.
  */
 function orbitFrame(map: MapLibreMap, t: number) {
-  const camT = Math.min(1, t / 0.65);
-  const glide = easeInOut(camT);
+  const spin = easeInOut(t);
+  const dive = easeInOut(Math.max(0, (t - 0.12) / 0.88));
   const baseShift = initialPadding(map.getContainer());
-  const shift = Math.round(baseShift * (1 - glide));
+  const shift = Math.round(baseShift * (1 - easeInOut(Math.min(1, t * 1.15))));
   const target = STORY_OVERVIEW;
   map.jumpTo({
-    center: [lerp(ORBIT_START.lng, target.center[0], glide), lerp(ORBIT_START.lat, target.center[1], glide)],
-    zoom: lerp(ORBIT_START.zoom, target.zoom, glide),
-    bearing: lerp(ORBIT_START.bearing, 0, glide),
-    pitch: lerp(ORBIT_START.pitch, 0, glide) + 10 * Math.sin(Math.PI * glide),
+    center: [lerp(ORBIT_START.lng, target.center[0], spin), lerp(ORBIT_START.lat, target.center[1], spin)],
+    zoom: lerp(ORBIT_START.zoom, target.zoom, Math.pow(dive, 1.1)),
+    bearing: lerp(ORBIT_START.bearing, 0, easeInOut(Math.min(1, t * 1.2))),
+    pitch: lerp(ORBIT_START.pitch, 0, spin) + 22 * Math.sin(Math.PI * dive),
     padding: { left: shift, right: 0, top: 0, bottom: 0 },
   });
 }
@@ -166,8 +165,6 @@ export function StoryMap({
         "fog-ground-blend": 0.2,
         "atmosphere-blend": ["interpolate", ["linear"], ["zoom"], 0, 1, 3, 0.85, 5.5, 0],
       });
-      // Reveal the globe immediately once the basemap style and globe projection are active.
-      setShown(true);
     });
 
     map.on("load", () => {
@@ -202,13 +199,13 @@ export function StoryMap({
         onYearRef.current?.(STORY_OVERVIEW.year);
       } else {
         orbitFrame(map, 0);
-        const hold = 200;
-        const t0 = performance.now() + hold;
+        const t0 = performance.now();
         let lastYearWrite = 0;
         const frame = (now: number) => {
           const t = Math.min(1, Math.max(0, (now - t0) / DESCENT_MS));
           orbitFrame(map, t);
-          const yearT = Math.min(1, Math.max(0, (t - 0.2) / 0.8));
+          // Begin sweeping years once India is centered in view (t >= 0.35).
+          const yearT = Math.min(1, Math.max(0, (t - 0.35) / 0.65));
           if (yearT > 0 && (now - lastYearWrite > 80 || t === 1)) {
             lastYearWrite = now;
             const y = Math.round(START_YEAR + (STORY_OVERVIEW.year - START_YEAR) * easeInOut(yearT));
