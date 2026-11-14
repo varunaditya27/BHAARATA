@@ -4,8 +4,11 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ReactLenis } from "lenis/react";
-import { motion, useReducedMotion } from "motion/react";
+import { ReactLenis, useLenis } from "lenis/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { useReducedMotion } from "motion/react";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { Odometer } from "@/components/primitives/Odometer";
 import { useAtlasData, useAtlasAccess } from "@/components/layout/AtlasDataProvider";
@@ -15,16 +18,18 @@ import { AstrolabeOverlay } from "./AstrolabeOverlay";
 import type { MapTelemetry } from "./StoryMap";
 import { Wordmark } from "./Wordmark";
 
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
 const StoryMap = dynamic(() => import("./StoryMap").then((m) => m.StoryMap), {
   ssr: false,
   loading: () => <div className="absolute inset-0 bg-ink" />,
 });
 
 const GHOST_SCRIPTS = [
-  { text: "भारत", left: "6%", top: "14%", size: "clamp(4rem, 10vw, 8.5rem)", delay: 0.1 },
-  { text: "பாரதம்", left: "34%", top: "64%", size: "clamp(3.2rem, 8vw, 6.5rem)", delay: 0.25 },
-  { text: "ಭಾರತ", left: "18%", top: "38%", size: "clamp(3.5rem, 8.5vw, 7rem)", delay: 0.4 },
-  { text: "భారత", left: "44%", top: "18%", size: "clamp(3.2rem, 7.5vw, 6rem)", delay: 0.55 },
+  { text: "भारत", left: "6%", top: "14%", size: "clamp(4rem, 10vw, 8.5rem)" },
+  { text: "பாரதம்", left: "34%", top: "64%", size: "clamp(3.2rem, 8vw, 6.5rem)" },
+  { text: "ಭಾರತ", left: "18%", top: "38%", size: "clamp(3.5rem, 8.5vw, 7rem)" },
+  { text: "భారత", left: "44%", top: "18%", size: "clamp(3.2rem, 7.5vw, 6rem)" },
 ];
 
 const ERA_GLINTS = [
@@ -35,11 +40,222 @@ const ERA_GLINTS = [
   "radial-gradient(58% 52% at 74% 20%, rgba(230,138,86,0.26), rgba(150,52,26,0.09) 48%, transparent 74%)",
 ];
 
+/** Syncs Lenis smooth scroll ticks with GSAP ScrollTrigger. */
+function LenisScrollTriggerBridge() {
+  useLenis(() => {
+    ScrollTrigger.update();
+  });
+  return null;
+}
+
 /**
- * The homepage as a choreographed historical film: smooth inertia scrolling
- * via Lenis, continuous scroll-scrubbed 60fps camera and year interpolation,
- * celestial astrolabe HUD, and parallax chapter plates.
+ * Tactile chapter card with GSAP quickTo hover tilt (Preset #2/#3)
+ * and ScrollTrigger image parallax + staggered reveal.
  */
+function ChapterPlate({
+  chapter,
+  index,
+  polityName,
+  politySlug,
+  polityId,
+  accentColor,
+  image,
+  onNext,
+}: {
+  chapter: (typeof storyChapters)[number];
+  index: number;
+  polityName: string;
+  politySlug?: string;
+  polityId?: string;
+  accentColor: string;
+  image: { file: string; alt: string; artist: string; license: string };
+  onNext?: () => void;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const el = cardRef.current;
+      if (!el) return;
+      const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // ScrollTrigger card entrance + inner image parallax
+        gsap.fromTo(
+          el,
+          { opacity: 0.15, y: 42 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.65,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 86%",
+              end: "top 40%",
+              scrub: 0.4,
+            },
+          }
+        );
+
+        const imgWrap = el.querySelector(".gsap-chapter-img");
+        if (imgWrap) {
+          gsap.fromTo(
+            imgWrap,
+            { scale: 1.12, yPercent: -6 },
+            {
+              scale: 1,
+              yPercent: 6,
+              ease: "none",
+              scrollTrigger: {
+                trigger: el,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            }
+          );
+        }
+
+        const copyItems = el.querySelectorAll(".gsap-chapter-item");
+        if (copyItems.length > 0) {
+          gsap.from(copyItems, {
+            opacity: 0,
+            y: 16,
+            duration: 0.45,
+            stagger: 0.07,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 78%",
+              toggleActions: "play none none reverse",
+            },
+          });
+        }
+
+        // Preset #2/#3: 60fps quickTo subtle tilt on pointer move
+        gsap.set(el, { transformPerspective: 900 });
+        const rxTo = gsap.quickTo(el, "rotateX", {
+          duration: 0.35,
+          ease: "power2.out",
+        });
+        const ryTo = gsap.quickTo(el, "rotateY", {
+          duration: 0.35,
+          ease: "power2.out",
+        });
+        const yTo = gsap.quickTo(el, "y", {
+          duration: 0.25,
+          ease: "power2.out",
+        });
+
+        const onMove = (e: PointerEvent) => {
+          const r = el.getBoundingClientRect();
+          const nx = (e.clientX - r.left) / r.width - 0.5;
+          const ny = (e.clientY - r.top) / r.height - 0.5;
+          rxTo(-ny * 4.5);
+          ryTo(nx * 5.5);
+          yTo(-3);
+        };
+        const onLeave = () => {
+          rxTo(0);
+          ryTo(0);
+          yTo(0);
+        };
+
+        el.addEventListener("pointermove", onMove);
+        el.addEventListener("pointerleave", onLeave);
+        return () => {
+          el.removeEventListener("pointermove", onMove);
+          el.removeEventListener("pointerleave", onLeave);
+        };
+      });
+
+      return () => mm.revert();
+    },
+    { scope: cardRef }
+  );
+
+  return (
+    <div
+      ref={cardRef}
+      className="relative w-full max-w-md overflow-hidden border border-paper/15 bg-ink/95 shadow-2xl will-change-transform"
+    >
+      <div className="h-1 w-full" style={{ backgroundColor: accentColor }} />
+
+      <div className="relative aspect-[16/6] overflow-hidden md:aspect-[16/9]">
+        <div className="gsap-chapter-img relative h-full w-full will-change-transform">
+          <Image
+            src={image.file}
+            alt={image.alt}
+            fill
+            sizes="448px"
+            className="object-cover"
+          />
+        </div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-80" />
+        <span className="absolute bottom-2.5 right-3 border border-paper/20 bg-ink/80 px-2 py-0.5 font-mono text-[10px] tracking-[0.14em] text-paper/85">
+          c. {chapter.year} CE
+        </span>
+      </div>
+
+      <div className="p-5 md:p-6">
+        <div className="gsap-chapter-item flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            {polityId && (
+              <KingdomEmblem
+                polityId={polityId}
+                color={accentColor}
+                className="h-8 w-8"
+              />
+            )}
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/55">
+              Chapter 0{index + 1} · {polityName}
+            </p>
+          </div>
+          {onNext && (
+            <button
+              type="button"
+              onClick={onNext}
+              className="font-mono text-[10px] uppercase tracking-[0.14em] text-paper/50 transition-colors hover:text-paper"
+            >
+              Next ↓
+            </button>
+          )}
+        </div>
+
+        <h2 className="gsap-chapter-item mt-3 font-display text-2xl text-paper md:text-3xl">
+          {chapter.title}
+        </h2>
+        <p className="gsap-chapter-item mt-3 font-sans text-[0.95rem] leading-relaxed text-paper/80 md:text-base">
+          {chapter.body}
+        </p>
+
+        <div className="gsap-chapter-item mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-paper/10 pt-4 font-sans text-sm">
+          <Link
+            href={`/atlas?year=${chapter.year}${politySlug ? `&polity=${politySlug}` : ""}`}
+            transitionTypes={NAV_FORWARD}
+            className="text-paper underline underline-offset-4 hover:text-paper/80"
+          >
+            Show {chapter.year} CE on the map
+          </Link>
+          {politySlug && (
+            <Link
+              href={`/polities/${politySlug}`}
+              transitionTypes={NAV_FORWARD}
+              className="text-paper/70 underline underline-offset-4 hover:text-paper"
+            >
+              More about {polityName}
+            </Link>
+          )}
+        </div>
+        <p className="gsap-chapter-item mt-3 font-sans text-[0.68rem] text-paper/45">
+          Photo: {image.artist}, {image.license}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function HomeFilm() {
   const { images } = useAtlasData();
   const { getPolityById } = useAtlasAccess();
@@ -54,8 +270,73 @@ export function HomeFilm() {
     bearing: 0,
   });
 
-  const scrollerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const spineFillRef = useRef<HTMLSpanElement>(null);
   const chapterRefs = useRef<(HTMLElement | null)[]>([]);
+
+  // GSAP ScrollTrigger choreography for the hero ghost scripts + vertical spine
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // Hero copy entrance stagger
+        gsap.from(".gsap-hero-item", {
+          opacity: 0,
+          y: 20,
+          duration: 0.7,
+          stagger: 0.12,
+          delay: 0.25,
+          ease: "power2.out",
+        });
+
+        // Multi-layer depth parallax on classical script watermarks (Preset #14)
+        gsap.utils.toArray<HTMLElement>(".gsap-ghost-script").forEach((layer, i) => {
+          gsap.fromTo(
+            layer,
+            { opacity: 0, yPercent: 12 },
+            {
+              opacity: 0.048,
+              yPercent: 0,
+              duration: 1.2,
+              delay: 0.1 + i * 0.12,
+              ease: "power2.out",
+            }
+          );
+          gsap.to(layer, {
+            yPercent: (i + 1) * -18,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top top",
+              end: "25% top",
+              scrub: 0.5,
+            },
+          });
+        });
+
+        // Hallmark #3: 2px vertical progress spine scaled by ScrollTrigger
+        if (spineFillRef.current && sectionRef.current) {
+          gsap.fromTo(
+            spineFillRef.current,
+            { scaleY: 0 },
+            {
+              scaleY: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 0.2,
+              },
+            }
+          );
+        }
+      });
+
+      return () => mm.revert();
+    },
+    { scope: sectionRef }
+  );
 
   // Continuous scroll-step calculation (0 = hero, 1..4 = chapters 1..4)
   useEffect(() => {
@@ -65,7 +346,6 @@ export function HomeFilm() {
       const els = chapterRefs.current;
       if (!els.length || !els[0]) return;
 
-      // Measure where viewport center falls relative to hero & each chapter
       const centers = els.map((el) => {
         if (!el) return 0;
         const rect = el.getBoundingClientRect();
@@ -116,7 +396,10 @@ export function HomeFilm() {
   const scrollToStage = (idx: number) => {
     const target = chapterRefs.current[idx];
     if (!target) return;
-    target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "center" });
+    target.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "center",
+    });
   };
 
   return (
@@ -128,7 +411,8 @@ export function HomeFilm() {
         syncTouch: false,
       }}
     >
-      <section className="relative bg-ink text-paper">
+      <LenisScrollTriggerBridge />
+      <section ref={sectionRef} className="relative bg-ink text-paper">
         {/* Sticky Cinematic Stage */}
         <div className="sticky top-16 h-[calc(100dvh-4rem)] overflow-hidden">
           <StoryMap
@@ -146,6 +430,20 @@ export function HomeFilm() {
             accentColor={activePolity?.accentColor ?? "#d4a359"}
             activeChapterId={activeId}
           />
+
+          {/* Hallmark #3: 2px vertical chronological spine along left edge */}
+          <div
+            className="pointer-events-none absolute bottom-20 left-3 top-20 hidden w-[2px] bg-paper/10 md:block"
+            aria-hidden
+          >
+            <span
+              ref={spineFillRef}
+              className="block h-full w-full origin-top transition-colors duration-500"
+              style={{
+                backgroundColor: activePolity?.accentColor ?? "#96341a",
+              }}
+            />
+          </div>
 
           {/* Dynamic era sun glint */}
           <div
@@ -209,7 +507,8 @@ export function HomeFilm() {
               <span
                 className="h-1 w-6 transition-all duration-300"
                 style={{
-                  backgroundColor: chapterIndex === -1 ? "#f3ede0" : "rgba(243,237,224,0.28)",
+                  backgroundColor:
+                    chapterIndex === -1 ? "#f3ede0" : "rgba(243,237,224,0.28)",
                 }}
               />
               <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-paper/60 group-hover:text-paper sm:inline">
@@ -245,7 +544,9 @@ export function HomeFilm() {
                   </span>
                   <span
                     className={`hidden font-mono text-[10px] tabular-nums transition-colors sm:inline ${
-                      isCurrent ? "text-paper" : "text-paper/45 group-hover:text-paper/80"
+                      isCurrent
+                        ? "text-paper"
+                        : "text-paper/45 group-hover:text-paper/80"
                     }`}
                   >
                     {c.year}
@@ -257,7 +558,7 @@ export function HomeFilm() {
         </div>
 
         {/* Scrolling Narrative Track */}
-        <div ref={scrollerRef} className="relative -mt-[calc(100dvh-4rem)]">
+        <div className="relative -mt-[calc(100dvh-4rem)]">
           {/* Opening Hero Stage */}
           <div
             ref={(el) => {
@@ -272,47 +573,31 @@ export function HomeFilm() {
               aria-hidden
             >
               {GHOST_SCRIPTS.map((g) => (
-                <motion.span
+                <span
                   key={g.text}
-                  initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
-                  animate={{ opacity: 0.045, y: 0 }}
-                  transition={{
-                    duration: 1.4,
-                    delay: g.delay,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
                   style={{ left: g.left, top: g.top, fontSize: g.size }}
-                  className="absolute font-display text-paper"
+                  className="gsap-ghost-script absolute font-display text-paper opacity-[0.045] will-change-transform"
                 >
                   {g.text}
-                </motion.span>
+                </span>
               ))}
             </div>
 
             <div className="relative z-10 max-w-xl">
-              <div className="flex items-center gap-3">
+              <div className="gsap-hero-item flex items-center gap-3">
                 <span className="h-px w-8 bg-territory-selected" aria-hidden />
-                <p
-                  className="bh-fade-in font-mono text-xs uppercase tracking-[0.2em] text-paper/80"
-                  style={{ animationDelay: "60ms" }}
-                >
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-paper/80">
                   600 – 1700 CE · Historical Atlas
                 </p>
               </div>
               <h1 className="mt-4">
                 <Wordmark className="text-6xl text-paper md:text-8xl" />
               </h1>
-              <p
-                className="bh-fade-in mt-6 max-w-md font-sans text-lg leading-relaxed text-paper/85"
-                style={{ animationDelay: "280ms" }}
-              >
+              <p className="gsap-hero-item mt-6 max-w-md font-sans text-lg leading-relaxed text-paper/85">
                 The kingdoms of the Indian subcontinent from 600 to 1700: where
                 they ruled, when, and how we know.
               </p>
-              <div
-                className="bh-fade-in mt-10 flex items-center gap-6"
-                style={{ animationDelay: "460ms" }}
-              >
+              <div className="gsap-hero-item mt-10 flex items-center gap-6">
                 <button
                   type="button"
                   onClick={() => scrollToStage(1)}
@@ -341,102 +626,20 @@ export function HomeFilm() {
                 data-chapter={c.id}
                 className="flex min-h-[100dvh] items-end px-4 pb-16 md:items-center md:px-8 md:pb-0"
               >
-                <motion.div
-                  initial={
-                    prefersReducedMotion
-                      ? false
-                      : { opacity: 0, y: 36, filter: "blur(6px)" }
+                <ChapterPlate
+                  chapter={c}
+                  index={i}
+                  polityName={polity?.name ?? c.polityId}
+                  politySlug={polity?.slug}
+                  polityId={polity?.id}
+                  accentColor={accent}
+                  image={image}
+                  onNext={
+                    i < storyChapters.length - 1
+                      ? () => scrollToStage(i + 2)
+                      : undefined
                   }
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ amount: 0.35, once: false }}
-                  transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative w-full max-w-md overflow-hidden border border-paper/15 bg-ink/95 shadow-2xl"
-                >
-                  {/* Kingdom pigment top rule */}
-                  <div
-                    className="h-1 w-full"
-                    style={{ backgroundColor: accent }}
-                  />
-
-                  <div className="relative aspect-[16/6] overflow-hidden md:aspect-[16/9]">
-                    <motion.div
-                      initial={prefersReducedMotion ? false : { scale: 1.08 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ amount: 0.35, once: false }}
-                      transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                      className="relative h-full w-full"
-                    >
-                      <Image
-                        src={image.file}
-                        alt={image.alt}
-                        fill
-                        sizes="448px"
-                        className="object-cover"
-                      />
-                    </motion.div>
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-80" />
-                    <span className="absolute bottom-2.5 right-3 border border-paper/20 bg-ink/80 px-2 py-0.5 font-mono text-[10px] tracking-[0.14em] text-paper/85">
-                      c. {c.year} CE
-                    </span>
-                  </div>
-
-                  <div className="p-5 md:p-6">
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="flex items-center gap-3">
-                        {polity && (
-                          <KingdomEmblem
-                            polityId={polity.id}
-                            color={polity.accentColor}
-                            className="h-8 w-8"
-                          />
-                        )}
-                        <div>
-                          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-paper/55">
-                            Chapter 0{i + 1} · {polity?.name ?? c.polityId}
-                          </p>
-                        </div>
-                      </div>
-                      {i < storyChapters.length - 1 && (
-                        <button
-                          type="button"
-                          onClick={() => scrollToStage(i + 2)}
-                          className="font-mono text-[10px] uppercase tracking-[0.14em] text-paper/50 transition-colors hover:text-paper"
-                        >
-                          Next ↓
-                        </button>
-                      )}
-                    </div>
-
-                    <h2 className="mt-3 font-display text-2xl text-paper md:text-3xl">
-                      {c.title}
-                    </h2>
-                    <p className="mt-3 font-sans text-[0.95rem] leading-relaxed text-paper/80 md:text-base">
-                      {c.body}
-                    </p>
-
-                    <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-paper/10 pt-4 font-sans text-sm">
-                      <Link
-                        href={`/atlas?year=${c.year}${polity ? `&polity=${polity.slug}` : ""}`}
-                        transitionTypes={NAV_FORWARD}
-                        className="text-paper underline underline-offset-4 hover:text-paper/80"
-                      >
-                        Show {c.year} CE on the map
-                      </Link>
-                      {polity && (
-                        <Link
-                          href={`/polities/${polity.slug}`}
-                          transitionTypes={NAV_FORWARD}
-                          className="text-paper/70 underline underline-offset-4 hover:text-paper"
-                        >
-                          More about {polity.name}
-                        </Link>
-                      )}
-                    </div>
-                    <p className="mt-3 font-sans text-[0.68rem] text-paper/45">
-                      Photo: {image.artist}, {image.license}
-                    </p>
-                  </div>
-                </motion.div>
+                />
               </article>
             );
           })}
