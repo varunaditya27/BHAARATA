@@ -121,13 +121,7 @@ export default async function PolitiesIndexPage() {
             <>
               <h1 className="font-display text-6xl leading-none text-paper sm:text-8xl">Kingdoms</h1>
               <p className="mt-6 max-w-xl font-sans text-lg leading-snug text-paper sm:text-2xl">
-                {polities.length} kingdoms, empires and sultanates, from {min} to {max} CE. Each tile is sized by the most
-                land that kingdom held at one time, measured from its recorded borders.
-              </p>
-              <p className="mt-4 max-w-xl font-sans text-sm text-paper/70">
-                The coloured line on each tile shows when the kingdom existed, on a scale from {min} to {max}. Borders come
-                from Cliopatria and summaries from Wikipedia. Each kingdom&rsquo;s page says what is still
-                unchecked.
+                {polities.length} kingdoms, empires and sultanates, from {min} to {max} CE.
               </p>
             </>
           }
