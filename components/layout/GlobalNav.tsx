@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandMark } from "@/components/layout/BrandMark";
 import { CommandPalette } from "@/components/search/CommandPalette";
 import { MobileMenu } from "./MobileMenu";
 import { NavLinks } from "./NavLinks";
@@ -21,8 +22,12 @@ export function GlobalNav() {
       style={{ viewTransitionName: "site-header" }}
     >
       <div className="mx-auto flex h-full max-w-[1400px] items-center gap-6 px-4 sm:px-6">
-        <Link href="/" className="shrink-0 font-display text-lg tracking-wide text-ink">
-          BHĀRATA
+        <Link
+          href="/"
+          className="flex shrink-0 items-center gap-2.5 font-display text-lg tracking-wide text-ink"
+        >
+          <BrandMark size={22} className="text-ink" />
+          <span>BHĀRATA</span>
         </Link>
         <NavLinks primary={primaryLinks} secondary={secondaryLinks} />
         <div className="ml-auto flex shrink-0 items-center gap-2">

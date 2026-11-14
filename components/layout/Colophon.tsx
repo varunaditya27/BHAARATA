@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandMark } from "@/components/layout/BrandMark";
 import { HideOnRoutes } from "./HideOnRoutes";
 
 const LINKS = [
@@ -24,7 +25,10 @@ export function Colophon() {
       <footer className="border-t border-border">
         <div className="mx-auto grid max-w-[1100px] gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            <p className="font-display text-2xl tracking-[0.04em] text-ink">BHĀRATA</p>
+            <div className="flex items-center gap-3">
+              <BrandMark size={26} className="text-ink" />
+              <p className="font-display text-2xl tracking-[0.04em] text-ink">BHĀRATA</p>
+            </div>
             <p className="mt-3 max-w-sm font-sans text-sm leading-relaxed text-ink-muted">
               An atlas of the Indian subcontinent through time: which kingdoms held which land, when, and how we know.
               Kingdom borders come from Cliopatria; descriptions, rulers, battles and places from Wikipedia and Wikidata.
