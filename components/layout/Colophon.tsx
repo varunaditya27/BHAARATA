@@ -47,10 +47,6 @@ export function Colophon() {
               ))}
             </nav>
           </div>
-
-          <div className="mt-6 border-t border-border/70 pt-4 font-sans text-[11px] text-ink-soft">
-            Borders from Cliopatria. Descriptions, rulers, battles, and places from Wikipedia, Wikidata, and Wikimedia Commons. Map tiles from CARTO and OpenStreetMap.
-          </div>
         </div>
       </footer>
     </HideOnRoutes>
