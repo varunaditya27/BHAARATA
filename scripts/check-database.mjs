@@ -76,7 +76,7 @@ try {
   for (const p of actual.polities) PolitySchema.parse(p);
   for (const p of actual.people) {
     PersonSchema.parse(p);
-    assert.ok(p.imageKey && actual.images[p.imageKey], `missing ruler image: ${p.id}`);
+    assert.ok(p.imageKey && p.imageKey.startsWith('ruler-') && actual.images[p.imageKey], `missing dedicated ruler image: ${p.id}`);
   }
   for (const p of actual.places) {
     PlaceSchema.parse(p);
