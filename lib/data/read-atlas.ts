@@ -6,7 +6,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 type DateRow = {start_year:number|null; end_year?:number|null; start_date_type:string; end_date_type?:string; date_confidence:string};
-function period(row: DateRow): DateRange {
+export function period(row: DateRow): DateRange {
   const qualifiers = {exact:'exact',about:'circa',before:'before',after:'after',unknown:'unknown'} as const;
   const confidences = {recorded:'attested',likely:'probable',debated:'disputed',example:'illustrative',unknown:'unknown'} as const;
   const start = qualifiers[row.start_date_type as keyof typeof qualifiers];
