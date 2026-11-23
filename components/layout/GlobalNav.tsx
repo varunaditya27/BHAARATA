@@ -1,3 +1,4 @@
+import { AudioControls } from "@/components/audio/AudioControls";
 import Link from "next/link";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { CommandPalette } from "@/components/search/CommandPalette";
@@ -46,6 +47,7 @@ export function GlobalNav() {
         <NavLinks primary={primaryLinks} secondary={secondaryLinks} />
 
         <div className="flex shrink-0 items-center gap-2">
+          <AudioControls />
           <CommandPalette />
           <MobileMenu links={[...primaryLinks, ...secondaryLinks]} />
         </div>

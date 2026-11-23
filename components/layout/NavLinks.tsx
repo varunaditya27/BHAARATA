@@ -28,7 +28,7 @@ export function NavLinks({
         href={link.href}
         aria-current={active ? "page" : undefined}
         className={cn(
-          "group relative flex h-16 items-center gap-1.5 font-sans text-[13px] tracking-[0.01em] transition-colors",
+          "group relative flex h-16 items-center gap-1.5 whitespace-nowrap font-sans text-[13px] tracking-[0.01em] transition-colors",
           active ? "font-medium text-ink" : "text-ink-muted hover:text-ink"
         )}
       >
