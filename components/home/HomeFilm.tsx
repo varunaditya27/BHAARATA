@@ -505,7 +505,7 @@ export function HomeFilm() {
     ERA_GLINTS.length - 1,
     Math.max(0, chapterIndex + 1),
   );
-  const activeAccent = activePolity?.accentColor ?? "#d4a359";
+  const activeAccent = activePolity?.accentColor ?? "#ffb347";
 
   const scrollToStage = (idx: number) => {
     const target = chapterRefs.current[idx];
@@ -555,7 +555,7 @@ export function HomeFilm() {
               ref={spineFillRef}
               className="block h-full w-full origin-top transition-colors duration-500"
               style={{
-                backgroundColor: activePolity?.accentColor ?? "#96341a",
+                backgroundColor: activePolity?.accentColor ?? "#b3123f",
               }}
             />
           </div>
@@ -570,7 +570,7 @@ export function HomeFilm() {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(90% 85% at 72% 38%, transparent 38%, rgba(5,4,3,0.55) 78%, rgba(5,4,3,0.85) 100%)",
+                "radial-gradient(90% 85% at 72% 38%, transparent 38%, rgba(8,5,24,0.55) 78%, rgba(8,5,24,0.85) 100%)",
             }}
             aria-hidden
           />
@@ -582,7 +582,7 @@ export function HomeFilm() {
             className="pointer-events-none absolute right-0 top-0 h-56 w-[28rem] max-w-full"
             style={{
               background:
-                "radial-gradient(ellipse at top right, rgba(36,31,23,0.82), rgba(36,31,23,0.35) 45%, transparent 72%)",
+                "radial-gradient(ellipse at top right, rgba(26,18,64,0.82), rgba(26,18,64,0.35) 45%, transparent 72%)",
             }}
             aria-hidden
           />
@@ -626,7 +626,7 @@ export function HomeFilm() {
                 className="h-1 w-6 transition-all duration-300"
                 style={{
                   backgroundColor:
-                    chapterIndex === -1 ? "#f3ede0" : "rgba(243,237,224,0.28)",
+                    chapterIndex === -1 ? "#fff4dc" : "rgba(255,244,220,0.28)",
                 }}
               />
               <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-paper/60 group-hover:text-paper sm:inline">
@@ -653,9 +653,9 @@ export function HomeFilm() {
                       style={{
                         width: `${fillPct}%`,
                         backgroundColor: isCurrent
-                          ? (p?.accentColor ?? "#e07a5f")
+                          ? (p?.accentColor ?? "#ff6b4a")
                           : isPassed
-                            ? "#f3ede0"
+                            ? "#fff4dc"
                             : "transparent",
                       }}
                     />
@@ -737,7 +737,7 @@ export function HomeFilm() {
           {storyChapters.map((c, i) => {
             const polity = getPolityById(c.polityId);
             const image = images[c.imageKey];
-            const accent = polity?.accentColor ?? "#96341a";
+            const accent = polity?.accentColor ?? "#b3123f";
             return (
               <article
                 key={c.id}

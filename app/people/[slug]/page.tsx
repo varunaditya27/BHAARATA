@@ -34,7 +34,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
   if (!person) notFound();
 
   const polity = person.polityId ? getPolityById(person.polityId) : undefined;
-  const accent = polity?.accentColor ?? "#5c5447";
+  const accent = polity?.accentColor ?? "#4a3f73";
   const lifetimeOnly = person.datesAre === "lifetime";
   const personDateKnown = person.period.startQualifier !== "unknown";
   const kingdomDatesKnown = polity && polity.period.startQualifier !== "unknown" && polity.period.endQualifier !== "unknown" && polity.period.endYear !== null;

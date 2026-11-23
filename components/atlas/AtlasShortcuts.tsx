@@ -130,7 +130,7 @@ export function ShortcutHelp({ open, onClose }: { open: boolean; onClose: () => 
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="w-full max-w-md border border-paper/15 bg-[#24201a] p-6 text-paper shadow-2xl"
+            className="w-full max-w-md border border-paper/15 bg-[#120a33] p-6 text-paper shadow-2xl"
             onClick={(e) => e.stopPropagation()}
             role="region"
             aria-label="Keyboard shortcuts"

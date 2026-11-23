@@ -31,7 +31,7 @@ export function EventCaption({ event, raised = false }: { event: HistoricalEvent
           <div className="pointer-events-auto flex gap-4 bg-ink p-4 text-paper shadow-xl">
             <span
               className="w-1 shrink-0 self-stretch"
-              style={{ backgroundColor: lightenHex(polity?.accentColor ?? "#b85c38", 0.2) }}
+              style={{ backgroundColor: lightenHex(polity?.accentColor ?? "#cc3310", 0.2) }}
               aria-hidden
             />
             <div className="min-w-0">

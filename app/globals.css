@@ -8,26 +8,26 @@
 
 :root {
   /* base */
-  --bh-paper: #f3ede0;
-  --bh-paper-raised: #faf6ec;
-  --bh-ink: #241f17;
-  --bh-ink-muted: #5c5447;
-  --bh-ash: #8a8273;
-  --bh-stone: #d8cfba;
-  --bh-border: #c9bda1;
+  --bh-paper: #fff4dc;
+  --bh-paper-raised: #fffbf0;
+  --bh-ink: #1a1240;
+  --bh-ink-muted: #4a3f73;
+  --bh-ash: #6e6396;
+  --bh-stone: #f6e2b4;
+  --bh-border: #e5c98a;
 
   /* geographic */
-  --bh-water: #9cb8ae;
-  --bh-water-deep: #7fa095;
-  --bh-land: #f3ede0;
-  --bh-terrain: #e4d9bf;
+  --bh-water: #7fd8d4;
+  --bh-water-deep: #3fbfbf;
+  --bh-land: #fff4dc;
+  --bh-terrain: #fde9b0;
 
   /* semantic */
-  --bh-territory: #b85c38;
-  --bh-territory-selected: #96341a;
-  --bh-evidence: #3a5a78;
-  --bh-uncertainty: #a68a52;
-  --bh-active: #241f17;
+  --bh-territory: #cc3310;
+  --bh-territory-selected: #b3123f;
+  --bh-evidence: #2347d6;
+  --bh-uncertainty: #d49400;
+  --bh-active: #1a1240;
 
   /* surfaces */
   --background: var(--bh-paper);
@@ -136,11 +136,11 @@ body::before {
    menu open in portals outside the header, so they keep their paper colours. */
 body:has([data-dark-page]) > header,
 body:has([data-dark-page]) > footer {
-  --bh-paper: #241f17;
-  --bh-paper-raised: #2e281f;
-  --bh-ink: #f3ede0;
-  --bh-ink-muted: #b3a994;
-  --bh-border: #4a4235;
+  --bh-paper: #1a1240;
+  --bh-paper-raised: #261a5c;
+  --bh-ink: #fff4dc;
+  --bh-ink-muted: #cfc6f0;
+  --bh-border: #4b3d94;
   background-color: var(--bh-paper);
 }
 
@@ -312,7 +312,7 @@ body:has([data-dark-page]) > footer {
 /* ---------------------------------------------------------------------- */
 .bh-map-grain {
   background-image:
-    radial-gradient(ellipse at center, transparent 55%, rgba(36, 31, 23, 0.28) 100%),
+    radial-gradient(ellipse at center, transparent 55%, rgba(26,18,64, 0.28) 100%),
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
   mix-blend-mode: multiply;
   opacity: 0.5;

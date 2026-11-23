@@ -86,7 +86,7 @@ export function SpaceBackdrop() {
       nebula.height = Math.round(h * dpr);
       const n = nebula.getContext("2d")!;
       n.scale(dpr, dpr);
-      n.fillStyle = "#070605";
+      n.fillStyle = "#0b0720";
       n.fillRect(0, 0, w, h);
       const glow = (x: number, y: number, r: number, color: string) => {
         const g = n.createRadialGradient(x, y, 0, x, y, r);
