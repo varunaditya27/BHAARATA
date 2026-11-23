@@ -169,6 +169,19 @@ export function CommandPalette() {
               )}
             </CommandGroup>
           )}
+          {query.trim() && (
+            <CommandGroup heading="More" forceMount className={GROUP_CLASS}>
+              <CommandItem
+                forceMount
+                value={`filter all records ${query}`}
+                onSelect={() => go(`/search?q=${encodeURIComponent(query.trim())}`, false)}
+                className={ITEM_CLASS}
+              >
+                <Search size={15} className="shrink-0 text-ink-muted" />
+                <span>Filter every record for “{query.trim()}”</span>
+              </CommandItem>
+            </CommandGroup>
+          )}
           {!query && recentEntries.length > 0 && (
             <CommandGroup heading="Recently opened" className={GROUP_CLASS}>
               {recentEntries.map((item) => (

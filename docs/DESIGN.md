@@ -66,22 +66,22 @@ Rules of thumb:
 
 ## 3. Colour
 
-A narrow palette of paper, ink and a few meaningful pigments. Tokens are CSS variables in `app/globals.css` and mirrored as Tailwind colours.
+A narrow palette of cream paper, indigo ink and a few bright jewel pigments (saffron, vermilion, crimson, cobalt, teal). Tokens are CSS variables in `app/globals.css` and mirrored as Tailwind colours.
 
 | Token | Value | Used for |
 |---|---|---|
-| `--bh-paper` | ![#f3ede0](https://img.shields.io/badge/%20%20%20%20%20-f3ede0?style=flat-square) `#f3ede0` | Page background |
-| `--bh-paper-raised` | ![#faf6ec](https://img.shields.io/badge/%20%20%20%20%20-faf6ec?style=flat-square) `#faf6ec` | Cards, popups, the palette |
-| `--bh-ink` | ![#241f17](https://img.shields.io/badge/%20%20%20%20%20-241f17?style=flat-square) `#241f17` | Text, the dark atlas, rules |
-| `--bh-ink-muted` | ![#5c5447](https://img.shields.io/badge/%20%20%20%20%20-5c5447?style=flat-square) `#5c5447` | Secondary text |
-| `--bh-ash` | ![#8a8273](https://img.shields.io/badge/%20%20%20%20%20-8a8273?style=flat-square) `#8a8273` | Quiet metadata |
-| `--bh-stone` | ![#d8cfba](https://img.shields.io/badge/%20%20%20%20%20-d8cfba?style=flat-square) `#d8cfba` | Fills, empty states |
-| `--bh-border` | ![#c9bda1](https://img.shields.io/badge/%20%20%20%20%20-c9bda1?style=flat-square) `#c9bda1` | Rules and dividers |
-| `--bh-water` | ![#9cb8ae](https://img.shields.io/badge/%20%20%20%20%20-9cb8ae?style=flat-square) `#9cb8ae` | Sea on the light map |
-| `--bh-territory` | ![#b85c38](https://img.shields.io/badge/%20%20%20%20%20-b85c38?style=flat-square) `#b85c38` | Default territory pigment, active controls |
-| `--bh-territory-selected` | ![#96341a](https://img.shields.io/badge/%20%20%20%20%20-96341a?style=flat-square) `#96341a` | Selection, links on hover |
-| `--bh-evidence` | ![#3a5a78](https://img.shields.io/badge/%20%20%20%20%20-3a5a78?style=flat-square) `#3a5a78` | Evidence accents |
-| `--bh-uncertainty` | ![#a68a52](https://img.shields.io/badge/%20%20%20%20%20-a68a52?style=flat-square) `#a68a52` | "Placeholder" badges, uncertainty dots |
+| `--bh-paper` | ![#fff4dc](https://img.shields.io/badge/%20%20%20%20%20-fff4dc?style=flat-square) `#fff4dc` | Page background |
+| `--bh-paper-raised` | ![#fffbf0](https://img.shields.io/badge/%20%20%20%20%20-fffbf0?style=flat-square) `#fffbf0` | Cards, popups, the palette |
+| `--bh-ink` | ![#1a1240](https://img.shields.io/badge/%20%20%20%20%20-1a1240?style=flat-square) `#1a1240` | Text, the dark atlas, rules |
+| `--bh-ink-muted` | ![#4a3f73](https://img.shields.io/badge/%20%20%20%20%20-4a3f73?style=flat-square) `#4a3f73` | Secondary text |
+| `--bh-ash` | ![#6e6396](https://img.shields.io/badge/%20%20%20%20%20-6e6396?style=flat-square) `#6e6396` | Quiet metadata |
+| `--bh-stone` | ![#f6e2b4](https://img.shields.io/badge/%20%20%20%20%20-f6e2b4?style=flat-square) `#f6e2b4` | Fills, empty states |
+| `--bh-border` | ![#e5c98a](https://img.shields.io/badge/%20%20%20%20%20-e5c98a?style=flat-square) `#e5c98a` | Rules and dividers |
+| `--bh-water` | ![#7fd8d4](https://img.shields.io/badge/%20%20%20%20%20-7fd8d4?style=flat-square) `#7fd8d4` | Sea on the light map |
+| `--bh-territory` | ![#cc3310](https://img.shields.io/badge/%20%20%20%20%20-cc3310?style=flat-square) `#cc3310` | Default territory pigment, active controls |
+| `--bh-territory-selected` | ![#b3123f](https://img.shields.io/badge/%20%20%20%20%20-b3123f?style=flat-square) `#b3123f` | Selection, links on hover |
+| `--bh-evidence` | ![#2347d6](https://img.shields.io/badge/%20%20%20%20%20-2347d6?style=flat-square) `#2347d6` | Evidence accents |
+| `--bh-uncertainty` | ![#d49400](https://img.shields.io/badge/%20%20%20%20%20-d49400?style=flat-square) `#d49400` | "Placeholder" badges, uncertainty dots |
 
 **Each kingdom has one pigment.** The eleven hand-written kingdoms have chosen colours; the rest get a colour derived from their id (`accent()` in `import-cliopatria.py`) at fixed lightness and saturation, so they sit comfortably together. On a kingdom's page the pigment becomes `--bh-accent`, which tints text selection, rules, the drop cap and the reading-progress line.
 
@@ -114,7 +114,7 @@ flowchart TB
         MID --> TIME
     end
 
-    classDef node fill:#faf6ec,stroke:#241f17,color:#241f17;
+    classDef node fill:#fffbf0,stroke:#1a1240,color:#1a1240;
     class SIDE,MAPA,TIME node;
 ```
 
