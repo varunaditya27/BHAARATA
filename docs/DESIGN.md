@@ -118,7 +118,7 @@ flowchart TB
     class SIDE,MAPA,TIME node;
 ```
 
-On a phone the sidebar becomes a row of kingdom chips, the legend collapses to a "Layers" button, and the preview card becomes a draggable bottom sheet. The map always stays on screen.
+The atlas is designed for laptop and desktop screens (about 1280 px wide and up). Phone layouts are not a goal of this project.
 
 ### Components
 
@@ -233,7 +233,6 @@ Designed in, not patched on.
 - **Focus is visible** everywhere, and focus order follows reading order.
 - **The map has a text alternative:** the kingdom list, the chips and the preview card all expose the same information, and the page says what the map shows.
 - **No colour-only signals** (see section 3).
-- **Touch targets** are at least about 36 px, larger on the timeline thumb.
 - **Images** have alt text describing what they show, and every credit is a real link.
 - **Native-script text** is set in its own fonts, and the evidence viewer's label tells screen-reader users which keys zoom and move.
 - **Reduced motion** is respected (see section 6).

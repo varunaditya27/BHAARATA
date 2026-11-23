@@ -62,7 +62,7 @@ quadrantChart
 |---|---|---|---|
 | **T1** | **Automated tests.** Unit tests (Vitest) for `formatDateRange`, `formatPersonDates`, `getHistoricalState`, the status badges and the importers' outputs. Browser tests (Playwright) for: open the atlas, select a kingdom, scrub, open its page, search, go back | Database reconciliation and date self-check scripts exist, but there is no complete automated suite. A date-formatting bug could silently print wrong history | M |
 | **T2** | **Continuous integration.** A GitHub Action running lint, type-check, build and the tests on every pull request | Catches the breakage that "it built on my machine" misses | S |
-| **T8** | **Real-device testing.** An ordinary Android phone, an iPhone with Safari, an older laptop. Especially compare view (two maps), 3D terrain, and the homepage globe | Everything so far was tested in a desktop and a software-rendered headless browser | S |
+| **T8** | **Real-device testing.** An older laptop and a second browser (phones are out of scope). Especially compare view (two maps), 3D terrain, and the homepage globe | Everything so far was tested in a desktop and a software-rendered headless browser | S |
 | **T14** | **Choose a licence for the code.** The repository has none, so by default nobody may reuse it. The data has its own licences ([`DATA.md`](DATA.md#2-sources-and-licences)) | Needed before anyone can contribute or reuse it. Needs an owner decision | S |
 
 ---
@@ -90,7 +90,7 @@ quadrantChart
 |---|---|---|---|
 | **T5** | **Loading states.** Error pages (`app/error.tsx`, `app/global-error.tsx`) and a notice when map tiles fail are built. `loading.tsx` skeletons were left out: every page is pre-rendered and prefetched, so they would almost never show | Only worth doing if pages start fetching data at request time | S |
 | **T6** | **Accessibility audit.** Test with VoiceOver and NVDA; check colour contrast on every pigment; give the map a proper text alternative (a readable list of "what is on the map in this year") | The site is designed to be accessible but has never been checked with real assistive technology | M |
-| **T7** | **Performance budget.** Bundle analysis, Lighthouse on a mid-range phone, and a target for the atlas and the homepage | MapLibre is large; this is where regressions will creep in | M |
+| **T7** | **Performance budget.** Bundle analysis, Lighthouse on a mid-range laptop, and a target for the atlas and the homepage | MapLibre is large; this is where regressions will creep in | M |
 
 ---
 
@@ -139,7 +139,7 @@ quadrantChart
 | **D14** | Extend the range beyond 600–1700 (Cliopatria covers far more); needs new era names and a lighter map at wider ranges | L |
 | **D15** | Replace the hand-drawn trade and war routes with routes from a scholarly source | L |
 | **F5** | Sidebar filters: by region, religion or ruler; group kingdoms by era | M |
-| **F7** | Compare view: URL state, a "what changed" summary, a phone layout (it is hidden below tablet width today) | M |
+| **F7** | Compare view: URL state, a "what changed" summary | M |
 | **F8** | `G` then a letter for keyboard navigation between sections | S |
 | **F9** | Offline use (a progressive web app) | M |
 | **F15** | An interface in Hindi, Tamil and other languages | XL |
@@ -156,7 +156,6 @@ Small, real problems, kept honest.
 | ID | Issue | Where |
 |---|---|---|
 | **K1** | In crowded periods (the 1500s Deccan), kingdom names overlap on the map | Atlas, ~1500–1600 |
-| **K3** | Compare view is hidden below tablet width | Atlas on phones |
 | **K4** | Some imported summaries start mid-thought or are replaced by a dataset line ("Appears in the Cliopatria … dataset from 561 to 874") | Turk Shahis, Anuradhapura |
 | **K5** | The evidence index lists only two records, both translations | `/evidence` |
 | **K6** | Era sound has been confirmed to play but not tuned by ear (volume, tone) | Atlas sound toggle |

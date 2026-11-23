@@ -465,7 +465,7 @@ It is done when:
 - hierarchy is intentional
 - content is meaningful
 - loading/error/empty states exist where relevant
-- mobile works
+- works at laptop width
 - keyboard interaction works
 - reduced motion works
 - historical uncertainty is honest
@@ -484,7 +484,7 @@ Before UI implementation:
 6. Implement the smallest coherent feature.
 7. Audit visually and interactively.
 8. Remove generic defaults.
-9. Verify accessibility and responsive behaviour.
+9. Verify accessibility and behaviour at laptop width.
 10. Document meaningful architectural changes in `docs/ARCHITECTURE.md`.
 
 Agents contribute code. They do not define product identity.

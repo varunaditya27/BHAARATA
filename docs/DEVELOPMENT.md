@@ -79,7 +79,7 @@ flowchart LR
     A["Change"] --> B["Type-check<br/>and lint"]
     B --> C["Production<br/>build"]
     C --> D["Run it,<br/>open the page"]
-    D --> E["Use it:<br/>click, keyboard,<br/>phone width"]
+    D --> E["Use it:<br/>click, keyboard,<br/>laptop width"]
     E --> F{"Console errors?<br/>Odd behaviour?"}
     F -- "yes" --> A
     F -- "no" --> G["Look at it:<br/>screenshot,<br/>reduced motion"]

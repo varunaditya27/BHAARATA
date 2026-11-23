@@ -98,7 +98,7 @@ flowchart LR
 - Plain language everywhere; no jargon
 - Typeset in **Zodiak** and **Ranade**, with Tamil, Kannada, Telugu and Devanagari fonts
 - A **⌘K** search that also jumps to any year
-- Works on phones, respects reduced motion, keyboard-operable
+- Built for laptops and desktops; respects reduced motion and is keyboard-operable
 - A film-like opening: a globe, a starfield, and an orbital descent
 
 </td>

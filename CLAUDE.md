@@ -109,11 +109,13 @@ panel all call. Do not reimplement "is this kingdom active in year Y" anywhere.
   can still be approximate, and a border match alone does not establish where
   the battle was fought. Do not restore coordinates borrowed from a related place.
 - **Monuments are "protected today"**, not dated.
-- Images must be real, freely licensed, and credited. Never pair a real artifact
-  photo with invented content about that specific artifact; if the photo shows a
-  different object, say so (`imageIsIllustrative`).
-- New data arrives through an importer in `scripts/` with a cited source and a
-  licence check, never by hand-typing facts. Checklist: `docs/DATA.md` §8.
+- Images must be real and credited. Licensing is not enforced: this is a small
+  college course project, so any public source may be used, but every image and
+  fact still names where it came from. Never pair a real artifact photo with
+  invented content about that specific artifact; if the photo shows a different
+  object, say so (`imageIsIllustrative`).
+- New data arrives through an importer in `scripts/` with a cited source, never
+  by hand-typing facts. Checklist: `docs/DATA.md` §8.
 
 ## Map rules
 
@@ -163,7 +165,7 @@ Telugu); Indian-script display: Tiro (same four). All wired through
 Before calling a feature done: `npm run lint`, `npx tsc --noEmit`,
 `npm run build`, then run it and **use it** in a browser — check the console for
 errors and hydration warnings, keyboard operation (the timeline is a native
-`<input type="range">` on purpose), a phone-width viewport, and reduced motion.
+`<input type="range">` on purpose), a laptop-width viewport (about 1280 px; phones are out of scope), and reduced motion.
 A passing build is not proof that it works. Checklist: `docs/DEVELOPMENT.md` §3.
 
 ## Git
