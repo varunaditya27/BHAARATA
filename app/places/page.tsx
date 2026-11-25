@@ -6,7 +6,7 @@ import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
 import { placeKindLabel } from "@/lib/domain/labels";
 import { AREA_ORDER, broadArea } from "@/lib/geo/areas";
-import { boundariesContaining, polityGeometry, projectTogether } from "@/lib/geo/silhouette";
+import { boundariesContaining } from "@/lib/geo/silhouette";
 
 export const metadata = { title: "Places — BHĀRATA" };
 
@@ -14,23 +14,6 @@ export default async function PlacesIndexPage() {
   const data = await getAtlasData();
   const { places, polities } = data;
   const { getPolityById } = atlasAccess(data);
-  const shaped = polities.flatMap((polity) => {
-    const geometry = polityGeometry(polity.id, data);
-    return geometry ? [{ polity, geometry }] : [];
-  });
-  const projected = projectTogether(shaped.map((s) => s.geometry), places.map((p) => p.coordinates), 100, 2);
-  // Large empires go underneath and small kingdoms on top, so every kingdom stays a clean patch of its own colour.
-  const extent = (d: string) => {
-    const n = (d.match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number);
-    const xs = n.filter((_, i) => i % 2 === 0);
-    const ys = n.filter((_, i) => i % 2 === 1);
-    return (Math.max(...xs) - Math.min(...xs)) * (Math.max(...ys) - Math.min(...ys));
-  };
-  const land = projected.paths
-    .map((d, i) => ({ d, color: shaped[i].polity.accentColor, area: extent(d) }))
-    .sort((a, b) => b.area - a.area)
-    .map(({ d, color }) => ({ d, color }));
-
   const heldBy = (coordinates: [number, number]) =>
     [...new Set(boundariesContaining(coordinates, data).map((b) => b.polityId))]
       .map((id) => getPolityById(id)?.name)
@@ -72,17 +55,16 @@ export default async function PlacesIndexPage() {
         intro="Capitals, temples, forts and tombs, each set on the map and listed from north to south."
         hero={HERO.places}
       />
-      <div className="mx-auto max-w-[1200px] px-4 py-14 sm:px-6">
+      <div className="mx-auto max-w-[1480px] px-4 py-14 sm:px-6">
         <div>
           <PlacesAtlas
-            land={land}
-            dots={places.map((p, i) => ({
+            places={places.map((p) => ({
               id: p.id,
               name: p.name,
-              x: projected.points[i][0],
-              y: projected.points[i][1],
-              color: polities.find((k) => k.capitals.some((c) => p.name.startsWith(c)))?.accentColor ?? "var(--bh-ink)",
-              href: `/places/${p.slug}`,
+              slug: p.slug,
+              coordinates: p.coordinates,
+              color: polities.find((k) => k.capitals.some((c) => p.name.startsWith(c)))?.accentColor ?? "#06242b",
+              heldBy: [...new Set(boundariesContaining(p.coordinates, data).map((b) => b.polityId))],
             }))}
             groups={groups}
           />
