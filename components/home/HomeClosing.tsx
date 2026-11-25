@@ -8,7 +8,6 @@ import { useGSAP } from "@gsap/react";
 import { useReducedMotion } from "motion/react";
 import { ButtonLink } from "@/components/primitives/Button";
 import { Magnetic } from "@/components/primitives/Magnetic";
-import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -110,7 +109,6 @@ function ClosingEntryCard({
     >
       <Link
         href={entry.href}
-        transitionTypes={NAV_FORWARD}
         className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[3px] border border-border/80 bg-paper p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] transition-colors duration-300 hover:border-territory-selected/60 sm:p-7"
       >
         <div
@@ -258,7 +256,6 @@ export function HomeClosing() {
           <Magnetic className="inline-block">
             <ButtonLink
               href="/atlas"
-              transitionTypes={NAV_FORWARD}
               variant="solid"
             >
               Open the atlas →

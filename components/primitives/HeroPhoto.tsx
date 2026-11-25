@@ -1,25 +1,19 @@
 import Image from "next/image";
-import { Shared } from "@/components/primitives/Shared";
 import type { ImageCredit } from "@/lib/domain/types";
 
 /**
  * Full-bleed hero treatment: darkened photo, gradient for text legibility,
  * credit tucked in the corner rather than a caption line (which would
- * break the cinematic effect this is for). For an inline/body photograph
- * with a normal caption, use CreditedImage instead.
+ * break the cinematic effect this is for).
  */
 export function HeroPhoto({
   credit,
   children,
   heightClassName = "h-[46vh] min-h-[320px]",
-  sharedName,
 }: {
   credit: ImageCredit;
   children: React.ReactNode;
   heightClassName?: string;
-  /** Matches the name on a list/preview thumbnail so the photo morphs
-   * between routes — see lib/utils/view-transition.ts. */
-  sharedName?: string;
 }) {
   const photo = (
     <div className="bh-kenburns absolute inset-0 overflow-hidden">
@@ -38,7 +32,7 @@ export function HeroPhoto({
 
   return (
     <div className={`relative w-full overflow-hidden ${heightClassName}`}>
-      {sharedName ? <Shared name={sharedName}>{photo}</Shared> : photo}
+      {photo}
       <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/15 to-transparent">
         {children}
       </div>

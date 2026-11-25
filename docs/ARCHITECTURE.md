@@ -318,7 +318,7 @@ flowchart TB
 | **Monuments undated** | Wikidata has no construction dates for them in this period; inventing some would break the data policy | A dated source (an ASI register, a gazetteer) is found |
 | **Borders linked by containment** | Honest about what the data supports (location, not combatants) | A source records who fought |
 | **Native `<input type="range">` for the timeline** | Keyboard and screen-reader support for free | Never |
-| **Next.js View Transitions for pages** | Shared-element morphs between a list and a page with no extra library | The browser support story changes |
+| **Native view transitions for pages** | A colour bloom between sections and a slide between records, with no extra library | The browser support story changes |
 
 ---
 

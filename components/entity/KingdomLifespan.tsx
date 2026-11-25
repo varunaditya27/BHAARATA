@@ -5,7 +5,6 @@ import { useMemo, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { formatDateRange } from "@/lib/domain/time";
 import type { Polity } from "@/lib/domain/types";
-import { NAV_FORWARD } from "@/lib/utils/view-transition";
 import { contemporariesOf } from "./contemporaries";
 
 const DEFAULT_VISIBLE = 8;
@@ -189,7 +188,6 @@ export function KingdomLifespan({
                   <div className="min-w-0 pr-2">
                     <Link
                       href={`/polities/${p.slug}`}
-                      transitionTypes={NAV_FORWARD}
                       className="block truncate font-sans text-xs font-medium text-ink hover:text-territory-selected hover:underline"
                     >
                       {p.name}

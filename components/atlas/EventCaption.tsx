@@ -6,7 +6,6 @@ import { useAtlasAccess } from "@/components/layout/AtlasDataProvider";
 import { formatDateRange } from "@/lib/domain/time";
 import type { HistoricalEvent } from "@/lib/domain/types";
 import { lightenHex } from "@/lib/utils/color";
-import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
 /**
  * Documentary lower-third: appears when playback (or a click on a
@@ -43,7 +42,6 @@ export function EventCaption({ event, raised = false }: { event: HistoricalEvent
               <p className="mt-1.5 line-clamp-2 font-sans text-sm leading-relaxed text-paper/75">{event.summary}</p>
               <Link
                 href={`/chronology#${event.slug}`}
-                transitionTypes={NAV_FORWARD}
                 className="mt-2 inline-block font-sans text-xs text-paper/80 underline underline-offset-4 hover:text-paper"
               >
                 Read more in the timeline

@@ -6,14 +6,12 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/primitives/Badge";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
-import { Shared } from "@/components/primitives/Shared";
 import type { ImageKey } from "@/lib/domain/types";
 import { useAtlasData, useAtlasAccess } from "@/components/layout/AtlasDataProvider";
 import { polityStatus } from "@/lib/data/status";
 import { formatDateRange } from "@/lib/domain/time";
 import type { Polity } from "@/lib/domain/types";
 import { MOBILE_QUERY, useMediaQuery } from "@/lib/utils/use-media-query";
-import { NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 export type EntityPreviewPanelProps = {
   polity: Polity | null;
@@ -148,11 +146,9 @@ function HeroStrip({ polity }: { polity: Polity }) {
   if (!hero) return null;
   return (
     <div className="relative h-32 w-full">
-      <Shared name={transitionNames.polityPhoto(polity.slug)}>
-        <div className="absolute inset-0">
-          <Image src={hero.file} alt={hero.alt} fill sizes="320px" className="object-cover" />
-        </div>
-      </Shared>
+      <div className="absolute inset-0">
+        <Image src={hero.file} alt={hero.alt} fill sizes="320px" className="object-cover" />
+      </div>
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent" />
     </div>
   );
@@ -228,7 +224,6 @@ function ExploreLink({ polity, className }: { polity: Polity; className?: string
   return (
     <Link
       href={`/polities/${polity.slug}`}
-      transitionTypes={NAV_FORWARD}
       className={`block bg-paper px-4 py-2 text-center font-sans text-sm font-medium text-ink hover:bg-paper/90 ${className ?? ""}`}
     >
       Open the {polity.name} page

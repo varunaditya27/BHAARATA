@@ -2,14 +2,12 @@ import Link from "next/link";
 import { Badge } from "@/components/primitives/Badge";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { PageHero } from "@/components/primitives/PageHero";
-import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
 import { KingdomLanes } from "@/components/chronology/KingdomLanes";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
 import { formatDateRange } from "@/lib/domain/time";
 import { PROTOTYPE_ERAS } from "@/lib/geo/historical-state";
-import { NAV_BACK, NAV_FORWARD } from "@/lib/utils/view-transition";
 
 export const metadata = {
   title: "Timeline — BHĀRATA",
@@ -30,7 +28,7 @@ export default async function ChronologyPage() {
   })).filter((g) => g.items.length > 0 || g.fights.length > 0);
 
   return (
-    <PageTransition>
+    <>
       <PageHero
         title="Timeline"
         intro="Every turning point and battle in the atlas, in order. Each line is a kingdom, and each diamond a turning point you can open."
@@ -92,7 +90,6 @@ export default async function ChronologyPage() {
                             <Link
                               key={id}
                               href={`/polities/${polity.slug}`}
-                              transitionTypes={NAV_FORWARD}
                               className="text-ink underline underline-offset-4 hover:text-territory-selected"
                             >
                               {polity.name}
@@ -101,7 +98,6 @@ export default async function ChronologyPage() {
                         })}
                         <Link
                           href={`/atlas?year=${event.period.startYear}${lead ? `&polity=${lead.slug}` : ""}`}
-                          transitionTypes={NAV_BACK}
                           className="text-ink-muted underline underline-offset-4 hover:text-ink"
                         >
                           Show {event.period.startYear} CE on the map
@@ -124,7 +120,6 @@ export default async function ChronologyPage() {
                           <span className="w-12 shrink-0 text-sm tabular-nums text-ink-muted">{b.period.startYear}</span>
                           <Link
                             href={`/atlas?year=${b.period.startYear}`}
-                            transitionTypes={NAV_BACK}
                             className="font-display text-lg text-ink underline-offset-4 hover:underline"
                           >
                             {b.title}
@@ -151,6 +146,6 @@ export default async function ChronologyPage() {
           </section>}
         </div>
       </div>
-    </PageTransition>
+    </>
   );
 }

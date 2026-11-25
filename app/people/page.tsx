@@ -3,14 +3,11 @@ import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { PeopleDirectory, type DirectoryGroup } from "@/components/entity/PeopleDirectory";
 import { RulerPortrait } from "@/components/entity/RulerPortrait";
 import { PageHero } from "@/components/primitives/PageHero";
-import { PageTransition } from "@/components/primitives/PageTransition";
 import { PortraitStack } from "@/components/primitives/PortraitStack";
-import { Shared } from "@/components/primitives/Shared";
 import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
 import { byStart, formatDateRange, formatPersonDates } from "@/lib/domain/time";
-import { NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 export const metadata = { title: "People — BHĀRATA" };
 
@@ -36,7 +33,7 @@ export default async function PeopleIndexPage() {
         >
           <div className="min-w-0">
             <h2 id={`${polity.slug}-name`} className="font-display text-[clamp(2.4rem,5vw,4rem)] leading-[0.95] tracking-[-0.02em]">
-              <Link href={`/polities/${polity.slug}`} transitionTypes={NAV_FORWARD} className="hover:underline hover:decoration-2 hover:underline-offset-8">
+              <Link href={`/polities/${polity.slug}`} className="hover:underline hover:decoration-2 hover:underline-offset-8">
                 {polity.name}
               </Link>
             </h2>
@@ -54,15 +51,12 @@ export default async function PeopleIndexPage() {
           <Link
             key={person.id}
             href={`/people/${person.slug}`}
-            transitionTypes={NAV_FORWARD}
             className="bh-lift group flex min-h-12 items-center gap-3 border-b border-border px-2 py-2"
           >
             <span className="min-w-0 flex-1 font-display text-lg text-ink group-hover:text-territory-selected">{person.name}</span>
             <span className="shrink-0 font-sans text-sm tabular-nums text-ink-muted">{formatPersonDates(person)}</span>
             {person.imageKey && images[person.imageKey as ImageKey] && (
-              <Shared name={transitionNames.personPortrait(person.slug)}>
-                <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-9 shrink-0" />
-              </Shared>
+              <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-9 shrink-0" />
             )}
           </Link>
         ),
@@ -70,7 +64,7 @@ export default async function PeopleIndexPage() {
     }));
 
   return (
-    <PageTransition>
+    <>
       <PageHero
         title="People"
         intro="Every ruler in the atlas, grouped by kingdom and in the order they ruled."
@@ -91,6 +85,6 @@ export default async function PeopleIndexPage() {
           <PeopleDirectory groups={groups} />
         </div>
       </div>
-    </PageTransition>
+    </>
   );
 }

@@ -1,10 +1,8 @@
 import Link from "next/link";
 import { SearchFilters } from "@/components/search/SearchFilters";
 import { PageHero } from "@/components/primitives/PageHero";
-import { PageTransition } from "@/components/primitives/PageTransition";
 import { cn } from "@/lib/utils/cn";
 import { KINDS, PAGE_SIZE, getFacets, parseFilters, runSearch, toQuery, type Facets, type Filters, type Kind } from "@/lib/search/advanced";
-import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
 export const metadata = { title: "Search — BHĀRATA" };
 
@@ -45,7 +43,7 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
   const pages = Math.max(1, Math.ceil(page.total / PAGE_SIZE));
 
   return (
-    <PageTransition>
+    <>
             <PageHero
         title="Search"
         intro="Rulers, kingdoms, places and events, narrowed by time, place and the way they connect."
@@ -108,7 +106,7 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
                   >
                     <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
                       <h2 className="font-display text-2xl text-ink">
-                        <Link href={r.href} transitionTypes={NAV_FORWARD} className="hover:text-territory-selected">
+                        <Link href={r.href} className="hover:text-territory-selected">
                           {r.title}
                         </Link>
                       </h2>
@@ -156,7 +154,7 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
           </section>
         </div>
       </div>
-    </PageTransition>
+    </>
   );
 }
 

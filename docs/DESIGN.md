@@ -133,7 +133,6 @@ Notable patterns:
 | `KingdomEmblem` | A kingdom's outline, filled with its pigment, used as its logo throughout |
 | `Odometer` | A year as rolling digits, so a change reads as a counter turning |
 | `ProvenanceChain` | The vertical "How we know" thread with real / partly real / placeholder marks |
-| `PageTransition`, `Shared` | Wrap a page and a shared element so it morphs between a list and its page |
 | `KingdomBoard` | The Kingdoms page: photo tiles sized by each kingdom's largest recorded territory, a year dial that dims kingdoms with no land that year, and a find box |
 | `PeopleDirectory` | The People page: rulers grouped by kingdom with an accent-insensitive find box. Rows are rendered on the server and only filtered in the browser |
 | `PlacesAtlas` | The Places page: a drawn map of every place beside the list, grouped by a rough area worked out from coordinates (`lib/geo/areas.ts`) |
@@ -179,7 +178,7 @@ Motion explains something or it is removed. It should show continuity, hierarchy
 
 | Moment | Motion | Time |
 |---|---|---|
-| Page change | Shared elements morph (the card photo becomes the hero); the page slides a short way | ~400 ms |
+| Page change | From the menu, the next page opens as a circle of its colour from the click; from a link in the page, the page slides forward | ~550–900 ms |
 | Territory in and out | Opacity crossfade between border records | 500 ms |
 | Selecting a kingdom | Camera flight to its borders, tilting a little | ~1.8 s |
 | Preview panel | Fade and a small slide | 180–280 ms |

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { PlacesAtlas, type PlaceGroup } from "@/components/entity/PlacesAtlas";
 import { PageHero } from "@/components/primitives/PageHero";
-import { PageTransition } from "@/components/primitives/PageTransition";
 import { PortraitStack } from "@/components/primitives/PortraitStack";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
@@ -9,7 +8,6 @@ import { placeKindLabel } from "@/lib/domain/labels";
 import { AREA_ORDER, broadArea } from "@/lib/geo/areas";
 import { boundariesContaining, polityGeometry, projectTogether } from "@/lib/geo/silhouette";
 import type { ImageKey } from "@/lib/domain/types";
-import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
 export const metadata = { title: "Places — BHĀRATA" };
 
@@ -53,7 +51,6 @@ export default async function PlacesIndexPage() {
               <Link
                 key={place.id}
                 href={`/places/${place.slug}`}
-                transitionTypes={NAV_FORWARD}
                 className="bh-lift group flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border px-2 py-3"
               >
                 <span className="font-display text-xl text-ink group-hover:text-territory-selected">{place.name}</span>
@@ -70,7 +67,7 @@ export default async function PlacesIndexPage() {
     }));
 
   return (
-    <PageTransition>
+    <>
             <PageHero
         title="Places"
         intro="Capitals, temples, forts and tombs, each set on the map and listed from north to south."
@@ -99,6 +96,6 @@ export default async function PlacesIndexPage() {
           />
         </div>
       </div>
-    </PageTransition>
+    </>
   );
 }

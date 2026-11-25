@@ -147,7 +147,7 @@ All historical records live in PostgreSQL (`prisma/seed.sql` is the deterministi
 
 ### Add a page
 
-1. Create `app/<route>/page.tsx` as a server component, wrapped in `<PageTransition>`.
+1. Create `app/<route>/page.tsx` as a server component.
 2. For dynamic routes, provide `generateMetadata` where a page needs a record-specific title. Records are read on request.
 3. Add it to the navigation in `components/layout/GlobalNav.tsx` and the footer in `Colophon.tsx` if it should be linked.
 4. Use `<Link transitionTypes={NAV_FORWARD}>` (or `NAV_BACK`) so the page transition has a direction.

@@ -13,7 +13,6 @@ import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { Odometer } from "@/components/primitives/Odometer";
 import { useAtlasData, useAtlasAccess } from "@/components/layout/AtlasDataProvider";
 import { STORY_OVERVIEW, storyChapters } from "@/lib/data/story";
-import { NAV_FORWARD } from "@/lib/utils/view-transition";
 import { AstrolabeOverlay } from "./AstrolabeOverlay";
 import type { MapTelemetry } from "./StoryMap";
 import { Wordmark } from "./Wordmark";
@@ -329,7 +328,6 @@ function ChapterPlate({
           <div className="gsap-chapter-item mt-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-paper/12 pt-4 font-sans text-sm">
             <Link
               href={`/atlas?year=${chapter.year}${politySlug ? `&polity=${politySlug}` : ""}`}
-              transitionTypes={NAV_FORWARD}
               className="group/cta inline-flex items-center gap-2.5 font-medium text-paper transition-colors hover:text-paper/85"
             >
               <span className="underline decoration-paper/35 underline-offset-4 group-hover/cta:decoration-paper">
@@ -345,7 +343,6 @@ function ChapterPlate({
             {politySlug && (
               <Link
                 href={`/polities/${politySlug}`}
-                transitionTypes={NAV_FORWARD}
                 className="text-xs text-paper/70 underline decoration-paper/25 underline-offset-4 transition-colors hover:text-paper"
               >
                 More about {polityName}

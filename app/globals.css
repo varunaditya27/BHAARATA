@@ -355,69 +355,11 @@ body:has([data-dark-page]) > footer {
 }
 
 /* ---------------------------------------------------------------------- */
-/* View Transitions — React <ViewTransition> + Link `transitionTypes`.    */
-/* Patterns from node_modules/next/dist/docs/01-app/02-guides/            */
-/* view-transitions.md: morphing shared photos, directional slides       */
-/* (forward = deeper into the record graph), a header that never moves.  */
+/* Page transitions: the browser's native view transitions, started by    */
+/* components/layout/PageTransitions.tsx. The header never moves.        */
 /* ---------------------------------------------------------------------- */
 ::view-transition {
   pointer-events: none;
-}
-
-::view-transition-group(.morph) {
-  animation-duration: 520ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-}
-::view-transition-image-pair(.morph) {
-  animation-name: bh-via-blur;
-}
-@keyframes bh-via-blur {
-  30% {
-    filter: blur(3px);
-  }
-}
-
-::view-transition-old(.nav-forward) {
-  --bh-slide: -60px;
-  animation:
-    150ms ease-in both bh-fade reverse,
-    420ms cubic-bezier(0.65, 0, 0.35, 1) both bh-slide reverse;
-}
-::view-transition-new(.nav-forward) {
-  --bh-slide: 60px;
-  animation:
-    220ms ease-out 150ms both bh-fade,
-    420ms cubic-bezier(0.65, 0, 0.35, 1) both bh-slide;
-}
-::view-transition-old(.nav-back) {
-  --bh-slide: 60px;
-  animation:
-    150ms ease-in both bh-fade reverse,
-    420ms cubic-bezier(0.65, 0, 0.35, 1) both bh-slide reverse;
-}
-::view-transition-new(.nav-back) {
-  --bh-slide: -60px;
-  animation:
-    220ms ease-out 150ms both bh-fade,
-    420ms cubic-bezier(0.65, 0, 0.35, 1) both bh-slide;
-}
-@keyframes bh-fade {
-  from {
-    filter: blur(3px);
-    opacity: 0;
-  }
-  to {
-    filter: blur(0);
-    opacity: 1;
-  }
-}
-@keyframes bh-slide {
-  from {
-    translate: var(--bh-slide);
-  }
-  to {
-    translate: 0;
-  }
 }
 
 /* Section changes (header, footer, search): the incoming page opens as a circle from the click, carrying its own
@@ -508,14 +450,6 @@ body:has([data-dark-page]) > footer {
 @keyframes bh-letter-rise {
   from { transform: translateY(105%); }
   to { transform: translateY(0); }
-}
-.bh-macron-draw {
-  stroke-dasharray: 100;
-  animation: bh-macron-draw 520ms cubic-bezier(0.65, 0, 0.35, 1) both;
-}
-@keyframes bh-macron-draw {
-  from { stroke-dashoffset: 100; }
-  to { stroke-dashoffset: 0; }
 }
 .bh-fade-in {
   animation: bh-fade-in 900ms ease-out both;
@@ -659,28 +593,6 @@ body:has([data-dark-page]) > footer {
 .bh-popup-credit { display: block; margin-top: 0.2rem; font-size: 0.62rem; color: var(--bh-ink-muted); text-decoration: underline; text-underline-offset: 2px; }
 .bh-popup-note { margin-top: 0.4rem; font-size: 0.68rem; font-style: italic; color: var(--bh-ink-muted); }
 .bh-popup-link { display: inline-block; margin-top: 0.55rem; font-size: 0.8rem; color: var(--bh-ink); text-decoration: underline; text-underline-offset: 3px; }
-
-/* Wordmark letters: each rises, then a band of light crosses it. The delays come from a
- * per-letter variable, so the glint travels along the word a letter at a time. */
-.bh-wordmark-letter {
-  background-image: linear-gradient(105deg, currentColor 0%, currentColor 38%, #fff6e2 50%, currentColor 62%, currentColor 100%);
-  background-size: 280% 100%;
-  background-position: 130% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation:
-    bh-letter-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) both,
-    bh-sheen 1.6s cubic-bezier(0.4, 0, 0.2, 1) both;
-  animation-delay: var(--d, 0ms), calc(var(--d, 0ms) + 1900ms);
-}
-@keyframes bh-sheen {
-  from { background-position: 130% 0; }
-  to { background-position: -30% 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .bh-wordmark-letter { animation: none; background-image: none; -webkit-text-fill-color: currentColor; }
-}
 
 /* Slow settle on hero photographs — the camera easing in after a cut. */
 .bh-kenburns {

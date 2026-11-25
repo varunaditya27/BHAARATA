@@ -1,4 +1,4 @@
-import type { Person, Place, Polity } from "@/lib/domain/types";
+import type { Polity } from "@/lib/domain/types";
 
 /**
  * A plain-words description of where a record's data comes from, for the
@@ -21,23 +21,3 @@ export function polityStatus(p: Polity): DataStatus {
   return { label: "Placeholder, not checked yet.", sourced: false };
 }
 
-export function personStatus(p: Person): DataStatus {
-  const ids = p.provenance.map((x) => x.sourceId);
-  if (ids.some((id) => id.startsWith("wikipedia-check-person-"))) return { label: "Dates and text checked against Wikipedia.", sourced: true };
-  if (ids.some((id) => id.startsWith("wikipedia-list-"))) return { label: "Name and dates from Wikipedia's list of rulers.", sourced: true };
-  if (ids.includes("wikidata")) {
-    return {
-      label: ids.some((id) => id.startsWith("wikipedia-"))
-        ? "Dates from Wikidata, Wikipedia's open database. Summary from Wikipedia."
-        : "Dates and title from Wikidata, Wikipedia's open database.",
-      sourced: true,
-    };
-  }
-  return { label: "Placeholder, not checked yet.", sourced: false };
-}
-
-export function placeStatus(p: Place): DataStatus {
-  return p.provenance.some((x) => x.sourceId === "wikidata")
-    ? { label: "Name and location from Wikidata, Wikipedia's open database.", sourced: true }
-    : { label: "Placeholder, not checked yet.", sourced: false };
-}

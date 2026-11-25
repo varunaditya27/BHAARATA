@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
-import { Shared } from "@/components/primitives/Shared";
 import { Tilt } from "@/components/primitives/Tilt";
 import { InkName } from "@/components/entity/InkName";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
@@ -12,7 +10,6 @@ import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
 import { formatDatePoint, formatDateRange, formatPersonDates } from "@/lib/domain/time";
-import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 
 
@@ -57,7 +54,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
   const pct = (y: number) => ((y - kingdomStart) / Math.max(1, kingdomEnd - kingdomStart)) * 100;
 
   return (
-    <PageTransition>
+    <>
       <div className="bh-accented" style={{ "--bh-accent": accent } as React.CSSProperties}>
         <div className="bh-reading-progress" aria-hidden />
         <section style={{ backgroundColor: accent, color: "#fff7e8" }}>
@@ -75,9 +72,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
             </div>
             {portrait ? (
               <Tilt className="w-56 lg:w-80">
-                <Shared name={transitionNames.personPortrait(person.slug)}>
-                  <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-full" />
-                </Shared>
+                <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-full" />
               </Tilt>
             ) : (
               polity && <KingdomEmblem polityId={polity.id} color="#fff7e8" draw className="h-44 w-44 lg:h-60 lg:w-60" />
@@ -90,7 +85,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
           <section className="mt-12">
             <h2 className="font-sans text-sm font-medium text-ink-muted">
               Where {lifetimeOnly ? "this lifetime falls" : person.datesAre === "reign" ? "this reign falls" : "these dates fall"} in the history of{" "}
-              <Link href={`/polities/${polity.slug}`} transitionTypes={NAV_FORWARD} className="text-ink underline underline-offset-4 hover:[color:var(--bh-accent)]">
+              <Link href={`/polities/${polity.slug}`} className="text-ink underline underline-offset-4 hover:[color:var(--bh-accent)]">
                 {polity.name}
               </Link>
             </h2>
@@ -129,7 +124,6 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
                       <h3 className="mt-0.5 font-display text-lg text-ink">{e.title}</h3>
                       <Link
                         href={`/atlas?year=${e.period.startYear}${polity ? `&polity=${polity.slug}` : ""}`}
-                        transitionTypes={NAV_BACK}
                         className="mt-1 inline-block font-sans text-xs text-ink underline underline-offset-4"
                       >
                         Show {e.period.startYear} CE on the map
@@ -152,7 +146,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
                     const theirs = p.polityId ? getPolityById(p.polityId) : undefined;
                     return (
                       <li key={p.id} className="border-t border-border pt-3">
-                        <Link href={`/people/${p.slug}`} transitionTypes={NAV_FORWARD} className="group block font-sans text-sm">
+                        <Link href={`/people/${p.slug}`} className="group block font-sans text-sm">
                           <span className="text-ink group-hover:underline">{p.name}</span>
                           <span className="block text-xs text-ink-muted">
                             {theirs ? `${theirs.name}, ` : ""}
@@ -169,6 +163,6 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
         </div>
       </div>
       </div>
-    </PageTransition>
+    </>
   );
 }
