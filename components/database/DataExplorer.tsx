@@ -276,7 +276,7 @@ export function DataExplorer({
               Browse all the data
             </h1>
             <p className="mt-3 max-w-2xl font-sans text-base leading-relaxed text-ink-muted">
-              Look through all 17 lists behind BHĀRATA, from 55 kingdoms and 584 rulers to 466 map borders, 392 places, and 1,026 images.
+              Look through all 17 lists behind BHĀRATA, from kingdoms and rulers to map borders, places and images.
             </p>
           </div>
           <Link

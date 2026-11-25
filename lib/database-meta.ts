@@ -27,25 +27,25 @@ export const tableDetails: Record<
   kingdoms: {
     category: "core",
     summary:
-      "55 kingdoms, empires, and sultanates across the subcontinent (600–1700 CE), with dates, language, religion, pigment colour, and hero photograph.",
+      "Kingdoms, empires, and sultanates across the subcontinent (600–1700 CE), with dates, language, religion, pigment colour, and hero photograph.",
     primaryRoute: "/polities/",
   },
   people: {
     category: "core",
     summary:
-      "584 rulers and historical figures linked to their kingdom, reign or lifetime years, title, summary, and dedicated portrait or coin image.",
+      "Rulers and historical figures linked to their kingdom, reign or lifetime years, title, summary, and dedicated portrait or coin image.",
     primaryRoute: "/people/",
   },
   places: {
     category: "core",
     summary:
-      "392 places on the map: capitals, temples, forts, mosques, tombs, monasteries, and protected monuments, with their coordinates.",
+      "Places on the map: capitals, temples, forts, mosques, tombs, monasteries, and protected monuments, with their coordinates.",
     primaryRoute: "/places/",
   },
   events: {
     category: "core",
     summary:
-      "35 dated turning points and battles with map coordinates, summaries, and how sure we are of the dates.",
+      "Dated turning points and battles with map coordinates, summaries, and how sure we are of the dates.",
     primaryRoute: "/chronology#",
   },
   historical_items: {
@@ -62,17 +62,17 @@ export const tableDetails: Record<
   sources: {
     category: "core",
     summary:
-      "209 books, inscription volumes, datasets, and articles with full citations and web links.",
+      "Books, inscription volumes, datasets, and articles with full citations and web links.",
   },
   images: {
     category: "core",
     summary:
-      "1,026 credited photos, coins, manuscripts, and building views with creator, licence, and description.",
+      "Credited photos, coins, manuscripts, and building views with creator, licence, and description.",
   },
   kingdom_borders: {
     category: "spatial",
     summary:
-      "466 dated kingdom border shapes, uncertain frontier lines, and map label spots from Cliopatria.",
+      "Dated kingdom border shapes, uncertain frontier lines, and map label spots from Cliopatria.",
   },
   routes: {
     category: "spatial",
@@ -110,7 +110,7 @@ export const tableDetails: Record<
   information_sources: {
     category: "relations",
     summary:
-      "1,798 source links showing where each fact about a kingdom, ruler, place, battle, or border came from.",
+      "Source links showing where each fact about a kingdom, ruler, place, battle, or border came from.",
   },
 };
 
