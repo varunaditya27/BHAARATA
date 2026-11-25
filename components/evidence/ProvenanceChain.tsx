@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Badge } from "@/components/primitives/Badge";
 import type { ImageCredit } from "@/lib/domain/types";
 import type { Evidence, Place, Source } from "@/lib/domain/types";
-import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
 type Status = "real" | "partly" | "placeholder";
 type Link_ = { step: string; what: React.ReactNode; status: Status; note: string };
@@ -36,7 +35,7 @@ export function ProvenanceChain({
             <>
               {" "}
               at{" "}
-              <Link href={`/places/${place.slug}`} transitionTypes={NAV_FORWARD} className="underline underline-offset-4">
+              <Link href={`/places/${place.slug}`} className="underline underline-offset-4">
                 {place.name}
               </Link>
             </>

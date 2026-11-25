@@ -221,11 +221,11 @@ export function StoryMap({
     map.on("style.load", () => {
       map.setProjection({ type: "globe" });
       map.setSky({
-        "sky-color": "#1d3350",
+        "sky-color": "#0a6f94",
         "sky-horizon-blend": 0.7,
-        "horizon-color": "#f0b46e",
+        "horizon-color": "#ffa51f",
         "horizon-fog-blend": 0.6,
-        "fog-color": "#8aa6c4",
+        "fog-color": "#8fd8e8",
         "fog-ground-blend": 0.2,
         "atmosphere-blend": [
           "interpolate",
@@ -270,7 +270,7 @@ export function StoryMap({
             source: STORY_FLIGHT_SOURCE,
             layout: { "line-cap": "round", "line-join": "round" },
             paint: {
-              "line-color": "#d4a359",
+              "line-color": "#ffa51f",
               "line-width": ["interpolate", ["linear"], ["zoom"], 3, 5, 6, 11],
               "line-blur": ["interpolate", ["linear"], ["zoom"], 3, 4, 6, 8],
               "line-opacity": 0.42,
@@ -288,7 +288,7 @@ export function StoryMap({
             source: STORY_FLIGHT_SOURCE,
             layout: { "line-cap": "round", "line-join": "round" },
             paint: {
-              "line-color": "#f3ede0",
+              "line-color": "#f2f7fc",
               "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.4, 6, 2.2],
               "line-dasharray": [2, 2.4],
               "line-opacity": 0.85,
@@ -306,8 +306,8 @@ export function StoryMap({
             source: STORY_BEACON_SOURCE,
             paint: {
               "circle-radius": 18,
-              "circle-color": "rgba(212, 163, 89, 0.09)",
-              "circle-stroke-color": "#d4a359",
+              "circle-color": "rgba(255, 176, 0, 0.1)",
+              "circle-stroke-color": "#ffa51f",
               "circle-stroke-width": 1.5,
               "circle-stroke-opacity": 0.72,
               "circle-pitch-alignment": "map",
@@ -325,8 +325,8 @@ export function StoryMap({
             source: STORY_BEACON_SOURCE,
             paint: {
               "circle-radius": 4.5,
-              "circle-color": "#f3ede0",
-              "circle-stroke-color": "#96341a",
+              "circle-color": "#f2f7fc",
+              "circle-stroke-color": "#c01a3c",
               "circle-stroke-width": 2,
               "circle-pitch-alignment": "map",
             },
@@ -339,9 +339,9 @@ export function StoryMap({
         if (map.getLayer(id))
           map.setPaintProperty(id, prop as never, value as never);
       };
-      paint("background", "background-color", "#d4c49b");
-      paint("water", "fill-color", "#17353b");
-      paint("waterway", "line-color", "#3d6f72");
+      paint("background", "background-color", "#eaf1f8");
+      paint("water", "fill-color", "#0a7fa5");
+      paint("waterway", "line-color", "#1fb6d6");
       paint(LAYER_IDS.hillshade, "hillshade-exaggeration", [
         "interpolate",
         ["linear"],
@@ -354,7 +354,7 @@ export function StoryMap({
       paint(
         LAYER_IDS.hillshade,
         "hillshade-shadow-color",
-        "rgba(48, 34, 20, 0.78)"
+        "rgba(6,36,43, 0.78)"
       );
       if (map.getLayer(LAYER_IDS.kingdomLabels)) {
         map.setLayerZoomRange(LAYER_IDS.kingdomLabels, 3.7, 24);
@@ -583,7 +583,7 @@ export function StoryMap({
   }, []);
 
   return (
-    <div className="absolute inset-0 bg-[#070605]" aria-hidden>
+    <div className="absolute inset-0 bg-[#031c22]" aria-hidden>
       <SpaceBackdrop />
       <div
         className={`absolute inset-0 transition-opacity duration-500 ${

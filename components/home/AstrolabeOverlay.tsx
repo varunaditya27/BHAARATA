@@ -24,7 +24,7 @@ export function AstrolabeOverlay({
   lng,
   lat,
   bearing,
-  accentColor = "#d4a359",
+  accentColor = "#ffa51f",
   activeChapterId,
 }: AstrolabeOverlayProps) {
   const prefersReducedMotion = useReducedMotion();
@@ -54,7 +54,7 @@ export function AstrolabeOverlay({
               cy="340"
               r="316"
               fill="none"
-              stroke="rgba(243, 237, 224, 0.22)"
+              stroke="rgba(242,247,252, 0.22)"
               strokeWidth="1"
             />
             {/* Dashed ecliptic ring */}
@@ -74,13 +74,13 @@ export function AstrolabeOverlay({
               cy="340"
               r="224"
               fill="none"
-              stroke="rgba(243, 237, 224, 0.12)"
+              stroke="rgba(242,247,252, 0.12)"
               strokeWidth="0.8"
             />
             {/* Cardinal crosshairs */}
             <path
               d="M 340 10 L 340 42 M 340 638 L 340 670 M 10 340 L 42 340 M 638 340 L 670 340"
-              stroke="rgba(243, 237, 224, 0.45)"
+              stroke="rgba(242,247,252, 0.45)"
               strokeWidth="1.2"
             />
             {/* Diagonal astrolabe ticks */}

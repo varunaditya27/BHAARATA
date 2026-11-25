@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { Badge } from "@/components/primitives/Badge";
-import { PageTransition } from "@/components/primitives/PageTransition";
+import { PageHero } from "@/components/primitives/PageHero";
+import { HERO } from "@/lib/hero";
 import { Rule } from "@/components/primitives/Rule";
 import { KingdomLanes } from "@/components/chronology/KingdomLanes";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
 import { formatDateRange } from "@/lib/domain/time";
 import { PROTOTYPE_ERAS } from "@/lib/geo/historical-state";
-import { NAV_BACK, NAV_FORWARD } from "@/lib/utils/view-transition";
 
 export const metadata = {
   title: "Timeline — BHĀRATA",
@@ -26,19 +26,18 @@ export default async function ChronologyPage() {
   })).filter((g) => g.items.length > 0 || g.fights.length > 0);
 
   return (
-    <PageTransition>
-      <div className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6">
-        <h1 className="font-display text-5xl text-ink">Timeline</h1>
-        <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
-          Every turning point and battle in the atlas, in order. Each coloured line shows how long a kingdom lasted, and each diamond marks a turning point. Click a diamond
-          to jump to it below. Under each period you&rsquo;ll also find its battles. &ldquo;c.&rdquo; in front of a date
-          means &ldquo;about&rdquo;.
-        </p>
-        <div className="mt-3">
+    <>
+      <PageHero
+        title="Timeline"
+        intro="Every turning point and battle in the atlas, in order. Each line is a kingdom, and each diamond a turning point you can open."
+        hero={HERO.timeline}
+      />
+      <div className="mx-auto max-w-[1100px] px-4 py-14 sm:px-6">
+        <div className="mb-3">
           <Badge tone="neutral">Battles from Wikidata and Wikipedia. Turning points written here and checked against Wikipedia.</Badge>
         </div>
 
-        <div className="mt-10">
+        <div>
           <KingdomLanes />
         </div>
 
@@ -77,7 +76,6 @@ export default async function ChronologyPage() {
                             <Link
                               key={id}
                               href={`/polities/${polity.slug}`}
-                              transitionTypes={NAV_FORWARD}
                               className="text-ink underline underline-offset-4 hover:text-territory-selected"
                             >
                               {polity.name}
@@ -86,7 +84,6 @@ export default async function ChronologyPage() {
                         })}
                         <Link
                           href={`/atlas?year=${event.period.startYear}${lead ? `&polity=${lead.slug}` : ""}`}
-                          transitionTypes={NAV_BACK}
                           className="text-ink-muted underline underline-offset-4 hover:text-ink"
                         >
                           Show {event.period.startYear} CE on the map
@@ -109,7 +106,6 @@ export default async function ChronologyPage() {
                           <span className="w-12 shrink-0 text-sm tabular-nums text-ink-muted">{b.period.startYear}</span>
                           <Link
                             href={`/atlas?year=${b.period.startYear}`}
-                            transitionTypes={NAV_BACK}
                             className="font-display text-lg text-ink underline-offset-4 hover:underline"
                           >
                             {b.title}
@@ -136,6 +132,6 @@ export default async function ChronologyPage() {
           </section>}
         </div>
       </div>
-    </PageTransition>
+    </>
   );
 }

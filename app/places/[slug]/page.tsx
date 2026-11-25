@@ -2,8 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { HeroPhoto } from "@/components/primitives/HeroPhoto";
-import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
+import { HERO } from "@/lib/hero";
 import { InkName } from "@/components/entity/InkName";
 import { RisingTitle } from "@/components/entity/RisingTitle";
 import type { ImageKey } from "@/lib/domain/types";
@@ -13,7 +13,6 @@ import { placeKindLabel } from "@/lib/domain/labels";
 import { formatDateRange } from "@/lib/domain/time";
 import { boundariesContaining, projectTogether } from "@/lib/geo/silhouette";
 import { darkenHex } from "@/lib/utils/color";
-import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 
 
@@ -71,10 +70,10 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
   );
 
   return (
-    <PageTransition>
+    <>
       <div>
         {hero && (
-          <HeroPhoto credit={hero} sharedName={transitionNames.placePhoto(place.slug)}>
+          <HeroPhoto credit={hero} tint={HERO.places.color}>
             <div className="flex h-full items-end">
               <div className="mx-auto w-full max-w-[960px] px-4 pb-10 sm:px-6">{header(true)}</div>
             </div>
@@ -128,7 +127,6 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
                     <div>
                       <Link
                         href={`/polities/${h.polity.slug}`}
-                        transitionTypes={NAV_FORWARD}
                         className="font-display text-xl text-ink hover:text-territory-selected"
                       >
                         {h.polity.name}
@@ -149,7 +147,7 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
                     {relatedEvents.map((e) => (
                       <li key={e.id} className="font-sans text-sm">
                         <span className="text-ink-muted">{formatDateRange(e.period)}</span>{" "}
-                        <Link href={`/chronology#${e.slug}`} transitionTypes={NAV_FORWARD} className="text-ink underline underline-offset-4">
+                        <Link href={`/chronology#${e.slug}`} className="text-ink underline underline-offset-4">
                           {e.title}
                         </Link>
                       </li>
@@ -160,7 +158,6 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
 
               <Link
                 href={`/atlas?year=${firstYear}`}
-                transitionTypes={NAV_BACK}
                 className="mt-10 inline-block border border-ink px-4 py-2 font-sans text-sm text-ink transition-colors hover:bg-ink hover:text-paper"
               >
                 Show it on the map in {firstYear} CE
@@ -169,6 +166,6 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
           </div>
         </div>
       </div>
-    </PageTransition>
+    </>
   );
 }

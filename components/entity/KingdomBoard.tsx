@@ -30,12 +30,10 @@ const SIZE: Record<TileSize, string> = {
  * year sink under an ink layer (opacity only), and the search hides tiles.
  */
 export function KingdomBoard({
-  intro,
   tiles,
   min,
   max,
 }: {
-  intro: React.ReactNode;
   tiles: BoardTile[];
   min: number;
   max: number;
@@ -51,9 +49,7 @@ export function KingdomBoard({
   return (
     <div className="px-2 pb-2 sm:px-3 sm:pb-3">
       <div className="grid gap-2 lg:grid-cols-12">
-        <div className="bg-[#2e281f] p-6 sm:p-8 lg:col-span-7">{intro}</div>
-
-        <div className="flex flex-col bg-territory-selected p-6 text-paper sm:p-8 lg:col-span-5">
+        <div className="flex flex-col bg-[#0a4a63] p-6 text-paper sm:p-8 lg:col-span-12">
           <p className="font-display text-6xl leading-none tabular-nums sm:text-7xl" aria-hidden>
             {year === null ? `${min}–${max}` : <Odometer value={year} suffix="CE" durationMs={260} />}
           </p>
@@ -97,7 +93,7 @@ export function KingdomBoard({
       </div>
 
       {q && shownCount === 0 && (
-        <p className="bg-[#2e281f] p-8 font-sans text-lg text-paper/80">
+        <p className="bg-[#0b3d46] p-8 font-sans text-lg text-paper/80">
           No kingdom matches &ldquo;{query.trim()}&rdquo;. Check the spelling, or type only part of the name.
         </p>
       )}

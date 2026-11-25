@@ -2,13 +2,12 @@ import Link from "next/link";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { PeopleDirectory, type DirectoryGroup } from "@/components/entity/PeopleDirectory";
 import { RulerPortrait } from "@/components/entity/RulerPortrait";
-import { PageTransition } from "@/components/primitives/PageTransition";
-import { Shared } from "@/components/primitives/Shared";
+import { PageHero } from "@/components/primitives/PageHero";
+import { HERO } from "@/lib/hero";
 import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
-import { formatDateRange, formatPersonDates } from "@/lib/domain/time";
-import { NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
+import { byStart, formatDateRange, formatPersonDates } from "@/lib/domain/time";
 
 export const metadata = { title: "People — BHĀRATA" };
 
@@ -19,7 +18,7 @@ export default async function PeopleIndexPage() {
   const groups: DirectoryGroup[] = [...polities]
     .sort((a, b) => a.period.startYear - b.period.startYear)
     .map((polity) => {
-      const rulers = getRulersForPolity(polity.id).sort((a, b) => a.period.startYear - b.period.startYear);
+      const rulers = getRulersForPolity(polity.id).sort(byStart);
       return { polity, rulers };
     })
     .filter(({ rulers }) => rulers.length > 0)
@@ -27,18 +26,22 @@ export default async function PeopleIndexPage() {
       id: polity.slug,
       name: polity.name,
       heading: (
-        <div key={polity.slug} className="flex items-center gap-4 border-b border-ink/70 pb-3">
-          <KingdomEmblem polityId={polity.id} color={polity.accentColor} className="h-11 w-11" />
+        <div
+          key={polity.slug}
+          className="bh-reveal relative mt-4 flex items-end justify-between overflow-hidden px-6 py-7 sm:px-8"
+          style={{ backgroundColor: polity.accentColor, color: "#f2f7fc" }}
+        >
           <div className="min-w-0">
-            <h2 id={`${polity.slug}-name`} className="font-display text-2xl text-ink">
-              <Link href={`/polities/${polity.slug}`} transitionTypes={NAV_FORWARD} className="hover:text-territory-selected">
+            <h2 id={`${polity.slug}-name`} className="font-display text-[clamp(2.4rem,5vw,4rem)] leading-[0.95] tracking-[-0.02em]">
+              <Link href={`/polities/${polity.slug}`} className="hover:underline hover:decoration-2 hover:underline-offset-8">
                 {polity.name}
               </Link>
             </h2>
-            <p className="font-sans text-sm text-ink-muted">
+            <p className="mt-3 font-sans text-base">
               {formatDateRange(polity.period)}, {rulers.length} {rulers.length === 1 ? "ruler" : "rulers"}
             </p>
           </div>
+          <KingdomEmblem polityId={polity.id} color="#f2f7fc" className="-mb-4 -mr-2 h-32 w-32 shrink-0 sm:h-40 sm:w-40" />
         </div>
       ),
       rulers: rulers.map((person) => ({
@@ -48,15 +51,12 @@ export default async function PeopleIndexPage() {
           <Link
             key={person.id}
             href={`/people/${person.slug}`}
-            transitionTypes={NAV_FORWARD}
-            className="group flex min-h-12 items-center gap-3 border-b border-border py-2"
+            className="bh-lift group flex min-h-12 items-center gap-3 border-b border-border px-2 py-2"
           >
             <span className="min-w-0 flex-1 font-display text-lg text-ink group-hover:text-territory-selected">{person.name}</span>
             <span className="shrink-0 font-sans text-sm tabular-nums text-ink-muted">{formatPersonDates(person)}</span>
             {person.imageKey && images[person.imageKey as ImageKey] && (
-              <Shared name={transitionNames.personPortrait(person.slug)}>
-                <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-9 shrink-0" />
-              </Shared>
+              <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-9 shrink-0" />
             )}
           </Link>
         ),
@@ -64,21 +64,20 @@ export default async function PeopleIndexPage() {
     }));
 
   return (
-    <PageTransition>
-      <div className="mx-auto max-w-[1000px] px-4 py-16 sm:px-6">
-        <h1 className="font-display text-5xl text-ink">People</h1>
-        <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
-          People in the atlas, grouped by kingdom and sorted by their recorded dates. Some dates describe a lifetime rather than a reign.
+    <>
+      <PageHero
+        title="People"
+        intro="Every ruler in the atlas, grouped by kingdom and in the order they ruled."
+        hero={HERO.people}
+      />
+      <div className="mx-auto max-w-[1100px] px-4 py-14 sm:px-6">
+        <p className="max-w-prose font-sans text-sm text-ink-muted">
+          Names and dates come from Wikipedia&rsquo;s lists of rulers and from Wikidata. &ldquo;c.&rdquo; before a year means about; some dates describe a lifetime rather than a reign.
         </p>
-        <p className="mt-3 max-w-prose font-sans text-sm text-ink-muted">
-          Most names and dates come from Wikipedia&rsquo;s lists of rulers and from Wikidata, Wikipedia&rsquo;s open
-          database. A few were written here and checked against Wikipedia. &ldquo;c.&rdquo; before a year means about.
-        </p>
-
-        <div className="mt-10">
+        <div className="mt-8">
           <PeopleDirectory groups={groups} />
         </div>
       </div>
-    </PageTransition>
+    </>
   );
 }

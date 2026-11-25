@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/primitives/Badge";
-import { Eyebrow } from "@/components/primitives/Eyebrow";
+import { PageHero } from "@/components/primitives/PageHero";
+import { HERO } from "@/lib/hero";
 import { Rule } from "@/components/primitives/Rule";
 import { ClaimThread } from "@/components/evidence/ClaimThread";
 import { EvidenceInvestigation } from "@/components/evidence/EvidenceInvestigation";
@@ -10,8 +11,6 @@ import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
 import { formatDateRange } from "@/lib/domain/time";
-import { PageTransition } from "@/components/primitives/PageTransition";
-import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
 
 
@@ -37,17 +36,19 @@ export default async function EvidencePage({ params }: PageProps<"/evidence/[slu
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
 
   return (
-    <PageTransition>
+    <>
+      <PageHero
+        title={record.title}
+        intro={`${record.evidenceType.charAt(0).toUpperCase() + record.evidenceType.slice(1)}, ${formatDateRange(record.period)}`}
+        hero={HERO.evidence}
+        size="lg"
+      >
+        <Link href="/evidence" className="mt-6 inline-block font-sans text-sm underline underline-offset-4">
+          All evidence
+        </Link>
+      </PageHero>
     <div className="mx-auto max-w-[1100px] px-6 py-12">
-      <Eyebrow>
-        <Link href="/evidence" transitionTypes={NAV_FORWARD} className="hover:text-ink">Evidence</Link>
-        <span aria-hidden> / </span>
-        {record.evidenceType.charAt(0).toUpperCase() + record.evidenceType.slice(1)}
-      </Eyebrow>
-      <h1 className="mt-2 font-display text-4xl text-ink sm:text-5xl">{record.title}</h1>
-      <p className="mt-2 font-sans text-ink-muted">{formatDateRange(record.period)}</p>
-
-      <div className="mt-4 grid gap-10 md:grid-cols-[2fr_1fr]">
+      <div className="grid gap-10 md:grid-cols-[2fr_1fr]">
         <div>
           {image ? (
             <EvidenceInvestigation record={record} image={image} />
@@ -70,7 +71,7 @@ export default async function EvidencePage({ params }: PageProps<"/evidence/[slu
             <div>
               <dt className="text-xs text-ink-muted">Where it is</dt>
               <dd className="mt-0.5 text-ink">
-                <Link href={`/places/${place.slug}`} transitionTypes={NAV_FORWARD} className="underline underline-offset-4 hover:text-territory-selected">
+                <Link href={`/places/${place.slug}`} className="underline underline-offset-4 hover:text-territory-selected">
                   {place.name}
                 </Link>
               </dd>
@@ -94,6 +95,6 @@ export default async function EvidencePage({ params }: PageProps<"/evidence/[slu
 
       <ProvenanceChain record={record} image={image} place={place} sources={sourceRecords} />
     </div>
-    </PageTransition>
+    </>
   );
 }

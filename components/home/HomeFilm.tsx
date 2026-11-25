@@ -13,7 +13,6 @@ import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { Odometer } from "@/components/primitives/Odometer";
 import { useAtlasData, useAtlasAccess } from "@/components/layout/AtlasDataProvider";
 import { STORY_OVERVIEW, storyChapters } from "@/lib/data/story";
-import { NAV_FORWARD } from "@/lib/utils/view-transition";
 import { AstrolabeOverlay } from "./AstrolabeOverlay";
 import type { MapTelemetry } from "./StoryMap";
 import { Wordmark } from "./Wordmark";
@@ -33,11 +32,11 @@ const GHOST_SCRIPTS = [
 ];
 
 const ERA_GLINTS = [
-  "radial-gradient(54% 48% at 82% 16%, rgba(255,196,128,0.22), rgba(255,170,90,0.07) 45%, transparent 72%)",
-  "radial-gradient(56% 50% at 76% 24%, rgba(224,122,95,0.25), rgba(150,52,26,0.08) 48%, transparent 74%)",
-  "radial-gradient(56% 50% at 84% 32%, rgba(92,168,176,0.24), rgba(58,90,120,0.08) 48%, transparent 74%)",
-  "radial-gradient(56% 50% at 78% 28%, rgba(242,184,96,0.24), rgba(166,138,82,0.08) 48%, transparent 74%)",
-  "radial-gradient(58% 52% at 74% 20%, rgba(230,138,86,0.26), rgba(150,52,26,0.09) 48%, transparent 74%)",
+  "radial-gradient(54% 48% at 82% 16%, rgba(255,176,0,0.30), rgba(255,110,0,0.09) 45%, transparent 72%)",
+  "radial-gradient(56% 50% at 76% 24%, rgba(232,50,90,0.32), rgba(176,16,80,0.10) 48%, transparent 74%)",
+  "radial-gradient(56% 50% at 84% 32%, rgba(0,172,196,0.32), rgba(0,90,160,0.10) 48%, transparent 74%)",
+  "radial-gradient(56% 50% at 78% 28%, rgba(255,190,40,0.30), rgba(255,110,60,0.10) 48%, transparent 74%)",
+  "radial-gradient(58% 52% at 74% 20%, rgba(235,70,90,0.30), rgba(230,90,40,0.10) 48%, transparent 74%)",
 ];
 
 /** Syncs Lenis smooth scroll ticks with GSAP ScrollTrigger (`lagSmoothing(0)`). */
@@ -329,7 +328,6 @@ function ChapterPlate({
           <div className="gsap-chapter-item mt-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-paper/12 pt-4 font-sans text-sm">
             <Link
               href={`/atlas?year=${chapter.year}${politySlug ? `&polity=${politySlug}` : ""}`}
-              transitionTypes={NAV_FORWARD}
               className="group/cta inline-flex items-center gap-2.5 font-medium text-paper transition-colors hover:text-paper/85"
             >
               <span className="underline decoration-paper/35 underline-offset-4 group-hover/cta:decoration-paper">
@@ -345,7 +343,6 @@ function ChapterPlate({
             {politySlug && (
               <Link
                 href={`/polities/${politySlug}`}
-                transitionTypes={NAV_FORWARD}
                 className="text-xs text-paper/70 underline decoration-paper/25 underline-offset-4 transition-colors hover:text-paper"
               >
                 More about {polityName}
@@ -505,7 +502,7 @@ export function HomeFilm() {
     ERA_GLINTS.length - 1,
     Math.max(0, chapterIndex + 1),
   );
-  const activeAccent = activePolity?.accentColor ?? "#d4a359";
+  const activeAccent = activePolity?.accentColor ?? "#ffa51f";
 
   const scrollToStage = (idx: number) => {
     const target = chapterRefs.current[idx];
@@ -555,7 +552,7 @@ export function HomeFilm() {
               ref={spineFillRef}
               className="block h-full w-full origin-top transition-colors duration-500"
               style={{
-                backgroundColor: activePolity?.accentColor ?? "#96341a",
+                backgroundColor: activePolity?.accentColor ?? "#c01a3c",
               }}
             />
           </div>
@@ -570,7 +567,7 @@ export function HomeFilm() {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(90% 85% at 72% 38%, transparent 38%, rgba(5,4,3,0.55) 78%, rgba(5,4,3,0.85) 100%)",
+                "radial-gradient(90% 85% at 72% 38%, transparent 38%, rgba(3,28,34,0.55) 78%, rgba(3,28,34,0.85) 100%)",
             }}
             aria-hidden
           />
@@ -582,7 +579,7 @@ export function HomeFilm() {
             className="pointer-events-none absolute right-0 top-0 h-56 w-[28rem] max-w-full"
             style={{
               background:
-                "radial-gradient(ellipse at top right, rgba(36,31,23,0.82), rgba(36,31,23,0.35) 45%, transparent 72%)",
+                "radial-gradient(ellipse at top right, rgba(6,36,43,0.82), rgba(6,36,43,0.35) 45%, transparent 72%)",
             }}
             aria-hidden
           />
@@ -626,7 +623,7 @@ export function HomeFilm() {
                 className="h-1 w-6 transition-all duration-300"
                 style={{
                   backgroundColor:
-                    chapterIndex === -1 ? "#f3ede0" : "rgba(243,237,224,0.28)",
+                    chapterIndex === -1 ? "#f2f7fc" : "rgba(242,247,252,0.28)",
                 }}
               />
               <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-paper/60 group-hover:text-paper sm:inline">
@@ -653,9 +650,9 @@ export function HomeFilm() {
                       style={{
                         width: `${fillPct}%`,
                         backgroundColor: isCurrent
-                          ? (p?.accentColor ?? "#e07a5f")
+                          ? (p?.accentColor ?? "#ff5a3c")
                           : isPassed
-                            ? "#f3ede0"
+                            ? "#f2f7fc"
                             : "transparent",
                       }}
                     />
@@ -737,7 +734,7 @@ export function HomeFilm() {
           {storyChapters.map((c, i) => {
             const polity = getPolityById(c.polityId);
             const image = images[c.imageKey];
-            const accent = polity?.accentColor ?? "#96341a";
+            const accent = polity?.accentColor ?? "#c01a3c";
             return (
               <article
                 key={c.id}

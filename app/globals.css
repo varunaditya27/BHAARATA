@@ -8,26 +8,26 @@
 
 :root {
   /* base */
-  --bh-paper: #f3ede0;
-  --bh-paper-raised: #faf6ec;
-  --bh-ink: #241f17;
-  --bh-ink-muted: #5c5447;
-  --bh-ash: #8a8273;
-  --bh-stone: #d8cfba;
-  --bh-border: #c9bda1;
+  --bh-paper: #f2f7fc;
+  --bh-paper-raised: #ffffff;
+  --bh-ink: #06242b;
+  --bh-ink-muted: #3b585e;
+  --bh-ash: #4f7378;
+  --bh-stone: #dbe8f4;
+  --bh-border: #c2d6ea;
 
   /* geographic */
-  --bh-water: #9cb8ae;
-  --bh-water-deep: #7fa095;
-  --bh-land: #f3ede0;
-  --bh-terrain: #e4d9bf;
+  --bh-water: #86d3ec;
+  --bh-water-deep: #2fa8d5;
+  --bh-land: #f2f7fc;
+  --bh-terrain: #e2ecf5;
 
   /* semantic */
-  --bh-territory: #b85c38;
-  --bh-territory-selected: #96341a;
-  --bh-evidence: #3a5a78;
-  --bh-uncertainty: #a68a52;
-  --bh-active: #241f17;
+  --bh-territory: #d42b12;
+  --bh-territory-selected: #c01a3c;
+  --bh-evidence: #0f6fd0;
+  --bh-uncertainty: #ffb000;
+  --bh-active: #06242b;
 
   /* surfaces */
   --background: var(--bh-paper);
@@ -73,24 +73,9 @@ html {
 }
 
 body {
-  /* Paper, part 1: a fine grain multiplied onto the base colour. Inline
-   * SVG noise, rasterised once per small tile (its seams are too fine to see). */
   background-color: var(--background);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.36 0 0 0 0 0.3 0 0 0 0 0.22 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   color: var(--foreground);
   font-family: var(--font-ranade), system-ui, sans-serif;
-}
-
-/* Paper, part 2: a faint large-scale mottle. Stretched once across the
- * viewport on a fixed layer rather than tiled — tiled, its seams showed. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' preserveAspectRatio='none'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.00625' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.37 0 0 0 0 0.24 0 0 0 0.11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
-  background-size: 100% 100%;
 }
 
 /* In a layer so Tailwind utilities (border-transparent, border-ink…) can
@@ -136,11 +121,11 @@ body::before {
    menu open in portals outside the header, so they keep their paper colours. */
 body:has([data-dark-page]) > header,
 body:has([data-dark-page]) > footer {
-  --bh-paper: #241f17;
-  --bh-paper-raised: #2e281f;
-  --bh-ink: #f3ede0;
-  --bh-ink-muted: #b3a994;
-  --bh-border: #4a4235;
+  --bh-paper: #06242b;
+  --bh-paper-raised: #0b3d46;
+  --bh-ink: #f2f7fc;
+  --bh-ink-muted: #bfe3e6;
+  --bh-border: #1c5f6b;
   background-color: var(--bh-paper);
 }
 
@@ -305,15 +290,12 @@ body:has([data-dark-page]) > footer {
 }
 
 /* ---------------------------------------------------------------------- */
-/* Map grain/vignette — a faint paper-grain texture + edge darkening over */
-/* the live map, generated from an inline SVG noise filter (no image      */
-/* download). Sits above the WebGL canvas as an ordinary absolutely-      */
-/* positioned div, so it costs nothing on the GPU/render side.            */
+/* ---------------------------------------------------------------------- */
+/* Map vignette: a soft darkening at the edges of the live map. Sits above */
+/* the WebGL canvas as an ordinary absolutely-positioned div.              */
 /* ---------------------------------------------------------------------- */
 .bh-map-grain {
-  background-image:
-    radial-gradient(ellipse at center, transparent 55%, rgba(36, 31, 23, 0.28) 100%),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
+  background-image: radial-gradient(ellipse at center, transparent 55%, rgba(6, 36, 43, 0.28) 100%);
   mix-blend-mode: multiply;
   opacity: 0.5;
 }
@@ -355,69 +337,45 @@ body:has([data-dark-page]) > footer {
 }
 
 /* ---------------------------------------------------------------------- */
-/* View Transitions — React <ViewTransition> + Link `transitionTypes`.    */
-/* Patterns from node_modules/next/dist/docs/01-app/02-guides/            */
-/* view-transitions.md: morphing shared photos, directional slides       */
-/* (forward = deeper into the record graph), a header that never moves.  */
+/* Page transitions: the browser's native view transitions, started by    */
+/* components/layout/PageTransitions.tsx. The header never moves.        */
 /* ---------------------------------------------------------------------- */
 ::view-transition {
   pointer-events: none;
 }
 
-::view-transition-group(.morph) {
-  animation-duration: 520ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+/* Section changes (header, footer, search): the incoming page opens as a circle from the click, carrying its own
+ * colour field, while the outgoing page sinks back and darkens. */
+:root:active-view-transition-type(section)::view-transition-old(root) {
+  animation: 420ms cubic-bezier(0.4, 0, 0.6, 1) both bh-section-out;
+  mix-blend-mode: normal;
 }
-::view-transition-image-pair(.morph) {
-  animation-name: bh-via-blur;
+:root:active-view-transition-type(section)::view-transition-new(root) {
+  animation: 560ms cubic-bezier(0.65, 0, 0.2, 1) both bh-section-in;
+  mix-blend-mode: normal;
 }
-@keyframes bh-via-blur {
-  30% {
-    filter: blur(3px);
-  }
+@keyframes bh-section-in {
+  from { clip-path: circle(0% at var(--bh-x, 50%) var(--bh-y, 0)); }
+  to { clip-path: circle(150% at var(--bh-x, 50%) var(--bh-y, 0)); }
+}
+@keyframes bh-section-out {
+  to { transform: scale(0.97); opacity: 0.55; }
 }
 
-::view-transition-old(.nav-forward) {
-  --bh-slide: -60px;
-  animation:
-    150ms ease-in both bh-fade reverse,
-    420ms cubic-bezier(0.65, 0, 0.35, 1) both bh-slide reverse;
+/* Any other link: the page slides out to the left and the next one arrives from the right. */
+:root:active-view-transition-type(drill)::view-transition-old(root) {
+  animation: 200ms ease-in both bh-drill-out;
+  mix-blend-mode: normal;
 }
-::view-transition-new(.nav-forward) {
-  --bh-slide: 60px;
-  animation:
-    220ms ease-out 150ms both bh-fade,
-    420ms cubic-bezier(0.65, 0, 0.35, 1) both bh-slide;
+:root:active-view-transition-type(drill)::view-transition-new(root) {
+  animation: 380ms cubic-bezier(0.22, 1, 0.36, 1) both bh-drill-in;
+  mix-blend-mode: normal;
 }
-::view-transition-old(.nav-back) {
-  --bh-slide: 60px;
-  animation:
-    150ms ease-in both bh-fade reverse,
-    420ms cubic-bezier(0.65, 0, 0.35, 1) both bh-slide reverse;
+@keyframes bh-drill-out {
+  to { opacity: 0; transform: translateX(-56px); }
 }
-::view-transition-new(.nav-back) {
-  --bh-slide: -60px;
-  animation:
-    220ms ease-out 150ms both bh-fade,
-    420ms cubic-bezier(0.65, 0, 0.35, 1) both bh-slide;
-}
-@keyframes bh-fade {
-  from {
-    filter: blur(3px);
-    opacity: 0;
-  }
-  to {
-    filter: blur(0);
-    opacity: 1;
-  }
-}
-@keyframes bh-slide {
-  from {
-    translate: var(--bh-slide);
-  }
-  to {
-    translate: 0;
-  }
+@keyframes bh-drill-in {
+  from { opacity: 0; transform: translateX(72px); }
 }
 
 ::view-transition-group(site-header) {
@@ -474,14 +432,6 @@ body:has([data-dark-page]) > footer {
 @keyframes bh-letter-rise {
   from { transform: translateY(105%); }
   to { transform: translateY(0); }
-}
-.bh-macron-draw {
-  stroke-dasharray: 100;
-  animation: bh-macron-draw 520ms cubic-bezier(0.65, 0, 0.35, 1) both;
-}
-@keyframes bh-macron-draw {
-  from { stroke-dashoffset: 100; }
-  to { stroke-dashoffset: 0; }
 }
 .bh-fade-in {
   animation: bh-fade-in 900ms ease-out both;
@@ -626,28 +576,6 @@ body:has([data-dark-page]) > footer {
 .bh-popup-note { margin-top: 0.4rem; font-size: 0.68rem; font-style: italic; color: var(--bh-ink-muted); }
 .bh-popup-link { display: inline-block; margin-top: 0.55rem; font-size: 0.8rem; color: var(--bh-ink); text-decoration: underline; text-underline-offset: 3px; }
 
-/* Wordmark letters: each rises, then a band of light crosses it. The delays come from a
- * per-letter variable, so the glint travels along the word a letter at a time. */
-.bh-wordmark-letter {
-  background-image: linear-gradient(105deg, currentColor 0%, currentColor 38%, #fff6e2 50%, currentColor 62%, currentColor 100%);
-  background-size: 280% 100%;
-  background-position: 130% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation:
-    bh-letter-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) both,
-    bh-sheen 1.6s cubic-bezier(0.4, 0, 0.2, 1) both;
-  animation-delay: var(--d, 0ms), calc(var(--d, 0ms) + 1900ms);
-}
-@keyframes bh-sheen {
-  from { background-position: 130% 0; }
-  to { background-position: -30% 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .bh-wordmark-letter { animation: none; background-image: none; -webkit-text-fill-color: currentColor; }
-}
-
 /* Slow settle on hero photographs — the camera easing in after a cut. */
 .bh-kenburns {
   animation: bh-kenburns 14s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -670,4 +598,109 @@ body:has([data-dark-page]) > footer {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+
+/* ---------------------------------------------------------------------- */
+/* Page richness: a reading-progress line, hover lift, staggered arrivals  */
+/* and slow parallax. Transform and opacity only,                          */
+/* so all of it runs on the compositor; reduced motion freezes the drift.  */
+/* ---------------------------------------------------------------------- */
+/* Reading progress: a gradient line under the header that fills as the page scrolls. */
+.bh-scroll-line {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .bh-scroll-line {
+    display: block;
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 60;
+    height: 3px;
+    background: var(--bh-territory);
+    transform-origin: left center;
+    transform: scaleX(0);
+    animation: bh-scroll-fill linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes bh-scroll-fill {
+    to { transform: scaleX(1); }
+  }
+}
+
+/* Rows and cards that answer the pointer: a soft colour wash and a small slide. */
+.bh-lift {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s ease;
+}
+.bh-lift:hover {
+  transform: translateX(6px);
+  background-color: color-mix(in srgb, var(--bh-lift-color, var(--bh-territory)) 9%, transparent);
+}
+
+/* Items that arrive one after another when a list loads. */
+.bh-stagger > * {
+  animation: bh-stagger-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+@keyframes bh-stagger-in {
+  from { opacity: 0; transform: translateY(14px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bh-scroll-line,
+  .bh-stagger > *,
+  .bh-float {
+    animation: none;
+  }
+  .bh-scroll-line {
+    display: none;
+  }
+  .bh-lift:hover {
+    transform: none;
+  }
+}
+
+/* Hero pictures drift upward a little as the page scrolls, at their own pace. */
+@supports (animation-timeline: scroll()) {
+  .bh-float {
+    animation: bh-float linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 100vh;
+  }
+  @keyframes bh-float {
+    to { transform: translate3d(0, var(--bh-float, -70px), 0); }
+  }
+}
+
+/* The chosen place on the map: a pulsing ring in its kingdom's colour, and its name beside it. */
+.bh-place-tag {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  pointer-events: none;
+}
+.bh-place-ping {
+  position: absolute;
+  inset: 0;
+  border: 3px solid var(--ring, #06242b);
+  border-radius: 9999px;
+  animation: bh-ping 1.4s ease-out infinite;
+}
+.bh-place-chip {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 3px 9px;
+  background: #06242b;
+  color: #f2f7fc;
+  font: 500 12px/1.3 var(--font-ranade), sans-serif;
+  white-space: nowrap;
+}
+@keyframes bh-ping {
+  from { opacity: 0.9; transform: scale(1); }
+  to { opacity: 0; transform: scale(2.6); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bh-place-ping { animation: none; }
 }

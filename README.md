@@ -20,7 +20,7 @@ Then follow any claim back to the evidence it rests on.
 
 <br />
 
-<img src="docs/assets/globe.jpg" alt="The BHĀRATA homepage: the subcontinent seen from above in 1050 CE with kingdoms inked in, the title, and a prompt to scroll" width="860" />
+<img src="docs/assets/globe.jpg" alt="The BHĀRATA homepage film: chapter one, the Rashtrakutas take the Deccan, over a relief map of the subcontinent in 771 CE" width="860" />
 
 <br />
 <br />
@@ -97,8 +97,9 @@ flowchart LR
 ### Built to be read
 - Plain language everywhere; no jargon
 - Typeset in **Zodiak** and **Ranade**, with Tamil, Kannada, Telugu and Devanagari fonts
-- A **⌘K** search that also jumps to any year
-- Works on phones, respects reduced motion, keyboard-operable
+- A **⌘K** search that also jumps to any year, and a **filter page** that joins rulers, kingdoms, places and events: who reigned during a battle, which kingdoms shared a border, which places lie inside a kingdom in a given year
+- A **spoken description** of every page, in a natural voice, with soft interface sounds as you move; both can be switched off
+- Built for laptops and desktops; respects reduced motion and is keyboard-operable
 - A film-like opening: a globe, a starfield, and an orbital descent
 
 </td>
@@ -116,10 +117,10 @@ flowchart LR
 </tr>
 <tr>
 <td width="50%"><img src="docs/assets/kingdom.jpg" alt="The Vijayanagara kingdom page with a photo of the Virupaksha temple at Hampi" /><br /><sub><b>A kingdom page.</b> Rulers, places, events, neighbours, sources.</sub></td>
-<td width="50%"><img src="docs/assets/evidence.jpg" alt="An evidence page showing a stone inscription viewer and the English translation" /><br /><sub><b>Evidence.</b> A translation from <i>South Indian Inscriptions</i>, with the viewer above it.</sub></td>
+<td width="50%"><img src="docs/assets/evidence.jpg" alt="An evidence page: the inscription's title on a rose field, above the stone inscription viewer and its English translation" /><br /><sub><b>Evidence.</b> A translation from <i>South Indian Inscriptions</i>, with the viewer above it.</sub></td>
 </tr>
 <tr>
-<td colspan="2"><img src="docs/assets/chronology.jpg" alt="The chronology page with one coloured line per kingdom, diamonds for events, and a button to show the other 48 kingdoms" /><br /><sub><b>The chronology.</b> One line per kingdom (the seven with turning points first, the other 48 one click away), one diamond per turning point, battles listed under each period.</sub></td>
+<td colspan="2"><img src="docs/assets/chronology.jpg" alt="The timeline page: a cerulean field with the title and the outlines of three kingdoms, above the lanes of kingdoms and events" /><br /><sub><b>The chronology.</b> One line per kingdom (the seven with turning points first, the other 48 one click away), one diamond per turning point, battles listed under each period.</sub></td>
 </tr>
 </table>
 
@@ -133,8 +134,8 @@ BHĀRATA is an early version, and being straight about that is part of the proje
 |---|---|---|
 | Kingdom borders and dates | [Cliopatria](https://github.com/Seshat-Global-History-Databank/cliopatria) (Seshat Global History Databank, CC BY 4.0) | Researched. One version of each territory, **not exact frontiers** |
 | Kingdom summaries | Wikipedia (CC BY-SA 4.0) | Opening paragraphs, lightly trimmed |
-| Capitals, battles, dated sites, monuments, rulers | Wikidata (CC0) and Wikipedia's lists of rulers | Real. Every kingdom has rulers; a few have only one to four because the sources name no more |
-| Photographs | Wikimedia Commons | Real, credited; only free licences |
+| Capitals, battles, dated sites, monuments, rulers | Wikidata and Wikipedia's ruler categories and articles | Real. 760 rulers in 55 kingdoms; each kingdom has at least 1 |
+| Photographs | Wikimedia Commons and other public sources | Real, credited |
 | Names in Tamil, Kannada, Persian and other scripts | Wikidata labels | Real, but **not yet checked by a reader of each language** |
 | Inscription evidence | *South Indian Inscriptions* Vol. II (1913, public domain) | **Two** real translations so far |
 | Hand-written texts, eleven rulers, nine turning points | This repository | Written here and **checked against Wikipedia**, statement by statement; the source is named on each page |

@@ -2,15 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { KingdomBoard, type BoardTile, type TileSize } from "@/components/entity/KingdomBoard";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
-import { PageTransition } from "@/components/primitives/PageTransition";
-import { Shared } from "@/components/primitives/Shared";
+import { PageHero } from "@/components/primitives/PageHero";
 import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import type { AtlasData } from "@/lib/data/atlas-data";
 import { formatDateRange } from "@/lib/domain/time";
+import { HERO } from "@/lib/hero";
 import { getHistoricalState, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 import { polityPeakArea } from "@/lib/geo/silhouette";
-import { NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 export const metadata = {
   title: "Kingdoms — BHĀRATA",
@@ -68,22 +67,19 @@ export default async function PolitiesIndexPage() {
           <Link
             key={polity.id}
             href={`/polities/${polity.slug}`}
-            transitionTypes={NAV_FORWARD}
-            className="group absolute inset-0 overflow-hidden bg-[#2e281f] focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-paper"
+            className="group absolute inset-0 overflow-hidden bg-[#0b3d46] focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-paper"
           >
             {hero && (
-              <Shared name={transitionNames.polityPhoto(polity.slug)}>
-                <div className="absolute inset-0">
-                  <Image
-                    src={hero.file}
-                    alt=""
-                    fill
-                    loading={index < 6 ? "eager" : "lazy"}
-                    sizes={size === "xl" ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 33vw, 50vw"}
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
-                  />
-                </div>
-              </Shared>
+              <div className="absolute inset-0">
+                <Image
+                  src={hero.file}
+                  alt=""
+                  fill
+                  loading={index < 6 ? "eager" : "lazy"}
+                  sizes={size === "xl" ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 33vw, 50vw"}
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
+                />
+              </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-ink/5" />
             <KingdomEmblem polityId={polity.id} color={polity.accentColor} className="absolute left-3 top-3 h-7 w-7 drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)] sm:left-4 sm:top-4 sm:h-9 sm:w-9" />
@@ -111,22 +107,19 @@ export default async function PolitiesIndexPage() {
     });
 
   return (
-    <PageTransition>
+    <>
+      <PageHero
+        title="Kingdoms"
+        intro={`${polities.length} kingdoms, empires and sultanates, from ${min} to ${max} CE.`}
+        hero={HERO.kingdoms}
+      />
       <div data-dark-page className="bg-ink pt-2 sm:pt-3">
         <KingdomBoard
           min={min}
           max={max}
           tiles={tiles}
-          intro={
-            <>
-              <h1 className="font-display text-6xl leading-none text-paper sm:text-8xl">Kingdoms</h1>
-              <p className="mt-6 max-w-xl font-sans text-lg leading-snug text-paper sm:text-2xl">
-                {polities.length} kingdoms, empires and sultanates, from {min} to {max} CE.
-              </p>
-            </>
-          }
         />
       </div>
-    </PageTransition>
+    </>
   );
 }

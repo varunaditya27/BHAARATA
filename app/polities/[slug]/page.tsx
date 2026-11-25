@@ -3,9 +3,7 @@ import { notFound } from "next/navigation";
 import { EntityTabs } from "@/components/primitives/EntityTabs";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { HeroPhoto } from "@/components/primitives/HeroPhoto";
-import { PageTransition } from "@/components/primitives/PageTransition";
 import { Plate } from "@/components/primitives/Plate";
-import { Shared } from "@/components/primitives/Shared";
 import { InkName } from "@/components/entity/InkName";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { contemporariesOf } from "@/components/entity/contemporaries";
@@ -16,8 +14,7 @@ import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
 import { placeKindLabel } from "@/lib/domain/labels";
-import { formatDateRange, formatPersonDates } from "@/lib/domain/time";
-import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
+import { byStart, formatDateRange, formatPersonDates } from "@/lib/domain/time";
 
 
 
@@ -37,7 +34,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
   if (!polity) notFound();
 
   const hero = polity.heroImageKey ? images[polity.heroImageKey as ImageKey] : undefined;
-  const rulers = getRulersForPolity(polity.id).sort((a, b) => a.period.startYear - b.period.startYear);
+  const rulers = getRulersForPolity(polity.id).sort(byStart);
   const relatedEvents = events
     .filter((e) => e.category !== "battle" && e.polityIds.includes(polity.id))
     .sort((a, b) => a.period.startYear - b.period.startYear);
@@ -115,7 +112,6 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
         </dl>
         <Link
           href={polity.period.startQualifier === "unknown" ? `/atlas?polity=${polity.slug}` : `/atlas?polity=${polity.slug}&year=${polity.period.startYear}`}
-          transitionTypes={NAV_BACK}
           className="mt-6 block border border-ink px-4 py-2 text-center text-ink transition-colors hover:bg-ink hover:text-paper"
         >
           Show it on the map
@@ -161,16 +157,14 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
         <ul className="mt-10 sm:columns-2 sm:gap-x-12">
           {rulers.map((ruler) => (
             <li key={ruler.id} className="break-inside-avoid">
-              <Link href={`/people/${ruler.slug}`} transitionTypes={NAV_FORWARD} className="group flex min-h-12 items-center gap-3 border-b border-border py-2">
+              <Link href={`/people/${ruler.slug}`} className="group flex min-h-12 items-center gap-3 border-b border-border py-2">
                 <span className="min-w-0 flex-1">
                   <span className="block font-display text-lg text-ink transition-colors group-hover:[color:var(--bh-accent)]">{ruler.name}</span>
                   {ruler.summary && <span className="block truncate font-sans text-sm text-ink-muted">{ruler.summary}</span>}
                 </span>
                 <span className="shrink-0 font-sans text-sm tabular-nums text-ink-muted">{formatPersonDates(ruler)}</span>
                 {ruler.imageKey && images[ruler.imageKey as ImageKey] && (
-                  <Shared name={transitionNames.personPortrait(ruler.slug)}>
-                    <RulerPortrait imageKey={ruler.imageKey} name={ruler.name} className="w-9 shrink-0" />
-                  </Shared>
+                  <RulerPortrait imageKey={ruler.imageKey} name={ruler.name} className="w-9 shrink-0" />
                 )}
               </Link>
             </li>
@@ -187,11 +181,9 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
         {relatedPlaces.map((place, i) => {
           const photo = place.imageKey ? images[place.imageKey as ImageKey] : undefined;
           return (
-            <Link key={place.id} href={`/places/${place.slug}`} transitionTypes={NAV_FORWARD} className="group block">
+            <Link key={place.id} href={`/places/${place.slug}`} className="group block">
               {photo && (
-                <Shared name={transitionNames.placePhoto(place.slug)}>
-                  <Plate credit={photo} number={i + 1} />
-                </Shared>
+                <Plate credit={photo} number={i + 1} />
               )}
               <h3 className="mt-3 font-display text-xl text-ink transition-colors group-hover:[color:var(--bh-accent)]">
                 {place.name}
@@ -214,7 +206,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
             <li key={b.id} className="py-3 font-sans">
               <div className="flex flex-wrap items-baseline gap-x-3">
                 <span className="w-12 shrink-0 text-sm tabular-nums text-ink-muted">{b.period.startQualifier === "unknown" ? "Date unknown" : b.period.startYear}</span>
-                <Link href={`/chronology#${b.slug}`} transitionTypes={NAV_FORWARD} className="font-display text-lg text-ink underline-offset-4 hover:underline">
+                <Link href={`/chronology#${b.slug}`} className="font-display text-lg text-ink underline-offset-4 hover:underline">
                   {b.title}
                 </Link>
               </div>
@@ -242,7 +234,6 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
             <p className="mt-1 max-w-prose font-sans text-sm leading-relaxed text-ink-muted">{event.summary}</p>
             {event.period.startQualifier !== "unknown" && <Link
               href={`/atlas?year=${event.period.startYear}&polity=${polity.slug}`}
-              transitionTypes={NAV_BACK}
               className="mt-2 inline-block font-sans text-xs text-ink underline underline-offset-4"
             >
               Show {event.period.startYear} CE on the map
@@ -262,7 +253,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
       <ul className="space-y-6">
         {relatedEvidence.map((ev) => (
           <li key={ev.id} className="border-t border-border pt-4">
-            <Link href={`/evidence/${ev.slug}`} transitionTypes={NAV_FORWARD} className="group block">
+            <Link href={`/evidence/${ev.slug}`} className="group block">
               <p className="font-sans text-sm text-ink-muted">
                 {ev.evidenceType.charAt(0).toUpperCase() + ev.evidenceType.slice(1)}, {formatDateRange(ev.period)}
               </p>
@@ -285,7 +276,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
         </p>
         <div className="mt-6 grid gap-8 sm:grid-cols-3">
           {contemporaries.map(({ polity: p, from, to }) => (
-            <Link key={p.id} href={`/polities/${p.slug}`} transitionTypes={NAV_FORWARD} className="group flex gap-4 border-t border-border pt-4">
+            <Link key={p.id} href={`/polities/${p.slug}`} className="group flex gap-4 border-t border-border pt-4">
               <KingdomEmblem polityId={p.id} color={p.accentColor} className="h-12 w-12" />
               <div>
                 <h3 className="font-display text-xl text-ink group-hover:text-territory-selected">{p.name}</h3>
@@ -321,11 +312,11 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
   );
 
   return (
-    <PageTransition>
+    <>
       <div className="bh-accented" style={{ "--bh-accent": polity.accentColor } as React.CSSProperties}>
         <div className="bh-reading-progress" aria-hidden />
         {hero ? (
-          <HeroPhoto credit={hero} sharedName={transitionNames.polityPhoto(polity.slug)} heightClassName="h-[62vh] min-h-[420px]">
+          <HeroPhoto credit={hero} tint={polity.accentColor}>
             <div className="flex h-full items-end">
               <div className="mx-auto w-full max-w-[1100px] px-4 pb-10 sm:px-6">{title(true)}</div>
             </div>
@@ -355,6 +346,6 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
           </div>
         </div>
       </div>
-    </PageTransition>
+    </>
   );
 }

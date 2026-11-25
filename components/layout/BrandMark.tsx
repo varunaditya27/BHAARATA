@@ -6,7 +6,7 @@ type BrandMarkProps = SVGProps<SVGSVGElement> & {
 
 /**
  * Geometric meridian-ring and Ashokan step-seal emblem for BHĀRATA.
- * Uses currentColor for archival ink strokes and terracotta (#96341a) for the focal axis.
+ * Uses currentColor for archival ink strokes and crimson (#c01a3c) for the focal axis.
  */
 export function BrandMark({ size = 24, className, ...props }: BrandMarkProps) {
   return (
@@ -59,12 +59,12 @@ export function BrandMark({ size = 24, className, ...props }: BrandMarkProps) {
       {/* Terracotta diamond seal at the center */}
       <path
         d="M16 9.5L21.5 16L16 22.5L10.5 16L16 9.5Z"
-        fill="#96341a"
+        fill="#c01a3c"
         stroke="currentColor"
         strokeWidth="1.1"
       />
       {/* Central pinpoint */}
-      <circle cx="16" cy="16" r="1.75" fill="#faf6ec" />
+      <circle cx="16" cy="16" r="1.75" fill="#ffffff" />
     </svg>
   );
 }

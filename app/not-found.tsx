@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
-import { PageTransition } from "@/components/primitives/PageTransition";
 
 /** Engraved-style sea: rows of short wave strokes, offset like a woodcut. */
 const WAVES = Array.from({ length: 5 }, (_, row) =>
@@ -31,7 +30,7 @@ const SERPENT = [
 
 export default function NotFound() {
   return (
-    <PageTransition>
+    <>
       <div className="mx-auto max-w-[720px] px-4 py-20 text-center sm:px-6">
         <svg viewBox="0 0 400 210" className="mx-auto w-full max-w-md text-ink" fill="none" aria-hidden>
           <g stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -73,6 +72,6 @@ export default function NotFound() {
           </Link>
         </div>
       </div>
-    </PageTransition>
+    </>
   );
 }

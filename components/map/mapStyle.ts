@@ -88,11 +88,11 @@ export const LAYER_IDS = {
 
 /** Colour of each kind of site on the map (and in the legend key). */
 export const SITE_COLORS = {
-  temple: "#b06b2c",
-  mosque: "#2f6b5e",
-  fort: "#5c3a6e",
-  tomb: "#8c3f5f",
-  palace: "#8a6d1f",
-  monastery: "#3a5a78",
-  church: "#5a5a5a",
+  temple: "#f26a00",
+  mosque: "#00a371",
+  fort: "#0b8aa6",
+  tomb: "#e0245e",
+  palace: "#e0a000",
+  monastery: "#0f6fd0",
+  church: "#6b7280",
 } as const;

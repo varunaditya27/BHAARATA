@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { PROTOTYPE_ERAS, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
-import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
 const TICKS = [600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700];
 
@@ -32,7 +31,6 @@ export async function KingdomLanes() {
                 <div className="absolute top-1/2 h-[3px] -translate-y-1/2" style={{ left: `${start}%`, width: `${width}%`, backgroundColor: p.accentColor }} />
                 <Link
                   href={`/polities/${p.slug}`}
-                  transitionTypes={NAV_FORWARD}
                   className="absolute top-1/2 -translate-y-[130%] whitespace-nowrap font-sans text-[0.7rem] text-ink hover:underline"
                   style={{ left: `${start}%` }}
                 >

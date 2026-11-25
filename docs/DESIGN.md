@@ -66,22 +66,24 @@ Rules of thumb:
 
 ## 3. Colour
 
-A narrow palette of paper, ink and a few meaningful pigments. Tokens are CSS variables in `app/globals.css` and mirrored as Tailwind colours.
+A narrow palette taken from the pigments of Indian miniature painting: ivory paper, lapis-black ink, and vivid vermilion, saffron, ultramarine, rani pink, emerald and peacock teal. The ground is a warm pearl rather than white, which lets the jewel colours keep their intensity. Kingdom colours are generated in OKLCH at one perceived brightness, so all 55 are equally vivid and none repeats. Tokens are CSS variables in `app/globals.css` and mirrored as Tailwind colours.
 
 | Token | Value | Used for |
 |---|---|---|
-| `--bh-paper` | ![#f3ede0](https://img.shields.io/badge/%20%20%20%20%20-f3ede0?style=flat-square) `#f3ede0` | Page background |
-| `--bh-paper-raised` | ![#faf6ec](https://img.shields.io/badge/%20%20%20%20%20-faf6ec?style=flat-square) `#faf6ec` | Cards, popups, the palette |
-| `--bh-ink` | ![#241f17](https://img.shields.io/badge/%20%20%20%20%20-241f17?style=flat-square) `#241f17` | Text, the dark atlas, rules |
-| `--bh-ink-muted` | ![#5c5447](https://img.shields.io/badge/%20%20%20%20%20-5c5447?style=flat-square) `#5c5447` | Secondary text |
-| `--bh-ash` | ![#8a8273](https://img.shields.io/badge/%20%20%20%20%20-8a8273?style=flat-square) `#8a8273` | Quiet metadata |
-| `--bh-stone` | ![#d8cfba](https://img.shields.io/badge/%20%20%20%20%20-d8cfba?style=flat-square) `#d8cfba` | Fills, empty states |
-| `--bh-border` | ![#c9bda1](https://img.shields.io/badge/%20%20%20%20%20-c9bda1?style=flat-square) `#c9bda1` | Rules and dividers |
-| `--bh-water` | ![#9cb8ae](https://img.shields.io/badge/%20%20%20%20%20-9cb8ae?style=flat-square) `#9cb8ae` | Sea on the light map |
-| `--bh-territory` | ![#b85c38](https://img.shields.io/badge/%20%20%20%20%20-b85c38?style=flat-square) `#b85c38` | Default territory pigment, active controls |
-| `--bh-territory-selected` | ![#96341a](https://img.shields.io/badge/%20%20%20%20%20-96341a?style=flat-square) `#96341a` | Selection, links on hover |
-| `--bh-evidence` | ![#3a5a78](https://img.shields.io/badge/%20%20%20%20%20-3a5a78?style=flat-square) `#3a5a78` | Evidence accents |
-| `--bh-uncertainty` | ![#a68a52](https://img.shields.io/badge/%20%20%20%20%20-a68a52?style=flat-square) `#a68a52` | "Placeholder" badges, uncertainty dots |
+| `--bh-paper` | ![#fbf5e8](https://img.shields.io/badge/%20%20%20%20%20-fbf5e8?style=flat-square) `#fbf5e8` | Page background |
+| `--bh-paper-raised` | ![#fffcf4](https://img.shields.io/badge/%20%20%20%20%20-fffcf4?style=flat-square) `#fffcf4` | Cards, popups, the palette |
+| `--bh-ink` | ![#120a38](https://img.shields.io/badge/%20%20%20%20%20-120a38?style=flat-square) `#120a38` | Text, the dark atlas, rules |
+| `--bh-ink-muted` | ![#46407a](https://img.shields.io/badge/%20%20%20%20%20-46407a?style=flat-square) `#46407a` | Secondary text |
+| `--bh-ash` | ![#6a649c](https://img.shields.io/badge/%20%20%20%20%20-6a649c?style=flat-square) `#6a649c` | Quiet metadata |
+| `--bh-stone` | ![#f3e6c8](https://img.shields.io/badge/%20%20%20%20%20-f3e6c8?style=flat-square) `#f3e6c8` | Fills, empty states |
+| `--bh-border` | ![#e6ce98](https://img.shields.io/badge/%20%20%20%20%20-e6ce98?style=flat-square) `#e6ce98` | Rules and dividers |
+| `--bh-water` | ![#86d3ec](https://img.shields.io/badge/%20%20%20%20%20-86d3ec?style=flat-square) `#86d3ec` | Sea on the light map |
+| `--bh-territory` | ![#d42b12](https://img.shields.io/badge/%20%20%20%20%20-d42b12?style=flat-square) `#d42b12` | Default territory pigment, active controls |
+| `--bh-territory-selected` | ![#b50f50](https://img.shields.io/badge/%20%20%20%20%20-b50f50?style=flat-square) `#b50f50` | Selection, links on hover |
+| `--bh-evidence` | ![#2a33d4](https://img.shields.io/badge/%20%20%20%20%20-2a33d4?style=flat-square) `#2a33d4` | Evidence accents |
+| `--bh-uncertainty` | ![#ffb000](https://img.shields.io/badge/%20%20%20%20%20-ffb000?style=flat-square) `#ffb000` | "Placeholder" badges, uncertainty dots |
+
+**Each page has its own colour.** Every page except the landing page and the atlas opens on a hero that fills the screen below the header: a photograph graded in that page's colour, the title set very large, and a strip of every kingdom's colour along the foot. People is royal blue, Places green, Evidence red, Timeline teal, Search orange, Kingdoms amber, Browse data rose and Connections azure. Kingdom, ruler and place pages are graded in the record's own colour. Colours and photograph credits live in `lib/hero.ts`.
 
 **Each kingdom has one pigment.** The eleven hand-written kingdoms have chosen colours; the rest get a colour derived from their id (`accent()` in `import-cliopatria.py`) at fixed lightness and saturation, so they sit comfortably together. On a kingdom's page the pigment becomes `--bh-accent`, which tints text selection, rules, the drop cap and the reading-progress line.
 
@@ -114,11 +116,11 @@ flowchart TB
         MID --> TIME
     end
 
-    classDef node fill:#faf6ec,stroke:#241f17,color:#241f17;
+    classDef node fill:#fffcf4,stroke:#120a38,color:#120a38;
     class SIDE,MAPA,TIME node;
 ```
 
-On a phone the sidebar becomes a row of kingdom chips, the legend collapses to a "Layers" button, and the preview card becomes a draggable bottom sheet. The map always stays on screen.
+The atlas is designed for laptop and desktop screens (about 1280 px wide and up). Phone layouts are not a goal of this project.
 
 ### Components
 
@@ -133,7 +135,6 @@ Notable patterns:
 | `KingdomEmblem` | A kingdom's outline, filled with its pigment, used as its logo throughout |
 | `Odometer` | A year as rolling digits, so a change reads as a counter turning |
 | `ProvenanceChain` | The vertical "How we know" thread with real / partly real / placeholder marks |
-| `PageTransition`, `Shared` | Wrap a page and a shared element so it morphs between a list and its page |
 | `KingdomBoard` | The Kingdoms page: photo tiles sized by each kingdom's largest recorded territory, a year dial that dims kingdoms with no land that year, and a find box |
 | `PeopleDirectory` | The People page: rulers grouped by kingdom with an accent-insensitive find box. Rows are rendered on the server and only filtered in the browser |
 | `PlacesAtlas` | The Places page: a drawn map of every place beside the list, grouped by a rough area worked out from coordinates (`lib/geo/areas.ts`) |
@@ -146,7 +147,7 @@ The map should look **printed**, not like a web map with the colours changed.
 
 | Element | Treatment |
 |---|---|
-| Land | Warm parchment (light atlas) or deeper sand (the homepage globe) |
+| Land | Pale cool grey-blue on the light atlas, deeper tones on the homepage globe |
 | Sea | Muted blue-green on the atlas; deep teal on the globe |
 | Relief | Hillshade with a warm brown shadow and a paper highlight, so mountains read as engraving |
 | Modern borders and country names | **Removed on purpose**, so today's lines do not look like they existed then |
@@ -171,6 +172,7 @@ Motion explains something or it is removed. It should show continuity, hierarchy
 
 - Animate **`opacity` and `transform`** (and, for the map, `feature-state` paint transitions). Avoid animating width, height, margin or box-shadow.
 - **Do not block the reader.** No transition delays the next click.
+- **Page transitions** use the browser's native view transitions (`components/layout/PageTransitions.tsx`). A link in the header, footer or search opens the next page as a circle of its own colour growing from the click; any other link slides the page forward. Reduced motion and browsers without support navigate normally.
 - **Respect `prefers-reduced-motion`** everywhere. The map's ambient motion does not start, the starfield stands still, the globe jumps to its final view, and playback still works by stepping the year.
 - **Do not animate everything at once.** At most a few elements per screen, and staggered.
 
@@ -178,7 +180,7 @@ Motion explains something or it is removed. It should show continuity, hierarchy
 
 | Moment | Motion | Time |
 |---|---|---|
-| Page change | Shared elements morph (the card photo becomes the hero); the page slides a short way | ~400 ms |
+| Page change | From the menu, the next page opens as a circle of its colour from the click; from a link in the page, the page slides forward | ~550–900 ms |
 | Territory in and out | Opacity crossfade between border records | 500 ms |
 | Selecting a kingdom | Camera flight to its borders, tilting a little | ~1.8 s |
 | Preview panel | Fade and a small slide | 180–280 ms |
@@ -233,7 +235,6 @@ Designed in, not patched on.
 - **Focus is visible** everywhere, and focus order follows reading order.
 - **The map has a text alternative:** the kingdom list, the chips and the preview card all expose the same information, and the page says what the map shows.
 - **No colour-only signals** (see section 3).
-- **Touch targets** are at least about 36 px, larger on the timeline thumb.
 - **Images** have alt text describing what they show, and every credit is a real link.
 - **Native-script text** is set in its own fonts, and the evidence viewer's label tells screen-reader users which keys zoom and move.
 - **Reduced motion** is respected (see section 6).

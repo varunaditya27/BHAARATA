@@ -19,6 +19,7 @@ Setting up, changing things safely, shipping, and fixing what breaks.
 5. [Deployment](#5-deployment)
 6. [Git](#6-git)
 7. [Troubleshooting](#7-troubleshooting)
+8. [Sound and voice](#8-sound-and-voice)
 
 ---
 
@@ -79,7 +80,7 @@ flowchart LR
     A["Change"] --> B["Type-check<br/>and lint"]
     B --> C["Production<br/>build"]
     C --> D["Run it,<br/>open the page"]
-    D --> E["Use it:<br/>click, keyboard,<br/>phone width"]
+    D --> E["Use it:<br/>click, keyboard,<br/>laptop width"]
     E --> F{"Console errors?<br/>Odd behaviour?"}
     F -- "yes" --> A
     F -- "no" --> G["Look at it:<br/>screenshot,<br/>reduced motion"]
@@ -146,7 +147,7 @@ All historical records live in PostgreSQL (`prisma/seed.sql` is the deterministi
 
 ### Add a page
 
-1. Create `app/<route>/page.tsx` as a server component, wrapped in `<PageTransition>`.
+1. Create `app/<route>/page.tsx` as a server component.
 2. For dynamic routes, provide `generateMetadata` where a page needs a record-specific title. Records are read on request.
 3. Add it to the navigation in `components/layout/GlobalNav.tsx` and the footer in `Colophon.tsx` if it should be linked.
 4. Use `<Link transitionTypes={NAV_FORWARD}>` (or `NAV_BACK`) so the page transition has a direction.
@@ -199,4 +200,50 @@ After a deploy, check:
 | A new `public/` folder 404s in dev | Next's dev server does not pick up new top-level folders in `public/` | Restart `npm run dev` |
 | **React compiler lint error** such as "cannot access refs during render" or "calling setState in an effect" | The code reads a ref, or sets state, in a way the compiler rules forbid | Move ref access into an effect; for "reset state when a prop changes", use the render-phase pattern (compare with a stored previous value) as in `AtlasView` |
 | An importer script fails with HTTP 504 | Wikidata's query service timed out | Run it again; finished requests are cached |
+| An importer returns "maxlag" errors | Wikidata refuses clients that send a `maxlag` setting while its servers are busy | The importers do not send it; do not add it back |
+| `npm install kokoro-js` fails in `onnxruntime-node` | Its install step looks for CUDA 12 and finds a newer one | Use the Python route in section 8 |
 | Port 3000 is taken | Another dev server | `npm run dev -- -p 3001` |
+
+---
+
+## 8. Sound and voice
+
+Two things make sound, and both are files in `public/`, so the running site needs no key and no server for audio.
+
+| What | Where | Made by |
+|---|---|---|
+| A spoken description of every page, about 20 seconds each | `public/narration/<key>.mp3` and `scripts.json` (the text) | Kokoro, a free voice model that runs on this machine |
+| Interface sounds: click, hover, slider tick, page whoosh, bell, gong, pluck, chime | `public/sfx/*.mp3` | `scripts/generate-sfx.py`, synthesised with numpy |
+
+The app reads `public/audio-manifest.json`, which lists the clips and sounds that exist, and asks only for those: a page with no recorded clip stays quiet and makes no request, and with no manifest at all the app runs silently. `npm run audio:index` rebuilds the list, and the speech script runs it as clips are added.
+
+A page's clip is named after its address: `/` is `home`, `/people/rajaraja-i` is `people-rajaraja-i`. `components/audio/PageAudio.tsx` plays the clip when the page changes, and listens for clicks, hovers and the timeline slider to play the interface sounds. Both are always on. Browsers allow sound only after a first click or key press, so the first page's description starts at that moment.
+
+### Making the audio
+
+Needs Python 3.12, a GPU is optional (about 5 times faster than CPU), `ffmpeg`, and `espeak-ng`.
+
+```bash
+uv venv --python 3.12 ~/.venvs/bhaarata-audio-gpu
+uv pip install --python ~/.venvs/bhaarata-audio-gpu/bin/python torch --index-url https://download.pytorch.org/whl/cu128 --extra-index-url https://pypi.org/simple
+uv pip install --python ~/.venvs/bhaarata-audio-gpu/bin/python kokoro soundfile numpy num2words faster-whisper "av<16" nvidia-cublas-cu12 nvidia-cudnn-cu12 \
+  "en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl"
+
+npm run narration:text        # writes the words for every page from the database
+export LD_LIBRARY_PATH=~/.venvs/bhaarata-audio-gpu/lib/python3.12/site-packages/nvidia/cublas/lib:~/.venvs/bhaarata-audio-gpu/lib/python3.12/site-packages/nvidia/cudnn/lib
+~/.venvs/bhaarata-audio-gpu/bin/python scripts/synthesize-narration.py     # speaks them; skips clips that exist
+```
+
+The voice is `af_heart`, Kokoro's best-rated English voice, at speed 0.95. Years are spoken as people say them ("nine eighty-five"), and "Rajaraja I" as "Rajaraja the First". Names the model reads badly are respelled in `RESPELL` in `scripts/synthesize-narration.py`.
+
+### Listening to the result
+
+`scripts/check-narration.py` is how a developer, or an AI agent, hears the audio without ears. It transcribes a random sample with Whisper and compares the transcript with the script. It also measures length, loudness and long pauses with ffmpeg.
+
+```bash
+~/.venvs/bhaarata-audio-gpu/bin/python scripts/check-narration.py --sample 40
+```
+
+Read the "heard differently" list at the end. A word the transcriber got wrong is either a mispronunciation (add a respelling and test it) or just an odd spelling (ignore it). Clips should land near 20 seconds at about -19 LUFS. Spectrograms of any clip are one ffmpeg command: `ffmpeg -i clip.mp3 -lavfi showspectrumpic=s=900x300 out.png`.
+
+For the interface sounds, run `python scripts/generate-sfx.py`, then check each file the same way.

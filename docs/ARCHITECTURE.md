@@ -287,6 +287,8 @@ flowchart TB
 | `components/primitives` has no app knowledge | They stay reusable and easy to restyle |
 | Historical geometry is data, never JSX or hand-drawn SVG paths | Borders must be checkable and replaceable |
 | `components/map` is the only code that touches MapLibre | Keeps the map lifecycle in one place |
+| The search page builds every query in `lib/search/advanced.ts` and passes each value as a bound parameter | No typed value is ever joined into query text, so nothing typed can alter a query |
+| `components/audio` is the only code that plays sound, and every clip is a file under `public/` | Audio never depends on a running service or a key |
 
 ---
 
@@ -316,7 +318,7 @@ flowchart TB
 | **Monuments undated** | Wikidata has no construction dates for them in this period; inventing some would break the data policy | A dated source (an ASI register, a gazetteer) is found |
 | **Borders linked by containment** | Honest about what the data supports (location, not combatants) | A source records who fought |
 | **Native `<input type="range">` for the timeline** | Keyboard and screen-reader support for free | Never |
-| **Next.js View Transitions for pages** | Shared-element morphs between a list and a page with no extra library | The browser support story changes |
+| **Native view transitions for pages** | A colour bloom between sections and a slide between records, with no extra library | The browser support story changes |
 
 ---
 

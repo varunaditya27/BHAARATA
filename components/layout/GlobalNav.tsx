@@ -14,6 +14,7 @@ const primaryLinks = [
 ];
 
 const secondaryLinks = [
+  { href: "/search", label: "Filter" },
   { href: "/data", label: "Browse data" },
   { href: "/connections", label: "ER diagram" },
 ];

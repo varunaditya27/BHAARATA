@@ -16,7 +16,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "background-color": "#f3ede0"
+        "background-color": "#f2f7fc"
       }
     },
     {
@@ -43,7 +43,7 @@
         ]
       ],
       "paint": {
-        "fill-color": "rgba(168, 156, 107, 0.16)"
+        "fill-color": "rgba(70, 130, 170, 0.14)"
       }
     },
     {
@@ -64,7 +64,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "fill-color": "rgba(168, 156, 107, 0.16)"
+        "fill-color": "rgba(70, 130, 170, 0.14)"
       }
     },
     {
@@ -85,7 +85,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "fill-color": "rgba(168, 156, 107, 0.16)"
+        "fill-color": "rgba(70, 130, 170, 0.14)"
       }
     },
     {
@@ -94,7 +94,7 @@
       "source": "carto",
       "source-layer": "waterway",
       "paint": {
-        "line-color": "#6f8f83",
+        "line-color": "#1b7fa8",
         "line-width": {
           "stops": [
             [
@@ -136,7 +136,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "fill-color": "#a9c2b7",
+        "fill-color": "#9adcf0",
         "fill-antialias": true
       }
     },
@@ -196,8 +196,8 @@
         "text-letter-spacing": 0.1
       },
       "paint": {
-        "text-color": "#6f8f83",
-        "text-halo-color": "#f3ede0",
+        "text-color": "#1b7fa8",
+        "text-halo-color": "#f2f7fc",
         "text-halo-width": 1
       }
     },
@@ -241,8 +241,8 @@
         "text-letter-spacing": 0.1
       },
       "paint": {
-        "text-color": "#6f8f83",
-        "text-halo-color": "#f3ede0",
+        "text-color": "#1b7fa8",
+        "text-halo-color": "#f2f7fc",
         "text-halo-width": 1
       }
     },
@@ -318,8 +318,8 @@
         "text-rotation-alignment": "auto"
       },
       "paint": {
-        "text-color": "#6f8f83",
-        "text-halo-color": "#f3ede0",
+        "text-color": "#1b7fa8",
+        "text-halo-color": "#f2f7fc",
         "text-halo-width": 1
       }
     },
@@ -394,8 +394,8 @@
         "text-transform": "none"
       },
       "paint": {
-        "text-color": "#5c5447",
-        "text-halo-color": "#f3ede0",
+        "text-color": "#3b585e",
+        "text-halo-color": "#f2f7fc",
         "text-halo-width": 1
       }
     }

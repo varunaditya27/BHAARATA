@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { PlacesAtlas, type PlaceGroup } from "@/components/entity/PlacesAtlas";
-import { PageTransition } from "@/components/primitives/PageTransition";
+import { PageHero } from "@/components/primitives/PageHero";
+import { HERO } from "@/lib/hero";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
 import { placeKindLabel } from "@/lib/domain/labels";
 import { AREA_ORDER, broadArea } from "@/lib/geo/areas";
-import { boundariesContaining, polityGeometry, projectTogether } from "@/lib/geo/silhouette";
-import { NAV_FORWARD } from "@/lib/utils/view-transition";
+import { boundariesContaining } from "@/lib/geo/silhouette";
 
 export const metadata = { title: "Places — BHĀRATA" };
 
@@ -14,9 +14,6 @@ export default async function PlacesIndexPage() {
   const data = await getAtlasData();
   const { places, polities } = data;
   const { getPolityById } = atlasAccess(data);
-  const land = polities.map((p) => polityGeometry(p.id, data)).filter((g) => g !== undefined);
-  const projected = projectTogether(land, places.map((p) => p.coordinates), 100, 2);
-
   const heldBy = (coordinates: [number, number]) =>
     [...new Set(boundariesContaining(coordinates, data).map((b) => b.polityId))]
       .map((id) => getPolityById(id)?.name)
@@ -36,8 +33,7 @@ export default async function PlacesIndexPage() {
               <Link
                 key={place.id}
                 href={`/places/${place.slug}`}
-                transitionTypes={NAV_FORWARD}
-                className="group flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border py-3"
+                className="bh-lift group flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border px-2 py-3"
               >
                 <span className="font-display text-xl text-ink group-hover:text-territory-selected">{place.name}</span>
                 <span className="font-sans text-sm text-ink-muted">{placeKindLabel(place.placeType)}</span>
@@ -53,21 +49,27 @@ export default async function PlacesIndexPage() {
     }));
 
   return (
-    <PageTransition>
-      <div className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6">
-        <h1 className="font-display text-5xl text-ink">Places</h1>
-        <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
-          Capitals, ports, towns and monuments on the map, listed from north to south.
-        </p>
-
-        <div className="mt-12">
+    <>
+            <PageHero
+        title="Places"
+        intro="Capitals, temples, forts and tombs, each set on the map and listed from north to south."
+        hero={HERO.places}
+      />
+      <div className="mx-auto max-w-[1480px] px-4 py-14 sm:px-6">
+        <div>
           <PlacesAtlas
-            land={projected.paths}
-            dots={places.map((p, i) => ({ id: p.id, name: p.name, x: projected.points[i][0], y: projected.points[i][1] }))}
+            places={places.map((p) => ({
+              id: p.id,
+              name: p.name,
+              slug: p.slug,
+              coordinates: p.coordinates,
+              color: polities.find((k) => k.capitals.some((c) => p.name.startsWith(c)))?.accentColor ?? "#06242b",
+              heldBy: [...new Set(boundariesContaining(p.coordinates, data).map((b) => b.polityId))],
+            }))}
             groups={groups}
           />
         </div>
       </div>
-    </PageTransition>
+    </>
   );
 }
