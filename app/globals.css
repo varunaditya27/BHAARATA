@@ -680,3 +680,117 @@ body:has([data-dark-page]) > footer {
 .bh-prompt-in {
   animation: bh-prompt-in 0.4s ease-out 1.2s both;
 }
+
+/* ---------------------------------------------------------------------- */
+/* Page richness: a drifting colour wash behind headers, a reading-       */
+/* progress line, hover lift, gradient titles. Transform and opacity only, */
+/* so all of it runs on the compositor; reduced motion freezes the drift.  */
+/* ---------------------------------------------------------------------- */
+.bh-aurora {
+  mask-image: linear-gradient(to bottom, #000 35%, transparent);
+}
+.bh-aurora > span {
+  position: absolute;
+  width: 46rem;
+  height: 46rem;
+  border-radius: 9999px;
+  background: radial-gradient(closest-side, var(--bh-aurora-color), transparent 72%);
+  animation: bh-drift 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.bh-aurora > span:nth-child(1) {
+  --bh-aurora-color: rgba(255, 176, 32, 0.5);
+  left: -8rem;
+  top: -20rem;
+}
+.bh-aurora > span:nth-child(2) {
+  --bh-aurora-color: rgba(232, 60, 130, 0.32);
+  right: -10rem;
+  top: -24rem;
+  animation-duration: 34s;
+  animation-delay: -9s;
+}
+.bh-aurora > span:nth-child(3) {
+  --bh-aurora-color: rgba(30, 190, 200, 0.34);
+  left: 32%;
+  top: -28rem;
+  animation-duration: 40s;
+  animation-delay: -18s;
+}
+@keyframes bh-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(7rem, 3rem, 0) scale(1.12); }
+  to { transform: translate3d(-5rem, 5rem, 0) scale(0.94); }
+}
+
+/* Reading progress: a gradient line under the header that fills as the page scrolls. */
+.bh-scroll-line {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .bh-scroll-line {
+    display: block;
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 60;
+    height: 3px;
+    background: linear-gradient(90deg, #ffb020, #cc3310 45%, #b3123f 70%, #2347d6);
+    transform-origin: left center;
+    transform: scaleX(0);
+    animation: bh-scroll-fill linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes bh-scroll-fill {
+    to { transform: scaleX(1); }
+  }
+}
+
+/* A title in ink that shades to indigo and crimson, with a rule that draws under it. */
+.bh-gradient-ink {
+  background: linear-gradient(100deg, var(--bh-ink) 0%, var(--bh-ink) 42%, #5b21b6 72%, #cc3310 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.bh-title-rule {
+  display: block;
+  height: 3px;
+  width: min(14rem, 40%);
+  margin-top: 1rem;
+  background: linear-gradient(90deg, #ffb020, #cc3310, #b3123f);
+  transform-origin: left center;
+  animation: bh-grow-x 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+/* Rows and cards that answer the pointer: a soft colour wash and a small slide. */
+.bh-lift {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s ease;
+}
+.bh-lift:hover {
+  transform: translateX(6px);
+  background-color: color-mix(in srgb, var(--bh-lift-color, var(--bh-territory)) 9%, transparent);
+}
+
+/* Items that arrive one after another when a list loads. */
+.bh-stagger > * {
+  animation: bh-stagger-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+@keyframes bh-stagger-in {
+  from { opacity: 0; transform: translateY(14px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bh-aurora > span,
+  .bh-scroll-line,
+  .bh-title-rule,
+  .bh-stagger > * {
+    animation: none;
+  }
+  .bh-scroll-line {
+    display: none;
+  }
+  .bh-lift:hover {
+    transform: none;
+  }
+}

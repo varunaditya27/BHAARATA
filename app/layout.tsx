@@ -28,6 +28,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to the page content
         </a>
+        <div aria-hidden className="bh-scroll-line" />
         <AtlasDataProvider data={data}>
         <GlobalNav />
         <main id="main" className="flex-1">{children}</main>

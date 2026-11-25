@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SearchFilters } from "@/components/search/SearchFilters";
+import { Aurora } from "@/components/primitives/Aurora";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { cn } from "@/lib/utils/cn";
 import { KINDS, PAGE_SIZE, getFacets, parseFilters, runSearch, toQuery, type Facets, type Filters, type Kind } from "@/lib/search/advanced";
@@ -45,8 +46,11 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
 
   return (
     <PageTransition>
+      <div className="relative">
+        <Aurora />
       <div className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6">
-        <h1 className="font-display text-5xl text-ink">Search</h1>
+        <h1 className="bh-gradient-ink font-display text-5xl">Search</h1>
+        <span className="bh-title-rule" aria-hidden />
 
         <nav aria-label="What to search" className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-b border-border">
           {KINDS.map((k) => (
@@ -93,9 +97,13 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
             {page.total === 0 ? (
               <p className="mt-10 font-sans text-lg text-ink-muted">Nothing matches. Remove a filter above, or clear them all.</p>
             ) : (
-              <ol className="mt-6">
-                {page.results.map((r) => (
-                  <li key={r.id} className="border-b border-border py-5" style={r.accent ? { borderLeft: `4px solid ${r.accent}`, paddingLeft: 16 } : { paddingLeft: 20 }}>
+              <ol className="bh-stagger mt-6" key={`${f.kind}-${page.total}-${f.page}`}>
+                {page.results.map((r, i) => (
+                  <li
+                    key={r.id}
+                    className="bh-lift border-b border-border py-5"
+                    style={{ ...(r.accent ? { borderLeft: `4px solid ${r.accent}`, paddingLeft: 16, "--bh-lift-color": r.accent } : { paddingLeft: 20 }), "--i": Math.min(i, 12) } as unknown as React.CSSProperties}
+                  >
                     <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
                       <h2 className="font-display text-2xl text-ink">
                         <Link href={r.href} transitionTypes={NAV_FORWARD} className="hover:text-territory-selected">
@@ -146,6 +154,7 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
           </section>
         </div>
       </div>
+    </div>
     </PageTransition>
   );
 }

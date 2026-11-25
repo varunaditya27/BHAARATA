@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PlacesAtlas, type PlaceGroup } from "@/components/entity/PlacesAtlas";
+import { Aurora } from "@/components/primitives/Aurora";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
@@ -37,7 +38,7 @@ export default async function PlacesIndexPage() {
                 key={place.id}
                 href={`/places/${place.slug}`}
                 transitionTypes={NAV_FORWARD}
-                className="group flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border py-3"
+                className="bh-lift group flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border px-2 py-3"
               >
                 <span className="font-display text-xl text-ink group-hover:text-territory-selected">{place.name}</span>
                 <span className="font-sans text-sm text-ink-muted">{placeKindLabel(place.placeType)}</span>
@@ -54,8 +55,11 @@ export default async function PlacesIndexPage() {
 
   return (
     <PageTransition>
+      <div className="relative">
+        <Aurora />
       <div className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6">
-        <h1 className="font-display text-5xl text-ink">Places</h1>
+        <h1 className="bh-gradient-ink font-display text-5xl">Places</h1>
+        <span className="bh-title-rule" aria-hidden />
         <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
           Capitals, ports, towns and monuments on the map, listed from north to south.
         </p>
@@ -68,6 +72,7 @@ export default async function PlacesIndexPage() {
           />
         </div>
       </div>
+    </div>
     </PageTransition>
   );
 }

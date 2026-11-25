@@ -47,7 +47,7 @@ export function PlacesAtlas({ land, dots, groups }: { land: string[]; dots: Plac
 
       <div>
         {groups.map((g) => (
-          <section key={g.label} className="mb-12" aria-labelledby={`state-${g.label}`}>
+          <section key={g.label} className="bh-reveal mb-12" aria-labelledby={`state-${g.label}`}>
             <h2 id={`state-${g.label}`} className="border-b border-ink/70 pb-2 font-display text-2xl text-ink">
               {g.label}
             </h2>

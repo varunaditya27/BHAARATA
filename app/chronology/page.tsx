@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Badge } from "@/components/primitives/Badge";
+import { Aurora } from "@/components/primitives/Aurora";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
 import { KingdomLanes } from "@/components/chronology/KingdomLanes";
@@ -27,8 +28,11 @@ export default async function ChronologyPage() {
 
   return (
     <PageTransition>
+      <div className="relative">
+        <Aurora />
       <div className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6">
-        <h1 className="font-display text-5xl text-ink">Timeline</h1>
+        <h1 className="bh-gradient-ink font-display text-5xl">Timeline</h1>
+        <span className="bh-title-rule" aria-hidden />
         <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
           Every turning point and battle in the atlas, in order. Each coloured line shows how long a kingdom lasted, and each diamond marks a turning point. Click a diamond
           to jump to it below. Under each period you&rsquo;ll also find its battles. &ldquo;c.&rdquo; in front of a date
@@ -136,6 +140,7 @@ export default async function ChronologyPage() {
           </section>}
         </div>
       </div>
+    </div>
     </PageTransition>
   );
 }

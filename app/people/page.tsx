@@ -2,6 +2,7 @@ import Link from "next/link";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { PeopleDirectory, type DirectoryGroup } from "@/components/entity/PeopleDirectory";
 import { RulerPortrait } from "@/components/entity/RulerPortrait";
+import { Aurora } from "@/components/primitives/Aurora";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { Shared } from "@/components/primitives/Shared";
 import type { ImageKey } from "@/lib/domain/types";
@@ -27,7 +28,7 @@ export default async function PeopleIndexPage() {
       id: polity.slug,
       name: polity.name,
       heading: (
-        <div key={polity.slug} className="flex items-center gap-4 border-b border-ink/70 pb-3">
+        <div key={polity.slug} className="bh-reveal flex items-center gap-4 border-b border-ink/70 pb-3">
           <KingdomEmblem polityId={polity.id} color={polity.accentColor} className="h-11 w-11" />
           <div className="min-w-0">
             <h2 id={`${polity.slug}-name`} className="font-display text-2xl text-ink">
@@ -49,7 +50,7 @@ export default async function PeopleIndexPage() {
             key={person.id}
             href={`/people/${person.slug}`}
             transitionTypes={NAV_FORWARD}
-            className="group flex min-h-12 items-center gap-3 border-b border-border py-2"
+            className="bh-lift group flex min-h-12 items-center gap-3 border-b border-border px-2 py-2"
           >
             <span className="min-w-0 flex-1 font-display text-lg text-ink group-hover:text-territory-selected">{person.name}</span>
             <span className="shrink-0 font-sans text-sm tabular-nums text-ink-muted">{formatPersonDates(person)}</span>
@@ -65,8 +66,11 @@ export default async function PeopleIndexPage() {
 
   return (
     <PageTransition>
+      <div className="relative">
+        <Aurora />
       <div className="mx-auto max-w-[1000px] px-4 py-16 sm:px-6">
-        <h1 className="font-display text-5xl text-ink">People</h1>
+        <h1 className="bh-gradient-ink font-display text-5xl">People</h1>
+        <span className="bh-title-rule" aria-hidden />
         <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
           People in the atlas, grouped by kingdom and sorted by their recorded dates. Some dates describe a lifetime rather than a reign.
         </p>
@@ -79,6 +83,7 @@ export default async function PeopleIndexPage() {
           <PeopleDirectory groups={groups} />
         </div>
       </div>
+    </div>
     </PageTransition>
   );
 }
