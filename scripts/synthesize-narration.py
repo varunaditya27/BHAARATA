@@ -4,13 +4,13 @@ Existing clips are kept, so an interrupted run resumes. Voice: af_heart (Kokoro'
 """
 import argparse
 import json
+import os
 import re
 import subprocess
-import tempfile
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import numpy as np
-import soundfile as sf
 import torch
 from kokoro import KPipeline
 from num2words import num2words
@@ -20,6 +20,7 @@ NARRATION = ROOT / "public" / "narration"
 VOICE = "af_heart"
 SPEED = 0.95
 RATE = 24000
+ENCODERS = 4
 GAP = np.zeros(int(RATE * 0.22), dtype=np.float32)
 
 ORDINALS = {"I": "the First", "II": "the Second", "III": "the Third", "IV": "the Fourth", "V": "the Fifth",
@@ -48,15 +49,15 @@ def synthesize(pipeline, text):
 
 
 def encode(samples, target):
-    """Mono MP3 at a steady loudness, so no page is louder than another."""
-    with tempfile.TemporaryDirectory() as tmp:
-        wav = Path(tmp) / "clip.wav"
-        sf.write(wav, samples, RATE)
-        subprocess.run(
-            ["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav), "-af", "loudnorm=I=-19:TP=-2:LRA=7",
-             "-ac", "1", "-ar", str(RATE), "-codec:a", "libmp3lame", "-b:a", "40k", str(target)],
-            check=True,
-        )
+    """Mono MP3 at a steady loudness, so no page is louder than another. The audio is piped to ffmpeg from memory and the
+    file is renamed into place only when complete, so an interrupted run never leaves a half-written clip."""
+    partial = target.with_suffix(".part.mp3")
+    subprocess.run(
+        ["ffmpeg", "-y", "-loglevel", "error", "-f", "f32le", "-ar", str(RATE), "-ac", "1", "-i", "-",
+         "-af", "loudnorm=I=-19:TP=-2:LRA=7", "-ac", "1", "-ar", str(RATE), "-codec:a", "libmp3lame", "-b:a", "40k", str(partial)],
+        input=np.asarray(samples, dtype=np.float32).tobytes(), check=True,
+    )
+    os.replace(partial, target)
 
 
 def refresh_manifest():
@@ -78,11 +79,18 @@ def main():
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"{len(todo)} clips to make on {device}", flush=True)
     pipeline = KPipeline(lang_code="a", device=device)
-    for i, key in enumerate(todo, 1):
-        encode(synthesize(pipeline, scripts[key]), NARRATION / f"{key}.mp3")
-        if i % 25 == 0 or i == len(todo):
-            refresh_manifest()
-            print(f"{i}/{len(todo)}", flush=True)
+    # The GPU is idle most of the time (text processing and encoding dominate), so encoding runs in parallel
+    # ffmpeg processes while the next clip is being spoken.
+    with ThreadPoolExecutor(max_workers=ENCODERS) as pool:
+        pending = []
+        for i, key in enumerate(todo, 1):
+            pending.append(pool.submit(encode, synthesize(pipeline, scripts[key]), NARRATION / f"{key}.mp3"))
+            if i % 25 == 0 or i == len(todo):
+                for done in pending:
+                    done.result()
+                pending.clear()
+                refresh_manifest()
+                print(f"{i}/{len(todo)}", flush=True)
     refresh_manifest()
 
 
