@@ -7,7 +7,7 @@ import { Shared } from "@/components/primitives/Shared";
 import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
-import { formatDateRange, formatPersonDates } from "@/lib/domain/time";
+import { byStart, formatDateRange, formatPersonDates } from "@/lib/domain/time";
 import { NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 export const metadata = { title: "People — BHĀRATA" };
@@ -19,7 +19,7 @@ export default async function PeopleIndexPage() {
   const groups: DirectoryGroup[] = [...polities]
     .sort((a, b) => a.period.startYear - b.period.startYear)
     .map((polity) => {
-      const rulers = getRulersForPolity(polity.id).sort((a, b) => a.period.startYear - b.period.startYear);
+      const rulers = getRulersForPolity(polity.id).sort(byStart);
       return { polity, rulers };
     })
     .filter(({ rulers }) => rulers.length > 0)

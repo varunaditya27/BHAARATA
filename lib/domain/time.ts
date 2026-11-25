@@ -64,6 +64,10 @@ export function formatPersonDates(person: { period: DateRange; datesAre?: "reign
 /** Unknown years use an internal sorting placeholder and must not be plotted. */
 export const hasKnownStart = (range: DateRange) => range.startQualifier !== "unknown";
 
+/** Sorts by start year, with records whose start is unknown last. */
+export const byStart = (a: { period: DateRange }, b: { period: DateRange }) =>
+  (hasKnownStart(a.period) ? a.period.startYear : Number.MAX_SAFE_INTEGER) - (hasKnownStart(b.period) ? b.period.startYear : Number.MAX_SAFE_INTEGER);
+
 /** True when `year` falls inside the range, using endYear=null as "ongoing/unknown end". */
 export function yearInRange(year: number, range: DateRange): boolean {
   if (range.startQualifier === "unknown") return false;

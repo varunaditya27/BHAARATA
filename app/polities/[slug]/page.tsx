@@ -16,7 +16,7 @@ import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
 import { placeKindLabel } from "@/lib/domain/labels";
-import { formatDateRange, formatPersonDates } from "@/lib/domain/time";
+import { byStart, formatDateRange, formatPersonDates } from "@/lib/domain/time";
 import { NAV_BACK, NAV_FORWARD, transitionNames } from "@/lib/utils/view-transition";
 
 
@@ -37,7 +37,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
   if (!polity) notFound();
 
   const hero = polity.heroImageKey ? images[polity.heroImageKey as ImageKey] : undefined;
-  const rulers = getRulersForPolity(polity.id).sort((a, b) => a.period.startYear - b.period.startYear);
+  const rulers = getRulersForPolity(polity.id).sort(byStart);
   const relatedEvents = events
     .filter((e) => e.category !== "battle" && e.polityIds.includes(polity.id))
     .sort((a, b) => a.period.startYear - b.period.startYear);
