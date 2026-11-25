@@ -221,11 +221,11 @@ export function StoryMap({
     map.on("style.load", () => {
       map.setProjection({ type: "globe" });
       map.setSky({
-        "sky-color": "#1f1a8c",
+        "sky-color": "#0a6f94",
         "sky-horizon-blend": 0.7,
         "horizon-color": "#ffa51f",
         "horizon-fog-blend": 0.6,
-        "fog-color": "#a18bff",
+        "fog-color": "#8fd8e8",
         "fog-ground-blend": 0.2,
         "atmosphere-blend": [
           "interpolate",
@@ -288,7 +288,7 @@ export function StoryMap({
             source: STORY_FLIGHT_SOURCE,
             layout: { "line-cap": "round", "line-join": "round" },
             paint: {
-              "line-color": "#fbf5e8",
+              "line-color": "#fff7e8",
               "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.4, 6, 2.2],
               "line-dasharray": [2, 2.4],
               "line-opacity": 0.85,
@@ -325,8 +325,8 @@ export function StoryMap({
             source: STORY_BEACON_SOURCE,
             paint: {
               "circle-radius": 4.5,
-              "circle-color": "#fbf5e8",
-              "circle-stroke-color": "#b50f50",
+              "circle-color": "#fff7e8",
+              "circle-stroke-color": "#c01a3c",
               "circle-stroke-width": 2,
               "circle-pitch-alignment": "map",
             },
@@ -354,7 +354,7 @@ export function StoryMap({
       paint(
         LAYER_IDS.hillshade,
         "hillshade-shadow-color",
-        "rgba(18,10,56, 0.78)"
+        "rgba(6,36,43, 0.78)"
       );
       if (map.getLayer(LAYER_IDS.kingdomLabels)) {
         map.setLayerZoomRange(LAYER_IDS.kingdomLabels, 3.7, 24);
@@ -583,7 +583,7 @@ export function StoryMap({
   }, []);
 
   return (
-    <div className="absolute inset-0 bg-[#070522]" aria-hidden>
+    <div className="absolute inset-0 bg-[#031c22]" aria-hidden>
       <SpaceBackdrop />
       <div
         className={`absolute inset-0 transition-opacity duration-500 ${

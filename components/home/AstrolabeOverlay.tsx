@@ -54,7 +54,7 @@ export function AstrolabeOverlay({
               cy="340"
               r="316"
               fill="none"
-              stroke="rgba(251,245,232, 0.22)"
+              stroke="rgba(255,247,232, 0.22)"
               strokeWidth="1"
             />
             {/* Dashed ecliptic ring */}
@@ -74,13 +74,13 @@ export function AstrolabeOverlay({
               cy="340"
               r="224"
               fill="none"
-              stroke="rgba(251,245,232, 0.12)"
+              stroke="rgba(255,247,232, 0.12)"
               strokeWidth="0.8"
             />
             {/* Cardinal crosshairs */}
             <path
               d="M 340 10 L 340 42 M 340 638 L 340 670 M 10 340 L 42 340 M 638 340 L 670 340"
-              stroke="rgba(251,245,232, 0.45)"
+              stroke="rgba(255,247,232, 0.45)"
               strokeWidth="1.2"
             />
             {/* Diagonal astrolabe ticks */}

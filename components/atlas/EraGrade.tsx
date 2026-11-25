@@ -7,8 +7,8 @@ import { getEraForYear } from "@/lib/geo/historical-state";
  */
 const ERA_TINT: Record<string, string> = {
   "Early medieval": "rgba(255, 176, 0, 0.2)",
-  "Late medieval": "rgba(216, 27, 122, 0.16)",
-  "Early modern": "rgba(43, 53, 224, 0.18)",
+  "Late medieval": "rgba(235, 70, 90, 0.14)",
+  "Early modern": "rgba(15, 111, 208, 0.16)",
 };
 
 export function EraGrade({ year }: { year: number }) {

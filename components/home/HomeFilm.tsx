@@ -36,8 +36,8 @@ const ERA_GLINTS = [
   "radial-gradient(54% 48% at 82% 16%, rgba(255,176,0,0.30), rgba(255,110,0,0.09) 45%, transparent 72%)",
   "radial-gradient(56% 50% at 76% 24%, rgba(232,50,90,0.32), rgba(176,16,80,0.10) 48%, transparent 74%)",
   "radial-gradient(56% 50% at 84% 32%, rgba(0,172,196,0.32), rgba(0,90,160,0.10) 48%, transparent 74%)",
-  "radial-gradient(56% 50% at 78% 28%, rgba(255,190,40,0.30), rgba(140,60,210,0.10) 48%, transparent 74%)",
-  "radial-gradient(58% 52% at 74% 20%, rgba(216,27,122,0.32), rgba(110,20,170,0.10) 48%, transparent 74%)",
+  "radial-gradient(56% 50% at 78% 28%, rgba(255,190,40,0.30), rgba(255,110,60,0.10) 48%, transparent 74%)",
+  "radial-gradient(58% 52% at 74% 20%, rgba(235,70,90,0.30), rgba(230,90,40,0.10) 48%, transparent 74%)",
 ];
 
 /** Syncs Lenis smooth scroll ticks with GSAP ScrollTrigger (`lagSmoothing(0)`). */
@@ -555,7 +555,7 @@ export function HomeFilm() {
               ref={spineFillRef}
               className="block h-full w-full origin-top transition-colors duration-500"
               style={{
-                backgroundColor: activePolity?.accentColor ?? "#b50f50",
+                backgroundColor: activePolity?.accentColor ?? "#c01a3c",
               }}
             />
           </div>
@@ -570,7 +570,7 @@ export function HomeFilm() {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(90% 85% at 72% 38%, transparent 38%, rgba(7,5,34,0.55) 78%, rgba(7,5,34,0.85) 100%)",
+                "radial-gradient(90% 85% at 72% 38%, transparent 38%, rgba(3,28,34,0.55) 78%, rgba(3,28,34,0.85) 100%)",
             }}
             aria-hidden
           />
@@ -582,7 +582,7 @@ export function HomeFilm() {
             className="pointer-events-none absolute right-0 top-0 h-56 w-[28rem] max-w-full"
             style={{
               background:
-                "radial-gradient(ellipse at top right, rgba(18,10,56,0.82), rgba(18,10,56,0.35) 45%, transparent 72%)",
+                "radial-gradient(ellipse at top right, rgba(6,36,43,0.82), rgba(6,36,43,0.35) 45%, transparent 72%)",
             }}
             aria-hidden
           />
@@ -626,7 +626,7 @@ export function HomeFilm() {
                 className="h-1 w-6 transition-all duration-300"
                 style={{
                   backgroundColor:
-                    chapterIndex === -1 ? "#fbf5e8" : "rgba(251,245,232,0.28)",
+                    chapterIndex === -1 ? "#fff7e8" : "rgba(255,247,232,0.28)",
                 }}
               />
               <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-paper/60 group-hover:text-paper sm:inline">
@@ -655,7 +655,7 @@ export function HomeFilm() {
                         backgroundColor: isCurrent
                           ? (p?.accentColor ?? "#ff5a3c")
                           : isPassed
-                            ? "#fbf5e8"
+                            ? "#fff7e8"
                             : "transparent",
                       }}
                     />
@@ -737,7 +737,7 @@ export function HomeFilm() {
           {storyChapters.map((c, i) => {
             const polity = getPolityById(c.polityId);
             const image = images[c.imageKey];
-            const accent = polity?.accentColor ?? "#b50f50";
+            const accent = polity?.accentColor ?? "#c01a3c";
             return (
               <article
                 key={c.id}

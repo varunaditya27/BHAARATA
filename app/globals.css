@@ -8,26 +8,26 @@
 
 :root {
   /* base */
-  --bh-paper: #fbf5e8;
-  --bh-paper-raised: #fffcf4;
-  --bh-ink: #120a38;
-  --bh-ink-muted: #46407a;
-  --bh-ash: #6a649c;
+  --bh-paper: #fff7e8;
+  --bh-paper-raised: #fffcf3;
+  --bh-ink: #06242b;
+  --bh-ink-muted: #3b585e;
+  --bh-ash: #4f7378;
   --bh-stone: #f3e6c8;
   --bh-border: #e6ce98;
 
   /* geographic */
   --bh-water: #86d3ec;
   --bh-water-deep: #2fa8d5;
-  --bh-land: #fbf5e8;
+  --bh-land: #fff7e8;
   --bh-terrain: #f6e7c4;
 
   /* semantic */
   --bh-territory: #d42b12;
-  --bh-territory-selected: #b50f50;
-  --bh-evidence: #2a33d4;
+  --bh-territory-selected: #c01a3c;
+  --bh-evidence: #0f6fd0;
   --bh-uncertainty: #ffb000;
-  --bh-active: #120a38;
+  --bh-active: #06242b;
 
   /* surfaces */
   --background: var(--bh-paper);
@@ -136,11 +136,11 @@ body::before {
    menu open in portals outside the header, so they keep their paper colours. */
 body:has([data-dark-page]) > header,
 body:has([data-dark-page]) > footer {
-  --bh-paper: #120a38;
-  --bh-paper-raised: #16104f;
-  --bh-ink: #fbf5e8;
-  --bh-ink-muted: #cfc9f5;
-  --bh-border: #34308a;
+  --bh-paper: #06242b;
+  --bh-paper-raised: #0b3d46;
+  --bh-ink: #fff7e8;
+  --bh-ink-muted: #bfe3e6;
+  --bh-border: #1c5f6b;
   background-color: var(--bh-paper);
 }
 
@@ -312,7 +312,7 @@ body:has([data-dark-page]) > footer {
 /* ---------------------------------------------------------------------- */
 .bh-map-grain {
   background-image:
-    radial-gradient(ellipse at center, transparent 55%, rgba(18,10,56, 0.28) 100%),
+    radial-gradient(ellipse at center, transparent 55%, rgba(6,36,43, 0.28) 100%),
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
   mix-blend-mode: multiply;
   opacity: 0.5;
@@ -672,14 +672,6 @@ body:has([data-dark-page]) > footer {
   }
 }
 
-/* The sound prompt waits a moment, so a returning visitor's saved choice has time to hide it. */
-@keyframes bh-prompt-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-.bh-prompt-in {
-  animation: bh-prompt-in 0.4s ease-out 1.2s both;
-}
 
 /* ---------------------------------------------------------------------- */
 /* Page richness: a reading-progress line, hover lift, staggered arrivals  */

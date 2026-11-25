@@ -4,16 +4,16 @@
 export default function GlobalError({ retry }: { error: Error & { digest?: string }; retry: () => void }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, minHeight: "100vh", background: "#fbf5e8", color: "#120a38", fontFamily: "Georgia, serif" }}>
+      <body style={{ margin: 0, minHeight: "100vh", background: "#fff7e8", color: "#06242b", fontFamily: "Georgia, serif" }}>
         <title>BHĀRATA could not load</title>
         <main style={{ maxWidth: 640, margin: "0 auto", padding: "96px 24px" }}>
           <h1 style={{ fontSize: 44, fontWeight: 400, margin: 0 }}>The atlas could not load</h1>
-          <p style={{ fontFamily: "system-ui, sans-serif", fontSize: 18, lineHeight: 1.5, color: "#46407a" }}>
+          <p style={{ fontFamily: "system-ui, sans-serif", fontSize: 18, lineHeight: 1.5, color: "#3b585e" }}>
             Something went wrong before any page could be shown. Check your connection and try again.
           </p>
           <button
             onClick={() => retry()}
-            style={{ marginTop: 16, minHeight: 44, padding: "0 20px", border: 0, background: "#120a38", color: "#fbf5e8", fontSize: 15, cursor: "pointer" }}
+            style={{ marginTop: 16, minHeight: 44, padding: "0 20px", border: 0, background: "#06242b", color: "#fff7e8", fontSize: 15, cursor: "pointer" }}
           >
             Try again
           </button>

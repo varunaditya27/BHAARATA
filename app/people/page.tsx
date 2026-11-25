@@ -32,7 +32,7 @@ export default async function PeopleIndexPage() {
         <div
           key={polity.slug}
           className="bh-reveal relative mt-4 flex items-end justify-between overflow-hidden px-6 py-7 sm:px-8"
-          style={{ backgroundColor: polity.accentColor, color: "#fbf5e8" }}
+          style={{ backgroundColor: polity.accentColor, color: "#fff7e8" }}
         >
           <div className="min-w-0">
             <h2 id={`${polity.slug}-name`} className="font-display text-[clamp(2.4rem,5vw,4rem)] leading-[0.95] tracking-[-0.02em]">
@@ -44,7 +44,7 @@ export default async function PeopleIndexPage() {
               {formatDateRange(polity.period)}, {rulers.length} {rulers.length === 1 ? "ruler" : "rulers"}
             </p>
           </div>
-          <KingdomEmblem polityId={polity.id} color="#fbf5e8" className="-mb-4 -mr-2 h-32 w-32 shrink-0 sm:h-40 sm:w-40" />
+          <KingdomEmblem polityId={polity.id} color="#fff7e8" className="-mb-4 -mr-2 h-32 w-32 shrink-0 sm:h-40 sm:w-40" />
         </div>
       ),
       rulers: rulers.map((person) => ({
@@ -74,7 +74,7 @@ export default async function PeopleIndexPage() {
       <PageHero
         title="People"
         intro="Every ruler in the atlas, grouped by kingdom and in the order they ruled."
-        field="#1d23b8"
+        field="#00798c"
         media={
           <PortraitStack
             plates={["ruler-razia-sultana", "ruler-shah-jahan", "ruler-babur"].flatMap((k) =>

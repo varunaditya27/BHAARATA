@@ -34,7 +34,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
   if (!person) notFound();
 
   const polity = person.polityId ? getPolityById(person.polityId) : undefined;
-  const accent = polity?.accentColor ?? "#46407a";
+  const accent = polity?.accentColor ?? "#3b585e";
   const lifetimeOnly = person.datesAre === "lifetime";
   const personDateKnown = person.period.startQualifier !== "unknown";
   const kingdomDatesKnown = polity && polity.period.startQualifier !== "unknown" && polity.period.endQualifier !== "unknown" && polity.period.endYear !== null;
@@ -60,7 +60,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
     <PageTransition>
       <div className="bh-accented" style={{ "--bh-accent": accent } as React.CSSProperties}>
         <div className="bh-reading-progress" aria-hidden />
-        <section style={{ backgroundColor: accent, color: "#fbf5e8" }}>
+        <section style={{ backgroundColor: accent, color: "#fff7e8" }}>
           <div
             className="mx-auto grid max-w-[1200px] items-end gap-10 px-6 pb-14 pt-20 lg:grid-cols-[minmax(0,1fr)_auto]"
             style={{ minHeight: "min(64vh, 36rem)" }}
@@ -80,7 +80,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
                 </Shared>
               </Tilt>
             ) : (
-              polity && <KingdomEmblem polityId={polity.id} color="#fbf5e8" draw className="h-44 w-44 lg:h-60 lg:w-60" />
+              polity && <KingdomEmblem polityId={polity.id} color="#fff7e8" draw className="h-44 w-44 lg:h-60 lg:w-60" />
             )}
           </div>
         </section>

@@ -16,7 +16,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "background-color": "#fbf5e8"
+        "background-color": "#fff7e8"
       }
     },
     {
@@ -197,7 +197,7 @@
       },
       "paint": {
         "text-color": "#1b7fa8",
-        "text-halo-color": "#fbf5e8",
+        "text-halo-color": "#fff7e8",
         "text-halo-width": 1
       }
     },
@@ -242,7 +242,7 @@
       },
       "paint": {
         "text-color": "#1b7fa8",
-        "text-halo-color": "#fbf5e8",
+        "text-halo-color": "#fff7e8",
         "text-halo-width": 1
       }
     },
@@ -319,7 +319,7 @@
       },
       "paint": {
         "text-color": "#1b7fa8",
-        "text-halo-color": "#fbf5e8",
+        "text-halo-color": "#fff7e8",
         "text-halo-width": 1
       }
     },
@@ -394,8 +394,8 @@
         "text-transform": "none"
       },
       "paint": {
-        "text-color": "#46407a",
-        "text-halo-color": "#fbf5e8",
+        "text-color": "#3b585e",
+        "text-halo-color": "#fff7e8",
         "text-halo-width": 1
       }
     }

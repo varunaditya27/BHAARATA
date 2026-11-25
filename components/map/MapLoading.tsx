@@ -6,7 +6,7 @@
 export function MapLoading({ visible }: { visible: boolean }) {
   return (
     <div
-      className={`pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#0b0830] transition-opacity duration-700 ${
+      className={`pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#052a31] transition-opacity duration-700 ${
         visible ? "opacity-100" : "opacity-0"
       }`}
       role="status"
@@ -33,7 +33,7 @@ export function MapLoading({ visible }: { visible: boolean }) {
         <g className="bh-needle">
           <path d="M0 -30 L5 0 L0 4 L-5 0 Z" fill="#ff5a3c" />
           <path d="M0 30 L5 0 L0 -4 L-5 0 Z" fill="currentColor" fillOpacity="0.55" />
-          <circle r="2" fill="#0b0830" stroke="currentColor" strokeWidth="0.8" />
+          <circle r="2" fill="#052a31" stroke="currentColor" strokeWidth="0.8" />
         </g>
       </svg>
       <p className="mt-5 font-sans text-sm text-paper/70">Loading the map…</p>

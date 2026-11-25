@@ -90,9 +90,9 @@ export const LAYER_IDS = {
 export const SITE_COLORS = {
   temple: "#f26a00",
   mosque: "#00a371",
-  fort: "#7a2bd8",
-  tomb: "#d81b7a",
+  fort: "#0b8aa6",
+  tomb: "#e0245e",
   palace: "#e0a000",
-  monastery: "#2a33d4",
+  monastery: "#0f6fd0",
   church: "#6b7280",
 } as const;
