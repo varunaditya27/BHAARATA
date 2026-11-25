@@ -10,7 +10,6 @@ import {
 } from "cmdk";
 import { useAtlasData } from "@/components/layout/AtlasDataProvider";
 import { Search } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { buildSearchIndex, searchEntryGroupLabel, yearCommand, type SearchEntry, type SearchEntryType } from "@/lib/search";
@@ -63,7 +62,6 @@ function ResultRow({ item }: { item: SearchEntry }) {
  */
 export function CommandPalette() {
   const data = useAtlasData();
-  const router = useRouter();
   const [open, setOpenState] = useState(false);
   const [query, setQuery] = useState("");
   const [recent, setRecent] = useState<string[]>([]);
@@ -108,7 +106,12 @@ export function CommandPalette() {
   const go = (href: string, remember = true) => {
     if (remember) rememberRecent(href);
     setOpen(false);
-    router.push(href);
+    const link = document.createElement("a");
+    link.href = href;
+    link.dataset.transition = "section";
+    document.body.append(link);
+    link.click();
+    link.remove();
   };
   const recentEntries = recent.map((h) => byHref.get(h)).filter((e): e is SearchEntry => Boolean(e));
 

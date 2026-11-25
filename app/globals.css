@@ -420,6 +420,40 @@ body:has([data-dark-page]) > footer {
   }
 }
 
+/* Section changes (header, footer, search): the incoming page opens as a circle from the click, carrying its own
+ * colour field, while the outgoing page sinks back and darkens. */
+:root:active-view-transition-type(section)::view-transition-old(root) {
+  animation: 780ms cubic-bezier(0.65, 0, 0.35, 1) both bh-section-out;
+  mix-blend-mode: normal;
+}
+:root:active-view-transition-type(section)::view-transition-new(root) {
+  animation: 880ms cubic-bezier(0.7, 0, 0.2, 1) both bh-section-in;
+  mix-blend-mode: normal;
+}
+@keyframes bh-section-in {
+  from { clip-path: circle(0% at var(--bh-x, 50%) var(--bh-y, 0)); }
+  to { clip-path: circle(150% at var(--bh-x, 50%) var(--bh-y, 0)); }
+}
+@keyframes bh-section-out {
+  to { transform: scale(0.94); filter: brightness(0.6) saturate(1.2); }
+}
+
+/* Any other link: the page slides out to the left and the next one arrives from the right. */
+:root:active-view-transition-type(drill)::view-transition-old(root) {
+  animation: 260ms ease-in both bh-drill-out;
+  mix-blend-mode: normal;
+}
+:root:active-view-transition-type(drill)::view-transition-new(root) {
+  animation: 540ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both bh-drill-in;
+  mix-blend-mode: normal;
+}
+@keyframes bh-drill-out {
+  to { opacity: 0; transform: translateX(-56px); }
+}
+@keyframes bh-drill-in {
+  from { opacity: 0; transform: translateX(72px); }
+}
+
 ::view-transition-group(site-header) {
   animation: none;
   z-index: 100;

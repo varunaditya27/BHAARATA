@@ -171,6 +171,7 @@ Motion explains something or it is removed. It should show continuity, hierarchy
 
 - Animate **`opacity` and `transform`** (and, for the map, `feature-state` paint transitions). Avoid animating width, height, margin or box-shadow.
 - **Do not block the reader.** No transition delays the next click.
+- **Page transitions** use the browser's native view transitions (`components/layout/PageTransitions.tsx`). A link in the header, footer or search opens the next page as a circle of its own colour growing from the click; any other link slides the page forward. Reduced motion and browsers without support navigate normally.
 - **Respect `prefers-reduced-motion`** everywhere. The map's ambient motion does not start, the starfield stands still, the globe jumps to its final view, and playback still works by stepping the year.
 - **Do not animate everything at once.** At most a few elements per screen, and staggered.
 
