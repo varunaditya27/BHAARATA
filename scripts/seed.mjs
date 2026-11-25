@@ -6,7 +6,11 @@ const prisma = new PrismaClient({
   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL || 'postgresql://bhaarata:bhaarata@localhost:55432/bhaarata' }),
 });
 
-const sql = fs.readFileSync(new URL('../prisma/seed.sql', import.meta.url), 'utf8');
+const sql = ['seed.sql', 'enrichment-people.sql']
+  .map(name => new URL(`../prisma/${name}`, import.meta.url))
+  .filter(file => fs.existsSync(file))
+  .map(file => fs.readFileSync(file, 'utf8'))
+  .join('\n');
 const statements = sql
   .split(/;\r?\n/)
   .map(s => s.trim())

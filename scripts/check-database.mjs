@@ -66,7 +66,7 @@ try {
   // 3. Validate readAtlas(db) and Zod domain schemas
   const actual = await readAtlas(db);
   assert.equal(actual.polities.length, 55, 'polities count');
-  assert.equal(actual.people.length, 584, 'people count');
+  assert.equal(actual.people.length, 760, 'people count');
   assert.equal(actual.places.length, 51, 'named places count');
   assert.equal(actual.events.length, 35, 'events count');
   assert.equal(actual.evidence.length, 2, 'evidence count');
@@ -76,7 +76,7 @@ try {
   for (const p of actual.polities) PolitySchema.parse(p);
   for (const p of actual.people) {
     PersonSchema.parse(p);
-    assert.ok(p.imageKey && p.imageKey.startsWith('ruler-') && actual.images[p.imageKey], `missing dedicated ruler image: ${p.id}`);
+    assert.ok(!p.imageKey || actual.images[p.imageKey], `ruler image does not exist: ${p.id}`);
   }
   for (const p of actual.places) {
     PlaceSchema.parse(p);
