@@ -3,6 +3,8 @@ import { Colophon } from "@/components/layout/Colophon";
 import { AtlasDataProvider } from "@/components/layout/AtlasDataProvider";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { GlobalNav } from "@/components/layout/GlobalNav";
+import { PageAudio } from "@/components/audio/PageAudio";
+import { TransitionOrigin } from "@/components/layout/TransitionOrigin";
 import { fontVariables } from "@/lib/fonts";
 import "./globals.css";
 
@@ -28,6 +30,8 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to the page content
         </a>
+        <PageAudio />
+        <TransitionOrigin />
         <div aria-hidden className="bh-scroll-line" />
         <AtlasDataProvider data={data}>
         <GlobalNav />

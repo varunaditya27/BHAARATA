@@ -217,7 +217,7 @@ Two things make sound, and both are files in `public/`, so the running site need
 
 The app reads `public/audio-manifest.json`, which lists the clips and sounds that exist, and asks only for those: a page with no recorded clip stays quiet and makes no request, and with no manifest at all the app runs silently. `npm run audio:index` rebuilds the list, and the speech script runs it as clips are added.
 
-A page's clip is named after its address: `/` is `home`, `/people/rajaraja-i` is `people-rajaraja-i`. `components/audio/AudioControls.tsx` plays the clip when the page changes, and listens for clicks, hovers and the timeline slider to play the interface sounds. Browsers allow sound only after a click or key press, so the first visit shows a one-time prompt; the choice is remembered in the browser (`bh-voice`, `bh-effects`).
+A page's clip is named after its address: `/` is `home`, `/people/rajaraja-i` is `people-rajaraja-i`. `components/audio/PageAudio.tsx` plays the clip when the page changes, and listens for clicks, hovers and the timeline slider to play the interface sounds. Both are always on. Browsers allow sound only after a first click or key press, so the first page's description starts at that moment.
 
 ### Making the audio
 

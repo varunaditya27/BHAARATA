@@ -1,4 +1,3 @@
-import { AudioControls } from "@/components/audio/AudioControls";
 import Link from "next/link";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { CommandPalette } from "@/components/search/CommandPalette";
@@ -36,10 +35,10 @@ export function GlobalNav() {
             <span>BHĀRATA</span>
           </Link>
           <span
-            className="hidden h-4 w-px bg-border 2xl:inline-block"
+            className="hidden h-4 w-px bg-border sm:inline-block"
             aria-hidden
           />
-          <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-ink-soft 2xl:inline">
+          <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-ink-soft xl:inline">
             600–1700 CE
           </span>
         </div>
@@ -47,7 +46,6 @@ export function GlobalNav() {
         <NavLinks primary={primaryLinks} secondary={secondaryLinks} />
 
         <div className="flex shrink-0 items-center gap-2">
-          <AudioControls />
           <CommandPalette />
           <MobileMenu links={[...primaryLinks, ...secondaryLinks]} />
         </div>
