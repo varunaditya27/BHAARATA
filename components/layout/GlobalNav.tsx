@@ -36,10 +36,10 @@ export function GlobalNav() {
             <span>BHĀRATA</span>
           </Link>
           <span
-            className="hidden h-4 w-px bg-border sm:inline-block"
+            className="hidden h-4 w-px bg-border 2xl:inline-block"
             aria-hidden
           />
-          <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-ink-soft xl:inline">
+          <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-ink-soft 2xl:inline">
             600–1700 CE
           </span>
         </div>

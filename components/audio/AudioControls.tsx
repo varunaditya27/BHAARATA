@@ -131,7 +131,7 @@ export function AudioControls() {
           aria-hidden
           className={cn("h-2 w-2 rounded-full transition-colors", speaking ? "bg-territory" : voice ? "bg-ink" : "bg-border")}
         />
-        <span className="hidden xl:inline">Voice</span>
+        <span className="hidden 2xl:inline">Voice</span>
       </button>
       <button
         type="button"
@@ -142,7 +142,7 @@ export function AudioControls() {
         className={cn(toggle, effects ? "border-ink text-ink" : "border-border text-ink-muted hover:border-ink hover:text-ink")}
       >
         <span aria-hidden className={cn("h-2 w-2 rounded-full transition-colors", effects ? "bg-ink" : "bg-border")} />
-        <span className="hidden xl:inline">Sound</span>
+        <span className="hidden 2xl:inline">Sound</span>
       </button>
 
       {!asked && (
