@@ -20,7 +20,7 @@ Then follow any claim back to the evidence it rests on.
 
 <br />
 
-<img src="docs/assets/globe.jpg" alt="The BHĀRATA homepage: the subcontinent seen from above in 1050 CE with kingdoms inked in, the title, and a prompt to scroll" width="860" />
+<img src="docs/assets/globe.jpg" alt="The BHĀRATA homepage film: chapter one, the Rashtrakutas take the Deccan, over a relief map of the subcontinent in 771 CE" width="860" />
 
 <br />
 <br />
@@ -117,10 +117,10 @@ flowchart LR
 </tr>
 <tr>
 <td width="50%"><img src="docs/assets/kingdom.jpg" alt="The Vijayanagara kingdom page with a photo of the Virupaksha temple at Hampi" /><br /><sub><b>A kingdom page.</b> Rulers, places, events, neighbours, sources.</sub></td>
-<td width="50%"><img src="docs/assets/evidence.jpg" alt="An evidence page showing a stone inscription viewer and the English translation" /><br /><sub><b>Evidence.</b> A translation from <i>South Indian Inscriptions</i>, with the viewer above it.</sub></td>
+<td width="50%"><img src="docs/assets/evidence.jpg" alt="An evidence page: the inscription's title on a rose field, above the stone inscription viewer and its English translation" /><br /><sub><b>Evidence.</b> A translation from <i>South Indian Inscriptions</i>, with the viewer above it.</sub></td>
 </tr>
 <tr>
-<td colspan="2"><img src="docs/assets/chronology.jpg" alt="The chronology page with one coloured line per kingdom, diamonds for events, and a button to show the other 48 kingdoms" /><br /><sub><b>The chronology.</b> One line per kingdom (the seven with turning points first, the other 48 one click away), one diamond per turning point, battles listed under each period.</sub></td>
+<td colspan="2"><img src="docs/assets/chronology.jpg" alt="The timeline page: a cerulean field with the title and the outlines of three kingdoms, above the lanes of kingdoms and events" /><br /><sub><b>The chronology.</b> One line per kingdom (the seven with turning points first, the other 48 one click away), one diamond per turning point, battles listed under each period.</sub></td>
 </tr>
 </table>
 

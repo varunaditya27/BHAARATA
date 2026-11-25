@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import type { BrowserColumn } from "@/lib/database-browser";
+import { PageHero } from "@/components/primitives/PageHero";
 import {
   categoryLabels,
   tableDetails,
@@ -267,31 +268,22 @@ export function DataExplorer({
   };
 
   return (
+    <>
+      <PageHero
+        title="Browse the data"
+        intro="All 17 lists behind BHĀRATA, from kingdoms and rulers to map borders, places and images."
+        field="#0a8a5f"
+        tall={false}
+        size="lg"
+      >
+        <Link href="/connections" className="mt-6 inline-flex items-center gap-2 font-sans text-sm underline underline-offset-4">
+          See how the data connects <span className="tabular-nums">({connections.length} links)</span>
+        </Link>
+      </PageHero>
     <div className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8">
-      {/* Editorial Header + Visual Corpus Distribution */}
       <div className="border-b border-ink pb-8">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <h1 className="font-display text-4xl text-ink sm:text-5xl">
-              Browse all the data
-            </h1>
-            <p className="mt-3 max-w-2xl font-sans text-base leading-relaxed text-ink-muted">
-              Look through all 17 lists behind BHĀRATA, from kingdoms and rulers to map borders, places and images.
-            </p>
-          </div>
-          <Link
-            href="/connections"
-            className="inline-flex items-center gap-2 border border-ink bg-ink px-4 py-2.5 font-sans text-sm text-paper transition-colors hover:bg-paper hover:text-ink"
-          >
-            <span>See how the data connects</span>
-            <span className="border border-paper/30 px-1.5 py-0.5 text-xs tabular-nums">
-              {connections.length} links
-            </span>
-          </Link>
-        </div>
-
         {/* Metrics + Visual Proportion Bar */}
-        <div className="mt-7 grid gap-6 border-t border-border pt-6 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+        <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-end">
           <dl className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             <div className="border-l-2 border-territory-selected pl-3">
               <dt className="font-sans text-xs text-ink-muted">Total entries</dt>
@@ -1047,5 +1039,6 @@ export function DataExplorer({
         </div>
       )}
     </div>
+    </>
   );
 }

@@ -10,6 +10,7 @@ export function PageHero({
   field,
   ink = "#fff7e8",
   tall = true,
+  size = "xl",
   media,
   children,
 }: {
@@ -18,6 +19,8 @@ export function PageHero({
   field: string;
   ink?: string;
   tall?: boolean;
+  /** "lg" for long titles. */
+  size?: "xl" | "lg";
   media?: React.ReactNode;
   children?: React.ReactNode;
 }) {
@@ -28,7 +31,7 @@ export function PageHero({
         style={{ minHeight: tall ? "min(84vh, 52rem)" : "min(42vh, 24rem)" }}
       >
         <div className="relative z-10">
-          <RisingTitle text={title} className="text-[clamp(4.5rem,11.5vw,10.5rem)] leading-[0.86] tracking-[-0.035em]" />
+          <RisingTitle text={title} className={size === "xl" ? "text-[clamp(4.5rem,11.5vw,10.5rem)] leading-[0.86] tracking-[-0.035em]" : "text-[clamp(2.5rem,4.4vw,4.5rem)] leading-[0.96] tracking-[-0.025em]"} />
           <p className="mt-8 max-w-xl font-sans text-xl leading-relaxed">{intro}</p>
           {children}
         </div>

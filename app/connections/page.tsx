@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PageHero } from "@/components/primitives/PageHero";
 import { Connections } from "@/components/database/Connections";
 import {
   getAllTableColumns,
@@ -33,25 +34,19 @@ export default async function ConnectionsPage({
   }
 
   return (
-    <div className="mx-auto max-w-[1360px] px-4 py-12 sm:px-8">
-      <div className="border-b border-ink pb-8">
-        <div className="flex flex-wrap items-baseline justify-between gap-4">
-          <div>
-            <h1 className="font-display text-4xl text-ink sm:text-5xl">
-              How the data connects
-            </h1>
-          </div>
-          <Link
-            href="/data"
-            className="border border-ink bg-paper-raised px-4 py-2 font-sans text-sm text-ink transition-colors hover:bg-ink hover:text-paper"
-          >
-            Browse all lists
-          </Link>
-        </div>
-        <p className="mt-3 max-w-2xl font-sans text-base text-ink-muted">
-          Every kingdom, ruler, place, battle, and source is stored in 17 connected lists. Pick any list below to see what it connects to, what fields it holds, or how two lists link together.
-        </p>
-      </div>
+    <>
+      <PageHero
+        title="How the data connects"
+        intro="Every kingdom, ruler, place, battle and source is stored in 17 connected lists. Pick a list to see what it connects to, what it holds, or how two lists link together."
+        field="#c01a3c"
+        tall={false}
+        size="lg"
+      >
+        <Link href="/data" className="mt-6 inline-block font-sans text-sm underline underline-offset-4">
+          Browse all lists
+        </Link>
+      </PageHero>
+    <div className="mx-auto max-w-[1360px] px-4 py-10 sm:px-8">
 
       {links ? (
         <Connections
@@ -67,5 +62,6 @@ export default async function ConnectionsPage({
         </p>
       )}
     </div>
+    </>
   );
 }
