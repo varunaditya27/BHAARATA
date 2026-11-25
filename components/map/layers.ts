@@ -273,7 +273,7 @@ export function addHistoricalLayers(
     },
     paint: {
       "icon-color": ["get", "accentColor"],
-      "icon-halo-color": "#fff7e8",
+      "icon-halo-color": "#f2f7fc",
       "icon-halo-width": 1.2,
       "icon-opacity": ["get", "fade"],
     },
@@ -294,7 +294,7 @@ export function addHistoricalLayers(
       "circle-radius": 3,
       "circle-color": "#06242b",
       "circle-stroke-width": 1,
-      "circle-stroke-color": "#fff7e8",
+      "circle-stroke-color": "#f2f7fc",
     },
   });
   map.addLayer({
@@ -321,7 +321,7 @@ export function addHistoricalLayers(
       "text-justify": "auto",
       "text-font": ["Ranade Medium"],
     },
-    paint: { "text-color": "#06242b", "text-halo-color": "#fff7e8", "text-halo-width": 1.2 },
+    paint: { "text-color": "#06242b", "text-halo-color": "#f2f7fc", "text-halo-width": 1.2 },
   });
   // Battles: a ring and a name, shown from the battle's year for ten years
   // (the filter is set per year in apply-state.ts).
@@ -335,7 +335,7 @@ export function addHistoricalLayers(
       "circle-radius": ["interpolate", ["linear"], ["zoom"], 3, 4, 8, 8],
       "circle-color": "#e0245e",
       "circle-opacity": 0.85,
-      "circle-stroke-color": "#fff7e8",
+      "circle-stroke-color": "#f2f7fc",
       "circle-stroke-width": 1.5,
     },
   });
@@ -353,7 +353,7 @@ export function addHistoricalLayers(
       "text-font": ["Ranade Medium"],
       "text-optional": true,
     },
-    paint: { "text-color": "#e0245e", "text-halo-color": "#fff7e8", "text-halo-width": 1.4 },
+    paint: { "text-color": "#e0245e", "text-halo-color": "#f2f7fc", "text-halo-width": 1.4 },
   });
 
   // Monuments protected today (ASI), clustered. Loaded from a static file only
@@ -403,7 +403,7 @@ export function addHistoricalLayers(
     },
     paint: {
       "text-color": ["get", "labelColor"],
-      "text-halo-color": "rgba(255,247,232, 0.55)",
+      "text-halo-color": "rgba(242,247,252, 0.55)",
       "text-halo-width": 1.4,
       "text-halo-blur": 0.6,
       "text-opacity": ["coalesce", ["feature-state", "labelOpacity"], 0],
@@ -438,7 +438,7 @@ export function ensureMonuments(map: MapLibreMap) {
       "circle-color": "#0e4a55",
       "circle-opacity": 0.82,
       "circle-radius": ["step", ["get", "point_count"], 11, 25, 15, 100, 20, 400, 26],
-      "circle-stroke-color": "#fff7e8",
+      "circle-stroke-color": "#f2f7fc",
       "circle-stroke-width": 1.5,
     },
   });
@@ -448,7 +448,7 @@ export function ensureMonuments(map: MapLibreMap) {
     source: SOURCE_IDS.monuments,
     filter: ["has", "point_count"],
     layout: { "text-field": ["get", "point_count_abbreviated"], "text-size": 11, "text-font": ["Ranade Medium"], "text-allow-overlap": true },
-    paint: { "text-color": "#fff7e8" },
+    paint: { "text-color": "#f2f7fc" },
   });
   map.addLayer({
     id: LAYER_IDS.monumentPoints,
@@ -458,7 +458,7 @@ export function ensureMonuments(map: MapLibreMap) {
     paint: {
       "circle-radius": ["interpolate", ["linear"], ["zoom"], 6, 3, 10, 6],
       "circle-color": "#0e4a55",
-      "circle-stroke-color": "#fff7e8",
+      "circle-stroke-color": "#f2f7fc",
       "circle-stroke-width": 1.2,
     },
   });
@@ -485,7 +485,7 @@ export function ensureSites(map: MapLibreMap) {
     paint: {
       "circle-radius": ["interpolate", ["linear"], ["zoom"], 3.8, 3.2, 6, 4.8, 9, 7.5],
       "circle-color": ["match", ["get", "t"], ...Object.entries(SITE_COLORS).flat(), "#3b585e"] as never,
-      "circle-stroke-color": "#fff7e8",
+      "circle-stroke-color": "#f2f7fc",
       "circle-stroke-width": 1.5,
       "circle-opacity": 1,
     },
@@ -505,6 +505,6 @@ export function ensureSites(map: MapLibreMap) {
       "text-optional": true,
       "text-max-width": 8,
     },
-    paint: { "text-color": "#0e4a55", "text-halo-color": "#fff7e8", "text-halo-width": 1.3 },
+    paint: { "text-color": "#0e4a55", "text-halo-color": "#f2f7fc", "text-halo-width": 1.3 },
   });
 }

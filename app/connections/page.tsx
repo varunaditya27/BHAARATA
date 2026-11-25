@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageHero } from "@/components/primitives/PageHero";
+import { HERO } from "@/lib/hero";
 import { Connections } from "@/components/database/Connections";
 import {
   getAllTableColumns,
@@ -38,8 +39,7 @@ export default async function ConnectionsPage({
       <PageHero
         title="How the data connects"
         intro="Every kingdom, ruler, place, battle and source is stored in 17 connected lists. Pick a list to see what it connects to, what it holds, or how two lists link together."
-        field="#c01a3c"
-        tall={false}
+        hero={HERO.connections}
         size="lg"
       >
         <Link href="/data" className="mt-6 inline-block font-sans text-sm underline underline-offset-4">

@@ -2,10 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { KingdomBoard, type BoardTile, type TileSize } from "@/components/entity/KingdomBoard";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
+import { PageHero } from "@/components/primitives/PageHero";
 import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import type { AtlasData } from "@/lib/data/atlas-data";
 import { formatDateRange } from "@/lib/domain/time";
+import { HERO } from "@/lib/hero";
 import { getHistoricalState, PROTOTYPE_YEAR_RANGE } from "@/lib/geo/historical-state";
 import { polityPeakArea } from "@/lib/geo/silhouette";
 
@@ -106,19 +108,16 @@ export default async function PolitiesIndexPage() {
 
   return (
     <>
+      <PageHero
+        title="Kingdoms"
+        intro={`${polities.length} kingdoms, empires and sultanates, from ${min} to ${max} CE.`}
+        hero={HERO.kingdoms}
+      />
       <div data-dark-page className="bg-ink pt-2 sm:pt-3">
         <KingdomBoard
           min={min}
           max={max}
           tiles={tiles}
-          intro={
-            <>
-              <h1 className="font-display text-6xl leading-none text-paper sm:text-8xl">Kingdoms</h1>
-              <p className="mt-6 max-w-xl font-sans text-lg leading-snug text-paper sm:text-2xl">
-                {polities.length} kingdoms, empires and sultanates, from {min} to {max} CE.
-              </p>
-            </>
-          }
         />
       </div>
     </>

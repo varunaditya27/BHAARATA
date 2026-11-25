@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { HeroPhoto } from "@/components/primitives/HeroPhoto";
 import { Rule } from "@/components/primitives/Rule";
+import { HERO } from "@/lib/hero";
 import { InkName } from "@/components/entity/InkName";
 import { RisingTitle } from "@/components/entity/RisingTitle";
 import type { ImageKey } from "@/lib/domain/types";
@@ -72,7 +73,7 @@ export default async function PlacePage({ params }: PageProps<"/places/[slug]">)
     <>
       <div>
         {hero && (
-          <HeroPhoto credit={hero}>
+          <HeroPhoto credit={hero} tint={HERO.places.color}>
             <div className="flex h-full items-end">
               <div className="mx-auto w-full max-w-[960px] px-4 pb-10 sm:px-6">{header(true)}</div>
             </div>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Tilt } from "@/components/primitives/Tilt";
 import { PageHero } from "@/components/primitives/PageHero";
+import { HERO } from "@/lib/hero";
 import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
@@ -25,8 +26,7 @@ export default async function EvidenceIndexPage() {
             <PageHero
         title="Evidence"
         intro="Words carved in stone, and the books that translated them. Every claim can be followed back to its source."
-        field="#d6285a"
-        tall={false}
+        hero={HERO.evidence}
       />
       <div className="mx-auto max-w-[1200px] px-4 py-14 sm:px-6">
         <div className="grid gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-16">

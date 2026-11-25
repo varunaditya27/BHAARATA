@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Rule } from "@/components/primitives/Rule";
+import { HeroPhoto } from "@/components/primitives/HeroPhoto";
 import { Tilt } from "@/components/primitives/Tilt";
 import { InkName } from "@/components/entity/InkName";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
@@ -38,6 +39,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
   const reignStart = person.period.startYear;
   const reignEnd = person.period.endYear ?? reignStart;
   const portrait = person.imageKey ? images[person.imageKey as ImageKey] : undefined;
+  const heroPhoto = polity?.heroImageKey ? images[polity.heroImageKey as ImageKey] : undefined;
 
   // Events of this ruler's own kingdom that fall inside the reign.
   const reignEvents = events
@@ -53,32 +55,39 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
   const kingdomEnd = polity?.period.endYear ?? reignEnd;
   const pct = (y: number) => ((y - kingdomStart) / Math.max(1, kingdomEnd - kingdomStart)) * 100;
 
+  const heroBody = (
+    <div className="mx-auto grid w-full max-w-[1200px] items-end gap-10 px-6 pb-16 pt-24 lg:grid-cols-[minmax(0,1fr)_auto]">
+      <div className="min-w-0">
+        <p className="font-sans text-lg">{person.role}</p>
+        <RisingTitle text={person.name} className="mt-3 text-[clamp(3rem,6.6vw,6.75rem)] leading-[0.9] tracking-[-0.03em]" />
+        {person.nativeName && <InkName text={person.nativeName} lang={person.nativeLang} className="mt-4 text-3xl" />}
+        <p className="mt-6 font-display text-2xl">
+          {person.period.startQualifier === "unknown" ? formatDateRange(person.period) : person.datesAre === "reign" ? `Ruled ${formatDateRange(person.period)}` : formatPersonDates(person)}
+        </p>
+      </div>
+      {portrait ? (
+        <Tilt className="w-56 lg:w-80">
+          <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-full" />
+        </Tilt>
+      ) : (
+        polity && <KingdomEmblem polityId={polity.id} color="#f2f7fc" draw className="h-44 w-44 lg:h-60 lg:w-60" />
+      )}
+    </div>
+  );
+
   return (
     <>
       <div className="bh-accented" style={{ "--bh-accent": accent } as React.CSSProperties}>
         <div className="bh-reading-progress" aria-hidden />
-        <section style={{ backgroundColor: accent, color: "#fff7e8" }}>
-          <div
-            className="mx-auto grid max-w-[1200px] items-end gap-10 px-6 pb-14 pt-20 lg:grid-cols-[minmax(0,1fr)_auto]"
-            style={{ minHeight: "min(64vh, 36rem)" }}
-          >
-            <div className="min-w-0">
-              <p className="font-sans text-lg">{person.role}</p>
-              <RisingTitle text={person.name} className="mt-3 text-[clamp(3rem,6.6vw,6.75rem)] leading-[0.9] tracking-[-0.03em]" />
-              {person.nativeName && <InkName text={person.nativeName} lang={person.nativeLang} className="mt-4 text-3xl" />}
-              <p className="mt-6 font-display text-2xl">
-                {person.period.startQualifier === "unknown" ? formatDateRange(person.period) : person.datesAre === "reign" ? `Ruled ${formatDateRange(person.period)}` : formatPersonDates(person)}
-              </p>
-            </div>
-            {portrait ? (
-              <Tilt className="w-56 lg:w-80">
-                <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-full" />
-              </Tilt>
-            ) : (
-              polity && <KingdomEmblem polityId={polity.id} color="#fff7e8" draw className="h-44 w-44 lg:h-60 lg:w-60" />
-            )}
-          </div>
-        </section>
+        {heroPhoto ? (
+          <HeroPhoto credit={heroPhoto} tint={accent}>
+            <div className="flex h-full items-end text-[#f2f7fc]">{heroBody}</div>
+          </HeroPhoto>
+        ) : (
+          <section className="flex min-h-[calc(100dvh-4rem)] items-end text-[#f2f7fc]" style={{ backgroundColor: accent }}>
+            {heroBody}
+          </section>
+        )}
 
         <div className="mx-auto max-w-[960px] px-4 py-14 sm:px-6">
         {polity && personDateKnown && kingdomDatesKnown && (

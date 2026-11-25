@@ -78,7 +78,7 @@ export function MapLegend({
               className="mt-0.5 h-3 w-5 shrink-0 border border-paper/40"
               style={{
                 backgroundImage:
-                  "repeating-linear-gradient(135deg, rgba(255,247,232,0.55) 0 1px, transparent 1px 5px)",
+                  "repeating-linear-gradient(135deg, rgba(242,247,252,0.55) 0 1px, transparent 1px 5px)",
               }}
               aria-hidden
             />

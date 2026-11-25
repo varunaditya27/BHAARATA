@@ -288,7 +288,7 @@ export function StoryMap({
             source: STORY_FLIGHT_SOURCE,
             layout: { "line-cap": "round", "line-join": "round" },
             paint: {
-              "line-color": "#fff7e8",
+              "line-color": "#f2f7fc",
               "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.4, 6, 2.2],
               "line-dasharray": [2, 2.4],
               "line-opacity": 0.85,
@@ -325,7 +325,7 @@ export function StoryMap({
             source: STORY_BEACON_SOURCE,
             paint: {
               "circle-radius": 4.5,
-              "circle-color": "#fff7e8",
+              "circle-color": "#f2f7fc",
               "circle-stroke-color": "#c01a3c",
               "circle-stroke-width": 2,
               "circle-pitch-alignment": "map",
@@ -339,7 +339,7 @@ export function StoryMap({
         if (map.getLayer(id))
           map.setPaintProperty(id, prop as never, value as never);
       };
-      paint("background", "background-color", "#fdeec4");
+      paint("background", "background-color", "#eaf1f8");
       paint("water", "fill-color", "#0a7fa5");
       paint("waterway", "line-color", "#1fb6d6");
       paint(LAYER_IDS.hillshade, "hillshade-exaggeration", [

@@ -187,9 +187,9 @@ export function registerSealImages(map: MapLibreMap, data: AtlasData) {
     ctx.beginPath();
     ctx.arc(c, c, c - 6, 0, Math.PI * 2);
     ctx.lineWidth = 1.2;
-    ctx.strokeStyle = "rgba(255,247,232,0.85)";
+    ctx.strokeStyle = "rgba(242,247,252,0.85)";
     ctx.stroke();
-    ctx.fillStyle = "#fff7e8";
+    ctx.fillStyle = "#f2f7fc";
     ctx.fill(new Path2D(silhouettePath(geometry, size, 14)));
     const imageData = ctx.getImageData(0, 0, size, size);
     map.addImage(id, { width: size, height: size, data: imageData.data }, { pixelRatio: 2 });

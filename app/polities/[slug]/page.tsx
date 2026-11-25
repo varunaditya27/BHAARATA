@@ -316,7 +316,7 @@ export default async function PolityPage({ params }: PageProps<"/polities/[slug]
       <div className="bh-accented" style={{ "--bh-accent": polity.accentColor } as React.CSSProperties}>
         <div className="bh-reading-progress" aria-hidden />
         {hero ? (
-          <HeroPhoto credit={hero} heightClassName="h-[62vh] min-h-[420px]">
+          <HeroPhoto credit={hero} tint={polity.accentColor}>
             <div className="flex h-full items-end">
               <div className="mx-auto w-full max-w-[1100px] px-4 pb-10 sm:px-6">{title(true)}</div>
             </div>

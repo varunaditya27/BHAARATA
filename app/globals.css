@@ -8,19 +8,19 @@
 
 :root {
   /* base */
-  --bh-paper: #fff7e8;
-  --bh-paper-raised: #fffcf3;
+  --bh-paper: #f2f7fc;
+  --bh-paper-raised: #ffffff;
   --bh-ink: #06242b;
   --bh-ink-muted: #3b585e;
   --bh-ash: #4f7378;
-  --bh-stone: #f3e6c8;
-  --bh-border: #e6ce98;
+  --bh-stone: #dbe8f4;
+  --bh-border: #c2d6ea;
 
   /* geographic */
   --bh-water: #86d3ec;
   --bh-water-deep: #2fa8d5;
-  --bh-land: #fff7e8;
-  --bh-terrain: #f6e7c4;
+  --bh-land: #f2f7fc;
+  --bh-terrain: #e2ecf5;
 
   /* semantic */
   --bh-territory: #d42b12;
@@ -73,24 +73,9 @@ html {
 }
 
 body {
-  /* Paper, part 1: a fine grain multiplied onto the base colour. Inline
-   * SVG noise, rasterised once per small tile (its seams are too fine to see). */
   background-color: var(--background);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.36 0 0 0 0 0.3 0 0 0 0 0.22 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   color: var(--foreground);
   font-family: var(--font-ranade), system-ui, sans-serif;
-}
-
-/* Paper, part 2: a faint large-scale mottle. Stretched once across the
- * viewport on a fixed layer rather than tiled — tiled, its seams showed. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' preserveAspectRatio='none'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.00625' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.37 0 0 0 0 0.24 0 0 0 0.11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
-  background-size: 100% 100%;
 }
 
 /* In a layer so Tailwind utilities (border-transparent, border-ink…) can
@@ -138,7 +123,7 @@ body:has([data-dark-page]) > header,
 body:has([data-dark-page]) > footer {
   --bh-paper: #06242b;
   --bh-paper-raised: #0b3d46;
-  --bh-ink: #fff7e8;
+  --bh-ink: #f2f7fc;
   --bh-ink-muted: #bfe3e6;
   --bh-border: #1c5f6b;
   background-color: var(--bh-paper);
@@ -305,15 +290,12 @@ body:has([data-dark-page]) > footer {
 }
 
 /* ---------------------------------------------------------------------- */
-/* Map grain/vignette — a faint paper-grain texture + edge darkening over */
-/* the live map, generated from an inline SVG noise filter (no image      */
-/* download). Sits above the WebGL canvas as an ordinary absolutely-      */
-/* positioned div, so it costs nothing on the GPU/render side.            */
+/* ---------------------------------------------------------------------- */
+/* Map vignette: a soft darkening at the edges of the live map. Sits above */
+/* the WebGL canvas as an ordinary absolutely-positioned div.              */
 /* ---------------------------------------------------------------------- */
 .bh-map-grain {
-  background-image:
-    radial-gradient(ellipse at center, transparent 55%, rgba(6,36,43, 0.28) 100%),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
+  background-image: radial-gradient(ellipse at center, transparent 55%, rgba(6, 36, 43, 0.28) 100%);
   mix-blend-mode: multiply;
   opacity: 0.5;
 }
@@ -365,11 +347,11 @@ body:has([data-dark-page]) > footer {
 /* Section changes (header, footer, search): the incoming page opens as a circle from the click, carrying its own
  * colour field, while the outgoing page sinks back and darkens. */
 :root:active-view-transition-type(section)::view-transition-old(root) {
-  animation: 780ms cubic-bezier(0.65, 0, 0.35, 1) both bh-section-out;
+  animation: 420ms cubic-bezier(0.4, 0, 0.6, 1) both bh-section-out;
   mix-blend-mode: normal;
 }
 :root:active-view-transition-type(section)::view-transition-new(root) {
-  animation: 880ms cubic-bezier(0.7, 0, 0.2, 1) both bh-section-in;
+  animation: 560ms cubic-bezier(0.65, 0, 0.2, 1) both bh-section-in;
   mix-blend-mode: normal;
 }
 @keyframes bh-section-in {
@@ -377,16 +359,16 @@ body:has([data-dark-page]) > footer {
   to { clip-path: circle(150% at var(--bh-x, 50%) var(--bh-y, 0)); }
 }
 @keyframes bh-section-out {
-  to { transform: scale(0.94); filter: brightness(0.6) saturate(1.2); }
+  to { transform: scale(0.97); opacity: 0.55; }
 }
 
 /* Any other link: the page slides out to the left and the next one arrives from the right. */
 :root:active-view-transition-type(drill)::view-transition-old(root) {
-  animation: 260ms ease-in both bh-drill-out;
+  animation: 200ms ease-in both bh-drill-out;
   mix-blend-mode: normal;
 }
 :root:active-view-transition-type(drill)::view-transition-new(root) {
-  animation: 540ms cubic-bezier(0.22, 1, 0.36, 1) 60ms both bh-drill-in;
+  animation: 380ms cubic-bezier(0.22, 1, 0.36, 1) both bh-drill-in;
   mix-blend-mode: normal;
 }
 @keyframes bh-drill-out {

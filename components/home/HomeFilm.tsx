@@ -623,7 +623,7 @@ export function HomeFilm() {
                 className="h-1 w-6 transition-all duration-300"
                 style={{
                   backgroundColor:
-                    chapterIndex === -1 ? "#fff7e8" : "rgba(255,247,232,0.28)",
+                    chapterIndex === -1 ? "#f2f7fc" : "rgba(242,247,252,0.28)",
                 }}
               />
               <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-paper/60 group-hover:text-paper sm:inline">
@@ -652,7 +652,7 @@ export function HomeFilm() {
                         backgroundColor: isCurrent
                           ? (p?.accentColor ?? "#ff5a3c")
                           : isPassed
-                            ? "#fff7e8"
+                            ? "#f2f7fc"
                             : "transparent",
                       }}
                     />

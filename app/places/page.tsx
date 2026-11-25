@@ -1,19 +1,18 @@
 import Link from "next/link";
 import { PlacesAtlas, type PlaceGroup } from "@/components/entity/PlacesAtlas";
 import { PageHero } from "@/components/primitives/PageHero";
-import { PortraitStack } from "@/components/primitives/PortraitStack";
+import { HERO } from "@/lib/hero";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
 import { placeKindLabel } from "@/lib/domain/labels";
 import { AREA_ORDER, broadArea } from "@/lib/geo/areas";
 import { boundariesContaining, polityGeometry, projectTogether } from "@/lib/geo/silhouette";
-import type { ImageKey } from "@/lib/domain/types";
 
 export const metadata = { title: "Places — BHĀRATA" };
 
 export default async function PlacesIndexPage() {
   const data = await getAtlasData();
-  const { places, polities, images } = data;
+  const { places, polities } = data;
   const { getPolityById } = atlasAccess(data);
   const shaped = polities.flatMap((polity) => {
     const geometry = polityGeometry(polity.id, data);
@@ -71,14 +70,7 @@ export default async function PlacesIndexPage() {
             <PageHero
         title="Places"
         intro="Capitals, temples, forts and tombs, each set on the map and listed from north to south."
-        field="#d8281a"
-        media={
-          <PortraitStack
-            plates={["chola-brihadisvara", "vijayanagara-virupaksha", "place-khajuraho"].flatMap((k) =>
-              images[k as ImageKey] ? [{ src: images[k as ImageKey].file, alt: images[k as ImageKey].alt }] : [],
-            )}
-          />
-        }
+        hero={HERO.places}
       />
       <div className="mx-auto max-w-[1200px] px-4 py-14 sm:px-6">
         <div>

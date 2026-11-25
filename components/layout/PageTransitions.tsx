@@ -15,12 +15,11 @@ export function PageTransitions() {
   const router = useRouter();
   const pathname = usePathname();
 
-  // The new route is on screen: let the browser capture it.
+  // The new route is committed: let the browser capture it. This must not wait for an animation frame, because the
+  // browser pauses rendering while it waits for this very step.
   useEffect(() => {
-    if (!release) return;
-    const done = release;
+    release?.();
     release = null;
-    requestAnimationFrame(() => requestAnimationFrame(done));
   }, [pathname]);
 
   useEffect(() => {
@@ -46,7 +45,7 @@ export function PageTransitions() {
           new Promise<void>((resolve) => {
             release = resolve;
             router.push(url.pathname + url.search + url.hash);
-            window.setTimeout(resolve, 2500);
+            window.setTimeout(resolve, 1500);
           }),
         types: [type],
       });

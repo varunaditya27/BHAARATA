@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SearchFilters } from "@/components/search/SearchFilters";
 import { PageHero } from "@/components/primitives/PageHero";
+import { HERO } from "@/lib/hero";
 import { cn } from "@/lib/utils/cn";
 import { KINDS, PAGE_SIZE, getFacets, parseFilters, runSearch, toQuery, type Facets, type Filters, type Kind } from "@/lib/search/advanced";
 
@@ -47,9 +48,7 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
             <PageHero
         title="Search"
         intro="Rulers, kingdoms, places and events, narrowed by time, place and the way they connect."
-        field="#ffb000"
-        ink="#06242b"
-        tall={false}
+        hero={HERO.search}
       />
       <div className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6">
         <nav aria-label="What to search" className="flex flex-wrap gap-x-8 gap-y-2 border-b border-border">

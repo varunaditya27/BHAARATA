@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/primitives/Badge";
 import { PageHero } from "@/components/primitives/PageHero";
+import { HERO } from "@/lib/hero";
 import { Rule } from "@/components/primitives/Rule";
 import { ClaimThread } from "@/components/evidence/ClaimThread";
 import { EvidenceInvestigation } from "@/components/evidence/EvidenceInvestigation";
@@ -39,8 +40,7 @@ export default async function EvidencePage({ params }: PageProps<"/evidence/[slu
       <PageHero
         title={record.title}
         intro={`${record.evidenceType.charAt(0).toUpperCase() + record.evidenceType.slice(1)}, ${formatDateRange(record.period)}`}
-        field="#d6285a"
-        tall={false}
+        hero={HERO.evidence}
         size="lg"
       >
         <Link href="/evidence" className="mt-6 inline-block font-sans text-sm underline underline-offset-4">

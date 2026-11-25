@@ -412,7 +412,7 @@ export function Connections({
                     <path
                       d="M 32 0 L 0 0 0 32"
                       fill="none"
-                      stroke="rgba(255,247,232, 0.06)"
+                      stroke="rgba(242,247,252, 0.06)"
                       strokeWidth="1"
                     />
                   </pattern>
@@ -436,7 +436,7 @@ export function Connections({
                     markerHeight="6"
                     orient="auto-start-reverse"
                   >
-                    <path d="M 0 1 L 8 5 L 0 9 z" fill="#fff7e8" />
+                    <path d="M 0 1 L 8 5 L 0 9 z" fill="#f2f7fc" />
                   </marker>
                 </defs>
 
@@ -458,7 +458,7 @@ export function Connections({
                     key={col.label}
                     x={col.x}
                     y={28}
-                    fill="rgba(255,247,232, 0.55)"
+                    fill="rgba(242,247,252, 0.55)"
                     fontSize="10"
                     letterSpacing="1.6"
                     className="font-mono"
@@ -504,10 +504,10 @@ export function Connections({
                   }
 
                   const stroke = isTraced
-                    ? "#fff7e8"
+                    ? "#f2f7fc"
                     : isConnected
                       ? "#ff5a3c"
-                      : "rgba(255,247,232, 0.14)";
+                      : "rgba(242,247,252, 0.14)";
 
                   return (
                     <g
@@ -530,7 +530,7 @@ export function Connections({
                         <motion.path
                           d={d}
                           fill="none"
-                          stroke={isTraced ? "#ffbe0b" : "#fffcf3"}
+                          stroke={isTraced ? "#ffbe0b" : "#ffffff"}
                           strokeWidth={1.6}
                           strokeDasharray="5 9"
                           initial={{ strokeDashoffset: 0 }}
@@ -591,7 +591,7 @@ export function Connections({
                         rx="2"
                         fill={
                           isSelected
-                            ? "#fffcf3"
+                            ? "#ffffff"
                             : isTraced
                               ? "#0b3d46"
                               : isHovered || isNeighbor
@@ -604,8 +604,8 @@ export function Connections({
                             : isTraced
                               ? "#ffbe0b"
                               : isNeighbor
-                                ? "rgba(255,247,232, 0.5)"
-                                : "rgba(255,247,232, 0.2)"
+                                ? "rgba(242,247,252, 0.5)"
+                                : "rgba(242,247,252, 0.2)"
                         }
                         strokeWidth={isSelected || isTraced ? 2 : 1}
                       />
@@ -623,7 +623,7 @@ export function Connections({
                       <text
                         x="14"
                         y="21"
-                        fill={isSelected ? "#06242b" : "#fff7e8"}
+                        fill={isSelected ? "#06242b" : "#f2f7fc"}
                         fontSize="12"
                         fontWeight="600"
                         className="font-sans"
@@ -638,7 +638,7 @@ export function Connections({
                         fill={
                           isSelected
                             ? "rgba(6,36,43, 0.65)"
-                            : "rgba(255,247,232, 0.58)"
+                            : "rgba(242,247,252, 0.58)"
                         }
                         fontSize="10"
                         className="font-mono"
@@ -652,7 +652,7 @@ export function Connections({
                         fill={
                           isSelected
                             ? "#c01a3c"
-                            : "rgba(255,247,232, 0.8)"
+                            : "rgba(242,247,252, 0.8)"
                         }
                         fontSize="11"
                         className="font-mono"
@@ -669,7 +669,7 @@ export function Connections({
                         fill={
                           isSelected
                             ? "rgba(6,36,43, 0.12)"
-                            : "rgba(255,247,232, 0.1)"
+                            : "rgba(242,247,252, 0.1)"
                         }
                       />
                       <rect
@@ -700,7 +700,7 @@ export function Connections({
                     <path
                       d="M 32 0 L 0 0 0 32"
                       fill="none"
-                      stroke="rgba(255,247,232, 0.05)"
+                      stroke="rgba(242,247,252, 0.05)"
                       strokeWidth="1"
                     />
                   </pattern>
@@ -713,7 +713,7 @@ export function Connections({
                   cy={radialGraph.cy}
                   r={radialGraph.ringRadius}
                   fill="none"
-                  stroke="rgba(255,247,232, 0.18)"
+                  stroke="rgba(242,247,252, 0.18)"
                   strokeDasharray="4 6"
                 />
                 <circle
@@ -721,7 +721,7 @@ export function Connections({
                   cy={radialGraph.cy}
                   r={radialGraph.ringRadius * 0.52}
                   fill="none"
-                  stroke="rgba(255,247,232, 0.08)"
+                  stroke="rgba(242,247,252, 0.08)"
                 />
 
                 {/* Spokes + FK labels */}
@@ -746,7 +746,7 @@ export function Connections({
                           y1={radialGraph.cy}
                           x2={n.x}
                           y2={n.y}
-                          stroke="#fffcf3"
+                          stroke="#ffffff"
                           strokeWidth={1.3}
                           strokeDasharray="4 10"
                           initial={{ strokeDashoffset: 0 }}
@@ -767,13 +767,13 @@ export function Connections({
                         height="18"
                         rx="2"
                         fill="#052a31"
-                        stroke="rgba(255,247,232, 0.25)"
+                        stroke="rgba(242,247,252, 0.25)"
                       />
                       <text
                         x={midX}
                         y={midY + 3}
                         textAnchor="middle"
-                        fill="#fff7e8"
+                        fill="#f2f7fc"
                         fontSize="9"
                         className="font-mono"
                       >
@@ -801,14 +801,14 @@ export function Connections({
                         height="50"
                         rx="2"
                         fill="#06242b"
-                        stroke="rgba(255,247,232, 0.45)"
+                        stroke="rgba(242,247,252, 0.45)"
                         strokeWidth="1.2"
                       />
                       <rect x="0" y="0" width="4" height="50" fill={accent} />
                       <text
                         x="12"
                         y="20"
-                        fill="#fff7e8"
+                        fill="#f2f7fc"
                         fontSize="11.5"
                         fontWeight="600"
                         className="font-sans"
@@ -818,7 +818,7 @@ export function Connections({
                       <text
                         x="12"
                         y="36"
-                        fill="rgba(255,247,232, 0.65)"
+                        fill="rgba(242,247,252, 0.65)"
                         fontSize="9.5"
                         className="font-mono"
                       >
@@ -837,7 +837,7 @@ export function Connections({
                     width="204"
                     height="64"
                     rx="2"
-                    fill="#fffcf3"
+                    fill="#ffffff"
                     stroke="#ff5a3c"
                     strokeWidth="2.5"
                   />

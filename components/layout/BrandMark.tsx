@@ -64,7 +64,7 @@ export function BrandMark({ size = 24, className, ...props }: BrandMarkProps) {
         strokeWidth="1.1"
       />
       {/* Central pinpoint */}
-      <circle cx="16" cy="16" r="1.75" fill="#fffcf3" />
+      <circle cx="16" cy="16" r="1.75" fill="#ffffff" />
     </svg>
   );
 }

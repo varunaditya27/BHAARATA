@@ -2,18 +2,19 @@ import Image from "next/image";
 import type { ImageCredit } from "@/lib/domain/types";
 
 /**
- * Full-bleed hero treatment: darkened photo, gradient for text legibility,
- * credit tucked in the corner rather than a caption line (which would
- * break the cinematic effect this is for).
+ * Full-bleed hero treatment: the photo fills the screen below the header, graded in the record's own colour, with a
+ * gradient for text legibility and the credit tucked in the corner rather than a caption line (which would break
+ * the cinematic effect this is for).
  */
 export function HeroPhoto({
   credit,
   children,
-  heightClassName = "h-[46vh] min-h-[320px]",
+  tint,
 }: {
   credit: ImageCredit;
   children: React.ReactNode;
-  heightClassName?: string;
+  /** The colour the photograph is graded in. */
+  tint: string;
 }) {
   const photo = (
     <div className="bh-kenburns absolute inset-0 overflow-hidden">
@@ -24,16 +25,18 @@ export function HeroPhoto({
           fill
           priority
           sizes="100vw"
-          className="object-cover brightness-[0.55]"
+          className="object-cover"
         />
       </div>
+      <div className="absolute inset-0" style={{ backgroundColor: tint, opacity: 0.8, mixBlendMode: "multiply" }} aria-hidden />
+      <div className="absolute inset-0" style={{ backgroundColor: tint, opacity: 0.3 }} aria-hidden />
     </div>
   );
 
   return (
-    <div className={`relative w-full overflow-hidden ${heightClassName}`}>
+    <div className="relative min-h-[calc(100dvh-4rem)] w-full overflow-hidden">
       {photo}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/15 to-transparent">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent">
         {children}
       </div>
       <a

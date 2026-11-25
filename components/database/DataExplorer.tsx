@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import type { BrowserColumn } from "@/lib/database-browser";
 import { PageHero } from "@/components/primitives/PageHero";
+import { HERO } from "@/lib/hero";
 import {
   categoryLabels,
   tableDetails,
@@ -156,23 +157,23 @@ function CoordinateLocator({ lon, lat, label }: { lon: number; lat: number; labe
       <svg viewBox="0 0 280 140" className="w-full" role="img" aria-label={`Coordinates ${lat.toFixed(2)}N, ${lon.toFixed(2)}E`}>
         {/* Graticule grid */}
         {[35, 70, 105].map((gy) => (
-          <line key={gy} x1="0" y1={gy} x2="280" y2={gy} stroke="#fffcf3" strokeOpacity="0.1" strokeWidth="0.7" />
+          <line key={gy} x1="0" y1={gy} x2="280" y2={gy} stroke="#ffffff" strokeOpacity="0.1" strokeWidth="0.7" />
         ))}
         {[56, 112, 168, 224].map((gx) => (
-          <line key={gx} x1={gx} y1="0" x2={gx} y2="140" stroke="#fffcf3" strokeOpacity="0.1" strokeWidth="0.7" />
+          <line key={gx} x1={gx} y1="0" x2={gx} y2="140" stroke="#ffffff" strokeOpacity="0.1" strokeWidth="0.7" />
         ))}
         {/* Crosshair lines */}
         <line x1={x} y1="0" x2={x} y2="140" stroke="#ffb000" strokeOpacity="0.45" strokeDasharray="3 3" />
         <line x1="0" y1={y} x2="280" y2={y} stroke="#ffb000" strokeOpacity="0.45" strokeDasharray="3 3" />
         {/* Target pulse */}
         <circle cx={x} cy={y} r="10" fill="#d42b12" fillOpacity="0.28" />
-        <circle cx={x} cy={y} r="4" fill="#d42b12" stroke="#fffcf3" strokeWidth="1.2" />
+        <circle cx={x} cy={y} r="4" fill="#d42b12" stroke="#ffffff" strokeWidth="1.2" />
         <text
           x={x > 180 ? x - 10 : x + 10}
           y={y - 6 < 16 ? y + 12 : y - 6}
           textAnchor={x > 180 ? "end" : "start"}
           fontSize="9.5"
-          fill="#fffcf3"
+          fill="#ffffff"
         >
           {label.slice(0, 26)}
         </text>
@@ -272,8 +273,7 @@ export function DataExplorer({
       <PageHero
         title="Browse the data"
         intro="All 17 lists behind BHĀRATA, from kingdoms and rulers to map borders, places and images."
-        field="#0a8a5f"
-        tall={false}
+        hero={HERO.data}
         size="lg"
       >
         <Link href="/connections" className="mt-6 inline-flex items-center gap-2 font-sans text-sm underline underline-offset-4">

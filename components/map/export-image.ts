@@ -17,7 +17,7 @@ export function captureMapCanvas(map: MapLibreMap): Promise<HTMLCanvasElement> {
   });
 }
 
-const PAPER = "#fff7e8";
+const PAPER = "#f2f7fc";
 const INK = "#06242b";
 const MUTED = "#3b585e";
 

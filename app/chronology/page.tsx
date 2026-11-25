@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Badge } from "@/components/primitives/Badge";
-import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { PageHero } from "@/components/primitives/PageHero";
+import { HERO } from "@/lib/hero";
 import { Rule } from "@/components/primitives/Rule";
 import { KingdomLanes } from "@/components/chronology/KingdomLanes";
 import { getAtlasData } from "@/lib/data/atlas-server";
@@ -14,9 +14,7 @@ export const metadata = {
 };
 
 export default async function ChronologyPage() {
-  const data = await getAtlasData();
-  const { polities } = data;
-  const { battles, getPolityById, milestones } = atlasAccess(data);
+  const { battles, getPolityById, milestones } = atlasAccess(await getAtlasData());
   const undated = [...milestones, ...battles].filter(e => e.period.startQualifier === "unknown");
   const byYear = (a: { period: { startYear: number } }, b: { period: { startYear: number } }) => a.period.startYear - b.period.startYear;
   const inEra = (era: { start: number; end: number }) => (e: { period: { startYear: number; startQualifier: string } }) =>
@@ -32,19 +30,7 @@ export default async function ChronologyPage() {
       <PageHero
         title="Timeline"
         intro="Every turning point and battle in the atlas, in order. Each line is a kingdom, and each diamond a turning point you can open."
-        field="#0f6fd0"
-        media={
-          <div className="bh-stagger flex items-end justify-between gap-3">
-            {["chola", "vijayanagara", "mughal"].map((id, i) => {
-              const polity = polities.find((p) => p.id === id);
-              return polity ? (
-                <div key={id} className="bh-float" style={{ "--i": i + 1, "--bh-float": `${-40 - i * 30}px` } as unknown as React.CSSProperties}>
-                  <KingdomEmblem polityId={id} color="#fff7e8" className="h-52 w-52" />
-                </div>
-              ) : null;
-            })}
-          </div>
-        }
+        hero={HERO.timeline}
       />
       <div className="mx-auto max-w-[1100px] px-4 py-14 sm:px-6">
         <div className="mb-3">

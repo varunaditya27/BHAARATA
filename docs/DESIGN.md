@@ -83,6 +83,8 @@ A narrow palette taken from the pigments of Indian miniature painting: ivory pap
 | `--bh-evidence` | ![#2a33d4](https://img.shields.io/badge/%20%20%20%20%20-2a33d4?style=flat-square) `#2a33d4` | Evidence accents |
 | `--bh-uncertainty` | ![#ffb000](https://img.shields.io/badge/%20%20%20%20%20-ffb000?style=flat-square) `#ffb000` | "Placeholder" badges, uncertainty dots |
 
+**Each page has its own colour.** Every page except the landing page and the atlas opens on a hero that fills the screen below the header: a photograph graded in that page's colour, the title set very large, and a strip of every kingdom's colour along the foot. People is royal blue, Places green, Evidence red, Timeline teal, Search orange, Kingdoms amber, Browse data rose and Connections azure. Kingdom, ruler and place pages are graded in the record's own colour. Colours and photograph credits live in `lib/hero.ts`.
+
 **Each kingdom has one pigment.** The eleven hand-written kingdoms have chosen colours; the rest get a colour derived from their id (`accent()` in `import-cliopatria.py`) at fixed lightness and saturation, so they sit comfortably together. On a kingdom's page the pigment becomes `--bh-accent`, which tints text selection, rules, the drop cap and the reading-progress line.
 
 **Colour never carries meaning alone.** Selection is also shown by a thicker outline and a card; uncertainty is also shown by a hatched or dashed edge and words.
@@ -145,7 +147,7 @@ The map should look **printed**, not like a web map with the colours changed.
 
 | Element | Treatment |
 |---|---|
-| Land | Warm parchment (light atlas) or deeper sand (the homepage globe) |
+| Land | Pale cool grey-blue on the light atlas, deeper tones on the homepage globe |
 | Sea | Muted blue-green on the atlas; deep teal on the globe |
 | Relief | Hillshade with a warm brown shadow and a paper highlight, so mountains read as engraving |
 | Modern borders and country names | **Removed on purpose**, so today's lines do not look like they existed then |
