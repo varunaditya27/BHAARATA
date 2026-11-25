@@ -1,19 +1,21 @@
 import Link from "next/link";
 import { PlacesAtlas, type PlaceGroup } from "@/components/entity/PlacesAtlas";
-import { Aurora } from "@/components/primitives/Aurora";
+import { PageHero } from "@/components/primitives/PageHero";
 import { PageTransition } from "@/components/primitives/PageTransition";
+import { PortraitStack } from "@/components/primitives/PortraitStack";
 import { getAtlasData } from "@/lib/data/atlas-server";
 import { atlasAccess } from "@/lib/data/atlas-data";
 import { placeKindLabel } from "@/lib/domain/labels";
 import { AREA_ORDER, broadArea } from "@/lib/geo/areas";
 import { boundariesContaining, polityGeometry, projectTogether } from "@/lib/geo/silhouette";
+import type { ImageKey } from "@/lib/domain/types";
 import { NAV_FORWARD } from "@/lib/utils/view-transition";
 
 export const metadata = { title: "Places — BHĀRATA" };
 
 export default async function PlacesIndexPage() {
   const data = await getAtlasData();
-  const { places, polities } = data;
+  const { places, polities, images } = data;
   const { getPolityById } = atlasAccess(data);
   const land = polities.map((p) => polityGeometry(p.id, data)).filter((g) => g !== undefined);
   const projected = projectTogether(land, places.map((p) => p.coordinates), 100, 2);
@@ -55,16 +57,20 @@ export default async function PlacesIndexPage() {
 
   return (
     <PageTransition>
-      <div className="relative">
-        <Aurora />
-      <div className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6">
-        <h1 className="bh-gradient-ink font-display text-5xl">Places</h1>
-        <span className="bh-title-rule" aria-hidden />
-        <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
-          Capitals, ports, towns and monuments on the map, listed from north to south.
-        </p>
-
-        <div className="mt-12">
+            <PageHero
+        title="Places"
+        intro="Capitals, temples, forts and tombs, each set on the map and listed from north to south."
+        field="#b3123f"
+        media={
+          <PortraitStack
+            plates={["chola-brihadisvara", "vijayanagara-virupaksha", "place-khajuraho"].flatMap((k) =>
+              images[k as ImageKey] ? [{ src: images[k as ImageKey].file, alt: images[k as ImageKey].alt }] : [],
+            )}
+          />
+        }
+      />
+      <div className="mx-auto max-w-[1200px] px-4 py-14 sm:px-6">
+        <div>
           <PlacesAtlas
             land={projected.paths}
             dots={places.map((p, i) => ({ id: p.id, name: p.name, x: projected.points[i][0], y: projected.points[i][1] }))}
@@ -72,7 +78,6 @@ export default async function PlacesIndexPage() {
           />
         </div>
       </div>
-    </div>
     </PageTransition>
   );
 }

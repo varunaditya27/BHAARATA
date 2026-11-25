@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Badge } from "@/components/primitives/Badge";
-import { Aurora } from "@/components/primitives/Aurora";
+import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
+import { PageHero } from "@/components/primitives/PageHero";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
 import { KingdomLanes } from "@/components/chronology/KingdomLanes";
@@ -15,7 +16,9 @@ export const metadata = {
 };
 
 export default async function ChronologyPage() {
-  const { battles, getPolityById, milestones } = atlasAccess(await getAtlasData());
+  const data = await getAtlasData();
+  const { polities } = data;
+  const { battles, getPolityById, milestones } = atlasAccess(data);
   const undated = [...milestones, ...battles].filter(e => e.period.startQualifier === "unknown");
   const byYear = (a: { period: { startYear: number } }, b: { period: { startYear: number } }) => a.period.startYear - b.period.startYear;
   const inEra = (era: { start: number; end: number }) => (e: { period: { startYear: number; startQualifier: string } }) =>
@@ -28,21 +31,29 @@ export default async function ChronologyPage() {
 
   return (
     <PageTransition>
-      <div className="relative">
-        <Aurora />
-      <div className="mx-auto max-w-[1100px] px-4 py-16 sm:px-6">
-        <h1 className="bh-gradient-ink font-display text-5xl">Timeline</h1>
-        <span className="bh-title-rule" aria-hidden />
-        <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
-          Every turning point and battle in the atlas, in order. Each coloured line shows how long a kingdom lasted, and each diamond marks a turning point. Click a diamond
-          to jump to it below. Under each period you&rsquo;ll also find its battles. &ldquo;c.&rdquo; in front of a date
-          means &ldquo;about&rdquo;.
-        </p>
-        <div className="mt-3">
+      <PageHero
+        title="Timeline"
+        intro="Every turning point and battle in the atlas, in order. Each line is a kingdom, and each diamond a turning point you can open."
+        field="#0f6d63"
+        media={
+          <div className="bh-stagger flex items-end justify-between gap-3">
+            {["chola", "vijayanagara", "mughal"].map((id, i) => {
+              const polity = polities.find((p) => p.id === id);
+              return polity ? (
+                <div key={id} className="bh-float" style={{ "--i": i + 1, "--bh-float": `${-40 - i * 30}px` } as unknown as React.CSSProperties}>
+                  <KingdomEmblem polityId={id} color="#fff4dc" className="h-52 w-52" />
+                </div>
+              ) : null;
+            })}
+          </div>
+        }
+      />
+      <div className="mx-auto max-w-[1100px] px-4 py-14 sm:px-6">
+        <div className="mb-3">
           <Badge tone="neutral">Battles from Wikidata and Wikipedia. Turning points written here and checked against Wikipedia.</Badge>
         </div>
 
-        <div className="mt-10">
+        <div>
           <KingdomLanes />
         </div>
 
@@ -140,7 +151,6 @@ export default async function ChronologyPage() {
           </section>}
         </div>
       </div>
-    </div>
     </PageTransition>
   );
 }

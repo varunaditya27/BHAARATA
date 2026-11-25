@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { SearchFilters } from "@/components/search/SearchFilters";
-import { Aurora } from "@/components/primitives/Aurora";
+import { PageHero } from "@/components/primitives/PageHero";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { cn } from "@/lib/utils/cn";
 import { KINDS, PAGE_SIZE, getFacets, parseFilters, runSearch, toQuery, type Facets, type Filters, type Kind } from "@/lib/search/advanced";
@@ -46,13 +46,15 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
 
   return (
     <PageTransition>
-      <div className="relative">
-        <Aurora />
-      <div className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6">
-        <h1 className="bh-gradient-ink font-display text-5xl">Search</h1>
-        <span className="bh-title-rule" aria-hidden />
-
-        <nav aria-label="What to search" className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-b border-border">
+            <PageHero
+        title="Search"
+        intro="Rulers, kingdoms, places and events, narrowed by time, place and the way they connect."
+        field="#ffb020"
+        ink="#1a1240"
+        tall={false}
+      />
+      <div className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6">
+        <nav aria-label="What to search" className="flex flex-wrap gap-x-8 gap-y-2 border-b border-border">
           {KINDS.map((k) => (
             <Link
               key={k}
@@ -154,7 +156,6 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
           </section>
         </div>
       </div>
-    </div>
     </PageTransition>
   );
 }

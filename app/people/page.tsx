@@ -2,8 +2,9 @@ import Link from "next/link";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { PeopleDirectory, type DirectoryGroup } from "@/components/entity/PeopleDirectory";
 import { RulerPortrait } from "@/components/entity/RulerPortrait";
-import { Aurora } from "@/components/primitives/Aurora";
+import { PageHero } from "@/components/primitives/PageHero";
 import { PageTransition } from "@/components/primitives/PageTransition";
+import { PortraitStack } from "@/components/primitives/PortraitStack";
 import { Shared } from "@/components/primitives/Shared";
 import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
@@ -28,18 +29,22 @@ export default async function PeopleIndexPage() {
       id: polity.slug,
       name: polity.name,
       heading: (
-        <div key={polity.slug} className="bh-reveal flex items-center gap-4 border-b border-ink/70 pb-3">
-          <KingdomEmblem polityId={polity.id} color={polity.accentColor} className="h-11 w-11" />
+        <div
+          key={polity.slug}
+          className="bh-reveal relative mt-4 flex items-end justify-between overflow-hidden px-6 py-7 sm:px-8"
+          style={{ backgroundColor: polity.accentColor, color: "#fff4dc" }}
+        >
           <div className="min-w-0">
-            <h2 id={`${polity.slug}-name`} className="font-display text-2xl text-ink">
-              <Link href={`/polities/${polity.slug}`} transitionTypes={NAV_FORWARD} className="hover:text-territory-selected">
+            <h2 id={`${polity.slug}-name`} className="font-display text-[clamp(2.4rem,5vw,4rem)] leading-[0.95] tracking-[-0.02em]">
+              <Link href={`/polities/${polity.slug}`} transitionTypes={NAV_FORWARD} className="hover:underline hover:decoration-2 hover:underline-offset-8">
                 {polity.name}
               </Link>
             </h2>
-            <p className="font-sans text-sm text-ink-muted">
+            <p className="mt-3 font-sans text-base">
               {formatDateRange(polity.period)}, {rulers.length} {rulers.length === 1 ? "ruler" : "rulers"}
             </p>
           </div>
+          <KingdomEmblem polityId={polity.id} color="#fff4dc" className="-mb-4 -mr-2 h-32 w-32 shrink-0 sm:h-40 sm:w-40" />
         </div>
       ),
       rulers: rulers.map((person) => ({
@@ -66,24 +71,26 @@ export default async function PeopleIndexPage() {
 
   return (
     <PageTransition>
-      <div className="relative">
-        <Aurora />
-      <div className="mx-auto max-w-[1000px] px-4 py-16 sm:px-6">
-        <h1 className="bh-gradient-ink font-display text-5xl">People</h1>
-        <span className="bh-title-rule" aria-hidden />
-        <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
-          People in the atlas, grouped by kingdom and sorted by their recorded dates. Some dates describe a lifetime rather than a reign.
+      <PageHero
+        title="People"
+        intro="Every ruler in the atlas, grouped by kingdom and in the order they ruled."
+        field="#1a1240"
+        media={
+          <PortraitStack
+            plates={["ruler-razia-sultana", "ruler-shah-jahan", "ruler-babur"].flatMap((k) =>
+              images[k as ImageKey] ? [{ src: images[k as ImageKey].file, alt: images[k as ImageKey].alt }] : [],
+            )}
+          />
+        }
+      />
+      <div className="mx-auto max-w-[1100px] px-4 py-14 sm:px-6">
+        <p className="max-w-prose font-sans text-sm text-ink-muted">
+          Names and dates come from Wikipedia&rsquo;s lists of rulers and from Wikidata. &ldquo;c.&rdquo; before a year means about; some dates describe a lifetime rather than a reign.
         </p>
-        <p className="mt-3 max-w-prose font-sans text-sm text-ink-muted">
-          Most names and dates come from Wikipedia&rsquo;s lists of rulers and from Wikidata, Wikipedia&rsquo;s open
-          database. A few were written here and checked against Wikipedia. &ldquo;c.&rdquo; before a year means about.
-        </p>
-
-        <div className="mt-10">
+        <div className="mt-8">
           <PeopleDirectory groups={groups} />
         </div>
       </div>
-    </div>
     </PageTransition>
   );
 }

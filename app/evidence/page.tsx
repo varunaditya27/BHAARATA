@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Aurora } from "@/components/primitives/Aurora";
 import { Tilt } from "@/components/primitives/Tilt";
+import { PageHero } from "@/components/primitives/PageHero";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import type { ImageKey } from "@/lib/domain/types";
 import { getAtlasData } from "@/lib/data/atlas-server";
@@ -24,16 +24,14 @@ export default async function EvidenceIndexPage() {
 
   return (
     <PageTransition>
-      <div className="relative">
-        <Aurora />
-      <div className="mx-auto max-w-[1200px] px-4 py-16 sm:px-6">
-        <h1 className="bh-gradient-ink font-display text-5xl">Evidence</h1>
-        <span className="bh-title-rule" aria-hidden />
-        <p className="mt-4 max-w-prose font-sans text-lg text-ink-muted">
-          Objects can help us learn about the past. Here you can explore words carved in stone and the books where they were translated.
-        </p>
-
-        <div className="mt-12 grid gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-16">
+            <PageHero
+        title="Evidence"
+        intro="Words carved in stone, and the books that translated them. Every claim can be followed back to its source."
+        field="#2347d6"
+        tall={false}
+      />
+      <div className="mx-auto max-w-[1200px] px-4 py-14 sm:px-6">
+        <div className="grid gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-16">
           {photo && (
             <figure className="md:sticky md:top-24 md:self-start">
               <Tilt className="shadow-[0_30px_60px_-28px_rgba(26,18,64,0.55)]">
@@ -79,7 +77,6 @@ export default async function EvidenceIndexPage() {
           </div>
         </div>
       </div>
-    </div>
     </PageTransition>
   );
 }

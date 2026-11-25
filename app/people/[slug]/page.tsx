@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Eyebrow } from "@/components/primitives/Eyebrow";
 import { PageTransition } from "@/components/primitives/PageTransition";
 import { Rule } from "@/components/primitives/Rule";
 import { Shared } from "@/components/primitives/Shared";
+import { Tilt } from "@/components/primitives/Tilt";
 import { InkName } from "@/components/entity/InkName";
 import { KingdomEmblem } from "@/components/entity/KingdomEmblem";
 import { RisingTitle } from "@/components/entity/RisingTitle";
@@ -58,32 +58,34 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
 
   return (
     <PageTransition>
-      <div
-        className="bh-accented mx-auto max-w-[960px] px-4 py-14 sm:px-6"
-        style={{ "--bh-accent": accent } as React.CSSProperties}
-      >
+      <div className="bh-accented" style={{ "--bh-accent": accent } as React.CSSProperties}>
         <div className="bh-reading-progress" aria-hidden />
-        <div className="grid items-end gap-6 sm:grid-cols-[auto_1fr] sm:gap-10">
-          {portrait ? (
-            <div className="w-40 sm:w-56">
-              <Shared name={transitionNames.personPortrait(person.slug)}>
-                <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-full" />
-              </Shared>
+        <section style={{ backgroundColor: accent, color: "#fff4dc" }}>
+          <div
+            className="mx-auto grid max-w-[1200px] items-end gap-10 px-6 pb-14 pt-20 lg:grid-cols-[minmax(0,1fr)_auto]"
+            style={{ minHeight: "min(64vh, 36rem)" }}
+          >
+            <div className="min-w-0">
+              <p className="font-sans text-lg">{person.role}</p>
+              <RisingTitle text={person.name} className="mt-3 text-[clamp(3rem,6.6vw,6.75rem)] leading-[0.9] tracking-[-0.03em]" />
+              {person.nativeName && <InkName text={person.nativeName} lang={person.nativeLang} className="mt-4 text-3xl" />}
+              <p className="mt-6 font-display text-2xl">
+                {person.period.startQualifier === "unknown" ? formatDateRange(person.period) : person.datesAre === "reign" ? `Ruled ${formatDateRange(person.period)}` : formatPersonDates(person)}
+              </p>
             </div>
-          ) : (
-            polity && <KingdomEmblem polityId={polity.id} color={accent} draw className="h-20 w-20 sm:h-28 sm:w-28" />
-          )}
-
-          <div>
-            <Eyebrow>{person.role}</Eyebrow>
-            <RisingTitle text={person.name} className="mt-2 text-5xl text-ink sm:text-6xl" />
-            {person.nativeName && <InkName text={person.nativeName} lang={person.nativeLang} className="mt-2 text-2xl text-ink-muted" />}
-            <p className="mt-4 font-display text-xl text-ink">
-              {person.period.startQualifier === "unknown" ? formatDateRange(person.period) : person.datesAre === "reign" ? `Ruled ${formatDateRange(person.period)}` : formatPersonDates(person)}
-            </p>
+            {portrait ? (
+              <Tilt className="w-56 lg:w-80">
+                <Shared name={transitionNames.personPortrait(person.slug)}>
+                  <RulerPortrait imageKey={person.imageKey} name={person.name} className="w-full" />
+                </Shared>
+              </Tilt>
+            ) : (
+              polity && <KingdomEmblem polityId={polity.id} color="#fff4dc" draw className="h-44 w-44 lg:h-60 lg:w-60" />
+            )}
           </div>
-        </div>
+        </section>
 
+        <div className="mx-auto max-w-[960px] px-4 py-14 sm:px-6">
         {polity && personDateKnown && kingdomDatesKnown && (
           <section className="mt-12">
             <h2 className="font-sans text-sm font-medium text-ink-muted">
@@ -165,6 +167,7 @@ export default async function PersonPage({ params }: PageProps<"/people/[slug]">
             </section>
           </aside>
         </div>
+      </div>
       </div>
     </PageTransition>
   );
