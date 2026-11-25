@@ -8,6 +8,7 @@ export const metadata = {
 export default function AtlasPage() {
   return (
     <>
+      <h1 className="sr-only">Atlas</h1>
     <Suspense fallback={<div className="h-[calc(100dvh-4rem)] bg-paper" />}>
       <AtlasView />
     </Suspense>

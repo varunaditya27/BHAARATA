@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CleanForm } from "@/components/search/CleanForm";
 import type { Facets, Filters } from "@/lib/search/advanced";
 
 const field =
@@ -77,7 +78,7 @@ export function SearchFilters({ f, facets }: { f: Filters; facets: Facets }) {
   const events = f.kind === "events";
 
   return (
-    <form action="/search" method="get" className="font-sans">
+    <CleanForm action="/search" method="get" className="font-sans">
       <input type="hidden" name="kind" value={f.kind} />
 
       <label className={label} htmlFor="q">
@@ -228,6 +229,6 @@ export function SearchFilters({ f, facets }: { f: Filters; facets: Facets }) {
           Clear all
         </Link>
       </div>
-    </form>
+    </CleanForm>
   );
 }
