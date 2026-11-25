@@ -17,8 +17,22 @@ export default async function PlacesIndexPage() {
   const data = await getAtlasData();
   const { places, polities, images } = data;
   const { getPolityById } = atlasAccess(data);
-  const land = polities.map((p) => polityGeometry(p.id, data)).filter((g) => g !== undefined);
-  const projected = projectTogether(land, places.map((p) => p.coordinates), 100, 2);
+  const shaped = polities.flatMap((polity) => {
+    const geometry = polityGeometry(polity.id, data);
+    return geometry ? [{ polity, geometry }] : [];
+  });
+  const projected = projectTogether(shaped.map((s) => s.geometry), places.map((p) => p.coordinates), 100, 2);
+  // Large empires go underneath and small kingdoms on top, so every kingdom stays a clean patch of its own colour.
+  const extent = (d: string) => {
+    const n = (d.match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number);
+    const xs = n.filter((_, i) => i % 2 === 0);
+    const ys = n.filter((_, i) => i % 2 === 1);
+    return (Math.max(...xs) - Math.min(...xs)) * (Math.max(...ys) - Math.min(...ys));
+  };
+  const land = projected.paths
+    .map((d, i) => ({ d, color: shaped[i].polity.accentColor, area: extent(d) }))
+    .sort((a, b) => b.area - a.area)
+    .map(({ d, color }) => ({ d, color }));
 
   const heldBy = (coordinates: [number, number]) =>
     [...new Set(boundariesContaining(coordinates, data).map((b) => b.polityId))]
@@ -72,8 +86,15 @@ export default async function PlacesIndexPage() {
       <div className="mx-auto max-w-[1200px] px-4 py-14 sm:px-6">
         <div>
           <PlacesAtlas
-            land={projected.paths}
-            dots={places.map((p, i) => ({ id: p.id, name: p.name, x: projected.points[i][0], y: projected.points[i][1] }))}
+            land={land}
+            dots={places.map((p, i) => ({
+              id: p.id,
+              name: p.name,
+              x: projected.points[i][0],
+              y: projected.points[i][1],
+              color: polities.find((k) => k.capitals.some((c) => p.name.startsWith(c)))?.accentColor ?? "var(--bh-ink)",
+              href: `/places/${p.slug}`,
+            }))}
             groups={groups}
           />
         </div>
