@@ -287,6 +287,8 @@ flowchart TB
 | `components/primitives` has no app knowledge | They stay reusable and easy to restyle |
 | Historical geometry is data, never JSX or hand-drawn SVG paths | Borders must be checkable and replaceable |
 | `components/map` is the only code that touches MapLibre | Keeps the map lifecycle in one place |
+| The search page builds every query in `lib/search/advanced.ts` and passes each value as a bound parameter | No typed value is ever joined into query text, so nothing typed can alter a query |
+| `components/audio` is the only code that plays sound, and every clip is a file under `public/` | Audio never depends on a running service or a key |
 
 ---
 
