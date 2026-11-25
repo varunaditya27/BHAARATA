@@ -60,7 +60,7 @@ export default async function PlacesIndexPage() {
             <PageHero
         title="Places"
         intro="Capitals, temples, forts and tombs, each set on the map and listed from north to south."
-        field="#b3123f"
+        field="#d8281a"
         media={
           <PortraitStack
             plates={["chola-brihadisvara", "vijayanagara-virupaksha", "place-khajuraho"].flatMap((k) =>

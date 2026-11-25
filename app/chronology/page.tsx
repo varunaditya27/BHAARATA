@@ -34,14 +34,14 @@ export default async function ChronologyPage() {
       <PageHero
         title="Timeline"
         intro="Every turning point and battle in the atlas, in order. Each line is a kingdom, and each diamond a turning point you can open."
-        field="#0f6d63"
+        field="#00757e"
         media={
           <div className="bh-stagger flex items-end justify-between gap-3">
             {["chola", "vijayanagara", "mughal"].map((id, i) => {
               const polity = polities.find((p) => p.id === id);
               return polity ? (
                 <div key={id} className="bh-float" style={{ "--i": i + 1, "--bh-float": `${-40 - i * 30}px` } as unknown as React.CSSProperties}>
-                  <KingdomEmblem polityId={id} color="#fff4dc" className="h-52 w-52" />
+                  <KingdomEmblem polityId={id} color="#fbf5e8" className="h-52 w-52" />
                 </div>
               ) : null;
             })}

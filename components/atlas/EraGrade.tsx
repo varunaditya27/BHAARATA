@@ -6,9 +6,9 @@ import { getEraForYear } from "@/lib/geo/historical-state";
  * background-color transition is the crossfade between eras.
  */
 const ERA_TINT: Record<string, string> = {
-  "Early medieval": "rgba(255, 168, 40, 0.16)",
-  "Late medieval": "rgba(232, 60, 130, 0.13)",
-  "Early modern": "rgba(50, 110, 240, 0.15)",
+  "Early medieval": "rgba(255, 176, 0, 0.2)",
+  "Late medieval": "rgba(216, 27, 122, 0.16)",
+  "Early modern": "rgba(43, 53, 224, 0.18)",
 };
 
 export function EraGrade({ year }: { year: number }) {

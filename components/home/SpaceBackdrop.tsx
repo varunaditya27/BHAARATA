@@ -86,7 +86,7 @@ export function SpaceBackdrop() {
       nebula.height = Math.round(h * dpr);
       const n = nebula.getContext("2d")!;
       n.scale(dpr, dpr);
-      n.fillStyle = "#0b0720";
+      n.fillStyle = "#070522";
       n.fillRect(0, 0, w, h);
       const glow = (x: number, y: number, r: number, color: string) => {
         const g = n.createRadialGradient(x, y, 0, x, y, r);
@@ -95,9 +95,9 @@ export function SpaceBackdrop() {
         n.fillStyle = g;
         n.fillRect(0, 0, w, h);
       };
-      glow(w * 0.18, h * 0.22, Math.max(w, h) * 0.55, "rgba(120,72,40,0.24)");
-      glow(w * 0.86, h * 0.78, Math.max(w, h) * 0.6, "rgba(38,74,92,0.28)");
-      glow(w * 0.58, h * 0.18, Math.max(w, h) * 0.42, "rgba(130,68,44,0.16)");
+      glow(w * 0.18, h * 0.22, Math.max(w, h) * 0.55, "rgba(90,40,170,0.26)");
+      glow(w * 0.86, h * 0.78, Math.max(w, h) * 0.6, "rgba(0,110,150,0.30)");
+      glow(w * 0.58, h * 0.18, Math.max(w, h) * 0.42, "rgba(120,30,160,0.18)");
       n.save();
       n.translate(w * 0.5, h * 0.5);
       n.rotate(-0.42);

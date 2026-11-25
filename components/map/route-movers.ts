@@ -25,7 +25,7 @@ export function routeMoversFeatureCollection(seconds: number, data: AtlasData): 
         properties: {
           routeId: route.id,
           routeType: route.routeType,
-          accentColor: routeColors.get(route.id) ?? "#4a3f73",
+          accentColor: routeColors.get(route.id) ?? "#46407a",
           bearing,
           fade: Math.min(1, t / 0.1, (1 - t) / 0.1),
         },

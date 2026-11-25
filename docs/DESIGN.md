@@ -66,22 +66,22 @@ Rules of thumb:
 
 ## 3. Colour
 
-A narrow palette of cream paper, indigo ink and a few bright jewel pigments (saffron, vermilion, crimson, cobalt, teal). Tokens are CSS variables in `app/globals.css` and mirrored as Tailwind colours.
+A narrow palette taken from the pigments of Indian miniature painting: ivory paper, lapis-black ink, and vivid vermilion, saffron, ultramarine, rani pink, emerald and peacock teal. The ground is a warm pearl rather than white, which lets the jewel colours keep their intensity. Kingdom colours are generated in OKLCH at one perceived brightness, so all 55 are equally vivid and none repeats. Tokens are CSS variables in `app/globals.css` and mirrored as Tailwind colours.
 
 | Token | Value | Used for |
 |---|---|---|
-| `--bh-paper` | ![#fff4dc](https://img.shields.io/badge/%20%20%20%20%20-fff4dc?style=flat-square) `#fff4dc` | Page background |
-| `--bh-paper-raised` | ![#fffbf0](https://img.shields.io/badge/%20%20%20%20%20-fffbf0?style=flat-square) `#fffbf0` | Cards, popups, the palette |
-| `--bh-ink` | ![#1a1240](https://img.shields.io/badge/%20%20%20%20%20-1a1240?style=flat-square) `#1a1240` | Text, the dark atlas, rules |
-| `--bh-ink-muted` | ![#4a3f73](https://img.shields.io/badge/%20%20%20%20%20-4a3f73?style=flat-square) `#4a3f73` | Secondary text |
-| `--bh-ash` | ![#6e6396](https://img.shields.io/badge/%20%20%20%20%20-6e6396?style=flat-square) `#6e6396` | Quiet metadata |
-| `--bh-stone` | ![#f6e2b4](https://img.shields.io/badge/%20%20%20%20%20-f6e2b4?style=flat-square) `#f6e2b4` | Fills, empty states |
-| `--bh-border` | ![#e5c98a](https://img.shields.io/badge/%20%20%20%20%20-e5c98a?style=flat-square) `#e5c98a` | Rules and dividers |
-| `--bh-water` | ![#7fd8d4](https://img.shields.io/badge/%20%20%20%20%20-7fd8d4?style=flat-square) `#7fd8d4` | Sea on the light map |
-| `--bh-territory` | ![#cc3310](https://img.shields.io/badge/%20%20%20%20%20-cc3310?style=flat-square) `#cc3310` | Default territory pigment, active controls |
-| `--bh-territory-selected` | ![#b3123f](https://img.shields.io/badge/%20%20%20%20%20-b3123f?style=flat-square) `#b3123f` | Selection, links on hover |
-| `--bh-evidence` | ![#2347d6](https://img.shields.io/badge/%20%20%20%20%20-2347d6?style=flat-square) `#2347d6` | Evidence accents |
-| `--bh-uncertainty` | ![#d49400](https://img.shields.io/badge/%20%20%20%20%20-d49400?style=flat-square) `#d49400` | "Placeholder" badges, uncertainty dots |
+| `--bh-paper` | ![#fbf5e8](https://img.shields.io/badge/%20%20%20%20%20-fbf5e8?style=flat-square) `#fbf5e8` | Page background |
+| `--bh-paper-raised` | ![#fffcf4](https://img.shields.io/badge/%20%20%20%20%20-fffcf4?style=flat-square) `#fffcf4` | Cards, popups, the palette |
+| `--bh-ink` | ![#120a38](https://img.shields.io/badge/%20%20%20%20%20-120a38?style=flat-square) `#120a38` | Text, the dark atlas, rules |
+| `--bh-ink-muted` | ![#46407a](https://img.shields.io/badge/%20%20%20%20%20-46407a?style=flat-square) `#46407a` | Secondary text |
+| `--bh-ash` | ![#6a649c](https://img.shields.io/badge/%20%20%20%20%20-6a649c?style=flat-square) `#6a649c` | Quiet metadata |
+| `--bh-stone` | ![#f3e6c8](https://img.shields.io/badge/%20%20%20%20%20-f3e6c8?style=flat-square) `#f3e6c8` | Fills, empty states |
+| `--bh-border` | ![#e6ce98](https://img.shields.io/badge/%20%20%20%20%20-e6ce98?style=flat-square) `#e6ce98` | Rules and dividers |
+| `--bh-water` | ![#86d3ec](https://img.shields.io/badge/%20%20%20%20%20-86d3ec?style=flat-square) `#86d3ec` | Sea on the light map |
+| `--bh-territory` | ![#d42b12](https://img.shields.io/badge/%20%20%20%20%20-d42b12?style=flat-square) `#d42b12` | Default territory pigment, active controls |
+| `--bh-territory-selected` | ![#b50f50](https://img.shields.io/badge/%20%20%20%20%20-b50f50?style=flat-square) `#b50f50` | Selection, links on hover |
+| `--bh-evidence` | ![#2a33d4](https://img.shields.io/badge/%20%20%20%20%20-2a33d4?style=flat-square) `#2a33d4` | Evidence accents |
+| `--bh-uncertainty` | ![#ffb000](https://img.shields.io/badge/%20%20%20%20%20-ffb000?style=flat-square) `#ffb000` | "Placeholder" badges, uncertainty dots |
 
 **Each kingdom has one pigment.** The eleven hand-written kingdoms have chosen colours; the rest get a colour derived from their id (`accent()` in `import-cliopatria.py`) at fixed lightness and saturation, so they sit comfortably together. On a kingdom's page the pigment becomes `--bh-accent`, which tints text selection, rules, the drop cap and the reading-progress line.
 
@@ -114,7 +114,7 @@ flowchart TB
         MID --> TIME
     end
 
-    classDef node fill:#fffbf0,stroke:#1a1240,color:#1a1240;
+    classDef node fill:#fffcf4,stroke:#120a38,color:#120a38;
     class SIDE,MAPA,TIME node;
 ```
 

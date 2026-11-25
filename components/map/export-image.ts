@@ -17,9 +17,9 @@ export function captureMapCanvas(map: MapLibreMap): Promise<HTMLCanvasElement> {
   });
 }
 
-const PAPER = "#fff4dc";
-const INK = "#1a1240";
-const MUTED = "#4a3f73";
+const PAPER = "#fbf5e8";
+const INK = "#120a38";
+const MUTED = "#46407a";
 
 function cssFont(variable: string, fallback: string) {
   const family = getComputedStyle(document.documentElement).getPropertyValue(variable).trim();

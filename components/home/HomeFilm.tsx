@@ -33,11 +33,11 @@ const GHOST_SCRIPTS = [
 ];
 
 const ERA_GLINTS = [
-  "radial-gradient(54% 48% at 82% 16%, rgba(255,196,128,0.22), rgba(255,170,90,0.07) 45%, transparent 72%)",
-  "radial-gradient(56% 50% at 76% 24%, rgba(224,122,95,0.25), rgba(150,52,26,0.08) 48%, transparent 74%)",
-  "radial-gradient(56% 50% at 84% 32%, rgba(92,168,176,0.24), rgba(58,90,120,0.08) 48%, transparent 74%)",
-  "radial-gradient(56% 50% at 78% 28%, rgba(242,184,96,0.24), rgba(166,138,82,0.08) 48%, transparent 74%)",
-  "radial-gradient(58% 52% at 74% 20%, rgba(230,138,86,0.26), rgba(150,52,26,0.09) 48%, transparent 74%)",
+  "radial-gradient(54% 48% at 82% 16%, rgba(255,176,0,0.30), rgba(255,110,0,0.09) 45%, transparent 72%)",
+  "radial-gradient(56% 50% at 76% 24%, rgba(232,50,90,0.32), rgba(176,16,80,0.10) 48%, transparent 74%)",
+  "radial-gradient(56% 50% at 84% 32%, rgba(0,172,196,0.32), rgba(0,90,160,0.10) 48%, transparent 74%)",
+  "radial-gradient(56% 50% at 78% 28%, rgba(255,190,40,0.30), rgba(140,60,210,0.10) 48%, transparent 74%)",
+  "radial-gradient(58% 52% at 74% 20%, rgba(216,27,122,0.32), rgba(110,20,170,0.10) 48%, transparent 74%)",
 ];
 
 /** Syncs Lenis smooth scroll ticks with GSAP ScrollTrigger (`lagSmoothing(0)`). */
@@ -505,7 +505,7 @@ export function HomeFilm() {
     ERA_GLINTS.length - 1,
     Math.max(0, chapterIndex + 1),
   );
-  const activeAccent = activePolity?.accentColor ?? "#ffb347";
+  const activeAccent = activePolity?.accentColor ?? "#ffa51f";
 
   const scrollToStage = (idx: number) => {
     const target = chapterRefs.current[idx];
@@ -555,7 +555,7 @@ export function HomeFilm() {
               ref={spineFillRef}
               className="block h-full w-full origin-top transition-colors duration-500"
               style={{
-                backgroundColor: activePolity?.accentColor ?? "#b3123f",
+                backgroundColor: activePolity?.accentColor ?? "#b50f50",
               }}
             />
           </div>
@@ -570,7 +570,7 @@ export function HomeFilm() {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(90% 85% at 72% 38%, transparent 38%, rgba(8,5,24,0.55) 78%, rgba(8,5,24,0.85) 100%)",
+                "radial-gradient(90% 85% at 72% 38%, transparent 38%, rgba(7,5,34,0.55) 78%, rgba(7,5,34,0.85) 100%)",
             }}
             aria-hidden
           />
@@ -582,7 +582,7 @@ export function HomeFilm() {
             className="pointer-events-none absolute right-0 top-0 h-56 w-[28rem] max-w-full"
             style={{
               background:
-                "radial-gradient(ellipse at top right, rgba(26,18,64,0.82), rgba(26,18,64,0.35) 45%, transparent 72%)",
+                "radial-gradient(ellipse at top right, rgba(18,10,56,0.82), rgba(18,10,56,0.35) 45%, transparent 72%)",
             }}
             aria-hidden
           />
@@ -626,7 +626,7 @@ export function HomeFilm() {
                 className="h-1 w-6 transition-all duration-300"
                 style={{
                   backgroundColor:
-                    chapterIndex === -1 ? "#fff4dc" : "rgba(255,244,220,0.28)",
+                    chapterIndex === -1 ? "#fbf5e8" : "rgba(251,245,232,0.28)",
                 }}
               />
               <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-paper/60 group-hover:text-paper sm:inline">
@@ -653,9 +653,9 @@ export function HomeFilm() {
                       style={{
                         width: `${fillPct}%`,
                         backgroundColor: isCurrent
-                          ? (p?.accentColor ?? "#ff6b4a")
+                          ? (p?.accentColor ?? "#ff5a3c")
                           : isPassed
-                            ? "#fff4dc"
+                            ? "#fbf5e8"
                             : "transparent",
                       }}
                     />
@@ -737,7 +737,7 @@ export function HomeFilm() {
           {storyChapters.map((c, i) => {
             const polity = getPolityById(c.polityId);
             const image = images[c.imageKey];
-            const accent = polity?.accentColor ?? "#b3123f";
+            const accent = polity?.accentColor ?? "#b50f50";
             return (
               <article
                 key={c.id}

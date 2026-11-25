@@ -49,8 +49,8 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
             <PageHero
         title="Search"
         intro="Rulers, kingdoms, places and events, narrowed by time, place and the way they connect."
-        field="#ffb020"
-        ink="#1a1240"
+        field="#ffb000"
+        ink="#120a38"
         tall={false}
       />
       <div className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6">

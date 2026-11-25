@@ -27,14 +27,14 @@ export default async function EvidenceIndexPage() {
             <PageHero
         title="Evidence"
         intro="Words carved in stone, and the books that translated them. Every claim can be followed back to its source."
-        field="#2347d6"
+        field="#b80f6a"
         tall={false}
       />
       <div className="mx-auto max-w-[1200px] px-4 py-14 sm:px-6">
         <div className="grid gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-16">
           {photo && (
             <figure className="md:sticky md:top-24 md:self-start">
-              <Tilt className="shadow-[0_30px_60px_-28px_rgba(26,18,64,0.55)]">
+              <Tilt className="shadow-[0_30px_60px_-28px_rgba(18,10,56,0.55)]">
                 <div className="relative aspect-[4/5] overflow-hidden bg-stone">
                   <Image src={photo.file} alt={photo.alt} fill loading="eager" sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
                 </div>

@@ -37,7 +37,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
 
   return new ImageResponse(
     (
-      <div style={{ display: "flex", position: "relative", width: 1200, height: 630, background: "#0b0720", color: "#fff4dc" }}>
+      <div style={{ display: "flex", position: "relative", width: 1200, height: 630, background: "#070522", color: "#fbf5e8" }}>
         {photo && (
           <img src={photo} alt="" width={680} height={630} style={{ position: "absolute", left: 520, top: 0, width: 680, height: 630, objectFit: "cover" }} />
         )}
@@ -50,11 +50,11 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             width: 260,
             height: 630,
             display: "flex",
-            backgroundImage: "linear-gradient(90deg, #0b0720, rgba(11,7,32,0))",
+            backgroundImage: "linear-gradient(90deg, #070522, rgba(11,7,32,0))",
           }}
         />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "56px 0 56px 64px", width: 600, height: 630 }}>
-          <div style={{ display: "flex", fontFamily: "Ranade", fontSize: 20, color: "rgba(255,244,220,0.7)" }}>
+          <div style={{ display: "flex", fontFamily: "Ranade", fontSize: 20, color: "rgba(251,245,232,0.7)" }}>
             BHĀRATA, a historical atlas
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -63,19 +63,19 @@ export default async function Image({ params }: { params: Promise<{ slug: string
                 <path d={silhouettePath(geometry, 100, 4)} fill={polity.accentColor} stroke={darkenHex(polity.accentColor, 0.4)} strokeWidth="1.5" />
               </svg>
             )}
-            <div style={{ display: "flex", fontFamily: "Ranade", fontSize: 22, color: "rgba(255,244,220,0.75)" }}>
+            <div style={{ display: "flex", fontFamily: "Ranade", fontSize: 22, color: "rgba(251,245,232,0.75)" }}>
               {polity ? `${polity.polityType} in ${polity.region}` : "Kingdom"}
             </div>
             <div style={{ display: "flex", fontFamily: "Zodiak", fontSize: nameSize, lineHeight: 1.05, marginTop: 10 }}>
               {name}
             </div>
             {polity && (
-              <div style={{ display: "flex", fontFamily: "Zodiak", fontSize: 36, marginTop: 14, color: "rgba(255,244,220,0.9)" }}>
+              <div style={{ display: "flex", fontFamily: "Zodiak", fontSize: 36, marginTop: 14, color: "rgba(251,245,232,0.9)" }}>
                 {formatDateRange(polity.period)}
               </div>
             )}
           </div>
-          <div style={{ display: "flex", fontFamily: "Ranade", fontSize: 18, color: "rgba(255,244,220,0.55)" }}>
+          <div style={{ display: "flex", fontFamily: "Ranade", fontSize: 18, color: "rgba(251,245,232,0.55)" }}>
             Borders: Cliopatria. Summary: Wikipedia.
           </div>
         </div>

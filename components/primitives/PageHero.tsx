@@ -8,7 +8,7 @@ export function PageHero({
   title,
   intro,
   field,
-  ink = "#fff4dc",
+  ink = "#fbf5e8",
   tall = true,
   media,
   children,

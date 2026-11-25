@@ -69,7 +69,7 @@ export default async function PolitiesIndexPage() {
             key={polity.id}
             href={`/polities/${polity.slug}`}
             transitionTypes={NAV_FORWARD}
-            className="group absolute inset-0 overflow-hidden bg-[#261a5c] focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-paper"
+            className="group absolute inset-0 overflow-hidden bg-[#16104f] focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-paper"
           >
             {hero && (
               <Shared name={transitionNames.polityPhoto(polity.slug)}>

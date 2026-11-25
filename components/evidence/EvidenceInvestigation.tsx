@@ -40,7 +40,7 @@ export function EvidenceInvestigation({
             disabled={!raking}
             onChange={(e) => setAzimuth(Number(e.target.value))}
             aria-valuetext={`${azimuth} degrees`}
-            className="min-w-24 flex-1 accent-[#ff6b4a]"
+            className="min-w-24 flex-1 accent-[#ff5a3c]"
           />
           <span className="w-8 shrink-0 tabular-nums text-ink-muted">{azimuth}°</span>
         </label>
