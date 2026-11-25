@@ -48,13 +48,13 @@ Read this before assuming anything is wired up. The detail is in `docs/DATA.md`.
   ships, capital seals, battles, optional monuments, river flow, era tint,
   keyboard shortcuts, cinema view, compare two years, save as image, opt-in era
   sound); the Chronology (kingdom lanes, battles by period); Kingdom, People,
-  Places and Evidence pages; the database browser and connections diagram; the ⌘K search (with year jump and recent items);
+  Places and Evidence pages; the database browser and connections diagram; the ⌘K search (with year jump and recent items); a filter page (`/search`) that joins rulers, kingdoms, places and events with filters on time, kingdom, region, religion and language; a spoken description of every page and interface sounds (`components/audio`, `public/narration`, `public/sfx`);
   share images per kingdom; Method (with credits); a colophon footer; a 404 page.
 - **Data comes from three kinds of source, and every page says which:**
   - *Cliopatria* (CC BY 4.0): 54 kingdoms, 465 dated border shapes, 600–1700.
     Borders are one researched version of each territory, not exact frontiers.
   - *Wikidata / Wikipedia / Wikimedia Commons* (CC0 / CC BY-SA / per-file free
-    licences): capitals, 26 geolocated battles, 154 protected monuments, 606 rulers, 344 dated sites,
+    licences): capitals, 26 geolocated battles, 154 protected monuments, 760 rulers, 344 dated sites,
     native-script names, summaries and photographs.
   - *Curated historical text* in PostgreSQL (`prisma/seed.sql`): the summaries of the 11
     curated kingdoms, 11 rulers, nine turning points. Each statement was

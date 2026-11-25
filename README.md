@@ -97,7 +97,8 @@ flowchart LR
 ### Built to be read
 - Plain language everywhere; no jargon
 - Typeset in **Zodiak** and **Ranade**, with Tamil, Kannada, Telugu and Devanagari fonts
-- A **⌘K** search that also jumps to any year
+- A **⌘K** search that also jumps to any year, and a **filter page** that joins rulers, kingdoms, places and events: who reigned during a battle, which kingdoms shared a border, which places lie inside a kingdom in a given year
+- A **spoken description** of every page, in a natural voice, with soft interface sounds as you move; both can be switched off
 - Built for laptops and desktops; respects reduced motion and is keyboard-operable
 - A film-like opening: a globe, a starfield, and an orbital descent
 
@@ -133,8 +134,8 @@ BHĀRATA is an early version, and being straight about that is part of the proje
 |---|---|---|
 | Kingdom borders and dates | [Cliopatria](https://github.com/Seshat-Global-History-Databank/cliopatria) (Seshat Global History Databank, CC BY 4.0) | Researched. One version of each territory, **not exact frontiers** |
 | Kingdom summaries | Wikipedia (CC BY-SA 4.0) | Opening paragraphs, lightly trimmed |
-| Capitals, battles, dated sites, monuments, rulers | Wikidata (CC0) and Wikipedia's lists of rulers | Real. Every kingdom has rulers; a few have only one to four because the sources name no more |
-| Photographs | Wikimedia Commons | Real, credited; only free licences |
+| Capitals, battles, dated sites, monuments, rulers | Wikidata and Wikipedia's ruler categories and articles | Real. 760 rulers in 55 kingdoms; each kingdom has at least 1 |
+| Photographs | Wikimedia Commons and other public sources | Real, credited |
 | Names in Tamil, Kannada, Persian and other scripts | Wikidata labels | Real, but **not yet checked by a reader of each language** |
 | Inscription evidence | *South Indian Inscriptions* Vol. II (1913, public domain) | **Two** real translations so far |
 | Hand-written texts, eleven rulers, nine turning points | This repository | Written here and **checked against Wikipedia**, statement by statement; the source is named on each page |
