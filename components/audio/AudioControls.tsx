@@ -8,10 +8,25 @@ import { useStoredFlag } from "@/lib/utils/use-stored-flag";
 /** "/" is "home", "/people/rajaraja-i" is "people-rajaraja-i": the file name of that page's spoken description. */
 const clipFor = (pathname: string) => (pathname === "/" ? "home" : pathname.slice(1).replace(/\/$/, "").replace(/\//g, "-"));
 
+type Manifest = { narration: Set<string>; sfx: Set<string> };
+
+let manifest: Promise<Manifest> | null = null;
+let loaded: Manifest | null = null;
+
+/** The audio files that exist, read once. Without the list, nothing is requested and the app is silent. */
+function audioManifest(): Promise<Manifest> {
+  manifest ??= fetch("/audio-manifest.json", { cache: "no-cache" })
+    .then((r) => (r.ok ? r.json() : { narration: [], sfx: [] }))
+    .catch(() => ({ narration: [], sfx: [] }))
+    .then((m: { narration?: string[]; sfx?: string[] }) => (loaded = { narration: new Set(m.narration ?? []), sfx: new Set(m.sfx ?? []) }));
+  return manifest;
+}
+
 const sounds = new Map<string, HTMLAudioElement>();
 
-/** Plays a short interface sound. Copies of one loaded element let sounds overlap, as quick clicks do. */
+/** Plays a short interface sound if that sound exists. Copies of one loaded element let sounds overlap, as quick clicks do. */
 function play(name: string, volume: number) {
+  if (!loaded?.sfx.has(name)) return;
   let base = sounds.get(name);
   if (!base) {
     base = new Audio(`/sfx/${name}.mp3`);
@@ -37,14 +52,12 @@ export function AudioControls() {
   // Speak the page's description each time the page changes. A short wait lets the page settle first.
   useEffect(() => {
     if (!voice) return;
-    const audio = new Audio(`/narration/${clipFor(pathname)}.mp3`);
-    audio.volume = 0.95;
-    audio.onended = () => setSpeaking(false);
-    audio.onerror = () => setSpeaking(false);
+    const key = clipFor(pathname);
     let cancelled = false;
     let armed = false;
+    let audio: HTMLAudioElement | null = null;
     const start = () => {
-      if (cancelled) return;
+      if (cancelled || !audio) return;
       audio.play().then(() => setSpeaking(true)).catch(() => {
         // Browsers allow sound only after a click or key press, so wait for the first one.
         if (armed || cancelled) return;
@@ -53,16 +66,30 @@ export function AudioControls() {
         window.addEventListener("keydown", start, { once: true });
       });
     };
-    const timer = window.setTimeout(start, 700);
+    let timer = 0;
+    audioManifest().then((m) => {
+      // A page without a recorded clip stays quiet and makes no request.
+      if (cancelled || !m.narration.has(key)) return;
+      audio = new Audio(`/narration/${key}.mp3`);
+      audio.volume = 0.95;
+      audio.onended = () => setSpeaking(false);
+      audio.onerror = () => setSpeaking(false);
+      timer = window.setTimeout(start, 700);
+    });
     return () => {
       cancelled = true;
       window.clearTimeout(timer);
       window.removeEventListener("pointerdown", start);
       window.removeEventListener("keydown", start);
-      audio.pause();
+      audio?.pause();
       setSpeaking(false);
     };
   }, [pathname, voice]);
+
+  // Know which sounds exist before the first one is needed.
+  useEffect(() => {
+    if (effects) void audioManifest();
+  }, [effects]);
 
   // A sound for moving to a new page; the kingdom, evidence and search pages each get their own.
   useEffect(() => {
